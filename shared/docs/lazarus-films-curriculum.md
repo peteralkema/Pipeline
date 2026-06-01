@@ -4,7 +4,7 @@
 
 ## At-a-glance summary for re-readers
 
-Lazarus is a five-year creative writing curriculum disguised as a content business. The moat is screenplay-craft applied to YouTube format, built through deliberate apprenticeship to fifteen master writers via public-domain adaptation.
+Lazarus is a five-year creative writing curriculum disguised as a content business. The moat is screenplay-craft applied to YouTube format, built through deliberate apprenticeship to fifteen+ master writers via public-domain adaptation.
 
 Three operational disciplines hold the strategy together:
 
@@ -12,7 +12,11 @@ Three operational disciplines hold the strategy together:
 2. **Brutal eight-question filter applied before romantic-literary instinct.** Most beloved PD works fail the YouTube test. The discipline catches that before three weeks of production proves it.
 3. **Reading IS work.** Three filters (technique catalogue / adaptation scoring / capability spec) run during every read. The intersection produces a curated PD shortlist no other operator can reproduce.
 
-The first Lazarus video should be in the atmospheric-horror cluster (Saki, Bierce, Stevenson, M.R. James, Jacobs, Wilde's darker pieces) because the dignified-literary-faceless YouTube niche is currently warmest in that neighbourhood. Other clusters open later as the channel earns trust capital.
+The first Lazarus video should be in the atmospheric-horror cluster (Saki, Bierce, Stevenson, M.R. James, Jacobs, Wilde's darker pieces) because the dignified-literary-faceless YouTube niche is currently warmest in that neighbourhood. This is a STARTING CLUSTER, not a permanent corner — register expansion is deliberate at video 5 (non-horror Saki like Tobermory), video 10 (Wharton or Conrad), video 15+ (Lazarus year two). Tony Walker's 7-year arc proves the broadening strategy works.
+
+The competitive lane is essentially empty. Tony Walker's Classic Ghost Stories is the only serious English-language operator in dignified-literary horror narration after 14 years; NexLev's semantic similarity engine cannot surface a second comparable English-language channel. Lazarus enters this lane as the first cinematic-tier entry, not as a late entrant fighting saturation.
+
+The framing is decade-plus, not viral-breakout. Tony Walker accumulated 99.7K subs over 14 years through consistent register and craft. Lazarus's cinematic differentiator may compress that timeline but does not eliminate the accumulation logic.
 
 ---
 
@@ -243,6 +247,73 @@ Saki's Sredni Vashtar lands here cleanly (dark child, malevolent god in the shed
 
 What would NOT land in this neighbourhood for the first 3-5 videos: drawing-room comedies of manners, social-observation pieces, straight drama without supernatural element. Save those for video 6-10 once trust capital exists.
 
+### Register-Expansion Roadmap (addressing the corner-risk concern)
+
+The atmospheric-horror starting cluster is NOT a permanent constraint. It is the algorithmically-warm starting position. Lazarus expands the register deliberately over time as audience trust accumulates. Tony Walker's 7-year arc proves the broadening strategy works — he started narrow (ghost stories) and gradually expanded to Wharton drawing-room work, A.J. Alan light comedy-horror, and Dickens. His audience now trusts him to bring them along.
+
+**Videos 1-5 (first 6 months) — atmospheric horror anchor.**
+Saki, Bierce, Stevenson's horror novellas, M.R. James, Jacobs. Establish the register, train the audience, build trust capital. Critical: do NOT broaden in this window. The algorithm needs unambiguous channel-signal training data.
+
+**Videos 6-10 (months 6-12) — atmospheric expansion within the dignified-literary register.**
+Wilde's darker non-horror (Lord Arthur Savile's Crime). Saki's non-horror (Tobermory the talking-cat satire — dark comedy not horror, but same Saki register). Conrad short fiction (Heart of Darkness compressed, Amy Foster). Wharton's pre-1926 ghost stories like Afterward and The Eyes. Edith Nesbit's grown-up supernatural fiction.
+
+**Videos 11-20 (year two) — register expansion into psychological drama.**
+Wharton's pre-1926 short fiction without supernatural elements (Roman Fever from 1934 not yet globally PD, but earlier work qualifies). Bierce's military-realism shorts. Stevenson's character studies. Henry James (selected — many fail filter, some pass like The Real Thing). Edith Wharton's social-cruelty pieces in drawing-room settings.
+
+**Videos 21-30 (year three) — register expansion into crime/mystery and historical fiction.**
+Conan Doyle's Holmes (already globally PD as of 2001; pre-1926 stories are the safest). Earliest Chandler (globally PD 2030s). Earliest Hammett (US PD now, globally PD 2031 — depends on the Maltese-Falcon-on-YouTube-decision in 2027). Period detective fiction generally.
+
+**Videos 30+ (year four-five) — broad dignified-literary register established.**
+The channel by this point has 30+ videos, established audience trust, and credibility to publish across multiple registers as long as the production grammar (cinematic, restrained, period-accurate) holds. This is the Tony Walker level reached in 7 years of audio-only narration — Lazarus may reach it faster due to cinematic differentiation, but the staging is necessary regardless of compression speed.
+
+**The corner-risk defence is the timing discipline, not the absence of horror.** Lazarus IS a horror-anchored channel for its first six months. Then it grows out of that constraint deliberately. The first 5 videos do the algorithmic work; videos 6-30 do the register-expansion work; videos 30+ operate from a position of audience trust.
+
+### What Tony Walker's channel-trailer reveals about format discipline
+
+Tony Walker published a 2:38 channel intro on 30 May 2026. Three things in it are worth absorbing as Lazarus production discipline:
+
+1. **Cold open is dramatic dialogue, NOT exposition.** The video opens with "Everybody dies, don't they? Everybody come back, don't they?" — two lines of unsettling exchange, eight seconds. Only at 0:12 does he pull back: "Welcome to the Classic Ghost Stories channel narrated by me, Tony Walker." Hook FIRST, host SECOND. This is the same discipline that separates Arthur Revives the Past's 1.1M London 1300 from his 632K Pompeii.
+
+   **Implication for Lazarus video one:** open with two lines of dramatic dialogue or atmospheric mood from the source work BEFORE introducing the channel and narrator. For Sredni Vashtar: open with the boy's prayer to Sredni Vashtar, atmospheric music underneath, then pull back: "I'm [narrator name]. Welcome to Lazarus Films."
+
+2. **Author list is structured for both discovery AND retention.** Tony Walker opens by naming the famous classics (Frankenstein, Dracula, Phantom of the Opera) and then pivots to the lesser-known operators (Lovecraft, M.R. James, Algernon Blackwood, Edith Wharton, lesser-known Victorians). The famous works are SEO discovery surface; the lesser-known are retention payoff. Viewer searches "Frankenstein audiobook," finds Tony Walker, subscribes for his Wharton and M.R. James.
+
+   **Implication for Lazarus year-two SEO strategy:** consider one famous-work adaptation as discovery surface (Picture of Dorian Gray, Jekyll and Hyde, Turn of the Screw — all Cohort A, all visualisable) once channel has 5-8 videos of trust capital. Famous-work entry brings traffic; established back-catalogue retains them.
+
+3. **The twin-upload format: story + post-story analysis.** Tony Walker explicitly says (1:39 in the trailer): *"with the shorter ones, I tend to do an analysis afterwards. I read the story, then look at the craft elements of the story, some of the themes, some of the philosophy behind it, some of the something about the author and their life. People tend to find that very interesting."*
+
+   This is a genuinely interesting structural option for Lazarus year two onwards:
+   - Video 1: Cinematic adaptation (12-15 minutes). Self-contained.
+   - Video 2 (companion): Short analysis piece (5-8 minutes) explaining the dramatic technique the author uses, period context, what makes it work, what failed adaptations have missed. Same narrator voice.
+
+   The companion piece serves three functions: gives the channel a second weekly upload at low production cost (no AI cinematography needed, just narrator + still images + screen text); demonstrates script-craft education embedded in channel mission (Samuelson value #3); serves as long-tail SEO bait (somebody searching "Saki Sredni Vashtar analysis" finds Lazarus before they find anyone else).
+
+   Not required for first 3 videos. Worth piloting at video 5-7 once production rhythm is established.
+
+### Adjacent-operator competitive landscape
+
+Tony Walker's "similar channels" surface from NexLev's semantic-similarity engine reveals something genuinely important: **dignified English-language literary horror narration is essentially a one-operator niche on YouTube.**
+
+The engine, given Tony Walker as input, could only find ONE channel with similarity above 60: Vitor Machado (Brazilian, 5.68K subs, Portuguese-language Lovecraft focus, 14 years operating). After that, the engine had to reach into entirely different language markets — Bengali audio story channels in India and the US — to find even tangentially-similar operators.
+
+| Channel | Country | Subs | Years | Similarity |
+|---|---|---|---|---|
+| Classic Ghost Stories (Tony Walker) | UK | 99.7K | 14.8 | 100 (self) |
+| Vitor Machado | Brazil | 5.68K | 14.7 | 60 |
+| Animatrix Prime Stories | India (Bengali) | 39.4K | 1.7 | 36 |
+| অডিওবুক by শাওন | US (Bengali) | 282 | 0.7 | 28 |
+| Radio Milan Audio Story | India (Bengali) | 282K | 8.5 | 22 |
+
+Three findings:
+
+**One — Tony Walker has effectively no English-language direct competition.** The lane is not crowded. It is nearly empty. Tony Walker accumulated 99.7K subscribers over 14 years not by beating fierce competition but by being nearly the only English-language operator running this register. The implication for Lazarus is significant: **the niche has room for a cinematic-tier entry alongside the audio-tier entry.** Lazarus is entering a near-empty lane, not a saturated one.
+
+**Two — Vitor Machado at 5.68K subs after 14 years is the cautionary data point.** Same start date as Tony Walker (August 2011). Same volume (591 vs 682 videos). Different outcome (5.68K vs 99.7K). The difference is language market AND production craft. Lesson: decade-long commitment alone is not sufficient. Need decade-long commitment PLUS the right register, language market (English), and craft floor (Tony Walker's narration is genuinely good). Lazarus needs all three.
+
+**Three — the Bengali audio-story channels surfacing in the similarity engine are false neighbours.** Semantic tools recognise "literary audio narration with horror elements" as a structural pattern but cannot weight cultural-market context. Worth noting only as a reminder that surface-similarity is not competitive-similarity.
+
+**Strategic conclusion:** the lane has room for a cinematic-tier entry. Tony Walker's 99.7K subs after 14 years is the floor for a serious entry, not the ceiling. A cinematic-tier operator with comparable register discipline and craft floor could plausibly reach his level faster (the cinematic differentiator compresses time) but still likely needs the decade-plus accumulation framing rather than a viral-breakout framing.
+
 ---
 
 ## First-10-Candidate Shortlist For Wednesday's Filter Session
@@ -333,3 +404,6 @@ The PD catalogue is public. The taste curve through it is not. The taste curve i
 - **Lip-sync** — required for Maltese Falcon. Wav2Lip, SadTalker, or Hedra integration. July R&D priority.
 - **Festival cut workflow** — `--festival-cut` flag on the assembly step to add slate + credits for Astana submission. 30-60 lines of pipeline code. July work.
 - **Sister-channel decision for Cohort B / dialogue-heavy works** — Austen, Shakespeare, late-Wharton drawing-room work require Channel 4 / Maltese Falcon dialogue capability AND a different register from Lazarus. Decide in Q1 2027 whether to launch a sister channel or fold into Channel 4's eventual register.
+- **Twin-upload analysis-companion format** — Tony Walker's story + post-story analysis pattern is genuinely interesting for Lazarus year two onwards. Second weekly upload at low production cost, demonstrates education mission (Samuelson value #3), long-tail SEO bait. Decide at video 5-7 whether to pilot it.
+- **Famous-work discovery surface** — one famous-work adaptation (Picture of Dorian Gray, Jekyll and Hyde, Turn of the Screw) as SEO discovery surface once trust capital exists at video 5-8. All three are Cohort A and visualisable. Decide which (if any) to include in year-one production queue based on Wednesday's filter session results and Tuesday's Mary Celeste retention data.
+- **Named-narrator implementation timing** — apply named-narrator companion pattern (Tony Walker's "narrated by me, Tony Walker") to Final Hours first, then carry the discipline into Lazarus video one. Edmund / Walter / Daniel / James candidates for Final Hours. Test by ear with Inworld in Eyam or next Final Hours script.
