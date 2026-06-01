@@ -1,6 +1,20 @@
 # Lazarus Films — Apprenticeship Curriculum + Selection Filter + Taglines
 *The strategic frame for Lazarus as the script-craft training ground for the wider operation.*
-*Drafted 1 June 2026.*
+*Drafted 1 June 2026. Updated late 1 June 2026 with stress-test refinements.*
+
+## At-a-glance summary for re-readers
+
+Lazarus is a five-year creative writing curriculum disguised as a content business. The moat is screenplay-craft applied to YouTube format, built through deliberate apprenticeship to fifteen master writers via public-domain adaptation.
+
+Three operational disciplines hold the strategy together:
+
+1. **Register-discipline beats topic-discipline.** Register stays locked; topics vary widely within it. Esme Time Travels proves this — Pompeii to Chernobyl to Atlantis is fine if the first-person time-travel vlog register holds. Austen-this-week / Shakespeare-next-week breaks because their natural registers conflict.
+2. **Brutal eight-question filter applied before romantic-literary instinct.** Most beloved PD works fail the YouTube test. The discipline catches that before three weeks of production proves it.
+3. **Reading IS work.** Three filters (technique catalogue / adaptation scoring / capability spec) run during every read. The intersection produces a curated PD shortlist no other operator can reproduce.
+
+The first Lazarus video should be in the atmospheric-horror cluster (Saki, Bierce, Stevenson, M.R. James, Jacobs, Wilde's darker pieces) because the dignified-literary-faceless YouTube niche is currently warmest in that neighbourhood. Other clusters open later as the channel earns trust capital.
+
+---
 
 ## The Core Insight
 
@@ -33,8 +47,13 @@ Every public domain author you adapt teaches a different dramatic technique:
 | Highsmith (when PD) | Sustained dread, sympathy with the wrong character |
 | O'Connor | Religious unease, sudden violence |
 | Greene | Moral compromise, faith under pressure |
+| Bierce | Psychological compression, perfect endings, war-horror |
+| Stevenson | Moral collapse, atmospheric novella, period dignity |
+| Jacobs | Cruel-ending discipline at popular-fiction tier |
+| M.R. James | Antiquarian-horror atmosphere, restrained dread |
+| Blackwood | Landscape-as-character, sustained natural dread |
 
-Five years of Lazarus adaptations = absorbed dramatic instincts of fifteen master writers.
+Five years of Lazarus adaptations = absorbed dramatic instincts of fifteen+ master writers.
 
 ## The Compounding Logic
 
@@ -45,7 +64,7 @@ Every Lazarus adaptation simultaneously:
 4. Builds capability transferable to Final Hours' continuing improvement (Principles 8-10 came directly from Arthur Revives analysis, which is the same dramatic-craft-extraction skill applied to a contemporary operator instead of a PD author)
 5. Creates a permanent craft moat no YouTube competitor can shortcut
 
-By 2030: 50+ adaptations done, fifteen master writers internalised, capability moat impossible to replicate by anyone working only in YouTube.
+By 2030: 50+ adaptations done, fifteen+ master writers internalised, capability moat impossible to replicate by anyone working only in YouTube.
 
 ## Why The Sequence Matters
 
@@ -53,54 +72,201 @@ Launching Channel 4 BEFORE the Lazarus apprenticeship would produce Mira-tier wo
 
 Launching Lazarus first means:
 - Six months of dramatic craft development before Channel 4 launches
-- Sredni Vashtar (Saki) = proof of concept + perfect ending discipline
-- Maltese Falcon (Hammett, US PD since 1 Jan 2026) = feature length + dialogue craft + multi-character
+- First proof-of-concept video (likely Saki) = establishes the Lazarus register on existing capability stack
+- Maltese Falcon (Hammett, US PD since 1 Jan 2026) = feature length + dialogue craft + multi-character — for Astana festival submission 15 August 2026
 - The Loving Spirit (du Maurier, opens US PD 1 Jan 2027) = interior register + landscape work + first-day-of-PD launch event
 - Channel 4 launches mid-2027 with eighteen months of dramatic apprenticeship behind it
 
 ---
 
-## The Brutal YouTube Test — Selection Filter
+## Register Discipline — The Most Important Distinction
 
-Reading PD authors as pleasure and reading them for Lazarus adaptation are not the same activity. Most romantic literary impulses fail the YouTube test. The filter below is applied BEFORE the romantic-literary instinct gets a vote.
+Register is the consistent emotional, tonal, and structural posture a channel takes toward its material across all videos. It's the bundle of decisions held constant: voice character, emotional posture, address mode, production grammar, visual aesthetic, title/thumbnail language, closer discipline.
 
-### Five filter questions
+**A coherent register supports vast topic diversity. A varying register breaks the channel signal regardless of topic quality.**
+
+Esme Time Travels is the proof: 101 videos in 60 days across Pompeii, Blitz London, Black Death London, Salem, Atlantis, Chernobyl, Troy, Titanic. Geographically global, temporally spanning 13,000 years. The TOPIC varies wildly. The REGISTER (first-person time-travel vlog with distressed-young-woman thumbnail) stays locked. Esme works because of this discipline, not despite it.
+
+Arthur Revives the Past is the second proof: 20 videos across London 1300, Pompeii, Ancient Iran, Rome, Alexandria, Knossos, Jerusalem, Carthage, Constantinople, Athens. Different cities, different periods, different continents. Same scholarly-companion narrator register throughout. 4.36M views in four months.
+
+### The Lazarus register (proposed, to be refined during proof-of-concept production)
+
+- **Voice character:** dignified-literary narrator, period-aware, restrained
+- **Emotional posture:** reverent toward the source, attentive to craft, never camp
+- **Address mode:** third-person narrator with optional companion phrasing ("we step into...") — named-narrator possibility deferred to Final Hours implementation first
+- **Production grammar:** cinematic pacing, classical or period-appropriate music, generous silent beats, restrained closer
+- **Visual aesthetic:** AI cinematic recreation with period accuracy, dignified palette, atmospheric over sensational
+- **Title language:** [Work title] — A [Author] adaptation (AI Cinematic Recreation), with optional evocative subtitle
+- **Closer discipline:** moralised reflection back at present-day viewer; no "thanks for watching"; the disaster lands and stays
+
+### Topics that fit the register
+
+Wide diversity is encouraged: atmospheric horror, psychological compression, supernatural dread, cruel-ending shorts, moral-collapse novellas, ghost stories, period thrillers. The works can span 1880s American gothic to 1930s English literary horror to 1900s European supernatural.
+
+### Topics that DO NOT fit the Lazarus register (and belong to future channels)
+
+- Multi-character drawing-room dialogue (Austen, late Wharton drawing-room work) — requires Channel 4 / Maltese Falcon dialogue capability
+- Theatrical declamation (Shakespeare, Marlowe) — requires multi-character avatar work
+- Comedic register at any volume (early Wodehouse, Twain) — different emotional posture from dignified-literary
+- Action-heavy adventure (Burroughs, early pulp) — different production grammar from atmospheric-restrained
+
+This is not a permanent ban on these authors. It is a recognition that they belong to a different register-channel built on capabilities you don't yet have.
+
+---
+
+## The Brutal YouTube Test — Eight-Question Selection Filter
+
+Reading PD authors as pleasure and reading them for Lazarus adaptation are not the same activity. Most romantic literary impulses fail the YouTube test. The filter is applied BEFORE the romantic-literary instinct gets a vote.
+
+### Filter questions
 
 **1. 30-second promise.** Does the opening promise an event the viewer wants to see resolved within the first 30 seconds? Tone is not enough. Promise.
 
-Sredni Vashtar opens with a sick boy being told he will not live to grow up — 30-second promise.
-Maltese Falcon opens with a beautiful woman walking into a detective's office with a lie — 30-second promise.
-Wharton's Ethan Frome opens with a frame narrator looking at a man in a small town and wondering what happened to him twenty years ago — slower promise, viable for written fiction, dead on YouTube.
+Sredni Vashtar opens with a sick boy being told he will not live to grow up — 30-second promise. Maltese Falcon opens with a beautiful woman walking into a detective's office with a lie — 30-second promise. Wharton's Ethan Frome opens with a frame narrator looking at a man in a small town wondering what happened to him twenty years ago — slower promise, viable for written fiction, dead on YouTube.
 
 **2. One-sentence plot compression.** Can the story be described in a single sentence that makes a stranger want to watch?
 
-Sredni Vashtar — abused boy's pet ferret kills his abuser.
-Maltese Falcon — detective hunts the killers of his partner while a femme fatale lies to him.
-Don't Look Now — couple grieving their daughter's death see her ghost in Venice.
-Most Henry James doesn't compress.
+Sredni Vashtar — abused boy's pet ferret kills his abuser. Maltese Falcon — detective hunts the killers of his partner while a femme fatale lies to him. Don't Look Now — couple grieving their daughter's death see her ghost in Venice. Most Henry James doesn't compress.
 
-**3. Peak inside the runtime window.** YouTube viewing optimum is 10-20 minutes. Some stories peak too early (Shirley Jackson's Lottery — 15 minutes is fine). Some peak too late (any 800-page novel with the climax in the final 100 pages). Adaptations have to compress AROUND the peak, which means the source has to have one.
+**3. Peak inside the runtime window.** YouTube viewing optimum is 10-20 minutes. Some stories peak too early (Shirley Jackson's Lottery — 15 minutes is fine). Some peak too late (any 800-page novel with the climax in the final 100 pages). The source has to have a single articulable peak that survives compression.
 
-A Saki story is a single beat. A 1930s Hammett novel is multiple beats but tightly engineered toward a 90-minute film equivalent. Joyce's Dubliners stories peak in fragments — some adaptable, some not.
-
-**4. Visualisable specifics.** AI cinematography needs concrete images. Saki gives you the shed, the ferret, the boy's specific face. Hammett gives you Sam Spade's office, the falcon statue, San Francisco fog. Du Maurier gives you Manderley, the Cornish cliffs, Rebecca's monogrammed handkerchief. Henry James gives you interiority. The Ambassadors is harder to AI-cinema than Sredni Vashtar by an order of magnitude.
+**4. Visualisable specifics.** AI cinematography needs concrete images. Saki gives you the shed, the ferret, the boy's specific face. Hammett gives you Sam Spade's office, the falcon statue, San Francisco fog. Du Maurier gives you Manderley, the Cornish cliffs, Rebecca's monogrammed handkerchief. Henry James gives you interiority — harder to AI-cinema by an order of magnitude.
 
 **5. Articulable protagonist stake.** What does this person want, and what will they lose if they fail.
 
-Sam Spade — find his partner's killer, survive.
-The boy in Sredni Vashtar — survive his abuser.
-Maxim de Winter — possess Manderley without his first wife's ghost.
-Boccaccio's frame characters in Decameron — escape plague-Florence.
+Sam Spade — find his partner's killer, survive. The boy in Sredni Vashtar — survive his abuser. Maxim de Winter — possess Manderley without his first wife's ghost. Modernist literature deliberately undermines stake-articulation, which is why it loses on YouTube.
 
-Most modernist literature deliberately undermines stake-articulation, which is why it loses on YouTube.
+**6. First-mover positioning still available.** Is the lane for AI-cinematic adaptation of this work currently empty or saturated? Famous classics (Hamlet, Pride and Prejudice, Dracula, Jekyll and Hyde) fail this question because of accumulated stock saturation across hundreds of competitors. Lesser-known works in the same authors' catalogues (Sredni Vashtar, Owl Creek Bridge, The Body Snatcher) pass because the lane is genuinely open.
+
+**7. Current viral demand vs SEO legacy stock.** Is there recent (last 6 months) outlier-tier algorithmic momentum in this work's neighbourhood, or only accumulated all-time views from 15 years of school-curriculum-driven searches? Cumulative view count on YouTube search results is a stock measurement, not a flow measurement. NexLev outlier scores measure flow. Front-load works where flow exists.
+
+**8. Jurisdiction-clean across all hosting regions.** Even after a work appears in PD on first inspection, run a final due-diligence pass on jurisdiction-specific exceptions, trademark claims (Sherlock Holmes has lingering trademark issues even on PD stories), and estate-administered residual rights (Peter Pan's UK royalty obligation to Great Ormond Street Hospital). Cohort A (globally PD) ideally passes this question by default; Cohort B and beyond require per-work review.
 
 ### The discipline
 
-The five filters narrow a romantic-literary shelf of fifty beloved works to maybe twelve. Of those twelve, only six or seven pass the additional channel-fit and visual-pipeline tests. That's the actual Lazarus shortlist for two years of production.
+The eight filters narrow a romantic-literary shelf of fifty beloved works to maybe twelve. Of those twelve, only six or seven pass the additional channel-fit and visual-pipeline tests. That's the actual Lazarus shortlist for two years of production.
 
-**Critical:** apply the five filters BEFORE the romantic-literary instinct gets a vote. The works you love most are not always the works that will work for Lazarus.
+**Critical:** apply the eight filters BEFORE the romantic-literary instinct gets a vote. The works you love most are not always the works that will work for Lazarus.
 
 The works that fail the YouTube test still earn their reading time because they teach craft that transfers to the works that pass. Henry James fails the filter but his consciousness compression sharpens your instinct when you adapt Hammett. Joyce fails the filter but his epiphany endings sharpen your instinct when you adapt Saki.
+
+---
+
+## Public Domain Cohort Taxonomy
+
+PD status is not a single category. Four cohorts exist with different strategic implications:
+
+### Cohort A — Globally Public Domain (died pre-1926)
+
+Globally PD under life+70 rules (life+100 in a few jurisdictions like Mexico). Zero territorial risk anywhere on Earth. The bombproof category.
+
+Includes: Saki (d. 1916), Bierce (d. 1914), Stevenson (d. 1894), Wilde (d. 1900), M.R. James (d. 1936 — globally PD 2007), Stoker (d. 1912), Conan Doyle (d. 1930 — globally PD 2001), Hawthorne (d. 1864), Henry James (d. 1916), early Edith Nesbit (d. 1924), early Wharton (d. 1937, pre-1926 work globally PD), Jacobs (d. 1943 — UK-PD only post-2013, US-PD since 1995 on Monkey's Paw specifically), Blackwood (d. 1951 — globally PD 2022), Le Fanu (d. 1873), Chekhov (d. 1904), Maupassant (d. 1893), Hawthorne (d. 1864), Poe (d. 1849).
+
+**Year one of Lazarus should front-load Cohort A entirely.** A takedown on video one or two destroys YouTube's account-level trust regardless of merits. Cohort A removes that risk completely.
+
+### Cohort B — US-Only PD, UK/EU Still Protected
+
+Works published before 1930 are US PD as of 2026. But many of these authors didn't die until later, meaning UK/EU copyright extends well into the future under life+70.
+
+Includes: Hammett's Maltese Falcon (US PD 2026, UK protected until 2031 — he died 1961), Faulkner's earliest novels (US PD imminent, UK protected until 2032), du Maurier's Loving Spirit (US PD 1 Jan 2027, UK protected until 2059), and most Anglo-American literary fiction 1926-1930.
+
+YouTube hosts in US territory, so US law governs. But UK/EU rights holders CAN file takedowns. For small channels, enforcement is rare. For growing channels, exposure scales with size.
+
+**Strategic implication:** Cohort B works are festival-safe (festivals don't get takedowns) but YouTube-exposure-scaling-with-growth. Maltese Falcon is fine for Astana 15 August 2026 submission. YouTube release of Maltese Falcon might wait until 2031 when it goes globally PD, or accept exposure at the time of release. The Loving Spirit January 1 2027 launches as a press-event but with awareness of UK exposure.
+
+### Cohort C — Never Copyrighted
+
+Works that predate modern copyright entirely. Shakespeare, Beethoven, da Vinci, Cervantes, Aristotle, Confucius, Lao Zi, the Bible, Homer.
+
+Legally safest of all categories. Strategically weakest because saturated with centuries of adaptations. Famous works fail Question 7 hard (legacy stock dominates the lane). First-mover positioning impossible. Generally NOT a Lazarus hunting ground — these works belong to future channels operating in different registers, or to one-off marquee experiments.
+
+### Cohort D — Procedurally PD (copyright-formality failures)
+
+Works that entered PD not by expiry but by procedural error in copyright registration. Night of the Living Dead (1968 — missing copyright notice on prints). It's a Wonderful Life (1946 — copyright lapsed in 1974). Charade (1963 — missing notice).
+
+Legally safe. Strategically irrelevant for Lazarus — these are mostly 20th-century films that were widely circulated specifically because of their PD status, so first-mover positioning is gone. Interesting trivia, useful for understanding how PD law works, but not Lazarus territory.
+
+### Lazarus operates as a Cohort A operator with selective Cohort B for marquee events
+
+This is a meaningful trust signal in a content category where competitors operate in legal gray zones. "Every adaptation we ship is verifiably in the public domain" is a credible claim and worth foregrounding in About-page positioning.
+
+---
+
+## What Lazarus Looks Like Through The Samuelson Public-Domain Values Framework
+
+Pamela Samuelson's framework of eight values that arise from public domain works gives Lazarus language for positioning that sits above "YouTube channel" and aligns with how cultural institutions, journalists, and educational organisations talk about PD. Four of her eight values map directly to Lazarus:
+
+- **Cultural heritage access** — Lazarus makes Saki, Stevenson, Bierce, Wilde accessible to viewers who would never read them. The cinematic adaptation is the access mechanism.
+- **Educational** — every Lazarus video leaves the viewer slightly more literate in dramatic technique and literary history than they were at the start, especially when the moralised closer is doing its work.
+- **Enabling follow-on innovation** — Lazarus videos themselves become creative works built on PD substrate that can inspire other adaptations, readings, derivative work.
+- **Low-cost access without rights clearance** — the operator economics that make Lazarus profitable at scale where adapting recent novels would be impossible.
+
+The other four Samuelson values (knowledge building blocks, public health, democratic process, competitive imitation of patents) are about scientific data and government information — different domains.
+
+**Strategic value of this framing.** Three concrete advantages:
+
+1. Press coverage at scale unavailable to other AI-recreation channels. A literary journalist writing about January 1 PD entrants can quote Lazarus's mission in Samuelson-adjacent language and the piece writes itself.
+2. Defence against AI-criticism backlash. Lazarus's source material is in PD specifically because cultural heritage belongs to everyone. The takedown narrative that hurts other AI channels doesn't land the same way.
+3. Non-commercial identity that the commercial mechanics inherit. The stated mission sits above the ad-revenue mechanics, which positions Lazarus for literary festival inclusion, university partnerships, library collaborations, BFI screenings.
+
+### Mission statement candidate
+
+"Lazarus Films makes works in the public domain visible again through cinematic adaptation. We treat the public domain as cultural heritage that belongs to everyone, and use new tools to widen access to the dramatic literature that shaped Western imagination."
+
+### The CC0 question — answered NO
+
+A tempting move: release Lazarus adaptations themselves under CC0 (no rights reserved). The Samuelson framing and the Romero / Night-of-the-Living-Dead trajectory point toward it. But: Romero lost millions in licensing revenue because of the copyright failure on his most influential film. Lazarus adaptations should remain standard copyrighted works owned by you, with future licensing optionality preserved.
+
+What CAN be open-sourced without giving away rights: the **source materials** (storyboard.json, canon block, script.md) released under CC-BY on a public site demonstrates the operation, supports cultural-heritage framing, and doesn't compromise commercial rights to finished videos. Other creators learn from the method without being able to clone the output.
+
+---
+
+## Demand Analysis — Tony Walker as Adjacent-Operator Calibration
+
+The dignified-literary-faceless niche on YouTube right now is dominated by **atmospheric horror and supernatural** content, not literary drama in general. This is genuinely important information for Lazarus selection.
+
+Tony Walker's Classic Ghost Stories Podcast: 99.7K subs, 682 videos over 14 years, 23.7K average views per video, 16.16M total. No video performs above 1.5x channel average — meaning his audience is a stable subscribed base, not algorithmic discovery. The author choice within his videos doesn't move the algorithm; his audience is already trained.
+
+What Tony Walker IS publishing right now (May-June 2026):
+
+Lovecraft, M.R. James, Edith Nesbit, Algernon Blackwood, Richard Marsh, Saki, Charles Dickens (ghost stories), Wharton, Charlotte Riddell, Rhoda Broughton, A.J. Alan, Russell Wakefield, Erckmann-Chatrian, Francis Prevost, Violet Hunt, Clark Ashton Smith, William F. Temple. (He also reads some non-PD: Murakami, Angela Carter — operating in copyright gray zone.)
+
+What his audience watches MOST in this current month: Lovecraft (8.5K), Wharton's A Bottle of Perrier (7.6K), A.J. Alan (7.5K), M.R. James (6.8K), Russell Wakefield (6.1K), Dickens (5.8K).
+
+**Pattern:** atmospheric horror and supernatural dread dominate. Not drawing-room drama. Not social comedy. Not historical fiction. The dignified-literary-faceless audience on YouTube right now is the horror-and-ghost audience.
+
+### Operational implication for Lazarus
+
+The first 3-5 Lazarus videos should land in the **atmospheric-horror + dramatic-cinematic** intersection because that's where the YouTube algorithm is currently most receptive to dignified-literary register. Other Lazarus videos can broaden the register over time, but the first few should land in algorithmically warm soil.
+
+Saki's Sredni Vashtar lands here cleanly (dark child, malevolent god in the shed, cruel ending). So do Bierce's Owl Creek Bridge (psychological horror, perfect ending), Stevenson's Body Snatcher (atmospheric horror, moral collapse), Wilde's Canterville Ghost (atmospheric haunting), Jacobs' Monkey's Paw (cruel-ending horror), M.R. James's Lost Hearts (atmospheric horror with child protagonist), Blackwood's Willows (atmospheric dread, landscape as character).
+
+What would NOT land in this neighbourhood for the first 3-5 videos: drawing-room comedies of manners, social-observation pieces, straight drama without supernatural element. Save those for video 6-10 once trust capital exists.
+
+---
+
+## First-10-Candidate Shortlist For Wednesday's Filter Session
+
+Drawn from Tony Walker's actively-published author set, filtered to Cohort A (globally PD), weighted toward atmospheric-horror neighbourhood, with first-mover positioning available.
+
+To be scored Wednesday evening against all eight filter questions (1-5 plot/craft, 6 first-mover, 7 current-demand, 8 jurisdiction-clean).
+
+1. **Sredni Vashtar** — Saki (atmospheric malevolence, child protagonist, cruel ending)
+2. **The Open Window** — Saki (atmospheric trick, cruel ending, shorter runtime)
+3. **Gabriel Ernest** — Saki (atmospheric horror, werewolf-adjacent; Tony Walker just published 1 June 2026 — live calibration signal available)
+4. **An Occurrence at Owl Creek Bridge** — Bierce (psychological horror, perfect ending)
+5. **The Body Snatcher** — Stevenson (atmospheric horror, moral collapse)
+6. **Markheim** — Stevenson (psychological horror, redemption choice)
+7. **The Monkey's Paw** — W.W. Jacobs (atmospheric horror, cruel ending, family tragedy)
+8. **Lost Hearts** — M.R. James (atmospheric horror, child protagonist, period setting)
+9. **The Willows** — Algernon Blackwood (atmospheric dread, landscape as character)
+10. **The Canterville Ghost** — Wilde (atmospheric haunting, comedy-tragedy, child redemption)
+
+All ten are Cohort A. All visualisable. All articulable stakes. All single-narrator-feasible (no multi-character dialogue capability required). All peak within feasible runtime windows. All in atmospheric-horror neighbourhood where algorithm is currently warm.
+
+**Wednesday session protocol:** score each work against eight filter questions on integer 1-5 scale (max 40 points). Top three become production queue. Sredni Vashtar may still emerge as the winner, but the discipline is to apply the filter rigorously rather than locking on pattern-match instinct.
+
+---
 
 ## The Reading-as-Work Principle
 
@@ -115,24 +281,6 @@ The three filters cannot be parallelised by hiring. They require synthesis betwe
 Output of running the three filters consistently over 6-12 months: a curated PD shortlist that no other operator can reproduce, because it's the intersection of public availability + craft pattern + pipeline feasibility + channel register + demand timing. The shortlist is closer to the actual moat than the public PD catalogue.
 
 **Operational implication:** protected reading time IS pipeline-building time. Don't trade it for tactical execution time. The list compounds.
-
----
-
-## Public Domain Legal Positioning
-
-The audiobook YouTube ecosystem splits into three operator types:
-
-1. **Pure PD operators** — focus on works whose authors died before 1955 (M.R. James, Le Fanu, Blackwood, Saki). Globally PD under life+70 rules. Legally clean everywhere.
-2. **Copyright gray-zone operators** — read works still under copyright in their jurisdiction (Tony Walker reading du Maurier from the UK before 2059). Operating on practical reality that small-channel readings don't get enforcement. Legal exposure that scales with growth.
-3. **Librivox re-uploaders** — take volunteer Librivox recordings (which are themselves PD) and republish with stock images. Legal but heavily commoditised.
-
-Lazarus operates as Type 1. The targeted works are clean:
-
-- **Sredni Vashtar (Saki, died 1916)** — globally PD everywhere on Earth. Zero risk.
-- **Maltese Falcon (Hammett, published 1930)** — entered US PD on 1 Jan 2026. YouTube hosts in US territory; US law governs.
-- **The Loving Spirit (du Maurier, 1931)** — enters US PD on 1 Jan 2027. First-day-of-PD launch with literary-event framing.
-
-**This is a meaningful differentiator.** Lazarus can credibly claim "every adaptation we ship is verifiably in the public domain." That's a trust signal in a content category where competitors are operating in legal gray zones. It also positions for January 1st launch announcements that get press attention — "the first cinematic adaptation of [work] on the day it became publicly available" is genuine news to PD enthusiasts, literary journalists, and the kind of viewer who cares about provenance.
 
 ---
 
@@ -155,13 +303,13 @@ Why it works:
 
 ### Status
 
-Banner candidate frozen at "LAZARUS: public domAIn revival" pending R&D phase. May still get displaced by something better that emerges during Sredni Vashtar production. Test by mocking up against the actual visual banner design before locking.
+Banner candidate frozen at "LAZARUS: public domAIn revival" pending R&D phase. May still get displaced by something better that emerges during proof-of-concept production. Test by mocking up against the actual visual banner design before locking.
 
 ---
 
 ## The Source Material Is The Moat
 
-Public domain dramatic writing from masters 1900-1960 is:
+Public domain dramatic writing from masters 1880-1930 is:
 
 - **Free** (no licensing, no royalties)
 - **Vast** (thousands of works across multiple writers per year)
@@ -174,3 +322,14 @@ This is the rarest combination of leverage available to a solo operator: free in
 
 The PD catalogue is public. The taste curve through it is not. The taste curve is what becomes uncopyable.
 
+---
+
+## Open Questions Held For Future Sessions
+
+- **First Lazarus video selection** — Wednesday 3 June 2026 filter session. Sredni Vashtar likely but not locked. Alternatives include Bierce's Owl Creek Bridge, Stevenson's Body Snatcher, Saki's Open Window or Gabriel Ernest.
+- **Lazarus banner visual design** — banner-candidate-text frozen but actual visual mock-up deferred until first video ships.
+- **Multi-speaker dialogue capability** — required for Maltese Falcon (Astana 15 August deadline). Mid-June Hetzner R&D priority.
+- **Character consistency across shots** — InstantID or PuLID integration. Required for any work with named recurring characters. Late-June R&D priority.
+- **Lip-sync** — required for Maltese Falcon. Wav2Lip, SadTalker, or Hedra integration. July R&D priority.
+- **Festival cut workflow** — `--festival-cut` flag on the assembly step to add slate + credits for Astana submission. 30-60 lines of pipeline code. July work.
+- **Sister-channel decision for Cohort B / dialogue-heavy works** — Austen, Shakespeare, late-Wharton drawing-room work require Channel 4 / Maltese Falcon dialogue capability AND a different register from Lazarus. Decide in Q1 2027 whether to launch a sister channel or fold into Channel 4's eventual register.
