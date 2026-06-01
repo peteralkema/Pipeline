@@ -1,0 +1,230 @@
+[
+  {
+    "narration": "They thought they had time.",
+    "image_prompt": "A wide aerial view of the ancient city of Pompeii in the early morning light, terracotta rooftops glowing amber, smoke curling from bakery chimneys, the broad shadow of Vesuvius falling across the lower districts. The mountain looms in the background, its slopes green and deceptively serene under a pale blue sky. No people visible \u2014 just the silent geometry of the city, still and unaware.",
+    "motion_prompt": "Extremely slow push-in toward the mountain from high above, drifting almost imperceptibly, the city spread below like a sleeping thing.",
+    "index": 1
+  },
+  {
+    "narration": "It is the morning of the 24th of August. The city of Pompeii is awake, and ordinary. Bread is baking.",
+    "image_prompt": "Inside a Roman bakery, a large stone mill and a clay oven dominate the frame. Round loaves of bread sit on a wooden counter, dusted with flour, steam rising gently from their crusts. Warm orange firelight from the oven mouth spills across the stone floor. The space is low-ceilinged, intimate, utterly mundane. No people visible \u2014 just the loaves, the glow, the flour-dusted air.",
+    "motion_prompt": "Slow drift of steam rising from the loaves, firelight flickering softly in the oven mouth, almost no camera movement.",
+    "index": 2
+  },
+  {
+    "narration": "The markets are opening. A dog sleeps in a doorway in the early heat.",
+    "image_prompt": "A narrow Roman street paved with large flat stones, market stalls with linen awnings just beginning to be arranged at the far end. In the foreground, partially in shadow beneath a heavy wooden doorframe, a medium-sized tan dog lies curled on the threshold, ears flat, utterly at rest. The morning light is golden and slanted, casting long shadows across the stone street.",
+    "motion_prompt": "Gentle breeze stirs the linen awning fabric at the far end of the street. The dog is motionless. Camera holds completely still.",
+    "index": 3
+  },
+  {
+    "narration": "Above the town, the mountain they call Vesuvius sits quiet, the way it has sat quiet for as long as anyone alive can remember. No one in the city below knows that it is a volcano. There is no word, yet, for what is about to happen to them.",
+    "image_prompt": "A view from the upper edge of the city looking up toward Vesuvius. The mountain's broad green slopes rise against a pale morning sky, entirely calm, no sign of disturbance. In the foreground, the red-tiled rooftops of Pompeii recede downhill. A single cypress tree stands silhouetted at the frame's edge. The mountain dominates the upper two-thirds of the composition, placid and enormous.",
+    "motion_prompt": "Imperceptibly slow tilt upward along the mountain's face, revealing more sky as the camera rises, the rooftops dropping out of frame at the bottom edge.",
+    "index": 4
+  },
+  {
+    "narration": "A little after noon, the mountain opens.",
+    "image_prompt": "The summit of Vesuvius seen from a distance across a flat plain. A thin, bright crack of orange light is visible at the peak \u2014 the first moment of eruption \u2014 but the column has not yet formed. The sky around the summit is still blue but beginning to bruise at the edges with a yellowish tint. The landscape below is still green and quiet. The composition is sparse, the mountain centered, the horizon low.",
+    "motion_prompt": "Camera holds completely still. A faint pulse of light at the summit, the sky at the peak beginning to darken almost imperceptibly.",
+    "index": 5
+  },
+  {
+    "narration": "A column of ash and rock climbs into the sky \u2014 higher than the eye can follow, twelve miles, then more \u2014 and at the top it spreads, and turns the afternoon to night.",
+    "image_prompt": "A full wide shot of Vesuvius mid-eruption. A massive column of ash and rock \u2014 dark grey at its core, billowing white-grey at its edges \u2014 towers into the sky, already spreading at the top into the classic umbrella-pine shape. The column fills the upper half of the frame. The sky has turned a sickly yellow-brown. The land below is tiny and dark by comparison. The scale is overwhelming, biblical.",
+    "motion_prompt": "Very slow tilt upward along the height of the column, sky darkening as the camera rises, the spreading crown at the top expanding slowly at the frame's edge.",
+    "index": 6
+  },
+  {
+    "narration": "And here is the strange part. The part that is easy to forget, two thousand years later, when we look at the bodies frozen in the ash.",
+    "image_prompt": "A plaster cast of a Pompeiian victim displayed in a sparse museum-like stone setting \u2014 a figure lying on its side, one arm raised toward the face, rendered in pale grey-white plaster. The cast rests on a simple stone surface, softly lit from one side by a cool, diffused light that emphasizes its contours. The background is dark and out of focus. The figure appears peaceful and terrible at once.",
+    "motion_prompt": "Extremely slow push-in toward the cast, light barely shifting, no other movement in the frame.",
+    "index": 7
+  },
+  {
+    "narration": "They were warned. They had hours. A whole day, for some of them. Time to gather what mattered, to reach the gate, to walk down to the sea and away.",
+    "image_prompt": "A wide stone Roman gate \u2014 the city wall's archway \u2014 seen from inside the city looking out. Through the arch, the road south is visible, pale and open, stretching toward a flat coastline and a glint of sea in the distance. The sky beyond the gate is lighter than the sky behind the camera. Two rolled traveling bundles lean against the gate's inner wall, already packed and waiting. No people.",
+    "motion_prompt": "Slow gentle push through the arch toward the open road beyond, the light brightening slightly as the frame moves toward the gate.",
+    "index": 8
+  },
+  {
+    "narration": "Some did. The ones who ran early \u2014 they lived.",
+    "image_prompt": "A Roman road stretching south through open countryside, seen from behind as if watching people who have already gone. The road is empty now \u2014 just the stone path, scrubby olive trees on either side, and ahead a distant figure or two, tiny, already far away, moving toward the coast. The eruption column is visible over the left shoulder, behind and above, but the sky ahead is still pale and open.",
+    "motion_prompt": "Slow drift forward along the road, the distant figures growing only slightly larger, ash beginning to settle on the road surface ahead.",
+    "index": 9
+  },
+  {
+    "narration": "But many stayed. They closed their shutters against the falling ash and they waited for it to pass, the way bad weather passes.",
+    "image_prompt": "A Roman street interior \u2014 a row of two-storey stone buildings, their windows all shuttered with heavy wooden panels, ash already collecting on the window ledges and along the tops of the shutters. The street is empty. A thin layer of pale pumice stone covers the cobblestones. The light is a strange filtered yellow-grey. The shuttered facades look sealed and stubborn, as if refusing what is happening outside.",
+    "motion_prompt": "Ash drifts slowly down from above, accumulating on the ledges and ground. Camera holds still or drifts very slightly along the shuttered facade.",
+    "index": 10
+  },
+  {
+    "narration": "They did not know that this was not weather. They did not know that the air itself would come for them.",
+    "image_prompt": "Looking upward from a courtyard inside a Roman home \u2014 the open rectangular sky above the atrium now filled with a roiling, churning ceiling of ash cloud, lit from within by a sulphurous yellow-orange glow. The courtyard's stone columns frame the view. Ash falls straight down in slow curtains. The impluvium pool in the center of the courtyard is already grey with fallen ash. The scene is eerily beautiful and wrong.",
+    "motion_prompt": "Ash falls steadily into the courtyard, the cloud above shifts and churns very slowly. Camera tilts up gradually to maximize the sky.",
+    "index": 11
+  },
+  {
+    "narration": "This is the story of the people who waited. And of one family, down at the water's edge, who believed \u2014 right until the end \u2014 that the sea would carry them home.",
+    "image_prompt": "The shoreline of Herculaneum at the base of sea-facing cliffs, the harbour visible. Stone arched boat chambers are built into the base of the seawall \u2014 dark, low, open-mouthed toward the water. The sea beyond is choppy and grey-brown, reflecting the poisoned sky above. The ash column from Vesuvius dominates the horizon behind the cliffs to the upper right. The scene is empty but feels like it is waiting to be filled.",
+    "motion_prompt": "Slow drift along the waterline toward the arched boat chambers, waves lapping quietly against the stone, ash falling into the water.",
+    "index": 12
+  },
+  {
+    "narration": "[Here's what you need to understand.] To understand why they stayed, you have to understand what they were seeing. Because it did not look like death. Not at first.",
+    "image_prompt": "A wide shot of a Pompeiian street in the first hours of the eruption. Pale grey ash drifts down like snow in the yellowed afternoon light. The street is quiet \u2014 no chaos, no running. A few small pumice stones rest on the cobblestones. The buildings on either side stand intact. The overall impression is of a strange, muted afternoon \u2014 odd but not obviously deadly. The eruption column is visible at the end of the street, but partially obscured by haze.",
+    "motion_prompt": "Ash and tiny pumice fragments fall slowly and evenly, like gentle snowfall. Camera holds still, letting the atmosphere do the work.",
+    "index": 13
+  },
+  {
+    "narration": "For the first few hours, the danger was almost gentle. Ash fell like grey snow. Small stones of pumice \u2014 light, porous, warm \u2014 rattled against the roofs. A nuisance. A strange afternoon.",
+    "image_prompt": "A close view of a Roman rooftop \u2014 terracotta tiles dusted with a growing layer of pale grey ash and small porous pumice stones scattered across them. Some pumice stones have rolled against the raised tile edges. The ash coating is only a centimeter or two deep, soft-looking, almost pretty in its even grey coverage. A single tile has cracked under the weight. The sky above is the colour of old linen.",
+    "motion_prompt": "Pumice stones and ash continue to fall, landing softly on the roof tiles with almost no sound implied. Camera holds still, a very slow push-in toward the dusted tiles.",
+    "index": 14
+  },
+  {
+    "narration": "People swept their doorsteps. They stood in the streets and pointed at the column rising over the mountain, the way we would film a storm rolling in.",
+    "image_prompt": "A Roman doorstep \u2014 a worn stone threshold \u2014 with a small pile of ash and pumice swept neatly to one side, the bristle end of a broom visible at the frame's edge, already set down. Beyond the threshold, the street stretches out, and at its far end, silhouetted figures stand still, looking upward toward the column. They are small, distant, faces invisible. The column of ash fills the sky above them.",
+    "motion_prompt": "The distant silhouetted figures are motionless. Ash drifts down past them. Camera holds still.",
+    "index": 15
+  },
+  {
+    "narration": "The ones who left in those first hours made a quiet, unremarkable decision. They gathered a few things. They took the children's hands. And they walked out through the city gates while the roads were still open, while the sky to the south was still clear.",
+    "image_prompt": "Inside a Roman home \u2014 a modest atrium. On a wooden table, a small bundle of cloth has been tied closed, a clay oil lamp and a leather purse placed beside it. A child's sandal sits on the floor nearby. The room is still, orderly, the objects arranged with the quiet urgency of someone who has already left. Ash has barely reached here \u2014 the room is almost clean. Light comes from a small window, pale and even.",
+    "motion_prompt": "Camera holds completely still. A single mote of ash drifts through the window light and settles on the table surface. No other movement.",
+    "index": 16
+  },
+  {
+    "narration": "History does not remember them. They simply lived, and went on, and told their grandchildren about the day the mountain woke up.",
+    "image_prompt": "The open Roman road south of the city gate, now empty. Olive trees line the road. The sky ahead to the south is pale and clear \u2014 almost normal \u2014 while behind, implied off the top of frame, the eruption continues. Small amounts of ash dust the road surface and the olive leaves. The road curves gently and disappears. It is peaceful, unremarkable. The path of the ones who survived.",
+    "motion_prompt": "Slow drift forward along the road, the olive trees passing gently on either side, ash barely visible in the still air.",
+    "index": 17
+  },
+  {
+    "narration": "It is the others we remember. Because the pumice kept falling. Hour after hour. And it began to pile \u2014 on the streets, against the doors, on the roofs. A foot of it. Then more.",
+    "image_prompt": "A Pompeiian street several hours into the eruption \u2014 now dramatically transformed. The pumice layer on the ground is knee-deep, the stone street invisible beneath it. Doorways are partially buried, the lower third of every door submerged in grey-white stone rubble. Shutters are barely visible above the pumice line. The buildings lean against the weight of ash on their roofs. The light is dim, ashen, and the column looms even taller now, filling the sky above the rooftops.",
+    "motion_prompt": "Pumice continues to fall, deepening the layer on the ground almost imperceptibly. Camera very slowly pulls back to reveal the full scale of the accumulation.",
+    "index": 18
+  },
+  {
+    "narration": "And now leaving was no longer a simple walk to the gate. Now it meant wading through deepening stone, in the dark, with ash filling your eyes and your mouth, not knowing if the road still led anywhere at all.",
+    "image_prompt": "The city gate from inside Pompeii \u2014 now half-buried. The great stone arch is still visible but the roadway through it is choked with pumice to waist height. Beyond the gate, the road is indistinct, swallowed in grey. The sky is almost completely dark now, lit only by the sickly amber glow of the eruption column reflected off the ash clouds. The gate stands as an obstacle, not an exit.",
+    "motion_prompt": "Ash and pumice fall steadily. The gate fills the frame. Camera holds still, letting the darkness and falling ash deepen the atmosphere.",
+    "index": 19
+  },
+  {
+    "narration": "So a terrible kind of logic took hold. If you had already waited this long \u2014 if the worst so far had only been falling stone \u2014 then surely the safest thing was to stay inside. To shelter. To wait for morning, and for it to be over.",
+    "image_prompt": "Inside a Roman room, lit by a single oil lamp on a stone ledge. The lamp flame burns steadily in still air. The room is a bedroom or inner chamber \u2014 a low wooden bed frame, a rough woolen blanket, plastered walls painted in simple dark red. Ash has sifted in under the door, leaving a thin line of grey on the floor at the threshold. The room feels enclosed, safe, and wrong. No people.",
+    "motion_prompt": "The oil lamp flame flickers very slightly, casting gentle moving shadows on the painted walls. Camera holds completely still.",
+    "index": 20
+  },
+  {
+    "narration": "They were wrong. But you can see how a reasonable person, in that moment, with what they knew, would choose to stay.",
+    "image_prompt": "An extreme close-up of a Roman oil lamp \u2014 a small terracotta vessel with a single flame burning in the darkness, its warm orange glow contained, fragile. Around it, pure blackness. The lamp is the only light source in the frame. The flame is perfectly steady. The image is intimate and mournful \u2014 a small warmth against an overwhelming dark.",
+    "motion_prompt": "The flame wavers almost imperceptibly. Camera holds completely still. Very slow, barely-there push-in toward the flame.",
+    "index": 21
+  },
+  {
+    "narration": "And then, in the darkness before dawn, the mountain did the thing they could not have imagined. The column that had been climbing into the sky for twelve hours collapsed.",
+    "image_prompt": "A wide view of Vesuvius from a distance in near-total darkness \u2014 the eruption column, which had towered miles into the sky, is now visibly falling back on itself. The upper column is collapsing inward, folding downward, the billowing clouds no longer rising but tumbling. The sky is almost completely black. The collapse is illuminated only by the hellish red-orange glow at the volcano's base. The landscape below is invisible.",
+    "motion_prompt": "The column slowly, majestically folds and collapses downward in the frame. Very slow motion. The glow at the base intensifies slightly.",
+    "index": 22
+  },
+  {
+    "narration": "And what came down was not ash, and not stone. It was a wave of superheated gas and rock, moving down the slope of the mountain faster than a person can run \u2014 faster, almost, than a person can comprehend. Hundreds of degrees. Silent until the last seconds.",
+    "image_prompt": "A ground-level view looking up the slope of Vesuvius in the darkness. A dense, fast-moving wave of hot dark cloud \u2014 the pyroclastic surge \u2014 is visible on the upper slope, rolling downward, lit from within by a deep orange-red glow, billowing but dense, unlike the ash column above it. The foreground is black. The cloud fills the upper frame, terrible and inevitable.",
+    "motion_prompt": "The pyroclastic cloud rolls very slowly down the slope in the frame, the internal glow pulsing faintly. Camera holds completely still as the cloud descends.",
+    "index": 23
+  },
+  {
+    "narration": "It did not bury them slowly. It reached them in moments.",
+    "image_prompt": "A Pompeiian street in the final moment \u2014 the pumice-buried road, the shuttered buildings, the oil lamp light just visible through a crack in one shutter \u2014 and at the far end of the street, the dark wall of the pyroclastic surge filling the frame top to bottom, advancing. The street is still, the buildings intact, the shutters closed. The approaching cloud is close, almost here. The scene holds the last second of stillness.",
+    "motion_prompt": "The surge wall at the end of the street slowly fills more of the frame, advancing. Everything in the foreground holds perfectly still. The light through the shutter crack goes dark.",
+    "index": 24
+  },
+  {
+    "narration": "This is what the ash preserved. Not the bodies, exactly \u2014 those were gone long ago. But the spaces where the bodies had been. The hollows in the hardened ash.",
+    "image_prompt": "An archaeological excavation site within Pompeii \u2014 a trench cut through layers of compressed grey ash and pumice, revealing the stratified geology of the eruption. Within one layer, a human-shaped void is clearly visible \u2014 an empty space in the hardened ash in the exact outline of a prone human figure. The void is empty, dark, waiting. Archaeological brushes and tools rest nearby on the ash surface. Natural daylight from above, cool and even.",
+    "motion_prompt": "Camera holds completely still on the void in the ash. No movement except a faint breath of air stirring loose ash dust at the trench edge.",
+    "index": 25
+  },
+  {
+    "narration": "And when archaeologists, centuries later, filled those hollows with plaster, the people of Pompeii came back \u2014 in the exact posture of their last moment.",
+    "image_prompt": "Three plaster casts of Pompeiian victims arranged in a row on a stone floor in a museum storage space, lit by cool diffuse light from above. Each cast is a different posture \u2014 one on its side with knees drawn up, one on its back with one arm raised, one face-down. They are pale grey-white, their surfaces textured with the exact grain of the ash that formed around them. They are deeply still. The room around them is bare stone.",
+    "motion_prompt": "Camera drifts very slowly along the row of casts from one end to the other, the light remaining constant and cool.",
+    "index": 26
+  },
+  {
+    "narration": "A man shielding his face. A dog, still chained, twisted against its collar. A pair of figures lying together, one arm thrown over the other.",
+    "image_prompt": "A single plaster cast in close detail \u2014 a figure with one arm raised toward the face, the cast showing the folds of a tunic pressed against the body by the surge, the curve of a forearm, the suggestion of features beneath the arm. The cast sits in a shallow stone alcove, lit from one side by cool raking light that emphasizes every surface detail. The background is dark. The figure is utterly still.",
+    "motion_prompt": "Extremely slow push-in toward the raised arm of the cast. Light holds completely still. No other movement.",
+    "index": 27
+  },
+  {
+    "narration": "They are not statues. They are the shape of a real person's final second, held for two thousand years.",
+    "image_prompt": "An extreme close-up detail of a plaster cast surface \u2014 the texture where cloth pressed against skin, a wrinkle of fabric, the curve of a shoulder or hip rendered in pale grey plaster. The detail is intimate and sorrowful. No face is visible \u2014 just the anonymous surface of a body, perfectly preserved in stillness. Cool, even light. High detail.",
+    "motion_prompt": "Camera holds perfectly still. Very slow rack of focus across the surface detail of the cast. No other movement.",
+    "index": 28
+  },
+  {
+    "narration": "And down at the shore \u2014 at the harbour town of Herculaneum, in the boat chambers along the water \u2014 they found them in groups. Families. Dozens of them, gathered in the stone arches that opened onto the sea.",
+    "image_prompt": "The boat chambers of Herculaneum \u2014 a row of low stone arches built into the base of the ancient seawall, open toward the water. The arches are dark inside, their interiors in deep shadow. The sea beyond is visible, grey and restless under an ash-clouded sky. The beach between the arches and the water is pale grey with ash. The scene is empty of people but the chambers feel occupied by absence. Daylight \u2014 the modern archaeological site.",
+    "motion_prompt": "Slow drift along the face of the arches from one to the next, the sea visible beyond each opening, waves barely audible.",
+    "index": 29
+  },
+  {
+    "narration": "They had not stayed in their homes. They had done the sensible thing. They had run toward the water, toward escape, toward the boats that surely would come.",
+    "image_prompt": "A view from inside one of the boat chamber arches looking out toward the sea. The stone arch frames the grey water and the ash-choked sky. The beach outside the arch is covered in a layer of grey volcanic debris. The eruption column is visible to the left on the horizon, reflected in the flat grey water. The chamber's interior is dark, the exterior pale and desolate. The framing creates a sense of trapped hope.",
+    "motion_prompt": "Waves move slowly on the water surface visible through the arch. Ash drifts down onto the beach outside. Camera holds still inside the dark arch.",
+    "index": 30
+  },
+  {
+    "narration": "A woman with her jewellery still on. A soldier. A mother holding an infant against her chest.",
+    "image_prompt": "Inside the modern archaeological boat chamber \u2014 skeletal remains and artifacts as they were found, partially reconstructed for display, behind glass in a museum-style setting. In the foreground, a small reconstructed figure grouping: a skeleton with a bronze bracelet still on one wrist bone, a military belt fitting nearby, and two sets of remains with the smaller clearly an infant, positioned as if cradled. The display is lit with warm amber museum light against a dark background. Respectful and still.",
+    "motion_prompt": "Camera holds completely still. Very slow, barely perceptible push-in toward the bracelet on the wrist bone. No other movement.",
+    "index": 31
+  },
+  {
+    "narration": "They had reached the shore. They were waiting for rescue. And the historians believe a rescue was even attempted \u2014 that ships were sent, and turned back by the sea and the falling debris, unable to reach the people standing on the beach watching for them.",
+    "image_prompt": "A wide sea view from the shore \u2014 the Bay of Naples under a sky choked with ash clouds, lit by the sickly amber-orange glow of the eruption reflected on the water. In the middle distance, the ghostly silhouette of a Roman ship \u2014 a broad-beamed trireme \u2014 is visible, stationary, its sails furled, surrounded by falling ash and rough water. It is distant, unreachable. The shore in the foreground is covered in pumice. The sea between shore and ship is dark and disturbed.",
+    "motion_prompt": "Waves roll slowly across the water surface. Ash falls into the sea. The ship silhouette barely moves. Camera holds still.",
+    "index": 32
+  },
+  {
+    "narration": "So they waited in the boat chambers, out of the falling stone, looking out at the water.",
+    "image_prompt": "Looking out from deep inside one of the Herculaneum boat chambers \u2014 the stone arch frames a rectangle of the grey sea and poisoned sky. The ash column from Vesuvius is visible above the horizon on the right. The chamber's interior walls are rough stone. The floor is covered with a thin layer of ash. The frame is composed so the arch creates a window of hope: sea and sky beyond, stone and dark within. Empty of people but heavy with presence.",
+    "motion_prompt": "Waves move on the water through the arch opening. Ash falls outside. The interior holds completely still. Camera holds still.",
+    "index": 33
+  },
+  {
+    "narration": "And the wave from the mountain reached them there. They died in the one place they were certain they were safe. Together. Facing the sea.",
+    "image_prompt": "The exterior of the Herculaneum boat chambers in the final moment \u2014 the arched openings facing the sea, and at the far end of the beach, the dark roiling wall of the pyroclastic surge descending toward the shore, reflected in the water, filling the upper frame. The chambers are still open, the sea still visible. The surge arrives from the left, inevitable, enormous. The scene holds one last second of the shore before it is taken.",
+    "motion_prompt": "The pyroclastic surge slowly rolls into frame from the upper left, descending toward the arches. The sea ripples. Camera holds completely still as the dark cloud advances.",
+    "index": 34
+  },
+  {
+    "narration": "We know all of this \u2014 the morning, the column, the hours of falling stone, the families at the shore \u2014 because of the thing that killed them. The ash that took their lives is the same ash that sealed their city away from time. No looters. No rebuilding. No two thousand years of weather wearing it down. Just a moment, covered, and kept.",
+    "image_prompt": "A sweeping aerial view of the archaeological site of Pompeii as it exists today \u2014 the ancient city exposed in its entirety, streets and rooms and courtyards visible from above, the volcanic plain stretching around it, and Vesuvius visible on the horizon, quiet and green again. The ruins are tan and ochre in afternoon light, perfectly preserved in their grid of streets and walls. The modern world is invisible. The city is intact and frozen, as if time stopped and held.",
+    "motion_prompt": "Very slow, wide aerial drift over the ruins, the city scrolling gently below. No people visible. Vesuvius sits silently on the horizon.",
+    "index": 35
+  },
+  {
+    "narration": "Pompeii is not a story about a volcano. We have had many volcanoes. It is a story about people who were given time, and used it the way any of us might have \u2014 by waiting, by hoping, by trusting that tomorrow would look like yesterday.",
+    "image_prompt": "Inside a preserved Pompeiian room \u2014 a triclinium or dining room, its frescoed walls showing garden scenes in deep red and green and ochre, perfectly intact. A low stone couch or bench along one wall. A mosaic floor partially visible. The room is empty, still, and beautiful \u2014 a domestic interior frozen in the moment before catastrophe, looking exactly like a room someone was about to return to. Late afternoon light from a small window falls across the mosaic floor.",
+    "motion_prompt": "The light through the window shifts almost imperceptibly, casting a slow-moving rectangle of sun across the mosaic floor. Camera holds completely still.",
+    "index": 36
+  },
+  {
+    "narration": "They thought they had time.",
+    "image_prompt": "The exterior of Pompeii's city gate at dusk, the great stone arch standing open as it always did. Beyond the arch, the road south stretches empty into the distance, the sky above it a deep blue fading to ash-grey on the horizon. Vesuvius is a dark silhouette to the right. The gate is silent and permanent. The road through it could still, even now, lead somewhere. The image is wide, still, and desolate.",
+    "motion_prompt": "Camera holds perfectly still. A breath of wind stirs the dry grass at the road's edge. The sky very slowly deepens toward darkness.",
+    "index": 37
+  },
+  {
+    "narration": "The terrible truth is that they did. They just did not know what it was for.",
+    "image_prompt": "A single plaster cast \u2014 the most iconic pose \u2014 a figure lying on its side, knees slightly drawn, one arm raised as if sheltering against something. The cast is placed in a shaft of cool, single-directional light in an otherwise completely dark space. Every contour is visible: the folds of cloth, the curve of the skull, the hollow where an eye was. The cast is alone in the darkness. Quiet. Permanent. The last image.",
+    "motion_prompt": "Camera holds completely still. The light fades almost imperceptibly over a long, slow beat, the figure remaining just barely visible as the shot ends.",
+    "index": 38
+  }
+]

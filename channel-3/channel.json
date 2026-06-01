@@ -1,0 +1,11 @@
+{
+  "name": "channel_3_TBD",
+  "display_name": "TBD — see public-domain-dramatic-writing-corpus.md",
+  "format": "narrated_literary",
+  "voice_id": "TBD — audition for literary register before launch",
+  "style_suffix": "photoreal cinematic Edwardian, painterly atmospheric, soft natural light, restrained color palette",
+  "default_music_prompt": "controlled literary dread, minimal, slow",
+  "base_canon": {
+    "_note": "Add recurring canon once stories scripted. See multi-genre-script-architecture.md for schema."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "negative": [
+    "visible ribs through skin",
+    "skeletal striping on animals",
+    "uncanny animal anatomy",
+    "on-screen text",
+    "captions",
+    "watermark",
+    "plastic textures",
+    "oversaturated colors",
+    "extra hands, duplicate hands, third arm, floating disembodied hands, extra head, duplicate head",
+    "light sources inside boats, candles in illogical places, skeletons with light sources",
+    "body parts fused into walls or stone, hands or limbs protruding from architecture, figures merged with stonework, disembodied hands emerging from surfaces",
+    "people looking at something in the background must be shown from behind or in profile, facing into the frame toward it; never show faces and have them looking at a background element simultaneously; eyeline must match camera position",
+    "objects defying gravity, swords balancing on their points, items floating or suspended in mid-air unsupported",
+    "disembodied hands emerging from clothing, sleeves, furniture, or floors; hands with no attached body",
+    "figures partially sunk into or emerging from floors or paving; people must stand fully on top of the ground, whole bodies visible, never embedded in the floor",
+    "incorrect object counts; when a specific number of objects is named, render exactly that number, never more or fewer",
+    "phantom or floating hands in empty scenes; scenes specified as empty must contain zero human body parts of any kind",
+    "in scenes requiring no people, frame tightly on objects or surfaces so there is no space a figure could occupy; absolutely no hands, fingers, or limbs anywhere in the frame",
+    "split-screen compositions are forbidden; never combine interior and exterior in one frame; pick one location and stay in it",
+    "AI image models cannot reliably render small text, engravings, or inscriptions legibly; always frame text-bearing objects so the writing is partially obscured, in shadow, at an oblique angle, or outside the depth of focus; never rely on the model to produce specific legible words on objects",
+    "for any recurring character or recurring ensemble across multiple shots, embed the full canonical visual description into every prompt where they appear; do not assume the model remembers earlier shots; consistency must be enforced shot by shot",
+    "modern clothing",
+    "t-shirt",
+    "wristwatch",
+    "contemporary hairstyle",
+    "eyeglasses",
+    "zippers",
+    "printed fabric",
+    "modern objects"
+  ],
+  "people_directive": "",
+  "motion_rules": [
+    "PEOPLE ARE THE EMOTIONAL CORE. Most shots should include human figures \u2014 the families, the crowds at a distance, individuals reacting. Do NOT default to empty rooms and landscapes. Empty atmospheric shots are the exception, not the rule.",
+    "Avoid shots where a hand manipulates an object on screen (closing a shutter, opening a door). Hands warp badly in motion. Show the RESULT instead \u2014 a shutter already closed, a door already shut, ash already settled on the sill.",
+    "Avoid close side-on shots of animals; image models hallucinate their anatomy. Frame animals small, distant, in shadow, or partially obscured.",
+    "Keep faces near-static in MOTION (to avoid warping when animated), but DO show people clearly in the still. Animate the environment (ash, smoke, water, light) around a still or barely-moving figure rather than animating the face itself.",
+    "No fast action, no running, no combat, no crowds in fast motion. Slow and atmospheric only."
+  ]
+}

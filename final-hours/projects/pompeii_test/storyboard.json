@@ -1,0 +1,116 @@
+[
+  {
+    "narration": "They thought they had time.",
+    "image_prompt": "An extreme close-up of a Roman sundial carved from pale limestone, set into a sunlit courtyard floor of Pompeii. Morning light rakes across the stone at a low angle, casting a short, sharp shadow from the gnomon. The edges of the courtyard are soft and slightly out of focus. The air is clear and still.",
+    "motion_prompt": "Extremely slow push-in toward the tip of the sundial's shadow, almost imperceptible, as if time itself is barely moving.",
+    "index": 1
+  },
+  {
+    "narration": "It is the morning of the 24th of August. The city of Pompeii is awake, and ordinary.",
+    "image_prompt": "A wide establishing shot of a Pompeii street at early morning, looking down a straight stone-paved road flanked by terracotta-plastered buildings with wooden shutters thrown open. Citizens in off-white and earth-toned tunics move at a relaxed pace. Warm golden morning light floods the street from the left. Potted plants sit in doorways. A man carries a clay amphora on his shoulder.",
+    "motion_prompt": "Very slow, smooth drift forward down the center of the street, as though gliding at walking pace just above the cobblestones.",
+    "index": 2
+  },
+  {
+    "narration": "Bread is baking.",
+    "image_prompt": "Interior of a Pompeian bakery, a thermopolium. A stone oven dominates the background, its mouth glowing deep orange with embers. Round loaves of dark bread, scored with lines, rest on a wooden shelf in the foreground. The air appears hazy with flour dust catching morning light from a small high window. A baker's wooden peel leans against the wall.",
+    "motion_prompt": "Slow, gentle pan from the glowing oven mouth leftward across the shelf of loaves, heat shimmer barely visible above the oven.",
+    "index": 3
+  },
+  {
+    "narration": "The markets are opening.",
+    "image_prompt": "A Pompeii market stall in the early morning, a wooden trestle table being loaded with figs, pomegranates, and bundles of dried herbs by a stout woman in a rust-red tunic and brown head wrap. Behind her, a plastered wall is painted deep red with painted columns. The light is still low and golden, casting long shadows across the cobblestones. Other stalls are visible but slightly blurred in the background.",
+    "motion_prompt": "Slow pull back and very slight pan to the right, revealing more of the market row gradually, ash-free air, completely still.",
+    "index": 4
+  },
+  {
+    "narration": "A dog sleeps in a doorway in the early heat.",
+    "image_prompt": "A medium-close shot of a short-haired tan dog curled on its side in the shadow of a wide Pompeian doorway, its ribcage gently rising. The doorway's threshold is worn smooth limestone. Beyond the dog, the sunlit street is bright and overexposed. A fly rests on the doorframe above. Dust motes float in the shaft of light cutting across the threshold.",
+    "motion_prompt": "Absolutely static frame with the subtlest breath-like rise and fall animation on the dog's flank; dust motes drift lazily upward in the light shaft.",
+    "index": 5
+  },
+  {
+    "narration": "Above the town, the mountain they call Vesuvius sits quiet, the way it has sat quiet for as long as anyone alive can remember.",
+    "image_prompt": "A sweeping wide-angle view from a Pompeii rooftop terrace looking northeast. In the mid-ground, the city's terracotta rooftops and the tops of columns spread across the frame. In the far background, Mount Vesuvius rises broad and green against a deep blue morning sky, completely serene, with no smoke or cloud. The mountain is enormous but completely benign in appearance. A few swallows are frozen in flight near the roofline.",
+    "motion_prompt": "Glacially slow crane-up, beginning at the rooftop level and rising to place Vesuvius in the upper center of frame, the mountain never moving, utterly still.",
+    "index": 6
+  },
+  {
+    "narration": "No one in the city below knows that it is a volcano. There is no word, yet, for what is about to happen to them.",
+    "image_prompt": "A tight, intimate shot looking up at the face of a middle-aged Roman man, around 45, with a weathered olive-skinned face, close-cropped dark hair going grey at the temples, wearing a plain off-white tunic. He stands on a street corner looking casually upward at the sky, shielding his eyes with one hand, expression relaxed and unconcerned. The sky above him is a perfect, unblemished blue.",
+    "motion_prompt": "Very slow, almost imperceptible push-in on the man's face, the sky behind him holding completely still and clear.",
+    "index": 7
+  },
+  {
+    "narration": "A little after noon, the mountain opens.",
+    "image_prompt": "A wide dramatic shot from a distance, showing Vesuvius from across flat green fields south of the mountain. From the mountain's summit, a massive white and grey eruption column is just beginning to billow upward, still in its early phase, dense and cauliflower-shaped at the top, catching the high midday sun so it is blinding white at its crown and dark grey at its base. The surrounding sky is still blue at the edges. The foreground fields are green and empty.",
+    "motion_prompt": "Locked-off static frame; the eruption column billows and churns slowly upward in extreme slow motion, as though breathing upward.",
+    "index": 8
+  },
+  {
+    "narration": "A column of ash and rock climbs into the sky \u2014 higher than the eye can follow, twelve miles, then more \u2014",
+    "image_prompt": "A vertical composition, almost portrait orientation, showing the eruption column from ground to sky. The base of the column at Vesuvius's crater is roiling dark grey and brown. The column climbs the full height of the frame, becoming lighter and more granular near the top. The surrounding sky grades from pale blue to an eerie yellow-orange at the top of the frame. A single bird flies in the lower left, dwarfed by the column.",
+    "motion_prompt": "Extremely slow tilt upward, beginning at the mountain base and tracking the column toward its crown, as the column churns and blooms at the top of frame.",
+    "index": 9
+  },
+  {
+    "narration": "and at the top it spreads, and turns the afternoon to night.",
+    "image_prompt": "A wide shot looking upward at the sky over Pompeii. The umbrella pine-shaped eruption cloud has spread across the upper portion of the frame, blocking the sun entirely. The sky beneath the cloud is a deep, sickly ochre darkening to brown-black at the center. A single ray of sunlight cuts in from the far right edge of the cloud. The first fine grey ash particles are just barely visible beginning to fall, almost invisible, like snow in dim light.",
+    "motion_prompt": "Slow wide pan across the sky from left to right, the darkness spreading and deepening as the pan moves, fine ash beginning to drift downward across the frame.",
+    "index": 10
+  },
+  {
+    "narration": "And here is the strange part. The part that is easy to forget, two thousand years later, when we look at the bodies frozen in the ash.",
+    "image_prompt": "A close-up of a plaster cast of a Pompeian victim displayed in a museum-like archaeological context, but framed tightly so only the cast is visible against a neutral dark stone background. The cast shows a person curled on their side, hand near their face, in exquisite and heartbreaking detail, clothing folds preserved in the plaster. Low, single-source directional light from the left picks out every texture. The surface is pale, chalky white.",
+    "motion_prompt": "An impossibly slow orbit around the cast, moving from front to slight side angle over many seconds, lighting shifting minutely as the camera moves.",
+    "index": 11
+  },
+  {
+    "narration": "They were warned.",
+    "image_prompt": "A medium shot of the same middle-aged Roman man from before, the same weathered olive face, close-cropped greying hair, off-white tunic, now standing in a street looking toward the sky with a more uncertain expression, brow slightly furrowed. Around him, other citizens have paused and are also looking up. Fine grey ash particles are now visibly dusting his shoulders and the cobblestones at his feet. The light is markedly dimmer, the street now under a yellow-brown pall.",
+    "motion_prompt": "Slow, subtle push-in toward the man's uncertain face, ash particles drifting down through the frame continuously.",
+    "index": 12
+  },
+  {
+    "narration": "They had hours. A whole day, for some of them. Time to gather what mattered, to reach the gate, to walk down to the sea and away.",
+    "image_prompt": "A wide shot of Pompeii's city gate, the stone arch broad and worn, seen from inside the city looking out. Through the arch, the road beyond is visible, and a line of tiny figures, Romans carrying bundles and leading animals, are moving away from the city down the road. The sky beyond the gate is dark ochre. Ash is falling visibly. In the foreground inside the gate, people are moving purposefully, some carrying strongboxes, some with children on hips.",
+    "motion_prompt": "Very slow push through the gate arch, the figures beyond becoming gradually more distinct, ash falling steadily through the shaft of the gate's opening.",
+    "index": 13
+  },
+  {
+    "narration": "Some did. The ones who ran early \u2014 they lived.",
+    "image_prompt": "A ground-level shot from behind a group of refugees on the road outside Pompeii, looking at their backs as they walk away from the city. A woman in a blue-green stola leads a child by the hand. A man carries a leather sack over one shoulder. They are moving in the dimming, ash-choked light. The road ahead of them is open. In the far background, the edge of Vesuvius's cloud is visible but they are walking away from it. Ash coats the road surface.",
+    "motion_prompt": "Slow tracking shot following the group from behind at a respectful distance, maintaining their silhouettes in the center frame as ash drifts down around them.",
+    "index": 14
+  },
+  {
+    "narration": "But many stayed. They closed their shutters against the falling ash and they waited for it to pass, the way bad weather passes.",
+    "image_prompt": "An exterior medium shot of a Pompeian building facade at midday-turned-dark. Wooden shutters on two windows are being pulled closed from inside, one already shut, one in the process of closing, a hand just visible at its edge. The plastered wall is now dusted pale grey with ash accumulation. Ash falls continuously and visibly. The street is nearly empty. A clay pot has been left abandoned on a doorstep.",
+    "motion_prompt": "Static locked frame; the shutter slowly swings closed over several seconds, ash accumulating almost imperceptibly on the sill, all other motion minimal.",
+    "index": 15
+  },
+  {
+    "narration": "They did not know that this was not weather. They did not know that the air itself would come for them.",
+    "image_prompt": "An interior shot inside a Pompeian room, lit only by a single oil lamp on a wooden table. The room is small: painted walls in faded red and ochre, a wooden bench, a folded wool blanket. The window shutters are closed and light glows faintly through their cracks. Ash dust filters through the crack in the shutters, a thin pale stream of particles catching the lamplight. The lamp flame flickers very slightly. The room feels airless and sealed.",
+    "motion_prompt": "Extremely slow push-in toward the crack in the shutters, where the thin stream of ash particles falls in the lamplight, the flame flickering almost imperceptibly.",
+    "index": 16
+  },
+  {
+    "narration": "This is the story of the people who waited.",
+    "image_prompt": "A wide interior shot of a Pompeian atrium, looking from the far wall toward the impluvium, the central open roof pool. Through the open roof above the impluvium, the sky is a terrifying deep brown-black. Ash is falling through the impluvium opening and piling in grey drifts around the pool. The atrium is lit only by two oil lamps on stands, casting warm orange pools of light. Silhouettes of several figures, adults and a child, are seated or standing against the walls, motionless, waiting.",
+    "motion_prompt": "Slow, mournful pull back from the impluvium opening, widening to reveal the waiting figures in the room's shadows, ash falling through the central shaft of the atrium in slow curtains.",
+    "index": 17
+  },
+  {
+    "narration": "And of one family, down at the water's edge,",
+    "image_prompt": "A wide shot of the beach at the Bay of Naples near Herculaneum, at the water's edge. The sky is a horrifying dark brown-black from horizon to zenith, illuminated only by intermittent dull red glows near the mountain. A family group is visible: a woman in her late 30s with dark hair pinned back wearing a pale yellow stola, a man in his 40s in a dark grey tunic, and two children, a girl around 10 and a boy around 7, both in plain light tunics. They stand or crouch on the volcanic sand at the shoreline, looking out to sea. The sea surface reflects the dark sky in grey-brown tones. Ash falls thickly.",
+    "motion_prompt": "Slow, wide lateral pan along the waterline from left to right, revealing the family group gradually from behind, the sea stretching vast and dark ahead of them.",
+    "index": 18
+  },
+  {
+    "narration": "who believed \u2014 right until the end \u2014 that the sea would carry them home.",
+    "image_prompt": "A close-up from the waterline looking back at the family from a low angle near the water's surface. The father, dark-haired with a weathered face, holds the boy close against his side. The mother, dark hair pinned back, pale yellow stola now grey with ash, has an arm around the girl. All four faces are turned toward the sea, their expressions a mixture of hope and fear and exhaustion. The dark choppy water laps at their feet. Ash falls on their shoulders and hair. The sky above them is a wall of darkness. The far horizon shows the faintest, narrowest sliver of dark light.",
+    "motion_prompt": "Locked, absolutely still frame at water level; the waves lap gently and continuously at the family's feet, ash falling softly on their figures, the sliver of horizon light holding constant \u2014 the camera does not move.",
+    "index": 19
+  }
+]

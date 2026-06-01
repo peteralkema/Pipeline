@@ -1,0 +1,84 @@
+# Secrets — NEVER commit
+.env
+*.env
+token.json
+client_secret.json
+**/token.json
+**/client_secret.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+venv/
+env/
+.venv/
+
+# Generated media files — too large for git, live on disk
+*.mp4
+*.mp3
+*.wav
+*.mov
+*.avi
+*.webp
+*.gif
+
+# Generated images — stills are regeneratable, don't bloat git
+**/projects/*/stills/
+**/projects/*/clips/
+
+# But DO commit thumbnails (small, hand-curated, source-of-truth)
+!**/projects/*/thumbnail.png
+!**/projects/*/thumbnail.jpg
+
+# Pipeline outputs that regenerate from inputs
+**/projects/*/voiceover.mp3
+**/projects/*/voiceover.json
+**/projects/*/final_video*.mp4
+**/projects/*/*.log
+**/projects/*/finish*.log
+**/projects/*/resync*.log
+**/projects/*/stills_run.log
+
+# Other generated images at root
+*.png
+*.jpg
+*.jpeg
+!**/projects/*/thumbnail.png
+!**/projects/*/thumbnail.jpg
+
+# Model caches
+.u2net/
+.cache/
+
+# OS junk
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor junk
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backups
+*.bak
+*.pre_migration_backup
+
+# Google Drive sync artifacts
+.tmp.driveupload/
+.tmp.drivedownload/
+
+# Loose log files anywhere
+*.log
+**/*.log

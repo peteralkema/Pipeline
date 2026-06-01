@@ -1,0 +1,199 @@
+{
+  "main": {
+    "id": "b23a49dbf5dc0346",
+    "type": "split",
+    "children": [
+      {
+        "id": "4fa6d39f808c8fbb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3b61dfc2aa722249",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "hetzner-pre-read.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "hetzner-pre-read"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c56d592cf79e8977",
+    "type": "split",
+    "children": [
+      {
+        "id": "145f4fc0ddadf28a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5fac83a6955f8572",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "fc665be11eb08bb3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "cdb1827579b65f67",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1eda89c78d884557",
+    "type": "split",
+    "children": [
+      {
+        "id": "e0d2510125f407b9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "627e6af355813567",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "hetzner-pre-read.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for hetzner-pre-read"
+            }
+          },
+          {
+            "id": "eb43b6cd3c4a2374",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "hetzner-pre-read.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from hetzner-pre-read"
+            }
+          },
+          {
+            "id": "78a268d8ae806f59",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "7d2f4121b8511415",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "a0832286b1ffd258",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "hetzner-pre-read.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of hetzner-pre-read"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3b61dfc2aa722249",
+  "lastOpenFiles": [
+    "lazarus-films-curriculum.md",
+    "channel-4-hypothesis.md",
+    "arthur-revives-script-craft-analysis.md",
+    "lazarus-as-curriculum.md",
+    "hetzner-pre-read.md",
+    "multi-genre-script-architecture.md",
+    "PIPELINE_PLAYBOOK.md",
+    "Untitled.md",
+    "competitive-analysis.md",
+    "calibration-reference.md"
+  ]
+}

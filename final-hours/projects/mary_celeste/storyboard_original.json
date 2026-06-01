@@ -1,0 +1,1010 @@
+[
+  {
+    "narration": "December 4, 1872.",
+    "image_prompt": "A wide shot of the grey North Atlantic ocean under a heavy overcast sky, the horizon lost in mist, dark swells rolling slowly, no land visible, the light cold and flat, a documentary still-life of open sea.",
+    "motion_prompt": "Very slow push forward across the water surface, low angle, subtle wave motion.",
+    "index": 1
+  },
+  {
+    "narration": "Four hundred miles east of the Azores, the British cargo ship Dei Gratia spotted another vessel moving strangely across the North Atlantic.",
+    "image_prompt": "A period two-masted brigantine sailing ship, the Dei Gratia, seen from a low angle at medium distance on a grey heaving sea, her dark hull and weathered sails silhouetted against a pale overcast sky, two sailors visible on deck as small figures looking out over the rail toward the horizon.",
+    "motion_prompt": "Slow drift to the right, as if on a gentle swell, the ship barely rocking, sails drawing faintly.",
+    "index": 2
+  },
+  {
+    "narration": "Her sails were partly set.",
+    "image_prompt": "A slightly distant view of the Mary Celeste from the perspective of observers on the Dei Gratia, the brigantine's sails partially unfurled and partially slack, hanging at odd angles, the ship drifting without purpose on a grey sea under dull winter light.",
+    "motion_prompt": "Slow zoom in toward the distant ship, the sails barely moving in the ambient wind.",
+    "index": 3
+  },
+  {
+    "narration": "Her wheel was unmanned.",
+    "image_prompt": "A medium shot of the Mary Celeste's wooden ship's wheel, large and dark-stained, spinning slowly unattended on the open deck, the grey Atlantic visible beyond the stern rail, no human figure present, ropes coiled nearby on the deck planks.",
+    "motion_prompt": "The wheel rotates very slowly of its own accord, a gentle creaking atmosphere, camera completely still.",
+    "index": 4
+  },
+  {
+    "narration": "No one came on deck to wave back.",
+    "image_prompt": "The deck of the Mary Celeste seen from the boarding perspective, a long empty expanse of weathered planking stretching toward the bow, no figures anywhere, ropes and rigging hanging still, the cold light casting shallow shadows, utterly silent.",
+    "motion_prompt": "Slow dolly forward along the empty deck, the silence emphasized by the stillness of everything.",
+    "index": 5
+  },
+  {
+    "narration": "Captain David Morehouse ordered a small boat lowered.",
+    "image_prompt": "On the deck of the Dei Gratia, Captain David Morehouse, a bearded man in his thirties in a dark naval coat and peaked cap, stands at the rail pointing toward the distant Mary Celeste, two sailors behind him looking in the same direction, the grey sea stretching beyond.",
+    "motion_prompt": "Camera holds still on Morehouse, light shifts slightly as a cloud passes, his coat collar stirring in wind.",
+    "index": 6
+  },
+  {
+    "narration": "The boarding party climbed up the side and stepped onto a silent deck.",
+    "image_prompt": "Three sailors from the Dei Gratia, in rough wool coats and knitted caps, are seen from above already standing on the Mary Celeste's deck near the rail, having just boarded, their faces upturned slightly as they look around the empty ship with expressions of unease, the grey sea visible below.",
+    "motion_prompt": "Very slow pull back to reveal the full scope of the empty deck around the three small figures.",
+    "index": 7
+  },
+  {
+    "narration": "The wheel turned to nothing.",
+    "image_prompt": "A close-up of the Mary Celeste's wooden ship's wheel, worn and salt-bleached, the spokes catching pale grey light, the binnacle compass behind it, the wheel drifting without a hand upon it, the horizon barely visible beyond.",
+    "motion_prompt": "The wheel turns a fraction of a degree, barely perceptibly, camera utterly still.",
+    "index": 8
+  },
+  {
+    "narration": "The ropes were uncoiled but not tangled.",
+    "image_prompt": "A section of the Mary Celeste's deck showing neatly laid-out but uncoiled ropes and lines, arranged as if left mid-task, the deck planking weathered and salt-stained, a boarding party sailor crouching to examine them from the side, his face turned away.",
+    "motion_prompt": "Slow pan along the ropes from one end to the other, the sailor figure remaining still.",
+    "index": 9
+  },
+  {
+    "narration": "Some sails still drew wind. Others flapped, torn, as if they had been left without care for days.",
+    "image_prompt": "Looking upward from the deck of the Mary Celeste at the masts and rigging, some canvas sails taut and pulling in a light grey wind, others hanging in torn and ragged strips, pale winter light filtering through the gaps in the canvas, the sky overcast above.",
+    "motion_prompt": "Slow tilt upward from deck level to the top of the mast, the torn sails swaying gently.",
+    "index": 10
+  },
+  {
+    "narration": "Below deck, the picture only grew stranger.",
+    "image_prompt": "One of the Dei Gratia boarding party sailors, a stocky man in a heavy wool coat, descends the companionway stairs into the hold of the Mary Celeste, one hand on the rail, his lantern casting a warm orange glow below, his face in three-quarter view showing quiet apprehension.",
+    "motion_prompt": "Camera slowly follows the figure downward into the darkening hold, the lantern light swaying gently.",
+    "index": 11
+  },
+  {
+    "narration": "There were several feet of water in the hold, but not enough to sink her.",
+    "image_prompt": "The interior of the Mary Celeste's lower hold, a dim cavernous space lit by a single lantern held by a sailor who stands ankle-deep in dark still water, the wooden hull ribs visible on either side, water reflecting the orange flame, barrels stacked beyond.",
+    "motion_prompt": "The lantern sways very gently, the water surface rippling slightly, the sailor completely still.",
+    "index": 12
+  },
+  {
+    "narration": "The food and water stores were nearly full. Enough for weeks at sea.",
+    "image_prompt": "The Mary Celeste's provisions area below deck, barrels and crates neatly stowed, sacks of provisions tied and sealed, a sailor holding a lantern bending to inspect them, the amber light illuminating the undisturbed stores, no sign of depletion.",
+    "motion_prompt": "Slow pan across the stored provisions, the lantern light moving with the sailor's slight lean.",
+    "index": 13
+  },
+  {
+    "narration": "The cargo \u2014 seventeen hundred and one barrels of industrial alcohol \u2014 was almost untouched.",
+    "image_prompt": "A wide view of the Mary Celeste's main cargo hold, row upon row of large oak barrels stacked and secured in the amber lamplight, a boarding party sailor standing in the foreground dwarfed by the cargo, the barrels intact and sealed, the hold massive and dark beyond the light.",
+    "motion_prompt": "Very slow push forward between the rows of barrels, the sailor figure remaining still.",
+    "index": 14
+  },
+  {
+    "narration": "In the captain's cabin, the clothes were still folded.",
+    "image_prompt": "The Mary Celeste's captain's cabin, a small wood-panelled room lit by grey light from a porthole, neatly folded women's clothing stacked on a wooden chest, a wool dress and shawl carefully arranged, a boarding party sailor visible in the doorway behind, observing.",
+    "motion_prompt": "Camera holds still on the folded clothes, the sailor a still figure in the background, light shifting slightly through the porthole.",
+    "index": 15
+  },
+  {
+    "narration": "The pipes were still on the desk.",
+    "image_prompt": "A ship's writing desk in the captain's cabin, two clay pipes resting in a small wooden pipe rack beside an open logbook, the desk surface scattered with papers and a compass rose chart, grey porthole light falling across the objects, entirely undisturbed.",
+    "motion_prompt": "Slow gentle push in toward the pipes on the desk, light barely shifting.",
+    "index": 16
+  },
+  {
+    "narration": "The charts were laid out where the navigator had left them.",
+    "image_prompt": "A close view of a large nautical chart spread open on the captain's chart table, pencil lines and markings visible, the corners weighted by a brass instrument and a small block, grey light illuminating it, the cabin walls panelled in dark wood around it.",
+    "motion_prompt": "Very slow pan across the surface of the chart from one edge to the other, camera completely level.",
+    "index": 17
+  },
+  {
+    "narration": "The ship's small boat \u2014 the yawl \u2014 was missing from its davits.",
+    "image_prompt": "A boarding party sailor, a lean man in a wool coat, stands at the stern of the Mary Celeste looking at the empty davits \u2014 iron brackets that should hold the small yawl boat but now hold only dangling ropes and empty space above the grey ocean below.",
+    "motion_prompt": "The empty ropes sway gently in the wind, the sailor still, slow pan down from the davits to the sea below.",
+    "index": 18
+  },
+  {
+    "narration": "Where it should have hung, there was empty space and neat tackle. It had been lowered on purpose. Not torn away by the sea.",
+    "image_prompt": "A detailed view of the Mary Celeste's stern davits, the iron arms and pulleys in position, the tackle ropes neatly coiled and undamaged as if properly stowed after a purposeful lowering, empty grey sky and sea beyond, no boat hanging where one should be.",
+    "motion_prompt": "Camera slowly drifts downward following the rope to where it ends in empty air above the ocean.",
+    "index": 19
+  },
+  {
+    "narration": "The compass was disturbed.",
+    "image_prompt": "The binnacle compass of the Mary Celeste on the open deck near the wheel, a brass instrument showing signs of rough handling, its housing slightly askew, a boarding party sailor crouching beside it to examine it, his face turned downward in concentration.",
+    "motion_prompt": "Very slow zoom in on the compass face, the sailor still, ambient light shifting with passing clouds.",
+    "index": 20
+  },
+  {
+    "narration": "Some of the navigation tools were gone.",
+    "image_prompt": "The Mary Celeste's chart room, a small wood-panelled space with a chart table and instrument cabinet, several brass navigation tools still in their felt-lined holders but two conspicuous empty spaces where instruments have been removed, grey light from a porthole, a sailor's hand visible at the edge of frame.",
+    "motion_prompt": "Slow pan across the instrument cabinet, pausing on the empty spaces, the light steady and cold.",
+    "index": 21
+  },
+  {
+    "narration": "In the chart room, the boarding party found the logbook.",
+    "image_prompt": "Two members of the boarding party in the Mary Celeste's chart room, one of them holding an open logbook, both men in heavy wool coats, their faces bent over the pages, the amber glow of a lantern illuminating the handwritten entries, the small room close and shadowed around them.",
+    "motion_prompt": "Camera holds still, the lantern light flickering very gently over the two figures and the open pages.",
+    "index": 22
+  },
+  {
+    "narration": "The last clear entry was dated ten days earlier. After that, the writing simply stopped.",
+    "image_prompt": "A tight view of the open logbook pages, handwritten entries in black ink visible on the left page, the last entry dated near the bottom, and then the right page almost entirely blank, the handwriting ending abruptly mid-voyage, grey light falling across the pages.",
+    "motion_prompt": "Slow zoom in to the final written line, then the blank space below it, camera utterly still.",
+    "index": 23
+  },
+  {
+    "narration": "The ship was called the Mary Celeste.",
+    "image_prompt": "The stern nameplate of the ship, carved wooden letters reading MARY CELESTE painted in faded white against dark wood, salt and weathering around the letters, the grey Atlantic ocean visible below the hull, the nameplate half in shadow.",
+    "motion_prompt": "A slow gentle wave lifts the ship, the nameplate rising and falling almost imperceptibly.",
+    "index": 24
+  },
+  {
+    "narration": "She had ten people aboard when she left New York on November 7. None of them were on her now.",
+    "image_prompt": "A wide shot of the Mary Celeste's empty deck from amidships looking forward toward the bow, the complete absence of human life emphasised by the scale of the vessel, ropes and rigging in place, the wheel visible in the distance, grey winter sky above and grey ocean beyond the bow.",
+    "motion_prompt": "Very slow dolly forward down the empty deck toward the bow, the only movement a distant rope swaying.",
+    "index": 25
+  },
+  {
+    "narration": "The story everyone tells about the Mary Celeste is the story of an empty ship.",
+    "image_prompt": "A wide establishing shot of the Mary Celeste from a small distance across the water, her dark hull and mismatched sails visible, the ship drifting alone on a flat grey sea, no other vessel in sight, the sky and sea merging at the horizon.",
+    "motion_prompt": "The ship drifts almost imperceptibly to one side, the water surface moving gently around the hull.",
+    "index": 26
+  },
+  {
+    "narration": "The wheel that turned to nothing.",
+    "image_prompt": "The Mary Celeste's helm wheel again, seen from slightly below deck level looking up, the wooden wheel large against a grey sky, no hands upon it, the compass binnacle behind it, the whole deck empty, a documentary image of abandonment.",
+    "motion_prompt": "The wheel turns a few degrees very slowly, camera holding still, clouds drifting in the sky behind.",
+    "index": 27
+  },
+  {
+    "narration": "The clothes that were never collected.",
+    "image_prompt": "The folded women's clothes on the chest in the captain's cabin, a closer view now showing the texture of the dark wool dress and a small hand-embroidered collar, grey porthole light falling across them, the dust of weeks already beginning to settle on the fabric.",
+    "motion_prompt": "Camera holds completely still, a tiny mote of dust drifting slowly through the shaft of porthole light.",
+    "index": 28
+  },
+  {
+    "narration": "The mystery of where the ten people went.",
+    "image_prompt": "A wide shot from the rail of the Mary Celeste looking out over the empty North Atlantic ocean, the horizon grey and featureless, the sea stretching endlessly in all directions, the rail and ropes of the ship framing the emptiness beyond.",
+    "motion_prompt": "Slow pan along the horizon from left to right, the water surface moving in gentle swells.",
+    "index": 29
+  },
+  {
+    "narration": "But that story leaves someone out.",
+    "image_prompt": "A modest New England coastal town in winter, 1872, Marion Massachusetts, a quiet street with wooden clapboard houses, bare elm trees, snow dusting the ground, a small boy of seven in a wool coat and cap walking along the street alone, his back to camera.",
+    "motion_prompt": "Very slow push in toward the small figure of the boy as he walks away down the street.",
+    "index": 30
+  },
+  {
+    "narration": "The person who lived the longest with what happened on that ship was not on board.",
+    "image_prompt": "The same small boy, Arthur, now viewed from the side at a distance, standing outside a modest white clapboard house in Marion Massachusetts, looking out at the grey winter sea visible between houses at the end of the street, his small figure very still.",
+    "motion_prompt": "Slow drift to one side, the boy remaining still, bare tree branches swaying slightly in the background.",
+    "index": 31
+  },
+  {
+    "narration": "He was seven years old, two thousand miles away, in a small house in Marion, Massachusetts.",
+    "image_prompt": "The exterior of a modest two-storey white clapboard house in Marion Massachusetts, winter 1872, bare trees around it, a lamp glowing in one window, snow on the ground, the ocean faintly visible in the distance behind the house, the house small and human against the wide grey sky.",
+    "motion_prompt": "Slow zoom in toward the lit window of the house, smoke rising from the chimney.",
+    "index": 32
+  },
+  {
+    "narration": "He was waiting for letters that would never come.",
+    "image_prompt": "Arthur, a seven-year-old boy with dark hair and serious eyes, sits at a small writing desk inside the house near a window, dressed in a wool shirt and suspenders, looking toward the door as if expecting something to arrive, his expression hopeful but patient.",
+    "motion_prompt": "Camera holds on Arthur's face and figure, the light from the window shifting slightly as clouds pass outside.",
+    "index": 33
+  },
+  {
+    "narration": "His name was Arthur Stanley Briggs. He was seven years old.",
+    "image_prompt": "A portrait-style medium shot of Arthur Stanley Briggs, age seven, standing in the interior of the house, dark wood furnishings behind him, wearing a neat wool jacket and white collar, his dark hair combed, his expression solemn and watchful, gentle window light on his face.",
+    "motion_prompt": "Camera holds completely still on Arthur, the ambient light from the window moving almost imperceptibly.",
+    "index": 34
+  },
+  {
+    "narration": "He had been left in Massachusetts with his grandmother \u2014 so he could go to school.",
+    "image_prompt": "Arthur sitting at a kitchen table with his grandmother, an elderly woman in a dark dress and white cap, in the warm interior of the Marion house, a fire visible in the hearth behind them, the grandmother's hand resting on the table near Arthur's school slate, both figures calm.",
+    "motion_prompt": "Firelight flickers gently in the background hearth, the two figures barely moving, slow push in.",
+    "index": 35
+  },
+  {
+    "narration": "His father was the captain of the ship.",
+    "image_prompt": "A formal portrait-style image of Captain Benjamin Spooner Briggs, a lean, bearded man of thirty-seven with steady pale eyes and a square jaw, wearing a dark captain's coat with brass buttons, standing at a ship's rail, the grey Atlantic behind him, his bearing confident and composed.",
+    "motion_prompt": "Camera holds still on Briggs, his coat collar moving very slightly in the sea wind.",
+    "index": 36
+  },
+  {
+    "narration": "Captain Benjamin Spooner Briggs was thirty-seven. He came from a long line of New England sea captains; almost every man in his family had gone to sea.",
+    "image_prompt": "Captain Briggs on the deck of the Mary Celeste, standing near the helm wheel in his dark captain's coat, one hand resting on the wheel, looking out toward the horizon with calm authority, the grey Atlantic stretching behind him, the ship's rigging visible above.",
+    "motion_prompt": "Very slow push in on Briggs at the wheel, the horizon visible behind him, water moving gently.",
+    "index": 37
+  },
+  {
+    "narration": "He was a steady, fair man, not given to gambling with his ship or his crew.",
+    "image_prompt": "Captain Briggs seated at the chart table in the captain's cabin of the Mary Celeste, lamplight illuminating his face as he studies a nautical chart, his expression focused and methodical, a Bible resting closed on the shelf behind him, the cabin neat and orderly.",
+    "motion_prompt": "The lantern flame sways gently, casting warm shifting light over Briggs and the chart, camera still.",
+    "index": 38
+  },
+  {
+    "narration": "He read his Bible, he did not drink, and he had put his own savings into the Mary Celeste alongside the main owner.",
+    "image_prompt": "A close view of the captain's cabin shelf showing a worn leather-bound Bible with a bookmark in it, a small framed miniature portrait beside it, and neatly arranged personal items, the Bible and portrait catching warm lamplight, the ship's timbers close behind.",
+    "motion_prompt": "Camera holds still, lantern light flickering very gently over the Bible and portrait.",
+    "index": 39
+  },
+  {
+    "narration": "His money, his career, and his reputation were tied to her wooden hull.",
+    "image_prompt": "Captain Briggs standing on the deck of the Mary Celeste, one hand resting on the ship's rail, looking down the length of the hull with a proprietorial and concerned expression, the vessel stretching before him, harbour water visible below, the late autumn sky overcast.",
+    "motion_prompt": "Very slow pan along the ship's rail from Briggs toward the bow, his figure receding.",
+    "index": 40
+  },
+  {
+    "narration": "His mother \u2014 Arthur's mother \u2014 was Sarah Elizabeth Briggs.",
+    "image_prompt": "A portrait-style image of Sarah Elizabeth Briggs, a composed, dark-haired woman of thirty in a dark wool travelling dress with a white collar, standing in a wood-panelled ship cabin, her expression calm and intelligent, grey light from a porthole illuminating her face.",
+    "motion_prompt": "Camera holds completely still on Sarah, the porthole light shifting almost imperceptibly behind her.",
+    "index": 41
+  },
+  {
+    "narration": "She was thirty years old. The daughter of a minister.",
+    "image_prompt": "Sarah Briggs seated in a chair in the captain's cabin, a small book open in her lap, her dark hair neatly pinned, her dark dress neat, the cabin bookshelves visible behind her including the Bible on its shelf, her posture upright and unhurried.",
+    "motion_prompt": "Slow zoom in on Sarah's composed face and figure, the ambient light very steady.",
+    "index": 42
+  },
+  {
+    "narration": "She had honeymooned with Benjamin on a previous Atlantic crossing, and she was comfortable at sea in a way few women of her time ever were.",
+    "image_prompt": "Sarah Briggs standing at the stern rail of the Mary Celeste, looking out at the open Atlantic Ocean, her dark dress and shawl catching a sea breeze, her posture relaxed and unafraid, the vast grey-green ocean stretching behind her, completely at ease.",
+    "motion_prompt": "Her shawl stirs gently in the wind, her figure still, slow pull back to show the expanse of ocean.",
+    "index": 43
+  },
+  {
+    "narration": "Family letters described her as calm and capable. The kind of person who did not panic.",
+    "image_prompt": "Sarah Briggs at the writing desk in the captain's cabin, pen in hand, writing a letter by lamplight, her face lit warmly from the side, composed and focused, the cabin orderly around her, the darkness of the Atlantic night beyond the porthole.",
+    "motion_prompt": "Lantern flame flickers gently, the light warm and amber over Sarah's writing hand and face.",
+    "index": 44
+  },
+  {
+    "narration": "Their daughter, Arthur's two-year-old sister, was named Sophia Matilda.",
+    "image_prompt": "Little Sophia Matilda Briggs, a round-faced toddler of two with dark curls, sitting on the cabin bunk in a small white dress, her hands folded in her lap, a small wooden toy beside her, looking directly forward with wide curious eyes, warm lamplight around her.",
+    "motion_prompt": "Camera holds still on Sophia, the lamplight warm and steady, an almost portrait stillness.",
+    "index": 45
+  },
+  {
+    "narration": "In late October, in the harbor at Staten Island, Sophia had been carried aboard the Mary Celeste in her mother's arms.",
+    "image_prompt": "Sarah Briggs standing at the top of the boarding gangway of the Mary Celeste in a bustling harbour, Sophia Matilda held against her shoulder, the child's dark curls visible, Sarah dressed in her travelling coat and bonnet, the dockside of Staten Island visible behind them.",
+    "motion_prompt": "Very slow zoom in on Sarah and Sophia at the gangway, harbour activity blurred gently in the distance.",
+    "index": 46
+  },
+  {
+    "narration": "The ship had been loaded with the alcohol cargo bound for Genoa, Italy.",
+    "image_prompt": "The Staten Island dockside beside the Mary Celeste, dock workers in rough clothing loading large oak barrels onto the ship via a ramp, the ship's hull dark and massive beside the dock, Captain Briggs visible in the background overseeing the operation, overcast sky above.",
+    "motion_prompt": "Very slow pan along the dockside, the figures of workers small and still, a distant barrel being moved very slowly.",
+    "index": 47
+  },
+  {
+    "narration": "There were seven other people on board.",
+    "image_prompt": "A group of seven men standing on the deck of the Mary Celeste at the Staten Island dock, the crew assembled in working clothes \u2014 wool coats, knitted caps, boots \u2014 their faces turned toward the camera in a composed group, the ship's rigging above them, the dock behind.",
+    "motion_prompt": "Camera holds on the group, a light harbour breeze stirring their coats, very slow zoom in.",
+    "index": 48
+  },
+  {
+    "narration": "The first mate was Albert Richardson, twenty-eight years old, an American who had sailed with Briggs before.",
+    "image_prompt": "Albert Richardson, twenty-eight, a broad-shouldered American man with a short dark beard and direct eyes, in a first mate's practical dark coat and cap, standing on the deck of the Mary Celeste with the harbour behind him, his expression steady and competent.",
+    "motion_prompt": "Camera holds still on Richardson, his coat stirring lightly in the harbour breeze.",
+    "index": 49
+  },
+  {
+    "narration": "The second mate was Andrew Gilling, in his mid-twenties, born in New York to Danish parents.",
+    "image_prompt": "Andrew Gilling, mid-twenties, a lean fair-haired young man with Danish features and calm blue-grey eyes, in a seaman's dark coat, standing on deck near the ship's rail with the harbour water visible below, his posture relaxed but capable.",
+    "motion_prompt": "Slow push in on Gilling, the harbour light steady, his coat barely stirring.",
+    "index": 50
+  },
+  {
+    "narration": "The steward and cook was Edward William Head, newly married, just starting his life ashore between voyages.",
+    "image_prompt": "Edward William Head, late twenties, a round-faced good-natured looking man in a cook's apron over a wool shirt, standing in the galley doorway of the Mary Celeste, his expression pleasant and open, the galley's copper pots visible behind him in warm interior light.",
+    "motion_prompt": "Camera holds on Head, the warm galley light steady behind him, a very gentle sway of the ship.",
+    "index": 51
+  },
+  {
+    "narration": "Four German sailors from the Frisian Islands made up the rest of the crew \u2014 the brothers Volkert and Boy Lorenzen, Arian Martens, and Gottlieb Goodschaad.",
+    "image_prompt": "Four German sailors, the Frisian crew members, standing together on the Mary Celeste's deck near the mainmast, dressed in typical working seaman's wool clothes and caps, their faces weathered and calm, two of them similar-looking brothers, all of them appearing experienced and settled.",
+    "motion_prompt": "Very slow pan across the four figures, their coats stirring gently in the harbour breeze.",
+    "index": 52
+  },
+  {
+    "narration": "Later research described them as experienced, peaceable men. First-class sailors. Not known troublemakers.",
+    "image_prompt": "Two of the German sailors working together on deck, coiling a heavy rope in a practiced, unhurried way, their movements suggesting long experience, the harbour visible behind them, the mood completely calm and professional.",
+    "motion_prompt": "The scene is essentially still, the rope in their hands motionless, slow zoom in on their calm faces.",
+    "index": 53
+  },
+  {
+    "narration": "These were not drifters pulled off the dock at the last minute. They were men with homes. With families. With reasons to come back.",
+    "image_prompt": "The full crew of the Mary Celeste \u2014 all seven sailors plus Richardson and Gilling \u2014 gathered on the deck of the ship at the Staten Island dock, their assembled figures suggesting community and familiarity, the ship solid behind them, a grey autumn sky above.",
+    "motion_prompt": "Slow pull back to show the whole group and the ship together, the harbour behind them.",
+    "index": 54
+  },
+  {
+    "narration": "The ship was delayed by bad weather. While the Mary Celeste waited at anchor near Staten Island, Sarah used the time to write a letter to her mother-in-law back in Marion.",
+    "image_prompt": "Sarah Briggs at the writing desk in the captain's cabin of the Mary Celeste, writing by the grey light of a porthole showing rain on the glass outside, her pen moving, Sophia Matilda playing quietly on the floor nearby with a wooden toy, the cabin warm and intimate.",
+    "motion_prompt": "Rain streaks down the porthole glass slowly, the cabin warm inside, Sarah's figure still.",
+    "index": 55
+  },
+  {
+    "narration": "Tell Arthur, she wrote, that I shall depend on his writing me. Tell him I shall try to remember things from the voyage that he might enjoy hearing about.",
+    "image_prompt": "A close view of Sarah's letter in progress on the desk, the handwritten words visible on cream paper in black ink, Sarah's hand resting beside the paper, the writing neat and deliberate, a small oil lamp casting warm light across the page.",
+    "motion_prompt": "Camera holds very still on the letter, the lamp flame flickering almost imperceptibly.",
+    "index": 56
+  },
+  {
+    "narration": "That letter went ashore on November 6. It was the last anyone in Marion heard from her.",
+    "image_prompt": "A dock worker in rough coat and hat walking away from the Mary Celeste along the Staten Island dock, a small bundle of letters tucked under his arm, the ship's hull visible behind him receding as he walks, the grey November sky overhead.",
+    "motion_prompt": "Slow push in on the dock worker's retreating figure, the ship behind him, the letters under his arm.",
+    "index": 57
+  },
+  {
+    "narration": "The next morning, on November 7, 1872, the Mary Celeste sailed for Italy.",
+    "image_prompt": "The Mary Celeste under full sail leaving New York harbour on a grey November morning, her dark hull cutting through dark water, her sails filled with wind, a few figures visible on deck including Captain Briggs at the helm, the receding cityscape of 1872 New York behind her.",
+    "motion_prompt": "The ship moves slowly away from the viewer, sails filling, water parting at the bow.",
+    "index": 58
+  },
+  {
+    "narration": "Arthur, in Massachusetts, went to school.",
+    "image_prompt": "Arthur Briggs, age seven, in his wool coat and cap, walking along a snow-dusted path toward a modest one-room schoolhouse in Marion Massachusetts, other children in period dress visible ahead of him, bare elm trees lining the path, the grey winter sky above.",
+    "motion_prompt": "Slow push in toward Arthur's small figure from behind as he walks toward the schoolhouse.",
+    "index": 59
+  },
+  {
+    "narration": "When the boarding party from the Dei Gratia climbed onto the Mary Celeste twenty-eight days later, they did not yet know who they were looking for.",
+    "image_prompt": "The three Dei Gratia boarding party sailors standing on the Mary Celeste's empty deck, looking around with expressions of confusion and unease, their breath visible in the cold Atlantic air, the grey sea surrounding the ship on all sides, the enormity of the emptiness apparent.",
+    "motion_prompt": "Slow wide pull back from the three figures to reveal the full expanse of empty deck around them.",
+    "index": 60
+  },
+  {
+    "narration": "They saw an empty wheel. We know now it was the wheel Benjamin Briggs had stood at every morning of his three-week crossing.",
+    "image_prompt": "The empty wheel of the Mary Celeste with a ghostly double exposure quality: Captain Briggs is faintly visible as a composed figure standing at the same wheel in warm daylight, his hands on the spokes, the Atlantic behind him, his presence layered over the empty wheel the boarding party sees.",
+    "motion_prompt": "The ghostly image of Briggs at the wheel fades very slowly, leaving only the empty turning wheel.",
+    "index": 61
+  },
+  {
+    "narration": "They saw folded clothes in the captain's cabin. We know now those were Sarah's clothes.",
+    "image_prompt": "The folded clothes on the chest in the captain's cabin, the same dark wool dress as before, and beside it a faint impression of Sarah Briggs as if she had only just stepped away, her dark-haired composed presence half-suggested in the cabin light, her clothes waiting.",
+    "motion_prompt": "Camera holds completely still, a tiny dust mote drifting through the porthole light.",
+    "index": 62
+  },
+  {
+    "narration": "The pipes on the desk were her husband's.",
+    "image_prompt": "The clay pipes in their rack on Captain Briggs's desk, the same image as before but now intimate with meaning, the faint sense of a man who will return for them, the desk otherwise tidy, grey porthole light across the worn wood.",
+    "motion_prompt": "Very slow zoom in on the pipes, the light holding steady.",
+    "index": 63
+  },
+  {
+    "narration": "The charts laid out on the table were the ones Benjamin had been reading the night the writing stopped.",
+    "image_prompt": "The nautical chart spread on the chart table, the pencil lines and markings now understood as Briggs's handwork, the last plotted position visible near the Azores, the chart lit by the grey porthole light, a boarding party sailor's hand resting at the edge of the table.",
+    "motion_prompt": "Slow pan across the chart to the last marked position, then to the blank ocean beyond it.",
+    "index": 64
+  },
+  {
+    "narration": "They saw a small toy on the cabin floor. A child's wooden toy.",
+    "image_prompt": "A small carved wooden toy \u2014 a simple painted horse \u2014 lying on the cabin floor of the captain's quarters, the floor planking around it, a shaft of grey porthole light falling across it, the toy alone and small on the vast wooden floor.",
+    "motion_prompt": "Camera holds completely still on the small toy, the light shifting very slightly.",
+    "index": 65
+  },
+  {
+    "narration": "They saw a yawl missing from its davits.",
+    "image_prompt": "The empty davits at the stern of the Mary Celeste again, this time one of the boarding party sailors is standing beside them with his hand on the iron davit arm, looking over the rail at the empty ocean below with a grave expression, the absence of the boat deeply felt.",
+    "motion_prompt": "Slow zoom in on the sailor's face as he looks down at the empty ocean, the wind stirring his coat.",
+    "index": 66
+  },
+  {
+    "narration": "We know now that seven men, a captain, a wife, and a two-year-old daughter had climbed into that small boat \u2014 and rowed away from the ship that was their only hope of survival.",
+    "image_prompt": "A reconstruction image: the small yawl boat on the dark Atlantic, seen from a distance, loaded with ten people \u2014 their small figures huddled together in the boat, the Mary Celeste visible behind them growing smaller, the grey sea enormous around the tiny vessel.",
+    "motion_prompt": "The tiny boat drifts very slowly away from the ship in the distance, the sea moving gently.",
+    "index": 67
+  },
+  {
+    "narration": "The boarding party found a pump taken apart. They could not understand why.",
+    "image_prompt": "A boarding party sailor crouching over a ship's bilge pump on the Mary Celeste's deck, its components partially disassembled and laid out on the deck planking, the sailor examining the parts with a puzzled expression, the grey sea visible beyond the rail.",
+    "motion_prompt": "Camera holds on the sailor and the disassembled pump, light shifting slightly.",
+    "index": 68
+  },
+  {
+    "narration": "We know now that the Mary Celeste had been taking on water in her hold, and that Benjamin Briggs \u2014 who had invested his own savings in this ship \u2014 had been trying to fix the only tool he had to clear it.",
+    "image_prompt": "A reconstruction: Captain Briggs crouching on the deck of the Mary Celeste, his coat off, sleeves rolled up, working intently on the disassembled pump in the dark of early morning, a lantern beside him, the urgency in his posture, the sea beyond the rail visible in grey pre-dawn light.",
+    "motion_prompt": "The lantern flame sways as a swell moves the ship, Briggs's figure still, slow zoom in.",
+    "index": 69
+  },
+  {
+    "narration": "They found the compass disturbed. Some of the navigation instruments missing. We know now that someone had carried them down into the yawl, expecting to come back.",
+    "image_prompt": "A reconstruction: First Mate Richardson, a bundle of navigation instruments under his arm, stands at the rail of the Mary Celeste in grey overcast light, handing a sextant down to unseen hands below in the yawl, his expression urgent but not panicked \u2014 purposeful, expecting to return.",
+    "motion_prompt": "Very slow zoom in on Richardson's face, his expression intent, the grey light steady.",
+    "index": 70
+  },
+  {
+    "narration": "The Dei Gratia sailed the empty Mary Celeste to Gibraltar.",
+    "image_prompt": "Two ships on the grey Atlantic, the Dei Gratia leading and towing the Mary Celeste behind her on a long line, both vessels seen from a distance in the flat grey light of the open ocean, the Mary Celeste trailing, crewless, her sails partly set.",
+    "motion_prompt": "Both ships move very slowly across the frame from left to right, the tow rope barely visible.",
+    "index": 71
+  },
+  {
+    "narration": "The British authorities held a formal inquiry. The attorney general, Frederick Solly-Flood, suspected foul play.",
+    "image_prompt": "The interior of a formal British colonial courtroom in Gibraltar, 1872, a panel of serious-faced officials at a long table, Frederick Solly-Flood a grey-haired imposing man in the centre, facing witnesses, the room lit by tall windows, dark wood panelling, a serious official atmosphere.",
+    "motion_prompt": "Slow pan along the panel of officials, their faces serious and composed, light from the windows steady.",
+    "index": 72
+  },
+  {
+    "narration": "He suspected murder. He suspected fraud. He found no evidence of either.",
+    "image_prompt": "Solly-Flood at the inquiry table, his expression severe and frustrated, papers spread before him, another official leaning toward him in quiet conference, the courtroom around them formal and grave, the late afternoon light from the tall windows casting long shadows.",
+    "motion_prompt": "Camera holds on Solly-Flood, his posture rigid, light shifting slightly through the windows.",
+    "index": 73
+  },
+  {
+    "narration": "No blood. No bodies. No signs of struggle.",
+    "image_prompt": "The Mary Celeste's empty deck seen at the Gibraltar harbour, tied to a dock, sunlight warmer than the Atlantic but still pale, officials in dark coats examining the deck surface, the complete absence of any sign of violence obvious in the clean undamaged deck planking.",
+    "motion_prompt": "Slow pan along the clean deck surface, the officials' figures moving very slowly in the background.",
+    "index": 74
+  },
+  {
+    "narration": "The court ruled that the rescuers deserved a salvage payment. But it was a small one. The suspicion never quite went away.",
+    "image_prompt": "The Dei Gratia's Captain Morehouse outside the Gibraltar courthouse, his expression dissatisfied, in his dark naval coat and cap, standing with one of his officers, the formal colonial building behind them, the harbour visible in the distance, the mood one of frustration.",
+    "motion_prompt": "Camera holds on Morehouse, the harbour behind him, a light Mediterranean breeze stirring his coat.",
+    "index": 75
+  },
+  {
+    "narration": "While the inquiry continued, the Mary Celeste sat tied up in Gibraltar harbour.",
+    "image_prompt": "The Mary Celeste tied to a Gibraltar dock in winter sunlight, her dark hull reflected in the still harbour water, ropes holding her in place, the Rock of Gibraltar visible in the background, the ship completely still and empty, a guard figure barely visible on the dock.",
+    "motion_prompt": "The ship's reflection shimmers very slightly in the harbour water, slow push in.",
+    "index": 76
+  },
+  {
+    "narration": "The clothes were still folded in the cabin. The toy was still on the floor.",
+    "image_prompt": "The captain's cabin of the Mary Celeste as it sits in Gibraltar harbour, the folded clothes on the chest exactly as they were found, the small wooden toy still on the floor, grey light now with a Mediterranean quality through the porthole, everything undisturbed and waiting.",
+    "motion_prompt": "Camera pans very slowly from the folded clothes to the toy on the floor.",
+    "index": 77
+  },
+  {
+    "narration": "The captain's pipes were still on the desk. The barrels were still in the hold.",
+    "image_prompt": "Split perspective: in the foreground the captain's pipes on the desk in the quiet cabin, and through the cabin doorway in the background the dark hold visible with its rows of sealed barrels, both scenes undisturbed and waiting, Gibraltar harbour light through the porthole.",
+    "motion_prompt": "Camera holds completely still, ambient light barely shifting, total stillness.",
+    "index": 78
+  },
+  {
+    "narration": "Two thousand miles away in Massachusetts, Arthur Briggs walked to school every morning.",
+    "image_prompt": "Arthur Briggs, age seven, walking alone along the snow-covered main street of Marion Massachusetts in winter morning light, his small figure in a wool coat and cap, his breath visible in the cold air, the quiet colonial New England town around him, houses with smoke rising from chimneys.",
+    "motion_prompt": "Slow push in from behind on Arthur's small figure, his breath rising in the cold air.",
+    "index": 79
+  },
+  {
+    "narration": "He had not yet been told that anything was wrong.",
+    "image_prompt": "Arthur at his school desk inside the one-room schoolhouse, his slate and chalk before him, other children around him, his face turned toward the window looking at the grey winter sky outside, his expression innocent and waiting, unaware.",
+    "motion_prompt": "Camera holds on Arthur's face in profile as he looks out the window, light shifting as a cloud passes.",
+    "index": 80
+  },
+  {
+    "narration": "The letters his mother had promised to write \u2014 the things she would try to remember to tell him \u2014 never arrived.",
+    "image_prompt": "Arthur's grandmother, the elderly woman in her dark dress and white cap, standing at the door of the Marion house, looking down the empty winter road, her hand resting on the door frame, her expression troubled and beginning to carry knowledge she cannot yet share, no letter in her hand.",
+    "motion_prompt": "Very slow zoom in on the grandmother's face, the empty road stretching behind her.",
+    "index": 81
+  },
+  {
+    "narration": "The newspapers got there first.",
+    "image_prompt": "A period 1872 newspaper lying on a kitchen table, the headline about the Mary Celeste visible in large type though not readable as specific text, the paper slightly creased, the Marion household interior around it with a fireplace, a hand pulling the newspaper from the edge of frame.",
+    "motion_prompt": "Camera holds still on the newspaper on the table, firelight flickering at the edge of the frame.",
+    "index": 82
+  },
+  {
+    "narration": "In the months after Gibraltar, the story of the Mary Celeste was printed and reprinted across the Atlantic world.",
+    "image_prompt": "A montage-style image of multiple period newspapers layered and spread across a surface, all bearing headlines about the Mary Celeste mystery, different typefaces and mastheads suggesting different publications, warm lamplight falling across them.",
+    "motion_prompt": "Slow pan across the spread of newspapers, the lamplight steady.",
+    "index": 83
+  },
+  {
+    "narration": "The empty ship. The vanished crew. The unanswered questions.",
+    "image_prompt": "The Mary Celeste as seen drifting alone on the open Atlantic in a grey illustration quality \u2014 a wide shot of the ship alone on the vast empty ocean, the mystery personified in her solitary drifting presence, the sea enormous around her.",
+    "motion_prompt": "Very slow push in from a great distance toward the drifting ship, the ocean moving gently.",
+    "index": 84
+  },
+  {
+    "narration": "In 1884, a young writer named Arthur Conan Doyle \u2014 not yet famous, not yet the author of Sherlock Holmes \u2014 published a short story about the Mary Celeste.",
+    "image_prompt": "A young Arthur Conan Doyle, twenty-five, a lean dark-haired man with a neat mustache in a Victorian writer's study, sitting at a writing desk with papers around him, a gas lamp illuminating his concentrated face, bookshelves behind him, the year suggested by his clothing and furnishings.",
+    "motion_prompt": "Gas lamp flickers gently, casting warm amber light over Doyle and his papers, camera holds still.",
+    "index": 85
+  },
+  {
+    "narration": "He changed the names. He invented a murderer. He wrote it as a first-person confession. Some readers, and at least one newspaper, took it as fact.",
+    "image_prompt": "Conan Doyle's hand at rest beside a completed manuscript on his desk, the title page visible in close view, the handwritten title and his pen beside it, the lamplight warm, the study quiet, the paper evidence of the fictionalizing of a real tragedy.",
+    "motion_prompt": "Slow zoom in on the manuscript pages, the lamplight steady.",
+    "index": 86
+  },
+  {
+    "narration": "The legend grew. The pirates, the mutinies, the giant squids, the supernatural.",
+    "image_prompt": "A Victorian periodical illustration style image: a sensational drawing of the Mary Celeste surrounded by dramatic imagery \u2014 shadowy figures suggesting piracy \u2014 rendered as a printed page in an 1880s magazine lying on a table, warm lamplight illuminating the melodramatic illustration.",
+    "motion_prompt": "Camera slowly pans across the open magazine page, the lamplight barely shifting.",
+    "index": 87
+  },
+  {
+    "narration": "Each version made the ship more haunted. Each version made the people on board less like real people and more like characters in someone else's story.",
+    "image_prompt": "A metaphorical image: the captain's cabin of the Mary Celeste as seen through a slightly distorting lens, the folded clothes and pipes becoming props in a stage set quality, the human warmth drained out, only the objects remaining, grey cold light.",
+    "motion_prompt": "Very slow pull back from the cabin objects, the coldness of the image emphasized.",
+    "index": 88
+  },
+  {
+    "narration": "Arthur Briggs grew up reading these stories.",
+    "image_prompt": "Arthur Briggs now twelve or thirteen, a serious thin-faced boy in a Victorian-era wool suit, sitting in a chair by a window in the Marion house, a newspaper folded on his lap, his eyes distant and troubled, the grey New England daylight around him.",
+    "motion_prompt": "Camera holds on the older Arthur, the window light shifting as clouds pass, his expression still.",
+    "index": 89
+  },
+  {
+    "narration": "He grew up under the shadow of a mystery that no one could solve.",
+    "image_prompt": "Arthur as a teenager, perhaps fifteen, standing on the rocky shore of Marion Massachusetts, looking out at the grey Atlantic Ocean, the sea and sky meeting at a hazy horizon, his figure small against the immensity of the water, his posture one of unresolved grief.",
+    "motion_prompt": "Slow push in on Arthur from behind, the ocean stretching before him, waves moving gently on the shore.",
+    "index": 90
+  },
+  {
+    "narration": "The mother who had promised to write to him.",
+    "image_prompt": "A memory-style image: Sarah Briggs as she appeared at the writing desk in the captain's cabin, her warm composed face in lamplight, pen in hand, her expression gentle and attentive, this time the image rendered with a quality of recollection \u2014 warm, slightly soft, treasured.",
+    "motion_prompt": "Camera holds completely still on Sarah's face in the lamplight, a single flicker of the flame.",
+    "index": 91
+  },
+  {
+    "narration": "The father who had invested his savings in a ship that came home without him.",
+    "image_prompt": "Captain Briggs at the helm of the Mary Celeste in Atlantic daylight, his steady bearded face, hands on the wheel, looking out toward the horizon with calm authority, the image carrying the weight of a man who went down with his investment and his faith.",
+    "motion_prompt": "Very slow zoom in on Briggs's face, his coat moving lightly in the sea wind.",
+    "index": 92
+  },
+  {
+    "narration": "The little sister who had been carried aboard in her mother's arms.",
+    "image_prompt": "Sophia Matilda on the cabin floor with her small wooden toy, her dark curls, her white dress, her round curious face in lamplight, the image now carrying the weight of loss, the child who never grew up, her innocence absolute and terrible.",
+    "motion_prompt": "Camera holds completely still on Sophia and her toy, the lamplight warm and utterly still.",
+    "index": 93
+  },
+  {
+    "narration": "He kept the last letter his mother had sent.",
+    "image_prompt": "Arthur, in his teenage years, in the Marion house, holding a folded letter carefully in both hands, looking down at it, seated at the same kitchen table where he waited as a child, the older grandmother visible in the background by the fire, the house unchanged around them.",
+    "motion_prompt": "Firelight flickers in the background, Arthur's figure still, slow zoom in on the letter in his hands.",
+    "index": 94
+  },
+  {
+    "narration": "When he was old enough, Arthur Briggs went to sea himself.",
+    "image_prompt": "Arthur Briggs as a young man of eighteen or nineteen, standing on the deck of a sailing ship at a New England harbour, in a sailor's working coat and cap, looking out at the water with a composed expression that carries both purpose and resignation, the sea behind him.",
+    "motion_prompt": "Slow push in on young Arthur at the rail, the harbour water behind him moving gently.",
+    "index": 95
+  },
+  {
+    "narration": "He became the captain of his own ship.",
+    "image_prompt": "Arthur Briggs as a man in his thirties, now a captain in a dark naval coat and peaked cap, standing at the helm of a sailing vessel on the open Atlantic, his bearded face bearing a resemblance to his father Benjamin, his hands on the wheel, the grey ocean behind him.",
+    "motion_prompt": "Camera holds on Captain Arthur Briggs at the wheel, his coat stirring in the sea wind.",
+    "index": 96
+  },
+  {
+    "narration": "He spent his life on the same Atlantic Ocean that had taken his family.",
+    "image_prompt": "Captain Arthur Briggs at the rail of his ship, looking out at the grey Atlantic from the same vantage point his father once occupied, the ocean stretching to the horizon, the sky overcast, his figure solitary and reflective at the rail, the vast water around him.",
+    "motion_prompt": "Very slow pull back from Arthur to reveal the full expanse of ocean around his ship.",
+    "index": 97
+  },
+  {
+    "narration": "In the early 1900s, decades after the Mary Celeste was found drifting, Arthur Briggs died in a shipwreck off the east coast of the United States.",
+    "image_prompt": "A grey Atlantic seascape off the east coast of the United States in winter, early morning, the sea rough with dark swells, a distant ship's mast visible at an angle above the horizon as if foundering, the coast barely visible as a dark line, the ocean claiming another Briggs.",
+    "motion_prompt": "The dark swells rise and fall slowly, the distant mast barely visible above them.",
+    "index": 98
+  },
+  {
+    "narration": "The ocean took his mother. It took his father. It took his sister.",
+    "image_prompt": "The open North Atlantic Ocean, grey and vast, seen from a low angle, the water filling the entire frame, the horizon a pale line between dark water and darker sky, the surface moving in slow deep swells, utterly indifferent, enormous.",
+    "motion_prompt": "Slow push forward across the ocean surface, low and steady, the swells rising and falling.",
+    "index": 99
+  },
+  {
+    "narration": "And then, when he was old enough to follow them, it took him too.",
+    "image_prompt": "The final shot: the wide grey North Atlantic, empty of ships and of people, the horizon merging with a pale and featureless sky, the ocean completely alone, the surface moving in slow eternal swells, no vessel anywhere, just the sea.",
+    "motion_prompt": "Extremely slow pull back from the ocean surface, the horizon widening, the water filling the world, fading slowly to grey.",
+    "index": 100
+  },
+  {
+    "narration": "December 4, 1872. Four hundred miles east of the Azores,",
+    "image_prompt": "The Dei Gratia sailing ship seen from a low angle on a grey heaving sea, her bow cutting through dark Atlantic swells, two sailors visible on her deck as small silhouetted figures, the sky overcast and pale, the ship moving with purpose through the cold water.",
+    "motion_prompt": "Slow zoom in from distance toward the Dei Gratia as she moves through the swell.",
+    "index": 101
+  },
+  {
+    "narration": "the British cargo ship Dei Gratia spotted another vessel moving strangely across the North Atlantic.",
+    "image_prompt": "A sailor on the Dei Gratia standing in the bow with one hand on the forestay, shading his eyes with the other hand as he looks toward the distant shape of the Mary Celeste on the horizon, his expression shifting from curiosity to concern, grey light around him.",
+    "motion_prompt": "Very slow zoom in on the sailor's face as he stares at the horizon, his coat stirring in the wind.",
+    "index": 102
+  },
+  {
+    "narration": "Her sails were partly set. Her wheel was unmanned. No one came on deck to wave back.",
+    "image_prompt": "The Mary Celeste seen from the perspective of the Dei Gratia's deck, her outline growing clearer as they approach, the erratic set of her sails now apparent, no movement on her deck, Captain Morehouse and two sailors in the foreground watching her approach with growing unease.",
+    "motion_prompt": "Slow push in toward the Mary Celeste in the distance, the Dei Gratia's crew still in the foreground.",
+    "index": 103
+  },
+  {
+    "narration": "Captain David Morehouse ordered a small boat lowered. The boarding party climbed up the side and stepped onto a silent deck.",
+    "image_prompt": "The small boarding boat from the Dei Gratia alongside the hull of the Mary Celeste, three sailors already having climbed the rope ladder and now visible over the rail of the Mary Celeste's deck, Captain Morehouse watching from the Dei Gratia's rail in the background.",
+    "motion_prompt": "The small boat rises and falls on the gentle swell against the Mary Celeste's hull, the sailors above still.",
+    "index": 104
+  },
+  {
+    "narration": "The wheel turned to nothing. The ropes were uncoiled but not tangled.",
+    "image_prompt": "One of the Dei Gratia boarding party sailors standing at the Mary Celeste's unmanned wheel, his hands not touching it but hovering near it, his expression troubled, the wheel turning slowly by itself, the grey sea visible all around over the rail.",
+    "motion_prompt": "The wheel turns very slowly past the sailor's hovering hands, camera holding still.",
+    "index": 105
+  },
+  {
+    "narration": "Some sails still drew wind. Others flapped, torn, as if they had been left without care for days.",
+    "image_prompt": "Looking upward along the mainmast of the Mary Celeste, one sail taut and drawing properly while beside it another hangs in torn strips that flutter in the breeze, the grey winter sky behind them, the contrast between order and abandonment clear.",
+    "motion_prompt": "The torn sail strips flutter gently in the breeze, the taut sail barely moving, slow tilt downward.",
+    "index": 106
+  },
+  {
+    "narration": "Below deck, the picture only grew stranger.",
+    "image_prompt": "The companionway hatch of the Mary Celeste open, the dark interior below visible, two boarding party sailors exchanging a glance before descending, their faces lit from above by the grey daylight, the darkness below them waiting, the ship creaking gently.",
+    "motion_prompt": "Camera holds on the two sailors at the hatch, their hesitation visible, light shifting above them.",
+    "index": 107
+  },
+  {
+    "narration": "There were several feet of water in the hold, but not enough to sink her. The food and water stores were nearly full.",
+    "image_prompt": "A boarding party sailor standing ankle-deep in still dark water in the Mary Celeste's lower hold, holding his lantern high, the amber light revealing intact provisions \u2014 barrels, sacks, casks of water \u2014 all around him, the water level disturbingly high but the stores untouched.",
+    "motion_prompt": "The lantern sways very gently, water around the sailor's feet rippling slightly, camera holds.",
+    "index": 108
+  },
+  {
+    "narration": "Enough for weeks at sea. The cargo \u2014 seventeen hundred and one barrels of industrial alcohol \u2014 was almost untouched.",
+    "image_prompt": "The main cargo hold of the Mary Celeste, a boarding party sailor's lantern held aloft illuminating row upon row of sealed oak alcohol barrels stretching into the darkness, the hold massive, the cargo completely intact, the sailor dwarfed by the scale of the undisturbed cargo.",
+    "motion_prompt": "Very slow push forward between the barrel rows, the lantern light swaying minimally.",
+    "index": 109
+  },
+  {
+    "narration": "In the captain's cabin, the clothes were still folded. The pipes were still on the desk. The charts were laid out where the navigator had left them.",
+    "image_prompt": "The captain's cabin of the Mary Celeste in its entirety, grey porthole light illuminating the folded clothes on the chest, the pipes on the desk, the charts spread on the table, all in their abandoned places, a boarding party sailor standing in the doorway observing the domestic scene.",
+    "motion_prompt": "Slow pan across the cabin from the chest to the desk to the charts, the sailor in the doorway still.",
+    "index": 110
+  },
+  {
+    "narration": "The ship's small boat \u2014 the yawl \u2014 was missing from its davits. Where it should have hung, there was empty space and neat tackle.",
+    "image_prompt": "The stern of the Mary Celeste showing the empty davits clearly, the iron arms extending over the grey ocean, the tackle ropes hanging neatly but without a boat, the ocean far below, a boarding party sailor standing beside the empty davits with his hand on the iron arm, looking down.",
+    "motion_prompt": "The dangling tackle ropes sway slowly in the sea breeze, the sailor still, camera holding.",
+    "index": 111
+  },
+  {
+    "narration": "It had been lowered on purpose. Not torn away by the sea.",
+    "image_prompt": "A close view of the davit pulleys and ropes, showing the neat, undamaged condition of the tackle \u2014 no fraying, no storm damage, no tearing \u2014 the ropes clearly lowered deliberately by practiced hands, grey Atlantic sky beyond.",
+    "motion_prompt": "Camera holds very still on the neat ropes and pulleys, the breeze barely stirring them.",
+    "index": 112
+  },
+  {
+    "narration": "The compass was disturbed. Some of the navigation tools were gone.",
+    "image_prompt": "The binnacle compass on the Mary Celeste's deck, its case slightly displaced from its proper mount, the compass needle swinging freely inside, a boarding party sailor crouching to inspect it, his face concerned, the instrument cabinet visible behind him with its empty spaces.",
+    "motion_prompt": "Very slow zoom in on the displaced compass, the needle visible inside, the sailor still.",
+    "index": 113
+  },
+  {
+    "narration": "In the chart room, the boarding party found the logbook. The last clear entry was dated ten days earlier. After that, the writing simply stopped.",
+    "image_prompt": "Two boarding party sailors in the chart room of the Mary Celeste, one holding the open logbook while the other holds the lantern, both bent over the pages, reading the last entry and then the blank pages after, the lamplight illuminating their expressions of bewilderment.",
+    "motion_prompt": "Lantern flickers gently over the two figures and the open pages, camera holds still.",
+    "index": 114
+  },
+  {
+    "narration": "The ship was called the Mary Celeste. She had ten people aboard when she left New York on November 7. None of them were on her now.",
+    "image_prompt": "A wide shot of the Mary Celeste on the grey Atlantic, the full ship visible from a distance, her dark hull and mismatched sails, drifting with no hands to guide her, the grey sky and grey sea surrounding her, completely and terribly alone.",
+    "motion_prompt": "Very slow pull back from the ship, the ocean widening around her, her isolation growing.",
+    "index": 115
+  },
+  {
+    "narration": "The story everyone tells about the Mary Celeste is the story of an empty ship. The wheel that turned to nothing. The clothes that were never collected. The mystery of where the ten people went.",
+    "image_prompt": "The Mary Celeste's deck seen from amidships, the empty wheel in the distance, the cabin door ajar, the ropes lying in their ordered coils, the utter stillness of a ship that should be full of life but contains none, grey winter light over everything.",
+    "motion_prompt": "Slow dolly along the empty deck, the wheel turning barely in the distance, complete desolation.",
+    "index": 116
+  },
+  {
+    "narration": "But that story leaves someone out.",
+    "image_prompt": "Arthur Briggs at age seven, sitting alone by the window of the Marion house in the early morning, dressed in his school clothes, his small face turned toward the frost-edged window glass looking out at the grey winter street, a letter-sized piece of paper folded on the windowsill beside him.",
+    "motion_prompt": "Camera holds on Arthur at the window, frost crystals on the glass barely shifting in the room's warmth.",
+    "index": 117
+  },
+  {
+    "narration": "The person who lived the longest with what happened on that ship was not on board. He was seven years old, two thousand miles away, in a small house in Marion, Massachusetts.",
+    "image_prompt": "A wide exterior shot of the Marion Massachusetts house in winter, the white clapboard glowing faintly in cold morning light, a lamp in one window where Arthur's silhouette is just visible, the grey Atlantic ocean a silver line in the far distance beyond the town's rooftops.",
+    "motion_prompt": "Slow zoom in on the lit window where Arthur's silhouette waits, smoke rising from the chimney.",
+    "index": 118
+  },
+  {
+    "narration": "He was waiting for letters that would never come.",
+    "image_prompt": "Arthur Briggs at seven, standing in the hallway of the Marion house near the front door, looking down at the empty letter box or mail slot, his expression patient and hopeful, the warm interior light behind him, the door closed against the winter outside.",
+    "motion_prompt": "Camera holds on Arthur, the empty letter box, a tiny draft stirring under the door.",
+    "index": 119
+  },
+  {
+    "narration": "His name was Arthur Stanley Briggs. He was seven years old. He had been left in Massachusetts with his grandmother \u2014 so he could go to school.",
+    "image_prompt": "Arthur and his grandmother walking together along a Marion street in winter, the old woman in her dark coat and bonnet holding Arthur's hand, the boy in his wool coat and cap beside her, bare trees and colonial houses along the street, a normal New England morning.",
+    "motion_prompt": "The two figures are still, the wind moving the bare tree branches overhead, slow zoom in.",
+    "index": 120
+  },
+  {
+    "narration": "His father was the captain of the ship. Captain Benjamin Spooner Briggs was thirty-seven.",
+    "image_prompt": "A formal portrait of Captain Benjamin Briggs at thirty-seven, seated at a table, his dark bearded face composed and dignified, wearing his good captain's coat, a nautical chart visible on the table before him, the portrait suggesting a man of substance and reliability.",
+    "motion_prompt": "Camera holds completely still on Briggs in portrait, the ambient light barely changing.",
+    "index": 121
+  },
+  {
+    "narration": "He came from a long line of New England sea captains; almost every man in his family had gone to sea. He was a steady, fair man, not given to gambling with his ship or his crew.",
+    "image_prompt": "Captain Briggs on the Mary Celeste's deck in calm Atlantic conditions, the ship moving well under a fair sky for once, Briggs standing easy at the helm, the crew visible at their tasks in the background, the whole image suggesting competent and steady command.",
+    "motion_prompt": "Very slow pan from Briggs at the helm to the crew working in the background, the ship moving smoothly.",
+    "index": 122
+  },
+  {
+    "narration": "He read his Bible, he did not drink, and he had put his own savings into the Mary Celeste alongside the main owner. His money, his career, and his reputation were tied to her wooden hull.",
+    "image_prompt": "Captain Briggs in the captain's cabin at his desk, the open Bible before him and a ledger beside it, both open, a man who manages his faith and his finances with equal seriousness, the cabin orderly and modest, lamplight over his thoughtful face.",
+    "motion_prompt": "Lamp flame flickers gently over Briggs and his desk, camera holds still.",
+    "index": 123
+  },
+  {
+    "narration": "His mother \u2014 Arthur's mother \u2014 was Sarah Elizabeth Briggs. She was thirty years old. The daughter of a minister.",
+    "image_prompt": "Sarah Elizabeth Briggs seated in the captain's cabin, her dark hair neatly arranged, wearing her dark travelling dress with white collar, her composed face turned slightly toward the porthole, the grey Atlantic light on her cheek, her bearing that of a minister's daughter \u2014 contained and thoughtful.",
+    "motion_prompt": "The porthole light shifts almost imperceptibly as the ship moves, Sarah's figure completely still.",
+    "index": 124
+  },
+  {
+    "narration": "She had honeymooned with Benjamin on a previous Atlantic crossing, and she was comfortable at sea in a way few women of her time ever were. Family letters described her as calm and capable. The kind of person who did not panic.",
+    "image_prompt": "Sarah Briggs standing at the Mary Celeste's bow in moderate Atlantic conditions, one hand on the stay, her face turned toward the open ocean ahead, a slight smile on her composed face, completely at ease, her shawl wrapped around her shoulders, the sea stretching before her.",
+    "motion_prompt": "Her shawl stirs gently in the wind, her figure still, the sea moving slowly behind her.",
+    "index": 125
+  },
+  {
+    "narration": "Their daughter, Arthur's two-year-old sister, was named Sophia Matilda.",
+    "image_prompt": "Sophia Matilda in Sarah's arms in the captain's cabin, the dark-curled toddler looking over her mother's shoulder with wide bright eyes, Sarah's profile calm and warm, the two of them together in lamplight, the family portrait quality of the image tender and complete.",
+    "motion_prompt": "Lamp light flickers gently over Sarah and Sophia, the image warm and intimate, camera still.",
+    "index": 126
+  },
+  {
+    "narration": "In late October, in the harbor at Staten Island, Sophia had been carried aboard the Mary Celeste in her mother's arms. The ship had been loaded with the alcohol cargo bound for Genoa, Italy.",
+    "image_prompt": "A wide view of the Staten Island harbour in late October 1872, the Mary Celeste alongside the dock, workers loading barrels, Captain Briggs on deck overseeing, Sarah visible partway up the gangway with Sophia on her hip, the grey autumn harbour behind them all.",
+    "motion_prompt": "Very slow pan across the harbour scene, the figures small and still in the distance.",
+    "index": 127
+  },
+  {
+    "narration": "There were seven other people on board. The first mate was Albert Richardson, twenty-eight years old, an American who had sailed with Briggs before.",
+    "image_prompt": "Albert Richardson and Captain Briggs together on the deck of the Mary Celeste at the Staten Island dock, Richardson slightly behind and to the right of Briggs, both men looking toward the loading operation, the dock workers and barrels in the background, the professional partnership between them clear.",
+    "motion_prompt": "Very slow zoom in on the two men, the dock activity small and distant behind them.",
+    "index": 128
+  },
+  {
+    "narration": "The second mate was Andrew Gilling, in his mid-twenties, born in New York to Danish parents. The steward and cook was Edward William Head, newly married, just starting his life ashore between voyages.",
+    "image_prompt": "Andrew Gilling and Edward Head standing together on the Mary Celeste's deck near the galley entrance, Gilling lean and fair, Head rounder and warmer-faced, both in working clothes, the harbour behind them, two young men with their lives clearly ahead of them.",
+    "motion_prompt": "Camera holds on the two figures, a harbour breeze stirring their coats, slow zoom in.",
+    "index": 129
+  },
+  {
+    "narration": "Four German sailors from the Frisian Islands made up the rest of the crew \u2014 the brothers Volkert and Boy Lorenzen, Arian Martens, and Gottlieb Goodschaad.",
+    "image_prompt": "The four Frisian German sailors working together to secure cargo on the Mary Celeste's deck, their faces weathered and experienced, similar northern European features, their movements practiced and efficient, the Staten Island dockside behind them, an image of ordinary maritime labor.",
+    "motion_prompt": "The sailors' figures are essentially still in their work, a slow pan across them from left to right.",
+    "index": 130
+  },
+  {
+    "narration": "Later research described them as experienced, peaceable men. First-class sailors. Not known troublemakers. These were not drifters pulled off the dock at the last minute. They were men with homes. With families. With reasons to come back.",
+    "image_prompt": "A group portrait of the entire Mary Celeste crew on the dock beside the ship, all nine crew members and Captain Briggs assembled informally, their faces showing the variety of ages and backgrounds but all sharing a quality of settled professional competence and human substance.",
+    "motion_prompt": "Very slow pull back from the group to show the whole crew and the ship behind them.",
+    "index": 131
+  },
+  {
+    "narration": "The ship was delayed by bad weather. While the Mary Celeste waited at anchor near Staten Island, Sarah used the time to write a letter to her mother-in-law back in Marion.",
+    "image_prompt": "Sarah Briggs writing at the desk in the captain's cabin, rain audible on the deck above, grey rain-light through the porthole, Sophia Matilda asleep in the bunk behind her, Sarah's pen moving across the paper in the quiet afternoon, the ship rocking very gently at anchor.",
+    "motion_prompt": "Rain tracks down the porthole glass, Sarah's figure still at the desk, lamp warm.",
+    "index": 132
+  },
+  {
+    "narration": "Tell Arthur, she wrote, that I shall depend on his writing me. Tell him I shall try to remember things from the voyage that he might enjoy hearing about.",
+    "image_prompt": "Close view of Sarah's hand resting beside the completed letter on the desk, the words of her last paragraph visible as careful black ink on cream paper, the lamplight warm, Sophia visible asleep in the background, the intimacy of the scene making the letter's significance unbearable.",
+    "motion_prompt": "Camera holds completely still on the letter and Sarah's resting hand, the lamp flame barely stirring.",
+    "index": 133
+  },
+  {
+    "narration": "That letter went ashore on November 6. It was the last anyone in Marion heard from her.",
+    "image_prompt": "The letter in the hands of a harbour messenger boy on the Staten Island dock, the boy in a rough coat about to walk away toward the city, the Mary Celeste behind him at anchor in the grey harbour, the last connection between Sarah and her son about to be severed.",
+    "motion_prompt": "Very slow zoom in on the letter in the boy's hand, the ship behind him growing small.",
+    "index": 134
+  },
+  {
+    "narration": "The next morning, on November 7, 1872, the Mary Celeste sailed for Italy.",
+    "image_prompt": "The Mary Celeste sailing out of New York harbour in the early morning of November 7, her sails filling, Captain Briggs visible at the helm, Sarah standing at the rail watching the receding American coast, Sophia in her arms, the ship moving into the open grey Atlantic.",
+    "motion_prompt": "The ship moves slowly through the frame, the figures of Briggs and Sarah small but visible, sails filling.",
+    "index": 135
+  },
+  {
+    "narration": "Arthur, in Massachusetts, went to school.",
+    "image_prompt": "Arthur Briggs, age seven, entering the one-room Marion schoolhouse, pushing through the door with the other children in morning light, his face neutral and innocent, the school building plain and white against the grey November sky, his small figure disappearing inside.",
+    "motion_prompt": "Slow push in on the schoolhouse as children enter, Arthur's figure passing through the door.",
+    "index": 136
+  },
+  {
+    "narration": "When the boarding party from the Dei Gratia climbed onto the Mary Celeste twenty-eight days later, they did not yet know who they were looking for.",
+    "image_prompt": "The three Dei Gratia boarding party sailors standing together on the Mary Celeste's deck, newly arrived, looking around at the empty ship with genuine bewilderment, their faces open and searching, the grey Atlantic surrounding the ship on all sides, the mystery fresh and uncomprehended.",
+    "motion_prompt": "Slow pan across the three sailors' faces as they look around, the sea moving behind them.",
+    "index": 137
+  },
+  {
+    "narration": "They saw an empty wheel. We know now it was the wheel Benjamin Briggs had stood at every morning of his three-week crossing.",
+    "image_prompt": "Captain Briggs at the helm of the Mary Celeste in mid-Atlantic morning light, his steady hands on the wheel, looking toward the horizon, the ship sailing well under his direction, this reconstruction image warm with competence and purpose.",
+    "motion_prompt": "Very slow zoom in on Briggs's face at the wheel, the horizon visible behind him, ocean moving.",
+    "index": 138
+  },
+  {
+    "narration": "They saw folded clothes in the captain's cabin. We know now those were Sarah's clothes. The pipes on the desk were her husband's.",
+    "image_prompt": "Sarah Briggs in the captain's cabin, folding her dark wool dress carefully and placing it on the chest, her movements methodical and neat, the cabin orderly around her, lamplight warm, her composure evident in every gesture \u2014 this is the person who left those clothes.",
+    "motion_prompt": "Camera holds on Sarah in the act of folding, lamp warm, very slow zoom in.",
+    "index": 139
+  },
+  {
+    "narration": "The charts laid out on the table were the ones Benjamin had been reading the night the writing stopped.",
+    "image_prompt": "Captain Briggs at the chart table on the night before the voyage's end, bent over the Atlantic charts with a pencil in hand, marking a position, his face concentrated by lamplight, the logbook open beside him, this the last ordinary evening of navigation.",
+    "motion_prompt": "Lamp flickers gently over Briggs and the chart, camera holds still, the intimacy of the last night.",
+    "index": 140
+  },
+  {
+    "narration": "They saw a small toy on the cabin floor. A child's wooden toy.",
+    "image_prompt": "Sophia Matilda sitting on the cabin floor of the Mary Celeste, her wooden painted horse toy beside her, playing contentedly, her dark curls and white dress, the lamplight warm around her, the cabin walls close, this the child whose toy will be found on the empty floor.",
+    "motion_prompt": "Camera holds very still on Sophia and her toy, the lamplight warm and utterly peaceful.",
+    "index": 141
+  },
+  {
+    "narration": "They saw a yawl missing from its davits. We know now that seven men, a captain, a wife, and a two-year-old daughter had climbed into that small boat \u2014 and rowed away from the ship that was their only hope of survival.",
+    "image_prompt": "The ten people of the Mary Celeste at the ship's rail near the davits, the whole group \u2014 Briggs, Sarah holding Sophia, Richardson, Gilling, Head, and the four German sailors \u2014 preparing to descend into the small yawl, their faces serious but not panicked, the grey Atlantic below.",
+    "motion_prompt": "Very slow push in on the assembled group, their faces visible, the ocean vast behind them.",
+    "index": 142
+  },
+  {
+    "narration": "The boarding party found a pump taken apart. They could not understand why. We know now that the Mary Celeste had been taking on water in her hold, and that Benjamin Briggs \u2014 who had invested his own savings in this ship \u2014 had been trying to fix the only tool he had to clear it.",
+    "image_prompt": "Captain Briggs on his knees on the deck of the Mary Celeste, the bilge pump components spread before him, his coat off, working with focused urgency in grey overcast daylight, his sleeves rolled, the tools of a man trying to save his ship and his investment.",
+    "motion_prompt": "The grey light shifts as clouds pass above Briggs, his figure still in concentrated effort.",
+    "index": 143
+  },
+  {
+    "narration": "They found the compass disturbed. Some of the navigation instruments missing. We know now that someone had carried them down into the yawl, expecting to come back.",
+    "image_prompt": "First Mate Richardson at the Mary Celeste's instrument cabinet, carefully wrapping a sextant in cloth, his expression purposeful \u2014 the action of a professional preparing to navigate back to the ship, not fleeing, expecting return, the compass binnacle beside him already disturbed.",
+    "motion_prompt": "Very slow zoom in on Richardson and the wrapped instrument, the light steady.",
+    "index": 144
+  },
+  {
+    "narration": "The Dei Gratia sailed the empty Mary Celeste to Gibraltar. The British authorities held a formal inquiry.",
+    "image_prompt": "The harbour of Gibraltar in winter 1872, the Rock of Gibraltar dominant in the background, the Mary Celeste tied at the quay, British officials in dark coats on the dock examining her, other ships in the harbour, the Mediterranean light flatter and colder than expected.",
+    "motion_prompt": "Slow pan from the harbour activity to the Rock of Gibraltar in the background.",
+    "index": 145
+  },
+  {
+    "narration": "The attorney general, Frederick Solly-Flood, suspected foul play. He suspected murder. He suspected fraud. He found no evidence of either.",
+    "image_prompt": "Frederick Solly-Flood, a silver-haired commanding man of fifty, in formal black coat, standing on the dock beside the Mary Celeste in Gibraltar, one hand on her hull, his expression deeply suspicious, examining the ship's side for evidence that simply isn't there.",
+    "motion_prompt": "Camera holds on Solly-Flood's hand on the hull, slow zoom in on his skeptical face.",
+    "index": 146
+  },
+  {
+    "narration": "No blood. No bodies. No signs of struggle.",
+    "image_prompt": "Solly-Flood and his officials walking the full length of the Mary Celeste's deck in Gibraltar harbour, examining every inch, finding nothing \u2014 the clean undisturbed deck, the intact rigging, the absence of any evidence of violence making their search increasingly frustrated.",
+    "motion_prompt": "Slow pan along the clean deck as the officials walk it, their figures moving slowly.",
+    "index": 147
+  },
+  {
+    "narration": "The court ruled that the rescuers deserved a salvage payment. But it was a small one. The suspicion never quite went away.",
+    "image_prompt": "The Gibraltar courthouse exterior, a colonial British building, Solly-Flood emerging from the door with papers in hand, his expression showing unsatisfied suspicion, the Dei Gratia's officers behind him looking relieved but not fully vindicated, the harbour visible down the street.",
+    "motion_prompt": "Camera holds on Solly-Flood at the courthouse door, the harbour light steady behind him.",
+    "index": 148
+  },
+  {
+    "narration": "While the inquiry continued, the Mary Celeste sat tied up in Gibraltar harbour. The clothes were still folded in the cabin. The toy was still on the floor. The captain's pipes were still on the desk. The barrels were still in the hold.",
+    "image_prompt": "A series-suggesting image: inside the captain's cabin of the Mary Celeste at Gibraltar, the folded clothes, the toy on the floor, the pipes on the desk all visible in the same frame, the Mediterranean winter light through the porthole different from the Atlantic grey but equally cold and quiet.",
+    "motion_prompt": "Very slow pan across all the objects in the cabin, the light holding steady.",
+    "index": 149
+  },
+  {
+    "narration": "Two thousand miles away in Massachusetts, Arthur Briggs walked to school every morning. He had not yet been told that anything was wrong.",
+    "image_prompt": "Arthur Briggs walking to school in Marion Massachusetts on a winter morning, his small figure on the snowy street, the other children walking with him, his face calm and innocent under his wool cap, the ordinary New England day completely unaware of what is waiting for him.",
+    "motion_prompt": "Slow push in on Arthur's back as he walks, his breath visible in the cold air.",
+    "index": 150
+  },
+  {
+    "narration": "The letters his mother had promised to write \u2014 the things she would try to remember to tell him \u2014 never arrived.",
+    "image_prompt": "The interior hallway of the Marion house, the letter box empty, Arthur standing nearby with his school bag, looking at the empty box with a child's patient incomprehension, his grandmother visible in the kitchen doorway behind him carrying quiet adult grief.",
+    "motion_prompt": "Camera holds on Arthur at the letter box, the grandmother still in the background, firelight warm.",
+    "index": 151
+  },
+  {
+    "narration": "The newspapers got there first.",
+    "image_prompt": "Arthur's grandmother at the kitchen table, a newspaper spread before her, her face showing the shock and grief of reading about the Mary Celeste mystery, her hand pressed to her mouth, the paper's headline visible in the foreground, the fire in the hearth behind her.",
+    "motion_prompt": "Firelight flickers over the grandmother's stricken face, camera holds very still.",
+    "index": 152
+  },
+  {
+    "narration": "In the months after Gibraltar, the story of the Mary Celeste was printed and reprinted across the Atlantic world. The empty ship. The vanished crew. The unanswered questions.",
+    "image_prompt": "A reading room in a Victorian library or parlour, several people seated with newspapers and periodicals, all of them reading, some with troubled expressions, the story of the Mary Celeste spreading through the readers in the warm gaslit room, the weight of public attention on a private tragedy.",
+    "motion_prompt": "Slow pan across the reading figures, the gaslights flickering gently, readers still.",
+    "index": 153
+  },
+  {
+    "narration": "In 1884, a young writer named Arthur Conan Doyle \u2014 not yet famous, not yet the author of Sherlock Holmes \u2014 published a short story about the Mary Celeste. He changed the names. He invented a murderer.",
+    "image_prompt": "A young Arthur Conan Doyle at his writing desk in 1884, twenty-five years old, lean and dark-mustached in a Victorian frock coat, bent over his manuscript in lamplight, his pen moving, the creative absorption of a writer turning tragedy into fiction.",
+    "motion_prompt": "Lamp flickers over Doyle's bent figure and the manuscript, camera holds still.",
+    "index": 154
+  },
+  {
+    "narration": "He wrote it as a first-person confession. Some readers, and at least one newspaper, took it as fact.",
+    "image_prompt": "A Victorian parlour, a well-dressed man reading Conan Doyle's story in Cornhill Magazine, his face showing growing alarm as he reads, the story taking on the appearance of truth in his hands, the warm parlour around him, the gaslight bright over the page.",
+    "motion_prompt": "Gaslight flickers over the reader's alarmed face, camera holds still.",
+    "index": 155
+  },
+  {
+    "narration": "The legend grew. The pirates, the mutinies, the giant squids, the supernatural. Each version made the ship more haunted.",
+    "image_prompt": "A Victorian bookshop or newsstand, the shelves and boards filled with penny publications and periodicals, their illustrated covers showing increasingly sensational imagery about the Mary Celeste \u2014 shadowy figures, wild seas \u2014 the accumulation of legend visible in the growing stack of fantastical publications.",
+    "motion_prompt": "Slow pan along the display of publications, the shop keeper a still figure behind them.",
+    "index": 156
+  },
+  {
+    "narration": "Each version made the people on board less like real people and more like characters in someone else's story.",
+    "image_prompt": "A close view of a sensational Victorian illustration of the Mary Celeste showing melodramatic caricatures where real people once stood, the illustrated figures bearing no resemblance to the Briggs family or crew, the real people rendered invisible by the legend.",
+    "motion_prompt": "Camera holds on the illustration, slow zoom in, the falseness of the imagery clear.",
+    "index": 157
+  },
+  {
+    "narration": "Arthur Briggs grew up reading these stories.",
+    "image_prompt": "Arthur Briggs at about fourteen, a lanky teenager in Victorian clothes, sitting in the Marion house parlour by a gas lamp, reading a periodical about the Mary Celeste, his young face showing the complicated pain of reading false accounts of his family's disappearance.",
+    "motion_prompt": "The gas lamp flickers over young Arthur's reading face, camera holds very still.",
+    "index": 158
+  },
+  {
+    "narration": "He grew up under the shadow of a mystery that no one could solve.",
+    "image_prompt": "Arthur at sixteen or seventeen, standing on the Marion Massachusetts waterfront, his growing figure reflected in the still harbour water, looking out at the grey Atlantic with an expression of unresolvable grief and longing, the ocean that took his family before him.",
+    "motion_prompt": "His reflection shimmers very gently in the harbour water, slow zoom in on his face.",
+    "index": 159
+  },
+  {
+    "narration": "The mother who had promised to write to him.",
+    "image_prompt": "A treasured memory image: Sarah Briggs's face in warm lamplight, her composed dark-haired beauty, looking at something to the side with a small private smile, the warmth and competence of her that Arthur remembered, the last image he would have carried of her.",
+    "motion_prompt": "Camera holds completely still on Sarah's face, the lamp barely flickering.",
+    "index": 160
+  },
+  {
+    "narration": "The father who had invested his savings in a ship that came home without him.",
+    "image_prompt": "Captain Briggs at the helm of the Mary Celeste, his bearded face calm and authoritative, the ship sailing well under a good sky, his hands sure on the wheel, the man Arthur would have known from letters and memory \u2014 steady, invested, not given to failure.",
+    "motion_prompt": "Very slow zoom in on Briggs's face, the ocean behind him moving gently.",
+    "index": 161
+  },
+  {
+    "narration": "The little sister who had been carried aboard in her mother's arms.",
+    "image_prompt": "Sophia Matilda as Arthur would have last seen her \u2014 or imagined her \u2014 a bright-eyed two-year-old with dark curls, sitting in Sarah's lap in the captain's cabin, her tiny hands reaching for her wooden toy, warmth and life and absolute innocence in every detail.",
+    "motion_prompt": "Camera holds still on Sophia and Sarah, the lamplight warm and complete.",
+    "index": 162
+  },
+  {
+    "narration": "He kept the last letter his mother had sent.",
+    "image_prompt": "Adult Arthur Briggs, in his twenties, sitting at a desk in a modest room, the aged and folded letter from Sarah spread carefully before him, his large sailor's hands resting on either side of it, not touching it, his face bent over the pages in a posture of reverence and grief.",
+    "motion_prompt": "Lamplight flickers very gently over Arthur and the letter, camera holds still.",
+    "index": 163
+  },
+  {
+    "narration": "When he was old enough, Arthur Briggs went to sea himself. He became the captain of his own ship.",
+    "image_prompt": "Captain Arthur Briggs, in his early thirties, a bearded man with his father's steady eyes, standing at the helm of a schooner on the grey Atlantic in early morning, his bearing and posture echoing his father's thirty years before, the wheel in his hands a continuation of a story.",
+    "motion_prompt": "Very slow push in on Captain Arthur Briggs at the wheel, his coat stirring in the sea wind.",
+    "index": 164
+  },
+  {
+    "narration": "He spent his life on the same Atlantic Ocean that had taken his family.",
+    "image_prompt": "Captain Arthur Briggs on deck of his ship at sea, the grey Atlantic surrounding him on all sides as far as the horizon, standing at the rail looking out at the water, his expression complex \u2014 love and grief and belonging \u2014 the ocean both his inheritance and his loss.",
+    "motion_prompt": "The ocean moves in slow deep swells around the ship, Arthur still at the rail, very slow pull back.",
+    "index": 165
+  },
+  {
+    "narration": "In the early 1900s, decades after the Mary Celeste was found drifting, Arthur Briggs died in a shipwreck off the east coast of the United States.",
+    "image_prompt": "The grey Atlantic off the east coast of the United States, a winter storm sea, dark heaving swells under a dark sky, a partial glimpse of a ship in distress at the edge of the frame \u2014 a tilting mast, a dark hull \u2014 the ocean claiming one more Briggs.",
+    "motion_prompt": "The dark swells rise and fall slowly, the partial ship listing almost imperceptibly, the storm light dim.",
+    "index": 166
+  },
+  {
+    "narration": "The ocean took his mother. It took his father. It took his sister.",
+    "image_prompt": "Three objects on a simple wooden table in a quiet room: Sarah's folded letter, a clay pipe like Benjamin's, and Sophia's small wooden horse toy, gathered together, warm lamplight over them \u2014 the physical remnants of three people taken by the same ocean.",
+    "motion_prompt": "Lamp flickers very slowly over the three objects, camera holds completely still.",
+    "index": 167
+  },
+  {
+    "narration": "And then, when he was old enough to follow them, it took him too.",
+    "image_prompt": "The final image: the North Atlantic Ocean at dusk, the water dark and deep grey, the last light on the horizon very pale, no ships, no land, no people \u2014 only the ocean in its absolute indifferent enormity, rolling slow deep swells toward a darkening sky.",
+    "motion_prompt": "Extremely slow fade from the ocean surface to the darkening sky, the last light fading at the horizon.",
+    "index": 168
+  }
+]

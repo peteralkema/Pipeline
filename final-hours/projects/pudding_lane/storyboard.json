@@ -1,0 +1,566 @@
+[
+  {
+    "index": 1,
+    "narration": "It is just before midnight on Saturday the first of September, 1666.",
+    "image_prompt": "The City of London during the Great Fire, viewed from a distance \u2014 from the river or from a hill outside the walls. A vast column of black smoke rising into a copper-coloured sky. The horizon line lit orange and red, the silhouettes of church spires and rooftops visible against the flame. Wind-driven embers drifting across the sky. The river Thames in the foreground reflecting the orange glow. 1666 photoreal cinematic disaster scene viewed from atmospheric distance. but BEFORE the fire \u2014 a wide rooftop view of 1666 London at near-midnight, timber-framed houses packed densely together under a deep indigo sky scattered with stars, warm amber candlelight glowing faintly in a few upper windows, a thin crescent moon low on the horizon, the dark ribbon of the Thames visible in the far distance, no people, utterly still and silent. Cinematic documentary, photorealistic, low-key natural light. No fire yet.",
+    "motion_prompt": "Extremely slow push-in toward the city roofline, drifting slightly downward as if descending from above."
+  },
+  {
+    "index": 2,
+    "narration": "In a narrow timber-framed house on Pudding Lane,",
+    "image_prompt": "Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. \u2014 view looking down the centre of the lane at night, cobblestones glistening faintly with dew, the timber-framed houses leaning inward overhead, the sky reduced to a thin dark strip above, warm amber light spilling from a single ground-floor window on the right side of the lane. 1666 photoreal cinematic.",
+    "motion_prompt": "Slow steady push-in down the centre of the lane toward the lit window, ground-level perspective."
+  },
+  {
+    "index": 3,
+    "narration": "a young woman in her late teens or early twenties is finishing her work in a bakery kitchen.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior., lit by a single tallow candle and the residual orange glow of the closed oven. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. stands with her back fully to camera at the heavy wooden trestle table, leaning a wooden peel against the wall. Heavy shadows on the wall. Intimate, documentary.",
+    "motion_prompt": "Slow drift inward toward the figure's back, the candle flame flickering gently in place."
+  },
+  {
+    "index": 4,
+    "narration": "We do not know her name. No record of it has ever been found.",
+    "image_prompt": "A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. in The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior., photographed from directly behind so that only her white linen coif and the back of her dark kirtle are visible. The rest of the kitchen in deep shadow. The brick oven faintly glowing orange to her left at the edge of frame. Atmosphere intimate and melancholy. Photorealistic, documentary.",
+    "motion_prompt": "Barely perceptible slow push toward the back of her head, the candle flame trembling very slightly."
+  },
+  {
+    "index": 5,
+    "narration": "In two hours she will become the first person to die in the Great Fire of London.",
+    "image_prompt": "The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior. seen from the far end of the room. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. small and solitary in the low candlelit space, seen from behind, standing near the trestle table. The large brick oven dominates the right side of the frame with its iron door faintly glowing at the seams. Shadows pressing in from all sides. The flagstones reflecting the orange glow. Heavy timber beams low overhead. Foreboding and still. Photorealistic, documentary.",
+    "motion_prompt": "Imperceptibly slow zoom out, making the figure appear smaller in the vast shadowed kitchen, oven glow steady and warm."
+  },
+  {
+    "index": 6,
+    "narration": "She will die because she will not jump from the window.",
+    "image_prompt": "The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior. view looking up toward a small dark casement window high on the wall, its diamond-pane glass reflecting the faint orange of the oven glow. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. stands below it in the foreground, seen from behind, her white linen coif catching the candlelight, looking upward toward the window. The night sky barely visible as deep indigo through the glass. Quiet, ominous. Photorealistic.",
+    "motion_prompt": "Slow upward tilt from her shoulders toward the window, the oven glow pulsing very faintly."
+  },
+  {
+    "index": 7,
+    "narration": "Everything you are about to see has been recreated from the household accounts, the British Library letter of October 1666, and the parliamentary investigation that followed.",
+    "image_prompt": "A close shot of an aged brown manuscript page with dense 17th-century secretary hand script, lying on a dark wood surface, lit from one side by a single candle whose flame is just off-frame. The ink slightly faded and brown, the paper slightly warped. No modern objects. No legible text. Documentary still-life. Photorealistic.",
+    "motion_prompt": "Extremely slow horizontal drift across the manuscript surface, the candle light causing faint shadows to shift almost imperceptibly."
+  },
+  {
+    "index": 8,
+    "narration": "The bakery belongs to a man named Thomas Farriner.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior., a broad-shouldered man in his mid-forties photographed from behind and three-quarters away from camera \u2014 only the back of his head, his shoulders in a plain linen shirt with sleeves rolled to the elbows, and the leather apron-strings at his back are visible. He stands beside the heavy wooden counter. The brick oven visible behind him glowing faintly. Candlelight warming the scene. Face never visible. Photorealistic, documentary.",
+    "motion_prompt": "Slow push-in toward the figure from behind, oven glow flickering softly."
+  },
+  {
+    "index": 9,
+    "narration": "He bakes ship's biscuit for the Royal Navy.",
+    "image_prompt": "Still-life medium shot inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: the heavy wooden trestle table covered with rows of pale, hard ship's biscuits \u2014 round, flat, dense \u2014 stacked in neat piles, a few loose on the table surface. The brick oven in warm orange glow behind. Flour dust visible in the candle-lit air. Rough wooden shelving to one side. No figures. Photorealistic, documentary.",
+    "motion_prompt": "Slow pan from left to right across the table of stacked biscuits, dust motes drifting in the candlelight."
+  },
+  {
+    "index": 10,
+    "narration": "His shop sits on the eastern side of Pudding Lane \u2014 a narrow medieval street that runs from Eastcheap down toward the river,",
+    "image_prompt": "Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. \u2014 elevated view looking down the lane from near Eastcheap at night. The narrow cobblestone lane falls away downhill toward the invisible Thames in the distance. Timber-framed houses with overhanging upper storeys form a tight canyon on both sides. A single oil lantern hung from a bracket on one house casts a small pool of amber light on the wet cobbles below. No people. Deep shadow.",
+    "motion_prompt": "Very slow downhill push, as if the camera floats gently down the slope of the lane toward the river."
+  },
+  {
+    "index": 11,
+    "narration": "named for the carts of offal that pass through it on their way to the Thames.",
+    "image_prompt": "Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. at ground-level view \u2014 cobblestones dark and slightly slick, old stains visible near the gutter channel running down the centre of the lane. The tall timber walls of the houses rising steeply on both sides into near darkness, the overhanging upper storeys nearly blocking the sky. Utterly deserted. Atmospheric.",
+    "motion_prompt": "Slow drift along the gutter channel of the lane, almost at ground level, moving gently downhill."
+  },
+  {
+    "index": 12,
+    "narration": "The kitchen at midnight smells of cooling oak ash,",
+    "image_prompt": "Extreme close shot of the iron door of the large brick oven in The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior., the door slightly ajar. Pale grey ash and a faint residual orange ember glow just visible through the crack. The brick surround warm cream and orange-charred. The heavy iron handle dull and dark. Fine grey ash settled on the hearth floor in front. No hands, no figures. Intimate and still.",
+    "motion_prompt": "Barely perceptible slow push-in toward the oven door crack, the ember glow pulsing very gently."
+  },
+  {
+    "index": 13,
+    "narration": "of yeast left rising for tomorrow's loaves,",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: a medium close shot of two round cloth-covered proving bowls on a wooden shelf, the linen cloths slightly mounded where the dough pushes upward beneath them. The shelf positioned near the oven for warmth. Candlelight from off-screen warming the scene in amber. Rough plaster wall behind with timber frame showing. No figures. Photorealistic still-life.",
+    "motion_prompt": "Slow horizontal drift from left to right along the shelf, the candlelight flickering softly."
+  },
+  {
+    "index": 14,
+    "narration": "and faintly of the river \u2014 three streets south, low and slow in the dry summer.",
+    "image_prompt": "View from a rooftop looking south over tightly packed 1666 London rooftops at night toward the Thames. The river visible as a dark, barely glinting ribbon in the far distance. The city roofline a jagged silhouette of gables, chimneys and thatch under a star-scattered indigo sky. No people, utterly still. The river very low between its banks. Photorealistic documentary.",
+    "motion_prompt": "Imperceptibly slow zoom toward the distant glint of the river, the scene barely moving."
+  },
+  {
+    "index": 15,
+    "narration": "The flagstones are warm from a day of baking.",
+    "image_prompt": "Low-angle shot looking across the warm flagstone floor of The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior., the stones large, dark and slightly uneven. The residual warmth implied by the orange glow from the oven just at the edge of frame. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. present only as the hem of her linen dress and her shoes visible at the far edge of the frame as she stands near the table \u2014 face never in view. Perspective intimate, almost floor-level. Photorealistic.",
+    "motion_prompt": "Very slow low drift across the flagstone floor toward the hem of her dress, warm oven glow pulsing faintly."
+  },
+  {
+    "index": 16,
+    "narration": "The brick of the oven is still hot to the touch.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: medium close shot of the side wall of the large brick oven. The old handmade bricks pale cream and charred black in patches. The mortar between them crumbling and heat-cracked. A faint orange glow visible at the base of the iron door. The surface radiating visible heat-haze in the candle-lit air. No hands. Photorealistic.",
+    "motion_prompt": "Slow drift upward along the oven's brick face, heat shimmer barely perceptible in the warm air above the oven top."
+  },
+  {
+    "index": 17,
+    "narration": "A copper pot ticks softly as it cools on the trestle table.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: medium close shot of a large round copper pot sitting on the heavy wooden trestle table. The copper warm orange-brown in the candlelight, slightly dented, with a riveted handle. A faint wisp of residual steam rising from its lid. A wooden spoon and a cloth on the table nearby. No figures. Photorealistic still-life.",
+    "motion_prompt": "Imperceptibly slow push-in toward the copper pot, the tiny wisp of steam drifting upward very gently."
+  },
+  {
+    "index": 18,
+    "narration": "She would have heard the watchmen calling midnight \u2014 past twelve, and all is well \u2014 somewhere up Eastcheap.",
+    "image_prompt": "View from a first-floor window inside the bakery house looking obliquely down onto Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. at night. The diamond-pane glass slightly distorting the view. A distant figure of a night watchman in a long dark coat and wide-brimmed hat visible at the far end of the lane near the junction with Eastcheap, carrying a lantern that glows amber. The watchman silhouetted and small, far away. Deep shadow everywhere.",
+    "motion_prompt": "Slow, very subtle drift \u2014 the watchman's lantern glow at the distant end of the lane, the window glass still."
+  },
+  {
+    "index": 19,
+    "narration": "She would have heard the timber of the house above her settling into the night.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: medium shot looking upward at the heavy oak ceiling beams. The beams dark brown and massive, centuries old. The plaster between them cracked and yellowed. A single candle off-screen casting long shadows across the beams. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. visible in the lower frame from behind, her white coif catching the light as she looks upward. Hushed and enclosed.",
+    "motion_prompt": "Slow upward tilt along the ceiling beams, the candle shadow shifting almost imperceptibly."
+  },
+  {
+    "index": 20,
+    "narration": "She would have heard the rats in the walls.",
+    "image_prompt": "Close shot of the rough plaster and oak timber wall of The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.. The plaster cracked and stained. A small dark gap visible where the plaster has separated from the timber frame. Deep shadow inside the gap. The candle glow from off-screen warm on the wall surface. No rats visible \u2014 only the implied presence through the dark gap. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. present only as the shadow of her shoulder and arm visible at the very edge of the frame nearby.",
+    "motion_prompt": "Barely perceptible slow push toward the dark gap in the wall, the candlelight shifting very slightly."
+  },
+  {
+    "index": 21,
+    "narration": "She would have heard the oven, fifteen feet across the kitchen from where she stood, still breathing its heat into the room.",
+    "image_prompt": "Wide interior shot of The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. standing near the far left foreground by the trestle table, her back fully to camera. The large brick oven dominates the right background, its iron door faintly glowing orange at the seams. The full expanse of warm flagstone floor between them. Tallow candle on the table casting a small pool of amber light. Heavy beamed ceiling above. The kitchen vast and shadowed.",
+    "motion_prompt": "Very slow drift from her position across the floor toward the glowing oven, the oven glow pulsing softly."
+  },
+  {
+    "index": 22,
+    "narration": "London in 1666 is a city of timber.",
+    "image_prompt": "Aerial high rooftop view of 1666 London at night, stretching in every direction to the horizon. Thousands of close-packed timber-framed houses with dark thatched and tiled roofs, gabled ends, overhanging storeys, a dense forest of chimneys. The city stretching impossibly far under a vast dark sky. Amber pinpricks of candlelight in windows. The Thames a dark curve in the far distance. Grand, documentary.",
+    "motion_prompt": "Extremely slow pull-back upward from the roofline, the city expanding below, utterly still."
+  },
+  {
+    "index": 23,
+    "narration": "Most of its houses were built in the time of Elizabeth, almost a century before \u2014",
+    "image_prompt": "Medium close shot of the exterior of a 1666 timber-framed London house at night. The structural oak frame clearly visible \u2014 the great curved beams, the peg-jointed braces, the infill panels of lath and plaster between them. The wood deeply weathered and dark. The overhang of the upper storey projecting outward above. A single lit window glowing faintly amber. The timber old and dense and dry-looking. Photorealistic.",
+    "motion_prompt": "Slow upward pan along the timber frame from ground level to the overhanging upper storey, the amber window light steady."
+  },
+  {
+    "index": 24,
+    "narration": "oak beams, lath and plaster walls, tarred wood eaves that overhang the lanes until the upper storeys nearly touch the houses opposite.",
+    "image_prompt": "View looking straight up from the middle of Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. at night, the timber-framed upper storeys of the houses on both sides leaning inward overhead, their tarred eaves nearly touching, framing a narrow sliver of dark star-scattered sky above. The wood surfaces dark with tar and age. A single lantern on one bracket glowing amber and illuminating the undersides of the overhanging beams. Utterly still.",
+    "motion_prompt": "Slow drift upward as if floating from the lane floor toward the narrow gap of sky between the overhanging eaves."
+  },
+  {
+    "index": 25,
+    "narration": "Three storeys, sometimes four. A street like Pudding Lane is ten feet wide at the cobbles and three feet wide at the eaves.",
+    "image_prompt": "Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. \u2014 wide shot looking down the lane from street level at night, the full canyon of four-storey timber-framed houses pressing in from both sides. The cobblestone lane only a few feet wide below. The overhanging upper storeys dramatically narrowing the space as the eye rises. A faint oil lamp illuminating the cobbles at the near end. The lane receding into deep darkness. Claustrophobic, atmospheric.",
+    "motion_prompt": "Very slow forward push down the centre of the lane, the walls pressing in overhead, lantern light steady."
+  },
+  {
+    "index": 26,
+    "narration": "The summer of 1666 has been the driest in living memory.",
+    "image_prompt": "Daytime establishing shot \u2014 close view of dry, cracked London earth in a small yard or alley behind a timber house. The soil split into wide fissures. A few dead brown weeds at the edges. A water bucket nearby on its side and clearly empty. The timber walls of the house behind deeply weathered and pale with dryness, the wood grain raised. The sky above white and hazy with summer heat.",
+    "motion_prompt": "Very slow drift across the cracked earth surface, heat shimmer barely visible above it."
+  },
+  {
+    "index": 27,
+    "narration": "The Thames is low. The wells are thin. The oak of the city is dry to the heart.",
+    "image_prompt": "Daytime wide shot of the Thames riverbank, the water level drastically low. A wide band of dark river mud exposed on the shore. Old timber pilings standing tall above the water level. The river a grey-brown sluggish ribbon far below its usual banks. The 1666 city of London visible behind on the north bank, timber rooflines against a white summer sky. A few distant small figures on the exposed mud, in silhouette.",
+    "motion_prompt": "Slow pan from the exposed mudflats toward the city roofline, the river barely moving in the distance."
+  },
+  {
+    "index": 28,
+    "narration": "For four days an east wind has been blowing across the rooftops.",
+    "image_prompt": "Elevated view of 1666 London rooftops in near-darkness. The ridge tiles and chimney pots silhouetted against a dark sky. Wisps of smoke from chimneys all bending dramatically in the same direction \u2014 westward \u2014 showing the consistent east wind. The rooftops stretching to the horizon. A cold dark atmosphere. The wind implied through the smoke direction and a few loose pieces of straw at the roof edges.",
+    "motion_prompt": "Slow drift in the direction of the wind across the rooftops, chimney smoke bending steadily westward."
+  },
+  {
+    "index": 29,
+    "narration": "At ten o'clock that Saturday night, Thomas Farriner went down into the bakehouse to rake the coals in the oven for the night.",
+    "image_prompt": "Inside the bakery house: medium shot of a broad-shouldered man in his mid-forties descending the narrow wooden staircase into The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior., photographed from behind so only his back, shoulders in plain linen shirt, and rolled sleeves are visible. One hand on the timber wall for balance. The bakehouse below glowing orange from the oven. The stairs steep and creaking. Face never visible.",
+    "motion_prompt": "Slow push-in following the figure descending the stairs, the oven glow visible below intensifying as he descends."
+  },
+  {
+    "index": 30,
+    "narration": "He raked them carefully.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: medium close shot of the same broad-shouldered man crouching before the open iron oven door, his broad back and rolled sleeves filling the frame. The interior of the firebox glowing deep orange and red with live coals. The rake tool extends into the firebox but no hands are clearly visible. His head is bowed forward, face never visible. Surrounding kitchen in deep shadow.",
+    "motion_prompt": "Very slow push-in toward the broad back at the oven, the oven fire casting flickering orange light on the kitchen walls around him."
+  },
+  {
+    "index": 31,
+    "narration": "He swept the embers toward the centre of the firebox, away from the walls.",
+    "image_prompt": "Close shot inside the firebox of the large brick oven in The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior., seen through the open iron door. The coals raked into a neat mound at the centre of the firebox floor, glowing deep orange and red. The brick walls of the firebox dark with ash and char. No hand or tool visible \u2014 just the result of the careful raking, the embers settled and central, pale ash at the walls.",
+    "motion_prompt": "Slow pull-back from the oven interior, the ember glow pulsing softly, the iron door edge entering the frame."
+  },
+  {
+    "index": 32,
+    "narration": "He closed the iron door. He believed the fire was out.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: medium close shot of the large brick oven with its heavy iron door now firmly shut, the latch in place. A thin line of orange light just barely visible at the bottom seam of the door. A figure stands beside it photographed from behind only \u2014 broad shoulders in plain linen shirt, back of head \u2014 looking down at the closed door. Face never visible. The kitchen behind in deep shadow.",
+    "motion_prompt": "Barely perceptible slow push-in toward the closed oven door, the thin line of orange light at the seam steady and faint."
+  },
+  {
+    "index": 33,
+    "narration": "He went up the narrow wooden stairs to bed.",
+    "image_prompt": "Inside the bakery house: view from the bakehouse floor looking up the narrow wooden staircase toward the dark upper floor. The stairs steep and worn, the handrail a simple timber post. A broad figure visible only from below and behind as he ascends \u2014 back, shoulders, and the trailing edge of his linen shirt. The candle glow from his unseen hand casts upward light on the stairwell ceiling. The bakehouse glow fading below him.",
+    "motion_prompt": "Slow upward pan following the candle light as he ascends the stairs, the light diminishing as he reaches the top."
+  },
+  {
+    "index": 34,
+    "narration": "Somewhere in the bakehouse \u2014 perhaps lodged in the soot of the chimney,",
+    "image_prompt": "Close shot looking up the interior of the bakery chimney breast from the firebox level. The blackened brick chimney shaft rising above. Thick layers of old soot on every surface. A faint orange point of light barely visible lodged in the soot on the chimney wall \u2014 a single ember, tiny and stubborn. The rest of the chimney in complete darkness. Ominous.",
+    "motion_prompt": "Imperceptibly slow upward drift along the soot-blackened chimney interior toward the tiny ember glow."
+  },
+  {
+    "index": 35,
+    "narration": "perhaps fallen into the kindling stacked beside the wall,",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: low close shot of a stack of dry wooden kindling \u2014 small split oak logs and bundles of dry sticks \u2014 piled against the base of the brick wall beside the oven. The wood very pale and dry-looking. A tiny barely-visible orange point of light just visible at the base of the stack where it meets the floor. Deep shadow everywhere around it. Ominous.",
+    "motion_prompt": "Barely perceptible slow push toward the tiny ember at the base of the kindling stack, the glow very faint."
+  },
+  {
+    "index": 36,
+    "narration": "perhaps caught in the seam of an oak floorboard \u2014 a single ember was still alive.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: extreme close shot of the oak floorboards near the oven. The boards wide and dry. The gap between two boards visible as a dark seam. Just inside that seam a tiny point of deep orange-red ember glow \u2014 barely alive, barely visible. The surrounding wood dry and pale. The rest of the bakehouse in total darkness except for the faintest ambient oven warmth. Ominous.",
+    "motion_prompt": "Extremely slow push-in toward the single ember glow in the floorboard seam, pulsing very faintly."
+  },
+  {
+    "index": 37,
+    "narration": "For an hour, nothing happens.",
+    "image_prompt": "Wide interior shot of The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior. at night, empty of figures. The oven door closed and faintly seeping orange light at its seams. The trestle table with the copper pot, the flour-dusted shelves, the proving bowls \u2014 all still in deep shadow. The tallow candle on the table now burned lower. The kitchen utterly silent and motionless. Deep sense of waiting and stillness.",
+    "motion_prompt": "Imperceptibly slow zoom out from the kitchen interior, the candle flame barely flickering, the whole scene perfectly still."
+  },
+  {
+    "index": 38,
+    "narration": "For another hour, still nothing.",
+    "image_prompt": "Same wide interior of The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior., empty of figures, now even deeper in darkness. The tallow candle on the table reduced to a small stub with a low guttering flame. The oven seams still faintly orange. The flagstones still. The shadows dense and heavy. A sense of time passing in silence, the kitchen holding its breath.",
+    "motion_prompt": "Barely perceptible slow push toward the guttering candle stub, the flame trembling very slightly in the still air."
+  },
+  {
+    "index": 39,
+    "narration": "The house above is asleep \u2014 Farriner in his bedchamber,",
+    "image_prompt": "Medium shot of a simple 17th-century bedchamber. The form of a sleeping man visible beneath heavy woolen blankets in a wooden-framed bed, only the curve of a shoulder and the back of a head against the pillow visible \u2014 face turned away from the camera, in deep shadow. The room sparse \u2014 a wooden chest, a low stool with folded clothes, rough plaster walls, heavy timber ceiling beams above. Faint moonlight through a small diamond-pane window. Utterly still.",
+    "motion_prompt": "Slow push-in toward the sleeping figure from the side, moonlight barely shifting, the scene deeply still."
+  },
+  {
+    "index": 40,
+    "narration": "Hanna in her room across the landing,",
+    "image_prompt": "Medium shot of a small 17th-century bedroom. A young woman lying asleep in a narrow wooden bed seen from above and behind so only the back of her head with loose dark hair on the pillow and the curve of her shoulder beneath the blanket are visible \u2014 face turned toward the wall, never visible. The room small and plain with rough plaster walls, a wooden chest, a low window with closed shutters. Deep shadow and faint moonlight. Utterly still.",
+    "motion_prompt": "Very slow push-in toward the sleeping figure from above, the deep shadow still and undisturbed."
+  },
+  {
+    "index": 41,
+    "narration": "Dagger in a smaller room toward the back,",
+    "image_prompt": "Medium shot of a very small, low-ceilinged back room in the 17th-century house. The form of a man lying asleep on a simple straw-mattress bed, seen from behind only \u2014 the back of his head, the curve of his shoulder beneath a rough blanket \u2014 face turned to the wall, never visible. The room barely large enough to hold the bed and a small chest. A tiny window with oiled cloth rather than glass. Deep shadow.",
+    "motion_prompt": "Barely perceptible slow drift toward the sleeping figure, the deep shadow perfectly still."
+  },
+  {
+    "index": 42,
+    "narration": "the maid in a room beneath the eaves on the upper floor.",
+    "image_prompt": "Medium shot of a tiny garret room directly beneath the roof eaves of the bakery house. The ceiling sloping sharply downward. The rafters exposed overhead. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. lying asleep on a thin straw mattress on the floor \u2014 photographed from above so only the curve of her body beneath a coarse blanket, the back of her head with dark hair loose on the makeshift pillow, and her white linen coif folded beside the bed are visible. Face never in view. The eave window a small dark triangle above. Deep shadow.",
+    "motion_prompt": "Slow drift across the sleeping figure from above, the sloped ceiling above very still, the shadow undisturbed."
+  },
+  {
+    "index": 43,
+    "narration": "The ember is still alive.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: extreme close shot of the single ember \u2014 now shown lodged in the kindling stack at the base of the wall \u2014 glowing a deep, steady orange-red in the otherwise completely dark bakehouse. The surrounding dry wood just barely warm. No smoke yet, no flame, just the insistent point of heat. Perfectly still. Ominous.",
+    "motion_prompt": "The ember glow pulses almost imperceptibly, very slowly brightening and dimming like a tiny heartbeat."
+  },
+  {
+    "index": 44,
+    "narration": "At about a quarter past midnight, the kindling stacked beside the oven begins to smoke.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: medium close shot of the kindling stack beside the oven base. A thin wisp of pale white smoke curling upward from the base of the pile. The wood just barely beginning to smoulder, no flame yet visible. The oven nearby with its faint seam glow. The rest of the kitchen in complete darkness. The smoke rising slowly and delicately in the still air.",
+    "motion_prompt": "Slow drift of the thin smoke wisp upward from the kindling pile, curling gently in the still air."
+  },
+  {
+    "index": 45,
+    "narration": "By half past midnight, the kindling is burning.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: medium shot of the base of the wall beside the oven. The kindling stack now clearly alight, small orange and yellow flames licking upward through the dry sticks. Firelight casting dramatic flickering orange shadows on the adjacent brick wall and flagstone floor. The smoke now thicker and rising faster. The rest of the kitchen in deep shadow beyond the small fire's reach.",
+    "motion_prompt": "The small fire's flames flicker and sway gently in the still air, the orange light dancing on the brick wall."
+  },
+  {
+    "index": 46,
+    "narration": "By one o'clock, the fire has climbed into the wooden wall behind the oven.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: medium shot of the wall behind the oven, now with flames clearly visible climbing up the old dry oak timber frame. The wood catching and glowing. The lower half of the wall already blackening and charring. Flames eating upward along the beam. Orange light flooding the kitchen. The copper pot on the trestle table catching the glare. The oven still in the scene but now overshadowed by the growing wall fire. Slow drama, documentary.",
+    "motion_prompt": "Slow upward drift following the flames climbing the wooden wall, fire light flickering across the kitchen surfaces."
+  },
+  {
+    "index": 47,
+    "narration": "The oak beams are dry to the heart. They catch quickly.",
+    "image_prompt": "Inside The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.: close shot of a massive oak ceiling beam, now with fire running along its underside. The old dry wood igniting readily. The grain of the beam visible and burning. Bright orange flame eating into pale heartwood. The room below lit dramatically by the spreading fire. Heavy smoke beginning to gather at the ceiling level. Intense and orange-lit.",
+    "motion_prompt": "Slow pan along the burning beam from left to right, the fire light pulsing and intensifying."
+  },
+  {
+    "index": 48,
+    "narration": "Smoke begins to rise through the floorboards of the rooms above.",
+    "image_prompt": "Medium close shot looking down at old oak floorboards in the upstairs room directly above The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.. Thin wisps of grey smoke seeping upward through the gaps between the boards. The boards themselves beginning to warm from below. The room above still in near darkness. The smoke rising silently and steadily through the floorboard cracks. Utterly ominous and quiet.",
+    "motion_prompt": "Slow drift across the floor surface as smoke wisps rise steadily upward through the board gaps."
+  },
+  {
+    "index": 49,
+    "narration": "In a small room near the back of the house, Thomas Dagger \u2014 the journeyman who works alongside Farriner \u2014 wakes choking on the smoke.",
+    "image_prompt": "Inside the small back room of the bakery house: medium shot of a man now sitting upright in his bed, awake and alarmed. Photographed from behind and the side so only his back, the curve of his shoulder, his rough linen sleeping shirt, and the back of his head are visible \u2014 face never in view. One hand visible at his throat. Thin smoke drifting in the air around him. The orange glow beginning to seep under the door. Dramatic low orange light with dark shadows.",
+    "motion_prompt": "Slow push-in toward the figure from behind, the smoke drifting through the air around him, the orange glow under the door pulsing."
+  },
+  {
+    "index": 50,
+    "narration": "He shouts for the others.",
+    "image_prompt": "Medium shot of a man standing at the open door of his small room on the upstairs landing of the bakery house. Photographed from behind so only his back, his rough linen sleeping shirt, and the back of his head with one hand on the door frame are visible \u2014 face never in view. The landing behind him beginning to fill with smoke. The orange glow from the stairwell below visible. His posture urgent.",
+    "motion_prompt": "Slow push toward the figure from behind, the smoke drifting past him, the orange glow from below intensifying slightly."
+  },
+  {
+    "index": 51,
+    "narration": "Farriner wakes. His daughter Hanna wakes. The maid wakes.",
+    "image_prompt": "The upper landing of the bakery house with smoke clearly visible drifting through the air. Empty of figures \u2014 only the doors to the various bedchambers seen ajar, the smoke rolling along the floor and up the walls, the ominous orange glow rising from the stairwell at the centre of the frame. The implied wakening of the household conveyed entirely by the smoke, the open doors, and the dread of the orange light.",
+    "motion_prompt": "Slow drift across the empty smoky landing toward the orange glow at the stairwell, smoke thickening in the air."
+  },
+  {
+    "index": 52,
+    "narration": "The bakehouse below them is fully engulfed. The wooden stairs are burning. The fire has been moving while they slept.",
+    "image_prompt": "View looking down the stairwell from the upper landing of the bakery house. The stairs fully engulfed in bright orange and yellow flame. The fire roaring below in The ground-floor bakehouse of a 1666 City of London timber-framed bakery. A large brick oven dominates one wall, its iron door closed. Stacked firewood and kindling beside the oven. A wooden trestle table with a dusting of flour. Hanging copper pots and a row of long-handled wooden peels for pulling bread from the oven. Stone-flagged floor blackened by years of use. Low oak ceiling beams smoke-darkened. A single small window high in the wall, currently dark. Late Saturday night, after the day's baking is done. 1666 photoreal cinematic interior.. The wooden handrail burning. The ceiling of the stairwell black with smoke. The opening of the stairwell at the top framing an inferno below. No figures visible. Dramatic, documentary.",
+    "motion_prompt": "Slow tilt downward into the burning stairwell, the flames dancing below, black smoke rolling upward."
+  },
+  {
+    "index": 53,
+    "narration": "There is one way out \u2014 the window of an upstairs bedroom that looks across a narrow gap of perhaps four feet to the gutter of the next house.",
+    "image_prompt": "Medium shot looking at the small casement window in the upstairs bedroom of the bakery house. The window now open wide, the diamond panes swung outward. The narrow gap of the night air and the close roofline of the adjacent house visible through the opening \u2014 only four feet away across a dark drop. The room behind lit by the flickering orange of the advancing fire. No figures yet.",
+    "motion_prompt": "Slow push toward the open window, the dark gap outside, the firelight flickering on the room walls behind."
+  },
+  {
+    "index": 54,
+    "narration": "It is a drop of ten feet to the cobbles of Pudding Lane below, or a climb across the gap to the neighbour's roof.",
+    "image_prompt": "View looking outward through the open casement window from inside the upstairs bedroom. The cobblestones of Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. visible ten feet below in the faint light. The gutter and roof tiles of the adjacent house visible just across the four-foot gap at the same level. The dark night air between the two buildings. The cramped narrow lane below showing the long drop. Vertiginous, documentary.",
+    "motion_prompt": "Very slow tilt downward from the adjacent roof gutter to the cobblestones far below, the night air still and dark."
+  },
+  {
+    "index": 55,
+    "narration": "Thomas Farriner goes out first. He swings his legs through the casement, finds the gutter with his foot, and steps across.",
+    "image_prompt": "View from outside the bakery house looking at the open upstairs window from the lane. A broad-shouldered man's figure visible in the window frame from the exterior, his body partially through the casement, one leg extended toward the adjacent roofline \u2014 photographed in silhouette only against the flickering orange fire glow inside the room behind him. His face never visible \u2014 he is a dark shape framed by fire. The night dark around the building. The adjacent roof in the foreground.",
+    "motion_prompt": "Slow, almost static hold on the silhouetted figure in the window, the fire glow behind him pulsing softly."
+  },
+  {
+    "index": 56,
+    "narration": "Hanna follows. She is in her shift. She finds her father's hand and crosses.",
+    "image_prompt": "View from outside the bakery house at the open upstairs window. The slender silhouette of a young woman in a white linen shift visible in the window frame, photographed against the orange firelight behind her so her face is in shadow and never resolved. One pale arm extended outward, reaching toward an unseen hand off-frame to the right. Her hair loose around her shoulders. The dark night air around her, the narrow drop below. Silhouette only.",
+    "motion_prompt": "Barely perceptible slow push toward the silhouetted figure in the window, the fire glow behind her flickering."
+  },
+  {
+    "index": 57,
+    "narration": "Dagger climbs out after them, lowers himself onto the gutter, and follows them down through the neighbour's house and into the lane.",
+    "image_prompt": "View from below in Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. at night looking upward at the side of the burning bakery house and adjacent house. The orange fire glow from the bakery upper windows dramatic in the darkness. A man's silhouette visible on the adjacent roofline in his sleeping shirt, moving carefully along the gutter \u2014 photographed against the orange sky glow so his face is in shadow and never resolved. The lane below cobbled and empty. Dramatic low-angle.",
+    "motion_prompt": "Slow upward tilt from the cobbled lane up to the roofline where the silhouette moves, the fire glow pulsing behind him."
+  },
+  {
+    "index": 58,
+    "narration": "The maid stays at the window.",
+    "image_prompt": "View from outside in the night looking directly at the open upstairs window of the bakery house. A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. visible in the window frame in pure silhouette, photographed against the inferno of orange and yellow flame behind her \u2014 her white linen coif and the shape of her shift outlined against the fire, her face entirely in shadow, never resolved. Both hands gripping the window sill. The interior behind her fully orange with fire and thick with black smoke. The four-foot gap to the adjacent roof visible to the right of frame. Powerful, documentary.",
+    "motion_prompt": "Perfectly still hold on the silhouetted figure in the window, the fire light behind her pulsing, smoke pouring past her into the night air."
+  },
+  {
+    "index": 59,
+    "narration": "We do not know what she said. We do not know what they said to her.",
+    "image_prompt": "Close medium shot of A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. at the window from outside, framed by the burning interior behind her. Her figure entirely silhouetted \u2014 only the outline of her white linen coif, the curve of her shoulders, and her hands on the window frame visible against the orange firelight. Her face entirely in shadow, never resolved. Smoke curling past her head into the cold night air. The darkness of the night surrounding her. Intensely emotional, but face never visible.",
+    "motion_prompt": "Imperceptibly slow push toward the silhouetted figure, the fire glow behind her pulsing, smoke drifting upward past her."
+  },
+  {
+    "index": 60,
+    "narration": "The letter that records the night, written that October to a Member of Parliament, says only this: his mayd was burnt in ye hous,",
+    "image_prompt": "Close shot of an aged 17th-century letter. The paper brown and slightly worn. The script in period secretary hand ink. A single line of text in the centre of the frame \u2014 the ink brown and faded, the words indistinct enough to not be readable but conveying handwritten age. Lit by a single candle just off-frame. The rest of the paper in warm shadow. No modern elements.",
+    "motion_prompt": "Extremely slow drift across the letter surface from left to right, the candle shadow shifting imperceptibly."
+  },
+  {
+    "index": 61,
+    "narration": "not adventuring to escape as he, his daughter, and his man did, out of ye windowe and gutter.",
+    "image_prompt": "Medium shot looking up at the open window of the bakery house exterior at night. The window with the fire roaring visibly behind it \u2014 the orange light pouring outward into the dark night \u2014 but no figure in the window anymore. The window empty. The adjacent roofline with its gutter empty. Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. cobblestones below faintly lit by the fire's glow. The building clearly burning. Ominous absence.",
+    "motion_prompt": "Slow pull-back from the burning window, the fire light reflecting on the wet cobblestones below, smoke rising upward."
+  },
+  {
+    "index": 62,
+    "narration": "She did not adventure to escape.",
+    "image_prompt": "Medium shot of A young woman in her late teens or early twenties, dressed in the plain clothing of a 1666 London servant: long undyed linen shift to the ankle, dark woollen kirtle (sleeveless overdress) laced at the front, white linen coif covering most of her hair with only a few wisps of dark hair visible at the edges, a white apron tied at the waist. She is photographed never directly facing the camera \u2014 always from behind, in profile silhouetted against light, in deep shadow, in soft focus, or with her face turned away. Her face is intentionally never clearly resolved. Plain, dignified, anonymous. 1666 photoreal cinematic. still at the window seen through the opening from outside. The fire is now roaring clearly behind her inside the room \u2014 walls and ceiling visible in flame, dense black smoke. Her figure entirely silhouetted against the inferno, face never resolved. Her body frozen at the threshold. The night air dark and cold just inches in front of her. The terrible proximity of safety and her inability to move. Heartbreaking, documentary.",
+    "motion_prompt": "Barely perceptible slow push toward the silhouetted figure, the fire roaring behind her, black smoke pouring outward."
+  },
+  {
+    "index": 63,
+    "narration": "She was afraid of the jump.",
+    "image_prompt": "View from inside the burning upstairs room of the bakery house looking out and down through the open window \u2014 her hands silhouetted against the window sill at the very bottom edge of the frame, only the shadow of her arms visible. Beyond the window, the cobblestones of Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. ten feet below faintly lit by the orange fire glow. The drop direct and hard. The lane empty and dark. Vertiginous and isolating. The perspective implies her gaze but no face is shown.",
+    "motion_prompt": "Very slow drift downward toward the cobblestones, the fire glow flickering on the stones below."
+  },
+  {
+    "index": 64,
+    "narration": "The roof of the bakery collapses within minutes.",
+    "image_prompt": "Wide exterior shot of the bakery house on Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. at night. The entire building fully engulfed, the windows all orange with fire, dense black smoke pouring from the roofline. The roof itself in the process of partial collapse \u2014 the ridge sagging, tiles and burning debris visible at the eaves. The adjacent houses still dark, the firelight dramatic on the lane and neighbouring facades.",
+    "motion_prompt": "Slow pull-back from the burning building, sparks and debris drifting upward in the smoke column, the fire light dancing on the lane cobbles."
+  },
+  {
+    "index": 65,
+    "narration": "The fire spreads to the Star Inn next door,",
+    "image_prompt": "Wide night shot of Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. and the adjacent building \u2014 a larger inn with a wide timber facade and signboard. Fire now clearly visible at the lower windows and spreading rapidly up its timber frame. The bakery beside it already fully engulfed. The two buildings burning together. The lane in dramatic orange firelight. Empty of figures.",
+    "motion_prompt": "Slow pan from the burning bakery to the adjacent Star Inn as fire spreads along its facade, sparks drifting across the gap."
+  },
+  {
+    "index": 66,
+    "narration": "then to the houses across Fish Street Hill,",
+    "image_prompt": "Wider night street scene showing Fish Street Hill, a slightly broader 17th-century London street. The fire jumping across from one side to the other. Three or four houses on the far side already catching, their upper windows orange with flame. The orange fire light illuminating the entire street. No figures \u2014 only the dread of the fire spreading.",
+    "motion_prompt": "Slow wide pan across Fish Street Hill, the fire spreading from building to building."
+  },
+  {
+    "index": 67,
+    "narration": "then to the church of St Magnus the Martyr by the river.",
+    "image_prompt": "Wide night view looking south toward the Thames. The tall stone tower of St Magnus the Martyr church silhouetted against a sky now beginning to glow orange from the approaching fire. The windows of nearby houses already burning. The church itself beginning to show fire at its wooden roof. The river a dark stripe beyond. Vast and terrible in its scale.",
+    "motion_prompt": "Slow drift toward the church tower, the orange sky glow behind it intensifying, smoke rising around its silhouette."
+  },
+  {
+    "index": 68,
+    "narration": "By dawn on Sunday, three hundred houses are gone.",
+    "image_prompt": "Wide elevated view of London at early dawn. The sky to the east pale grey and pink, but the city spread below is devastated \u2014 a vast area of smoking ruins, blackened brick chimney stacks standing alone above collapsed rooflines, rubble and ash where hundreds of houses stood. Smoke still rising from dozens of sites. Empty of figures in the foreground.",
+    "motion_prompt": "Extremely slow pull-back from the smoking ruins, revealing the scale of the destruction, the dawn sky lightening."
+  },
+  {
+    "index": 69,
+    "narration": "By Sunday evening, the fire has crossed Cannon Street.",
+    "image_prompt": "The City of London during the Great Fire, viewed from a distance \u2014 from the river or from a hill outside the walls. A vast column of black smoke rising into a copper-coloured sky. The horizon line lit orange and red, the silhouettes of church spires and rooftops visible against the flame. Wind-driven embers drifting across the sky. The river Thames in the foreground reflecting the orange glow. 1666 photoreal cinematic disaster scene viewed from atmospheric distance. \u2014 dramatic wide shot at dusk on Sunday. The sky a deep red-orange above the burning city. The fire a vast front of flame visible across the middle ground. The ruins to the east already black and smoking. The buildings to the west still standing but threatened. Smoke filling the entire sky.",
+    "motion_prompt": "Slow pull-back from the fire front, the vast smoke column rising against the red evening sky."
+  },
+  {
+    "index": 70,
+    "narration": "By Wednesday morning, four days later, St Paul's Cathedral has collapsed in on itself.",
+    "image_prompt": "Wide dawn view of the ruins of Old St Paul's Cathedral (the medieval pre-Wren cathedral with its long stone nave and tall central tower, NOT the modern domed cathedral). The great medieval building's shell still standing but the roof gone, the walls cracked and blackened, the enormous open wound of the collapsed interior visible. Rubble inside. Thin smoke still rising. The sky above pale morning grey over the devastated city.",
+    "motion_prompt": "Slow push toward the ruined cathedral, smoke still rising from its collapsed interior, the ruins still and vast."
+  },
+  {
+    "index": 71,
+    "narration": "The molten lead of its roof has run in rivers down Ludgate Hill into the Thames.",
+    "image_prompt": "Wide daylight view of Ludgate Hill looking south toward the Thames. The street strewn with rubble and ash. Clearly visible on the cobblestones \u2014 long dark channels where lead has cooled and solidified in rivers and sheets across the road surface. The lead now cold and grey but showing the flow patterns clearly. The ruins of buildings on both sides. Smoke still rising in the distance. No figures.",
+    "motion_prompt": "Slow pan down Ludgate Hill along the solidified lead rivers on the cobblestone surface, smoke drifting in the distance."
+  },
+  {
+    "index": 72,
+    "narration": "Four-fifths of the City of London is gone.",
+    "image_prompt": "Vast aerial view of the City of London from a high perspective. The extent of the devastation overwhelming \u2014 a huge grey and black field of rubble, ash and isolated chimney stacks covering four-fifths of the visible city. Only the edges and a few stone buildings surviving. Thin smoke rising from hundreds of points. The Thames visible to the south still flowing. The scale of the destruction almost incomprehensible.",
+    "motion_prompt": "Very slow pull-back to the widest possible view, revealing the full scale of the devastated city below."
+  },
+  {
+    "index": 73,
+    "narration": "When the fire finally dies, thirteen thousand two hundred houses have been destroyed.",
+    "image_prompt": "Ground-level view of the London ruins in the aftermath, stretching in every direction. Blackened brick chimney stacks rising from rubble, broken timber, ash, the occasional section of surviving stone wall. The sky overhead grey with residual smoke. Empty of figures in the foreground \u2014 the scale of destruction at ground level as far as the eye can see.",
+    "motion_prompt": "Slow pan across the ground-level ruins from left to right, smoke drifting lazily in the still air."
+  },
+  {
+    "index": 74,
+    "narration": "Eighty-seven parish churches.",
+    "image_prompt": "Medium shot of the ruins of a small London parish church in the aftermath. The stone walls standing but the wooden roof entirely gone. The interior open to a grey sky. The stone columns blackened by extreme heat. Rubble of collapsed roof inside. Ash on the floor. The medieval stonework cracked and fire-damaged. A melancholy and solemn ruin. No figures.",
+    "motion_prompt": "Slow pan across the interior of the ruined church, ash drifting on the floor, the open sky above."
+  },
+  {
+    "index": 75,
+    "narration": "The Royal Exchange. Old St Paul's. The Guildhall.",
+    "image_prompt": "Wide mid-distance view of the ruins of the Royal Exchange in the aftermath. The great colonnaded building's exterior walls still partly standing but gutted. The trading floor open to the sky. The arcaded gallery damaged. Rubble and ash everywhere within. A grey overcast sky above. No figures in foreground \u2014 the vast empty shell still and mournful.",
+    "motion_prompt": "Slow push toward the ruined Exchange, the vast empty shell still and mournful."
+  },
+  {
+    "index": 76,
+    "narration": "About a hundred thousand Londoners are homeless.",
+    "image_prompt": "Wide shot of Moorfields outside the City walls in the aftermath. A vast encampment of displaced Londoners \u2014 but the camera is far enough back that the people are tiny distant figures, none individually resolved. Makeshift shelters of cloth and timber scattered across the open field. Small fires for warmth. Bundles of salvaged possessions. The destroyed city skyline visible to the south behind them. A grey autumn sky above. Scale matters more than individual figures.",
+    "motion_prompt": "Slow pan across the vast encampment from a distance, smoke from small fires drifting, the figures barely moving in their exhaustion."
+  },
+  {
+    "index": 77,
+    "narration": "The official death toll is six.",
+    "image_prompt": "Close shot of a page from an official-looking 17th-century document. Aged brown paper with formal handwritten text. A clear column of numbers or a list visible though not fully legible. The number aspect of an official tally implied by the format. Lit by grey daylight from off-screen. Surrounded by darkness. The document on a plain wood surface. No modern elements.",
+    "motion_prompt": "Extremely slow horizontal drift across the document page, the light barely shifting."
+  },
+  {
+    "index": 78,
+    "narration": "The real number was almost certainly much higher.",
+    "image_prompt": "Wide view of the ruins of a collapsed timber house in the aftermath. The rubble low and grey, ash covering everything. The interior of the home now open and exposed \u2014 fragments of household objects visible in the debris: a broken pot, a metal hinge. The ruins anonymous and impersonal. A heavy grey sky above. Empty of figures. Melancholy.",
+    "motion_prompt": "Slow drift across the ruins at ground level, ash shifting almost imperceptibly in the light wind."
+  },
+  {
+    "index": 79,
+    "narration": "Many of the urban poor \u2014 the elderly, the sick, the very young, the servants in upstairs rooms \u2014 were never accounted for.",
+    "image_prompt": "Medium shot of an abandoned spinning wheel left on its side in the ruins of a small home in the aftermath. A torn shawl, a broken wooden bowl, a single child's leather shoe scattered nearby in the ash. The walls of the room burned away around them, only the foundations remaining. A grey sky above. The objects standing in for the people who used them, who have no names left. Documentary.",
+    "motion_prompt": "Slow push-in toward the abandoned objects, ash drifting almost imperceptibly in the light wind."
+  },
+  {
+    "index": 80,
+    "narration": "Their bodies, where they were found at all, had been cremated in the heat.",
+    "image_prompt": "Close shot of the grey ash-covered floor of a burned-out room. The ash deep and smooth. A few fragments of melted metal \u2014 a buckle, a pin \u2014 just visible in the ash. The charred stumps of timber around the edges of the scene. Utterly anonymous and final. No human remains visible but the implication profound. A grey sky visible through the open burned-out roof above. Mournful.",
+    "motion_prompt": "Barely perceptible slow drift of ash on the floor surface in the lightest of breezes."
+  },
+  {
+    "index": 81,
+    "narration": "The maid in the bakery is counted as one of the six.",
+    "image_prompt": "Close shot of the same aged official document page as before. The handwriting in 17th-century secretary script. A short list of entries visible. The text not fully legible but the format suggesting a tally of names or casualties. The paper brown and worn. Lit by grey daylight. A sense of erasure and reduction \u2014 a life reduced to one entry in a short list. Melancholy.",
+    "motion_prompt": "Imperceptibly slow push-in toward the single entry on the page, the light perfectly still."
+  },
+  {
+    "index": 82,
+    "narration": "Her name was never recorded.",
+    "image_prompt": "Close shot of the lower portion of the manuscript document. The last line of text and then blank aged paper below \u2014 the blankness itself the subject. The paper brown and slightly warped. The candle light falling on the empty space below the last written line. The emptiness where a name should be. The document on a dark wood surface. No modern elements. Profoundly quiet.",
+    "motion_prompt": "Slow drift down the blank lower portion of the page, the candle light barely shifting, the emptiness vast."
+  },
+  {
+    "index": 83,
+    "narration": "Thomas Farriner survived.",
+    "image_prompt": "Medium shot of a broad-shouldered man in daylight, photographed from behind \u2014 back of head, broad shoulders in a plain working coat, the line of his shoulders against a grey London sky. He stands in a partially rebuilt street in London, rubble and new construction visible around him, looking at a cleared plot of land. Face never visible. The man defined by his posture and his back, not his face.",
+    "motion_prompt": "Slow push toward the figure from behind, dust and debris drifting lightly around him."
+  },
+  {
+    "index": 84,
+    "narration": "He rebuilt his bakery on the same spot on Pudding Lane within two years.",
+    "image_prompt": "Medium wide shot of a new timber-framed bakery being constructed on Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. in daylight. Fresh pale oak framing visible. New brick and plaster work partly done. Scaffolding of rough timber poles. A few workers visible in the distance on ladders, far enough away that their faces are not resolved. The street around newly cobbled and cleared of fire debris.",
+    "motion_prompt": "Slow pan across the new construction, dust drifting in the light breeze."
+  },
+  {
+    "index": 85,
+    "narration": "He never publicly accepted that the fire had started in his oven.",
+    "image_prompt": "Close shot of a 17th-century carved oak chair seen from behind, standing alone in a plain whitewashed room \u2014 perhaps a hearing chamber or office. A plain wooden table beyond it with papers laid out. A small leaded window with grey daylight beyond. The room austere and judicial. The chair empty in the frame but its emptiness implies the figure who refused to sit and accept blame. No faces.",
+    "motion_prompt": "Barely perceptible slow push-in toward the empty chair, the window light very still."
+  },
+  {
+    "index": 86,
+    "narration": "He died in December 1670, four years and three months after the night she did not jump, still maintaining his innocence.",
+    "image_prompt": "Wide exterior shot of a 17th-century London churchyard in winter. Bare trees. Grey sky. Weathered gravestones in rows. A plain new stone burial marker in the foreground with no legible inscription. The rebuilt streets of London visible beyond the churchyard wall. The atmosphere grey and cold and final. No figures.",
+    "motion_prompt": "Very slow push toward the plain burial marker in the foreground, dead leaves barely drifting on the churchyard ground."
+  },
+  {
+    "index": 87,
+    "narration": "Two hundred and two feet from where the bakery stood, the city of London built a column to the fire.",
+    "image_prompt": "The Monument to the Great Fire of London, designed by Sir Christopher Wren and Robert Hooke. A 202-foot Doric column of Portland stone topped with a gilded urn of flames. Photographed at dawn, the gilded urn catching the first sunlight, the lower portion of the column still in cool shadow. Quiet empty cobbled street at its base. 1670s photoreal cinematic period setting. \u2014 wide street-level shot of the Monument to the Great Fire of London in the late 17th century. The tall classical stone column with the gilded urn of flames at its summit. Standing at the junction of Monument Street and Fish Street Hill. The rebuilt 17th-century London cityscape around it. A grey London sky above. The column monumental and permanent. Empty of figures.",
+    "motion_prompt": "Slow upward tilt from the column's base up to the gilded flame urn at its summit, the sky behind it perfectly still."
+  },
+  {
+    "index": 88,
+    "narration": "It is two hundred and two feet tall. It still stands.",
+    "image_prompt": "The Monument to the Great Fire of London, designed by Sir Christopher Wren and Robert Hooke. A 202-foot Doric column of Portland stone topped with a gilded urn of flames. Photographed at dawn, the gilded urn catching the first sunlight, the lower portion of the column still in cool shadow. Quiet empty cobbled street at its base. 1670s photoreal cinematic period setting. \u2014 dramatic low-angle shot looking straight up from the base of the column. The stone shaft rising overhead in perspective. The gilded flame urn at the summit small against a grey sky. The classical proportions of the column clear and powerful. The stone surface weathered but enduring. The sky above vast and empty.",
+    "motion_prompt": "Extremely slow upward tilt continuing up the column shaft, the gilded flame at the top barely catching the pale light."
+  },
+  {
+    "index": 89,
+    "narration": "The column has a long Latin inscription at its base.",
+    "image_prompt": "Close medium shot of the base of The Monument to the Great Fire of London, designed by Sir Christopher Wren and Robert Hooke. A 202-foot Doric column of Portland stone topped with a gilded urn of flames. Photographed at dawn, the gilded urn catching the first sunlight, the lower portion of the column still in cool shadow. Quiet empty cobbled street at its base. 1670s photoreal cinematic period setting.. The large stone plinth with deeply carved Latin text covering its face. The letters carved in clean 17th-century capitals. The stone surface slightly weathered and mossy at the edges. Grey light falling across the carved inscription. The monumental quality of the stonework conveying permanence and official record. No readable text required.",
+    "motion_prompt": "Slow horizontal drift across the carved inscription panels, the stone surface still and permanent."
+  },
+  {
+    "index": 90,
+    "narration": "It names the kings who reigned during the fire and during the column's construction.",
+    "image_prompt": "Close shot of a section of the carved Latin inscription on the base of The Monument to the Great Fire of London, designed by Sir Christopher Wren and Robert Hooke. A 202-foot Doric column of Portland stone topped with a gilded urn of flames. Photographed at dawn, the gilded urn catching the first sunlight, the lower portion of the column still in cool shadow. Quiet empty cobbled street at its base. 1670s photoreal cinematic period setting.. The letters deeply cut and filled with shadow in grey raking light. Royal emblems and formal architectural framing around the text panel. The stonework precise and official. The inscription conveying an official record of monarchs and events. The scale and permanence of the carved record.",
+    "motion_prompt": "Very slow drift across the carved text panel, the raking light across the letters barely shifting."
+  },
+  {
+    "index": 91,
+    "narration": "It names the architects, Christopher Wren and Robert Hooke.",
+    "image_prompt": "Wide shot of a 17th-century architectural drawing on a wide drafting table. A rolled sheet of drafting paper partially unrolled showing architectural elevations of the Monument column in fine pen and ink. Dividers and a straight-edge visible nearby. A grey window light falling across the drawing. No modern elements. Photorealistic documentary still-life.",
+    "motion_prompt": "Slow drift across the architectural drawing surface, the pen-and-ink elevations of the column detailed and precise."
+  },
+  {
+    "index": 92,
+    "narration": "It names the Lord Mayor and the city officials who commissioned it.",
+    "image_prompt": "Medium close shot of the carved inscription panel on the base of The Monument to the Great Fire of London, designed by Sir Christopher Wren and Robert Hooke. A 202-foot Doric column of Portland stone topped with a gilded urn of flames. Photographed at dawn, the gilded urn catching the first sunlight, the lower portion of the column still in cool shadow. Quiet empty cobbled street at its base. 1670s photoreal cinematic period setting. showing carved names and titles in Latin. Formal heraldic elements around the text. The stone deeply weathered. Grey daylight raking across the surface. The official and civic weight of the inscription clear in the scale and permanence of the carved lettering.",
+    "motion_prompt": "Slow push-in toward the carved names panel, the raking grey light steady and still."
+  },
+  {
+    "index": 93,
+    "narration": "It does not name the woman who died first.",
+    "image_prompt": "Wide shot looking across the site of Pudding Lane in the City of London, 1666. A narrow medieval timber-framed street, perhaps ten feet wide at the cobbles. Houses of dark oak beams and white lath-and-plaster walls, three storeys tall, upper storeys overhanging the lane below so the buildings nearly touch the houses opposite. Cobbled street. Night version lit only by a single oil lantern at a corner, deep shadows in doorways. 1666 photoreal cinematic. from a distance in the rebuilt 17th-century city. The street rebuilt and ordinary. The rebuilt bakery building visible. The Monument to the Great Fire of London, designed by Sir Christopher Wren and Robert Hooke. A 202-foot Doric column of Portland stone topped with a gilded urn of flames. Photographed at dawn, the gilded urn catching the first sunlight, the lower portion of the column still in cool shadow. Quiet empty cobbled street at its base. 1670s photoreal cinematic period setting. visible in the far background beyond Fish Street Hill. The busy rebuilt London street between them, with a few distant pedestrians as small silhouettes too far away to be individually resolved. The ordinary and the monumental visible together. The site of the maid's death now unmarked.",
+    "motion_prompt": "Slow pan from the rebuilt bakery site to the Monument in the distance, the street life around them barely moving."
+  },
+  {
+    "index": 94,
+    "narration": "Hers was never written down.",
+    "image_prompt": "Close shot of a plain, blank piece of aged cream paper lying on a dark wood surface, lit by a single candle. The paper entirely empty \u2014 no writing, no inscription, no name \u2014 just the blank surface. The candle casting warm light on the whiteness of the page. Deep shadow around the edges. The emptiness of the page the entire subject of the shot. Profoundly quiet. Photorealistic.",
+    "motion_prompt": "Imperceptibly slow pull-back from the blank page, the candle flame barely flickering, the emptiness vast and final."
+  }
+]

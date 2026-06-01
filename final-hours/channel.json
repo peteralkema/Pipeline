@@ -1,0 +1,7 @@
+{
+  "name": "final_hours",
+  "voice_id": "Victor",
+  "style_suffix": "cinematic photorealistic recreation, painterly golden-hour and candlelit tones, deep shadows, volumetric light, film grain, shallow depth of field, historically accurate period detail, muted desaturated palette, 35mm film look",
+  "default_music_prompt": "Slow, mournful cinematic underscore for a historical documentary about death and disaster. Low sustained strings, a deep ambient drone, sparse distant piano. Funereal, foreboding, restrained. No percussion, no melody that competes with a narrator. Builds dread very slowly. Dark and solemn.",
+  "base_canon": {}
+}

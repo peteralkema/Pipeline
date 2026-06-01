@@ -1,0 +1,425 @@
+{
+  "canon": {
+    "hermann": "Hermann Doehner, a 49-year-old German-Mexican pharmaceutical executive. Dignified businessman of moderate build, around 5 feet 10 inches tall. Angular serious face with dark brown eyes behind round wire-rim glasses with thin silver frames. Dark brown hair neatly combed back from forehead, with visible silver at the temples (graying naturally, not white). Clean-shaven. Fair European skin weathered slightly from years in the Mexican climate. Composed thoughtful expression, the face of a man accustomed to making decisions. Wears a charcoal grey three-piece suit with notched lapels, white dress shirt, dark patterned tie, leather oxford shoes. Upright reserved posture. 1937 photoreal cinematic",
+    "matilde": "Matilde Doehner, a 41-year-old Argentine-German woman, mother of three. Warm but composed face with dark brown almond-shaped eyes, full dark eyebrows, softly defined jaw. Dark brown hair pinned up in a 1937 European style — gathered at the nape with soft waves framing her face. Fair skin with warm undertones. Moderate build, around 5 feet 5 inches, neither slim nor heavy. Wears a 1937 travelling dress in muted earth tones: deep navy fitted bodice over a mid-calf skirt with simple cream collar and cuffs, low-heeled travelling shoes. Quiet maternal presence — attentive, capable, no makeup. 1937 photoreal cinematic",
+    "irene": "Irene Doehner, a 14-year-old girl, eldest child of the Doehner family. In the awkward physical bracket between child and adolescent — taller than her brothers, approximately 5 feet 3 inches, with the proportions of an early teenager: longer limbs than a child but still slim and developing. Recognisably her mother's daughter — dark brown almond-shaped eyes, full dark eyebrows, softly defined jaw but younger and rounder. Fair skin with warm undertones. Dark brown hair shoulder-length, parted in the centre, sometimes tied back with a simple cream or pale-blue ribbon. Wears a 1937 girl's travelling outfit: knee-length pleated skirt in dark blue, white blouse with rounded collar, knee-length white socks, dark leather buckle shoes. Thoughtful quiet expression. 1937 photoreal cinematic",
+    "walter": "Walter Doehner, a 10-year-old boy, middle child of the Doehner family. Visibly older and taller than his brother Werner, noticeably stockier in build, with the proportions of a fourth-grader. Dark brown hair like his father, cut short with a neat parting on the left side, the typical 1937 European schoolboy haircut. Round face but losing baby fat, with dark brown eyes and full dark eyebrows. Fair European skin with warm undertones. Approximately 4 feet 5 inches tall. Wears 1937 European boy's travelling clothes: short trousers ending at the knee in dark grey wool, tucked-in white shirt, knee-high grey wool socks, dark leather lace-up shoes. Curious energetic expression. 1937 photoreal cinematic",
+    "werner": "Werner Doehner, an 8-year-old boy, youngest child of the Doehner family. Clearly the smallest of the three children, significantly smaller than 10-year-old Walter and much smaller than 14-year-old Irene. Approximately 4 feet 1 inch tall, slim, with the proportions of a second-grader. Dark brown hair slightly softer and finer than Walter's, with a similar short parted cut. Round face still carrying childhood softness, large dark brown eyes that dominate his small face. Fair European skin with warm undertones. Wears 1937 European boy's clothes nearly identical to Walter's but smaller. Wide-eyed observant expression — a quiet eight-year-old who watches the world carefully. 1937 photoreal cinematic",
+    "dining_room": "The portside dining room of the airship Hindenburg, 1937. A long room with light maple wood panelling, art deco geometric inlays in darker walnut. The dominant feature is the panoramic observation windows along the outer wall — slightly inward-slanted windows with polished aluminium frames. White art deco ceiling with frosted glass and chrome light fixtures. Tables set with white linen tablecloths, formal silverware, fine porcelain marked with the Zeppelin company crest. Tubular chrome chairs with leather upholstery in muted earth tones. Deep dense carpet in a geometric art deco pattern of cream and dark blue. Soft warm interior light filtered through the panoramic windows. Bauhaus-influenced art deco modernism, not Edwardian grandeur. 1937 photoreal cinematic",
+    "cabin": "A passenger cabin aboard the Hindenburg, 1937. Narrow rectangular room about 6 feet wide and 7 feet long. Two narrow bunks stacked against one wall, lower bunk doubling as daytime seating. Opposite wall has a small foldable washbasin with polished metal mirror and a thin foldable writing desk. Built-in narrow vertical lockers in light maple wood. No porthole — interior cabin without windows. Single art deco wall fixture in frosted glass and chrome. Deep cream-and-blue art deco carpet. White linens on the bunks with the Zeppelin company crest embroidered in pale blue. Efficient and modern, more like a luxury train sleeper than a ship's stateroom. 1937 photoreal cinematic",
+    "promenade": "The promenade deck observation area of the airship Hindenburg, 1937. Long corridor running along the outer hull on the upper passenger deck with the famous panoramic observation windows along the entire outer wall. Slightly inward-slanted windows with polished aluminium frames at chest height. Inner wall panelled in light maple with art deco geometric details. Deep cream-and-blue art deco carpet. Art deco wall sconces in frosted glass. Open and elegant despite the narrow corridor width. View through windows shows the Atlantic ocean far below or the approaching ground at Lakehurst. 1937 photoreal cinematic",
+    "lakehurst_field": "Naval Air Station Lakehurst landing field, May 6 1937, late evening. Vast open grass field in central New Jersey with the tall steel lattice mooring mast standing approximately 160 feet high in the centre, a triangular framework structure painted matte grey. Grass short and recently mown, slightly damp from afternoon thunderstorms. Sky overcast but clearing — grey-blue dusk with patches of darker cloud and occasional gold from the setting sun. Low warehouse-like buildings around the perimeter (airship hangars and naval station outbuildings) painted dark green. Ground crew in dark navy uniforms with peaked caps. Small crowd of civilian observers behind a roped barrier. Anticipatory but routine atmosphere. 1937 photoreal cinematic"
+  },
+  "beats": [
+    {
+      "narration": "On the evening of May 6th, 1937, a forty-one-year-old woman named Matilde Doehner was sitting in the dining room of the airship Hindenburg with her three children.",
+      "image_prompt": "{matilde} seated at an elegantly set dining table in {dining_room}. Warm amber lamplight, polished wood paneling. Her three children — {irene}, {walter}, and {werner} — are seated around her, but framed in soft focus behind Matilde whose composed face is the focal point. White tablecloth, crystal glasses, fine porcelain. The observation windows behind them are dark with evening sky. Cinematic composition with Matilde foregrounded.",
+      "motion_prompt": "Very slow push-in toward Matilde at the table, the lamplight flickering slightly."
+    },
+    {
+      "narration": "In twelve minutes, the air outside the windows would catch fire.",
+      "image_prompt": "Close detail view of the large curved panoramic observation window of {dining_room} at dusk. The dark blue-grey sky outside is calm, the distant horizon faintly lit. The polished aluminium window frame gleams. A faint reflection of warm lamplight on the glass. No people visible. The window itself is the subject — slightly inward-slanted, characteristic Hindenburg design.",
+      "motion_prompt": "Slow drift of the camera toward the window glass, the reflection of lamplight wavering gently."
+    },
+    {
+      "narration": "In thirty-four seconds after that, she would have to choose which of her children she could save.",
+      "image_prompt": "{matilde} sits at the dining table in {dining_room}, looking down at her hands resting on the white tablecloth. Her dark eyes downcast, expression composed and thoughtful. Walter and Werner are visible at the edge of frame, blurred and soft. A half-eaten dessert plate sits before her. Warm amber lamplight. Single-character focus on Matilde with family suggested in soft focus around her.",
+      "motion_prompt": "Almost imperceptible slow push-in toward her still, downcast face. Lamplight flickers faintly."
+    },
+    {
+      "narration": "What you are about to see has been recreated from period photographs, the Doehner family's own surviving accounts, and the official Lakehurst investigation records.",
+      "image_prompt": "Detail shot of a spread of aged black-and-white photographs, official typed documents with government letterhead, and a handwritten letter in German script, arranged on a dark wooden desk under a single focused lamp. A magnifying glass rests beside them. The edges of the photographs are yellowed and slightly curled. No people. Period archive aesthetic. 1937 photoreal cinematic",
+      "motion_prompt": "Slow pan across the surface of the documents, the lamplight casting soft shadows."
+    },
+    {
+      "narration": "Three days earlier, the family had boarded in Frankfurt, Germany.",
+      "image_prompt": "Wide shot of the Frankfurt airship terminal in 1937 — a cavernous hangar-like building with high arched ceilings and pale morning light streaming through tall windows. The Doehner family stands with luggage carts near the boarding gate, framed from behind so individual faces are not the focus — five figures together, recognisable as a family. {hermann} in a heavy wool overcoat over his charcoal grey suit, Matilde beside him in her muted earth-tone travelling dress, the three children clustered close. Other passengers and uniformed ground staff visible in the background. 1937 photoreal cinematic",
+      "motion_prompt": "Slow wide pan across the terminal interior, figures nearly still, dust motes drifting in the light beams."
+    },
+    {
+      "narration": "They were going home.",
+      "image_prompt": "Wide low-angle shot of the Doehner family from behind on the tarmac, looking up at the enormous silver hull of the Hindenburg airship. The five family figures are silhouetted against the vast hull which fills the upper frame, dwarfing them. {hermann} in his wool overcoat, Matilde beside him, the three children clustered close. Morning grey light. Ground crew figures move in the far background, very small. Composition emphasises scale of the ship over individual faces. 1937 photoreal cinematic",
+      "motion_prompt": "Slow tilt upward from the family to the vast silver hull above, a gentle breeze moving Hermann's coat hem."
+    },
+    {
+      "narration": "Home was Mexico City.",
+      "image_prompt": "A sepia-toned 1930s photographic print of Mexico City — a wide boulevard lined with colonial buildings, a mountain visible in the distant haze, a few automobiles and pedestrians from the era. The image has the quality of a treasured family photograph, slightly faded at the edges, slightly curling. No modern elements. 1930s photoreal cinematic period detail.",
+      "motion_prompt": "Very slow push-in toward the center of the photograph, the edges softly vignetting."
+    },
+    {
+      "narration": "Hermann Doehner, Matilde's husband, was forty-nine. He had moved to Mexico from Germany when he was twenty-one and never left.",
+      "image_prompt": "{hermann} stands in the Frankfurt terminal, one hand resting on a large leather trunk. He looks slightly off-camera with a calm prosperous confidence. Charcoal grey three-piece suit, white dress shirt, dark patterned tie, wire-rim glasses, dark brown hair greying at temples. Clean-shaven. Composed thoughtful expression. Single-character composition, Hermann centred and clear.",
+      "motion_prompt": "Slow push-in toward Hermann's composed face, ambient terminal light steady."
+    },
+    {
+      "narration": "He ran the country's largest German pharmaceutical company.",
+      "image_prompt": "{hermann} seated at a dark wooden desk in a 1930s office, hands folded on the surface. Charcoal grey three-piece suit, wire-rim glasses, composed expression. Behind him a wall of wooden filing cabinets and a framed map of Mexico. Warm deliberate office lighting. A leather briefcase sits beside the desk. Single-character formal portrait composition.",
+      "motion_prompt": "Almost no movement — a barely perceptible drift of the camera to one side, dust motes floating in the lamplight."
+    },
+    {
+      "narration": "The family had spent three months in Germany on a long holiday.",
+      "image_prompt": "The Doehner family in a German park in spring 1937. {hermann}, Matilde, and the three children — {irene}, {walter}, {werner} — posed together. Spring light through leafy trees. The children in their 1937 European clothes: Irene in her knee-length pleated skirt and white blouse, Walter and Werner in matching short trousers and tucked-in white shirts. The family stands close together, relaxed. A fountain blurred in the background. Composition: family group in middle distance, faces visible but not close, dignified period family portrait. 1937 photoreal cinematic",
+      "motion_prompt": "Slow gentle pan from left to right across the family group, leaves stirring faintly in a light breeze."
+    },
+    {
+      "narration": "Now they were returning by airship, then by train south to Mexico City.",
+      "image_prompt": "The Doehner family walks along the boarding gangway up into the Hindenburg, seen from behind and below. Hermann leads, his charcoal grey suit and overcoat visible, carrying his 1937 leather-cased movie camera. Matilde follows in her muted earth-tone travelling dress with the three children — Irene, Walter, Werner. The gangway angles upward into the belly of the great silver ship. Ground crew stand at the base. Overcast sky. Composition: backs of family walking up, ship dominating frame.",
+      "motion_prompt": "Slow upward tilt following the family figures as they ascend the gangway, the massive hull filling the frame."
+    },
+    {
+      "narration": "The tickets cost seven hundred US dollars per person. About fifteen thousand dollars today, in 2026 money.",
+      "image_prompt": "Close detail view of a 1937 Hindenburg passenger ticket — an elegant printed document with the Deutsche Zeppelin-Reederei logo, the words 'HINDENBURG' and 'FRANKFURT–LAKEHURST' printed in bold serif type, a seat number, and a departure date. The ticket rests on a dark wood surface beside a few period US dollar bills and German marks. Lamplight glints on the paper. No people. Period document detail. 1937 photoreal cinematic",
+      "motion_prompt": "Slow shallow pan across the surface of the ticket and currency, lamplight glinting on the paper."
+    },
+    {
+      "narration": "Five tickets. Irene was fourteen. Walter was ten. Werner was eight.",
+      "image_prompt": "Five Hindenburg tickets fanned out on a dark wood surface, each slightly different in position. In the soft background, slightly out of focus, the three Doehner children are visible — {irene}, {walter}, and {werner} — arranged in a row from tallest to smallest. Irene with her shoulder-length dark hair, Walter round-faced and alert, Werner the smallest with large dark eyes. All three in their 1937 European travel clothes. Foreground sharp on tickets, background softly visible.",
+      "motion_prompt": "Very slow pull back from the tickets to include the blurred children in the background, lamplight warm and still."
+    },
+    {
+      "narration": "For three days, the Hindenburg moved across the Atlantic at one hundred and twenty kilometres an hour.",
+      "image_prompt": "Wide aerial view from slightly above the Hindenburg as it crosses open ocean — the immense silver cigar shape suspended against a pale blue sky, its shadow falling faintly on the dark Atlantic far below. White clouds at the horizon. The ship is perfectly still, monumental. No people visible at this scale. 1937 photoreal cinematic.",
+      "motion_prompt": "Extremely slow drift of the camera laterally across the airship, the clouds at the horizon barely shifting."
+    },
+    {
+      "narration": "Slow, by modern standards. The whole crossing was a single long meal.",
+      "image_prompt": "{dining_room} mid-voyage — elegantly dressed passengers seated at a long table, white linens, crystal glassware, a multi-course meal laid out. A white-jacketed steward stands at the sideboard. The Doehner family is among those seated — Matilde and Hermann visible at the table with the children, framed at medium distance among other passengers so individual faces are not the only focus. Warm amber lamplight. The atmosphere is unhurried and refined. Composition with the room itself the protagonist.",
+      "motion_prompt": "Slow push-in toward the centre of the dining table, the steward barely moving, light steady."
+    },
+    {
+      "narration": "The dining room smelled of polished wood and faintly of engine oil.",
+      "image_prompt": "Detail of {dining_room} interior — the rich golden-brown maple paneled walls, the polished aluminium rail along the observation windows, the deep cream-and-blue art deco carpet. A single white rose in a slim vase on the nearest table. The room is empty of people in this moment, capturing its physical quality — warm, intimate, with subtle industrial undertones beneath the modernist luxury. No people. 1937 photoreal cinematic.",
+      "motion_prompt": "Slow pan along the paneled wall, catching the gleam of the aluminium rail, dust motes barely visible."
+    },
+    {
+      "narration": "The carpet underfoot was so deep you could not hear your own footsteps.",
+      "image_prompt": "Low-angle close shot looking along the deep cream-and-blue art deco carpet of the {dining_room} floor. Two pairs of shoes at the edge of frame — a woman's heeled leather pumps and a child's small leather buckle shoes — standing in the deep carpet. The pattern stretches away in soft focus. The room above is warm and still. No faces visible, just the textile and detail.",
+      "motion_prompt": "Almost no motion — a barely perceptible slow push forward along the carpet, lamplight steady."
+    },
+    {
+      "narration": "Through the observation windows, you could see whitecaps on the ocean four thousand feet below,",
+      "image_prompt": "Two children — {walter} and {werner} — press close to the large curved panoramic observation window of the Hindenburg lounge, looking down through the glass. Walter visibly taller and stockier, Werner clearly smaller with his round face close to the glass, both in their 1937 short-trousered European travel clothes. Below through the glass, the dark Atlantic stretches to the horizon, tiny white flecks of waves visible far below. The boys' faces are lit by the cool light from the window. Composition focuses on the two brothers from a slight back-angle.",
+      "motion_prompt": "Very slow push-in toward the boys at the window, the ocean light below shifting faintly."
+    },
+    {
+      "narration": "but the airship moved so smoothly that the whitecaps looked like still photographs.",
+      "image_prompt": "View through the panoramic Hindenburg observation window from inside — the vast grey-blue Atlantic far below, dotted with miniature white-crested waves, utterly motionless-looking from this height. The curved aluminium window frame is sharp in the foreground. The ocean below appears frozen, like a painted picture. No people. Just the view and the window detail. 1937 photoreal cinematic.",
+      "motion_prompt": "Slow gentle drift sideways along the window glass, the ocean below appearing completely still."
+    },
+    {
+      "narration": "Werner spent the mornings at the windows.",
+      "image_prompt": "{werner} sits alone on the wide observation bench beneath the curved panoramic window, his small hands on the glass, his round face close to it, staring down at the ocean below. Dark brown hair, large dark eyes, wide-eyed observant expression. Wears his 1937 short trousers, white shirt, knee-high grey socks. Morning light from the window falls across his small face. The bench cushion is deep red velvet. Single-character composition emphasising his small scale.",
+      "motion_prompt": "Barely perceptible slow push-in toward Werner's still small figure at the window."
+    },
+    {
+      "narration": "Walter played cards in the lounge.",
+      "image_prompt": "{walter} sits across a small table from another passenger (an adult man visible in soft focus from behind) in the Hindenburg passenger lounge. Walter is round-faced and alert, dark brown hair short and parted, ten years old. Cards are fanned in his small hand. He wears his 1937 short trousers, tucked-in white shirt, knee-high grey socks. A low table lamp illuminates the game. The lounge has the same maple paneling and art deco design as the dining room. Walter's expression is concentrated. Composition foregrounds Walter, other passenger softly visible.",
+      "motion_prompt": "Slow pull back from the card game, the warm lamplight steady, barely moving."
+    },
+    {
+      "narration": "Irene read.",
+      "image_prompt": "{irene} sits in an armchair in the Hindenburg lounge, a book open in her lap. Fourteen years old, dark hair tied back with a pale cream ribbon, thoughtful expression, dark eyes cast downward on the page. Wears her knee-length pleated skirt, white blouse with rounded collar. Visibly taller and more developed than her younger brothers, an adolescent. The observation window behind her frames the open Atlantic sky. The room is quiet. Single-character composition, Irene clearly an adolescent not a child.",
+      "motion_prompt": "Very slow push-in toward Irene's still reading figure, the window light behind her barely shifting."
+    },
+    {
+      "narration": "Hermann had brought a movie camera. He filmed the family at meals.",
+      "image_prompt": "{hermann} stands in {dining_room}, a bulky 1930s home movie camera held to his eye with both hands. Charcoal grey three-piece suit, wire-rim glasses. Matilde and the three children are seated at the table behind him, slightly blurred, their faces turned toward the camera but in soft focus. Warm amber light. The polished room gleams around them. Composition foregrounds Hermann and the camera.",
+      "motion_prompt": "Slow push-in toward Hermann and his camera, the family behind him softly focused."
+    },
+    {
+      "narration": "He filmed the children at the observation windows.",
+      "image_prompt": "{hermann} stands slightly to one side in his charcoal suit and wire-rim glasses, his bulky 1930s movie camera raised and pointed toward the panoramic observation windows. The three Doehner children are crowded together at the window from behind — their silhouettes outlined by the cool light. Composition: Hermann in foreground with camera, children's backs visible in middle distance at the window. Faces not the focus; the framing is the focus.",
+      "motion_prompt": "Slow gentle pan from Hermann with the camera toward the children at the window."
+    },
+    {
+      "narration": "He filmed the Atlantic from above.",
+      "image_prompt": "{hermann} leans slightly toward the panoramic observation window in {promenade}, his 1930s movie camera pressed against the glass, angled downward to capture the ocean below. His face is mostly in profile, obscured by the camera body. The window reflects the pale sky. Below, the dark Atlantic stretches away. Single-character composition focused on Hermann and the camera as one object.",
+      "motion_prompt": "Very slow push-in toward Hermann at the window, the ocean light outside shifting faintly."
+    },
+    {
+      "narration": "Every evening he carried the camera back to his cabin and stored it carefully.",
+      "image_prompt": "Hermann's 1930s movie camera rests in its open leather carrying case on the narrow shelf of {cabin}. The case is lined with dark felt. The cabin is tidy: a made bunk with white linens, a small art deco wall lamp casting warm glow. Hermann's charcoal suit jacket is draped over the edge of the bunk. No people in frame, just the object and the room. 1937 photoreal cinematic.",
+      "motion_prompt": "Slow push-in toward the camera in its case, the wall lamp casting a warm steady glow."
+    },
+    {
+      "narration": "He was filming the trip for his family in Mexico to see when they got home.",
+      "image_prompt": "{hermann} sits on the edge of his bunk in {cabin}, the 1930s movie camera in his lap, looking down at it with a quiet private expression. Charcoal grey three-piece suit, wire-rim glasses, his composed thoughtful face. The cabin's art deco wall lamp casts warm light. He is alone, his expression fond and unhurried. Single-character intimate composition.",
+      "motion_prompt": "Barely perceptible slow push-in toward Hermann's still figure, the cabin light steady."
+    },
+    {
+      "narration": "The morning of May 6th, the Hindenburg passed over Boston, hours behind schedule.",
+      "image_prompt": "Wide shot of the Hindenburg gliding low over a 1930s American city skyline — dense brick buildings, church spires, a harbour visible at the edge of frame. The airship's enormous shadow falls across the rooftops below. Morning light, slightly overcast. The city is small beneath the ship's scale. 1937 photoreal cinematic.",
+      "motion_prompt": "Slow lateral drift of the camera, the airship shadow moving almost imperceptibly across the rooftops."
+    },
+    {
+      "narration": "By early afternoon it was over New Jersey.",
+      "image_prompt": "The Hindenburg seen from slightly below and behind as it passes over a flat green New Jersey landscape — farmland, a dirt road, a cluster of white farmhouses. The sky is partly cloudy, the afternoon light diffuse and grey-white. Two tiny human figures stand in a field looking up. 1937 photoreal cinematic.",
+      "motion_prompt": "Very slow pan following the airship across the landscape, the clouds drifting."
+    },
+    {
+      "narration": "But the weather at Lakehurst had turned. Thunderstorms had grounded the airfield.",
+      "image_prompt": "{lakehurst_field} in late afternoon — dark storm clouds piled on the horizon. Ground crew in navy uniforms with peaked caps stand near the mast base, looking at the sky. The light is strange, greenish-grey. The field is tense and waiting. The grass is damp from recent rain. No civilian crowd yet visible at this stage.",
+      "motion_prompt": "Slow pan across the field toward the mooring mast, the storm clouds visibly building at the horizon."
+    },
+    {
+      "narration": "Captain Max Pruss circled the New Jersey coast for hours, waiting for the storms to pass.",
+      "image_prompt": "In the Hindenburg's control car — a glass-enclosed gondola beneath the bow — Captain Max Pruss stands at the navigation windows looking out at the grey coastline below. He is middle-aged, square-jawed, wearing a Zeppelin commander's uniform with peaked cap. Other officers visible at their stations behind him in soft focus. The light is flat and overcast. 1937 photoreal cinematic.",
+      "motion_prompt": "Very slow push-in toward the captain at the window, the coastline below shifting almost imperceptibly."
+    },
+    {
+      "narration": "The family ate lunch. Then they ate an early dinner. Then they waited.",
+      "image_prompt": "{dining_room} — the Doehner family at the table in late afternoon light, the meal clearly a late sitting. The table has been partly cleared. {hermann} has his hands folded, charcoal suit and wire-rim glasses. {matilde} looks slightly tired, her dark hair still pinned up. The three children quiet at the table, soft focus. The steward stands at the sideboard. The mood is patient but restless. Composition: family group in middle distance.",
+      "motion_prompt": "Slow push-in toward the family at the table, the light through the windows fading toward evening."
+    },
+    {
+      "narration": "By half past six, the storms had cleared.",
+      "image_prompt": "{lakehurst_field} at early evening — the storm clouds have broken, revealing a pale yellow-grey sky. Puddles on the grass reflect the clearing light. Ground crew figures stand in small groups across the field. The triangular mooring mast stands sharp against the lighter sky. The air has the clear, washed quality after rain. No people foregrounded.",
+      "motion_prompt": "Slow pan across the cleared field, puddles shimmering faintly, figures still."
+    },
+    {
+      "narration": "The ship turned inland toward the mooring mast at Lakehurst.",
+      "image_prompt": "The Hindenburg seen from below at a three-quarter angle, its vast silver hull catching the pale evening light as it turns slowly. The triangular mooring mast is visible small in the distance ahead of it. The sky behind the ship is layered — dark clouds to one side, clearing yellow light to the other. The ship's tail fin markings are visible but framed at a distance so insignia detail is not emphasised. 1937 photoreal cinematic.",
+      "motion_prompt": "Very slow pan following the turn of the great ship, the sky light shifting."
+    },
+    {
+      "narration": "A small crowd of relatives and journalists had been waiting on the ground since morning.",
+      "image_prompt": "On the edge of {lakehurst_field}, a group of forty to fifty people — relatives in good coats, journalists with cameras on tripods, newsreel cameramen — stand behind a rope barrier, all looking upward. The evening light is pale. Some people hold hats against a light breeze. Faces are small in the frame, the crowd seen at medium distance. 1937 photoreal cinematic.",
+      "motion_prompt": "Slow pan along the waiting crowd, faces upturned, a few hats and coat hems stirring in the wind."
+    },
+    {
+      "narration": "Hermann took out his movie camera. He started filming.",
+      "image_prompt": "{hermann} stands at the panoramic observation window in {promenade}, his 1930s movie camera raised and pressed to his eye, pointed out through the glass at the mooring field below. Charcoal grey three-piece suit, wire-rim glasses, composed expression. His posture is alert and purposeful. Through the window, the mooring mast and the tiny crowd on the ground are visible in the fading evening light. Single-character composition with the view through the window as context.",
+      "motion_prompt": "Slow push-in toward Hermann at the window, the field below coming slightly clearer."
+    },
+    {
+      "narration": "At seven twenty-one PM, the Hindenburg was two hundred feet above the field.",
+      "image_prompt": "Wide ground-level shot looking up at the Hindenburg from {lakehurst_field} — the enormous silver hull hanging in the evening sky at low altitude, its passenger gondola visible beneath, mooring lines beginning to drop. The triangular mooring mast is in the left foreground. Ground crew figures stand small on the field below. The sky is pale blue-grey. No close-up of insignia or markings. 1937 photoreal cinematic.",
+      "motion_prompt": "Very slow upward tilt from the ground crew to the looming hull above, mooring lines drifting faintly."
+    },
+    {
+      "narration": "The mooring lines were dropped to the ground crew.",
+      "image_prompt": "On {lakehurst_field}, several ground crew in dark navy uniforms with peaked caps strain at thick hemp mooring ropes that descend from the airship overhead. The ropes are taut and angled upward out of frame. The men lean back, their weight against the lines. The field is damp, the grass flattened. Other crew run toward the ropes in the background. 1937 photoreal cinematic.",
+      "motion_prompt": "Slow pan along the ground crew at the mooring lines, their figures barely moving, the ropes swaying faintly."
+    },
+    {
+      "narration": "The descent toward the mast began.",
+      "image_prompt": "The Hindenburg seen from the side at medium distance, its great hull angling slowly downward toward the triangular mooring mast. The evening sky behind it is deep grey-blue. The ship's nose is pointed toward the mast. The scale of the ship against the mast makes the mast look fragile. Ground crew ant-like below. 1937 photoreal cinematic.",
+      "motion_prompt": "Extremely slow downward tilt with the ship's descent, the mast growing fractionally larger."
+    },
+    {
+      "narration": "Hermann was still at the window. He had been filming the descent for perhaps three minutes",
+      "image_prompt": "{hermann} at the panoramic observation window of {dining_room}, his 1930s movie camera still raised. Charcoal grey suit, wire-rim glasses. Through the glass behind him, the mooring field is now visible and close below — the crowd, the mast, the ground crew. His back is partly to camera. The dining room is warm and still behind him. Matilde and the children are visible at the table in deep background, very soft focus. Composition foregrounds Hermann.",
+      "motion_prompt": "Slow push-in toward Hermann at the window, the ground detail outside growing fractionally clearer."
+    },
+    {
+      "narration": "when he lowered the camera and turned to walk back toward his cabin to put it away.",
+      "image_prompt": "{hermann} seen from behind in the corridor of {promenade}, the 1930s movie camera now at his side in one hand, his other hand resting on the polished maple wood paneling as he walks away from the dining room toward the cabins. Charcoal grey suit visible. The corridor is narrow and warm. The deep art deco carpet muffles everything. His broad back recedes. Single-character back-of-camera composition.",
+      "motion_prompt": "Very slow push-in following Hermann's retreating figure down the corridor, lamplight steady."
+    },
+    {
+      "narration": "At seven twenty-five PM, something began to flicker at the top of the tail.",
+      "image_prompt": "Wide shot of the Hindenburg's stern tail section from the ground, seen at a slight distance against the evening sky. At the very top of the tail fin, a faint, small orange flicker has appeared at the fabric surface — atmospheric, almost ambient, not yet dramatic. The sky around it is still grey. The rest of the ship appears untouched. Ground crew figures visible below at distance. Fire visible only as a subtle background element, not foreground subject. 1937 photoreal cinematic.",
+      "motion_prompt": "Slow push-in toward the tail section, the tiny flicker pulsing gently."
+    },
+    {
+      "narration": "From the ground it looked at first like a mushroom of light.",
+      "image_prompt": "Ground-level view from among the watching crowd at {lakehurst_field} — faces turned upward with expressions shifting from curiosity to alarm. Above them, the Hindenburg's tail section is visible with a swelling dome of orange-red light growing at its top, still contained against the grey sky. A woman in the crowd has her hand half-raised toward her mouth. Composition focuses on the crowd's upturned faces lit faintly by the glow.",
+      "motion_prompt": "Slow push-in toward the upturned faces of the crowd, the glow from above lighting them faintly."
+    },
+    {
+      "narration": "Within four seconds, it had spread the length of the airship.",
+      "image_prompt": "Wide shot showing the entire length of the Hindenburg, its silver hull transformed into a mass of orange-red fire and black smoke boiling upward. The tail is already falling. The nose still points at the mast. The sky behind is darkening with smoke. The scale is catastrophic but the framing keeps the fire as visual environment, not as close-up subject. Ground crew and crowd figures are tiny dark silhouettes below.",
+      "motion_prompt": "Slow upward tilt from the silhouetted crowd to the burning hull above, smoke billowing in slow rolls."
+    },
+    {
+      "narration": "Inside the dining room, the windows turned orange.",
+      "image_prompt": "{dining_room} from inside — {matilde} and the three children at the table, their faces lit by a sudden violent orange glow pouring through the panoramic observation windows. The art deco lamp above the table is overwhelmed by the orange light. Matilde's composed face shows the first instant of alert recognition, dark eyes wide. The children's faces show incomprehension. Matilde's hands are on the table, tensed. The fire itself is outside the window — light, not foreground.",
+      "motion_prompt": "Slow push-in toward the table, the orange glow through the windows intensifying slightly."
+    },
+    {
+      "narration": "The light came from everywhere at once.",
+      "image_prompt": "{dining_room} interior bathed in orange and red light from all angles — the panoramic windows, the ceiling, the polished maple wood walls reflecting the fire. {matilde} is on her feet, pulling {werner} toward her — Matilde's dark hair loosened slightly, expression fierce and controlled. {walter} stands beside her. {irene} is half-risen from her chair. The art deco lamp is lost in the overwhelming firelight. Composition emphasises Matilde and the children as a tight family group; fire is environment, not foreground subject.",
+      "motion_prompt": "Very slow push-in toward the family, the orange light pulsing faintly."
+    },
+    {
+      "narration": "The Hindenburg burned for thirty-four seconds.",
+      "image_prompt": "Wide shot of the Hindenburg from {lakehurst_field} — the ship fully consumed, a massive column of fire and black smoke rising into the darkening sky. The structural ribs of the hull are briefly visible as black lines inside the fire before they collapse. Ground crew and spectators are frozen in their tracks, small dark figures against the conflagration. Framed at distance so fire is environmental, not close-up.",
+      "motion_prompt": "Slow pan across the length of the burning ship, black smoke rolling upward."
+    },
+    {
+      "narration": "The airship's hull was on the ground within seconds.",
+      "image_prompt": "The collapsed wreckage of the Hindenburg on {lakehurst_field} — the great frame now a burning skeleton on the ground, the nose still partly upright, the tail gone. Smoke and fire pour from the frame. Ground crew run in the background. The triangular mooring mast stands untouched at the edge of the frame. The sky is black with smoke. Wide composition, fire as environment.",
+      "motion_prompt": "Slow pan along the burning wreckage, smoke drifting in slow columns."
+    },
+    {
+      "narration": "But the dining room, on the portside mid-ship, was still fifteen to twenty feet up, tilted,",
+      "image_prompt": "Side view of the mid-section of the Hindenburg wreckage — the dining room structure visible tilted at a steep angle, still elevated above the ground, the panoramic observation windows facing outward over the open field. Fire burns at both ends of the frame but the dining room itself is briefly intact in this moment. Smoke obscures the upper half. Wide framing.",
+      "motion_prompt": "Slow push-in toward the tilted dining room section, smoke drifting across the frame."
+    },
+    {
+      "narration": "with the observation windows facing the open field.",
+      "image_prompt": "The Hindenburg dining room panoramic observation windows seen from outside at ground level — the large curved aluminium-framed windows tilted at an angle above the ground, some glass broken, orange fire reflected in the remaining panes. The open field stretches away behind. The ground below the windows is a fifteen-foot drop. Detail composition.",
+      "motion_prompt": "Very slow push-in toward the tilted windows, firelight flickering in the glass."
+    },
+    {
+      "narration": "Matilde had three children with her in the dining room.",
+      "image_prompt": "Inside the burning {dining_room} — {matilde}, her dark hair loosened, her face fierce and controlled, holds {werner} close to her with one arm. {walter} stands tight beside her. {irene} is at her other side. The room is tilted, the furniture slid to one side. Orange firelight from outside pours through the broken panoramic windows. The ceiling above is in flames but framed in background — the family group is the foreground subject.",
+      "motion_prompt": "Slow push-in toward the family huddled together, firelight shifting around them."
+    },
+    {
+      "narration": "Hermann was somewhere on the other side of the burning airship.",
+      "image_prompt": "View through the burning structural ribs of the Hindenburg — the interior corridor beyond is engulfed, the far side of the ship lost in fire and smoke. A man's dark figure is barely discernible in the far background, obscured by smoke — Hermann in his charcoal suit. The corridor is impassable. Fire is environmental framing; the small distant figure is the emotional subject.",
+      "motion_prompt": "Slow push-in through the burning frame, smoke drifting, the distant figure barely visible."
+    },
+    {
+      "narration": "She took Walter first. He was ten.",
+      "image_prompt": "{matilde} at the broken panoramic observation window of the tilted {dining_room} — she holds {walter} by both arms, his small body lifted, dark hair, round face, his 1937 short trousers and white shirt and knee-high socks visible. Her expression is absolute, iron. Walter's face shows trust and fear. The open air and the field below visible through the window. Fire lights the room behind them but framed in background. Composition: Matilde and Walter as a tight unit, fire as environment.",
+      "motion_prompt": "Barely perceptible slow push-in toward Matilde and Walter at the window, firelight behind them shifting."
+    },
+    {
+      "narration": "She lifted him to the window and threw him out. He bounced off the window frame on the way down.",
+      "image_prompt": "Exterior view of the {dining_room} observation window from below — the window frame is broken and jagged, a small boy's figure ({walter} in his 1937 short trousers and white shirt) visible at the frame edge, mid-fall. The field is below. Smoke curls above. Fire is at the edges of the window but framed in background. The moment captured as a still — the boy at the window's edge.",
+      "motion_prompt": "Slow push-in toward the window frame from below, smoke drifting upward past the frame."
+    },
+    {
+      "narration": "She had to throw him out a second time.",
+      "image_prompt": "{matilde} again at the panoramic window, her arms extended outward through the broken frame — the second throw already made, her arms empty, her dark hair more disheveled, her face still fierce and intent. The smoke-filled room is behind her. The field below the window is out of frame. Her knuckles are white on the window frame edge.",
+      "motion_prompt": "Very slow push-in toward Matilde at the empty window frame, firelight behind her pulsing."
+    },
+    {
+      "narration": "Then Werner. He was eight.",
+      "image_prompt": "{matilde} holds {werner} — clearly the smallest child, his dark hair, large dark eyes wide with fear — at the broken panoramic window. Her arms are around his small torso. He clings to her briefly. His 1937 short trousers and white shirt and knee socks visible. The field is below. The room behind is burning but framed in background. Her expression is a force of will.",
+      "motion_prompt": "Barely perceptible slow push-in, firelight flickering around the still, agonised pair at the window."
+    },
+    {
+      "narration": "She turned back for Irene. Irene was fourteen. She was too heavy.",
+      "image_prompt": "{matilde} turns back inside the burning {dining_room} toward {irene} — Irene stands against the tilted far wall, clearly an adolescent of fourteen, taller than her young brothers, in her knee-length pleated skirt and white blouse, dark hair loose around her shoulders. {matilde}'s arms reach toward her. Firelight fills the room. The angle of the floor is steep. Between them, the distance is only feet but the room is collapsing. Composition: two figures in agonised distance.",
+      "motion_prompt": "Slow push-in toward Irene against the wall, the firelight between the two figures shifting."
+    },
+    {
+      "narration": "Matilde had to make a choice she had no time to make.",
+      "image_prompt": "Tight shot of {matilde}'s face — dark almond-shaped eyes, controlled but shattered, her dark hair loosened, her composed maternal face transformed by the moment. Orange firelight on her skin. She is at the window frame, her body half-turned between outside and the burning room. Irene is a blurred figure in the deep background behind her. The window frame in the foreground. This is the last second of the choice. Close-up single-character composition.",
+      "motion_prompt": "Almost no motion — a micro-push-in toward Matilde's face, the fire behind her barely shifting."
+    },
+    {
+      "narration": "She climbed onto the window frame herself, alone. She jumped.",
+      "image_prompt": "Exterior of the {dining_room} window from below and to one side — {matilde}'s figure is at the window frame, poised at the edge, alone. Below her is the open field — fifteen to twenty feet drop. The burning structure is above and around her, framed in background. Her body is still for this fraction of a second before the fall. Her travelling dress is darkened with soot. Composition: solitary figure at the edge.",
+      "motion_prompt": "Slow push-in from below toward Matilde on the window frame, smoke curling upward past her."
+    },
+    {
+      "narration": "She broke her pelvis on landing.",
+      "image_prompt": "{matilde} is on the ground of {lakehurst_field}, having landed. She is crumpled on the damp grass, one leg at a wrong angle, her face pressed to the earth. Her travelling dress is soot-darkened and torn. The burning wreckage of the Hindenburg is behind her and above, the sky black with smoke. A ground crew member in dark navy uniform runs toward her from the right. Composition: Matilde foregrounded, wreckage as background environment.",
+      "motion_prompt": "Slow pan from the burning wreckage above down to Matilde on the ground, smoke drifting."
+    },
+    {
+      "narration": "Ground crew pulled Irene from the wreckage.",
+      "image_prompt": "Two ground crew men in dark navy Lakehurst uniforms carry {irene} — fourteen, her white blouse and pleated skirt scorched, her face and arms burned — out of the smoldering edge of the Hindenburg wreckage. Her arms are draped over their shoulders. Her head is bowed. The wreckage glows orange behind them as environment. The field is dark and smoke-filled.",
+      "motion_prompt": "Slow push-in toward the two crew members carrying Irene, smoke drifting across the frame."
+    },
+    {
+      "narration": "She was alive. She was severely burned.",
+      "image_prompt": "{irene} is laid on a stretcher on {lakehurst_field}, a coat or blanket placed over her. A medical officer kneels beside her. Her face is turned to one side, her dark hair singed, the burns visible on her hands and forearms. The field is chaos in the soft background — running figures, smoke. The foreground is quiet and focused on her. Composition: dignified despite catastrophe.",
+      "motion_prompt": "Barely perceptible slow push-in toward Irene on the stretcher, the medical officer still."
+    },
+    {
+      "narration": "They drove her to Point Pleasant Hospital that night.",
+      "image_prompt": "A 1930s ambulance — boxy black vehicle with a red cross on the side — parked at the edge of {lakehurst_field}. Its rear doors are open. Two attendants are visible beside it. Behind the vehicle, the glowing wreckage of the Hindenburg is reflected in the night sky. The scene is lit by that terrible orange glow from the background. 1937 period vehicle and uniform detail.",
+      "motion_prompt": "Slow pan from the glowing wreckage in the background to the ambulance in the foreground."
+    },
+    {
+      "narration": "A nurse fainted at the sight of her injuries when she was brought in.",
+      "image_prompt": "Corridor of a 1930s hospital at night — linoleum floors, white-painted walls, a row of overhead bulbs. A nurse in a white 1930s uniform and cap is slumped against the wall, another nurse steadying her. At the far end of the corridor, the gurney carrying Irene is visible, partially obscured by distance. The scene is clinical and terrible. Period hospital detail.",
+      "motion_prompt": "Slow push-in down the corridor toward the far end, the overhead lights casting steady white shadows."
+    },
+    {
+      "narration": "Irene died early the next morning.",
+      "image_prompt": "A 1930s hospital room at dawn — pale grey light through a small window, a single bed with white linens. The bed is empty, the pillow still indented. A wooden chair beside the bed is pushed back slightly. A vase with a single wilted flower sits on the windowsill. The room is very still and very quiet. No people. Period hospital detail.",
+      "motion_prompt": "Barely perceptible slow push-in toward the empty bed, the dawn light barely brightening."
+    },
+    {
+      "narration": "The next day's newspapers listed Hermann Doehner as missing.",
+      "image_prompt": "A 1937 American newspaper front page — a large headline reads 'HINDENBURG DISASTER' and below in a second column 'SEVERAL PASSENGERS STILL UNACCOUNTED FOR'. Beside the newspaper, a handwritten list of names on plain paper, 'MISSING:' at the top. The paper is on a wooden desk under a desk lamp. Period typography and detail.",
+      "motion_prompt": "Slow pan across the newspaper front page, the lamplight casting a shadow from the paper's edge."
+    },
+    {
+      "narration": "His body was found later that day in the wreckage of the dining room area.",
+      "image_prompt": "Two figures in dark coats — investigators or recovery crew — stand in the still-smoking, collapsed wreckage of the Hindenburg dining room section. The metal frame ribs of the hull are bent and blackened around them. The floor of the dining room is barely recognizable — twisted metal, ash, a fragment of white tablecloth. The sky above the open wreckage is grey morning. No close detail of remains; framing is dignified.",
+      "motion_prompt": "Slow pan across the wreckage from the investigators' perspective, smoke still rising from the debris."
+    },
+    {
+      "narration": "He was identified by his wedding ring.",
+      "image_prompt": "Close, still image of a plain gold wedding band resting on a dark cloth — the ring is slightly tarnished and shows heat discoloration at its surface. A gloved hand holds it steady. The background is out of focus — grey ash, blackened metal. Object detail, no people foregrounded. The ring is the emotional subject.",
+      "motion_prompt": "Barely perceptible slow push-in toward the wedding ring, ash drifting faintly at the edge of frame."
+    },
+    {
+      "narration": "Matilde, Walter, and Werner survived.",
+      "image_prompt": "A 1930s hospital ward — {matilde} lies in a hospital bed, her lower body immobilized in a cast, her dark hair brushed back, expression composed despite her injuries. {walter} sits in a chair beside her, his hands and face wrapped in white gauze bandages. {werner} is in the adjacent bed, similarly bandaged on his arms and legs. All three alive, eyes open. Morning light through the ward windows. Composition: three survivors together.",
+      "motion_prompt": "Slow pan from Walter to Matilde to Werner, the ward light steady and calm."
+    },
+    {
+      "narration": "The two boys had burns on their hands, faces, and legs.",
+      "image_prompt": "{walter} and {werner} side by side in their hospital beds — Walter with gauze wrapped around his hands and a burn dressing on one cheek; Werner with his small arms bandaged to the elbows, a blistered mark at his temple. They look at each other across the gap between the beds. The ward is white and clean. 1937 hospital period detail.",
+      "motion_prompt": "Slow push-in toward the two boys in their beds, the ward light soft and still."
+    },
+    {
+      "narration": "Werner would be in the hospital for three months.",
+      "image_prompt": "{werner} alone in a hospital bed, smaller than the bed's dimensions suggest. His bandaged arms rest on the white coverlet. A child's drawing — a simple crayon sketch of an airship — is pinned to the wall beside his bed. The window shows late afternoon light. A nurse in 1930s uniform passes in the background, out of focus. Single-character intimate composition.",
+      "motion_prompt": "Very slow push-in toward Werner in his bed, the afternoon light shifting imperceptibly."
+    },
+    {
+      "narration": "The Hindenburg disaster killed thirteen of the thirty-six passengers and twenty-two of the sixty-one crew.",
+      "image_prompt": "Wide shot of {lakehurst_field} the morning after — the collapsed, blackened skeleton of the Hindenburg's frame lies on the damp grass, still smoking in places. American flags on the mooring mast base are at half-staff. Several uniformed investigators and naval personnel stand in small groups surveying the wreckage. The sky is grey and overcast. Wide framing.",
+      "motion_prompt": "Slow wide pan across the wreckage field, ash and smoke drifting."
+    },
+    {
+      "narration": "The Doehner family lost two of five.",
+      "image_prompt": "A formal 1930s family photograph — the Doehner family posed together as they would have been before the disaster, in a German studio or park. {hermann} seated in his charcoal suit, {matilde} beside him, all three children — {irene}, {walter}, {werner} — arranged around them. A perfectly ordinary family portrait. The photograph is slightly aged, its edges beginning to soften. Composition: traditional 1930s family portrait, all five together as historical record.",
+      "motion_prompt": "Very slow push-in toward the family portrait, the image slightly vignetting at the edges."
+    },
+    {
+      "narration": "Matilde lived until 1972.",
+      "image_prompt": "An older Matilde Doehner — late sixties, her dark hair now grey and neatly arranged, wearing a modest dark dress — sits in a chair in a comfortable Mexico City living room. Wooden furniture, a window with afternoon light, a few framed photographs on a side table, blurred. Her hands are folded in her lap. Her face is composed and private — still recognisably the same composed face from the dining room, decades later. Single-character composition.",
+      "motion_prompt": "Barely perceptible slow push-in toward older Matilde, the afternoon light through the window steady."
+    },
+    {
+      "narration": "She was buried in Mexico City beside her husband and her daughter.",
+      "image_prompt": "View of a Mexico City cemetery in warm, late-afternoon light — rows of white and grey stone grave markers among cypress trees. Three graves are in the foreground, side by side, their stone markers carved with names. Fresh white flowers rest against two of the markers. The light falls long across the grass. No people. Period appropriate cemetery detail.",
+      "motion_prompt": "Slow pan from left to right across the three graves, the cypress trees barely moving in a gentle breeze."
+    },
+    {
+      "narration": "Walter became a chemist.",
+      "image_prompt": "A 1940s laboratory in Mexico City — clean benches, glass equipment, a man in a white lab coat working at a bench with his back partially to camera. He is of average build, perhaps thirty (Walter as an adult), focused and professional. Through a window, a Mexico City street is faintly visible. The laboratory light is cool and white. No clear face shot; back-of-camera composition.",
+      "motion_prompt": "Very slow push-in toward the figure in the lab, the laboratory light steady."
+    },
+    {
+      "narration": "He died in the 1950s.",
+      "image_prompt": "A simple grave marker in a Mexico City cemetery — white stone, carved with a name and two dates: one in the 1920s, one in the 1950s. Fresh flowers rest at its base. Dappled afternoon light falls through nearby trees. The marker is clean and well-tended. No people. The cemetery is quiet.",
+      "motion_prompt": "Slow push-in toward the grave marker, light and shadow shifting almost imperceptibly through the trees."
+    },
+    {
+      "narration": "Werner became an electrical engineer.",
+      "image_prompt": "A 1960s engineering office — drafting tables, blueprints pinned to boards, a fluorescent overhead lamp. A man in his thirties (Werner as an adult), in shirtsleeves with a pocket protector, leans over a large technical drawing, a pencil in one hand. His face is not clearly visible — three-quarter back-of-camera composition. A model of an electrical component sits on the shelf behind him. Period office detail.",
+      "motion_prompt": "Very slow push-in toward the drafting table, the fluorescent light steady in the still frame."
+    },
+    {
+      "narration": "He lived in Mexico, then Colorado, then New Hampshire.",
+      "image_prompt": "A series-feel composition — at left, a sun-drenched Mexican street with a modest house; in the centre, a Colorado mountain road with pine trees and a modest wooden house; at right, a New Hampshire winter scene with a small clapboard house under snow. Each a quiet residential scene with no people in focus. Composition suggests a triptych of homes across decades.",
+      "motion_prompt": "Slow pan from left to right across the three scenes, the light changing from warm to cool."
+    },
+    {
+      "narration": "He almost never spoke about what happened.",
+      "image_prompt": "Werner Doehner in later life — a white-haired man in his late seventies seated at a simple kitchen table with a cup of coffee. He looks out a window at an overcast New Hampshire day. His face is quiet, private, and far away — recognisably the same observant eyes from childhood, decades on. The kitchen is simple and lived-in — an ordinary American domestic scene. A newspaper on the table is folded, unread. Single-character intimate composition.",
+      "motion_prompt": "Barely perceptible slow push-in toward Werner's still, distant face, the window light steady."
+    },
+    {
+      "narration": "When he died in 2019, at age 90, he was the last living person who had been on the Hindenburg.",
+      "image_prompt": "A New Hampshire residential street in autumn — a modest clapboard house set back from the road, its lights on in the early evening. Fallen leaves cover the lawn. A single car in the driveway. The scene is achingly ordinary. The lit windows glow warmly against the darkening sky. No people. Composition: domestic landscape, the final home.",
+      "motion_prompt": "Very slow push-in toward the lit windows of the house, the autumn leaves shifting faintly."
+    },
+    {
+      "narration": "The film in Hermann's camera was never recovered.",
+      "image_prompt": "Hermann's 1930s movie camera — the same bulky leather-cased device — but now shown as it would have been found: the casing warped by heat, the film compartment burst open and blackened, the lens cracked. It rests among fragments of dark ash and twisted metal from the wreckage. A single recognisable element — the lens ring — catches a faint glint of light. Detail shot, no people. The destroyed object as final image.",
+      "motion_prompt": "Slow push-in toward the destroyed camera, ash drifting faintly across the surface."
+    }
+  ]
+}

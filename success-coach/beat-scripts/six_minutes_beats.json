@@ -1,0 +1,434 @@
+{
+  "canon": {
+    "sarah": "Sarah Patel, exactly 32, average height and slim athletic build with naturally good posture, light olive Mediterranean skin tone (NOT pale Northern European, NOT dark), shoulder-length straight glossy dark brown hair parted in the middle with no fringe and no layers, falling to just past the collarbone, thick natural medium-brown eyebrows with a slight natural arch, deep warm brown almond-shaped eyes with long natural lashes, oval face with defined cheekbones and a slightly pointed chin, straight medium-length nose, full but not large lips, calm composed thoughtful expression with the natural focus of someone who listens before speaking, minimal natural makeup (no heavy contouring, no bold lip), wearing a perfectly fitted charcoal grey single-breasted wool blazer with notched lapels open at the front over a plain cream silk blouse with a small open collar, no necklace, no rings, no earrings, no watch, no glasses, contemporary 2026 professional setting, photoreal cinematic",
+    "sarah_home": "{sarah}, at home in early morning soft natural light through a kitchen window",
+    "sarah_office": "{sarah}, in a modern open-plan office under soft cool daylight, dignified and focused",
+    "sarah_meeting": "{sarah}, seated at a small light-wood meeting room table, calm and composed",
+    "mark": "Mark, exactly 48, average height and slightly stocky build with broad shoulders, fair Northern European skin with subtle natural age lines, full head of neatly cut short dark brown hair with visible silvery grey only at the temples (NOT thinning, NOT balding, just naturally maturing), clean-shaven, square-jawed kind face with deep-set warm grey-blue eyes (NOT brown, NOT hazel), neat medium-thick dark eyebrows with a few grey strands, a straight broad nose with a slight definition at the bridge, full but not large lips, fine lines around the eyes from years of considered listening, the calm settled expression of an experienced senior manager who genuinely cares about his team, wearing a dark charcoal-navy single-breasted suit jacket OPEN at the front over a plain pale blue button-down shirt with the TOP BUTTON UNDONE and NO TIE EVER, no pocket square, no tie clip, no visible watch, no glasses, contemporary 2026 corporate setting, photoreal cinematic",
+    "mark_meeting": "{mark}, seated across a small light-wood meeting room table with an open laptop in front of him",
+    "meeting_room": "A small modern glass-walled corporate meeting room with a polished light wood table and two leather chairs, floor-to-ceiling windows showing soft late-afternoon city light, neutral grey carpet, no other people, no distracting screens or signage, contemporary 2026 photoreal cinematic",
+    "office": "A modern open-plan corporate office with rows of desks visible in soft focus, neutral grey and wood tones, normal mid-tier company aesthetic not a Silicon Valley startup, soft natural daylight, contemporary 2026 photoreal"
+  },
+  "beats": [
+    {
+      "narration": "I want to tell you about six minutes. The most important six minutes in Sarah's career.",
+      "image_prompt": "A close cinematic detail of a sleek modern minimalist wall clock with a simple white face and slim black hands on a grey office wall, soft cool daylight, the corner of a modern office desk visible at the lower edge of frame, the second hand poised mid-tick, contemporary 2026 photoreal corporate setting",
+      "motion_prompt": "Almost still. The second hand of the clock moving in a very slow deliberate tick."
+    },
+    {
+      "narration": "She walked into a meeting room earning fifty-eight thousand. She walked out earning a hundred and twenty.",
+      "image_prompt": "A wide cinematic shot of a single empty modern glass-walled meeting room seen from the corridor outside, the small light-wood table and two leather chairs visible through the glass, soft late afternoon daylight, no people, the small unremarkable space where the conversation will happen, contemporary 2026 photoreal cinematic",
+      "motion_prompt": "Very slow gentle drift toward the meeting room. The empty space steady. Faint light shifting on the glass."
+    },
+    {
+      "narration": "It was not luck. It was not a clever trick taught in a book.",
+      "image_prompt": "Close intimate detail of a closed business book on a wooden home desk in soft warm evening light, the title not legible, a single empty wine glass beside it, the deliberate absence of a guru or formula, photorealistic contemporary domestic",
+      "motion_prompt": "Almost still. The slow drift of warm evening light across the desk and the closed book."
+    },
+    {
+      "narration": "It was three small choices she made in those six minutes.",
+      "image_prompt": "Close cinematic detail of three index-finger taps on the cover of a CLOSED black leather notebook on a wooden home desk, the cover plain and unmarked, a black pen resting beside it, soft warm lamp light, the gesture of pointing-to-three-things without any text visible, contemporary 2026 photoreal intimate",
+      "motion_prompt": "Slow deliberate motion of three fingertip taps on the notebook cover. Warm steady lamp light."
+    },
+    {
+      "narration": "Most professionals get this moment wrong. Here is exactly what she did, and why it worked.",
+      "image_prompt": "A wide atmospheric cinematic shot of a modern office building at late afternoon golden hour, tall windows reflecting the warm sky, the building seen from across the street, the suggestion of a thousand conversations happening behind those windows, contemporary 2026 photoreal cinematic",
+      "motion_prompt": "Very slow gentle drift across the office building facade. The golden light steady, the building still."
+    },
+    {
+      "narration": "She has been at her company for three years and eight months.",
+      "image_prompt": "{sarah_office} at her desk in early morning soft daylight, a coffee cup beside her keyboard, the office not yet busy, a calm familiar workspace",
+      "motion_prompt": "Slow gentle motion of fingers on a keyboard. Steady cool daylight."
+    },
+    {
+      "narration": "She knows exactly what she is worth. She has done the research.",
+      "image_prompt": "Close intimate detail of Sarah's hands at her laptop, the screen showing a clean spreadsheet of salary comparables in soft focus, the actual numbers not legible, just the shape of careful research, warm desk lamp light",
+      "motion_prompt": "Slow careful motion of fingers across the laptop trackpad. Warm steady light."
+    },
+    {
+      "narration": "Two competitor offers sit in her drawer. She has not used them.",
+      "image_prompt": "Close detail of a slightly open desk drawer revealing two folded white printed letters with a corporate letterhead at the top, the drawer half closed, the letters partly hidden, warm desk lamp light, photorealistic intimate office detail",
+      "motion_prompt": "Almost still. The drawer faintly catching the light as if just touched."
+    },
+    {
+      "narration": "Today is her annual review. The conversation she has avoided for a year.",
+      "image_prompt": "Close detail of a desk calendar with one specific date circled in pen and the words ANNUAL REVIEW handwritten beside it, soft daylight from a nearby window, the deliberate human handwriting visible but the wider page out of focus",
+      "motion_prompt": "Slow gentle drift of light across the calendar page. The circled date in focus."
+    },
+    {
+      "narration": "Her boss is a kind man. That is part of the problem.",
+      "image_prompt": "{mark} smiling warmly across an office floor while passing in the corridor, professional and approachable, friendly but in a hurry, contemporary office context, soft daylight",
+      "motion_prompt": "Slow natural motion of a man walking past with a brief friendly smile."
+    },
+    {
+      "narration": "Kind bosses give kind raises. Three percent. Maybe four.",
+      "image_prompt": "Close detail of a printed annual review document on a desk showing percentage figures and small text, the words too small to fully read but the general layout of a corporate compensation letter visible, soft cool office light",
+      "motion_prompt": "Still. Soft cool light moving very slowly across the paper."
+    },
+    {
+      "narration": "She has watched colleagues leave for forty-thousand-pound jumps.",
+      "image_prompt": "An empty desk in a modern open-plan office, a chair pushed in, no monitor, no personal items, the absence of a recently departed colleague, soft cool daylight, contemporary office setting",
+      "motion_prompt": "Almost still. The faintest drift of light across the empty desk."
+    },
+    {
+      "narration": "She has stayed because she likes the team. The work. The familiar walk to the kitchen.",
+      "image_prompt": "Wide soft shot of a modern open-plan office mid-morning, a few people working at desks in soft focus, sunlight through tall windows, the warm familiarity of a workplace she has stayed in, photorealistic contemporary",
+      "motion_prompt": "Slow gentle drift across the office. Faint movement of distant figures at desks."
+    },
+    {
+      "narration": "But she has been paying for that loyalty every single month.",
+      "image_prompt": "Close intimate detail of Sarah's hands holding a folded piece of A4 paper at a kitchen table at home, the paper held at a strong oblique angle so its contents face downward and only the blank back of the page is visible to the camera, the gesture of a private financial document being reviewed without revealing its contents, soft warm morning light, photorealistic contemporary domestic",
+      "motion_prompt": "Slow careful motion of hands holding the folded paper. Warm steady morning light."
+    },
+    {
+      "narration": "Today she is going to ask for what she is worth.",
+      "image_prompt": "Close intimate portrait of {sarah_home}, framed head-and-shoulders at slight three-quarter angle, calm composed expression, the quiet resolve of someone who has decided, the warm morning light catching the side of her face, photorealistic contemporary intimate portrait",
+      "motion_prompt": "Very slow intimate motion. The almost imperceptible breath, the held composure."
+    },
+    {
+      "narration": "She wakes at six. She prepares like she is interviewing for the job she already has.",
+      "image_prompt": "{sarah_home}, standing at a kitchen counter with a notebook open in front of her, an empty coffee cup beside it, focused and methodical, soft cool early morning light through a window",
+      "motion_prompt": "Slow gentle motion of a hand turning a notebook page. Cool early morning light steady."
+    },
+    {
+      "narration": "She makes a list. Three columns. Achievements. Comparables. Counter-arguments.",
+      "image_prompt": "Close overhead detail of a hand drawing three short vertical lines on a notebook page as if dividing it into columns, only the dividing lines visible and no letters or words rendered, the hand mid-gesture with a black pen, soft warm light, the structure of preparation visible without any legible content, contemporary 2026 photoreal intimate",
+      "motion_prompt": "Slow gentle motion of the pen drawing on the page. Warm steady light."
+    },
+    {
+      "narration": "She practises one sentence in the mirror until it sounds natural.",
+      "image_prompt": "{sarah_home} reflected in a bathroom mirror, soft warm morning light, her lips moving slightly as she rehearses, calm composed face, the focus and self-direction of preparation, photorealistic contemporary intimate",
+      "motion_prompt": "Slow intimate motion. The faint movement of lips, the steady held gaze in the mirror."
+    },
+    {
+      "narration": "The sentence is: I need a hundred and twenty for me to stay.",
+      "image_prompt": "Close intimate portrait of Sarah's face in the mirror, her lips clearly forming the words of the practised sentence, calm and quietly resolved, soft warm bathroom light, photorealistic contemporary",
+      "motion_prompt": "Very slow intimate motion of the speaking lips. Soft warm light steady."
+    },
+    {
+      "narration": "She does not soften it. She does not pad it. She does not apologise for it.",
+      "image_prompt": "{sarah_home}, mirror reflection, calm resolved expression, the deliberate clarity of someone who has decided not to back down, soft warm morning light, photorealistic contemporary",
+      "motion_prompt": "Almost still. The held composed face. Steady warm light."
+    },
+    {
+      "narration": "She does not dread this conversation. She is going to lead it.",
+      "image_prompt": "{sarah_home}, putting on her charcoal blazer in front of a full-length mirror, calm and prepared, soft warm morning light through a bedroom window, photorealistic contemporary",
+      "motion_prompt": "Slow careful motion of arms slipping into the blazer sleeves. Steady warm light."
+    },
+    {
+      "narration": "At nine she walks into the office. Coffee in hand. Completely normal.",
+      "image_prompt": "{sarah_office} arriving through a glass office entrance carrying a takeaway coffee cup, professional and composed, soft cool morning light, other people moving past her in soft focus, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of a confident walk through an office entrance. Faint movement of figures in the background."
+    },
+    {
+      "narration": "At ten the calendar reminder fires. Review with Mark, eleven thirty.",
+      "image_prompt": "Close detail of a laptop screen showing a calendar notification popup with the words REVIEW WITH MARK 11:30 AM visible against a clean office desktop background, soft cool daylight on the screen, photorealistic contemporary office",
+      "motion_prompt": "Almost still. The faint glow of the screen, the notification dialog visible."
+    },
+    {
+      "narration": "At eleven she stops working. She rereads her list. She closes her notebook.",
+      "image_prompt": "Close intimate detail of Sarah's hands at her desk closing a small notebook with deliberate care, the cover plain and worn, her keyboard and screen visible in soft focus, the moment of pause before the meeting, soft cool office light",
+      "motion_prompt": "Slow deliberate motion of hands closing the notebook. Steady cool daylight."
+    },
+    {
+      "narration": "At eleven twenty-eight she walks across the office to the glass meeting room.",
+      "image_prompt": "{sarah_office} walking past rows of colleagues' desks toward a glass-walled meeting room visible at the end of an open-plan office, calm purposeful posture, soft cool daylight, other people working in soft focus, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of a measured purposeful walk across the office floor."
+    },
+    {
+      "narration": "Mark is already there. Laptop open. Friendly smile. He likes her.",
+      "image_prompt": "{mark_meeting} looking up with a warm friendly smile toward the door of the glass meeting room as Sarah arrives, kind and welcoming, late morning daylight through the meeting room windows, photorealistic contemporary corporate",
+      "motion_prompt": "Slow natural motion of looking up with a friendly smile. Steady daylight."
+    },
+    {
+      "narration": "He starts the way kind bosses start. He asks how her year has been.",
+      "image_prompt": "{mark_meeting} and {sarah_meeting} seated across the small meeting room table, Mark speaking warmly with hands gesturing slightly, Sarah listening attentively, the casual professional opening of a review conversation, daylight through floor-to-ceiling windows, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of two people in conversation, gentle hand gestures, attentive listening."
+    },
+    {
+      "narration": "She tells him. Briefly. She does not list. She tells him she had a good year.",
+      "image_prompt": "Close intimate shot of {sarah_meeting} speaking calmly across the small light-wood meeting room table, her charcoal grey blazer still on over the cream silk blouse exactly as she entered, composed and unhurried, deliberate not defensive, soft daylight from the floor-to-ceiling windows, photorealistic contemporary intimate portrait",
+      "motion_prompt": "Slow gentle motion of speaking lips and calm steady eye contact. Steady soft daylight."
+    },
+    {
+      "narration": "He nods. He brings up her file on his screen.",
+      "image_prompt": "Close intimate detail of Mark's hands on his laptop keyboard, the screen showing the top of a corporate HR document with a small portrait photograph of Sarah visible in the upper corner, the specific text not legible, soft cool office light",
+      "motion_prompt": "Slow careful motion of hands moving across the laptop trackpad. Steady cool light."
+    },
+    {
+      "narration": "He says the team values her. He says she has grown significantly.",
+      "image_prompt": "{mark_meeting} speaking with sincere warmth, gesturing slightly with one hand toward the screen, the genuine appreciation of a kind manager, daylight through the meeting room windows, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of speaking and gesturing. Steady warm daylight."
+    },
+    {
+      "narration": "He pauses. Like he is about to give her a gift.",
+      "image_prompt": "Close intimate portrait of Mark's face mid-pause, kind expression, the small held breath of someone delivering what he believes is good news, soft daylight, photorealistic contemporary intimate",
+      "motion_prompt": "Almost still. The held breath, the small intake before speaking. Steady soft light."
+    },
+    {
+      "narration": "He says they would like to offer her a four percent raise.",
+      "image_prompt": "{mark_meeting} speaking the words across the table with a kind hopeful smile, leaning very slightly forward, the moment of the offer being made, daylight through the windows, photorealistic contemporary intimate",
+      "motion_prompt": "Slow natural motion of speaking lips and the small lean forward. Steady warm daylight."
+    },
+    {
+      "narration": "Four percent on fifty-eight is two thousand three hundred and twenty pounds a year.",
+      "image_prompt": "Close detail of a corporate HR document on the meeting room table showing a printed compensation summary with percentage figures visible but the specific numbers out of focus, soft cool daylight on the paper, photorealistic intimate document detail",
+      "motion_prompt": "Still. Soft cool light moving very slowly across the printed page."
+    },
+    {
+      "narration": "After tax, fewer than fifteen hundred. About a hundred and twenty pounds a month.",
+      "image_prompt": "Close intimate detail of a folded bank statement and a calculator on a wooden home desk in soft warm evening light, an empty wine glass nearby, the small private mathematics of a real salary increase, photorealistic contemporary domestic",
+      "motion_prompt": "Almost still. The faintest drift of warm evening light across the desk."
+    },
+    {
+      "narration": "She does not react. She does not nod. She does not thank him.",
+      "image_prompt": "Close intimate portrait of Sarah's calm composed face across the meeting room table, holding completely still, the deliberate withheld reaction, no expression of either pleasure or offence, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Almost still. The held composure, the small slow blink, the deliberate stillness."
+    },
+    {
+      "narration": "She lets the number sit between them. Five seconds. Then ten.",
+      "image_prompt": "A wide intimate two-shot of Sarah and Mark seated across the meeting room table in held silence, neither speaking, the unspoken tension between them visible, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Almost still. The held silence. Faintest movement of dust in the daylight."
+    },
+    {
+      "narration": "Mark fills the silence. He says he knows it is not a lot.",
+      "image_prompt": "Close intimate portrait of Mark speaking with a small apologetic tilt of the head, the discomfort of a kind manager facing his own offer, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of speaking and the small head tilt. Steady soft daylight."
+    },
+    {
+      "narration": "He says budgets are tight this year. He says he hopes she understands.",
+      "image_prompt": "{mark_meeting}, hands turning slightly upward in a small gesture of apology, kind professional face, the genuine constraint of someone who cannot offer more, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow gentle motion of hands turning upward. Steady soft daylight."
+    },
+    {
+      "narration": "Now is the moment she has practised. She does not rush it.",
+      "image_prompt": "Close intimate portrait of Sarah's calm composed face, the small slow inhale before she speaks, the practised resolve, soft daylight, photorealistic contemporary intimate",
+      "motion_prompt": "Very slow intimate motion. The small breath before speech. Steady soft light."
+    },
+    {
+      "narration": "She says, Mark, I appreciate the offer. I want to be honest with you.",
+      "image_prompt": "{sarah_meeting} speaking calmly across the table, direct steady eye contact with Mark, no aggression no apology, the considered honesty of a professional, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of speaking lips and steady held eye contact. Soft daylight steady."
+    },
+    {
+      "narration": "She says, I have done some research. And I have had two conversations.",
+      "image_prompt": "Close intimate portrait of Sarah speaking with measured calm, the small implicit weight of unrevealed information, deliberate not threatening, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of speaking. The steady composed delivery."
+    },
+    {
+      "narration": "She does not name the companies. She does not show the offers.",
+      "image_prompt": "Close intimate detail of Sarah's hands resting calmly on the meeting room table, no papers in front of her, no folder, the deliberate absence of evidence, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Almost still. The composed hands on the bare table. Steady soft light."
+    },
+    {
+      "narration": "She says, The market for someone with my work is between one hundred and ten and one hundred and thirty.",
+      "image_prompt": "{sarah_meeting} delivering the number with calm professional certainty, no chart no document, just the words held in steady eye contact, the authority of having done the research, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of speaking, steady composed eye contact across the table."
+    },
+    {
+      "narration": "She says, I love the team. I would prefer to stay.",
+      "image_prompt": "Close intimate portrait of Sarah's face speaking with genuine warmth, the sincerity that this is not a threat, soft daylight, photorealistic contemporary intimate portrait",
+      "motion_prompt": "Slow natural motion of speaking with the small warmth of meant words."
+    },
+    {
+      "narration": "She says, I need a hundred and twenty for me to stay.",
+      "image_prompt": "Close intimate portrait of Sarah's calm composed face delivering the practised sentence with measured clarity, the moment of the actual request, no apology in the face, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Very slow intimate motion of the speaking lips. The held composure after the words land."
+    },
+    {
+      "narration": "Then she stops. She does not explain. She does not justify. She does not add anything.",
+      "image_prompt": "Close intimate portrait of Sarah's face holding completely still after speaking, the deliberate post-sentence silence, no nervous addition, no softening words, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Almost still. The held silence after the words. The small slow blink."
+    },
+    {
+      "narration": "Mark looks at her. He looks at his laptop. He looks at her again.",
+      "image_prompt": "{mark_meeting} mid-pause, his gaze moving from Sarah to the laptop screen and back, the small visible recalculation of a manager who was not expecting this, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of the gaze shifting between the laptop and Sarah's face."
+    },
+    {
+      "narration": "He says he was not expecting this. She does not fill the silence.",
+      "image_prompt": "A wide intimate two-shot of Mark speaking and Sarah listening in held composed silence, the asymmetry of the conversation now visible, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of Mark speaking. Sarah held completely still in receptive silence."
+    },
+    {
+      "narration": "He says he will need to talk to his director. She nods, once.",
+      "image_prompt": "Close intimate portrait of Sarah giving a single small composed nod of acknowledgement, no eagerness, no anxiety, just the small acceptance of a process, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Very slow precise motion of a single small nod. The held composure."
+    },
+    {
+      "narration": "She says, I understand. Take whatever time you need.",
+      "image_prompt": "{sarah_meeting} speaking calmly with quiet professional grace, the absence of pressure, the position of strength held lightly, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of speaking. The held composed warmth."
+    },
+    {
+      "narration": "She says, I would like the offer in writing before I respond either way.",
+      "image_prompt": "Close intimate portrait of Sarah's face delivering the final professional condition, calm and clear, the deliberate request for documentation, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of speaking. Steady held eye contact across the table."
+    },
+    {
+      "narration": "She stands up. She thanks him for his time. She walks out.",
+      "image_prompt": "{sarah_meeting} standing up from the table with composed unhurried grace, gathering nothing because she brought nothing, walking toward the glass meeting room door, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of standing up and turning toward the door. The unhurried departure."
+    },
+    {
+      "narration": "Six minutes have passed. The meeting ended seventeen minutes early.",
+      "image_prompt": "Close detail of a digital wall clock or laptop screen clock showing the time visibly earlier than expected, the small surprise of an unexpectedly short meeting, soft daylight on the surface, photorealistic contemporary office",
+      "motion_prompt": "Still. The clock display steady. Soft light moving very slowly across the surface."
+    },
+    {
+      "narration": "Mark sits alone for two of those minutes before he calls his director.",
+      "image_prompt": "{mark} alone at the meeting room table in soft late afternoon light, hands resting on the closed laptop, the held silence of a manager rethinking what just happened, photorealistic contemporary intimate",
+      "motion_prompt": "Almost still. The held silence. The small slow breath of recalculation."
+    },
+    {
+      "narration": "By the end of the day she has an email. The number is one hundred and fifteen.",
+      "image_prompt": "Close intimate detail of Sarah's hand resting on a closed laptop on a home desk in soft warm evening lamp light, the laptop angled so the screen is not visible to the camera, a simple coffee cup beside it, the gesture of waiting after sending or receiving an important email without showing any screen content, photorealistic contemporary domestic",
+      "motion_prompt": "Almost still. The hand resting on the closed laptop. Faint warm light moving across the desk."
+    },
+    {
+      "narration": "She does not reply that evening. She does not reply the next morning.",
+      "image_prompt": "Close intimate detail of Sarah's hands closing a laptop in soft warm evening light at a home desk, deliberate and unhurried, the small mastery of not responding immediately, photorealistic contemporary domestic",
+      "motion_prompt": "Slow careful motion of hands closing the laptop. Warm steady evening light."
+    },
+    {
+      "narration": "She replies at three the next afternoon. One paragraph. Calm.",
+      "image_prompt": "Close intimate detail of Sarah's hands typing at a laptop in soft cool afternoon light, the screen showing a partly composed email reply, deliberate and composed, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of fingers typing. Steady cool afternoon light."
+    },
+    {
+      "narration": "She thanks him for moving so quickly. She says one hundred and fifteen is close.",
+      "image_prompt": "Close intimate portrait of Sarah's calm composed face reading the screen at her home desk, soft cool afternoon light, the quiet professional command of the moment, photorealistic contemporary",
+      "motion_prompt": "Almost still. The thoughtful held face, soft afternoon light steady."
+    },
+    {
+      "narration": "She says she would accept one hundred and twenty plus an additional week of leave.",
+      "image_prompt": "Close intimate detail of Sarah's hands at the laptop keyboard, fingers paused mid-thought above the keys, the deliberate composition of a specific counter, soft cool light, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of fingers pausing above the keyboard. The composed thinking moment."
+    },
+    {
+      "narration": "She signs off. Closes her laptop. Does not refresh her inbox.",
+      "image_prompt": "Close detail of a closed laptop on a wooden home desk in soft afternoon light, a coffee cup beside it, the deliberate restraint of not waiting for a reply, photorealistic contemporary",
+      "motion_prompt": "Almost still. The faint drift of light across the closed laptop."
+    },
+    {
+      "narration": "The reply comes back at five. One hundred and twenty. The extra leave approved.",
+      "image_prompt": "Close intimate detail of a laptop screen showing a new email notification in soft late afternoon home light, the small visible joy of an unopened message that already contains the answer, photorealistic contemporary",
+      "motion_prompt": "Still. The screen glow steady. The notification visible against the open laptop."
+    },
+    {
+      "narration": "She accepts in writing. One short professional sentence. Thank you. I look forward to continuing.",
+      "image_prompt": "Close intimate detail of Sarah's hands typing a short final reply, the brief professional acceptance, soft warm evening light at the home desk, photorealistic contemporary domestic",
+      "motion_prompt": "Slow careful motion of fingers typing the short reply. Warm steady evening light."
+    },
+    {
+      "narration": "She closes the laptop. She does not tell anyone for two days.",
+      "image_prompt": "{sarah_home} sitting alone at the kitchen table in soft warm evening light with a glass of wine, no phone in hand, the private celebration of a private win, photorealistic contemporary intimate",
+      "motion_prompt": "Almost still. The slow held breath. The warm light gentle across the face."
+    },
+    {
+      "narration": "Her base salary has more than doubled in nine minutes of actual conversation.",
+      "image_prompt": "Close intimate portrait of Sarah's calm face in soft warm evening home light, the quiet recognition of what just happened, no triumph just understanding, photorealistic contemporary intimate portrait",
+      "motion_prompt": "Very slow intimate motion. The held composed face. Warm light steady."
+    },
+    {
+      "narration": "After tax that is approximately three thousand four hundred pounds a month more.",
+      "image_prompt": "Close detail of a small notebook with calm methodical handwriting calculating monthly amounts in soft warm light, the private mathematics of a new financial reality, photorealistic contemporary",
+      "motion_prompt": "Still. Warm light shifting very slowly across the handwritten figures."
+    },
+    {
+      "narration": "Forty thousand more a year. For the rest of her career. Compounded.",
+      "image_prompt": "A wide warm domestic scene of Sarah's living room in soft evening light, a window with view of a city beyond, the suggestion of a long future ahead, photorealistic contemporary intimate",
+      "motion_prompt": "Slow gentle drift across the room. The soft evening light steady through the window."
+    },
+    {
+      "narration": "She did not threaten. She did not show her competing offers.",
+      "image_prompt": "Close intimate detail of the two folded competitor offer letters still sitting unopened in Sarah's desk drawer at home, soft warm light, the deliberate restraint of unused leverage, photorealistic contemporary",
+      "motion_prompt": "Almost still. The faintest drift of warm light across the folded letters."
+    },
+    {
+      "narration": "She did not list her achievements. She did not ask for permission.",
+      "image_prompt": "{sarah_home} in soft warm evening light, the calm composed face of someone who knew her own worth and stated it, photorealistic contemporary intimate portrait",
+      "motion_prompt": "Almost still. The held composed face. The warm light steady."
+    },
+    {
+      "narration": "She named her number. She held the silence. She left.",
+      "image_prompt": "A wide intimate composition of Sarah walking calmly through the modern office at the end of the day, professional and unhurried, the late afternoon light through tall windows, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of an unhurried walk. The late afternoon light steady."
+    },
+    {
+      "narration": "That is the whole technique. Three things. Six minutes.",
+      "image_prompt": "Close intimate detail of three handwritten lines in Sarah's notebook listing the three moves of the technique in calm clear handwriting, soft warm light, the specific words not fully legible but the structure of three principles visible, photorealistic contemporary",
+      "motion_prompt": "Still. Warm light moving slowly across the handwritten page."
+    },
+    {
+      "narration": "Most professionals do not ask. They wait to be given.",
+      "image_prompt": "A wide composed view of a row of empty desks in a modern open-plan office in soft cool light, the absence of people, the symbolic weight of unrealised value, photorealistic contemporary",
+      "motion_prompt": "Almost still. The slow drift of cool light across the empty workspace."
+    },
+    {
+      "narration": "They confuse loyalty with patience. They confuse politeness with weakness.",
+      "image_prompt": "Close intimate composition of a single empty office chair pulled neatly under a desk in soft cool office light, the chair photographed straight on with no other chair anywhere in the frame, the small symbol of professional stillness, photorealistic contemporary",
+      "motion_prompt": "Almost still. The chair held in soft steady light."
+    },
+    {
+      "narration": "They believe a good boss will eventually notice their worth.",
+      "image_prompt": "A modern open-plan office in soft daylight with people working quietly at their desks, all heads down, the universal posture of patient hope, photorealistic contemporary",
+      "motion_prompt": "Slow gentle drift across the office. Faint movement of distant figures at their work."
+    },
+    {
+      "narration": "Good bosses notice. They still pay you the budget number.",
+      "image_prompt": "{mark} at his own desk in soft daylight reviewing a corporate spreadsheet on his screen, kind and professional, the genuine constraint of someone working within his given budget, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of reviewing a screen. Steady cool office light."
+    },
+    {
+      "narration": "Sarah's boss did not become unkind when she asked for more.",
+      "image_prompt": "{mark_meeting} and {sarah_meeting} again in the meeting room but in a different later moment, both calm and professional, the conversation continuing without conflict, soft daylight, photorealistic contemporary",
+      "motion_prompt": "Slow natural motion of two professionals in continuing conversation. Steady daylight."
+    },
+    {
+      "narration": "He paid her more because she asked for more. He still liked her.",
+      "image_prompt": "{mark} smiling warmly across an office floor at Sarah in passing, the professional warmth fully intact after the negotiation, contemporary modern office setting, photorealistic",
+      "motion_prompt": "Slow natural motion of a friendly nod in passing. The warmth held steady."
+    },
+    {
+      "narration": "The conversation was not a fight. It was a clarification.",
+      "image_prompt": "A wide composed view of the empty glass meeting room in soft late afternoon light, the two empty chairs across the table, the small unremarkable space where a single conversation changed a career, photorealistic contemporary",
+      "motion_prompt": "Almost still. Slow drift of late afternoon light across the empty room."
+    },
+    {
+      "narration": "She told him what she was worth. He paid it.",
+      "image_prompt": "{sarah_office} at her desk months later in soft daylight, calm and composed, professionally established, photorealistic contemporary",
+      "motion_prompt": "Almost still. The composed working figure. Steady daylight."
+    },
+    {
+      "narration": "Three things she did. She named her number, specifically.",
+      "image_prompt": "Close cinematic detail of Sarah's hand circling a number on a notebook page with a deliberate confident pen-stroke, the number itself partially obscured by her hand and pen and in shallow depth of field so it cannot be read, the gesture of underlining one's worth visible without the specific digits legible, soft warm lamplight, contemporary 2026 photoreal intimate",
+      "motion_prompt": "Slow deliberate motion of the pen circling the number. Warm steady lamp light."
+    },
+    {
+      "narration": "She held the silence. She did not justify or explain.",
+      "image_prompt": "A wide intimate cinematic two-shot of the empty meeting room with two chairs across the small wooden table seen from a low angle, the held silence between absent speakers visible in the space itself, soft daylight, contemporary 2026 photoreal cinematic",
+      "motion_prompt": "Almost still. The empty space held. Faintest drift of daylight across the wood."
+    },
+    {
+      "narration": "She did not respond immediately. She gave herself time.",
+      "image_prompt": "Close intimate detail of a closed laptop on a wooden home desk in soft warm evening light, a coffee cup beside it untouched, the deliberate restraint of an email not yet replied to, contemporary 2026 photoreal domestic",
+      "motion_prompt": "Almost still. The faint drift of warm evening light across the closed laptop."
+    },
+    {
+      "narration": "That is six minutes. That is forty thousand pounds a year.",
+      "image_prompt": "A wide warm cinematic shot of Sarah's living room window at evening with city lights beginning to appear beyond the glass, the suggestion of a long good life ahead, soft warm interior light, contemporary 2026 photoreal cinematic",
+      "motion_prompt": "Very slow drift toward the window. The city lights beginning to glow."
+    },
+    {
+      "narration": "Compounded across a career, that single conversation is worth more than a house.",
+      "image_prompt": "A wide cinematic atmospheric shot of a row of warm-lit houses on a quiet evening street, the suggestion of stability and arrival, soft golden hour light, contemporary 2026 photoreal cinematic",
+      "motion_prompt": "Very slow drift along the row of warm-lit houses. The golden light steady."
+    },
+    {
+      "narration": "Have the conversation. Most of you have earned it already.",
+      "image_prompt": "A wide composed cinematic shot of an empty modern meeting room with two chairs across a small table in soft late afternoon light, the door slightly ajar, the visible invitation of an empty space waiting to be used, contemporary 2026 photoreal cinematic",
+      "motion_prompt": "Very slow drift toward the slightly open door. The late afternoon light steady. The empty waiting space held to the final frame."
+    }
+  ]
+}

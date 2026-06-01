@@ -1,0 +1,48 @@
+{
+  "canon": {
+    "coach_avatar": "Coach Alex, a friendly approachable man in his mid-forties with a kind face that radiates genuine warmth (an ordinary likeable face, NOT polished, NOT symmetrically perfect, NOT the manicured handsome look of a fashion model or LinkedIn-influencer headshot), very fair skin with a light natural tan, very short closely-cropped dark brown hair worn almost buzzed on the sides and only slightly longer but still very short on top with natural texture (no styled part, no fringe, slightly receding at the temples as a real man's hair in his forties), clean-shaven, clear bright blue eyes that crinkle warmly at the corners with subtle crow's-feet, medium dark eyebrows, an oval friendly face with broader friendly jaw (defined but NOT chiselled, NOT model-sculpted), slightly rounded cheeks when he smiles, a wide open genuinely joyful smile that fully shows the upper teeth (this is the most important feature — NOT a closed-mouth half-smile, NOT a smirk, NOT a polished closed expression, but the full open warm smile of someone genuinely glad to be talking to you), head level and slightly forward-leaning toward the viewer (NEVER chin-up, NEVER head tilted back, NEVER the haughty pose of a portrait subject), natural lived-in skin texture with slight asymmetry, the visible warmth of an experienced coach who actually likes his work and the people he works with, lean athletic build visible in the shoulders, wearing a dark navy quarter-zip merino knit jumper with a small visible metal zip pull at the collar, the collar of a softer pale blue collared shirt visible underneath the open zip, no tie, no blazer, the smart-casual look of a trusted coach in his home study, photoreal painterly cinematic 2026",
+    "coach_office": "warm cinematic home study, behind him a densely packed wooden bookshelf running floor-to-ceiling on the back wall with real books of varied spines and natural disorder, a few small framed family photographs deliberately out of focus enough not to be identifiable, two small framed professional awards leaning casually against books rather than mounted formally, a small antique brass desk clock on one shelf as a signature element, a single warm practical desk lamp visible creating a pool of warm light, warm brown and amber wood tones balanced by cool navy of his jumper, late afternoon warm-light feel, photoreal painterly cinematic contemporary 2026 home study setting"
+  },
+  "beats": [
+    {
+      "narration": "Reference one — neutral.",
+      "image_prompt": "{coach_avatar} seated in his {coach_office}, framed chest-up at slight three-quarter angle to camera, warm directional key light from camera-left at 45 degrees creating gentle Rembrandt-style depth, soft fill on the right, looking directly at camera with warm genuine eye contact, the natural open expression of a coach about to begin speaking, slight forward lean of interest",
+      "motion_prompt": "still"
+    },
+    {
+      "narration": "Reference two — engaged.",
+      "image_prompt": "{coach_avatar} seated in his {coach_office}, framed chest-up at slight three-quarter angle to camera, warm directional key light from camera-left at 45 degrees, looking directly at camera with a warm engaged smile that shows teeth, slight forward lean and a small lift to the eyebrows as if making a point he genuinely cares about, gentle natural light, the relatable warmth of a coach mid-explanation",
+      "motion_prompt": "still"
+    },
+    {
+      "narration": "Reference three — listening.",
+      "image_prompt": "{coach_avatar} seated in his {coach_office}, framed chest-up at slight three-quarter angle to camera, warm directional key light from camera-left at 45 degrees, looking directly at camera with a quieter more attentive expression, no smile but warmth in the eyes, the receptive face of someone actively listening to the viewer through the camera",
+      "motion_prompt": "still"
+    },
+    {
+      "narration": "Reference four — emphatic.",
+      "image_prompt": "{coach_avatar} seated in his {coach_office}, framed chest-up at slight three-quarter angle to camera, one hand visible at the lower edge of the frame in a soft open gesture (open palm, gentle emphasis), warm directional key light from camera-left at 45 degrees, looking directly at camera with the warm engaged smile of a coach making a specific point that matters, head slightly forward not chin-up",
+      "motion_prompt": "still"
+    },
+    {
+      "narration": "Reference five — closer intimate.",
+      "image_prompt": "{coach_avatar} in his {coach_office}, slightly tighter framing showing head and upper shoulders only with the bookshelf softer in the background, warm directional key light from camera-left at 45 degrees, looking directly at camera with a warm genuine smile that shows teeth, the intimate close-up of a coach delivering a key insight while genuinely glad to be doing so, the bookshelf behind in gentle bokeh",
+      "motion_prompt": "still"
+    },
+    {
+      "narration": "Reference six — wider context.",
+      "image_prompt": "{coach_avatar} in his {coach_office}, slightly wider framing showing the upper body and more of the bookshelf and warm desk lamp visible in the background, the antique brass desk clock on the shelf visible behind his shoulder as the signature element, warm directional key light from camera-left at 45 degrees, looking directly at camera with a relaxed considered expression, the wider establishing shot of a coach in his familiar space",
+      "motion_prompt": "still"
+    },
+    {
+      "narration": "Reference seven — direct address.",
+      "image_prompt": "{coach_avatar} seated in his {coach_office}, framed chest-up at very slight angle (almost direct to camera), warm directional key light from camera-left at 45 degrees, looking directly at camera with steady warm eye contact and the engaged open smile of someone giving advice that matters, slight forward lean toward the viewer, the held warmth of a coach in a quiet teaching moment",
+      "motion_prompt": "still"
+    },
+    {
+      "narration": "Reference eight — reflective.",
+      "image_prompt": "{coach_avatar} seated in his {coach_office}, framed chest-up at three-quarter angle to camera, warm directional key light from camera-left at 45 degrees, head slightly tilted in thought, looking just past the camera with a soft reflective expression as if remembering a story he's about to tell, the natural human pause of a coach gathering his thought, photoreal cinematic",
+      "motion_prompt": "still"
+    }
+  ]
+}

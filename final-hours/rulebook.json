@@ -1,0 +1,16 @@
+{
+  "negative": [
+    "modern clothing",
+    "t-shirt",
+    "wristwatch",
+    "contemporary hairstyle",
+    "eyeglasses",
+    "zippers",
+    "printed fabric",
+    "modern objects",
+    "nudity, naked figures, unclothed people, bare bodies, exposed skin on torsos; all figures must be fully clothed in period-appropriate clothing at all times",
+    "When historical accuracy requires subtle period detail (coloured facings, fine braiding, small insignia) that image models reliably render as garish or oversized, sacrifice the period detail for visual coherence; the viewer never knows the difference and the result reads cleaner"
+  ],
+  "people_directive": "include people where the narrative calls for them, with natural, well-formed faces and hands, period-accurate figures, anatomically correct, emotionally expressive, naturally posed",
+  "motion_rules": []
+}

@@ -1,0 +1,12 @@
+{
+  "name": "channel_4",
+  "status": "pre-launch",
+  "launch_target": "mid-2027 after Lazarus apprenticeship + Hetzner avatar capability",
+  "voice_id": "TBD — male voice character to be selected during R&D phase",
+  "register": "first-person protagonist with optional second-person address",
+  "protagonist": "male AI avatar — recurring character across all videos",
+  "style_suffix": "TBD — cinematic photorealistic recreation in the dignified-documentary register adapted for first-person POV protagonist work, period-accurate detail, restrained palette",
+  "default_music_prompt": "TBD — to be developed against pilot video",
+  "base_canon": {},
+  "notes": "Pre-launch. Folder structure created 1 June 2026 during strategic planning session. R&D begins mid-June after Hetzner migration (4 June 2026). First production video targets Q1 2027 after Maltese Falcon ships and Lazarus apprenticeship reaches feature-length proficiency."
+}
