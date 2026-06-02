@@ -14,6 +14,28 @@ This document is the *operational* layer. Two companion documents:
 
 The 12-step lifecycle. Use this as muscle memory once you know the system.
 
+### Step 0 — MANDATORY pre-read (every video, no exceptions)
+
+Before any script writing or storyboard generation begins, Claude must read and apply these documents. Banked from the KLM Tenerife v1 lesson on 2 June 2026 — where the script was written from generic instinct without applying the documented craft principles, resulting in violations of Principles 1, 2, 8 of script-craft (the exact Hindenburg 11% retention failure mode).
+
+For any Final Hours / Synthetic Press / Lazarus Films video, Claude reads:
+
+1. **`shared/docs/script-craft-principles.md`** — the 10+ craft principles + pre-lock audit table. Cold-open structure, trust line, sensation-not-description, clock-anchored dread, named surrounding humans, silent beats, ending on image not explanation, Principle 8 cold-open contract + 2-minute tension renewal, anonymity as craft, seeds-planted-early-harvested-late, pace-aware sensory density.
+
+2. **`shared/docs/production-patterns-that-work.md`** — the 12 production principles. Face-never-resolved as canon strategy, ensemble anonymization via framing, object-substitution for group composition, empty-room shots carry meaning, scene canons over character canons, fire-as-environment never as subject, thumbnail design starts at script lock, architectural period-accuracy, canon block before shots in beats.json, per-location shot cap, voiceover duration audit before finish, angle variation within canon.
+
+3. **`shared/docs/hook-craft-library.md`** — first 60 seconds corpus + 7-question stress-test protocol. Specific anchor, named protagonist, scale numbers, comparative anchoring, catastrophe foreshadow at 40-55s, mid-sentence cliffhanger, present-tense immersion, dramatic irony, contrast structure.
+
+4. **`shared/rulebook.json` and `<channel>/rulebook.json`** — banked production rules (universal + channel-specific). The accumulated moat from prior video failures.
+
+5. **`shared/docs/calibration-reference.md`** — channel positioning and retention benchmarks. Where this channel sits in the competitive landscape and what its retention curve should look like.
+
+**Audit gate before script lock.** After writing the script, fill in the pre-lock audit table from script-craft-principles.md. If any cell reads "weak" or "missing," revise before going to canon or storyboard generation. If any production pattern would be violated by the script's locations or character density, restructure the script before storyboard.
+
+**Audit gate before stills lock.** After storyboard generation, audit it against production-patterns-that-work.md before fal generation. Face-heavy shots, two-character cockpit/office shots, group compositions of 4+, fire-as-subject framings — flag and rewrite before burning fal credits. The audit is cheap; the reshoots are expensive.
+
+This discipline is non-negotiable for every video on every channel. The cost of reading is 5 minutes. The cost of NOT reading is a video that ships with documented retention failure modes.
+
 ### Pre-production (research + script)
 
 **Step 1.** Pick a topic. Use NexLev to validate demand. Check that no direct format competitor exists in the lane. Bank the decision in the channel's backlog document with rationale.
