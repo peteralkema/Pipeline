@@ -24,6 +24,8 @@ The 12-step lifecycle. Use this as muscle memory once you know the system.
 
 **Step 4.** Write the script as a markdown document at `<channel>/projects/<project>/script.md`. Include production notes, silent beats, capability stretches. Keep the canonical script here.
 
+**Step 4.5.** Stress-test the first 60 seconds against `shared/docs/hook-craft-library.md`. Run the 7-question gate (Section 4 of that document). If it fails 2+ checks, revise the opening before storyboarding — fixing the hook later means regenerating storyboard, stills, and voiceover.
+
 **Step 5.** Write the canon block as a markdown document at `<channel>/projects/<project>/canon.md` if the video has named recurring characters or named locations. Reference `shared/docs/production-patterns-that-work.md` for canon strategy — prefer scene canons over character canons, apply face-never-resolved for anonymous protagonists, anonymize ensemble via framing not canon.
 
 ### Production (stills generation)
@@ -480,7 +482,7 @@ The result, whichever way it lands, should be weighed against brand-consistency:
 
 ## PART 5 — OPERATING REMINDERS
 
-- **The venv name is `success-coach`** for historical reasons. Serves both channels. Don't rename it.
+- **The venv name is `pipeline`** at `~/venvs/pipeline`. Renamed from `success-coach` on 2 June 2026. Activate with `source ~/venvs/pipeline/bin/activate`.
 - **Channel detection is by `channel.json` marker**, found by walking up from CWD. `cd final-hours/` or `cd success-coach/` before running pipeline commands.
 - **Most commands run from the channel root**, not the project folder. The `--project <path>` argument is resolved against CWD. Use `projects/<name>` not bare `<name>`.
 - **First run of `make_thumbnail.py` after environment reset downloads rembg U2Net model** (~170MB) into `~/.u2net/`.
