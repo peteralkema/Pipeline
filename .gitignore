@@ -82,3 +82,7 @@ Thumbs.db
 # Loose log files anywhere
 *.log
 **/*.log
+music-results.json
+music-results.html
+music-results.json.bak
+shared/jamendo_search.py.bak
