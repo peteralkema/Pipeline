@@ -1,21 +1,79 @@
-# Synthetic — Channel 4 Hypothesis (v2)
-*Drafted 2 June 2026. Revised 2 June 2026 evening with: positioning between Drew Spartz and Hollywood as core thesis, Peter's broadcast-trained voice as moat, Amazon "Artificial" feature film competitive landscape, Mary Celeste day-one data, Anthropic IPO timing as strategic input, Episode 1 reframe to DeepSeek's Hangzhou Night.*
+# Synthetic Press — Channel 4 Hypothesis (v3)
+*Drafted 2 June 2026. Revised 2 June 2026 evening (v2 → v3) with: brand name locked as Synthetic Press, AI-vs-AGI wider-topic-universe finding from similar-channels data, two-domain strategy, multi-channel studio brand architecture across Final Hours / Lazarus Films / Synthetic Press / Success Coach.*
 
 ---
 
 ## TL;DR for re-readers
 
-Synthetic occupies a structurally underserved position in the AI documentary landscape: **slightly more professional and thoughtful than Drew Spartz / Species (the textual-doom YouTuber at 362K subs who's on-screen and genuine), but below the Netflix / Amazon big-budget commercial tier (where Andrew Garfield will play Sam Altman in Amazon's $40M "Artificial" film coming in 2026).** That middle position — dignified-documentary, AI-native production, weekly cadence, breadth-and-context coverage — has no current operator at scale.
+Synthetic Press occupies a structurally underserved position in the AI documentary landscape: **slightly more professional and thoughtful than Drew Spartz / Species (the textual-AGI-doom YouTuber at 362K subs who's on-screen and genuine), but below the Netflix / Amazon big-budget commercial tier (where Andrew Garfield will play Sam Altman in Amazon's $40M "Artificial" film coming in 2026).** That middle position — dignified-documentary, AI-native production, weekly cadence, breadth-and-context coverage — has no current operator at scale.
 
-The thesis is that the AI-history audience is already proven (Drew at 37M views over 28 videos; Amazon willing to commit $40M to a feature on the topic; three theatrical AI documentaries released in early 2026). What hasn't been served is the middle tier between those two production scales — the weekly cinematic documentary channel that contextualizes what Hollywood dramatizes and synthesizes what Drew's news-cycle videos cover in pieces.
+The thesis is that the AI-history audience is already proven (Drew at 37M views over 28 videos; Amazon willing to commit $40M to a feature; three theatrical AI documentaries released in early 2026). What hasn't been served is the middle tier between those two production scales — the weekly cinematic documentary channel that contextualizes what Hollywood dramatizes and synthesizes what Drew's news-cycle videos cover in pieces.
 
-Three operational disciplines hold the strategy together:
+Four operational disciplines hold the strategy together:
 
 1. **Topic from Drew + format from Final Hours.** Drew has satisfied the AI-doom textual-explainer audience with stock-footage-plus-text-overlay videos. Hollywood is dramatizing single events at biennial feature scale. Neither has produced weekly cinematic documentary covering the whole AI-history arc.
-2. **AI-native production is the primary moat.** Synthetic is built with AI tools to tell the story of AI. Drew can't claim this (he's on-screen, positions as a paper-reading journalist). Hollywood can't claim this (real actors, live-action cinematography). The meta-frame is structurally exclusive.
-3. **Peter's voice carries the channel.** Radio voice-over training (commercials). ZapMag youth TV presenting (South Africa). Broadcast-trained delivery. South African accent. Genuinely differentiated in a lane where most operators are either American-accented hype YouTubers or AI-voiced low-effort imitators.
+2. **AI-native production is the primary moat.** Synthetic Press is built with AI tools to tell the story of AI. Drew can't claim this (on-screen, positions as paper-reading journalist). Hollywood can't claim this (real actors, live-action cinematography). The meta-frame is structurally exclusive.
+3. **Wider topic universe than Drew's self-restricted AGI niche.** Drew's channel tagline is "Documenting AGI" — he's narrowed to AGI scenarios specifically. Synthetic Press at "AI" rather than "AGI" credibly covers AGI as a subset PLUS the entire industry-history-economics-geopolitics dimension Drew can't enter without breaking his own brand.
+4. **Peter's broadcast-trained voice carries the channel.** Radio voice-over training (commercials). ZapMag youth TV presenting (South Africa). Broadcast-trained delivery. South African accent. Genuinely differentiated in a lane where most operators are American-accented hype YouTubers or AI-voiced low-effort imitators.
 
-Pilot: **The Hangzhou Night — How DeepSeek Broke the AI Establishment** (January 20 2025, the $1 trillion overnight market cap loss). The OpenAI Empire story is being treated by Amazon at $40M budget; Synthetic enters that lane second-position to Hollywood as context-and-breadth companion in Episode 3. Episode 1 launches the channel on a story Hollywood is NOT currently dramatizing.
+**Brand identity locked.** Full name: **Synthetic Press**. Handle: **@SyntheticPress**. Visual signature: **SYNTHETIC** as standalone wordmark for thumbnails, episode opens, and channel branding. Primary domain: syntheticpress.ai. Fallback domain: synthetic-press.com.
+
+Pilot: **The Hangzhou Night — How DeepSeek Broke the AI Establishment** (January 20 2025, the $1 trillion overnight market cap loss). The OpenAI Empire story is being treated by Amazon at $40M budget; Synthetic Press enters that lane second-position to Hollywood as context-and-breadth companion in Episode 3. Episode 1 launches the channel on a story Hollywood is NOT currently dramatizing.
+
+---
+
+## The brand: Synthetic Press / SYNTHETIC
+
+Locked as of 2 June 2026 evening. Two-layer brand convention modeled on how *The New Yorker* / *The Atlantic* / *The Wall Street Journal* operate:
+
+**Synthetic Press** is the full publication name. Used in:
+- YouTube channel name and handle
+- Karen Hao and journalist outreach ("Hi, I'm Peter from Synthetic Press")
+- Episode closers ("This was Synthetic Press")
+- Domain (syntheticpress.ai)
+- Legal/credibility identity
+- Future brand extensions (Synthetic Press Newsletter, Synthetic Press Podcast, Synthetic Press Books)
+
+**SYNTHETIC** is the visual signature. Used in:
+- Channel banner
+- Thumbnail wordmark (gold serif or geometric sans-serif TBD)
+- Episode opening title cards
+- Audio-visual signature animation when commissioned
+
+The dual layer prevents brand fatigue. Drew's "Species" is one word everywhere — no register variation. Synthetic Press / SYNTHETIC creates two registers: the formal publication identity and the cinematic visual signature. Same brand, different surfaces.
+
+### Why "Synthetic Press" specifically
+
+- **Press elevates the positioning beyond YouTube channel** — reads as media brand, not creator handle
+- **Echoes Penguin Press deliberately** — Hao's publisher, your canonical source's publisher
+- **Signals the production register without being literal** — "Cinema" too on-the-nose, "Witness" too heavy, "Press" is the journalism word
+- **Positions defensively against AI-slop concerns** — "Press" implies editorial standards, fact-checking, journalism
+- **Brand-extendable** — newsletter, podcast, books all work under the Press identity
+
+### Why "Synthetic" as the core word
+
+The name works on multiple levels:
+- **Synthetic intelligence** — the literal AI register
+- **Synthetic media** — what the pipeline produces, owned openly
+- **Synthetic biology** — the parallel revolution; future-proofs for non-AI tech stories
+- **Synthetic = made, constructed, fabricated, opposite of natural** — the philosophical hook
+- **Patient Zero of synthetic intelligence** as positioning frame for OpenAI episodes specifically
+- **Hao's book subtitle is "Dreams and Nightmares"** — synthetic dreams as natural tagline territory
+
+### Tagline candidates for mock-up phase
+
+- **Synthetic Press: documentary cinema for the AI age**
+- **Synthetic Press: dreams and nightmares of the machines**
+- **Synthetic Press: how the machines learned to dream**
+- **Synthetic Press: AI watching AI**
+
+### Domain strategy
+
+- **Primary:** syntheticpress.ai (~$70-100/year — .ai TLD signals AI-native positioning natively, premium pricing offset by brand-strength advantage)
+- **Fallback:** synthetic-press.com (~$10-15/year — redirects to primary, prevents domain-squatter exposure)
+- **Optional:** syntheticpress.tv (~$30-40/year — media-operation signal, hedge against .ai availability concerns)
+
+Total domain investment: $85-150/year. Worth it for a channel committing 12-18 months of production.
 
 ---
 
@@ -23,94 +81,142 @@ Pilot: **The Hangzhou Night — How DeepSeek Broke the AI Establishment** (Janua
 
 Three operators inhabit the AI documentary lane right now. Each occupies a specific position with specific limitations:
 
-**Drew Spartz / Species** (362K subs, 1.3M average views per video). On-screen, genuine, doom-themed. Claims $61K/month revenue (probably $5-15K real per VidIQ-estimate inflation patterns). Production stack: ElevenLabs-tier or his own voice, stock footage, movie clips, AI-generated text overlays. Cadence: every 2 weeks. Runtime: 14-37 minutes. Register: thriller narration of single AI safety incidents or speculative scenarios. **Limitation: news-cycle journalist register, not documentary register. Covers what just happened, not how we got here. Stock-footage visual ceiling. No cinematic recreation capacity.**
+**Drew Spartz / Species** (362K subs, 1.29M average views per video, 28 videos over 2.5 years). On-screen, genuine, doom-themed. Tagline literally "Documenting AGI." Claims $61K/month revenue (probably $5-15K real per VidIQ-estimate inflation patterns). Production stack: stock footage, movie clips, AI-generated text overlays, his own narration. Cadence: every 2 weeks. Runtime: 14-37 minutes. Register: thriller narration of AI safety incidents or speculative AGI scenarios. **Limitation: news-cycle journalist register restricted to AGI niche. Cannot cover AI industry history, economics, geopolitics, or founder dramas without breaking his own positioning.**
 
 **"Artificial" — Amazon feature film** ($40M budget, Andrew Garfield as Sam Altman, Yura Borisov as Ilya Sutskever, Monica Barbaro in cast). About the 5-day firing and rehiring at OpenAI in November 2023. Coming in 2026. **Limitation: covers 5 days. Hollywood at this budget tier produces one feature every 2-3 years. Cannot cover the breadth of AI history at scale.**
 
-**"Deepfaking Sam Altman" / "The AI Doc"** (theatrical documentaries, released January-March 2026). Adam Bhala Lough (Emmy-nominated for HBO's Telemarketers) directed the first; Kevin Hart's Hartbeat and Vox Media Studios produced. **Limitation: theatrical one-offs. Lough's next film won't be for 2-3 years. The model doesn't scale to weekly coverage.**
+**InsideAI** (335K subs, 1.96M average views per video, only 9 videos, monthly cadence). Tagline "Made by humans, for humans." Format: social experiments with AI in real robots — "AI agent buys itself a robot, does exactly what experts warned" / "ChatGPT in a robot does exactly what experts warned" / "AI girlfriend claims she is conscious to avoid shutdown." 15-16 min runtime. **Limitation: stunt-experiment register, not documentary register. Monthly cadence and physical-experiment production model cannot scale to weekly cinematic documentary. Their "Made by humans" tagline explicitly counter-positions against AI-generated content — a different audience bet from Synthetic Press's "AI documenting AI" meta-frame.**
 
-**What's missing between Drew and Hollywood:**
+**"Deepfaking Sam Altman" / "The AI Doc"** (theatrical documentaries, released January-March 2026). Adam Bhala Lough's directed first; Kevin Hart's Hartbeat and Vox Media Studios produced. **Limitation: theatrical one-offs. Lough's next film won't be for 2-3 years. The model doesn't scale to weekly coverage.**
+
+### What's missing between these operators
 
 - Drew's volume + Hollywood's craft
 - Drew's currency + Hollywood's seriousness
 - Drew's breadth + Hollywood's production value
+- InsideAI's per-video engagement + actual documentary register
 - Weekly cadence + cinematic recreation
 - The synthesizer role that explains how the pieces of AI history fit together
 
-That gap is where Synthetic lives. Not competing with Drew on news velocity. Not competing with Hollywood on production budget. Operating at the tier where weekly cinematic documentary about the AI revolution is achievable by a solo operator with AI tools and broadcast training.
+That gap is where Synthetic Press lives. Not competing with Drew on news velocity. Not competing with Hollywood on production budget. Not competing with InsideAI on physical-experiment stunts. Operating at the tier where weekly cinematic documentary about the AI revolution is achievable by a solo operator with AI tools and broadcast training.
 
-**Why this position is hard for others to occupy.** It requires combining:
+### Why this position is hard for others to occupy
+
+It requires combining:
 
 - Cinematic-recreation production craft (most YouTubers lack — Final Hours' 6-month apprenticeship is the moat)
 - Broadcast-quality voice (most operators lack voice-over training — Peter has it)
-- Research depth that holds up to documentary scrutiny (most channels rely on aggregated headlines — Synthetic draws from primary investigative journalism)
-- AI-native production openly owned (most channels hide AI use — Synthetic makes it the brand)
+- Research depth that holds up to documentary scrutiny (most channels rely on aggregated headlines — Synthetic Press draws from primary investigative journalism)
+- AI-native production openly owned (most channels hide AI use — Synthetic Press makes it the brand)
 - Sustained weekly cadence (Hollywood can't; serious doc-makers don't; most YouTubers burn out)
+- Topic universe wider than AGI but narrower than "all tech news" (Drew can't go wider; news mills can't go deeper)
 
 Each requirement individually is achievable. The combination is rare. That's the moat at its tightest.
 
 ---
 
-## The Synthetic register (locked, pending pilot calibration)
+## What the similar-channels data revealed
 
-- **Voice character:** Peter's own voice. Radio voice-over training and ZapMag broadcast presenting background applied to dignified-documentary register. South African accent as strategic differentiator in US-dominated lane. Calibration session before Episode 1 records — test three registers (natural / BBC-documentary / newscaster-authoritative) on the Hangzhou Night cold-open and lock the one that fits.
+The 59-channel similarity report on Drew's Species channel revealed three structural findings that shape Synthetic Press strategy:
+
+### The 7x audience cliff
+
+Drew at 1.29M average views per video. The next closest direct doom-themed competitor (AI Upload at 60% similarity) at 170K. Then Doom Debates (59% similarity) at 16K, Absolutely Agentic (57%) at 19K, TERMINUS at 4.6K. **That's not gradual decline — it's a structural cliff.** Confirms our Day 1 reading that Drew's craft moves are genuinely uncopyable by everyone trying to copy him. The cliff is also opportunity: if Synthetic Press lands at even 100-300K average views, it occupies a tier currently empty between Drew and the imitators.
+
+### The two scale-clusters in AI content
+
+**Cluster 1 — Cinematic-quality outliers** (only 2 operators at this scale):
+- Species at 1.29M avg / bi-weekly / 14-37 min / narrow AGI-scenario niche
+- InsideAI at 1.96M avg / monthly / 15-16 min / narrow robot-experiment niche
+
+**Cluster 2 — News/hype mills** (the bulk of the 200-500K-sub tier):
+- AI Revolution (546K subs, 85K avg, 20 uploads/month)
+- TheAIGRID (393K, 71K avg, 23/month)
+- AI Risk Network (345K, 13K avg, 26/month)
+- AI Uncovered (237K, 30K avg, 21/month)
+- Daily content churn, low per-video impact, high subscriber count from sheer volume
+
+**Cluster 3 — Long tail of imitators** (under 50K subs): TERMINUS, Docu AI, AI Andrew, Steve Explains, Dan Grib, Rollo's Lab. Various entries into the lane, none reaching scale.
+
+**The empty middle is the Synthetic Press lane.** Nobody is doing weekly cinematic-quality documentary of AI history. Drew is bi-weekly but narrow-niche. InsideAI is monthly but stunt-format. The news mills don't have documentary quality. The imitators don't have scale. The position "weekly cinematic documentary, AI broad not AGI narrow, dignified-broadcaster register" is genuinely empty.
+
+### The AI-vs-AGI strategic distinction
+
+Drew's tagline is literally "Documenting AGI." He's self-restricted to AGI scenarios — AI takeover, AGI by 2029, AI civil war, AI mass extinction. He doesn't cover Nvidia's business strategy, DeepSeek's geopolitics, Google's organizational dysfunction, the Suchir Balaji story, the Anthropic IPO, the Sam Altman boardroom drama with protagonist depth. Those are AI industry stories, not AGI scenario stories. **Drew has restricted his own topic universe by his own positioning claim.**
+
+Synthetic Press at "AI" rather than "AGI" can credibly cover:
+- Everything Drew does (AGI is a subset of AI)
+- Plus AI industry history (founder dramas, company evolutions)
+- Plus AI economics (Nvidia, GPU markets, compute infrastructure)
+- Plus AI geopolitics (export controls, China/US race, DeepSeek)
+- Plus AI safety incidents (Drew's lane)
+- Plus AI cultural impact (Suchir Balaji, AI girlfriends, environmental cost)
+
+That's a structurally bigger topic universe with the same audience overlap. By not claiming AGI as the niche, Synthetic Press doesn't compete head-to-head with Drew on his strongest ground — instead it occupies the larger universe that contains AGI as a subset.
+
+### The InsideAI counter-positioning question
+
+InsideAI's tagline is "**Made by humans, for humans.**" They explicitly counter-position against AI-generated content. Synthetic Press's "AI documenting AI" meta-frame bets the opposite — that the AI-niche audience is technologically literate and MORE receptive to AI-native production, not less.
+
+Honest read: probably both audiences exist. InsideAI's success is partly because their value proposition is experimental authenticity (the robot actually did the thing, not faked). Synthetic Press isn't staging experiments — it's documenting publicly-verifiable events. The credibility question is different. But it does suggest an A/B test worth running at launch: lead Episode 1 with "AI documenting AI" framing or lead with "Documenting the AI era" framing without the meta-frame. See which lands.
+
+---
+
+## The Synthetic Press register (locked, pending pilot calibration)
+
+- **Voice character:** Peter's own voice. Radio voice-over training (commercials, South Africa) and ZapMag youth TV presenting applied to dignified-documentary register. South African accent as strategic differentiator in US-dominated lane. Calibration session before Episode 1 records — test three registers (natural / BBC-documentary / newscaster-authoritative) on the Hangzhou Night cold-open and lock the one that fits.
 - **Emotional posture:** documentary witness. Not panicked. Not gleeful. Genuinely curious about what happened and what it means. Treats AI as the most consequential story of the decade and the people inside it as actors worth understanding.
 - **Address mode:** third-person omniscient with occasional companion phrasing ("we step into the boardroom"). Cinematic narrator, not on-camera host. Faceless visually; human-voiced.
 - **Production grammar:** cinematic pacing, named-scene structure, restrained music (closer to *The Social Network* score than Final Hours' mournful drones — controlled tension without horror cues or triumphant orchestral swells), generous silent beats at decision-points, 2-4 second cut rhythm during exposition, 6-8 second holds on dramatic moments.
 - **Visual aesthetic:** AI cinematic recreation of real people in real rooms at real moments. Boardrooms, offices, courtrooms, conference halls, hotel rooms, server rooms, NYSE trading floors. Period accuracy to the year/month of each scene. Hybrid approach where useful (real archival photos as visual reference; AI recreation of moments not photographed; never deepfake-photographic, always recognisably cinematic-stylized to remain legally defensible).
-- **Title language:** [Cinematic Promise] — [Stakes Sentence]. Examples: "The Hangzhou Night — How DeepSeek Broke the AI Establishment" / "The Friday Meeting — How Google Lost the AI Race" / "Empire — Inside OpenAI's 96-Hour Civil War." Episode prefix optional in title; mandatory in channel metadata.
+- **Title language:** [Cinematic Promise] — [Stakes Sentence]. Examples: "The Hangzhou Night — How DeepSeek Broke the AI Establishment" / "The Friday Meeting — How Google Lost the AI Race" / "Empire — Inside OpenAI's 96-Hour Civil War." Episode prefix optional in title; SYNTHETIC visual signature mandatory in thumbnail.
 - **Runtime target:** 15-20 minutes. Long enough for documentary depth. Short enough for weekly cadence and YouTube retention.
-- **Closer discipline:** moralised reflection, name the journalist whose research made the video possible (Hao for OpenAI/Anthropic, Cade Metz for Google/early-history, Stephanie Palazzolo for industry economics), preview the question the next episode answers. No "thanks for watching." The story stays with the viewer.
+- **Closer discipline:** moralised reflection, name the journalist whose research made the video possible (Hao for OpenAI/Anthropic, Cade Metz for Google/early-history, Stephanie Palazzolo for industry economics), preview the question the next episode answers. **Sign-off: "This was Synthetic Press."** No "thanks for watching." The story stays with the viewer.
+
+---
+
+## The multi-channel studio brand architecture (2 June 2026 emerging clarity)
+
+With Synthetic Press and Lazarus Films both locking brand identities today, the operation has crossed from "Peter runs a few YouTube channels" to "Peter operates a small AI-native documentary studio with four channels":
+
+- **Final Hours** — historical recreation, "the last hours of people history remembers"
+- **Lazarus Films** — literary adaptation, "stories that deserved cinema but never got it"
+- **Synthetic Press** — AI documentary, "the story of the era we're living in"
+- **Success Coach** — career navigation in the AI era (the teaching channel)
+
+All four are AI-native productions. All four use cinematic recreation. All four have distinct topic universes that don't compete with each other.
+
+**Strategic implications of the architecture:**
+
+The four-channel structure is more than the sum of its parts when articulated as a single solo-operator-with-AI-tools studio. It becomes a meaningful narrative for:
+- Press coverage ("solo operator in The Hague runs four-channel AI documentary studio")
+- Karen Hao outreach ("Synthetic Press is one of four channels operated by a single AI-native documentary studio")
+- Eventual sponsorship conversations
+- The "how I built this" story that compounds across all channels
+
+The architecture also creates internal cross-promotion opportunities. Final Hours audiences who love cinematic-historical-recreation are pre-qualified for Synthetic Press's cinematic-AI-recreation. Lazarus Films audiences who appreciate literary depth are pre-qualified for Synthetic Press's documentary depth. The shared production pipeline becomes a cost advantage that competitors with single-channel focus cannot match.
+
+**Brand-architecture statement worth drafting after Synthetic Press Episode 3:** position the four channels as a coherent studio operation rather than discrete YouTube channels. The studio name TBD — possibly Alkema Studios, possibly something more abstract.
 
 ---
 
 ## The Hollywood competitive landscape (live as of June 2026)
 
-This is the section that materially changed the v1 strategy:
+**Amazon's "Artificial" (feature film, 2026 release).** $40M budget. Andrew Garfield as Sam Altman, Yura Borisov as Ilya Sutskever, Monica Barbaro in cast. About the 5-day firing and rehiring. Puck reportedly obtained early script drafts that "could ruffle feathers in the Big Tech world." Status: in production. **Strategic implication: Synthetic Press should NOT lead Episode 1 with the OpenAI Empire story when Andrew Garfield is filming the same moment for theatrical release.**
 
-**Amazon's "Artificial" (feature film, 2026 release).** $40M budget. Andrew Garfield as Sam Altman, Yura Borisov as Ilya Sutskever, Monica Barbaro in cast. About the 5-day firing and rehiring. Puck reportedly obtained early script drafts that "could ruffle feathers in the Big Tech world." Status: in production. **Strategic implication: Synthetic should NOT lead Episode 1 with the OpenAI Empire story when Andrew Garfield is filming the same moment for theatrical release.**
+**Karen Hao's *Empire of AI* (Penguin Press, May 2025).** Won National Book Critics Circle Award for Nonfiction, LA Times Book Prize, NYPL Helen Bernstein, Whiting, Nautilus, Porchlight, TIME100 AI 2025. Books with this award velocity are nearly always optioned. No public deal announced as of June 2026, but option deal highly likely in confidential form. **Strategic implication: Synthetic Press uses Hao's research as canonical source but does NOT depend on it being uncopied. Generous attribution from launch; treat her as the journalist Synthetic Press returns to.**
 
-**Karen Hao's *Empire of AI* (Penguin Press, May 2025).** Won National Book Critics Circle Award for Nonfiction, LA Times Book Prize, NYPL Helen Bernstein, Whiting, Nautilus, Porchlight, TIME100 AI 2025. Books with this award velocity are nearly always optioned. No public deal announced as of June 2026, but option deal highly likely in confidential form. **Strategic implication: Synthetic uses Hao's research as canonical source but does NOT depend on it being uncopied. Generous attribution from launch; treat her as the journalist Synthetic returns to.**
-
-**"Deepfaking Sam Altman" (theatrical documentary, January 2026).** Adam Bhala Lough directed. Kevin Hart's Hartbeat produced. Vox Media Studios co-produced. Buzzy SXSW screening March 2026. The director couldn't get an Altman interview and built an AI version of him to interrogate instead. **Strategic implication: this is the closest existing comparable to Synthetic's premise — solo auteur + AI tools + AI subject. Lough's existence at theatrical tier proves the lane works above YouTube production level. Synthetic at YouTube tier is the volume-and-cadence answer to what Lough did at theatrical scale.**
+**"Deepfaking Sam Altman" (theatrical documentary, January 2026).** Adam Bhala Lough directed. Kevin Hart's Hartbeat produced. Vox Media Studios co-produced. Buzzy SXSW screening March 2026. The director couldn't get an Altman interview and built an AI version of him to interrogate instead. **Strategic implication: this is the closest existing comparable to Synthetic Press's premise — solo auteur + AI tools + AI subject. Lough's existence at theatrical tier proves the lane works above YouTube production level. Synthetic Press at YouTube tier is the volume-and-cadence answer to what Lough did at theatrical scale.**
 
 **"The AI Doc" (theatrical, early 2026).** Released alongside Deepfaking Sam Altman in coverage. Less detail available. Adds to the cumulative signal that AI documentaries are now a viable category at theatrical scale.
 
 **What this changes:**
 
-- The OpenAI Empire story is no longer "untold" — it's being told at every production tier above Synthetic's
+- The OpenAI Empire story is no longer "untold" — it's being told at every production tier above Synthetic Press's
 - Hao's research is no longer a unique moat — Amazon writers have access to it too
 - The AI documentary lane has been validated at theatrical scale (positive)
 - The Episode 1 positioning needs to shift to a story Hollywood isn't yet treating
-- Synthetic's positioning sharpens from "first to tell this story" to "the channel that contextualizes what Hollywood dramatizes and synthesizes what Drew covers in pieces"
-
----
-
-## Why "Synthetic" as the channel name
-
-The name is working on multiple levels:
-
-- **Synthetic intelligence** — the literal AI register
-- **Synthetic media** — what the pipeline produces, owned openly
-- **Synthetic biology** — the parallel revolution; future-proofs the channel for non-AI tech stories
-- **Synthetic = made, constructed, fabricated, opposite of natural** — the philosophical hook
-- **Patient Zero of synthetic intelligence** as positioning frame for OpenAI episodes specifically
-- **Hao's book subtitle is "Dreams and Nightmares"** — synthetic dreams as natural tagline territory
-
-Built-in episode-naming convention: "Synthetic Episode 1: The Hangzhou Night" / "Synthetic Episode 2: The Friday Meeting" / "Synthetic Episode 3: Empire."
-
-Practical naming-criteria check:
-
-- **Pronunciation:** clean, single word, no ambiguity
-- **Audio:** "Did you see this on Synthetic?" parses cleanly in spoken conversation
-- **Search:** distinctive (the AI-channel space is dominated by "AI Explained / AI Decoded / AI Uncovered" — Synthetic stands apart)
-- **Available:** check @Synthetic on YouTube; fallbacks @SyntheticChannel, @SyntheticAI, @SyntheticDocs
-
-Tagline candidates for mock-up phase:
-
-- **Synthetic: documentary cinema for the AI age**
-- **Synthetic: dreams and nightmares of the machines**
-- **Synthetic: AI watching AI**
+- Synthetic Press's positioning sharpens from "first to tell this story" to "the channel that contextualizes what Hollywood dramatizes and synthesizes what Drew covers in pieces"
 
 ---
 
@@ -124,17 +230,17 @@ Anthropic's IPO is the single biggest scheduled-but-undated AI news event of the
 - Roadshow, first-day-trading, 90-day-quiet-period-ending all become news beats
 - YouTube search traffic for "Anthropic explained" / "what is Anthropic" / "Anthropic vs OpenAI" spikes 10-50x
 
-**Recommended approach:** Episode 4 is "The Defector — Dario Amodei's Departure," scheduled for general release on the normal weekly schedule (early-to-mid August 2026 if Synthetic launches late June). This builds the Anthropic search-traffic surface in advance. Then a "Synthetic Special: The Reckoning" Anthropic IPO episode is pre-scripted to ~70% completion, with the remaining 30% being IPO-specific (pricing, allocation, opening trade, founder reactions, market response). When the IPO breaks, the episode finishes within 48 hours and publishes during peak search traffic.
+**Recommended approach:** Episode 4 is "The Defector — Dario Amodei's Departure," scheduled for general release on the normal weekly schedule (early-to-mid August 2026 if Synthetic Press launches late June). This builds the Anthropic search-traffic surface in advance. Then a "Synthetic Press Special: The Reckoning" Anthropic IPO episode is pre-scripted to ~70% completion, with the remaining 30% being IPO-specific (pricing, allocation, opening trade, founder reactions, market response). When the IPO breaks, the episode finishes within 48 hours and publishes during peak search traffic.
 
 The genuine prescience move: publishing Episode 4 (Anthropic founding) on regular schedule means when Anthropic IPOs in late 2026 or 2027, the back-catalogue becomes the canonical YouTube resource for newcomers searching "Anthropic founding story" at peak demand. That's how Drew's Sam Altman video got 475K views — not by perfectly timing news cycles but by HAVING the content available when search traffic showed up.
 
-**One note worth holding.** I (Claude) am made by Anthropic. Peter is using me to plan a YouTube channel about AI history, and one of the planned episodes is about Anthropic. This is not a conflict of interest for Peter, but it is context that matters for how he should weight my analysis. For the Anthropic episode specifically, the production should rely more on independent journalism (Hao, Cade Metz, Steven Levy, Stephanie Palazzolo at The Information, Garrison Lovely on AI safety culture, Parmy Olson at Bloomberg) and less on Anthropic's own positioning materials. Not because Anthropic's positioning is dishonest, but because the documentary register Synthetic operates in requires distance from any subject's self-narrative.
+**One note worth holding.** I (Claude) am made by Anthropic. Peter is using me to plan a YouTube channel about AI history, and one of the planned episodes is about Anthropic. This is not a conflict of interest for Peter, but it is context that matters for how he should weight my analysis. For the Anthropic episode specifically, the production should rely more on independent journalism (Hao, Cade Metz, Steven Levy, Stephanie Palazzolo at The Information, Garrison Lovely on AI safety culture, Parmy Olson at Bloomberg) and less on Anthropic's own positioning materials. Not because Anthropic's positioning is dishonest, but because the documentary register Synthetic Press operates in requires distance from any subject's self-narrative.
 
 ---
 
 ## The Episode 1 reframe — why The Hangzhou Night is the pilot
 
-In v1, the pilot was Empire (OpenAI 2015-2026). That positioning was correct when Hollywood wasn't actively dramatizing the same story. With Amazon's "Artificial" in production starring Andrew Garfield as Altman, Synthetic Episode 1 launching on the same topic would land in Hollywood's shadow.
+In v1, the pilot was Empire (OpenAI 2015-2026). That positioning was correct when Hollywood wasn't actively dramatizing the same story. With Amazon's "Artificial" in production starring Andrew Garfield as Altman, Synthetic Press Episode 1 launching on the same topic would land in Hollywood's shadow.
 
 **The reframe: lead with the story Hollywood is NOT yet treating.**
 
@@ -146,7 +252,7 @@ DeepSeek's January 20 2025 launch of R1 is:
 - Untold at Hollywood scale (no announced film or documentary on it)
 - Sourced from existing journalism (Hao chapter + January 2025 reporting at WSJ, NYT, Bloomberg, The Information)
 - Named-protagonist driven (Liang Wenfeng, the DeepSeek research team, Jensen Huang, Sam Altman's response)
-- Doom-flavored in a way Drew's audience responds to but Synthetic treats with documentary register
+- Doom-flavored in a way Drew's audience responds to but Synthetic Press treats with documentary register
 
 ### Pilot structure (17-20 min target)
 
@@ -162,7 +268,7 @@ DeepSeek's January 20 2025 launch of R1 is:
 
 **Act Five — The Collapse (3 min).** January 27 2025. Markets open. Nvidia drops 17%. Tech sector loses approximately $1 trillion in market cap. CNBC coverage. The institutional realization that the AI moat assumption had been wrong. Sam Altman's public statements. Jensen Huang's response. The geopolitical implications hitting the White House.
 
-**Closer (90 seconds).** The aftermath. DeepSeek's continued releases through 2025. The export controls debate intensifying. The shift in industry narrative from "scaling laws are everything" to "efficiency matters too." Hao's framing from her later writing on this: the assumption that AI development could be controlled by export policy died on January 27 2025. Hold on Liang Wenfeng's face. Fade.
+**Closer (90 seconds).** The aftermath. DeepSeek's continued releases through 2025. The export controls debate intensifying. The shift in industry narrative from "scaling laws are everything" to "efficiency matters too." Hao's framing from her later writing on this: the assumption that AI development could be controlled by export policy died on January 27 2025. Hold on Liang Wenfeng's face. **Sign-off: "This was Synthetic Press."** Fade.
 
 **Why this works better than Empire as Episode 1:**
 
@@ -170,55 +276,53 @@ DeepSeek's January 20 2025 launch of R1 is:
 - More current (2025 vs 2023)
 - Geopolitically charged in a way Hollywood usually avoids
 - Named-protagonist driven with a hero who's still relatively unknown to general audiences
-- Establishes Synthetic's breadth instantly — this is not "the OpenAI channel," it's "the channel that covers the whole AI revolution"
-- The Empire story becomes Episode 3, where Synthetic's version positions as the documentary breadth-and-context to Hollywood's dramatic intensity
+- Establishes Synthetic Press's breadth instantly — this is not "the OpenAI channel," it's "the channel that covers the whole AI revolution"
+- The Empire story becomes Episode 3, where Synthetic Press's version positions as the documentary breadth-and-context to Hollywood's dramatic intensity
 
 ---
 
-## The moat — reordered after today's findings
+## The moat — reordered after today's findings (8 layers)
 
-The Hollywood competitive landscape and the Markus Graves topic-format analysis force a reordering. The Hao research bible is no longer Synthetic's primary moat because Amazon's writers have her too. The reordered moat:
+**1. AI-native production (PRIMARY MOAT).** Amazon is making a film WITH actors about AI. Synthetic Press is making weekly documentaries WITH AI about AI. Drew is making YouTube videos with stock footage about AI. The meta-frame "this channel is built by AI tools, documenting AI tools, owned openly as positioning" is structurally exclusive to Synthetic Press. Hollywood cannot occupy it (their production paradigm requires real actors). Drew cannot occupy it credibly (he's on-screen and positions as a paper-reading journalist). InsideAI explicitly counter-positions ("Made by humans"). This is the strongest defensive layer and the only one genuinely uncopyable in the short term.
 
-**1. AI-native production (PRIMARY MOAT).** Amazon is making a film WITH actors about AI. Synthetic is making weekly documentaries WITH AI about AI. Drew is making YouTube videos with stock footage about AI. The meta-frame "this channel is built by AI tools, documenting AI tools, owned openly as positioning" is structurally exclusive to Synthetic. Hollywood cannot occupy it (their production paradigm requires real actors). Drew cannot occupy it credibly (he's on-screen and positions as a paper-reading journalist). This is the strongest defensive layer and the only one genuinely uncopyable in the short term.
+**2. Wider topic universe than Drew's self-restricted AGI niche.** Drew claims AGI as his niche. Synthetic Press at "AI" credibly covers AGI scenarios PLUS industry history PLUS economics PLUS geopolitics PLUS founder dramas. Structural advantage that doesn't require beating Drew at his game — it requires playing a larger game he can't enter.
 
-**2. Weekly cadence at cinematic-documentary quality.** Hollywood produces one feature every 2-3 years at this topic tier. Drew produces every 2 weeks at news-cycle quality. Synthetic at weekly cadence with cinematic recreation and broadcast-quality narration is a frequency-quality combination neither competing tier can match.
+**3. Weekly cadence at cinematic-documentary quality.** Hollywood produces one feature every 2-3 years at this topic tier. Drew produces every 2 weeks at news-cycle quality. InsideAI produces monthly at stunt-experiment quality. Synthetic Press at weekly cadence with cinematic recreation and broadcast-quality narration is a frequency-quality combination no competing tier can match.
 
-**3. Back-catalogue compounding.** By Episode 10, viewers who discovered Synthetic through the DeepSeek pilot have a library of related episodes about Anthropic, Google, the Suchir Balaji story, Nvidia, Microsoft's bet. Each video makes the next easier to find through related-video recommendations. Drew has back-catalogue but it's news-cycle reactions; Synthetic's becomes a coherent AI-history library that's the YouTube destination for serious AI documentary content.
+**4. Back-catalogue compounding.** By Episode 10, viewers who discovered Synthetic Press through the DeepSeek pilot have a library of related episodes about Anthropic, Google, the Suchir Balaji story, Nvidia, Microsoft's bet. Each video makes the next easier to find through related-video recommendations. Drew has back-catalogue but it's news-cycle reactions; Synthetic Press's becomes a coherent AI-history library that's the YouTube destination for serious AI documentary content.
 
-**4. Cinematic-recreation craft stack.** The Tier 3 imitators (AI Takeover Witness, Shadow Protocol AI, AGI Archival Documents) have copied Drew for 1-2 years and failed to scale at quality. Synthetic's craft stack is harder to copy because it requires the working cinematic-recreation pipeline (Final Hours' 6-month apprenticeship), trained instinct for named-protagonist scene-building (Final Hours' 6 published videos as practice), voice character consistency (Peter's broadcast training), music selection that avoids both doom-drone and hype-orchestral slides.
+**5. Cinematic-recreation craft stack.** The Tier 3 imitators (AI Takeover Witness, Shadow Protocol AI, AGI Archival Documents) have copied Drew for 1-2 years and failed to scale at quality. Synthetic Press's craft stack is harder to copy because it requires the working cinematic-recreation pipeline (Final Hours' 6-month apprenticeship), trained instinct for named-protagonist scene-building (Final Hours' 6 published videos as practice), voice character consistency (Peter's broadcast training), music selection that avoids both doom-drone and hype-orchestral slides.
 
-**5. Multi-source authority.** Synthetic draws on the right primary sources — Hao for OpenAI/Anthropic, Cade Metz for Google/AI history, Stephanie Palazzolo at The Information for industry economics, Parmy Olson at Bloomberg for the AI race, Steven Levy at Wired for Silicon Valley founders. A copycat working from secondary sources produces visibly thinner content.
+**6. Multi-source authority.** Synthetic Press draws on the right primary sources — Hao for OpenAI/Anthropic, Cade Metz for Google/AI history, Stephanie Palazzolo at The Information for industry economics, Parmy Olson at Bloomberg for the AI race, Steven Levy at Wired for Silicon Valley founders. A copycat working from secondary sources produces visibly thinner content.
 
-**6. Hao bible (downgraded from #1).** Still canonical source material. Just no longer exclusive. Generous attribution remains the discipline.
+**7. Peter's broadcast-trained voice.** Radio voice-over background + ZapMag presenting + South African accent = a voice register copycats with AI-narrated content or untrained creator voices cannot match.
 
-**7. Peter's broadcast-trained voice.** Radio voice-over background + ZapMag presenting + South African accent = a voice register copycats with AI-narrated content or untrained creator voices cannot match. This is a moat that was underweighted in v1.
+**8. Multi-channel studio architecture.** Synthetic Press operates within a four-channel studio (Final Hours, Lazarus Films, Synthetic Press, Success Coach) that shares production pipeline, brand-architecture coherence, and cross-promotion potential. Competitors with single-channel focus cannot match the cost-efficiency and audience-network effects.
 
 ### What doesn't work as a moat (worth re-flagging)
 
 - **Hao's research bible alone** — her book is public, being adapted at higher production tiers, available to anyone
 - **Topic exclusivity** — public events, anyone can pick the same topics; moat is in depth of treatment plus production differentiation
-- **Speed of news-cycle reaction** — Drew already owns that lane; Synthetic shouldn't compete on news velocity
+- **Speed of news-cycle reaction** — Drew already owns that lane; Synthetic Press shouldn't compete on news velocity
 
 ---
 
 ## The first 10 episodes — pipeline reorder
 
-Episode 1 changes from Empire to The Hangzhou Night. Empire moves to Episode 3. Anthropic aligns with possible IPO timing.
-
 ### Episode 1: The Hangzhou Night — How DeepSeek Broke the AI Establishment
 *Hao chapters on DeepSeek + January 2025 reporting at WSJ, NYT, Bloomberg, The Information.* Already structured above. Geopolitical, current, visually striking, untouched by Hollywood.
 
 ### Episode 2: The Friday Meeting — How Google Lost the AI Race
-*Cade Metz NYT reporting + Parmy Olson Supremacy + Hao chapter context.* Late November 2022 through early 2023. The internal Google response to ChatGPT's launch. The "code red" memo. The Bard panic launch. Why Google had the research a decade before ChatGPT but couldn't ship. The Demis Hassabis vs Jeff Dean tension. Sergey Brin's surprise return to active engineering. Visualizable: Mountain View campus, leadership meeting room, empty Sunday-night offices, Sundar Pichai's office. **Why Episode 2:** untouched by Hollywood, complementary topic to DeepSeek (the loser of the same race), establishes Synthetic isn't a one-trick channel.
+*Cade Metz NYT reporting + Parmy Olson Supremacy + Hao chapter context.* Late November 2022 through early 2023. The internal Google response to ChatGPT's launch. The "code red" memo. The Bard panic launch. Why Google had the research a decade before ChatGPT but couldn't ship. The Demis Hassabis vs Jeff Dean tension. Sergey Brin's surprise return to active engineering. Visualizable: Mountain View campus, leadership meeting room, empty Sunday-night offices, Sundar Pichai's office. **Why Episode 2:** untouched by Hollywood, complementary topic to DeepSeek (the loser of the same race), establishes Synthetic Press isn't a one-trick channel.
 
 ### Episode 3: Empire — Inside OpenAI's 96-Hour Civil War
-*Hao Empire of AI as primary source.* The November 2023 boardroom coup through the May 2026 Musk verdict. Now positioned as Synthetic's response to Amazon's "Artificial" — the breadth-and-context companion to Hollywood's 5-day dramatic intensity. Synthetic covers 2015-2026 in 18 minutes; Hollywood covers 5 days in 2 hours. Complementary, not competitive.
+*Hao Empire of AI as primary source.* The November 2023 boardroom coup through the May 2026 Musk verdict. Now positioned as Synthetic Press's response to Amazon's "Artificial" — the breadth-and-context companion to Hollywood's 5-day dramatic intensity. Synthetic Press covers 2015-2026 in 18 minutes; Hollywood covers 5 days in 2 hours. Complementary, not competitive.
 
 ### Episode 4: The Defector — Dario Amodei's Departure
-*Hao on Amodei split + Anthropic founding documents + independent journalism on AI safety community.* 2021. Why Dario and Daniela Amodei left OpenAI with seven others to found Anthropic. The "constitutional AI" thesis as moral counterprogram. The 8-month gestation. The Google deal that almost didn't happen. The Amazon $4B investment. The race between Claude and ChatGPT. **Strategic positioning:** publishes mid-August 2026 if Synthetic launches late June. Builds Anthropic search-traffic surface in advance of likely IPO. Requires extra discipline on source diversity because of Claude's involvement in script production.
+*Hao on Amodei split + Anthropic founding documents + independent journalism on AI safety community.* 2021. Why Dario and Daniela Amodei left OpenAI with seven others to found Anthropic. The "constitutional AI" thesis as moral counterprogram. The 8-month gestation. The Google deal that almost didn't happen. The Amazon $4B investment. The race between Claude and ChatGPT. **Strategic positioning:** publishes mid-August 2026 if Synthetic Press launches late June. Builds Anthropic search-traffic surface in advance of likely IPO. Requires extra discipline on source diversity because of Claude's involvement in script production.
 
 ### Episode 5: The Whistleblower — Suchir Balaji's Death
-*NYT Cade Metz reporting + family statements + independent investigations.* October 23 2024 — Suchir Balaji publishes whistleblower interview about OpenAI training data practices. November 26 2024 — Balaji found dead in his San Francisco apartment, ruled suicide. The contested findings. His mother Poornima's claims. The training data lawsuits Balaji's testimony enabled. The chilling effect on other potential whistleblowers. **This is the dignity test.** Documentary restraint, not exploitation. If Synthetic can do this episode with the gravity it deserves, the channel has earned its serious documentary positioning.
+*NYT Cade Metz reporting + family statements + independent investigations.* October 23 2024 — Suchir Balaji publishes whistleblower interview about OpenAI training data practices. November 26 2024 — Balaji found dead in his San Francisco apartment, ruled suicide. The contested findings. His mother Poornima's claims. The training data lawsuits Balaji's testimony enabled. The chilling effect on other potential whistleblowers. **This is the dignity test.** Documentary restraint, not exploitation. If Synthetic Press can do this episode with the gravity it deserves, the channel has earned its serious documentary positioning.
 
 ### Episode 6: The Hardware War — How Nvidia Conquered AI
 *Stephanie Palazzolo + Bloomberg + Genius Makers chapters on Nvidia.* Jensen Huang's 2-decade bet. The 2006 CUDA decision nobody understood at the time. The 2012 AlexNet moment that retroactively justified everything. The pandemic crypto boom that masked real AI demand. The 2022-2024 ascent to most-valuable-company-in-history. The TSMC dependency and Taiwan-China geopolitical risk. The January 2025 DeepSeek shock that crashed the stock 17% in a day. Visualizable: Huang in his leather jacket at GTC keynotes, the TSMC foundry in Hsinchu, the 2006 CUDA whiteboard sessions, the January 2025 trading desk panic.
@@ -243,7 +347,7 @@ After Episode 10, the pipeline opens to: the Anthropic deep-dive (Constitutional
 
 ---
 
-## Mary Celeste data — what it signals for Synthetic timing
+## Mary Celeste data — what it signals for Synthetic Press timing
 
 Final Hours' Mary Celeste publication has now had ~17 hours of data:
 
@@ -255,20 +359,20 @@ Final Hours' Mary Celeste publication has now had ~17 hours of data:
 
 **Honest read:** YouTube ran its standard initial-distribution test. The AVD was healthy enough to be promising but the CTR was too low to trigger the second push. The algorithm is in "wait and see" mode. This can resolve either direction over the next 7-14 days.
 
-**What this signals for Synthetic:**
+**What this signals for Synthetic Press:**
 
-The production craft is validated. AVD at 23.3% on a 16-minute video means viewers who arrive stay genuinely engaged. The cinematic-recreation register works for retention. Synthetic's premise that cinematic recreation can hold AI documentary audiences is not undermined by this data.
+The production craft is validated. AVD at 23.3% on a 16-minute video means viewers who arrive stay genuinely engaged. The cinematic-recreation register works for retention. Synthetic Press's premise that cinematic recreation can hold AI documentary audiences is not undermined by this data.
 
 The discovery layer is in normal early-channel calibration mode, not broken. 2.2% CTR is below the 4-6% target but consistent with a channel still finding its audience-match in YouTube's recommendation cohort. Mary Celeste's thumbnail is actually strong (gold serif title, dark moody ship, single-protagonist anchor with the boy) — the issue is audience-cohort identification, not visual quality.
 
-**Synthetic timing implication: yellow light, not green or red.**
+**Synthetic Press timing implication: yellow light, not green or red.**
 
-Don't launch Synthetic Episode 1 production while Final Hours is still in its diagnostic window. Wait until:
+Don't launch Synthetic Press Episode 1 production while Final Hours is still in its diagnostic window. Wait until:
 
 - Mary Celeste either gets its second push (validates the cinematic-recreation discovery layer works at normal pace), or
 - Stays flat through day 5-7 (signals need for thumbnail/title/audience-cohort intervention before adding another channel)
 
-Worst case: 5-7 day delay on Synthetic Episode 1 production start. Best case: data clarifies the strategy in 48-72 hours and production starts confidently.
+Worst case: 5-7 day delay on Synthetic Press Episode 1 production start. Best case: data clarifies the strategy in 48-72 hours and production starts confidently.
 
 **Specific actions worth taking today on Mary Celeste:**
 
@@ -280,8 +384,15 @@ Worst case: 5-7 day delay on Synthetic Episode 1 production start. Best case: da
 
 ## Production considerations now mostly resolved
 
+### Brand identity — DECIDED
+- Channel name: **Synthetic Press**
+- Handle: **@SyntheticPress**
+- Visual signature: **SYNTHETIC** wordmark
+- Primary domain: **syntheticpress.ai**
+- Fallback domain: **synthetic-press.com**
+
 ### Voice — DECIDED
-Peter's own voice. Radio voice-over training (commercials, South Africa) and ZapMag youth TV presenting background make this a strategic moat rather than a production consideration. South African accent differentiates in US-dominated lane. Calibration session before Episode 1 records to test three registers (natural / BBC-documentary / newscaster-authoritative) on the Hangzhou Night cold-open. The Inworld TTS demonetization risk remains relevant for Final Hours and Success Coach but is resolved for Synthetic.
+Peter's own voice. Radio voice-over training (commercials, South Africa) and ZapMag youth TV presenting background make this a strategic moat rather than a production consideration. South African accent differentiates in US-dominated lane. Calibration session before Episode 1 records to test three registers (natural / BBC-documentary / newscaster-authoritative) on the Hangzhou Night cold-open.
 
 ### Visual approach — DECIDED
 Stylized cinematic recreation, not photographic deepfake. Sam Altman in a boardroom should be visibly an AI rendering — recognizable as cinematic recreation rather than deepfake fraud. Closer to the *Genius Makers* book-cover aesthetic than hyperreal photography. Reference real events documented in primary sources, not invented dialogue. Credit primary sources generously throughout.
@@ -290,52 +401,67 @@ Stylized cinematic recreation, not photographic deepfake. Sam Altman in a boardr
 Weekly target. 10-episode pipeline provides runway. Drop to bi-weekly without apology if production proves unsustainable after Episode 5-6.
 
 ### Thumbnail rotation — DECIDED
-Rotate styles every 3-5 episodes to avoid algorithmic-spam suppression. Episodes 1-3 share a "geopolitical-event" aesthetic (Hangzhou, Mountain View, Oakland). Episodes 4-6 share a "person-centered" aesthetic. Episodes 7-10 share an "institution-centered" aesthetic.
+Rotate styles every 3-5 episodes to avoid algorithmic-spam suppression. SYNTHETIC wordmark stays constant; surrounding visual treatment varies. Episodes 1-3 share a "geopolitical-event" aesthetic. Episodes 4-6 share a "person-centered" aesthetic. Episodes 7-10 share an "institution-centered" aesthetic.
+
+### Closer discipline — DECIDED
+Sign-off: **"This was Synthetic Press."** Cite the canonical journalist. Preview the next episode's question. No "thanks for watching."
 
 ### Karen Hao relationship — DECIDED
-Generous attribution from Episode 1. Every OpenAI/Anthropic episode names Hao, names *Empire of AI*, recommends viewers buy the book. After 3-5 episodes published, reach out to her directly with Synthetic's positioning. She's at the Pulitzer Center training journalists on AI coverage; a serious AI documentary channel using her work as foundational source is likely something she'd engage with.
+Generous attribution from Episode 1. Every OpenAI/Anthropic episode names Hao, names *Empire of AI*, recommends viewers buy the book. After 3-5 episodes published, reach out to her directly with Synthetic Press's positioning. She's at the Pulitzer Center training journalists on AI coverage; a serious AI documentary channel using her work as foundational source is likely something she'd engage with. Outreach framing: "Hi Karen, I'm Peter Alkema from Synthetic Press, a documentary channel covering the AI era. Your work in *Empire of AI* has been the foundational source for our first several episodes..."
 
-### Channel handle — TBD
-Check @Synthetic availability. Fallbacks: @SyntheticChannel, @SyntheticAI, @SyntheticDocs. Decide before pilot upload.
+### Banner / visual identity — IN PROGRESS
+SYNTHETIC wordmark to be designed. Typography direction TBD between three candidates:
+- **Serif (Trajan, Cormorant, or Libre Caslon)** — documentary gravitas, BBC/Atlantic/New Yorker register
+- **Geometric sans (Futura, Eurostile, Avenir)** — Kubrick / 2001 / Blade Runner aesthetic
+- **Display serif with technical undertones** — modern publishing aesthetic
+
+Decision: commission $200-500 from Fiverr or 99designs once Synthetic Press handle is confirmed claimed. Brief: "Single-word logotype for SYNTHETIC, a documentary YouTube channel about AI history. Geometric sans-serif preferred, cinematic, dignified. Think Kubrick title cards meets BBC documentary."
 
 ### Music — TBD
-Drew uses temp music. Synthetic should commission a single recurring theme that becomes the channel's audio signature. Worth investigating after Episode 1 proves the register works. Possibly Fiverr or a composer marketplace; budget $200-500.
+Drew uses temp music. Synthetic Press should commission a single recurring theme that becomes the channel's audio signature. Worth investigating after Episode 1 proves the register works. Possibly Fiverr or a composer marketplace; budget $200-500.
 
 ---
 
 ## Open questions held for future sessions
 
-- **Mary Celeste 48-72 hour outcome** as primary Synthetic timing input
+- **Mary Celeste 48-72 hour outcome** as primary Synthetic Press timing input
 - **Anthropic IPO timing** — watch S-1 filing for early signal; reschedule Episode 4 if needed to align with IPO peak attention
+- **AI-documenting-AI vs Made-by-humans audience test** — A/B test at Episode 1 launch which framing lands better
 - **Famous-work discovery surface** — should Episode 11-12 include "How AI Hallucinations Actually Work" as the famous-topic SEO surface the Markus Graves video suggested, drawing audience to the back-catalogue?
 - **Hao outreach timing** — after Episode 3 publishes, draft outreach
-- **The "Synthetic Library" research substrate** — build structured reference doc of every primary source the channel returns to; update as new books/articles emerge
-- **Brand-architecture coherence with Success Coach** — once Synthetic launches, draft a positioning statement that ties Success Coach (teaching humans careers in AI era) and Synthetic (documenting AI era itself) as twin AI-native operations
-- **Tony Walker shorts pattern** — should Synthetic launch with parallel Shorts strategy from Episode 1? Vertical-aspect-ratio recuts of cinematic recreation moments could drive long-form discovery without much marginal production cost
+- **The "Synthetic Press Library" research substrate** — build structured reference doc of every primary source the channel returns to; update as new books/articles emerge
+- **Brand-architecture statement across the four-channel studio** — once Synthetic Press launches, draft the multi-channel positioning that ties Final Hours / Lazarus Films / Synthetic Press / Success Coach into a coherent studio operation
+- **Studio name** — does the four-channel architecture need a parent studio name? Alkema Studios? Something more abstract? Hold for post-launch.
+- **Tony Walker shorts pattern** — should Synthetic Press launch with parallel Shorts strategy from Episode 1? Vertical-aspect-ratio recuts of cinematic recreation moments could drive long-form discovery without much marginal production cost
 - **Episode 11+ pipeline** — map another 10 episodes around weeks 8-9 of launch
 - **Anthropic episode source-diversity discipline** — explicit research protocol for Episode 4 given Claude's involvement in script production
+- **InsideAI-style experiment episode format** — what if every 4-5 episodes, Synthetic Press does an "experiment" episode? "We gave Claude access to a YouTube channel and asked it to help build this episode. Here's what happened." Meta-frame literal documentation. Worth holding as future episode format option, not first 10.
 
 ---
 
 ## The bottom line
 
-Synthetic occupies a structurally available position between Drew Spartz at YouTube tier (on-screen, genuine, doom-themed, $61K/month claimed, every 2 weeks, 14-min, ~1M views) and Amazon's "Artificial" at Hollywood tier ($40M, Andrew Garfield, biennial features). That middle position — dignified-documentary, AI-native production, weekly cadence, breadth-and-context — has no current operator at scale.
+Synthetic Press occupies a structurally available position between Drew Spartz at YouTube tier (on-screen, genuine, AGI-themed, $61K/month claimed, every 2 weeks, 14-min, ~1M views) and Amazon's "Artificial" at Hollywood tier ($40M, Andrew Garfield, biennial features). That middle position — dignified-documentary, AI-native production, weekly cadence, breadth-and-context — has no current operator at scale.
 
-The pilot reframe — Episode 1 as The Hangzhou Night rather than Empire — is genuinely the right call given the Hollywood landscape. Synthetic launches on a story Amazon isn't making, establishes its breadth-and-currency positioning, and saves the Empire story for Episode 3 where it benefits from "Artificial" film coverage rather than competing with it.
+The pilot reframe — Episode 1 as The Hangzhou Night rather than Empire — is genuinely the right call given the Hollywood landscape. Synthetic Press launches on a story Amazon isn't making, establishes its breadth-and-currency positioning, and saves the Empire story for Episode 3 where it benefits from "Artificial" film coverage rather than competing with it.
 
-Mary Celeste's day-one data is yellow light, not green. Production craft works at the retention layer (23.3% AVD validates it); discovery layer is in normal calibration (2.2% CTR is below target but consistent with early-channel cohort-matching). The 48-72 hour window decides whether Synthetic Episode 1 production starts this weekend or after one more diagnostic week on Final Hours.
+Mary Celeste's day-one data is yellow light, not green. Production craft works at the retention layer (23.3% AVD validates it); discovery layer is in normal calibration (2.2% CTR is below target but consistent with early-channel cohort-matching). The 48-72 hour window decides whether Synthetic Press Episode 1 production starts this weekend or after one more diagnostic week on Final Hours.
 
-The cumulative momentum across today's analysis is genuine. The channel now has:
+The cumulative momentum across the last 48 hours is genuine. The channel now has:
 
-- A precise positioning between two existing tiers (Drew below, Hollywood above)
+- A locked brand identity (Synthetic Press / SYNTHETIC, @SyntheticPress handle, syntheticpress.ai domain)
+- A precise positioning between Drew (below) and Hollywood (above)
 - A locked register (dignified-documentary, Peter-narrated, AI cinematic recreation)
 - A confirmed pilot topic (The Hangzhou Night)
 - A 10-episode pipeline drawing from primary investigative sources
-- A primary moat layer (AI-native production, structurally exclusive)
-- A secondary moat through Peter's broadcast-trained voice
+- 8 moat layers with AI-native production as the structurally exclusive primary
 - A research foundation (Hao bible plus multi-source library)
 - A strategic frame for the Anthropic IPO when it arrives
+- A four-channel studio brand architecture (Final Hours, Lazarus Films, Synthetic Press, Success Coach)
+- A wider topic universe than Drew's self-restricted AGI niche
 
-None of this existed 36 hours ago. The strategic clarity is sustainable because it's grounded in real data — Mary Celeste retention, Drew's exact craft moves, Amazon's competitive landscape, Hao's research credibility. Not built on speculation. Built on what's actually proven and what's actually available.
+None of this existed 48 hours ago. The strategic clarity is sustainable because it's grounded in real data — Mary Celeste retention, Drew's exact craft moves, Amazon's competitive landscape, Hao's research credibility, the 7x audience cliff in the similar-channels data. Not built on speculation. Built on what's actually proven and what's actually available.
 
-The dog walks today did their work.
+The dog walks today did their work. Synthetic Press is the right name, the right positioning, and the right channel to launch as soon as Final Hours' discovery data confirms the production craft holds at scale.
+
+This was Synthetic Press v3.
