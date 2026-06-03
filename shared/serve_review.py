@@ -1,19 +1,7 @@
-# fal_client uses httpx internally — monkey-patch httpx SSL before fal_client loads
+# httpx TLS for fal_client is handled in shared/ssl_compat (no verify=False).
 import sys as _sys
-try:
-    import httpx as _httpx
-    _orig_client_init = _httpx.Client.__init__
-    _orig_async_init = _httpx.AsyncClient.__init__
-    def _patched_client_init(self, *args, **kwargs):
-        kwargs["verify"] = False
-        _orig_client_init(self, *args, **kwargs)
-    def _patched_async_init(self, *args, **kwargs):
-        kwargs["verify"] = False
-        _orig_async_init(self, *args, **kwargs)
-    _httpx.Client.__init__ = _patched_client_init
-    _httpx.AsyncClient.__init__ = _patched_async_init
-except ImportError:
-    pass
+from ssl_compat import trust_zscaler_if_present
+trust_zscaler_if_present()
 import warnings as _w
 _w.filterwarnings("ignore")
 

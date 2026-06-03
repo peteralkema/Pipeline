@@ -1,21 +1,7 @@
-# fal_client uses httpx internally. httpx ignores SSL_CERT_FILE env var and
-# uses its own SSLContext. Monkey-patch httpx to disable SSL verification
-# BEFORE fal_client imports it. Safe — we only call fal's known public API.
+# httpx TLS for fal_client is handled in shared/ssl_compat (no verify=False).
 import sys as _sys
-try:
-    import httpx as _httpx
-    _orig_client_init = _httpx.Client.__init__
-    _orig_async_init = _httpx.AsyncClient.__init__
-    def _patched_client_init(self, *args, **kwargs):
-        kwargs["verify"] = False
-        _orig_client_init(self, *args, **kwargs)
-    def _patched_async_init(self, *args, **kwargs):
-        kwargs["verify"] = False
-        _orig_async_init(self, *args, **kwargs)
-    _httpx.Client.__init__ = _patched_client_init
-    _httpx.AsyncClient.__init__ = _patched_async_init
-except ImportError:
-    pass
+from ssl_compat import trust_zscaler_if_present
+trust_zscaler_if_present()
 import warnings as _w
 _w.filterwarnings("ignore")
 
@@ -68,13 +54,6 @@ from pathlib import Path
 # fal_client uses httpx internally which can't find the system CA bundle
 # on this Python installation. Disable SSL verification globally for this
 # script only. Safe because we only talk to known public APIs (fal, requests).
-ssl._create_default_https_context = ssl._create_unverified_context
-warnings.filterwarnings("ignore", message="Unverified HTTPS request")
-try:
-    import urllib3
-    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-except ImportError:
-    pass
 
 # ---------- env loading ----------
 
@@ -197,7 +176,7 @@ def generate_still(prompt: str, negatives: list[str], output_path: Path, model: 
     try:
         result = fal_client.subscribe(model, arguments=args, with_logs=False)
         image_url = result["images"][0]["url"]
-        response = requests.get(image_url, timeout=120, verify=False)
+        response = requests.get(image_url, timeout=120)
         response.raise_for_status()
         output_path.write_bytes(response.content)
         return True

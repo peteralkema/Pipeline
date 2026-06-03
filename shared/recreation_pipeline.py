@@ -504,6 +504,12 @@ def generate_still(image_prompt: str, out_path: Path) -> Path:
     if negative:
         # Most fal image models accept negative_prompt; harmless if ignored.
         args["negative_prompt"] = negative
+    if IMAGE_MODEL == "flux":
+        # flux-pro/v1.1 silently returns black ~7KB PNGs when its safety
+        # filter trips (default tolerance ~2). "5" is the loosest practical
+        # setting that stops the silent rejects. Gated to flux — seedream/
+        # nano_banana do not take this arg and should not be handed it.
+        args["safety_tolerance"] = "5"
     result = fal_client.subscribe(
         endpoint,
         arguments=args,
@@ -686,8 +692,8 @@ def generate_music(out_path: Path, prompt: str = None,
 # ── Step 6: assemble ────────────────────────────────────────────────────────────
 
 # Audio mix levels — tune by ear. Victor full; music/SFX low underneath.
-VOICE_LEVEL = 1.0
-MUSIC_LEVEL = 0.12   # bed sits low under the narration
+VOICE_LEVEL = 1.15
+MUSIC_LEVEL = 0.07   # bed sits low under the narration (calibrated for Jamendo tracks, 3 June 2026)
 SFX_LEVEL   = 0.28   # used only if per-shot SFX is switched on
 
 def _auto_align_with_whisper(voice_path: Path, storyboard_path: Path) -> bool:
