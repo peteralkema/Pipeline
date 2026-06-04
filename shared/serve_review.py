@@ -102,6 +102,17 @@ Respond with STRICT JSON only, no preamble, no markdown:
 {"verdict": "fine" | "fix", "diagnosis": "<one short sentence naming what is wrong, or why it is fine>", "corrected_prompt": "<the full corrected prompt if verdict is fix, else empty string>"}"""
 
 
+def _sniff_media_type(data: bytes) -> str:
+    """Detect image format from magic bytes; filenames lie (fal often returns JPEG as .png)."""
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return "image/png"
+    if data[:3] == b"\xff\xd8\xff":
+        return "image/jpeg"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "image/webp"
+    return "image/png"
+
+
 class ReviewServer(HTTPServer):
     def __init__(self, addr, handler_cls, project_dir, beats_data, canon,
                  negatives, model):
@@ -281,10 +292,12 @@ class Handler(BaseHTTPRequestHandler):
 
         # 1) Vision diagnosis
         try:
-            img_b64 = base64.standard_b64encode(still_path.read_bytes()).decode("ascii")
+            img_bytes = still_path.read_bytes()
+            media_type = _sniff_media_type(img_bytes)
+            img_b64 = base64.standard_b64encode(img_bytes).decode("ascii")
             user_content = [
                 {"type": "image", "source": {
-                    "type": "base64", "media_type": "image/png", "data": img_b64}},
+                    "type": "base64", "media_type": media_type, "data": img_b64}},
                 {"type": "text", "text":
                     f"Intended prompt for this shot:\n\n{intended_prompt}\n\n"
                     f"Judge the image against the brand rules and respond with the JSON object."},
