@@ -330,20 +330,18 @@ def main():
 
     if not video_path.exists():
         raise SystemExit(f"No video found: {video_path}. Run `finish` first.")
-    if not script_path.exists():
-        raise SystemExit(f"No script found: {script_path}.")
-
-    script = script_path.read_text()
 
     # Step 1: metadata — prefer hand-written metadata.json if present,
-    # otherwise generate via Claude.
+    # otherwise generate via Claude (which needs script.txt).
     metadata_path = project / "metadata.json"
     if metadata_path.exists():
         print(f"Using existing metadata.json from {metadata_path}")
         metadata = json.loads(metadata_path.read_text())
     else:
+        if not script_path.exists():
+            raise SystemExit(f"No metadata.json and no script.txt at {project}; need one to build metadata.")
         print("Generating metadata (Claude)...")
-        metadata = generate_metadata(script)
+        metadata = generate_metadata(script_path.read_text())
     print(f"   title: {metadata['title']}")
     print(f"   tags : {metadata['tags']}")
 
@@ -372,10 +370,8 @@ def main():
     # Save it next to the video for reference / reuse
     (project / "metadata.json").write_text(json.dumps(metadata, indent=2))
 
-    # Step 2: SRT
-    print("\nGenerating SRT from storyboard...")
-    srt_path = generate_srt(project)
-    print(f"OK SRT -> {srt_path}")
+    # Step 2: SRT generation removed — auto-captions drift vs speech and were
+    # being deleted in Studio every time. Revisit once Whisper-based timing lands.
 
     # Step 3: auth + upload
     youtube = get_youtube_client()
@@ -394,7 +390,6 @@ def main():
 
     video_id = upload_video(youtube, video_path, metadata, privacy, publish_at=publish_at)
 
-    upload_captions(youtube, video_id, srt_path)
 
     # Step 4: optional thumbnail
     thumb_jpg = project / "thumbnail.jpg"
