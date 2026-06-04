@@ -1,92 +1,27 @@
-# Secrets — NEVER commit
-.env
-*.env
-token.json
-client_secret.json
-**/token.json
-**/client_secret.json
+# Render artifacts — generated outputs, regenerable, live on the box. Never tracked.
+**/projects/**/stills/
+**/projects/**/clips/
+**/projects/**/*.mp4
+**/projects/**/voiceover.*
+**/projects/**/*.srt
+**/projects/**/storyboard*.json
+**/projects/**/audio_credits.txt
+**/projects/**/metadata.json
+**/projects/**/thumbnail.*
+**/projects/**/review.html
+**/projects/**/*.json.backup
+**/stills/_backup/
 
 # Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-*.egg-info/
-.pytest_cache/
-venv/
-env/
 .venv/
+venv/
 
-# Generated media files — too large for git, live on disk
-*.mp4
-*.mp3
-*.wav
-*.mov
-*.avi
-*.webp
-*.gif
+# Env / secrets — never commit
+.env
+*token.json
+client_secret.json
 
-# Generated images — stills are regeneratable, don't bloat git
-**/projects/*/stills/
-**/projects/*/clips/
-
-# But DO commit thumbnails (small, hand-curated, source-of-truth)
-!**/projects/*/thumbnail.png
-!**/projects/*/thumbnail.jpg
-
-# Pipeline outputs that regenerate from inputs
-**/projects/*/voiceover.mp3
-**/projects/*/voiceover.json
-**/projects/*/final_video*.mp4
-**/projects/*/*.log
-**/projects/*/finish*.log
-**/projects/*/resync*.log
-**/projects/*/stills_run.log
-
-# Other generated images at root
-*.png
-*.jpg
-*.jpeg
-!**/projects/*/thumbnail.png
-!**/projects/*/thumbnail.jpg
-
-# Model caches
-.u2net/
-.cache/
-
-# OS junk
+# OS noise
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Editor junk
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Backups
-*.bak
-*.pre_migration_backup
-
-# Google Drive sync artifacts
-.tmp.driveupload/
-.tmp.drivedownload/
-
-# Loose log files anywhere
-*.log
-**/*.log
-music-results.json
-music-results.html
-music-results.json.bak
-shared/jamendo_search.py.bak
-music-results.json
-music-results.html
-shared/jamendo_search.py.bak
-.obsidian/
