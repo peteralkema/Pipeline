@@ -6,23 +6,28 @@ import warnings as _w
 _w.filterwarnings("ignore")
 
 """
-serve_review.py — local HTTP server: regenerate + override prompt.
+serve_review.py — local HTTP server: regenerate + override prompt + AI fix.
 
 POST /api/restill accepts {shot, note, override}.
+  Override non-empty → raw user prompt to fal, no canon/beat/note/rulebook.
+  Override empty → normal mode: canon-resolved beat prompt + REGENERATION FEEDBACK note.
 
-Override non-empty → raw user prompt to fal, no canon/beat/note/rulebook.
-Override empty → normal mode: canon-resolved beat prompt + REGENERATION FEEDBACK note.
+POST /api/aifix accepts {shot}.
+  Sends the current rendered still + the shot's intended (canon-resolved) prompt +
+  the brand rules to Claude vision. Claude judges the image against the rules,
+  returns a short diagnosis + a corrected prompt, which is then run through the
+  SAME fal path as Override mode. Returns the diagnosis so the reviewer sees what
+  changed. Vision calls happen only on shots the reviewer clicks — no batch pass.
 """
 import argparse
+import base64
 import json
 import os
-import ssl
 import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
-ssl._create_default_https_context = ssl._create_unverified_context
 try:
     import urllib3
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -55,6 +60,47 @@ try:
 except ImportError as e:
     sys.exit(f"ERROR: could not import from restill_from_feedback.py: {e}")
 
+# Anthropic client for the AI-fix vision diagnosis. Imported lazily so the
+# server still starts (NORMAL/OVERRIDE regen still work) if anthropic is absent.
+try:
+    from anthropic import Anthropic
+    _ANTHROPIC_AVAILABLE = True
+except ImportError:
+    _ANTHROPIC_AVAILABLE = False
+
+VISION_MODEL = "claude-sonnet-4-6"
+
+# The brand rules Claude judges each rendered still against. Mirrors the
+# discipline-auditor's system prompt, extended to vision: it is now looking at
+# the IMAGE, not just the prompt text, and must catch what actually rendered.
+AIFIX_SYSTEM_PROMPT = """You are the quality reviewer for a YouTube channel called Final Hours: dignified, atmospheric, photoreal cinematic recreations of historical final hours.
+
+You are shown a generated still image and the prompt that was intended to produce it. Judge the IMAGE against these brand rules and find what actually rendered wrong:
+
+FACE-NEVER-RESOLVED (the most important rule):
+- No human may have a clearly resolved face. Faces must be obscured by shadow, profile, distance, framing, back-of-head, or silhouette.
+- A visible face, resolved eyes, or a clear facial expression is a violation.
+
+PERIOD ACCURACY:
+- No modern objects, clothing, hairstyles, materials, or architecture out of period.
+- Famous structures must be the correct historical version (e.g. medieval cathedral not modern dome; Victorian wrought-iron lattice bridge not a modern suspension bridge with cables/towers).
+
+ANATOMY & RENDER QUALITY:
+- No broken anatomy, extra or malformed hands/limbs, phantom disembodied hands, fused figures.
+- No gibberish or illegible text rendered in the image.
+
+COMPOSITION:
+- Group compositions of multiple resolved figures are weak; prefer object-substitution or anonymised framing.
+- Fire/storm should read as environment and lighting, not a literal close-up subject.
+
+Your job:
+1. Look at the image. Decide if it violates any rule above, OR has an obvious quality problem (black/empty frame, nonsense, off-topic).
+2. If it is FINE, say so — do not invent problems.
+3. If it is WRONG, write a corrected image prompt that fixes the specific problem while preserving the intended location, period, lighting, atmosphere, and framing. Apply the channel rules (obscure the face, correct the period detail, substitute objects for groups, etc.). Restate the era anchor and the face-never-resolved framing explicitly in the corrected prompt.
+
+Respond with STRICT JSON only, no preamble, no markdown:
+{"verdict": "fine" | "fix", "diagnosis": "<one short sentence naming what is wrong, or why it is fine>", "corrected_prompt": "<the full corrected prompt if verdict is fix, else empty string>"}"""
+
 
 class ReviewServer(HTTPServer):
     def __init__(self, addr, handler_cls, project_dir, beats_data, canon,
@@ -67,6 +113,10 @@ class ReviewServer(HTTPServer):
         self.negatives = negatives
         self.model = model
         self.stills_dir = project_dir / "stills"
+        # Build the Anthropic client once if available + keyed.
+        self.anthropic = None
+        if _ANTHROPIC_AVAILABLE and os.environ.get("ANTHROPIC_API_KEY"):
+            self.anthropic = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -113,7 +163,11 @@ class Handler(BaseHTTPRequestHandler):
             self._send_file(html_path, "text/html; charset=utf-8"); return
 
         if path == "/api/health":
-            self._send_json(200, {"ok": True, "project": srv.project_dir.name}); return
+            self._send_json(200, {
+                "ok": True,
+                "project": srv.project_dir.name,
+                "aifix": srv.anthropic is not None,
+            }); return
 
         if path.startswith("/stills/"):
             relative = path.lstrip("/")
@@ -131,14 +185,25 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
-        if path != "/api/restill":
-            self.send_response(404); self.end_headers(); return
+        if path == "/api/restill":
+            self._handle_restill(); return
+        if path == "/api/aifix":
+            self._handle_aifix(); return
+        self.send_response(404); self.end_headers()
 
+    def _read_body(self):
         length = int(self.headers.get("Content-Length", 0))
         try:
-            body = json.loads(self.rfile.read(length).decode("utf-8"))
+            return json.loads(self.rfile.read(length).decode("utf-8")), None
         except (json.JSONDecodeError, UnicodeDecodeError) as e:
-            self._send_json(400, {"ok": False, "error": f"bad JSON: {e}"}); return
+            return None, f"bad JSON: {e}"
+
+    # ── Existing regenerate (Notes / Override) ──────────────────────────────
+
+    def _handle_restill(self):
+        body, err = self._read_body()
+        if err:
+            self._send_json(400, {"ok": False, "error": err}); return
 
         shot_idx = body.get("shot")
         note = (body.get("note") or "").strip()
@@ -152,10 +217,9 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(404, {"ok": False, "error": f"shot {shot_idx} not in beats"}); return
 
         if override:
-            # OVERRIDE MODE: send exactly what the user typed, nothing else
             final_prompt = override
             mode = "OVERRIDE"
-            negatives_to_use = []  # also bypass rulebook negatives
+            negatives_to_use = []
         else:
             beat = srv.beats_by_idx[shot_idx]
             raw_prompt = beat.get("image_prompt", "")
@@ -187,6 +251,92 @@ class Handler(BaseHTTPRequestHandler):
         else:
             print(f"  FAILED")
             self._send_json(500, {"ok": False, "error": "fal generation failed"})
+
+    # ── AI fix (vision diagnose → corrected prompt → regenerate) ────────────
+
+    def _handle_aifix(self):
+        body, err = self._read_body()
+        if err:
+            self._send_json(400, {"ok": False, "error": err}); return
+
+        shot_idx = body.get("shot")
+        if not isinstance(shot_idx, int):
+            self._send_json(400, {"ok": False, "error": "shot must be an integer"}); return
+
+        srv: ReviewServer = self.server  # type: ignore
+        if srv.anthropic is None:
+            self._send_json(503, {"ok": False, "error":
+                "AI fix unavailable: anthropic not installed or ANTHROPIC_API_KEY not set"}); return
+        if shot_idx not in srv.beats_by_idx:
+            self._send_json(404, {"ok": False, "error": f"shot {shot_idx} not in beats"}); return
+
+        still_path = srv.stills_dir / f"shot_{shot_idx:03d}.png"
+        if not still_path.exists():
+            self._send_json(404, {"ok": False, "error": f"still not found: {still_path.name}"}); return
+
+        beat = srv.beats_by_idx[shot_idx]
+        intended_prompt = resolve_canon_tokens(beat.get("image_prompt", ""), srv.canon)
+
+        print(f"\n[AI fix] Shot {shot_idx:03d} — diagnosing image against brand rules...")
+
+        # 1) Vision diagnosis
+        try:
+            img_b64 = base64.standard_b64encode(still_path.read_bytes()).decode("ascii")
+            user_content = [
+                {"type": "image", "source": {
+                    "type": "base64", "media_type": "image/png", "data": img_b64}},
+                {"type": "text", "text":
+                    f"Intended prompt for this shot:\n\n{intended_prompt}\n\n"
+                    f"Judge the image against the brand rules and respond with the JSON object."},
+            ]
+            resp = srv.anthropic.messages.create(
+                model=VISION_MODEL,
+                max_tokens=1024,
+                system=AIFIX_SYSTEM_PROMPT,
+                messages=[{"role": "user", "content": user_content}],
+            )
+            raw = resp.content[0].text.strip()
+            # tolerate accidental ```json fences
+            if raw.startswith("```"):
+                raw = raw.strip("`")
+                raw = raw[raw.find("{"):raw.rfind("}") + 1]
+            verdict = json.loads(raw)
+        except Exception as e:
+            print(f"  diagnosis failed: {e}")
+            self._send_json(500, {"ok": False, "error": f"vision diagnosis failed: {e}"}); return
+
+        diagnosis = (verdict.get("diagnosis") or "").strip()
+        corrected = (verdict.get("corrected_prompt") or "").strip()
+        is_fix = verdict.get("verdict") == "fix" and bool(corrected)
+
+        print(f"  Verdict:    {verdict.get('verdict')}")
+        print(f"  Diagnosis:  {diagnosis}")
+
+        # 2) If the model says the shot is fine, report back and regenerate nothing.
+        if not is_fix:
+            self._send_json(200, {
+                "ok": True, "shot": shot_idx, "changed": False,
+                "diagnosis": diagnosis or "Image looks consistent with the brand rules.",
+            }); return
+
+        # 3) Run the corrected prompt through the SAME fal path as Override mode
+        #    (raw prompt, no canon/rulebook negatives — the corrected prompt is self-contained).
+        print(f"  Corrected:  {corrected[:220]}{'...' if len(corrected) > 220 else ''}")
+        backup = backup_existing_still(srv.stills_dir, shot_idx)
+        if backup:
+            print(f"  Backed up:  {backup.name}")
+
+        success = generate_still(corrected, [], still_path, srv.model)
+        if success:
+            print(f"  OK -> {still_path.name}")
+            self._send_json(200, {
+                "ok": True, "shot": shot_idx, "changed": True,
+                "diagnosis": diagnosis, "corrected_prompt": corrected,
+            })
+        else:
+            print(f"  FAILED (fal generation)")
+            self._send_json(500, {"ok": False, "error": "fal generation failed after diagnosis",
+                                   "diagnosis": diagnosis})
 
 
 def main():
@@ -223,6 +373,11 @@ def main():
 
     addr = ("127.0.0.1", args.port)
     server = ReviewServer(addr, Handler, project_dir, beats, canon, negatives, args.model)
+
+    if server.anthropic is not None:
+        print(f"AI fix: enabled ({VISION_MODEL})")
+    else:
+        print("AI fix: DISABLED (anthropic not installed or ANTHROPIC_API_KEY not set)")
 
     print()
     print(f"Server running at http://localhost:{args.port}/")

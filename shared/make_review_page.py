@@ -3,6 +3,9 @@ make_review_page.py — generate an HTML stills review page for any project.
 
 Override prompt: if filled, REPLACES the canon-resolved prompt entirely.
 Notes: appended to original prompt as REGENERATION FEEDBACK (if override empty).
+AI fix: one-click — vision model judges the rendered still against brand rules,
+        and if it's wrong, writes a corrected prompt and regenerates. Shows the
+        diagnosis inline. Only enabled when the server reports AI fix available.
 
 Usage:
     python ../shared/make_review_page.py --project projects/tenerife
@@ -67,6 +70,7 @@ def build_html(project_name: str, beats: list, canon: dict, stills_dir_rel: str)
     --accent: #5b8def;
     --regen: #b87a14;
     --override: #a855f7;
+    --aifix: #14a3b8;
   }}
   * {{ box-sizing: border-box; }}
   body {{ margin: 0; font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }}
@@ -87,14 +91,16 @@ def build_html(project_name: str, beats: list, canon: dict, stills_dir_rel: str)
   .shot.accept {{ border-color: var(--accept); background: var(--accept-bg); }}
   .shot.reject {{ border-color: var(--reject); background: var(--reject-bg); }}
   .shot.regenerating {{ border-color: var(--regen); }}
+  .shot.aifixing {{ border-color: var(--aifix); }}
   .shot.has-override {{ border-color: var(--override); }}
   .shot-image {{ position: relative; background: #000; border-radius: 6px; overflow: hidden; aspect-ratio: 16/9; }}
   .shot-image img {{ width: 100%; height: 100%; object-fit: contain; display: block; }}
   .shot-image .missing {{ display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); font-size: 13px; text-align: center; padding: 24px; }}
   .shot-number {{ position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: 600; font-family: ui-monospace, monospace; }}
-  .regen-overlay {{ position: absolute; inset: 0; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; color: white; font-size: 13px; flex-direction: column; gap: 12px; }}
+  .regen-overlay {{ position: absolute; inset: 0; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; color: white; font-size: 13px; flex-direction: column; gap: 12px; text-align: center; padding: 16px; }}
   .regen-overlay.visible {{ display: flex; }}
   .spinner {{ width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.2); border-top-color: var(--regen); border-radius: 50%; animation: spin 1s linear infinite; }}
+  .spinner.aifix {{ border-top-color: var(--aifix); }}
   @keyframes spin {{ to {{ transform: rotate(360deg); }} }}
   .shot-content {{ min-width: 0; }}
   .narration {{ font-size: 14px; color: var(--text); font-style: italic; margin-bottom: 12px; padding: 10px 14px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--accent); border-radius: 4px; }}
@@ -105,11 +111,20 @@ def build_html(project_name: str, beats: list, canon: dict, stills_dir_rel: str)
   .btn-judge:hover {{ background: rgba(255,255,255,0.05); }}
   .btn-judge.active.accept {{ background: var(--accept); border-color: var(--accept); color: white; }}
   .btn-judge.active.reject {{ background: var(--reject); border-color: var(--reject); color: white; }}
+  .btn-aifix {{ padding: 10px; background: var(--aifix); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; transition: opacity 0.15s; }}
+  .btn-aifix:hover {{ opacity: 0.9; }}
+  .btn-aifix:disabled {{ opacity: 0.3; cursor: not-allowed; }}
+  .btn-aifix.hidden {{ display: none; }}
   .btn-regen {{ padding: 10px; background: var(--regen); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; transition: opacity 0.15s; }}
   .btn-regen:hover {{ opacity: 0.9; }}
   .btn-regen:disabled {{ opacity: 0.3; cursor: not-allowed; }}
   .btn-regen.hidden {{ display: none; }}
   .btn-regen.override-active {{ background: var(--override); }}
+  .ai-diagnosis {{ font-size: 12px; line-height: 1.5; padding: 8px 12px; border-radius: 6px; display: none; }}
+  .ai-diagnosis.visible {{ display: block; }}
+  .ai-diagnosis.fixed {{ background: rgba(20, 163, 184, 0.1); border-left: 3px solid var(--aifix); color: var(--text); }}
+  .ai-diagnosis.fine {{ background: var(--accept-bg); border-left: 3px solid var(--accept); color: var(--text); }}
+  .ai-diagnosis .dx-label {{ font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 2px; }}
   textarea {{ width: 100%; min-height: 80px; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 10px; font-family: inherit; font-size: 13px; resize: vertical; }}
   textarea:focus {{ outline: none; border-color: var(--accent); }}
   textarea::placeholder {{ color: var(--text-muted); }}
@@ -150,6 +165,7 @@ const SHOTS = {shots_json};
 const STORAGE_PREFIX = `review:${{PROJECT}}:`;
 const IS_SERVED = window.location.protocol === "http:" || window.location.protocol === "https:";
 let SERVER_AVAILABLE = false;
+let AIFIX_AVAILABLE = false;
 
 async function checkServer() {{
   if (!IS_SERVED) return;
@@ -157,10 +173,17 @@ async function checkServer() {{
     const res = await fetch("/api/health", {{method: "GET"}});
     if (res.ok) {{
       SERVER_AVAILABLE = true;
+      const data = await res.json();
+      AIFIX_AVAILABLE = !!data.aifix;
       const el = document.getElementById("server-status");
-      el.textContent = "Server live — regenerate available";
+      el.textContent = AIFIX_AVAILABLE
+        ? "Server live — regenerate + AI fix available"
+        : "Server live — regenerate available (AI fix off)";
       el.classList.add("live");
       document.querySelectorAll(".btn-regen").forEach(b => b.classList.remove("hidden"));
+      if (AIFIX_AVAILABLE) {{
+        document.querySelectorAll(".btn-aifix").forEach(b => b.classList.remove("hidden"));
+      }}
     }}
   }} catch (e) {{ }}
 }}
@@ -236,6 +259,70 @@ function setStatus(el, text, cls) {{
   }}
 }}
 
+function showDiagnosis(idx, text, kind) {{
+  const dx = document.getElementById(`diagnosis-${{idx}}`);
+  dx.innerHTML = `<span class="dx-label">${{kind === "fine" ? "AI review — looks fine" : "AI fix — what changed"}}</span>${{text.replace(/</g, '&lt;')}}`;
+  dx.className = "ai-diagnosis visible " + (kind === "fine" ? "fine" : "fixed");
+}}
+
+async function aiFixShot(idx) {{
+  if (!AIFIX_AVAILABLE) {{
+    alert("AI fix not available. The server must be running with anthropic installed and ANTHROPIC_API_KEY set.");
+    return;
+  }}
+  const card = document.getElementById(`shot-${{idx}}`);
+  const overlay = document.getElementById(`overlay-${{idx}}`);
+  const overlayLabel = document.getElementById(`overlay-label-${{idx}}`);
+  const spinner = document.getElementById(`spinner-${{idx}}`);
+  const aiBtn = card.querySelector(".btn-aifix");
+  const regenBtn = card.querySelector(".btn-regen");
+  const statusEl = document.getElementById(`status-${{idx}}`);
+
+  card.classList.add("aifixing");
+  spinner.classList.add("aifix");
+  overlayLabel.textContent = "AI reviewing the image...";
+  overlay.classList.add("visible");
+  aiBtn.disabled = true;
+  regenBtn.disabled = true;
+  setStatus(statusEl, "AI reviewing...", "");
+
+  try {{
+    const res = await fetch("/api/aifix", {{
+      method: "POST",
+      headers: {{"Content-Type": "application/json"}},
+      body: JSON.stringify({{shot: idx}})
+    }});
+    const data = await res.json();
+    if (data.ok) {{
+      if (data.changed) {{
+        const img = card.querySelector(".shot-image img");
+        const baseSrc = img.src.split("?")[0];
+        img.src = baseSrc + "?v=" + Date.now();
+        saveJudgment(idx, "");
+        updateShotUI(idx);
+        updateCounters();
+        showDiagnosis(idx, data.diagnosis || "Corrected.", "fixed");
+        setStatus(statusEl, "AI fixed — review the new still", "regen-ok");
+      }} else {{
+        showDiagnosis(idx, data.diagnosis || "Looks consistent with the brand rules.", "fine");
+        setStatus(statusEl, "AI says fine — no change", "regen-ok");
+      }}
+      setTimeout(() => setStatus(statusEl, "", ""), 3000);
+    }} else {{
+      setStatus(statusEl, "AI fix failed: " + (data.error || "unknown"), "regen-fail");
+      if (data.diagnosis) showDiagnosis(idx, data.diagnosis, "fixed");
+    }}
+  }} catch (e) {{
+    setStatus(statusEl, "AI fix failed: " + e.message, "regen-fail");
+  }} finally {{
+    card.classList.remove("aifixing");
+    spinner.classList.remove("aifix");
+    overlay.classList.remove("visible");
+    aiBtn.disabled = false;
+    regenBtn.disabled = false;
+  }}
+}}
+
 async function regenerateShot(idx) {{
   if (!SERVER_AVAILABLE) {{
     alert("Server not running. Start it from the channel root with:\\n\\npython ../shared/serve_review.py --project projects/" + PROJECT);
@@ -243,14 +330,18 @@ async function regenerateShot(idx) {{
   }}
   const card = document.getElementById(`shot-${{idx}}`);
   const overlay = document.getElementById(`overlay-${{idx}}`);
+  const overlayLabel = document.getElementById(`overlay-label-${{idx}}`);
   const regenBtn = card.querySelector(".btn-regen");
+  const aiBtn = card.querySelector(".btn-aifix");
   const statusEl = document.getElementById(`status-${{idx}}`);
   const note = loadNote(idx);
   const override = loadOverride(idx);
 
   card.classList.add("regenerating");
+  overlayLabel.textContent = "Generating new still...";
   overlay.classList.add("visible");
   regenBtn.disabled = true;
+  if (aiBtn) aiBtn.disabled = true;
   setStatus(statusEl, override ? "Regenerating with OVERRIDE..." : "Regenerating...", "");
 
   try {{
@@ -278,6 +369,7 @@ async function regenerateShot(idx) {{
     card.classList.remove("regenerating");
     overlay.classList.remove("visible");
     regenBtn.disabled = false;
+    if (aiBtn) aiBtn.disabled = false;
   }}
 }}
 
@@ -328,8 +420,8 @@ function renderShots() {{
              onerror="this.outerHTML='<div class=missing>Still not generated yet<br>${{shot.still_path}}</div>'">
         <div class="shot-number">SHOT ${{String(shot.index).padStart(3, '0')}}</div>
         <div class="regen-overlay" id="overlay-${{shot.index}}">
-          <div class="spinner"></div>
-          <div>Generating new still...</div>
+          <div class="spinner" id="spinner-${{shot.index}}"></div>
+          <div id="overlay-label-${{shot.index}}">Generating new still...</div>
         </div>
       </div>
       <div class="shot-content">
@@ -342,6 +434,8 @@ function renderShots() {{
           <button class="btn-judge" data-action="accept" onclick="setJudgment(${{shot.index}}, 'accept')">Accept</button>
           <button class="btn-judge" data-action="reject" onclick="setJudgment(${{shot.index}}, 'reject')">Reject</button>
         </div>
+        <button class="btn-aifix hidden" onclick="aiFixShot(${{shot.index}})">AI fix</button>
+        <div class="ai-diagnosis" id="diagnosis-${{shot.index}}"></div>
         <button class="btn-regen hidden" onclick="regenerateShot(${{shot.index}})">Regenerate this shot</button>
         <div class="field-group">
           <div class="field-label">Notes (appended to original prompt)</div>
@@ -423,7 +517,7 @@ def main():
     output_path.write_text(html)
     print(f"Wrote: {output_path}")
     print()
-    print(f"Open with server (override prompt + single-click regenerate):")
+    print(f"Open with server (override prompt + single-click regenerate + AI fix):")
     print(f"  python ../shared/serve_review.py --project {project_dir}")
 
 
