@@ -101,6 +101,8 @@ def main():
     ap.add_argument("--start-phase", choices=PHASES, default="storyboard",
                     help="resume from a later phase (skips earlier ones)")
     ap.add_argument("--model", default="fal-ai/flux-pro/v1.1", help="passed to serve_review reminder only")
+    ap.add_argument("--box", default="peter@116.202.18.68",
+                    help="ssh target printed in the laptop tunnel block at gate 2")
     args = ap.parse_args()
 
     project_dir = resolve_project_dir(args.project)
@@ -210,16 +212,40 @@ def main():
 
     # ── GATE 2: human review ──────────────────────────────────────────────
     if active("stills"):
-        print("\n" + "=" * 60)
+        channel_root = Path.cwd()                    # we run from the channel root
+        venv_activate = "source ~/venvs/pipeline/bin/activate"
+        bar = "=" * 64
+        print("\n" + bar)
         print("STILLS READY FOR REVIEW")
-        print("In a separate step, start the review server and open the page:")
-        print(f"    python ../shared/serve_review.py --project {project_dir}")
-        print("    (ensure your SSH tunnel is up, then open http://localhost:8000)")
-        print("Accept / reject / AI-fix / regenerate. Whatever is on disk when you")
-        print("continue is what gets animated.")
-        print("=" * 60)
+        print(bar)
+        print("Two windows. Copy-paste each block exactly. Do this window LAST.\n")
+
+        print("-" * 64)
+        print("WINDOW A  — BOX  (open a NEW ssh session to the box, then paste):")
+        print("-" * 64)
+        print(f"{venv_activate}")
+        print(f"cd {channel_root}")
+        print(f"python ../shared/make_review_page.py --project {project_dir}")
+        print(f"python ../shared/serve_review.py --project {project_dir}")
+        print("   # leave this running — it should print 'AI fix: enabled'\n")
+
+        print("-" * 64)
+        print(f"WINDOW B  — LAPTOP  (open a NEW laptop terminal, then paste):")
+        print("-" * 64)
+        print("lsof -ti :8000 | xargs kill 2>/dev/null; true")
+        print(f"ssh -p 443 -L 8000:localhost:8000 {args.box}")
+        print("   # leave this connected — it forwards the page to your browser\n")
+
+        print("-" * 64)
+        print("THEN: open  http://localhost:8000  in your browser.")
+        print("Review every shot: Accept / Reject / AI-fix / Regenerate.")
+        print("Whatever is on disk when you continue is what gets animated.")
+        print(bar)
         if not confirm("Continue to clips + voiceover + assembly + true-up?"):
-            print("\nStopped before finish. Re-run when ready with:")
+            print("\nStopped before finish. When ready, come back to THIS window")
+            print("(or a new box session) and run:")
+            print(f"    {venv_activate}")
+            print(f"    cd {channel_root}")
             print(f"    python ../shared/orchestrate.py --project {name} --start-phase finish")
             sys.exit(0)
 
