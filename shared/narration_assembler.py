@@ -138,8 +138,18 @@ def verify(beats, full_text):
 
 
 def categorise_empty(beats):
-    """Split empty-narration beats into expected (cold open) vs held cards vs other."""
-    cold_open, held_cards, other = [], [], []
+    """Split empty-narration beats into the legitimate categories vs genuine anomalies.
+
+    All of these are untimable by Whisper (no words to transcribe) and need
+    durations ASSIGNED in the alignment/assemble step rather than measured:
+      - cold_open    : beat 00, the black frame whose words live on beat 01's card
+      - held_cards   : Mode B graphics held over silence (ChapterCards, etc.)
+      - silent_holds : Mode A recreated beats held in silence at decision-points
+                       (the register's "generous silent beats"); they carry a
+                       visual and almost always silence_after=True
+      - other        : anything that fits none of the above -> investigate
+    """
+    cold_open, held_cards, silent_holds, other = [], [], [], []
     for b in beats:
         if spoken_text(b):
             continue
@@ -147,9 +157,11 @@ def categorise_empty(beats):
             cold_open.append(b)
         elif b["mode"] == "B":
             held_cards.append(b)
+        elif b["mode"] == "A" and (b.get("visual") or "").strip():
+            silent_holds.append(b)
         else:
             other.append(b)
-    return cold_open, held_cards, other
+    return cold_open, held_cards, silent_holds, other
 
 
 # --------------------------------------------------------------------------
@@ -184,17 +196,22 @@ def main():
     if problems == 0:
         print("  OK  found_line fold + QuoteCard-once checks pass.")
 
-    # Silent beats
-    cold_open, held_cards, other = categorise_empty(beats)
-    print("\n--- silent beats (no spoken words; Whisper can't time these) ---")
+    # Silent beats (no words -> Whisper can't time them; durations get ASSIGNED)
+    cold_open, held_cards, silent_holds, other = categorise_empty(beats)
+    untimable = len(cold_open) + len(held_cards) + len(silent_holds) + len(other)
+    print(f"\n--- silent beats: {untimable} of {n} carry no spoken words "
+          f"(Whisper can't time these; durations get assigned, not measured) ---")
     if cold_open:
         print(f"  cold open (expected): beat(s) {[b['index'] for b in cold_open]}")
     if held_cards:
         comps = [f"{b['index']:02d}:{b.get('component')}" for b in held_cards]
-        print(f"  held cards ({len(held_cards)}) -> need default holds in assemble: {comps}")
+        print(f"  held B cards ({len(held_cards)}): {comps}")
+    if silent_holds:
+        idxs = [b["index"] for b in silent_holds]
+        print(f"  silent A holds ({len(silent_holds)}) -> decision-point pauses: {idxs}")
     if other:
         print(f"  !! UNEXPECTED empty beats (investigate): {[b['index'] for b in other]}")
-    if not (cold_open or held_cards or other):
+    if untimable == 0:
         print("  (none - every beat has spoken words)")
 
     # Write artifacts
