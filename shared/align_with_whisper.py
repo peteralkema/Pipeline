@@ -12,6 +12,13 @@ based on real measured timestamps from the rendered voiceover audio.
 Usage (from channel root, e.g. final-hours/):
     python ../shared/align_with_whisper.py --project mary_celeste
 
+  OR point it at named files directly (used by the Synthetic dual-mode spine,
+  whose 62-beat scaffold is deliberately NOT called storyboard.json so it can't
+  collide with the engine's own 41-shot storyboard.json):
+    python ../shared/align_with_whisper.py \
+        --storyboard ep1_beats_storyboard.json \
+        --whisper projects/ep1-the-promise/voiceover.json
+
 The pipeline's assemble() step then reads audio_duration from storyboard.json
 and uses it instead of the word-count proxy that caused drift on Mary Celeste.
 
@@ -41,28 +48,43 @@ def words_in(text: str) -> list:
 
 def main():
     parser = argparse.ArgumentParser(description="Align storyboard shots to Whisper-measured audio timestamps.")
-    parser.add_argument("--project", required=True, help="Project name (looks in projects/<name>/)")
+    parser.add_argument("--project", required=False, default=None, help="Project name (looks in projects/<name>/)")
+    parser.add_argument("--storyboard", default=None,
+                        help="explicit path to the shot/beat list JSON (overrides --project; pass with --whisper)")
+    parser.add_argument("--whisper", default=None,
+                        help="explicit path to the Whisper voiceover.json (overrides --project; pass with --storyboard)")
     parser.add_argument("--verbose", action="store_true", help="Print per-shot timing details")
     args = parser.parse_args()
 
-    project_arg = Path(args.project)
-    if not project_arg.is_absolute() and len(project_arg.parts) == 1 and Path("projects").is_dir():
-        project_dir = Path("projects") / project_arg
+    # Path resolution: explicit file overrides take precedence; otherwise the
+    # original --project-based resolution runs UNCHANGED (Final Hours path).
+    if args.storyboard or args.whisper:
+        if not (args.storyboard and args.whisper):
+            print("ERROR: pass BOTH --storyboard and --whisper, or use --project instead", file=sys.stderr)
+            sys.exit(1)
+        storyboard_path = Path(args.storyboard)
+        whisper_path = Path(args.whisper)
     else:
-        project_dir = project_arg
-
-    whisper_path = project_dir / "voiceover.json"
-    storyboard_path = project_dir / "storyboard.json"
+        if not args.project:
+            print("ERROR: --project is required (or pass --storyboard and --whisper)", file=sys.stderr)
+            sys.exit(1)
+        project_arg = Path(args.project)
+        if not project_arg.is_absolute() and len(project_arg.parts) == 1 and Path("projects").is_dir():
+            project_dir = Path("projects") / project_arg
+        else:
+            project_dir = project_arg
+        whisper_path = project_dir / "voiceover.json"
+        storyboard_path = project_dir / "storyboard.json"
 
     if not whisper_path.exists():
         print(f"ERROR: Whisper output not found at {whisper_path}", file=sys.stderr)
         print(f"Run Whisper first:", file=sys.stderr)
-        print(f"  whisper {project_dir}/voiceover.mp3 --model small --output_format json \\", file=sys.stderr)
-        print(f"    --output_dir {project_dir}/ --word_timestamps True", file=sys.stderr)
+        print(f"  whisper {whisper_path.parent}/voiceover.mp3 --model small --output_format json \\", file=sys.stderr)
+        print(f"    --output_dir {whisper_path.parent}/ --word_timestamps True", file=sys.stderr)
         sys.exit(1)
 
     if not storyboard_path.exists():
-        print(f"ERROR: storyboard.json not found at {storyboard_path}", file=sys.stderr)
+        print(f"ERROR: storyboard not found at {storyboard_path}", file=sys.stderr)
         sys.exit(1)
 
     # Load Whisper output and flatten to a single word list
@@ -100,7 +122,7 @@ def main():
         elif "shots" in storyboard:
             storyboard_key = "shots"
         else:
-            print(f"ERROR: storyboard.json has no 'beats' or 'shots' key", file=sys.stderr)
+            print(f"ERROR: storyboard has no 'beats' or 'shots' key", file=sys.stderr)
             sys.exit(1)
         shots = storyboard[storyboard_key]
 
