@@ -1,6 +1,6 @@
 # Pipeline Playbook
 *The full lifecycle from topic to published video, across all channels.*
-*Last updated: 5 June 2026 — added PART 2B (dual-mode architecture, Mode A + Mode B) ahead of the Synthetic launch series. Prior: 30 May 2026, after shipping Six Minutes (Success Coach video 1) and setting up Hindenburg (Final Hours video 4).*
+*Last updated: 5 June 2026 (later session) — 4c Piece 2 (audio spine) scaffolding built: narration_assembler.py + make_episode_vo.py. Prior same day: added PART 2B (dual-mode architecture, Mode A + Mode B) ahead of the Synthetic launch series. Prior: 30 May 2026, after shipping Six Minutes (Success Coach video 1) and setting up Hindenburg (Final Hours video 4).*
 
 This is the single source of truth for how to make a video. Read it before starting any new project. Update it when banking new rules from production.
 
@@ -370,7 +370,7 @@ Pinned comments generate the early engagement signal the algorithm watches.
 
 ## PART 2B — DUAL-MODE ARCHITECTURE (MODE A + MODE B)
 
-*Added 5 June 2026 for the Synthetic Press launch series; rewritten same day after the pipeline was actually BUILT and proven end to end. Mode A is the existing stills→clips engine (all Final Hours / Success Coach video). Mode B is Remotion motion-graphics. Synthetic is the first channel to use both; the architecture is general. **Status as of 5 June 2026: Steps 1–4b proven on real hardware. Step 4c (real A render + full-episode audio spine + dual-mode assemble) is specified and not yet built — see the separate 4c spec doc.***
+*Added 5 June 2026 for the Synthetic Press launch series; rewritten same day after the pipeline was actually BUILT and proven end to end. Mode A is the existing stills→clips engine (all Final Hours / Success Coach video). Mode B is Remotion motion-graphics. Synthetic is the first channel to use both; the architecture is general. **Status as of 5 June 2026: Steps 1–4b proven on real hardware. Step 4c is now under construction (Piece 2 audio-spine scaffolding built; Pieces 1 and 3 pending) — see "4c progress" below.***
 
 ### The four principles (the whole thing hangs off these)
 
@@ -463,9 +463,71 @@ Mode B Remotion renders 1920×1080. Mode A engine historically rendered 1280×72
 | 3 | real Mode B render (`render_mode_b` → Remotion) | ✅ real $650M clip rendered on laptop |
 | 4a | assemble plumbing (B clip between A placeholders) | ✅ proven on laptop |
 | 4b | Mode A translator + engine ingest under Synthetic channel | ✅ `OK Beat-script ingested: 41 beats` on box |
-| 4c | real A render + full-episode audio spine + dual-mode assemble | ⏳ specified, not built |
+| 4c | real A render + full-episode audio spine + dual-mode assemble | 🔨 in progress — see 4c sub-status below |
 
 **Three known component-feature gaps (small Remotion tweaks, not pipeline work):** QuoteCard attribution-only variant; NumberCounter startValue+countdown; NumberCounter plainYear. None block 4c; each makes one beat render exactly as scripted.
+
+### 4c progress — audio-spine scaffolding built (5 June 2026, later session)
+
+*Step 4c is being built bottom-up in the SPEC's "spend money last" order. Piece 2
+(the full-episode audio spine) is the first thing under construction because it
+de-risks timing before any fal/Kling spend. Two new files, both free/cheap, both
+proven on the box against the locked E1 script.*
+
+**New files (both in `shared/`):**
+
+- **`narration_assembler.py`** — Piece 2, step 1. Pure, free, instant transform of
+  `beats.json`. Emits two artifacts: `ep1_narration.txt` (the whole-episode VO
+  script — every beat's spoken words in beat order, the text the narrator actually
+  reads) and `ep1_beats_storyboard.json` (a 62-entry one-per-beat scaffold in the
+  flat-list shape the Whisper aligner accepts). The scaffold is given a DISTINCT
+  filename on purpose so it never collides with the engine's own 41-shot
+  `storyboard.json` (the Mode-A-only one the recreation pipeline writes and its
+  assemble reads). Run from inside `synthetic/`.
+
+- **`make_episode_vo.py`** — Piece 2, step 2. Turns `ep1_narration.txt` into ONE
+  continuous Victor voiceover by reusing the engine's `generate_voiceover` (so the
+  1800-char chunking + concat stay single-sourced — no second TTS path). Verifies
+  voice_id == Victor and the Inworld key before spending a credit. With `--whisper`
+  it then runs Whisper using the IDENTICAL invocation as the engine's
+  `_auto_align_with_whisper` (model=small, word timestamps, JSON), writing
+  `voiceover.json` next to the mp3 — exactly where the aligner will look, so Whisper
+  won't have to re-run when the per-beat aligner is wired. Run from inside
+  `synthetic/`, inside `~/venvs/pipeline` (bare python3 lacks the deps).
+
+**Banked lessons from this session:**
+
+- **`found_line` is already folded INTO `narration`.** `parse_script.flush_into()`
+  sets both fields from the same buffered blockquote. So the VO uses `narration`
+  ALONE — appending `found_line` again (as the SPEC's prose literally says) would
+  make Victor read every QuoteCard line TWICE. The assembler verifies this: each
+  QuoteCard's spoken line must appear exactly once in the assembled text. Lesson:
+  verify against the real parser output, not the SPEC's description of it.
+
+- **23 of 62 E1 beats carry no spoken words and are UNTIMABLE by Whisper** (nothing
+  to transcribe). Breakdown: beat 00 (cold-open black frame, its words live on beat
+  01's QuoteCard) + 16 held Mode B cards + 6 silent Mode A holds (beats
+  20, 25, 31, 43, 52, 54 — decision-point pauses like the empty chair after the
+  firing, the door closing on Altman). These get durations **ASSIGNED, not
+  measured**. The sizing signal for the silent A holds is **`silence_after=True`** —
+  every one of the six carries it; the script is encoding an editorial timing
+  decision the spine must honour, not stumble over.
+
+- **The audio spine is built at the Synthetic level over the whole 62-beat script**,
+  NOT delegated to the engine's per-mode `finish`. The beat-00 empty-narration tell
+  proves the VO is one continuous track across both modes. `make_episode_vo.py` owns
+  the episode VO; the engine will only animate (the `--animate-only` seam, still to
+  build in Piece 1).
+
+**Updated 4c sub-status:**
+
+| 4c piece | What | Status |
+|---|---|---|
+| 2 (spine) | narration assembler → VO text + 62-beat scaffold | ✅ built, proven on box |
+| 2 (spine) | whole-episode Victor VO + raw Whisper `voiceover.json` | ✅ built (run with `--whisper`) |
+| 2 (spine) | per-beat aligner: map word timestamps onto all 62 beats | ⏳ pending `align_with_whisper.py` |
+| 1 (A render) | `--animate-only` seam on `cmd_finish`; real stills+Kling | ⏳ not built (spend-last) |
+| 3 (assemble) | dual-mode interleave A+B in beat order at 1080p | ⏳ not built |
 
 The mental model in one line: **the tag is a routing instruction the author writes, the parser carries it, the dispatcher obeys it, two renderers feed one timeline, and (once 4c lands) the measured audio keeps them honest.**
 
