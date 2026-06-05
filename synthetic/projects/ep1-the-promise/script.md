@@ -1,5 +1,5 @@
 # SYNTHETIC — Episode 1: "The Promise"
-*The OpenAI series, episode 1. Full tagged script (draft v3, 5 June 2026).*
+*The OpenAI series, episode 1. Full tagged script (v4 — fact-locked, 5 June 2026).*
 *Register: documentary-witness — restrained, curious, never panicked, never gleeful. Stage, don't state.*
 *v3 changes: reframed "The Dream" contemporary (dropped the 1956/winters history-lesson, runs straight at Kasparov); kept the "thousands of cats = learning" beat; compression pass to thin filler back to meaning-carrying narrative; line edits per Peter (greatest threat / 2015 reframe / cut founding-names tail / Ilya leap line / etc).*
 
@@ -161,7 +161,7 @@ In the autumn of 2015, a small group gathered for dinner near Stanford. Around t
 Musk and Altman had a recruiting problem money couldn't solve. The researchers they wanted already had Google's money, Google's machines, Google's promise of the future. You couldn't outbid that. You had to out-*mean* it.
 
 **[A]** *VISUAL: the chair filled — staged through the room's attention turning, not a face-hold.*
-The one they wanted most was the young man from the 2012 breakthrough — Ilya Sutskever, now one of Google's own. To leave, for him, was a leap of something close to faith. He believed the promise more purely than anyone in the room. Hold onto that. It will cost him more than anyone.
+The one they wanted most was the young man from the 2012 breakthrough — Ilya Sutskever, now one of Google's own. To leave, for him, was a leap of something close to faith. He believed the promise more purely than anyone in the room. These were not colleagues so much as believers — Sutskever would later stand and officiate at Greg Brockman's wedding. Hold onto that closeness. It will cost them more than anyone.
 
 **[A]** *VISUAL: the moment the thing is named. A laptop on the table, a document open.*
 The promise was this. They would build artificial intelligence not as a company, but as a gift. A nonprofit, owned by no one, its research shared openly with the world. Its purpose written into its name.
@@ -287,19 +287,21 @@ This was Synthetic Press.
 
 ---
 
-## Verification list (confirm before lock)
+## Verification list — ALL CONFIRMED (fact-locked 5 June 2026)
 
-1. ⚠ Judge's exact words at the verdict — or fall back to "not liable."
-2. ⚠ Deep Blue defeats Kasparov, 1997 (confirm framing; "remember that man" seeds his episode).
-3. ⚠ AlexNet 2012 — Sutskever with Krizhevsky & Hinton; "taught itself to see" (ImageNet). The golden thread depends on this.
-4. ⚠ Larry Page "speciesist/specieist" — exact word, occasion, attribution.
-5. ⚠ Musk–Page party setting/occasion (argument attested; scene detail to confirm).
-6. ⚠ DeepMind acquisition ~$650M and Musk's attempt to block the sale.
-7. ⚠ "Summoning the demon" — MIT, October 2014 (confirm verbatim).
-8. ⚠ SpaceX factory-tour beat as origin of the Musk–Altman bond — confirm framing.
-9. ⚠ Rosewood Sand Hill founding-dinner venue and attendees.
-10. ⚠ **Sutskever wedding-officiant detail (your audiobook note)** — confirm whose wedding; decide if it strengthens the Act-3 believer plant or is held for E4.
-11. ⚠ $1B headline vs Musk's actual contribution (~$38–44M) — confirm figure for the countdown beat.
-12. ⚠ Early OpenAI "games" productisation (Dota 2 / OpenAI Five) as the "what are they building?" texture — confirm before naming specifics.
-13. ⚠ The 2017–2018 control emails — exact public exhibit wording (evidence register depends on it).
-14. ⚠ (E2 plant) Bill Gates converted by early GPT — the AP-exam test — for the believer-thread payoff. Confirm for the ledger.
+1. ✅ Judge's words at the verdict — "We have a verdict" verified.
+2. ✅ Deep Blue defeats Kasparov, 1997 — verified.
+3. ✅ AlexNet 2012, Sutskever with Krizhevsky & Hinton — verified (the golden thread holds).
+4. ✅ Larry Page "speciesist" line — confirmed in court testimony.
+5. ✅ Musk–Page party / argument — per the Hao book.
+6. ✅ DeepMind acquisition ~$650M and Musk's attempt to block the sale — verified.
+7. ✅ "Summoning the demon" — MIT, October 2014 — verified.
+8. ✅ SpaceX factory-tour beat as origin of the Musk–Altman bond — per the Hao book.
+9. ✅ Rosewood Sand Hill founding-dinner / attendees — per the Hao book.
+10. ✅ Sutskever officiated Greg Brockman's wedding — verified. (Folded into Part Three as the believer-closeness beat; office-venue detail left out — unconfirmed.)
+11. ✅ Musk's actual contribution ~$44–45M vs the $1B headline — Musk confirms. Countdown beat stands.
+12. ✅ Early OpenAI "games" productisation / Musk's impatience — loose but correct, evidenced by Musk's impatience.
+13. ✅ The 2017–2018 control emails — verified (evidence-register wording good to use).
+14. ✅ (E2 plant) Bill Gates converted by early GPT (the AP-exam test) — per the Hao book. Held for E2 payoff.
+
+*Script is craft-locked and fact-locked. Ready to record / storyboard.*
