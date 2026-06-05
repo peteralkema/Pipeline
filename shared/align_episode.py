@@ -111,16 +111,23 @@ def main():
     for b in beats:
         spoken = bool((b.get("narration") or "").strip())
         measured = float(b.get("audio_duration", 0.0))
+        # The VO window for this beat: where its spoken words sit in voiceover.mp3.
+        # Spoken beats have a real window; silent beats consume no VO (span 0).
+        vo_start = float(b.get("audio_start", 0.0))
         if spoken:
             spoken_measured += measured
             b["hold_assigned"] = False
             b["hold_category"] = "spoken"
+            b["vo_start"] = round(vo_start, 3)
+            b["vo_span"] = round(measured, 3)   # measured word duration, before any bonus
             dur = measured
             if b.get("silence_after"):
                 dur += SILENCE_AFTER_BONUS
                 inserted_silence += SILENCE_AFTER_BONUS
         else:
             cat, base = categorise(b)
+            b["vo_start"] = None
+            b["vo_span"] = 0.0                   # no spoken words -> consumes no VO
             dur = base
             if b.get("silence_after"):
                 dur += SILENCE_AFTER_BONUS
