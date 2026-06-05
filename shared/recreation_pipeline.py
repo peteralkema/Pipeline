@@ -211,7 +211,19 @@ IMAGE_ENDPOINTS = {
 VIDEO_ENDPOINT = "fal-ai/kling-video/o3/standard/image-to-video"
 
 SHOT_DURATION = "5"        # seconds per clip
-ASPECT = {"width": 1280, "height": 720}   # 16:9
+def _channel_aspect():
+    """Render resolution from channel.json (width/height), default 1280x720.
+    Final Hours has no width/height in its channel.json so it stays 720p;
+    Synthetic sets 1920x1080 to match the Mode B Remotion clips."""
+    try:
+        cfg = load_channel_config(strict=False)
+        w = int(cfg.get("width", 1280))
+        h = int(cfg.get("height", 720))
+        return {"width": w, "height": h}
+    except Exception:
+        return {"width": 1280, "height": 720}
+
+ASPECT = _channel_aspect()   # 16:9; per-channel via channel.json width/height
 
 # House visual style appended to every image prompt for consistency.
 # This IS the channel's look — keep it identical across every video.
@@ -556,7 +568,7 @@ def _still_to_held_clip(still_path: Path, out_path: Path, duration: float = None
     cmd = [
         "ffmpeg", "-y", "-loop", "1", "-i", str(still_path),
         "-c:v", "libx264", "-t", str(dur), "-pix_fmt", "yuv420p",
-        "-vf", "scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,setsar=1",
+        "-vf", f"scale={ASPECT['width']}:{ASPECT['height']}:force_original_aspect_ratio=decrease,pad={ASPECT['width']}:{ASPECT['height']}:(ow-iw)/2:(oh-ih)/2,setsar=1",
         "-r", "24", str(out_path),
     ]
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -877,8 +889,8 @@ def assemble(clip_paths: list, voice_path: Path, out_path: Path,
                 "-t", f"{cut:.3f}",
                 "-c:v", "libx264", "-preset", "medium", "-crf", "18",
                 "-pix_fmt", "yuv420p", "-an",
-                "-vf", "scale=1280:720:force_original_aspect_ratio=decrease,"
-                       "pad=1280:720:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=24",
+                "-vf", f"scale={ASPECT['width']}:{ASPECT['height']}:force_original_aspect_ratio=decrease,"
+                       f"pad={ASPECT['width']}:{ASPECT['height']}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=24",
                 str(dst),
             ], f"trim clip {i}")
             trimmed.append(dst)
