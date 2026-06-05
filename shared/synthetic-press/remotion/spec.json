@@ -1,0 +1,10 @@
+{
+  "beats": [
+    {
+      "component": "HighlightedHeadline",
+      "text": "By Monday, the board had lost control of the company.",
+      "highlightPhrase": "lost control",
+      "highlightColor": "#3b5bdb"
+    }
+  ]
+}
