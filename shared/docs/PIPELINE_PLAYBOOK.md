@@ -1,414 +1,535 @@
 # Pipeline Playbook
 *The full lifecycle from topic to published video, across all channels.*
-*v2.1 — 5 June 2026. Adds the orchestrator (the conductor) as the operational spine, on top of the v2.0 box-native rewrite. Written after shipping Eyam as the first fully orchestrated video.*
+*Last updated: 5 June 2026 — added PART 2B (dual-mode architecture, Mode A + Mode B) ahead of the Synthetic launch series. Prior: 30 May 2026, after shipping Six Minutes (Success Coach video 1) and setting up Hindenburg (Final Hours video 4).*
 
 This is the single source of truth for how to make a video. Read it before starting any new project. Update it when banking new rules from production.
 
-This is the **operational** layer. Companion documents (the craft layers) are consolidated in `STARTUP_PACK.md`, which you load alongside this one at the start of any production chat. The deep-reference originals:
-- `shared/docs/script-craft-principles.md` — what makes a good script (applied at Step 3)
-- `shared/docs/production-patterns-that-work.md` — architectural decisions that minimise stills drift (applied at Step 5/8)
-- `shared/docs/hook-craft-library.md` — first-60-seconds corpus + 7-question stress test (applied at Step 4.5)
-- `shared/docs/hetzner-runbook.md` — how the production box is built and rebuilt
-- `shared/rulebook.json` + `<channel>/rulebook.json` — the accumulated negative-rule moat
-- `shared/docs/calibration-reference.md` — channel positioning and retention benchmarks
+---
+
+## PART 1 — QUICK REFERENCE CARD
+
+The 12-step lifecycle. Use this as muscle memory once you know the system.
+
+### Pre-production (research + script)
+
+**Step 1.** Pick a topic. Use NexLev to validate demand. Check that no direct format competitor exists in the lane. Bank the decision in the channel's backlog document with rationale.
+
+**Step 2.** Research the protagonist and historical/situational facts. For Final Hours, use web search for documented sources, family accounts, and contemporary reporting. For Success Coach, use lived experience and published research.
+
+**Step 3.** Decide the title (use the channel's title pattern), the protagonist (one specific human), and the seven craft principles application. Reference `final-hours/docs/script-craft-principles.md` for Final Hours; equivalent doc for other channels.
+
+**Step 4.** Write the script as a markdown document at `<channel>/projects/<project>/script.md`. Include production notes, silent beats, capability stretches. Keep the canonical script here.
+
+**Step 5.** Write the canon block as a markdown document at `<channel>/projects/<project>/canon.md` if the video has named recurring characters or named locations. Skip for ensemble/atmospheric videos (early Final Hours videos didn't need this).
+
+### Production (stills generation)
+
+**Step 6.** Extract pure narration from script.md, save as `<channel>/projects/<project>/<project>_script.txt` (no production notes, just prose).
+
+**Step 7.** Generate the initial storyboard from the narration. From the channel root:
+
+```bash
+python ../shared/recreation_pipeline.py stills --script projects/<project>/<project>_script.txt --project <project> --storyboard-only
+```
+
+This calls Claude to slice the narration into ~one shot per 9 words. Saves `storyboard.json`. Costs cents in Claude API. **Important: use `--storyboard-only` to avoid kicking off Flux image generation against canon-unaware prompts.**
+
+**Step 8.** If the video has canon, convert `storyboard.json` to a canon-aware beats file. Insert `{character}` and `{location}` tokens into image_prompts where appropriate. Add the canon block from `canon.md` at the top of the file (in JSON format). Save as `<channel>/beat-scripts/<project>_beats.json`.
+
+**Step 9.** Generate the stills. From the channel root:
+
+```bash
+python ../shared/recreation_pipeline.py stills --beats beat-scripts/<project>_beats.json --project <project>
+```
+
+This runs Flux against each shot's prompt. Costs $25-30 in fal credits typically. Takes 30-60 minutes. Outputs to `<project>/stills/shot_NNN.png`.
+
+**Step 10.** Review every still. For drifted shots:
+
+```bash
+python ../shared/recreation_pipeline.py restill --project <project> --shot N
+```
+
+If the same shot fails 3 times with 3 different failure modes, duplicate an adjacent acceptable shot rather than continuing to roll dice. Bank any new rules in the rulebook.
+
+### Animation, audio, assembly
+
+**Step 11.** Run finish to animate stills, generate voiceover, assemble video. From the channel root:
+
+```bash
+python ../shared/recreation_pipeline.py finish --project <project> --no-music
+```
+
+Wait — verify `channel.json` voice_id matches the channel identity first. About 30-60 minutes of compute. Outputs `<project>/final_video.mp4`.
+
+### Publication
+
+**Step 12.** Generate thumbnail, then upload. From the channel root:
+
+```bash
+python make_thumbnail.py --project <project>
+python upload.py --project <project>
+```
+
+Upload defaults to PRIVATE. Open YouTube Studio, review auto-generated metadata, replace title with your locked version, verify thumbnail loaded, schedule for the target window (typically Sunday/Monday evening US time for cold-start channels). Add the pinned comment after publication.
 
 ---
 
-## What changed since v1 (read once)
+## PART 2 — FULL PLAYBOOK
 
-v1 described the laptop world and the manual step-by-step flow. Two things have changed since:
+The detailed walkthrough. Read this on first-time setup, when something breaks, or when launching a new channel.
 
-**1. Everything runs on the Hetzner box (v2.0).** The craft layers are unchanged; the operational layer is box-native.
-- Production runs on the box, not the laptop. Long jobs run in **tmux**, not under `caffeinate`. Paths are `~/Pipeline/...`. The governing rule is now *no Hetzner = no videos.*
-- The `verify=False` SSL monkey-patch is **gone and must never return.** TLS is correct via certifi + `shared/ssl_compat.py`. Any instruction to disable verification is a security regression.
-- `safety_tolerance: "5"` is baked into `recreation_pipeline.py` (gated to flux). No longer a TODO.
-- Upload reads `metadata.json` and no longer generates SRT. Flow is metadata.json → unlisted upload → review → schedule.
-- Stills review on the box uses an SSH tunnel (the review server binds localhost-only).
+### Architecture overview
 
-**2. The orchestrator now runs the middle of the pipeline (v2.1).** `shared/orchestrate.py` is a thin **conductor** that drives storyboard → audit → canon → stills → finish → true-up as one command, with exactly **two human gates**. It contains zero generation logic — it calls the existing scripts as subprocesses and guards each phase's output. You no longer run Steps 7–11 by hand for a normal video; you run the orchestrator and answer two prompts. The manual steps are preserved in Part 4 for debugging and re-runs.
+The Pipeline directory at `/03. Pipeline/` contains everything:
 
-Also banked this cycle (Eyam, the first orchestrated video):
-- **moviepy OOM at assembly is fixed permanently** — ffmpeg-based `assemble()` folded into `recreation_pipeline.py` (streaming concat, low memory). The old moviepy concat is kept as `assemble_moviepy()` fallback.
-- **`canon.json` is now a project input file**, not a script header. You write it; the orchestrator consumes it.
-- **`build_canon.py`** replaces the old keyword-routing approach: Claude assigns each audited shot to a canon scene **by visual subject**, fixing the subject-vs-mention bug.
-- **Shot-grammar variety** is now in the storyboard prompt (framing vocabulary, no-two-consecutive-same-framing, close framings prefer hands/objects).
-- **The silent-reject audit reads file sizes, not just the threshold** — real dark/night/water shots trip `-size -200k` as false positives.
+```
+03. Pipeline/
+├── .env                    # API keys (Anthropic, fal, etc.) — shared across channels
+├── shared/                 # Python scripts and shared utilities
+│   ├── recreation_pipeline.py    # Main pipeline (stills, restill, finish, rulebook)
+│   ├── make_thumbnail.py
+│   ├── srt_generator.py
+│   ├── voice_test.py
+│   ├── still_to_clip.py
+│   ├── rulebook.json             # Shared moat — accumulated production rules
+│   └── docs/                     # Cross-channel reference documents
+│       ├── PIPELINE_PLAYBOOK.md  # This document
+│       ├── calibration-reference.md
+│       ├── competitive-analysis.md
+│       └── hetzner-pre-read.md
+├── final-hours/            # Channel 1
+│   ├── channel.json        # Channel identity, voice_id, base_canon
+│   ├── client_secret.json  # OAuth client (Google Cloud Console)
+│   ├── token.json          # OAuth token (this channel's YouTube account)
+│   ├── auth.py             # OAuth flow script
+│   ├── upload.py           # Upload script
+│   ├── rulebook.json       # Channel-specific rules layered over shared
+│   ├── beat-scripts/       # Canon-aware beats files
+│   ├── projects/           # Individual video projects
+│   │   ├── hartley/
+│   │   ├── pompeii_v2/
+│   │   └── hindenburg/
+│   │       ├── script.md         # Full script with production notes
+│   │       ├── canon.md          # Canon block (markdown form)
+│   │       ├── hindenburg_script.txt   # Narration only
+│   │       ├── storyboard.json   # Generated by pipeline (Claude slicing)
+│   │       ├── stills/           # Generated PNG files
+│   │       ├── clips/            # Animated MP4 segments
+│   │       ├── voiceover.mp3     # Generated TTS
+│   │       └── final_video.mp4   # Final output
+│   └── docs/               # Channel-specific reference docs
+│       ├── script-craft-principles.md
+│       └── strategy.md
+├── success-coach/          # Channel 2 — same structure as final-hours
+└── channel-3/              # Channel 3 — same structure, launching later
+```
+
+**Critical paths to remember:**
+
+- The `.env` file lives at the Pipeline root, *not* in each channel folder
+- Channels symlink `.env` into themselves: `ln -s ../.env .env`
+- Channels symlink shared utilities they import: `ln -s ../shared/srt_generator.py srt_generator.py`
+- The `recreation_pipeline.py` lives in `shared/` and is invoked with relative path from channel roots: `../shared/recreation_pipeline.py`
+- Most pipeline commands must be run from the *channel root* (final-hours/ or success-coach/), not from inside the project folder. The pipeline uses CWD to resolve project paths.
+
+### Channel setup (one-time per new channel)
+
+When launching a new channel for the first time:
+
+**1. Create the channel folder structure:**
+
+```bash
+mkdir -p channel-3/{beat-scripts,projects,docs,assets}
+cd channel-3
+touch channel.json rulebook.json
+```
+
+**2. Configure channel.json:**
+
+The minimum channel.json has:
+- `name` — channel display name
+- `voice_id` — TTS voice (e.g. "Reed" for Success Coach, "Ashley" for Final Hours)
+- `style_suffix` — appended to every Flux prompt (e.g. "photoreal cinematic")
+- `base_canon` — optional channel-level canon entries inherited by all projects
+
+**3. Symlink shared utilities:**
+
+```bash
+ln -s ../.env .env
+ln -s ../shared/srt_generator.py srt_generator.py
+```
+
+**4. Set up OAuth for this channel's YouTube account:**
+
+The OAuth client (`client_secret.json`) can be reused across channels — same Google Cloud project, same OAuth client. But each channel needs its own `token.json` because each channel's YouTube uploads happen under a different Google account.
+
+Copy the OAuth scripts and client from a working channel:
+
+```bash
+cp ../final-hours/auth.py .
+cp ../final-hours/upload.py .
+cp ../final-hours/client_secret.json .
+```
+
+Then **add the new channel's Google account as a test user** in Google Cloud Console:
+- Go to `console.cloud.google.com`
+- Open the project (e.g. `youtube-upload-test-497220`)
+- Navigate to Google Auth Platform → Audience
+- Add the channel's Google account email under "Test users"
+
+Then make sure your default browser is signed in to the new channel's Google account, and run:
+
+```bash
+python auth.py
+```
+
+A browser opens. Pick the right Google account, grant the YouTube upload permissions, the script saves `token.json` to the channel folder.
+
+**5. Verify the API key loads:**
+
+```bash
+python -c "from dotenv import load_dotenv; import os; load_dotenv(); print('Key loaded:', bool(os.getenv('ANTHROPIC_API_KEY')))"
+```
+
+Should print `Key loaded: True`. If False, check the symlink to `../.env` exists and the key is set in the parent .env file.
+
+### Project setup (per video)
+
+For each new video:
+
+**1. Create the project folder under the channel:**
+
+```bash
+mkdir -p projects/<project_name>/stills
+```
+
+**2. Decide the canon strategy upfront:**
+
+Two types of projects:
+
+- **Atmospheric / ensemble** (early Final Hours videos like Pompeii, Anne Boleyn): no recurring named characters. Skip canon entirely. Run stills with `--script` (auto-slicing).
+- **Named-character recurring** (Hartley, Six Minutes, Hindenburg, Channel 3 dramatic adaptations): recurring people who must look consistent across many shots. Build a canon block. Run stills with `--beats` (pre-written canon-aware).
+
+If you're not sure, build the canon. The cost of a canon block is one hour of writing; the cost of no canon when you needed one is hundreds of failed stills.
+
+**3. Write script.md and canon.md in the project folder.**
+
+**4. Extract pure narration to `<project>_script.txt`** — strip production notes, visual cues, silent-beat markers, beat headers. Just prose narration.
+
+### Storyboard generation
+
+Two paths depending on canon strategy:
+
+**Path A — no canon (atmospheric/ensemble video):**
+
+```bash
+python ../shared/recreation_pipeline.py stills --script projects/<project>/<project>_script.txt --project <project>
+```
+
+This generates the storyboard AND immediately generates all stills. ~$25-30 in fal credits, 30-60 minutes. For projects without canon, this is fine.
+
+**Path B — canon-aware (recurring characters):**
+
+Run in two phases. First, generate the storyboard only:
+
+```bash
+python ../shared/recreation_pipeline.py stills --script projects/<project>/<project>_script.txt --project <project> --storyboard-only
+```
+
+Saves `storyboard.json`, costs cents in Claude API, no Flux generation. Then review and edit the storyboard:
+
+- Open `storyboard.json` in an editor
+- For each shot, identify characters and locations mentioned in the image_prompt
+- Replace generic descriptions ("a man," "the dining room") with canon tokens (`{hermann}`, `{dining_room}`)
+- Restate wardrobe details per-prompt where they matter (wardrobe drift is a known issue)
+- Save the edited file as `beat-scripts/<project>_beats.json`
+- Add the canon block at the top of the JSON in the format `{"canon": {...}, "beats": [...]}`
+
+Then run stills against the canon-aware beats:
+
+```bash
+python ../shared/recreation_pipeline.py stills --beats beat-scripts/<project>_beats.json --project <project>
+```
+
+This generates the actual stills with canon expansion. The pipeline substitutes `{hermann}` with the full canon descriptor at prompt time. ~$25-30 in fal credits, 30-60 minutes.
+
+### Storyboard editing principles
+
+When converting auto-generated storyboard.json to canon-aware beats:
+
+**Canon tokens go in image_prompts only, not motion_prompts** (motion describes the camera/scene, not the subject).
+
+**Restate wardrobe in the prompt body, never trust canon resolution alone for wardrobe.** Known failure: Flux honours wardrobe from canon inconsistently. Always include the specific wardrobe details in each prompt that uses a character canon. (Banked from Six Minutes session.)
+
+**Never prompt for group shots of 4+ characters.** Two-character shots already overwhelm Flux; five-character family shots will fail. Frame multi-character shots as:
+- One character foregrounded with others suggested in soft focus
+- Back-of-camera composition (one character's back visible, others off-screen)
+- No-people detail shots (the wedding ring, the camera, the clock)
+- Single-character close-ups with others implied by context
+
+**Restate the era anchor in every image_prompt.** Each prompt should end with the period descriptor (e.g. "1937 photoreal cinematic" or "contemporary 2026 photoreal").
+
+**Watch for expression defaults.** Flux's default for any character is a slight smile. Restate the canon expression baseline per-prompt for emotional moments ("composed and thoughtful," "wide-eyed observant," etc.).
+
+**Estimate the reshoot budget realistically:**
+- Adult characters in period clothing: 15-25% reshoot rate
+- Child characters: 30-50% reshoot rate
+- Multi-character compositions: 50%+ reshoot rate
+- Total: budget 110-130 generations to get 80-100 usable stills
+
+### Stills review
+
+Open `<project>/stills/` and look at every shot in order. Things to check:
+
+- **Canon drift**: does the character look like themselves shot-to-shot?
+- **Wardrobe drift**: does clothing match canon and stay consistent?
+- **Expression**: composed when it should be composed, anguished when it should be anguished
+- **Era authenticity**: no modern objects, no modern hairstyles, no modern photography aesthetic
+- **Group composition**: faces visible only when intended; soft-focus or back-of-camera for crowd scenes
+
+For drifted shots, use restill:
+
+```bash
+python ../shared/recreation_pipeline.py restill --project <project> --shot N
+```
+
+If the same shot fails 3 times with 3 different failure modes, duplicate an adjacent acceptable shot:
+
+```bash
+cp <project>/stills/shot_038.png <project>/stills/shot_037.png
+```
+
+This was the resolution for Six Minutes shot 37. Banked rule: don't continue rolling dice past three attempts.
+
+### Finish (animation + voiceover + assembly)
+
+When all stills are accepted, run finish:
+
+```bash
+python ../shared/recreation_pipeline.py finish --project <project> --no-music
+```
+
+**Pre-finish checklist:**
+- Verify `channel.json` voice_id is correct (Reed for Success Coach, Ashley for Final Hours, etc.) — a wrong voice_id means re-rendering the audio
+- Verify all stills exist: `ls <project>/stills/ | wc -l`
+- Check fal credit balance — finish typically costs $25-30, sometimes more
+- Have laptop plugged in if running locally — finish takes 30-60 minutes
+
+The `--no-music` flag ships clean and you add music in post-edit or YouTube's editor later. Use `--music <path>` if you have a chosen track.
+
+Finish output: `<project>/final_video.mp4` and `<project>/voiceover.mp3` and `<project>/clips/shot_NNN.mp4`.
+
+### Thumbnail generation
+
+```bash
+python ../shared/make_thumbnail.py --project <project>
+```
+
+Output: `<project>/thumbnail.png`. Review it. If it doesn't land, the thumbnail script is a vibe-codable territory — iterate on the prompt or the source frame until it lands.
+
+### Upload
+
+```bash
+python upload.py --project <project>
+```
+
+What happens:
+1. Reads script, storyboard, final_video.mp4
+2. Calls Claude API to generate title/description/tags from the script content
+3. Generates SRT subtitles from storyboard timing
+4. Uploads video as PRIVATE
+5. Uploads SRT as caption track
+6. Uploads thumbnail.png
+7. Prints YouTube Studio URL
+
+**Known limitation: Claude-generated title may not match your locked title.** Open YouTube Studio after upload, navigate to the video, replace the title with your locked version before publishing. This is the current manual step until the script is upgraded to read a `metadata.json` from the project folder.
+
+### Publication (in YouTube Studio)
+
+After upload completes, open the Studio URL the script prints:
+
+1. **Title** — replace auto-generated with your locked version
+2. **Description** — review and edit. Keep the hook in the first 2 lines.
+3. **Thumbnail** — verify it loaded; manually upload if not
+4. **Tags** — add 5-10 relevant tags
+5. **Audience** — Made for Kids: No
+6. **Language** — English
+7. **Category** — Education or appropriate
+8. **Visibility** — Schedule for target window (typically Sunday/Monday evening US Eastern = 01:00 Warsaw next day)
+9. **Save**
+
+After publication, return to the video and **add the pinned comment**:
+- Final Hours: dignity-register question about the protagonist's choice
+- Success Coach: career-applicable question to the viewer
+- Channel 3: literary question about the adapted work
+
+Pinned comments generate the early engagement signal the algorithm watches.
 
 ---
 
-# PART 1 — QUICK REFERENCE CARD
+## PART 2B — DUAL-MODE ARCHITECTURE (MODE A + MODE B)
 
-All commands assume you are SSH'd into the box, inside the channel root (`cd ~/Pipeline/final-hours`), venv active (`source ~/venvs/pipeline/bin/activate`).
+*Added 5 June 2026 for the Synthetic Press launch series. Mode A is the existing stills→clips engine (all current Final Hours / Success Coach video). Mode B is Remotion motion-graphics. This part describes how they coexist in one pipeline. Synthetic is the first channel to use both; the architecture is general.*
 
-```bash
-ssh -p 443 peter@116.202.18.68
-source ~/venvs/pipeline/bin/activate
-cd ~/Pipeline/final-hours
+### The four principles (the whole thing hangs off these)
+
+1. **The sentence decides the mode (upstream).** Every beat is born Mode A or Mode B because the *sentence* decides. A sentence describing a place/person/moment ("Altman sat across from the man who would later try to destroy him") is Mode A — it wants a recreated scene. A sentence asserting a fact/number/quote/structure ("Microsoft put thirteen billion dollars in") is Mode B — it wants the number drawn, the quote sourced, the structure built. You are not annotating a script for the pipeline; you are writing in two registers the pipeline understands. If you can't decide a beat's mode, it's doing two jobs — split it.
+
+2. **Visual exclusivity (the load-bearing rule).** At any instant the screen belongs to *either* a Mode A recreated scene *or* a Mode B graphic — never both. One renderer owns the frame at a time. This is what makes the launch build tractable: exclusivity means the timeline is a pure **sequence** (clips butted end to end), so assemble needs **no compositing**. (Breaking exclusivity — graphics layered *over* live scenes, the "underlay/Vox" look — is Phase 2 and requires a compositing stage. Cutaway-only for launch.) Narration pausing on a Mode B beat is an *editorial* choice for effect, fully decoupled from the visual — the visual is exclusive either way.
+
+3. **The audio is the source of truth (shared spine).** Generate the voiceover first, measure it with Whisper, hang visuals off the measurement — for *both* modes. Same `voiceover.json`, same finish step, same matcher. A beat's measured duration is handed to whichever renderer it routes to: a NumberCounter given 3.1s counts over 3.1s; a recreated shot given 3.1s holds 3.1s. One measurement, two consumers. Mode A and Mode B share one spine.
+
+4. **The tagged script IS the pipeline spec (the seam).** Because a Mode B beat is written in the known component vocabulary, the act of scripting it *is* the design — the tag payload is the render spec. When the script is done, grepping the B tags yields the exact component list the episode needs. The script tells you what to build, instead of you guessing the wiring and writing to fit it.
+
+### The chain, top to bottom
+
+```
+Script (tagged beats)
+  → storyboard (one row per beat; `mode` column decides row shape)
+  → audio spine generated + Whisper-measured (both modes timed off this)
+  → DISPATCH on tag:
+        [A]            → stills→clips path (Flux → review gate → Kling → clip)
+        [B:Component]  → Remotion path (payload→props→remotion render → clip)
+  → assemble: clips in beat order on the voiceover spine (sequence, no compositing)
 ```
 
-### Step 0 — MANDATORY pre-read (every video, no exceptions)
+One storyboard, one timeline. The two modes are not two pipelines that merge — they are two renderers the storyboard hands work to, beat by beat, both returning ordinary MP4 clips into the same slot order. By assemble time, an A clip and a B clip are both just MP4s of known duration.
 
-Before any script writing or storyboard generation, read and apply the craft layers (now all in `STARTUP_PACK.md`): the 10 script-craft principles + pre-lock audit table; the 12 production patterns; the hook 7-question stress test; the channel + shared `rulebook.json`; the calibration reference.
+### The beat-type notation (the discipline layer)
 
-**Audit gate before script lock.** Fill in the pre-lock audit table. Any "weak" or "missing" cell → revise before canon or storyboard.
+Every beat opens with a tag. Mode A stays light (the default). Mode B carries the component name + payload, because the payload *is* the render spec.
 
-**Audit gate before stills lock.** The orchestrator's discipline-audit phase handles face/expression rewrites automatically, but you still eyeball the storyboard for multi-character compositions, group scenes, and fire/storm-as-subject framings — rewrite those in the script/canon before the run burns fal credits.
+```
+[A] Altman sat across from the man who would one day try to destroy him.
 
-The cost of reading is 5 minutes. The cost of not reading is a video that ships with documented retention-failure modes (the KLM Tenerife v1 lesson).
+[B:QuoteCard] "I deeply regret my participation."
+  — Ilya Sutskever · public statement · Nov 2023
+  highlight: "deeply regret"
 
-**Exception — disposable infrastructure tests.** When the goal is to prove plumbing, not ship a flagship, a compressed Step 0 is legitimate (concrete cold open, clock-anchored dread, one or two silent beats, image-not-explanation close; skip the full audit table). Be deliberate about which mode you're in.
+[B:NumberCounter] from=0 to=13000000000 prefix=$ label="Microsoft's bet"
 
-### Pre-production (you do this by hand — the orchestrator starts at Step 7)
+[B:DocumentReveal] exhibit: 2017 internal email
+  show_line: "we don't really intend to honor the nonprofit structure"
+  source: trial exhibit, Musk v. OpenAI
 
-**Step 1.** Pick a topic. NexLev to validate demand; check no direct format competitor owns the lane. Bank the decision in the channel backlog.
-
-**Step 2.** Research the protagonist and documented facts (web search for sources, family accounts, contemporary reporting).
-
-**Step 3.** Decide title (channel pattern), protagonist (one specific human or deliberate anonymity), apply the craft principles, run the audit table before locking.
-
-**Step 4.** Write the script as `projects/<project>/script.md` (with production notes and silent-beat markers).
-
-**Step 4.5.** Stress-test the first 60 seconds against the hook 7-question gate. Fix the hook before storyboarding.
-
-**Step 5.** Write canon as **`projects/<project>/canon.json`** — a JSON dict `{token: "scene/character description"}`, one entry per recurring scene or anonymised protagonist. Prefer **scene canons over character canons**; apply **face-never-resolved** for anonymous protagonists; anonymise ensemble via framing, not canon. *This file is the orchestrator's canon input — see Part 2.*
-
-**Step 6.** Extract pure narration to **`projects/<project>/<project>_script.txt`** — prose only, no production notes, no silent-beat markers, no canon block. This is what the pipeline ingests.
-
-### Steps 7–11 — RUN THE ORCHESTRATOR (the conductor)
-
-With `canon.json` and `<project>_script.txt` in place, one command drives the rest:
-
-```bash
-tmux new -s render          # so the long render survives disconnect
-python ../shared/orchestrate.py --project projects/<project>
+[B:ChapterCard] "Part One — The Promise"
 ```
 
-It runs: **preflight → storyboard → discipline-audit → build_canon → [GATE 1] → stills → silent-reject check → [GATE 2] → finish → true-up.** You answer two prompts (Gate 1 and Gate 2); everything else is automatic. Re-run cheaply from any phase with `--start-phase <storyboard|canon|stills|finish>`. Full detail, gate behaviour, and the Gate-2 copy-paste blocks are in **Part 2**.
+Rules:
+- **Tag chosen as you write the sentence, not after.** Upstream principle made physical.
+- **The narration line is the same in both modes; the tag carries what the voice omits.** In a `[B:QuoteCard]` the narration *is* the quote (you say it); the payload carries name/source/date. This is "the spoken line and its receipt" (banked in the series doc, script-craft Principle 8, and the Mode B notes): voice = the words; card = words + attribution; `highlight:` = the swept phrase. **No-karaoke rule:** the card never duplicates the full sentence as text the narrator is also reading verbatim.
+- **Only components that exist get tags.** Legal vocabulary is exactly the six built: `HighlightedHeadline`, `LowerThird`, `NumberCounter`, `ChapterCard`, `QuoteCard`, `DocumentReveal`. A beat wanting something outside the six is a *deliberate* decision to build a seventh component, not a thing to write around — the tag vocabulary won't let you invent a renderer.
+- **Every B beat is a no-fal, no-stills-gate beat.** So tag-counting a finished script gives the A/B ratio, the fal exposure, and the review-gate load *before* a single render. The script becomes the production estimate. Mode B is cheaper and more deterministic than Mode A (no model call, no review, just props → render).
+- **Ratio is read, not enforced, per episode.** Target band 60–70% A / 30–40% B is a smell test against what the story is made of, not a quota. E1 (founding, scene-heavy) runs A-heavy and that's correct; if it comes out 95% A, that's the signal you skipped the charter DocumentReveal, the founding-cast LowerThirds, the "for all of humanity" QuoteCard — Mode B beats the story actually contains.
 
-### Step 12 — Publication
+### Inside the Mode B render step (spec → props → clip)
 
-Write `metadata.json`, attach a thumbnail (made in Clickly on the laptop, scp'd over), upload unlisted, review, then schedule:
+You are **not** generating new Remotion code per beat. The six components are written once and parameterized. The Mode B renderer is a small translator:
+1. Look up the tag's component name in the **registry** (string→component map, already built in the prototype): `"NumberCounter"` → the NumberCounter component.
+2. Spread the payload fields as **props**; pass the beat's measured duration as the frame count (duration × 30fps).
+3. `remotion render` that one beat to a clip.
 
-```bash
-# metadata.json: {"title": "...", "description": "...", "tags": [...]}
-python upload.py --project projects/<project> --privacy unlisted
-```
+So `[B:NumberCounter] from=0 to=13e9 prefix=$` becomes `<NumberCounter from={0} to={13e9} prefix="$" durationInFrames={93} />` → rendered clip. Deterministic, cheap, no review gate.
 
-Open the returned `youtu.be` link on the laptop, review the finished video, then in YouTube Studio set the schedule (01:00 Europe/Warsaw ≈ 19:00 US Eastern), confirm the locked title/thumbnail, and add the pinned comment after publish.
+### The true-up IS the human-voice swap
+
+Because audio is the source of truth, swapping the Inworld scratch narration for Peter's human read is a **true-up, not a re-render**: drop in the human `voiceover`, re-run Whisper → match → assemble, and *every* visual timing re-derives for free — Mode A shot holds *and* Mode B component timings alike. Nothing visual regenerates. This is the same true-up mechanism already banked for Mode A shot durations, now doing double duty as the production model for Synthetic: **script + record scratch (Inworld) → build all visuals against it → swap in the human read → true-up → final.** Build the `finish --voiceover <path>` override so the human read can be supplied at true-up time (this also fixes the old "finish regenerates voiceover" behaviour).
+
+### What to build for the Episode 1 launch (the thin slice)
+
+Build only what E1 demands, proven end to end:
+1. **Tag parser** — read `[A]` / `[B:Component]` into storyboard rows of the right shape. Small.
+2. **Dispatch branch** — the `if mode=="A" … else …` routing each row to a renderer. Small.
+3. **Mode B render step** — payload → props (via the existing registry) → `remotion render` → clip. Medium; the hard part (the components) is done. Start with **two live components**: `QuoteCard` (needed for the cold open's "We have a verdict" receipt) and `NumberCounter` (needed at the first valuation). The other four are then just more registry entries, not new plumbing.
+4. **Assemble accepts both clip types** — mostly already true; a clip is a clip by timeline time.
+
+**Do NOT build for launch:** automatic mode *inference* (tagging is by hand — the human decides the mode, correctly); compositing/underlay (Phase 2); batch/parallel rendering (Phase 2); any component beyond the six (and if E1's script demands a seventh, that's a deliberate decision surfaced *by* the script).
+
+The mental model in one line: **the tag is a routing instruction the author writes, the storyboard carries it, the dispatcher obeys it, two renderers feed one timeline, and the measured audio keeps them honest.**
 
 ---
 
-# PART 2 — THE ORCHESTRATOR (the conductor)
 
-`shared/orchestrate.py` is a **thin conductor**: it owns sequencing and the two human gates, and contains **zero generation logic**. Every phase shells out to the existing, separately-tested scripts (`recreation_pipeline.py`, `audit_storyboard_discipline.py`, `build_canon.py`). This is deliberate — the conductor stays simple and the generation primitives stay independently runnable (and debuggable) by hand.
 
-### The phase pipeline
+Common issues and resolutions:
 
-```
-preflight → storyboard → discipline-audit → build_canon → [GATE 1] →
-stills → silent-reject check → [GATE 2] → finish → true-up
-```
+**"No module named 'srt_generator'"** when running upload.py
+→ Missing symlink. Run `ln -s ../shared/srt_generator.py srt_generator.py` from the channel root.
 
-1. **preflight** — checks the project folder, that `canon.json` exists and parses to a non-empty `{token: description}` dict, that `<project>_script.txt` exists, and that `.env` has the needed keys. Fails fast and loud before spending anything.
-2. **storyboard** — `recreation_pipeline.py stills --script ... --storyboard-only`. Claude slices the narration (~one shot per 9 words; shot-grammar variety now baked into the prompt). Writes `storyboard.json`. Costs cents.
-3. **discipline-audit** — `audit_storyboard_discipline.py`. Strips face/eye/expression descriptors that collide with face-never-resolved, preserving framing/location/period/atmosphere. Writes `storyboard_audited.json`. ~$0.40.
-4. **build_canon** — `build_canon.py`. Reads `storyboard_audited.json` + `canon.json`, uses Claude (sonnet-4-6) to assign **each shot to a canon scene by visual subject** (not keyword match — this fixes the bug where narration *about* a place pulled shots toward the wrong canon), prepends the `{token}` to each image_prompt, writes `beat-scripts/<project>_beats.json`, and prints the per-canon distribution.
-5. **GATE 1 — canon distribution (y/n).** The orchestrator prints how many shots landed in each canon and waits. Eyeball it: the dominant visual subject should dominate the distribution. If a scene is wildly under/over-represented, that's a misassignment — fix it (or re-run this phase) before paying for stills. `y` to proceed.
-6. **stills** — `recreation_pipeline.py stills --beats ...`. fal generation, ~$15–25, 20–60 min.
-7. **silent-reject check (automatic).** flux-pro returns black ~7KB PNGs on safety triggers. The orchestrator scans for these. **It halts only on true blacks (<10 KB);** files in the 10–200 KB band that are merely *dark but real* (night, water) are reported as an FYI, not treated as rejects. (This is the dark-video false-positive lesson, encoded.)
-8. **GATE 2 — human stills review (y/n).** The orchestrator pauses and **prints two labelled, copy-paste command blocks** so review can't fumble — see below. Review every shot in the browser, restill the genuine spell-breakers, then type `y` to continue into clips + voiceover + assembly + true-up.
-9. **finish** — `recreation_pipeline.py finish --no-music`. Animates stills → clips (Kling), generates voiceover (Inworld), auto-runs Whisper alignment, assembles `final_video.mp4` via the **ffmpeg `assemble()`** (low-memory streaming concat — this is the permanent fix for the moviepy OOM that killed Eyam's first assembly).
-10. **true-up** — refreshes Whisper alignment and re-assembles so sync is frame-accurate regardless of any voiceover regeneration during finish.
+**"ANTHROPIC_API_KEY not set"** or similar
+→ Missing or broken .env symlink. Run `ln -s ../.env .env` from the channel root and verify with `python -c "from dotenv import load_dotenv; import os; load_dotenv(); print(bool(os.getenv('ANTHROPIC_API_KEY')))"`.
 
-### Invocation and flags
+**"FileNotFoundError: 'six_minutes/clips'"** or similar during finish
+→ CWD wrong. The pipeline expects to be run from the channel root, not from inside the project folder. `cd ..` to the channel root and re-run.
 
-```bash
-python ../shared/orchestrate.py --project projects/<project>
-```
+**"Missing client_secret.json"** when running auth.py
+→ Auth.py has a known variable-swap bug. Lines 34-35 should be `CLIENT_SECRET = "client_secret.json"` and `TOKEN_FILE = "token.json"` — these are sometimes inverted. Check and fix if needed.
 
-- **`--project projects/<name>`** — required. Use the `projects/` prefix, not the bare name.
-- **`--canon <path>`** — defaults to `projects/<project>/canon.json`. The orchestrator does **not** generate canon; you write `canon.json` first (Step 5).
-- **`--start-phase <phase>`** — resume from a phase without redoing the earlier (paid) ones. Valid: `storyboard`, `canon` (re-runs build_canon assignment from scratch), `stills`, `finish`. Examples:
-  - `--start-phase canon` — you edited `canon.json` or want a fresh assignment; reuses the audited storyboard.
-  - `--start-phase stills` — beats are final; skip straight to generation.
-  - `--start-phase finish` — stills are reviewed and accepted; go straight to clips/voice/assembly.
-- **`--box`** — the box address for the printed Gate-2 blocks; defaults to `peter@116.202.18.68`.
+**Upload errors with permission denied or no channel found**
+→ Wrong Google account active in browser when auth.py was run. Delete `token.json`, switch browser to the correct Google account, re-run `python auth.py`.
 
-Run it inside **tmux** so the long render survives an SSH disconnect. Silent terminal for 30–60s between clips is normal — check progress from a second shell with `ls projects/<project>/clips/ | wc -l`.
+**Stills look drifted from canon despite canon being defined**
+→ Canon resolution works but wardrobe and expression are notoriously unstable. Restate these explicitly in the prompt body, not just via canon tag. Banked rule.
 
-### The Gate-2 review blocks (what the orchestrator prints)
+**Pipeline tries to generate stills against a canon-unaware storyboard**
+→ Use `--storyboard-only` flag with `--script` mode to stop after storyboard generation, then edit the storyboard to add canon awareness before re-running with `--beats`.
 
-At Gate 2 the orchestrator prints two clearly labelled blocks so the box-native review never trips on the two things that bit us before — the missing make-page step, and a stale tunnel port:
+**fal credits run out mid-render**
+→ Auto-top-up should handle this if enabled. If not enabled, set it in the fal dashboard. Re-running finish should resume from where it left off (clips already rendered are not re-rendered).
 
-**WINDOW A — BOX** (run on the box, in the orchestrator's paused session or a second box shell):
-```bash
-python ../shared/make_review_page.py --project projects/<project>   # builds review.html FIRST
-python ../shared/serve_review.py    --project projects/<project>   # then serves it (binds localhost:8000)
-```
+**Video file too large for YouTube upload (>256GB)**
+→ Won't happen at current resolution and length. Not a real concern.
 
-**WINDOW B — LAPTOP** (opens a shell on the box AND forwards the port):
-```bash
-lsof -ti :8000 | xargs kill 2>/dev/null   # kill any leftover tunnel from a previous session
-ssh -p 443 -L 8000:localhost:8000 peter@116.202.18.68
-```
-
-Then open **`http://localhost:8000`** in the laptop browser — the tunnel routes it to the box, the live badge goes green, Regenerate/Override activate, and fal credentials never leave the box. Review, restill spell-breakers, then return to the orchestrator and type `y`.
-
-### What the orchestrator does NOT do
-
-- It does not write `canon.json` (you do — Step 5).
-- It does not select topics, write scripts, or design thumbnails (Steps 1–5, 12 are yours).
-- For **Mode B / Synthetic Press explainer beats** (Remotion motion-graphics), the dispatch is different and is **not** part of this orchestrator. Mode B is deterministic, not probabilistic — it is not reviewed at the stills gate; correctness is checked as facts-at-script-time and sync-at-final-cut. When the Synthetic orchestrator is built it will be a separate conductor; beat-processing steps there must skip `mode:"explainer"` beats. (Banked; not built.)
+**Voice sounds wrong**
+→ Check channel.json voice_id. Reed for Success Coach, Ashley for Final Hours. Banked rule: verify voice_id before every finish run.
 
 ---
 
-# PART 3 — INFRASTRUCTURE (the box-native reality)
+## PART 4 — KNOWN DEFERRED IMPROVEMENTS
 
-Full build/rebuild detail is in `shared/docs/hetzner-runbook.md`. This is the day-to-day mental model.
+Items banked but not yet built. Address when blocking or when time permits.
 
-### The two machines
+**Upload script reads metadata.json from project folder before falling back to Claude generation.** Eliminates the manual title-fix step in YouTube Studio. ~30 minutes to build.
 
-- **The box (Hetzner) is the runtime.** It renders, uploads, holds the repo, makes every real API call. Headless — no screen, no GUI. The only way in is SSH.
-- **The laptop is the control surface.** Edit code, write scripts, design thumbnails (Clickly), `git push`, `scp`, review final cuts. Never a production runtime.
+**Fix the variable-swap bug in auth.py canonically in shared/, not channel copies.** Move auth.py and upload.py to `shared/`, make them channel-aware via CWD detection of channel.json. ~60 minutes.
 
-Prompt tells you where you are: laptop ends `%` (zsh); box ends `$` (bash) and shows `pipeline-prod`.
+**Whisper-based SRT instead of even-spacing.** Current captions drift against spoken words. *Note (5 June 2026): Whisper alignment is no longer merely a captions nicety — it is now the shared spine for the dual-mode architecture (PART 2B): it times both Mode A and Mode B off measured audio and powers the human-voice true-up. Being built for the Synthetic launch. SRT generation should hang off the same Whisper measurement once it exists.*
 
-### Access
+**Pre-render cost estimate.** Print expected fal spend before finish runs, based on shot count. ~30 lines of code. Soft guardrail against runaway costs.
 
-```bash
-ssh -p 443 peter@116.202.18.68
-```
+**Beat-multiples for rhythmic variation.** Allow individual beats to be integer multiples of base unit (peak beats 2×) for rhythmic variation. Probably 50-100 lines of changes. Not urgent.
 
-SSH is on **port 443**, not 22 (the work network blocks 22). The **Hetzner web console** (console.hetzner.cloud → pipeline-prod → `>_`) is the emergency door — it works even if SSH, firewall, or network all fail.
+**Cloud migration to Hetzner.** ~€5/month VPS for unattended overnight rendering. Day-off task. Worth doing before video count is large enough that overnight laptop renders block morning workflow. Install Claude Code on Hetzner as part of provisioning for the agentic workflow.
 
-### Sessions model
-
-A **tmux session ≠ a terminal window.** The tmux session lives on the box and keeps running whether or not you're attached. Detach with Ctrl-b then d; reattach with `tmux attach -t render`. Pattern: one window holds the render (the orchestrator); other SSH windows are free shells for quick checks. If two windows both show the render, they're attached to the same tmux session — detach one to get a free shell back.
-
-### Moving files (no clicking)
-
-```bash
-# laptop → box (e.g. thumbnail up)
-scp -P 443 ~/Downloads/thumbnail.png peter@116.202.18.68:~/Pipeline/final-hours/projects/<project>/thumbnail.png
-# box → laptop (e.g. final cut down to watch)
-scp -P 443 peter@116.202.18.68:~/Pipeline/final-hours/projects/<project>/final_video.mp4 ~/Downloads/<project>.mp4
-```
-
-Capital `-P 443` for the port (lowercase `-p` preserves timestamps — wrong flag).
-
-### Code flow
-
-The box reads from git, never writes to it. Edit on the laptop → `git push` → `git pull` on the box. Never edit repo files only on the box — they become orphaned/untracked (the exact `upload.py` drift we had to reconcile). The laptop clone is at `~/Projects/Pipeline`; the box repo is `~/Pipeline`. `git fetch && git status` confirms laptop = git = box before trusting a doc or running a build.
+**Pipeline self-tests.** `rulebook --count`, `--validate` modes for env vars, channel.json structure, token file existence, fal connectivity. Small ergonomic wins, none blocking.
 
 ---
 
-# PART 4 — FULL MANUAL WALKTHROUGH (for debugging and re-runs)
+## PART 5 — OPERATING REMINDERS
 
-The orchestrator automates Steps 7–11. Run them by hand when debugging a single phase or when you want finer control. These are the exact subprocesses the conductor calls.
+Small things easy to forget across sessions:
 
-### Architecture
-
-- `.env` at `~/Pipeline/.env` (chmod 600). Five real keys: `ANTHROPIC_API_KEY`, `FAL_KEY`, `INWORLD_API_KEY` (not `INWORLD_TTS_API_KEY`), `JAMENDO_CLIENT_ID` (required if `music_score.py` is in the run path), `PEXELS_API_KEY`.
-- `recreation_pipeline.py` lives in `shared/`, invoked as `../shared/recreation_pipeline.py` from a channel root.
-- Most commands run from the **channel root**, not inside the project folder — `--project` resolves against CWD. Use `projects/<name>`.
-- Channel detection is by the `channel.json` marker (walked up from CWD).
-- final-hours uses `projects/<name>/`; success-coach uses `<name>/` directly (inconsistency banked for cleanup).
-
-### Storyboard (Step 7)
-
-```bash
-python ../shared/recreation_pipeline.py stills --script projects/<project>/<project>_script.txt --project projects/<project> --storyboard-only
-```
-
-Slices into ~one shot per 9 words; shot-grammar variety is in the prompt now (framing vocabulary; no two consecutive same-framing shots; close framings prefer hands/objects). Writes `storyboard.json`.
-
-*Streaming requirement:* `build_storyboard` uses `messages.stream()` with `max_tokens=32000`. If you see a JSON parse error or "Streaming is required…", the streaming code was reverted — restore it (permanent fix, 31 May 2026).
-
-*Shot density (tuning knob):* total duration = word count ÷ ~135 wpm; shot count = word count ÷ words-per-shot. For a calmer, cheaper video, raise words-per-shot and lean on angle-variation-within-canon. (`--words-per-shot N` flag queued in Phase 2.)
-
-### Discipline audit (Step 7.5)
-
-```bash
-python ../shared/audit_storyboard_discipline.py --project projects/<project> --verbose
-```
-
-Writes `storyboard_audited.json`; ~$0.40; `--verbose` shows the rewrite count.
-
-### Build canon-aware beats (Step 8)
-
-Write `canon.json` first (`{token: description}`), then:
-
-```bash
-python ../shared/build_canon.py --project projects/<project>   # reads storyboard_audited.json + canon.json
-```
-
-Claude assigns each shot to a canon scene **by visual subject**, prepends `{token}`, writes `beat-scripts/<project>_beats.json`, prints the distribution. Schema is a dict with `canon` and `beats` keys (top-level key is `beats`, not `shots`). Canon tokens go in image_prompts only, never motion_prompts.
-
-Banked editing rules (carried into build_canon's behaviour, still worth knowing for hand-edits):
-- Restate wardrobe in the prompt body even with canon — flux honours canon wardrobe inconsistently.
-- For face-never-resolved protagonists, restate the framing rule in *every* shot ("from behind", "in silhouette", "face never resolved").
-- Rewrite group compositions as object-substitution before generating.
-- Restate the era anchor in every prompt ("1666 photoreal cinematic").
-- For famous landmarks, add the explicit "NOT the modern X" guard.
-
-**Check the canon distribution before generating stills** (this is Gate 1 in the orchestrator). Narration *about* a place is not a shot *of* it.
-
-### Stills (Step 9) + silent-reject audit (9.5)
-
-```bash
-python ../shared/recreation_pipeline.py stills --beats beat-scripts/<project>_beats.json --project projects/<project>
-find projects/<project>/stills -maxdepth 1 -name "shot_*.png" -size -200k -printf "%f  %k KB\n" | sort
-```
-
-Read the **sizes**: a true reject is ~4–10 KB; a real night/water/dark shot can legitimately be 130–200 KB and trip the `-size -200k` filter — that's a false positive, not a reject. (Brightness-check fix queued in Phase 2.) Reshoot budget: atmospheric / anonymised-protagonist 5–10%; single named character 15–25%; multi-named ensemble 30–50%. Disaster/storm/water scripts run hotter on silent rejects regardless of canon (see Part 6).
-
-### Review (Steps 9.6–10)
-
-```bash
-python ../shared/make_review_page.py --project projects/<project>
-python ../shared/serve_review.py --project projects/<project>     # binds localhost:8000
-# from the LAPTOP, separate terminal: ssh -p 443 -L 8000:localhost:8000 peter@116.202.18.68
-```
-
-Open `http://localhost:8000` on the laptop. Reject genuine spell-breakers; accept atmospheric-but-imperfect. Notes mode for soft guidance (~80%); Override mode replaces the prompt entirely for stubborn shots (~20%, lands in 1–2 tries vs 4–6, at the cost of canon consistency for that shot). Every regen backs up the prior still to `stills/_backup/`. Three failures → duplicate an adjacent acceptable shot. *Freelancer handoff:* zip stills + `review.html`; they accept/reject/note and export JSON; run `restill_from_feedback.py --feedback <theirs>.json` on the box — their machine never touches fal credentials.
-
-### Finish (Step 11) + true-up
-
-```bash
-tmux new -s render   # or: tmux attach -t render
-python -u ../shared/recreation_pipeline.py finish --project projects/<project> --no-music 2>&1 | tee <project>_finish.log
-```
-
-Verify `channel.json` voice_id first (Victor for Final Hours, Reed for Success Coach). Animates clips (Kling) → voiceover (Inworld) → Whisper align (downloads `small` model ~470MB once) → **ffmpeg `assemble()`** → `final_video.mp4`. Silent terminal between clips is normal.
-
-*Assembly is now ffmpeg, not moviepy.* `assemble()` trims each clip to its Whisper audio_duration, concatenates via the demuxer (streaming, low-memory), and muxes voice (+ optional music). This is the permanent fix for the moviepy `concatenate_videoclips` OOM that killed Eyam's first assembly even at 16 GB. The old path survives as `assemble_moviepy()` (fallback only).
-
-*True-up before publish (standard, not optional):*
-```bash
-whisper projects/<project>/voiceover.mp3 --model small --output_format json --output_dir projects/<project>/ --word_timestamps True
-python ../shared/align_with_whisper.py --project <project> --verbose
-python -u ../shared/recreation_pipeline.py finish --project projects/<project> --no-music --assemble-only
-```
-The assembler trades small per-shot pacing for zero global drift (narration micro-stretches within a shot) — correct behaviour, don't "fix" it. Documentary tolerates near-accurate sync; dramatic/dialogue content requires a full true-up and zero accepted drift.
-
-*Voiceover duration audit (Principle 11):* `ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 projects/<project>/voiceover.mp3`. Inworld renders ~85–90% of the 135-wpm estimate. Write 10–15% more script than the runtime target.
-
-### Thumbnail (parallel with stills) and upload (Step 12)
-
-Thumbnail design starts at script lock; build it in Clickly on the laptop *while stills render on the box*; scp over before upload. `upload.py` attaches `thumbnail.jpg`/`.png` if present, else lets YouTube auto-generate.
-
-**On-brand thumbnail spec.** Default generators produce MrBeast clickbait (shocked face, exclamation) — off-brand for Final Hours, never ship it. On-brand uses the **place or object as subject, never a reaction face**:
-> "A cinematic, photorealistic thumbnail of [EVENT/PLACE] in [YEAR], [time/weather]. [SUBJECT: the structure/place/object, period-accurate, with an explicit 'NOT the modern X' guard]. [Catastrophe shown through environment + a single focal point of warm light against a cold dark palette — never faces or bodies]. Wide, monumental, dignified, atmospheric period-drama register. No people, no faces, no figures anywhere. Historically accurate [period] detail."
-
-Text overlay (Clickly text layer, not image-generated): 2–5 words, declarative, no exclamation, no rhetorical question (e.g. "260 DEAD", "THEY STAYED", "THE LIGHTS WENT OUT"). The full dramatic title lives in YouTube's title field. **Brand-over-CTR:** if off-brand clickbait beats on-brand by a small CTR margin, keep on-brand — brand consistency is the compounding moat. A/B test only at real impression volume.
-
-```bash
-python upload.py --project projects/<project> --privacy unlisted
-```
-
-Reads `metadata.json`, attaches the thumbnail, uploads unlisted, prints the watch URL. **Unlisted-first** for new infra / first-of-its-kind renders — review on the laptop, then in Studio set Scheduled (01:00 Europe/Warsaw), confirm the locked title/thumbnail, add the pinned comment after publish. (`--schedule-cet-1am` exists but forces `private` and skips the unlisted-review window.)
-
-*Retention diagnosis after publish:* pull the curve at 48–72h (Studio → per-video → Audience retention). The curve *shape* is the diagnostic, not view count, and not at <100 views.
+- **The venv name is `success-coach`** for historical reasons. Serves both channels. Don't rename it.
+- **Channel detection is by `channel.json` marker**, found by walking up from CWD. `cd final-hours/` or `cd success-coach/` before running pipeline commands.
+- **Most commands run from the channel root, not the project folder.** The `--project <name>` argument is resolved against CWD.
+- **First run of `make_thumbnail.py` after environment reset downloads rembg U2Net model** (~170MB) into `~/.u2net/`. Takes 30-90 seconds the first time, 1-3 seconds thereafter.
+- **`grep -c '_expand_canon\|_load_beats_with_canon'` on the pipeline** is a sanity check that the canon mechanism is in place; should return ~6 matches.
+- **`shared/rulebook.json.pre_migration_backup`** exists from the 30 May rulebook split — pre-multi-channel snapshot, available if needed.
+- **OAuth client `youtube-upload-test-497220` is owned by peteralkema2@gmail.com** but supports test users from other accounts (including peteralkema6 for Success Coach). Add new accounts as test users before running auth flow.
 
 ---
 
-# PART 5 — TROUBLESHOOTING
+## PART 6 — EVOLUTION
 
-**Orchestrator halts at the silent-reject check** → it found true-black (<10 KB) stills. Restill those via the review page; dark-but-real (10–200 KB) are reported as FYI, not halts.
+This document is a living artefact. Update it when:
 
-**`canon.json missing` / `not valid JSON` at preflight** → write `canon.json` in the project folder as a non-empty `{token: description}` dict before running the orchestrator.
+- A new failure mode is encountered and resolved
+- A new step is added to the workflow
+- A pipeline command's interface changes
+- A new channel is launched (capture any channel-specific quirks)
+- A deferred improvement gets built and changes the workflow
 
-**Re-run a phase without redoing paid work** → `--start-phase <storyboard|canon|stills|finish>`.
+Date the changes at the top of the document. Bank rules in the rulebook for things that affect prompts; bank workflow lessons here.
 
-**Render must survive disconnect** → run the orchestrator (or `finish`) in tmux.
-
-**Can't reach the box** → SSH is on 443, not 22. If that fails, the Hetzner web console is the always-available door.
-
-**Review page won't load / badge red** → the tunnel isn't up, or a stale one holds the port. On the laptop: `lsof -ti :8000 | xargs kill`, then `ssh -p 443 -L 8000:localhost:8000 peter@116.202.18.68`, run `serve_review.py` in that session, open `localhost:8000` on the laptop.
-
-**Assembly killed with exit -9 / "Killed"** → that was the moviepy OOM; it's fixed (ffmpeg `assemble()`). If you somehow hit it again, confirm the ffmpeg `assemble()` is the active one (`assemble_moviepy()` is the fallback, should not be called).
-
-**JSON parse error / "Streaming is required…" in storyboard** → the `build_storyboard` streaming patch was reverted; restore `messages.stream()` with `max_tokens=32000`.
-
-**"No module named 'srt_generator'" / "ANTHROPIC_API_KEY not set"** → missing symlink. From the channel root: `ln -s ../.env .env` (env) or the relevant `ln -s ../shared/...`.
-
-**Voice sounds wrong** → check `channel.json` voice_id (Victor / Reed).
-
-**Thumbnail looks like generic AI clickbait** → the default generator is a starting point only; use the on-brand Clickly spec above. Expect two iterations (Clickly drifts to modern landmarks; push the "NOT the modern X" guard to the front).
-
----
-
-# PART 6 — BANKED PRINCIPLES (one authoritative list)
-
-Hard-won from real production failures. (v1 repeated these across appended sections; consolidated here.)
-
-**Flux-pro silent safety-rejection.** `fal-ai/flux-pro/v1.1` silently returns black ~7KB PNGs on a safety trip — no exception, no log. `safety_tolerance: "5"` is baked in (gated to flux) and the orchestrator audits for blacks. Even at tolerance 5, **disaster/storm/water/collapse-into-water scripts** run a high silent-reject rate (Tay Bridge: ~37% of 48) — that's content trigger-density, not a config miss. Neutralize trigger stacks in Override mode: glint not sparks; empty dark water not plunge; salvage boats not divers-on-bodies; lone structure + faint light not violent storm. Known stacks that fail even at 5: `fire+survivor+wreckage`, `hand+finger+dial`, `emergency+vehicles+disaster`, `eyes+close up+person`.
-
-**Dark-video false positive.** The `-size -200k` silent-reject filter flags legitimate night/water shots (130–200 KB). Read sizes; only ~4–10 KB is a true black. The orchestrator encodes this (halt <10 KB, FYI 10–200 KB).
-
-**moviepy OOM → ffmpeg assembly.** moviepy `concatenate_videoclips` balloons past RAM on ~100+ clips and gets OS-killed (exit -9) even at 16 GB. Fixed by the ffmpeg `assemble()` (streaming concat). RAM upgrades don't fix this — the model was the memory shape, not the ceiling.
-
-**Canon by visual subject, not keyword.** Narration *about* a location is not a shot *of* it. `build_canon.py` uses Claude to assign by subject; still confirm the distribution at Gate 1.
-
-**Scene canons over character canons** (~3–5× more reliable under flux). **Face-never-resolved** for undocumented protagonists eliminates the hardest drift problem and serves the dignity register. **Object-substitution** for group compositions. **Angle-variation-within-canon** for visual variety without exploding canon count. **Per-location shot cap** (~10/scene in a 7-min video). **Fire/storm-as-environment, never as subject.**
-
-**Shot-grammar variety.** The storyboard prompt now enforces a framing vocabulary (establishing/wide/medium/close-detail/extreme-CU/low/high-drone/from-behind), no two consecutive same-framing shots, and close framings preferring hands/objects (cooperates with face-never-resolved). Honest open question: whether this is doing real work or manual rescue would suffice — judge on variety-in-motion in finished videos.
-
-**True-up is standard, not debug.** Every render ends with a Whisper true-up before publish.
-
-**Measurement over prediction.** Per-shot duration comes from Whisper-measured audio, not a word-count proxy.
-
-**TLS is correct, not bypassed.** No `verify=False` anywhere in the render/upload path. The httpx monkey-patch lives only in the review-server utilities and is gated. Never reintroduce a global bypass.
-
-**Foreign-language pronunciation hints.** Inworld respects bracketed phonetics: `"Dei Gratia [DAY-ee GRAH-tsee-ah]"`.
-
-**Flux text-rendering limit.** Short all-caps only (3–5 words). Thumbnails use short hooks; the full title is YouTube's title field.
-
-**Step 0 pre-read is non-negotiable** for any narrative video (KLM Tenerife v1 lesson).
-
----
-
-# PART 7 — DEFERRED IMPROVEMENTS (Phase 2 backlog)
-
-- **Parallel/concurrent fal animation** — `finish` animates clips sequentially; bounded concurrency (semaphore ~5–10) cuts animation wall-clock ~5–8× and is free (Kling runs remote on fal; the box isn't the bottleneck). Needs per-clip content-policy fallback working concurrently. *The real speedup lever.* Design deliberately; build after more single videos.
-- **Batch processing** — split the orchestrator at the stills-review seam into `prep` (unattended → stills) + `finish-batch` (unattended back half), with async review between and per-project failure isolation. Batched canon review (print all distributions, single y/n). Sequential-unattended, not truly parallel. Build after a few more single videos.
-- **Synthetic Press Mode B** — separate orchestrator; Remotion explainer beats skipped at the stills gate; renderer-interface seam designed on paper first.
-- Brightness-based silent-reject check (replace `-size` heuristic).
-- `--words-per-shot N` flag (shot density without editing code).
-- Skip-existing logic that verifies the file exists on disk before skipping (clips and stills).
-- fal retry-on-error with exponential backoff.
-- Centralise Claude model IDs in `shared/models.json`.
-- Unify `upload.py` into `shared/` (currently duplicated per channel and drifted) — at channel 3.
-- Move OAuth app out of "testing" status to stop weekly token expiry (or accept the ~5-min Path-A re-auth chore).
-- `.gitignore` additions: `*.pre_*` backups, `*TEMP_MPY*`, `*_finish.log`; delete redundant `shared/assemble_ffmpeg.py`; delete the old Google Drive repo copy.
-
----
-
-# PART 8 — THE STANDING AUDIT: are our principles in code or only in docs?
-
-A principle written in a doc but not enforced in code only executes if a human remembers to apply it. Every such gap is a quality risk that depends on attention. This section is the running ledger of where each craft/production principle currently lives, so we can drive principles **from docs → into the conductor/scripts** over time. (Full audit deferred — this is the scaffold to fill in.)
-
-| Principle | Enforced where | Gap? |
-|---|---|---|
-| Face/expression discipline | `audit_storyboard_discipline.py` (orchestrator phase) | In code ✓ |
-| Canon assignment by visual subject | `build_canon.py` (orchestrator phase) | In code ✓ |
-| `safety_tolerance: "5"` | `recreation_pipeline.py` (gated to flux) | In code ✓ |
-| Silent-reject / dark-video handling | orchestrator silent-reject check | In code ✓ |
-| Shot-grammar variety | storyboard prompt | In code ✓ (effectiveness unproven) |
-| ffmpeg low-memory assembly | `recreation_pipeline.py assemble()` | In code ✓ |
-| Whisper true-up before publish | manual (orchestrator runs it as a phase) | Partly — verify the orchestrator's true-up phase always runs |
-| Pre-lock script audit (10 principles) | **human only** | **Gap** — lives in docs; applied by judgement at Step 3 |
-| Hook 7-question gate | **human only** | **Gap** — docs; Step 4.5 |
-| Per-location shot cap (~10/scene) | partially via Gate-1 distribution check | **Gap** — no hard cap in code |
-| Object-substitution for groups | **human only** (script/canon authoring) | **Gap** |
-| "NOT the modern X" period guard | **human only** (canon/prompt authoring) | **Gap** |
-| Voiceover duration audit (Principle 11) | manual ffprobe | **Gap** — could be an automatic finish-time check |
-| On-brand thumbnail spec | **human only** (Clickly) | **Gap** — inherently laptop-in-the-loop |
-
-The bottom rows are where craft currently depends on attention. The deliberate next move (not now): pick the highest-leverage gaps — likely the pre-lock audit and the hook gate — and decide whether each becomes an automatic check the orchestrator runs (printing pass/fail before it lets you proceed) or stays a human judgement we accept as such. The point of this table is to make the choice explicit rather than letting principles quietly decay into "we wrote that down once."
-
----
-
-## Evolution
-
-Update this document when a failure mode is resolved, a phase or flag changes, a new channel launches, a deferred improvement ships, or a new principle is banked. Date changes at the top. The goal: future-Peter (or a future hire) could pick up the system without re-deriving it from chat threads.
+The goal of this document is that future-Peter (or a future hire) could pick up the system without re-deriving it from chat threads.
