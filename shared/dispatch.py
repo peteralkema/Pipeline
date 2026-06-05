@@ -17,9 +17,12 @@ Run it after parse_script.py:
     python3 dispatch.py beats.json
 """
 
+import os
 import sys
 import json
 import argparse
+import tempfile
+import subprocess
 
 KNOWN_COMPONENTS = {
     "HighlightedHeadline", "LowerThird", "NumberCounter",
@@ -27,6 +30,12 @@ KNOWN_COMPONENTS = {
 }
 
 FPS = 30  # Remotion frame rate; durations (once measured) become frame counts.
+
+# Where the Remotion project lives. Override with env REMOTION_DIR so moving the
+# folder into the repo later is a one-line change, not a code edit.
+REMOTION_DIR = os.environ.get("REMOTION_DIR", os.path.expanduser("~/Projects/remotion-learning"))
+ACCENT = "#3b5bdb"   # Synthetic channel accent; every prototype takes accentColor
+COMPOSITION_ID = {c: c for c in KNOWN_COMPONENTS}  # parsed name -> Remotion composition id (1:1)
 
 
 # --------------------------------------------------------------------------
@@ -36,58 +45,60 @@ FPS = 30  # Remotion frame rate; durations (once measured) become frame counts.
 # arrives, ONLY render_mode_b() changes - everything else stays.
 # --------------------------------------------------------------------------
 
-def shape_props(component: str, payload: dict) -> dict:
-    """Translate a parsed B payload into Remotion component props."""
-    p = dict(payload)  # copy
-
-    if component == "NumberCounter":
-        props = {
-            "to": p.get("to", 0),
-            "from": p.get("from", 0),
-            "prefix": p.get("prefix", ""),
-            "label": p.get("label", ""),
-            "plainYear": bool(p.get("plain_year", False)),
-            "countdown": bool(p.get("countdown", False)),
-        }
-        # plain-year mode: no separators, no prefix
-        if props["plainYear"]:
-            props["prefix"] = ""
-            props["separator"] = ""
-        return props
+def shape_props(component: str, payload: dict, beat: dict):
+    """Translate a parsed B payload into REAL prototype props (per Root.tsx schemas).
+    Returns (props, notes). notes = component-feature gaps to upgrade later."""
+    p = dict(payload)
+    notes = []
 
     if component == "QuoteCard":
-        return {
-            "attribution": p.get("text", ""),   # name/source/date - the receipt
-            "highlight": p.get("highlight", ""), # stressed phrase, voice-synced
-            # NB: the spoken line is NOT a prop - it lives in the voiceover.
-            # The card never duplicates the full sentence (no-karaoke rule).
-        }
+        # Prototype: {quote, attribution, accentColor} — it RENDERS the quote.
+        # Doctrine wants spoken line in VO only + card shows attribution. Prototype
+        # has no attribution-only mode yet, so render the found-line as quote for now.
+        quote = beat.get("found_line", "") or p.get("text", "")
+        notes.append("QuoteCard renders spoken line (karaoke) — needs attribution-only/highlight variant later")
+        return {"quote": quote, "attribution": p.get("text", ""), "accentColor": ACCENT}, notes
+
+    if component == "NumberCounter":
+        # Prototype: {endValue, prefix, suffix, label, accentColor}; always 0->endValue.
+        props = {"endValue": p.get("to", 0), "prefix": p.get("prefix", ""),
+                 "suffix": "", "label": p.get("label", ""), "accentColor": ACCENT}
+        if p.get("countdown"):
+            notes.append(f"COUNTDOWN ({p.get('from')}->{p.get('to')}) unsupported — renders 0->{p.get('to')}; add startValue+countdown later")
+        if p.get("plain_year"):
+            notes.append("PLAIN-YEAR unsupported — renders with commas; add plainYear prop later")
+        return props, notes
 
     if component == "HighlightedHeadline":
-        return {"text": p.get("text", ""), "highlight": p.get("highlight", "")}
+        return {"text": p.get("text", ""), "highlightPhrase": p.get("highlight", ""),
+                "highlightColor": ACCENT, "sweepStart": 30}, notes
 
     if component == "ChapterCard":
-        return {"text": p.get("text", "")}
+        text = p.get("text", ""); eyebrow, title = "", text
+        for sep in ["\u2014", "\u2013", " - ", ":"]:
+            if sep in text:
+                a, b = text.split(sep, 1); eyebrow, title = a.strip(), b.strip(); break
+        return {"eyebrow": eyebrow, "title": title, "accentColor": ACCENT}, notes
 
     if component == "LowerThird":
-        return {"text": p.get("text", "")}
+        text = p.get("text", ""); primary, secondary = text, ""
+        for sep in ["\u2014", "\u2013", " - ", ":"]:
+            if sep in text:
+                a, b = text.split(sep, 1); primary, secondary = a.strip(), b.strip(); break
+        return {"primary": primary, "secondary": secondary, "accentColor": ACCENT}, notes
 
     if component == "DocumentReveal":
-        return {
-            "title": p.get("text", ""),
-            "showLine": p.get("show_line", ""),
-            "source": p.get("source", ""),
-        }
+        return {"source": p.get("source", "") or p.get("text", ""),
+                "body": p.get("show_line", ""), "highlight": p.get("highlight", ""),
+                "accentColor": ACCENT}, notes
 
-    # unknown component - shouldn't reach here if parser flagged it
-    return p
-
+    return p, notes
 
 # --------------------------------------------------------------------------
 # Renderers (STUBBED). Each returns a clip path it "produced".
 # --------------------------------------------------------------------------
 
-def render_mode_a(beat: dict, frames: int) -> str:
+def render_mode_a(beat: dict, frames: int, render: bool = False) -> str:
     clip = f"clips/beat_{beat['index']:02d}_A.mp4"
     face = "  [FACE-HOLD]" if beat.get("face_hold") else ""
     sil = "  [+silence]" if beat.get("silence_after") else ""
@@ -99,19 +110,43 @@ def render_mode_a(beat: dict, frames: int) -> str:
     return clip
 
 
-def render_mode_b(beat: dict, frames: int) -> str:
+def render_mode_b(beat: dict, frames: int, render: bool = False) -> str:
     comp = beat["component"]
-    props = shape_props(comp, beat.get("payload", {}))
-    clip = f"clips/beat_{beat['index']:02d}_B_{comp}.mp4"
-    sil = "  [+silence]" if beat.get("silence_after") else ""
-    print(f"  -> MODE B  remotion render {comp}   ({frames} frames){sil}")
+    comp_id = COMPOSITION_ID.get(comp, comp)
+    props, notes = shape_props(comp, beat.get("payload", {}), beat)
+    os.makedirs(os.path.join(os.getcwd(), "clips"), exist_ok=True)
+    clip = os.path.abspath(f"clips/beat_{beat['index']:02d}_B_{comp}.mp4")
+
+    print(f"  -> MODE B  {comp}   ({frames} frames)")
     print(f"     props  : {props}")
     if beat.get("found_line"):
-        print(f"     vo     : \"{beat['found_line']}\"  (spoken; card shows attribution only)")
-    print(f"     => would run: npx remotion render {comp} --props='{json.dumps(props)}' --frames={frames}")
-    print(f"     => {clip}")
-    return clip
+        print(f"     vo     : \"{beat['found_line']}\"  (spoken; from voiceover)")
+    for n in notes:
+        print(f"     !! {n}")
 
+    tf = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8")
+    json.dump(props, tf, ensure_ascii=False); tf.close()
+    cmd = ["npx", "remotion", "render", comp_id, clip,
+           f"--props={tf.name}", f"--frames=0-{max(1, frames - 1)}"]
+    print(f"     run    : (cwd={REMOTION_DIR}) {' '.join(cmd)}")
+
+    if not render:
+        os.unlink(tf.name)
+        return clip
+    try:
+        res = subprocess.run(cmd, cwd=REMOTION_DIR, capture_output=True, text=True, timeout=600)
+        if res.returncode != 0:
+            tail = res.stderr.strip().splitlines()[-1] if res.stderr.strip() else "no stderr"
+            print(f"     !! FAILED (exit {res.returncode}): {tail}")
+        else:
+            print(f"     => {clip}")
+    except FileNotFoundError:
+        print("     !! 'npx' not found — is Node on PATH on this box?")
+    except subprocess.TimeoutExpired:
+        print("     !! timed out (>600s)")
+    finally:
+        if os.path.exists(tf.name): os.unlink(tf.name)
+    return clip
 
 # --------------------------------------------------------------------------
 # Duration: until the audio spine exists, estimate frames from narration length
@@ -133,17 +168,19 @@ def estimate_frames(beat: dict) -> int:
     return round(seconds * FPS)
 
 
-def dispatch(beats: list) -> list:
+def dispatch(beats, render=False, only=None):
     timeline = []
     warnings = []
     for beat in beats:
+        if only is not None and beat['index'] not in only:
+            continue
         frames = estimate_frames(beat)
         idx = beat["index"]
         mode = beat["mode"]
 
         if mode == "A":
             print(f"[{idx:02d}] A")
-            clip = render_mode_a(beat, frames)
+            clip = render_mode_a(beat, frames, render=render)
         elif mode == "B":
             comp = beat.get("component")
             if comp not in KNOWN_COMPONENTS:
@@ -151,7 +188,7 @@ def dispatch(beats: list) -> list:
                 print(f"[{idx:02d}] B:{comp}  !! UNKNOWN - skipped")
                 continue
             print(f"[{idx:02d}] B:{comp}")
-            clip = render_mode_b(beat, frames)
+            clip = render_mode_b(beat, frames, render=render)
         else:
             warnings.append(f"beat {idx}: unknown mode '{mode}'")
             continue
@@ -165,13 +202,16 @@ def dispatch(beats: list) -> list:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("beats_json")
+    ap.add_argument("--render", action="store_true", help="actually run Remotion (default: dry-run, just print the command)")
+    ap.add_argument("--only", help="comma-separated beat indices to process, e.g. 27,01")
     args = ap.parse_args()
 
     with open(args.beats_json, encoding="utf-8") as f:
         beats = json.load(f)
 
     print(f"\n=== dispatch: {args.beats_json} ({len(beats)} beats) ===\n")
-    timeline, warnings = dispatch(beats)
+    only = set(int(x) for x in args.only.split(',')) if args.only else None
+    timeline, warnings = dispatch(beats, render=args.render, only=only)
 
     a = sum(1 for t in timeline if t["mode"] == "A")
     b = sum(1 for t in timeline if t["mode"] == "B")
