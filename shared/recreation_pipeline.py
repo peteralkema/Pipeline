@@ -457,6 +457,25 @@ For each shot return:
 - "image_prompt": a vivid, specific description of a SINGLE photorealistic frame. Describe subject, setting, lighting, composition. Do NOT describe motion here. Keep recurring characters visually consistent (same age, clothing, hair) across shots.
 - "motion_prompt": the camera/scene motion for this frame. Keep it SLOW and atmospheric - drifting ash, lapping water, flickering firelight, slow push-in or pan. Avoid fast action, avoid anything that would warp faces.
 
+SHOT GRAMMAR — VARY THE CAMERA (this is critical for visual interest):
+Each shot must specify a deliberate framing. Draw from this vocabulary and
+VARY IT AGGRESSIVELY across consecutive shots — never two adjacent shots with
+the same distance-and-angle:
+- ESTABLISHING / EXTREME WIDE: the subject tiny in a vast landscape; drone-height looking down over terrain
+- WIDE: full scene, figure and surroundings together
+- MEDIUM: a figure from the waist, or two elements in frame
+- CLOSE DETAIL: hands at work, an object, turned earth, a tool, a texture — NOT a face
+- EXTREME CLOSE-UP: a single object or texture filling the frame (grain of wood, weave of cloth, a single coin)
+- LOW ANGLE: camera low, looking up (the sky, a ridge above, a doorway towering)
+- HIGH ANGLE / DRONE: camera high, looking down (a lone figure on a slope, graves from above, a roof, a path)
+- FROM BEHIND / OVER-THE-SHOULDER: looking where the subject looks (the channel's face-never-resolved default)
+
+HARD RULES:
+- When several consecutive shots occur in the same location, DELIBERATELY cycle the framing: establish wide, then cut to a close detail of hands or an object, then a low or high angle, then a from-behind medium. Treat repetition as a failure.
+- Never produce two adjacent shots that would look like the same photograph. Vary camera height, distance, and angle as much as the scene allows.
+- For CLOSE and MEDIUM framings of people, frame on HANDS, OBJECTS, BACKS, and SILHOUETTES rather than faces. A close-up is an opportunity for a detail of hands at work or a meaningful object — NEVER a resolved face. This keeps variety and face-never-resolved discipline working together.
+- Put the chosen framing explicitly at the START of each image_prompt (e.g. "High aerial drone view of...", "Extreme close-up of hands gripping...", "Low angle looking up at...").
+
 CRITICAL RULES learned from past production (these prevent the artifacts that break realism — follow them strictly when choosing framings):
 {motion_rules}
 

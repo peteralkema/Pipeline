@@ -31,8 +31,8 @@ SCOPES = [
     "https://www.googleapis.com/auth/youtube.force-ssl",
 ]
 
-CLIENT_SECRET = "token.json"
-TOKEN_FILE    = "client_secret.json"
+CLIENT_SECRET = "client_secret.json"
+TOKEN_FILE    = "token.json"
 
 
 def main():
