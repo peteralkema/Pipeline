@@ -1,6 +1,6 @@
 # Synthetic — The OpenAI Series (Launch)
 *The working production document for Synthetic Press's launch series. Sits under the higher-level "Synthetic Launch Strategy" doc — strategy stays the reference; this is the artifact we layer down into (arc → cold opens → packaging variants → scripts).*
-*v1 — 5 June 2026. Establishes the 6-episode arc, working titles, neighborhood mapping, and structural decisions. Next layers (cold opens, per-episode title/thumbnail variants) to be appended as we build them.*
+*v3 — 5 June 2026. Narrator now voices the found line (attribution-hinge technique); banks "the spoken line and its receipt" pattern and the no-lip-sync register boundary; loose-date refinement. v2 added the trial frame, E1 cold open, E1 packaging, evidence register, and resolved sequencing. v1 established the 6-episode arc.*
 
 ---
 
@@ -83,12 +83,105 @@ November 2023, Saturday–Tuesday. The narrowest, most intense episode — the h
 
 ---
 
+## The trial as frame story (architecture)
+
+The Musk v. OpenAI trial is not just E6's subject — it is the **frame story for the whole series.** Open Episode 1 on the verdict, flash back to the founding, and close Episode 6 on the verdict's full meaning. This resolves the release-sequencing tension (see below): you get arc integrity *and* current-news punch with no compromise, because the trial turns "the 2015 founding of a nonprofit" (a weak cold start) into "the origin of the feud that just detonated in a federal courtroom" (a strong one).
+
+Why the trial is the natural frame: the trial *was itself a retrospective.* Under oath, over three weeks, Altman, Brockman, Nadella, and Musk re-told this entire history — founding, money, firing. The courtroom is a machine for reconstructing the past, which is exactly what the series does. So the frame is intrinsic, not bolted on.
+
+**Use it heaviest at the two ends, lightly in the middle.** The trial is the door at E1 and the reckoning at E6, and the natural evidence spine for E2 (the money). But it must NOT collapse the series into "Musk vs Altman" — that feud is the hook that gets the stranger in the door; Ilya, Murati, Nadella, the believers and defectors are the soul of the middle. Don't open every episode in the courtroom; the device flattens with overuse (see cold-open standard below).
+
+**One consequence, and it's a feature:** opening E1 on the verdict means E6 can no longer use "what's the verdict?" as suspense. Good — E6's tension becomes *what did it mean and what did it cost,* which is the register-appropriate question. Synthetic doesn't trade in "you won't believe what happens"; it trades in "you know what happened — now understand it."
+
+---
+
+## The evidence register (device, free from the trial)
+
+The trial produced real, public exhibits — the 2017 internal emails where founders privately admitted they weren't committed to staying a nonprofit; Musk's $38M in donations; testimony that Musk himself once pushed to fold OpenAI into Tesla under his control; his "calendar technicality" post. These become **Mode B DocumentReveals and QuoteCards** throughout the series: actual exhibits, attributed, on screen.
+
+This is the archival-as-evidence principle from the Mode B notes, applied: *recreate the experience (Mode A), show the evidence (real exhibits, Mode B), and only show evidence you can prove you're allowed to show* (court exhibits are public record — clean). It is the strongest possible footing for the documentary-witness register — not editorializing, showing the record.
+
+### The pattern: "the spoken line and its receipt"
+*The standard for every quoted moment in the series (and there are many). Banked because it spans three docs — script-craft, Mode B notes, and here.*
+
+When the narrator voices a real line for impact, **Mode B shows it as a sourced QuoteCard/DocumentReveal, voice-synced (Whisper-matched) so the words appear as they're spoken. The visual carries the attribution so the voice never has to.** Three layers, no redundancy:
+- **Voice** = the words. The narrator just *says the line* — "I deeply regret my participation" — never the leaden citation scaffolding ("as Ilya Sutskever wrote in his public statement, quote… end quote").
+- **Card** = the words *plus* what the voice omits — name, source, date. The attribution lives in a channel the voice never touches, keeping the narration clean and human.
+- **Highlight** = the emphasis. The key phrase highlight-sweeps (HighlightedHeadline) as it's spoken, landing on the stressed words.
+
+Why it matters: a narrator *claiming* someone said something is an assertion; a narrator saying it *while the sourced card builds* is the assertion plus its receipt, in one beat — the documentary-witness credibility move made mechanical. **No-karaoke discipline:** the card carries name/source/date, never a full-sentence wall of text the narrator is also reading verbatim (eyes and ears doing the identical thing is redundant and faintly insulting). Voice = words; card = words + proof; highlight = emphasis.
+
+### Register note: no lip-sync (Synthetic), ever
+Synthetic is **narrated witness over cinematic recreation — the people on screen are seen, not heard; mouths stay closed.** No lip-sync. This (a) keeps the recreation behind the deepfake line (synthesized speech driving a recognizable real face is exactly what the visual register avoids), and (b) is load-bearing for the evidence register — because the recreated figures never speak, the found-line moments land as deliberate punctuation against an otherwise wordless visual world. Lip-sync would dilute that. **Lazarus, later, is where lip-sync belongs** — literary adaptation is dialogue-driven (characters speaking Saki/James lines), a fundamentally different audio contract (performed dialogue vs witness narration) needing different tech and its own craft doc. Channel boundary: *Synthetic = narrated, mouths closed, found-lines-as-punctuation; Lazarus = performed dialogue, lip-sync, later.*
+
+---
+
+## Episode 1 cold open (in medias res)
+
+Follows script-craft Principle 8 (start at the peak; let the narrator catch up; lead with a real found line). **The narrator voices the found line, then steps out to narrate** — same voice doing two registers, joined by an attribution hinge ("with those four words…") that frames the quote as quoted and drives forward. No separate courtroom-audio element; no on-screen mouths (see register note). The quote card carries the source.
+
+> *[Cold. A held beat of courtroom ambience under the voice — papers, a room settling. The narrator, low, performing the line:]*
+> **"We have a verdict."**
+> *[A breath. The narrator steps back out — same voice, now telling. Mode B: a QuoteCard sources the line — court, Oakland, May 2026 — so the voice never has to.]*
+> With those four words, in a federal courthouse in Oakland, California, nine people ended the most consequential lawsuit in the history of artificial intelligence.
+> The question was simple. Did Sam Altman steal a charity — to build the most powerful company on earth?
+> *Mode A: the jury filing in; Altman still at the defense table.*
+> They cleared him. But they never said he was right. They said only that Elon Musk had waited too long to ask.
+> *Beat.*
+> And so the real question — the one that began at a dinner table, eleven years before any of this — went unanswered.
+> *Warmth bleeds in. 2015.*
+> To understand how two men who set out to save humanity from artificial intelligence ended up here… we have to go back to the beginning.
+> *Title: SYNTHETIC — "The Promise."*
+
+**On dates:** loose, not precise ("In May of 2026," not "the eighteenth of May") — a verdict's calendar date carries no dread, so exactness just clots the line. (Precision is for clock-anchored *dread*; see the refinement note under script-craft Principle 4.) "Eleven years before any of this" stays — the span is doing dramatic work, not stamping a date.
+
+**Verification flag (relaxed by the narrator-voiced design):** because the narrator is *characterizing* the moment rather than playing claimed courtroom audio, "we have a verdict" as the archetypal phrase is defensible even if the literal words differed slightly — the bar is lower than dropping in a real recording. Still worth checking the transcript at scripting time; safe fallback is the foreman's "not liable" (certainly on the record).
+
+**Cold-open standard for the series:** every episode starts *mid-event*, at its hottest true moment, narrator catching up — not with scene-setting. Vary the entry point episode to episode; reserve the courtroom frame for the ends. (Banked as script-craft Principle 8.)
+
+---
+
+## Episode 1 packaging spectrum (the test)
+
+**Thumbnail conventions to design against.** The doom neighborhood (Drew) is *not* MrBeast-loud — it wins with cinematic-restrained: a single dramatic moody high-production image, deep blue/teal or orange/red grade, minimal bold text. **Reassuring: the doom neighborhood's leading player already proves restraint wins there — Synthetic's register-appropriate thumbnails are not a handicap.** The exposé neighborhood (More Perfect Union, DOAC) is louder/accusatory — high contrast, a CEO's face, large white/yellow accusatory text, news-graphic urgency, the dark-studio + provocative-quote formula.
+
+**The Synthetic constant (never tested away):** SYNTHETIC wordmark; cold near-black / indigo palette; **cinematic-recreation imagery** (recreated rooms and faces, never stock, never cartoon, never webcam — the one signal that separates us from both neighborhoods); restrained composed text. What we *test* is the title and the emotional framing of the image. What stays fixed is the identity.
+
+Variants, doom → exposé → neutral:
+
+- **A — Doom-curiosity** *(→ Drew's neighborhood):* "They Built AI to Stop the Apocalypse. They Might Have Started It." Thumbnail: founders lit by laptop glow in a dark room. Trade-off: max doom-pull but over-promises doom for an origin episode — register-dissonance bounce risk. Only with a genuinely dread cold open.
+- **B — Doom-clean ("what happened" keying)** *(→ doom-adjacent, cleaner pocket):* "Before ChatGPT, There Was a Warning." Thumbnail: split — a glowing early model/screen vs the shadowed founders. Uses ChatGPT as the known anchor pulling back to the origin. Strong; lands in the higher-quality capability pocket. **Primary challenger.**
+- **C — Exposé / money** *(→ Hao + MPU neighborhood):* "How a Charity Became a $500 Billion Empire." Thumbnail: charter/nonprofit doc dissolving into corporate glass / rising valuation. On Hao's *Empire* thesis (good-faith bonus); strong money hook; watch the accusatory edge — deliver as observation, not indictment. **The dedicated exposé-wave test.**
+- **D — Exposé / betrayal** *(→ exposé, hotter end):* "OpenAI Promised to Save Us From AI. Then the Money Came." Highest-click exposé framing, most accusatory, closest to the register line — highest reach, highest brand risk.
+- **E — Character / bridge (the Musk magnet)** *(→ both neighborhoods):* "The Dinner Where Elon Musk and Sam Altman Built OpenAI." Thumbnail: recreated Musk + Altman at the 2015 table, stylized-not-deepfake, tension between them; SYNTHETIC. Two megastar names = pure cold-start reach, bridges both neighborhoods, completely honest to the episode. **Recommended lead.**
+- **F — Neutral-documentary** *(→ broad / home register):* "The Real Story of How OpenAI Began." Most on-brand, lowest neighborhood-specific pull; relies on topic gravity + the cinematic look. The baseline to test against, not the lead.
+
+**Verdict-framed variants (now that the trial is the frame — these pull current-news heat + names):**
+- "Elon Musk Just Lost to Sam Altman. This Is How It Started." (current-news + both names + flashback promise)
+- "Musk vs Altman: How They Built — and Broke — OpenAI."
+- "The Verdict Is In. Now Here's the Real Story." (leans hardest on the news cycle; pairs with the "we have a verdict" open)
+
+**Recommendation:** lead with **E / the verdict-framed Musk-Altman variant**, with **B** as the primary Test & Compare challenger and **C** as the dedicated exposé test. Reasoning: E1 is the *founding* — the least doom-y episode — so it can't out-doom the coup episodes; trying to (A/D) risks the register-dissonance bounce. Its real assets are the two famous names, the current verdict heat, and "you don't know how this started" curiosity. E/B/the-verdict-framings play those assets, bridge both neighborhoods, keep the register honest. Add the single restrained current-news cue to the thumbnail (a gavel motif or small "VERDICT") — enough to signal *this is the thing in the news* without going tabloid; the cue pulls current-search, the recreation says *not another talking-head reaction.*
+
+---
+
+## Release sequencing — RESOLVED
+
+The earlier open question (release in arc order vs lead with the most clickable episode) is **resolved by the trial frame.** Release **in arc order, E1 first**, because the trial-frame cold open gives E1 the current-news, name-heavy hook it otherwise lacked — you no longer sacrifice cold-start reach to preserve series integrity. The hottest, most-current material (the verdict) lives at the *front door of E1* as the frame, then the series proceeds in order. Pin the series as an ordered playlist. (Move reasonably quickly: the verdict was 18 May; search heat is freshest now and decaying — though Musk's vowed appeal will re-ignite it, and a launch already established as the canonical account is positioned to catch that second surge.)
+
+
+
+---
+
 ## Next layers (to append as we build them)
 
-1. **Per-episode cold opens** — the 60–90s hook for each, in the wide→narrow logic.
-2. **Episode 1 packaging test** — 5–6 title/thumbnail variants spanning doom-curiosity → exposé → neutral-documentary, each mapped to the neighborhood it would land in. (This is the strategy doc's flagged immediate next action — where validation becomes a shipped decision.)
-3. **The "Empire's Cost" decision** — resolve the open structural question above.
-4. **Dual-cadence plan** — how the 6-part series ships in parallel with the Final Hours 100-video commitment without either breaking (the capacity question Peter flagged to return to).
+Done in v2: trial-as-frame architecture · E1 cold open (in medias res) · E1 packaging spectrum · evidence-register device · release sequencing resolved.
+
+Remaining queue:
+1. **Cold opens for E2–E6** — each mid-event per the cold-open standard (script-craft Principle 8), varying the entry point, courtroom frame reserved for the ends.
+2. **The "Empire's Cost" decision** — resolve the open structural question above (recommendation: keep the six, make it the immediate next episode / S2 opener).
+3. **Dual-cadence plan** — how the 6-part series ships in parallel with the Final Hours 100-video commitment without either breaking (the capacity question Peter flagged to return to).
+4. **Packaging for the cold-start-critical episodes** — same treatment as E1 for the coup (E4/E5) and verdict (E6), since they carry the most clickable material even with E1-first sequencing.
 5. **Episode breaks → scripts** — lock exact act structure per episode, then script E1.
 
 ---
@@ -97,4 +190,4 @@ November 2023, Saturday–Tuesday. The narrowest, most intense episode — the h
 
 The Musk v. OpenAI verdict facts in E6 were verified via web search on 5 June 2026 (the trial outcome post-dates the working knowledge cutoff): jury verdict 18 May 2026, Oakland; all claims dismissed against Altman, Brockman, OpenAI and the aiding-and-abetting claim against Microsoft, on statute-of-limitations grounds; Musk vowed to appeal. Re-verify current status (appeal progress, conversion finalization) at scripting time, as it may continue to move.
 
-*v1 — to be extended layer by layer.*
+*v3 — to be extended layer by layer.*

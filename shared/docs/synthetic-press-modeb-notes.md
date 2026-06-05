@@ -71,6 +71,9 @@ This is the *same* principle already banked as "measurement over prediction" in 
 
 Consequence for workflow: in any Mode B beat, the voiceover is produced *first*, then matched, then visuals placed. Same ordering as Mode A's Whisper-align finish step.
 
+### Application: "the spoken line and its receipt" (the quoted-moment pattern)
+The flagship use of QuoteCard + HighlightedHeadline + voice-sync. When the narrator voices a real line for impact, **the visual carries the attribution so the voice doesn't have to.** Three layers, no redundancy: **voice** = the words (the narrator just says the line — never "as X wrote, quote… end quote"); **card** (QuoteCard / DocumentReveal) = the words *plus* name/source/date, the citation the voice omits; **highlight** (HighlightedHeadline sweep) = the stressed phrase, voice-synced via the matcher so it lands as spoken. A narrator *claiming* a quote is an assertion; saying it *while the sourced card builds* is the assertion plus its receipt, in one beat — the documentary-witness credibility move, mechanical. **No-karaoke rule:** the card never duplicates the full sentence as text the narrator is also reading verbatim (eyes + ears doing the identical thing is redundant). This is why the matcher matters beyond emphasis timing: it's what lets the receipt build *as the line is spoken*. (Banked in full in the Synthetic series doc; the script-craft side is a sub-note under Principle 8.)
+
 ---
 
 ## The Whisper matcher (`match_beats.py`)

@@ -8,7 +8,7 @@ Leo's principle of research-and-replicate says: study the outliers that exist, l
 
 But her format is fundamentally different from ours. She does first-person POV vlog where her character "Chloe" time-travels and narrates from inside the historical scene. Final Hours does third-person omniscient witness — someone telling the story of a real person's last hours with dignity register intact. **Format doesn't transfer. Craft does.** This document captures the craft.
 
-The seven principles below are the actually-portable lessons. Each one applies directly to Hindenburg (the next video) and to every Final Hours video after it.
+The principles below are the actually-portable lessons. The first seven came from the Chloe study and apply directly to Hindenburg (the next video) and to every Final Hours video after it; Principle 8 was added later from the Synthetic Press trial-frame work and is genre-portable.
 
 ---
 
@@ -92,6 +92,8 @@ The script should call out these specific times. "It is 7:21 PM. In four minutes
 
 The 34-second collapse is the most cinematic clock structure in the entire Final Hours topic library so far. Hartley had two and a half hours. Anne Boleyn had hours. Pompeii had hours. Hindenburg has *thirty-four seconds* from first flame to ground. The script can slow that down to two or three minutes of narration without breaking the viewer's perception of compressed time, and the dread will be enormous.
 
+Refinement (added 5 June 2026) — precise when the clock is a weapon, loose when it's just a timestamp. Exact times earn their syllables only when the precision *is* the tension ("it is 7:21 PM; in four minutes, the first flame"). A date that carries no dread — a verdict, a founding, a publication — should stay loose ("In May of 2026," not "On the eighteenth of May, 2026"); false precision clots the line and signals *report* rather than *story*. Keep a span when the span itself is dramatic ("eleven years before any of this"). So: precise for dread, loose for mere chronology, spans where the duration is the point.
+
 ---
 
 ## Principle 5 — Name the surrounding humans, not just the protagonist
@@ -146,7 +148,29 @@ What NOT to do — the version that breaks the spell: "The Hindenburg disaster m
 
 ---
 
-## The seven principles, distilled
+## Principle 8 — Start in medias res: enter at the peak, let the narrator catch up
+
+*Added 5 June 2026, from the Synthetic Press trial-frame work. Portable to Final Hours and every genre — this is an entry-point principle, not a register one.*
+
+The lesson. The weakest version of a strong cold open is the narrator *settling in* — "On a Monday morning in a federal courthouse…" Scene-setting has a throat-clear quality, and on YouTube the first three seconds are a swipe-or-stay decision where throat-clearing loses. The strong version drops the viewer *mid-event*, at the single most charged instant of the whole story, before they have decided whether to commit — and then makes them stay to learn what it is the peak *of*. You start at the top of the tension curve and pay off the context afterward.
+
+The sharpest form of this uses a real, found line — something a person actually said at the hinge of the story — as the literal first sound, because authentic speech carries a charge no narration can manufacture. The narrator does not speak first. The *event* speaks first; the narrator enters once the hook is already set. (This also suits a calm, dignified register: the witness voice lands harder *after* a jolt than as the jolt.)
+
+How this relates to Principle 1. Principle 1 governs *density* — three concrete facts (date, person, money) fast. Principle 8 governs *entry point* — where in the story you start. They combine rather than compete: open at the peak moment *and* with concrete specificity. The Hindenburg open already half-does this; Principle 8 says push the entry even later into the action and let the facts arrive in the next beat.
+
+Application to Final Hours (Hindenburg). Rather than "It is May 3rd, 1937…", consider opening on the 34-second collapse itself — the first flame, a found radio line ("It's broken into flames… this is terrible, this is one of the worst catastrophes in the world" is the real, public Herbert Morrison broadcast) — then cutting back: "Four days earlier, Hermann Doehner boarded that airship with his wife and three children." The disaster is the hook; the family is the story you flash back to. Verify any found line against the record before locking it — the authenticity *is* the device, so a paraphrased "real" line defeats the purpose.
+
+Application to Synthetic (the OpenAI series). The launch episode opens not on narration but on the courtroom at the verdict — the judge's real line ("We have a verdict"), the jury, the word *not liable* — then flashes back eleven years to the founding dinner. The fresh, current, name-heavy peak (Musk vs Altman, just decided) is the door; the 2015 origin is the house. This is what lets a series open on its *widest, oldest* material without a weak cold start — you enter at the hottest recent moment and travel backward.
+
+The caution. A found-line / peak-moment open is a device, not a default to run identically every episode — overuse flattens it. Reserve the heaviest version for the episodes where a genuine peak moment exists, and vary the entry point elsewhere.
+
+Sub-note — voicing a found line, then stepping back out. When the *narrator* speaks the found line (rather than a separate audio element), the line is ambiguous until framed — is it the narrator's own words or a quotation? Resolve it with an **attribution hinge**: a connective phrase that labels the quote as quoted and drives forward in one move — "With those four words…", "Those were the words, in…", "As the record shows…". The skill is the micro-transition: voice someone else's words slightly flatter/more-spoken (reading off the record), then resume your own narrator timbre at the hinge — two registers inside one voice, not a spliced second take. This recurs constantly, so it's core craft, not a one-off.
+
+Sub-note — the spoken line and its receipt (pairs with Mode B). When a real line is voiced for impact, let the visual carry the attribution so the voice doesn't have to. Three layers, no redundancy: **voice** = the words (just say the line — never "as X wrote, quote… end quote"); **on-screen card** = the words *plus* name/source/date (the citation the voice omits); **highlight** = the stressed phrase sweeping as it's spoken. A narrator *claiming* a quote is an assertion; a narrator saying it *while the sourced card builds* is the assertion plus its receipt, in one beat. No-karaoke rule: the card never duplicates the full sentence as text the narrator is also reading verbatim. (Banked in full in the Synthetic series doc and Mode B notes.)
+
+---
+
+## The eight principles, distilled
 
 Cold-open with three concrete facts in ten seconds. Date, person, money. No build-up.
 
@@ -161,6 +185,8 @@ Name the surrounding humans. The protagonist is one person among many specific p
 Let emotional beats land in silence. At least two beats per video with no narration. The audience needs space to participate.
 
 End with the image, not the explanation. The audience is left in the story, not above it.
+
+Start in medias res. Enter at the peak — ideally a real, found line — and let the narrator catch up. Entry point, not density; combines with Principle 1.
 
 ---
 
@@ -196,7 +222,7 @@ This document lives at `final-hours/docs/script-craft-principles.md` as the perm
 
 ## One closing note on craft transfer
 
-The seven principles above are not abstract rules — they're specific to AI-generated historical recreation as a *format*. They will not all survive into other genres or technologies. When lip-sync arrives in 2027-2028 and the format shifts toward dialogue-heavy adaptation, some of these principles will become obsolete (the clock-anchoring stays; the let-music-carry stays; the sensory-not-descriptive stays; the cold-open shifts because dialogue handles introduction differently).
+The eight principles above are not abstract rules — they're specific to AI-generated historical recreation as a *format*. They will not all survive into other genres or technologies. When lip-sync arrives in 2027-2028 and the format shifts toward dialogue-heavy adaptation, some of these principles will become obsolete (the clock-anchoring stays; the let-music-carry stays; the sensory-not-descriptive stays; the cold-open shifts because dialogue handles introduction differently).
 
 What is genuinely permanent is the underlying discipline: **study what's working in your adjacent space, distil the craft principles, apply them to your own format, ignore the surface-level imitation traps.** Chloe's surface choices (first-person vlog, modern register, comedy) are her brand. Her underlying craft choices (cold-open specificity, sensory writing, clock structure, named humans, silent beats) are universal. The first set we leave alone. The second set we steal completely.
 
