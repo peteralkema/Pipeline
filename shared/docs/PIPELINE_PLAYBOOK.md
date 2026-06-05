@@ -370,86 +370,106 @@ Pinned comments generate the early engagement signal the algorithm watches.
 
 ## PART 2B — DUAL-MODE ARCHITECTURE (MODE A + MODE B)
 
-*Added 5 June 2026 for the Synthetic Press launch series. Mode A is the existing stills→clips engine (all current Final Hours / Success Coach video). Mode B is Remotion motion-graphics. This part describes how they coexist in one pipeline. Synthetic is the first channel to use both; the architecture is general.*
+*Added 5 June 2026 for the Synthetic Press launch series; rewritten same day after the pipeline was actually BUILT and proven end to end. Mode A is the existing stills→clips engine (all Final Hours / Success Coach video). Mode B is Remotion motion-graphics. Synthetic is the first channel to use both; the architecture is general. **Status as of 5 June 2026: Steps 1–4b proven on real hardware. Step 4c (real A render + full-episode audio spine + dual-mode assemble) is specified and not yet built — see the separate 4c spec doc.***
 
 ### The four principles (the whole thing hangs off these)
 
-1. **The sentence decides the mode (upstream).** Every beat is born Mode A or Mode B because the *sentence* decides. A sentence describing a place/person/moment ("Altman sat across from the man who would later try to destroy him") is Mode A — it wants a recreated scene. A sentence asserting a fact/number/quote/structure ("Microsoft put thirteen billion dollars in") is Mode B — it wants the number drawn, the quote sourced, the structure built. You are not annotating a script for the pipeline; you are writing in two registers the pipeline understands. If you can't decide a beat's mode, it's doing two jobs — split it.
+1. **The sentence decides the mode (upstream).** Every beat is born Mode A or Mode B because the *sentence* decides. A sentence describing a place/person/moment is Mode A — it wants a recreated scene. A sentence asserting a fact/number/quote/structure is Mode B — it wants the number drawn, the quote sourced, the structure built. You write in two registers the pipeline understands; you are not annotating after the fact. If you can't decide a beat's mode, it's doing two jobs — split it.
 
-2. **Visual exclusivity (the load-bearing rule).** At any instant the screen belongs to *either* a Mode A recreated scene *or* a Mode B graphic — never both. One renderer owns the frame at a time. This is what makes the launch build tractable: exclusivity means the timeline is a pure **sequence** (clips butted end to end), so assemble needs **no compositing**. (Breaking exclusivity — graphics layered *over* live scenes, the "underlay/Vox" look — is Phase 2 and requires a compositing stage. Cutaway-only for launch.) Narration pausing on a Mode B beat is an *editorial* choice for effect, fully decoupled from the visual — the visual is exclusive either way.
+2. **Visual exclusivity (the load-bearing rule).** At any instant the screen belongs to *either* a Mode A recreated scene *or* a Mode B graphic — never both. One renderer owns the frame at a time. This makes the build tractable: exclusivity means the timeline is a pure **sequence** (clips butted end to end), so assemble needs **no compositing**. (Layering graphics *over* live scenes — the "underlay/Vox" look — is Phase 2 and needs a compositing stage. Cutaway-only for launch.) Narration pausing on a Mode B beat is an *editorial* choice, fully decoupled from the visual.
 
-3. **The audio is the source of truth (shared spine).** Generate the voiceover first, measure it with Whisper, hang visuals off the measurement — for *both* modes. Same `voiceover.json`, same finish step, same matcher. A beat's measured duration is handed to whichever renderer it routes to: a NumberCounter given 3.1s counts over 3.1s; a recreated shot given 3.1s holds 3.1s. One measurement, two consumers. Mode A and Mode B share one spine.
+3. **The audio is the source of truth (shared spine).** Generate the voiceover, measure it with Whisper, hang visuals off the measurement — for *both* modes. A beat's measured duration is handed to whichever renderer it routes to: a NumberCounter given 3.1s counts over 3.1s; a recreated shot given 3.1s holds 3.1s. One measurement, two consumers. **NOTE (5 June): this is the one principle not yet wired — `estimate_frames()` currently uses a word-count proxy. Real Whisper timing lands in Step 4c.**
 
-4. **The tagged script IS the pipeline spec (the seam).** Because a Mode B beat is written in the known component vocabulary, the act of scripting it *is* the design — the tag payload is the render spec. When the script is done, grepping the B tags yields the exact component list the episode needs. The script tells you what to build, instead of you guessing the wiring and writing to fit it.
+4. **The tagged script IS the pipeline spec (the seam).** Because a Mode B beat is written in the known component vocabulary, scripting it *is* the design — the tag payload is the render spec. `grep '[B:'` on a finished script yields the exact component list the episode needs. Proven literally true: `parse_script.py` reads the tags into a complete beat list where every B beat already carries its full render payload.
 
-### The chain, top to bottom
-
-```
-Script (tagged beats)
-  → storyboard (one row per beat; `mode` column decides row shape)
-  → audio spine generated + Whisper-measured (both modes timed off this)
-  → DISPATCH on tag:
-        [A]            → stills→clips path (Flux → review gate → Kling → clip)
-        [B:Component]  → Remotion path (payload→props→remotion render → clip)
-  → assemble: clips in beat order on the voiceover spine (sequence, no compositing)
-```
-
-One storyboard, one timeline. The two modes are not two pipelines that merge — they are two renderers the storyboard hands work to, beat by beat, both returning ordinary MP4 clips into the same slot order. By assemble time, an A clip and a B clip are both just MP4s of known duration.
-
-### The beat-type notation (the discipline layer)
-
-Every beat opens with a tag. Mode A stays light (the default). Mode B carries the component name + payload, because the payload *is* the render spec.
+### The chain, top to bottom (AS BUILT)
 
 ```
-[A] Altman sat across from the man who would one day try to destroy him.
+script.md  (tagged beats; the source of truth)
+  → parse_script.py            → beats.json   (62 beats, mode A/B, full B payloads, found-lines)
+  → [Mode B path]  dispatch.py --render   → npx remotion render → clips/beat_NN_B_<Component>.mp4
+  → [Mode A path]  modea_beats.py         → synthetic_modeA_beats.json  (+ _index.json map)
+                   recreation_pipeline.py stills --beats … → storyboard → stills → REVIEW GATE → Kling
+                                                           → clips/shot_NNN.mp4
+  → [4c, not yet] full-episode Victor VO over all 62 beats' narration → Whisper-align
+  → [4c, not yet] dual-mode assemble: interleave A + B clips in true beat order via index map, 1080p
+```
 
-[B:QuoteCard] "I deeply regret my participation."
-  — Ilya Sutskever · public statement · Nov 2023
-  highlight: "deeply regret"
+Two renderers feed one timeline. They are not two pipelines that merge — they are two renderers the dispatcher hands work to, both returning ordinary MP4 clips. By assemble time an A clip and a B clip are both just MP4s of known duration and matching resolution.
 
-[B:NumberCounter] from=0 to=13000000000 prefix=$ label="Microsoft's bet"
+### THE FILES (as built, all in shared/, all committed)
 
-[B:DocumentReveal] exhibit: 2017 internal email
-  show_line: "we don't really intend to honor the nonprofit structure"
-  source: trial exhibit, Musk v. OpenAI
+- **`parse_script.py`** — Step 1. `script.md` → ordered beats. Each B beat carries component + full payload; each QuoteCard carries its spoken found-line (the `> "…"` blockquote above it). Validates against the six KNOWN_COMPONENTS; an unknown tag is the "seventh-component signal." `--json` writes beats.json. Parses only the body (between first `## COLD OPEN`/`## PART` and the spec/ledger/verification sections). E1 output: **62 beats, A:41 B:21**.
+- **`dispatch.py`** — Steps 2+3. Routes each beat: A→`render_mode_a()` (stub, prints), B→`render_mode_b()` (REAL: payload→props→temp-JSON→`npx remotion render <CompId> <out> --props=<file> --frames=0-<n>`). `shape_props()` is the registry boundary — translates parsed payloads into the REAL prototype prop schemas. `--render` actually runs Remotion (default = dry-run, prints the command); `--only N,N` filters to specific beats. `REMOTION_DIR` env points at the Remotion project (default `~/Projects/remotion-learning`), so moving it later is one env var.
+- **`modea_beats.py`** — Step 4b. Filters beats.json to mode==A, translates each into the recreation engine's `--beats` format (`{beats:[{narration, image_prompt, motion_prompt}]}`): `beat.visual`→`image_prompt`, `beat.narration`→`narration`, default motion (face-hold beats get a near-static motion so Kling won't warp the face). **CRITICAL: also writes `_index.json`** mapping engine shot index → original beat index (engine renders shot_001..shot_041 contiguously and has no idea which beats were Mode B holes; without this map the dual-mode assemble can't reorder). One beat = one shot (decided: the tagged script is already shot-designed).
+- **`assemble_test.py`** — Step 4a (plumbing proof). ffmpeg placeholder generator + concat. Proved a real Mode B clip concatenates cleanly between Mode A placeholders. Superseded by the real 4c assemble but kept as the seam test.
+- **`patch_channel_resolution.py`** — idempotent in-place patch that taught `recreation_pipeline.py` per-channel resolution: `ASPECT = _channel_aspect()` reads `width`/`height` from channel.json (default 1280×720 so Final Hours is untouched). All three resolution spots (image_size, held-clip scale, assemble trim scale) build from ASPECT.
 
-[B:ChapterCard] "Part One — The Promise"
+### The REAL prototype prop schemas (what shape_props must emit)
+
+From the committed Remotion prototype `Root.tsx` — these differ from the script's authoring payload, which is why `shape_props()` exists as a translator:
+
+- **QuoteCard** `{quote, attribution, accentColor}` — RENDERS the quote on screen. ⚠ Conflicts with the no-karaoke/receipt doctrine (card should show attribution only, the line is in VO). Current behaviour: renders the found-line as `quote`. **Component upgrade needed: attribution-only / highlight-only variant.**
+- **NumberCounter** `{endValue, prefix, suffix, label, accentColor}` — always counts 0→endValue. ⚠ No `from`/countdown (the $1B→$44M countdown renders 0→44M for now) and no `plainYear` (1997 renders "1,997"). **Two small component props needed: startValue+countdown, and plainYear.**
+- **HighlightedHeadline** `{text, highlightPhrase, highlightColor, sweepStart}` — maps cleanly.
+- **ChapterCard** `{eyebrow, title, accentColor}` — shape_props splits "Part One — The Dream" on the dash into eyebrow/title.
+- **LowerThird** `{primary, secondary, accentColor}` — splits "Ilya Sutskever — co-author…" on the dash.
+- **DocumentReveal** `{source, body, highlight, accentColor}` — maps text→source, show_line→body.
+
+All six take `accentColor` (Synthetic `#3b5bdb` indigo, injected by shape_props). All hardcode `durationInFrames` at registration; the renderer overrides per-beat via `--frames`.
+
+### The beat-type notation (authoring)
+
+```
+[A] *VISUAL: the jury filing in, from behind.* With those four words, a jury ended the most consequential lawsuit…
+
+*Narrator voices the found line:*
+> "We have a verdict."
+[B:QuoteCard] the judge · U.S. District Court, Oakland · spring 2026
+  highlight: "verdict"
+
+[B:NumberCounter] from=0 to=650000000 prefix=$ label="Google acquires DeepMind, 2014"
+
+[B:NumberCounter] to=1997 plain_year=true label="Deep Blue defeats the world champion"
+
+[B:DocumentReveal] the founding statement · 11 December 2015
+  show_line: "to benefit humanity as a whole, unconstrained by a need to generate financial return"
+  source: OpenAI founding announcement
+
+[B:ChapterCard] "Part Three — The Promise"
 ```
 
 Rules:
 - **Tag chosen as you write the sentence, not after.** Upstream principle made physical.
-- **The narration line is the same in both modes; the tag carries what the voice omits.** In a `[B:QuoteCard]` the narration *is* the quote (you say it); the payload carries name/source/date. This is "the spoken line and its receipt" (banked in the series doc, script-craft Principle 8, and the Mode B notes): voice = the words; card = words + attribution; `highlight:` = the swept phrase. **No-karaoke rule:** the card never duplicates the full sentence as text the narrator is also reading verbatim.
-- **Only components that exist get tags.** Legal vocabulary is exactly the six built: `HighlightedHeadline`, `LowerThird`, `NumberCounter`, `ChapterCard`, `QuoteCard`, `DocumentReveal`. A beat wanting something outside the six is a *deliberate* decision to build a seventh component, not a thing to write around — the tag vocabulary won't let you invent a renderer.
-- **Every B beat is a no-fal, no-stills-gate beat.** So tag-counting a finished script gives the A/B ratio, the fal exposure, and the review-gate load *before* a single render. The script becomes the production estimate. Mode B is cheaper and more deterministic than Mode A (no model call, no review, just props → render).
-- **Ratio is read, not enforced, per episode.** Target band 60–70% A / 30–40% B is a smell test against what the story is made of, not a quota. E1 (founding, scene-heavy) runs A-heavy and that's correct; if it comes out 95% A, that's the signal you skipped the charter DocumentReveal, the founding-cast LowerThirds, the "for all of humanity" QuoteCard — Mode B beats the story actually contains.
-
-### Inside the Mode B render step (spec → props → clip)
-
-You are **not** generating new Remotion code per beat. The six components are written once and parameterized. The Mode B renderer is a small translator:
-1. Look up the tag's component name in the **registry** (string→component map, already built in the prototype): `"NumberCounter"` → the NumberCounter component.
-2. Spread the payload fields as **props**; pass the beat's measured duration as the frame count (duration × 30fps).
-3. `remotion render` that one beat to a clip.
-
-So `[B:NumberCounter] from=0 to=13e9 prefix=$` becomes `<NumberCounter from={0} to={13e9} prefix="$" durationInFrames={93} />` → rendered clip. Deterministic, cheap, no review gate.
+- **The narration is the same in both modes; the tag carries what the voice omits.** A QuoteCard's narration *is* the spoken found-line (the `> "…"` above the tag); the payload carries name/source/date. "The spoken line and its receipt": voice = words; card = attribution; `highlight:` = swept phrase. **No-karaoke:** the card never duplicates the full sentence as on-screen text the narrator reads verbatim.
+- **Only the six components have tags.** A beat wanting something else is a deliberate decision to build a seventh, surfaced by the parser as a warning — not a thing to write around.
+- **Every B beat is a no-fal, no-review beat.** Tag-counting a finished script gives the A/B ratio, fal exposure, and review-gate load before a single render.
+- **Ratio is read, not enforced.** Band 60–70% A / 30–40% B is a smell test. E1 is scene-heavy (66% A) and that's correct.
 
 ### The true-up IS the human-voice swap
 
-Because audio is the source of truth, swapping the Inworld scratch narration for Peter's human read is a **true-up, not a re-render**: drop in the human `voiceover`, re-run Whisper → match → assemble, and *every* visual timing re-derives for free — Mode A shot holds *and* Mode B component timings alike. Nothing visual regenerates. This is the same true-up mechanism already banked for Mode A shot durations, now doing double duty as the production model for Synthetic: **script + record scratch (Inworld) → build all visuals against it → swap in the human read → true-up → final.** Build the `finish --voiceover <path>` override so the human read can be supplied at true-up time (this also fixes the old "finish regenerates voiceover" behaviour).
+Audio is the source of truth, so swapping Inworld scratch (Victor) for Peter's human read is a **true-up, not a re-render**: drop in the human voiceover, re-run Whisper → match → assemble, and *every* visual timing re-derives for free — Mode A holds and Mode B counts alike. Nothing visual regenerates. Production model for Synthetic: **script → record scratch (Inworld Victor) → build all visuals against it → swap in human read → true-up → final.** (The recreation engine's `finish --assemble-only` already does zero-cost re-assembly; 4c extends this to the dual-mode timeline.)
 
-### What to build for the Episode 1 launch (the thin slice)
+### Resolution (decided 5 June)
 
-Build only what E1 demands, proven end to end:
-1. **Tag parser** — read `[A]` / `[B:Component]` into storyboard rows of the right shape. Small.
-2. **Dispatch branch** — the `if mode=="A" … else …` routing each row to a renderer. Small.
-3. **Mode B render step** — payload → props (via the existing registry) → `remotion render` → clip. Medium; the hard part (the components) is done. Start with **two live components**: `QuoteCard` (needed for the cold open's "We have a verdict" receipt) and `NumberCounter` (needed at the first valuation). The other four are then just more registry entries, not new plumbing.
-4. **Assemble accepts both clip types** — mostly already true; a clip is a clip by timeline time.
+Mode B Remotion renders 1920×1080. Mode A engine historically rendered 1280×720. **Decision: 1080p is the Synthetic master.** Implemented via per-channel resolution in channel.json (`width`/`height`), read by `_channel_aspect()`. Final Hours has no width/height → stays 720p, untouched. So both modes now render 1080p for Synthetic with no per-clip scaling needed at assemble.
 
-**Do NOT build for launch:** automatic mode *inference* (tagging is by hand — the human decides the mode, correctly); compositing/underlay (Phase 2); batch/parallel rendering (Phase 2); any component beyond the six (and if E1's script demands a seventh, that's a deliberate decision surfaced *by* the script).
+### Build status (5 June 2026)
 
-The mental model in one line: **the tag is a routing instruction the author writes, the storyboard carries it, the dispatcher obeys it, two renderers feed one timeline, and the measured audio keeps them honest.**
+| Step | What | Status |
+|---|---|---|
+| 1 | tag parser (`parse_script.py`) | ✅ proven on box |
+| 2 | dispatch routing (`dispatch.py`) | ✅ proven on box |
+| 3 | real Mode B render (`render_mode_b` → Remotion) | ✅ real $650M clip rendered on laptop |
+| 4a | assemble plumbing (B clip between A placeholders) | ✅ proven on laptop |
+| 4b | Mode A translator + engine ingest under Synthetic channel | ✅ `OK Beat-script ingested: 41 beats` on box |
+| 4c | real A render + full-episode audio spine + dual-mode assemble | ⏳ specified, not built |
+
+**Three known component-feature gaps (small Remotion tweaks, not pipeline work):** QuoteCard attribution-only variant; NumberCounter startValue+countdown; NumberCounter plainYear. None block 4c; each makes one beat render exactly as scripted.
+
+The mental model in one line: **the tag is a routing instruction the author writes, the parser carries it, the dispatcher obeys it, two renderers feed one timeline, and (once 4c lands) the measured audio keeps them honest.**
 
 ---
-
 
 
 Common issues and resolutions:
