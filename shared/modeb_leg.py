@@ -129,3 +129,54 @@ def run_modeb_leg(ctx):
     for p in rendered[:6]:
         t.detail(os.path.basename(p))
     return {"clips": rendered, "count": len(rendered), "indices": b_idx}
+
+
+def modeb_gate(ctx, rendered_count):
+    """The Mode B gate: print DEAD-SIMPLE, copy-paste, which-window-labelled instructions
+    to get the autoplay/live-edit review page up, then wait for the user to finish.
+    Two terminals are unavoidable (box serves, laptop tunnels) — so we make BOTH blocks
+    fully pre-filled and labelled. Assume the user remembers nothing."""
+    t = ctx["t"]
+    proj = ctx["project_dir"]
+    shared = ctx["shared"]
+    beats = ctx["beats_list_json"]
+    durations = ctx.get("durations") or ""
+    clips = ctx.get("clips_dir") or os.path.join(os.path.dirname(shared), "clips")
+    box = ctx.get("box", "peter@116.202.18.68")
+    port = ctx.get("review_port", 8000)
+    dur_arg = f" --durations {durations}" if durations else ""
+
+    t.gate("MODE B GATE — review the cards")
+    print(f"""
+  ┌─ MODE B REVIEW — 3 steps, copy-paste each block ──────────────────────┐
+  │                                                                        │
+  │  STEP 1 ▸ In your BOX window (prompt: peter@pipeline-prod), paste:     │
+  │                                                                        │
+        source ~/venvs/pipeline/bin/activate
+        export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        python {shared}/serve_modeb_review.py --project {proj} --beats {beats} --clips {clips}{dur_arg} --port {port}
+  │                                                                        │
+  │  STEP 2 ▸ In your LAPTOP window (prompt: your-name@laptop), paste:     │
+  │                                                                        │
+        lsof -ti :{port} | xargs kill 2>/dev/null; true
+        ssh -p 443 -L {port}:localhost:{port} {box}
+  │                                                                        │
+  │  STEP 3 ▸ Open this in your browser:                                   │
+  │                                                                        │
+        http://localhost:{port}
+  │                                                                        │
+  │  Scroll top→bottom. Clips autoplay. Edit a payload + click            │
+  │  "Re-render this beat" to fix. Click "Flag" if a beat is wrong in     │
+  │  a way you can't fix here (audio-affecting / bug).                     │
+  │                                                                        │
+  │  When done: Ctrl-C the BOX server, then come back HERE and type go.   │
+  └────────────────────────────────────────────────────────────────────────┘
+  ({rendered_count} cards rendered and waiting in the review page.)""")
+    if ctx["dry_run"]:
+        t.info("[dry-run] Mode B gate would wait for review here.")
+        return True
+    while True:
+        ans = input("  >>> type 'go' when you've finished reviewing (or 'skip'): ").strip().lower()
+        if ans in ("go", "skip"):
+            t.ok(f"Mode B gate cleared ({ans}).")
+            return True
