@@ -571,13 +571,15 @@ beats.json  (carries `channel`; per-beat mode / speaker / lock / payload)
                    DUAL-MODE ASSEMBLE
             interleave all clips in true beat order (index map),
             each held to its audio-measured duration,
-            over the (possibly multi-voice) VO, at channel w/h
+            over the (possibly multi-voice) VO + ducked music bed, at channel w/h
                              │
                              ▼
                        final_video.mp4
 ```
 
 Sequential-unattended is acceptable for the legs that *could* parallelize (audio ∥ Mode B ∥ Mode A-stills) — matches the banked "sequential not parallel" instinct. Expressing them as legs makes the parallelism *available* later without redesign; it is not required now. The discipline that matters is the ordering constraint: **the audio leg runs first because both render legs depend on its durations.** (This is the orchestration consequence of "audio is the source of truth": durations must exist before either renderer is dispatched, or Mode B renders at guessed lengths. The audio leg is now BUILT — see PART 2B principle 3: `build_audio_script.py` → `generate_episode_vo.py` → `build_beat_durations.py` → `dispatch.py --durations`. The orchestrator's job is to sequence these before the render legs.)
+
+**Music belongs to ASSEMBLE, not the audio leg.** Keep this clear as the system grows — every piece has one home. The audio leg produces ONLY the voiceover + per-beat durations; it has no music. Music is a ducked bed laid *under* the finished VO at assemble time, and it is independent of per-beat timing (a bed over the whole timeline, it never touches the durations). The mux logic currently lives inside `recreation_pipeline.py`'s `assemble()` — the Final Hours engine. **The dual-mode (Synthetic) assembler does NOT use the engine's assemble, so the music mux must be PORTED into it** — it does not come for free. What to lift (self-contained ffmpeg, ports cleanly): the voice+music `amix` at the calibrated levels `VOICE_LEVEL = 1.15` / `MUSIC_LEVEL = 0.07` (low bed tuned for Jamendo tracks); loop-to-cover (concat-repeat then trim, avoids the music-stops-early bug); bed sourced from the channel's `default_music_prompt` in channel.json, with `--music <file>` to override or `--no-music` to skip. Per-channel music identity therefore also lives in channel.json, exactly like style_suffix and the Mode B tokens.
 
 ### channel.json — the complete cross-mode identity
 
