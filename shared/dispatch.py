@@ -110,6 +110,32 @@ def render_mode_a(beat: dict, frames: int, render: bool = False) -> str:
     return clip
 
 
+_COMP_DUR_CACHE = None
+
+def component_durations():
+    """Ask Remotion how long each composition is — the component is the SINGLE source of
+    truth for its own duration. Mode B renders each element at ITS OWN declared length,
+    never a frame count derived from audio. Result cached for the run.
+    Returns {composition_id: durationInFrames}. Empty dict if the query fails (caller
+    then falls back to the component's frames, which is still component-driven)."""
+    global _COMP_DUR_CACHE
+    if _COMP_DUR_CACHE is not None:
+        return _COMP_DUR_CACHE
+    _COMP_DUR_CACHE = {}
+    try:
+        r = subprocess.run(["npx", "remotion", "compositions", "--quiet"],
+                           cwd=REMOTION_DIR, capture_output=True, text=True, timeout=120)
+        # output lines look like:  CompId   1920x1080   120 frames ...
+        import re as _re
+        for line in (r.stdout or "").splitlines():
+            m = _re.match(r"\s*(\S+).*?(\d+)\s*frames?", line)
+            if m:
+                _COMP_DUR_CACHE[m.group(1)] = int(m.group(2))
+    except Exception:
+        pass
+    return _COMP_DUR_CACHE
+
+
 def render_mode_b(beat: dict, frames: int, render: bool = False) -> str:
     comp = beat["component"]
     comp_id = COMPOSITION_ID.get(comp, comp)
@@ -117,7 +143,21 @@ def render_mode_b(beat: dict, frames: int, render: bool = False) -> str:
     os.makedirs(os.path.join(os.getcwd(), "clips"), exist_ok=True)
     clip = os.path.abspath(f"clips/beat_{beat['index']:02d}_B_{comp}.mp4")
 
-    print(f"  -> MODE B  {comp}   ({frames} frames)")
+    # FIRST PRINCIPLE: a Mode B element renders at ITS OWN declared length. The audio-
+    # derived `frames` is IGNORED here — Remotion enforces the component's durationInFrames
+    # and refuses anything longer, so we render exactly what the component declares. The
+    # gap between this clip's length and the beat's measured audio slot is filled by the
+    # ASSEMBLER (freeze-fill), not here. This makes Mode B render unbreakable: it can never
+    # ask for more frames than the component has.
+    comp_frames = component_durations().get(comp_id)
+    if comp_frames is None:
+        comp_frames = frames  # query unavailable (e.g. dry-run/no-node): fall back, render still attempts component length
+        note_dur = f"{comp_frames} frames (audio-fallback; component duration unqueried)"
+    else:
+        note_dur = f"{comp_frames} frames (component's own duration)"
+    frames = comp_frames
+
+    print(f"  -> MODE B  {comp}   ({note_dur})")
     print(f"     props  : {props}")
     if beat.get("found_line"):
         print(f"     vo     : \"{beat['found_line']}\"  (spoken; from voiceover)")
