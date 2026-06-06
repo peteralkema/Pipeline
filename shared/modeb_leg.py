@@ -79,10 +79,25 @@ def run_modeb_leg(ctx):
     if not _stream(cmd, t, "dispatch Mode B render", cwd=ctx.get("run_cwd")):
         return None
 
-    # collect what landed
-    clips_dir = proj / "clips"
-    rendered = sorted(str(p) for p in clips_dir.glob("beat_*_B*.mp4")) if clips_dir.exists() else []
-    t.ok(f"Mode B render complete → {len(rendered)} clips in {clips_dir}")
+    # collect what landed — clips may go to <proj>/clips OR the engine's default clips/ dir
+    search_dirs = [proj / "clips", Path("clips"), Path(ctx.get("run_cwd") or ".") / "clips"]
+    rendered = []
+    for d in search_dirs:
+        if d.exists():
+            rendered += [str(p) for p in d.glob("beat_*_B*.mp4")]
+    rendered = sorted(set(rendered))
+
+    # HALT-ON-MISSING-OUTPUT (§12): zero/too-few clips from N beats is a FAILURE, not success.
+    expected = len(b_idx)
+    if len(rendered) < expected:
+        t.halt(f"Mode B rendered {len(rendered)}/{expected} clips. "
+               f"Most likely cause: Node/Remotion not runnable on this box "
+               f"('npx not found' in the log above means Node isn't on PATH, or the "
+               f"Remotion project/REMOTION_DIR isn't set here). Fix Node+Remotion on the "
+               f"box (or render Mode B on the laptop), then re-run.")
+        return None
+
+    t.ok(f"Mode B render complete → {len(rendered)} clips")
     for p in rendered[:6]:
         t.detail(os.path.basename(p))
     return {"clips": rendered, "count": len(rendered), "indices": b_idx}
