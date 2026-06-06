@@ -154,7 +154,8 @@ def component_durations():
         # output lines look like:  CompId   1920x1080   120 frames ...
         import re as _re
         for line in (r.stdout or "").splitlines():
-            m = _re.match(r"\s*(\S+).*?(\d+)\s*frames?", line)
+            # CompId  fps  WxH  FRAMES (X.XX sec)  e.g. "ChapterCard  30  1920x1080  120 (4.00 sec)"
+            m = _re.match(r"\s*(\S+)\s+\d+\s+\d+x\d+\s+(\d+)\s*\(", line)
             if m:
                 _COMP_DUR_CACHE[m.group(1)] = int(m.group(2))
     except Exception:
