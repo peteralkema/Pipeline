@@ -17,6 +17,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from telemetry import Telemetry
 from banner import BANNER
 import audio_leg
+import modeb_leg
 
 
 def parse_args():
@@ -218,16 +219,18 @@ def main():
     # the flat beats list (leg tools expect a list, not the wrapper) — write it next to the wrapper
     beats_list_json = None
     if proj_dir:
+        os.makedirs(proj_dir, exist_ok=True)
         beats_list_json = os.path.join(proj_dir, "beats.json")
-        if not dry:
-            with open(beats_list_json, "w", encoding="utf-8") as f:
-                json.dump(beats, f, indent=2, ensure_ascii=False)
-            t.detail(f"wrote flat beats list for leg tools → {beats_list_json}")
+        # always write it (cheap local file; legs read it to plan, even in dry-run)
+        with open(beats_list_json, "w", encoding="utf-8") as f:
+            json.dump(beats, f, indent=2, ensure_ascii=False)
+        t.detail(f"wrote flat beats list for leg tools → {beats_list_json}")
 
     ctx = {
         "t": t, "shared": shared_dir, "channel_dir": channel_dir,
         "project_dir": proj_dir, "beats_list_json": beats_list_json,
-        "script_md": None, "dry_run": dry, "py": sys.executable,
+        "durations": os.path.join(proj_dir, "durations.json") if proj_dir else None,
+        "run_cwd": None, "script_md": None, "dry_run": dry, "py": sys.executable,
     }
 
     # ── 3a: AUDIO LEG (wired) ─────────────────────────────────────────────
@@ -240,12 +243,21 @@ def main():
             t.halt("audio leg halted. Fix the reported issue and re-run.")
             sys.exit(1)
 
-    # ── legs not yet wired (steps 3b/4/5) ─────────────────────────────────
-    pending = [l for l in legs if l not in ("audio",)]
+    # ── 3b Half 1: MODE B LEG (render wired; gate is Half 2) ──────────────
+    if "modeB" in legs:
+        mb = modeb_leg.run_modeb_leg(ctx)
+        if mb is None:
+            t.halt("Mode B leg halted. Fix the reported issue and re-run.")
+            sys.exit(1)
+        if not dry:
+            t.info("(Mode B gate — autoplay/live-edit review — is Half 2, built next.)")
+
+    # ── legs not yet wired (steps 4/5) ────────────────────────────────────
+    pending = [l for l in legs if l not in ("audio", "modeB")]
     if pending:
         t.phase("LEGS NOT YET WIRED")
         for l in pending:
-            t.info(f"· {l} — wiring is a later build step (3b Mode B, 4 Mode A, 5 convergence)")
+            t.info(f"· {l} — wiring is a later build step (4 Mode A, 5 convergence)")
 
     t.phase("RUN SUMMARY")
     t.info(f"channel {channel} · {project}")
