@@ -148,7 +148,7 @@ def component_durations():
         return _COMP_DUR_CACHE
     _COMP_DUR_CACHE = {}
     try:
-        r = subprocess.run(["npx", "remotion", "compositions", "--quiet"],
+        r = subprocess.run(["npx", "remotion", "compositions"],
                            cwd=REMOTION_DIR, capture_output=True, text=True, timeout=120,
                            env=_render_env())
         # output lines look like:  CompId   1920x1080   120 frames ...

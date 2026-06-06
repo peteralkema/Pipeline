@@ -11,7 +11,7 @@ Half 2 (the autoplay/live-edit gate) is built next, as its own piece.
 Like every leg: shells out to the proven script (dispatch.py), does not reimplement it.
 The orchestrator calls run_modeb_leg(ctx).
 """
-import os, sys, json, subprocess
+import os, sys, re, json, subprocess
 from pathlib import Path
 
 
@@ -21,7 +21,8 @@ def _stream(cmd, t, label, cwd=None):
     import time, threading
     t.detail(f"$ {' '.join(str(c) for c in cmd)}  (cwd={cwd or '.'})")
     proc = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE,
-                            stderr=subprocess.STDOUT, text=True, bufsize=1)
+                            stderr=subprocess.STDOUT, text=True, bufsize=1,
+                            env=os.environ.copy())
     start = time.time(); last = [start]; stop = threading.Event()
     def hb():
         while not stop.wait(15):
@@ -66,6 +67,16 @@ def run_modeb_leg(ctx):
         t.warn(f"durations.json not found at {durations} — Mode B would render at "
                f"proxy lengths. Run the audio leg first.")
 
+    # verify Remotion is runnable: REMOTION_DIR must be set and point at a real project.
+    remotion_dir = os.environ.get("REMOTION_DIR")
+    if not dry:
+        if not remotion_dir or not os.path.isdir(remotion_dir):
+            t.halt(f"REMOTION_DIR not set or not a directory (got: {remotion_dir!r}). "
+                   f"On the box: export REMOTION_DIR=$HOME/Pipeline/remotion "
+                   f"(and add it to ~/.bashrc). Mode B renders there.")
+            return None
+        t.detail(f"REMOTION_DIR = {remotion_dir}")
+
     only = ",".join(str(i) for i in b_idx)
     cmd = [py, str(Path(shared) / "dispatch.py"), beats_json,
            "--render", "--only", only, "--durations", durations]
@@ -73,6 +84,8 @@ def run_modeb_leg(ctx):
     if dry:
         t.info(f"[dry-run] would render {len(b_idx)} Mode B clips: beats {b_idx}")
         t.detail(f"$ {' '.join(cmd)}")
+        if remotion_dir:
+            t.detail(f"REMOTION_DIR = {remotion_dir}")
         return {"clips": [], "count": len(b_idx), "dry": True}
 
     t.info(f"rendering {len(b_idx)} Mode B clips via Remotion (measured durations)")
@@ -87,14 +100,29 @@ def run_modeb_leg(ctx):
             rendered += [str(p) for p in d.glob("beat_*_B*.mp4")]
     rendered = sorted(set(rendered))
 
-    # HALT-ON-MISSING-OUTPUT (§12): zero/too-few clips from N beats is a FAILURE, not success.
+    # HALT-ON-MISSING-OUTPUT (§12): figure out WHICH beats are missing and report precisely.
     expected = len(b_idx)
-    if len(rendered) < expected:
-        t.halt(f"Mode B rendered {len(rendered)}/{expected} clips. "
-               f"Most likely cause: Node/Remotion not runnable on this box "
-               f"('npx not found' in the log above means Node isn't on PATH, or the "
-               f"Remotion project/REMOTION_DIR isn't set here). Fix Node+Remotion on the "
-               f"box (or render Mode B on the laptop), then re-run.")
+    got_indices = set()
+    for p in rendered:
+        m = re.search(r"beat_(\d+)_B", os.path.basename(p))
+        if m:
+            got_indices.add(int(m.group(1)))
+    missing = [i for i in b_idx if i not in got_indices]
+
+    if len(rendered) == 0:
+        t.halt("Mode B rendered 0 clips. Likely Node/Remotion not runnable here: check "
+               "'npx not found' in the log, REMOTION_DIR, and `npx remotion versions`.")
+        return None
+
+    if missing:
+        # SOME rendered — Node is clearly fine. Name the specific failures.
+        t.warn(f"Mode B rendered {len(rendered)}/{expected} — these beats FAILED: {missing}")
+        t.halt(f"beats {missing} did not render (the other {len(rendered)} did, so Node/Remotion "
+               f"work). Render one directly to see its real error, e.g.:\n"
+               f"    cd $REMOTION_DIR && npx remotion render <Component> /tmp/x.mp4 "
+               f"--props='<json>' --frames=0-<n>\n"
+               f"Common causes: a very long frame count (a card given a long spoken duration), "
+               f"or a component prop it can't handle. Fix, then re-run.")
         return None
 
     t.ok(f"Mode B render complete → {len(rendered)} clips")
