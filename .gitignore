@@ -26,3 +26,8 @@ client_secret.json
 # OS noise
 .DS_Store
 .obsidian/
+clips/
+*.docx
+~$*
+voiceover.mp3
+voiceover.json

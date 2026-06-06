@@ -155,13 +155,39 @@ def render_mode_b(beat: dict, frames: int, render: bool = False) -> str:
 # measured duration per beat flows straight into `frames` for BOTH renderers.
 # --------------------------------------------------------------------------
 
+# Real per-beat durations from the audio leg (build_beat_durations.py -> durations.json).
+# Keyed by str(beat index) -> {"duration","frames","source",...}. Loaded once via
+# load_durations(); when present, estimate_frames() uses MEASURED frames instead of
+# the word-count guess. This is the seam where the audio spine replaces the proxy.
+_DURATIONS = None
+
+def load_durations(path):
+    """Load durations.json (from the audio leg). Call before dispatch()."""
+    global _DURATIONS
+    import json as _json
+    with open(path, encoding="utf-8") as f:
+        _DURATIONS = _json.load(f)
+    n = len(_DURATIONS)
+    measured = sum(1 for d in _DURATIONS.values() if d.get("source") == "whisper")
+    print(f"   durations: loaded {n} beats ({measured} whisper-measured) from {path}")
+    return _DURATIONS
+
+
 def estimate_frames(beat: dict) -> int:
+    # 1. Real measured duration from the audio leg, if available.
+    if _DURATIONS is not None:
+        d = _DURATIONS.get(str(beat["index"]))
+        if d and "frames" in d:
+            return int(d["frames"])
+        # durations file present but this beat missing -> fall through to proxy,
+        # but make the gap visible rather than silently guessing.
+        print(f"   !! beat {beat['index']} not in durations.json — using word-count proxy")
+    # 2. Fallback: word-count proxy (pre-audio-leg behaviour; keeps script standalone).
     text = beat.get("narration") or beat.get("found_line") or ""
     words = len(text.split())
     if words:
         seconds = max(1.5, words / 135 * 60)
     else:
-        # silent / card-only beat defaults by type
         seconds = 3.0 if beat["mode"] == "B" else 2.5
     if beat.get("silence_after"):
         seconds += 1.5
@@ -204,6 +230,7 @@ def main():
     ap.add_argument("beats_json")
     ap.add_argument("--render", action="store_true", help="actually run Remotion (default: dry-run, just print the command)")
     ap.add_argument("--only", help="comma-separated beat indices to process, e.g. 27,01")
+    ap.add_argument("--durations", help="durations.json from the audio leg (real per-beat timing); if omitted, falls back to the word-count proxy")
     args = ap.parse_args()
 
     with open(args.beats_json, encoding="utf-8") as f:
@@ -211,6 +238,8 @@ def main():
 
     print(f"\n=== dispatch: {args.beats_json} ({len(beats)} beats) ===\n")
     only = set(int(x) for x in args.only.split(',')) if args.only else None
+    if args.durations:
+        load_durations(args.durations)
     timeline, warnings = dispatch(beats, render=args.render, only=only)
 
     a = sum(1 for t in timeline if t["mode"] == "A")
