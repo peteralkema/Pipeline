@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """
-modeb_leg.py — the Mode B render leg, wired for the orchestrator. ONE home for Mode B.
+modeb_leg.py — the Mode B render leg + the Mode B gate. ONE home for Mode B.
 
-Half 1 of step 3b: render. Calls the PROVEN dispatch.py to render the Mode B beats
-(Remotion motion-graphics cards), now fed the REAL durations.json from the audio leg
-so each card renders at its measured frame count (no more word-count proxy).
+Step 3b in two halves, both living here (one home, one job):
+  Half 1  run_modeb_leg(ctx)  — render. Calls the PROVEN dispatch.py to render the
+          Mode B beats (Remotion motion-graphics cards), fed the REAL durations.json
+          from the audio leg so each card renders at its measured frame count.
+  Half 2  modeb_gate(ctx, rendered_count) — the idiot-proof autoplay/live-edit review
+          gate. Prints copy-paste, window-labelled steps; waits for the user.
 
-Half 2 (the autoplay/live-edit gate) is built next, as its own piece.
-
-Like every leg: shells out to the proven script (dispatch.py), does not reimplement it.
-The orchestrator calls run_modeb_leg(ctx).
+Like every leg: shells out to the proven script (dispatch.py); does not reimplement it.
+The orchestrator calls run_modeb_leg(ctx) then modeb_gate(ctx, count). The gate lives
+HERE, not in orchestrate.py — Mode B has one home.
 """
 import os, sys, re, json, subprocess
 from pathlib import Path
@@ -92,13 +94,20 @@ def run_modeb_leg(ctx):
     if not _stream(cmd, t, "dispatch Mode B render", cwd=ctx.get("run_cwd")):
         return None
 
-    # collect what landed — clips may go to <proj>/clips OR the engine's default clips/ dir
+    # collect what landed — clips may go to <proj>/clips OR the engine's default clips/ dir.
+    # The three search dirs can be the SAME physical directory (when run_cwd == proj), and
+    # glob yields both relative and absolute path strings for the same file — so dedup by
+    # RESOLVED real path, never by string, or a clip gets counted multiple times.
     search_dirs = [proj / "clips", Path("clips"), Path(ctx.get("run_cwd") or ".") / "clips"]
-    rendered = []
+    rendered, seen = [], set()
     for d in search_dirs:
         if d.exists():
-            rendered += [str(p) for p in d.glob("beat_*_B*.mp4")]
-    rendered = sorted(set(rendered))
+            for p in d.glob("beat_*_B*.mp4"):
+                rp = os.path.realpath(str(p))
+                if rp not in seen:
+                    seen.add(rp)
+                    rendered.append(rp)
+    rendered = sorted(rendered)
 
     # HALT-ON-MISSING-OUTPUT (§12): figure out WHICH beats are missing and report precisely.
     expected = len(b_idx)
@@ -132,10 +141,11 @@ def run_modeb_leg(ctx):
 
 
 def modeb_gate(ctx, rendered_count):
-    """The Mode B gate: print DEAD-SIMPLE, copy-paste, which-window-labelled instructions
-    to get the autoplay/live-edit review page up, then wait for the user to finish.
-    Two terminals are unavoidable (box serves, laptop tunnels) — so we make BOTH blocks
-    fully pre-filled and labelled. Assume the user remembers nothing."""
+    """The Mode B gate — the ONLY copy (orchestrate.py used to carry a duplicate; killed).
+    Print DEAD-SIMPLE, copy-paste, which-window-labelled steps to bring up the autoplay/
+    live-edit review page, then wait. Two terminals are unavoidable (box serves, laptop
+    tunnels) so BOTH blocks are fully pre-filled and labelled. Assume the user remembers
+    nothing. Owns its own dry-run behaviour (gate decides, caller doesn't guard)."""
     t = ctx["t"]
     proj = ctx["project_dir"]
     shared = ctx["shared"]
@@ -143,7 +153,7 @@ def modeb_gate(ctx, rendered_count):
     durations = ctx.get("durations") or ""
     clips = ctx.get("clips_dir") or os.path.join(os.path.dirname(shared), "clips")
     box = ctx.get("box", "peter@116.202.18.68")
-    port = ctx.get("review_port", 8000)
+    port = ctx.get("modeb_port", 8000)
     dur_arg = f" --durations {durations}" if durations else ""
 
     t.gate("MODE B GATE — review the cards")
@@ -154,7 +164,7 @@ def modeb_gate(ctx, rendered_count):
   │                                                                        │
         source ~/venvs/pipeline/bin/activate
         export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-        python {shared}/serve_modeb_review.py --project {proj} --beats {beats} --clips {clips}{dur_arg} --port {port}
+        python {os.path.join(shared, 'serve_modeb_review.py')} --project {proj} --beats {beats} --clips {clips}{dur_arg} --port {port}
   │                                                                        │
   │  STEP 2 ▸ In your LAPTOP window (prompt: your-name@laptop), paste:     │
   │                                                                        │
@@ -177,6 +187,7 @@ def modeb_gate(ctx, rendered_count):
         return True
     while True:
         ans = input("  >>> type 'go' when you've finished reviewing (or 'skip'): ").strip().lower()
-        if ans in ("go", "skip"):
+        if ans in ("go", "skip", "continue", "c", "done", "y", "yes"):
             t.ok(f"Mode B gate cleared ({ans}).")
             return True
+        t.info("(type 'go' when you've finished reviewing the cards)")

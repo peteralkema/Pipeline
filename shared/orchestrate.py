@@ -18,6 +18,7 @@ from telemetry import Telemetry
 from banner import BANNER
 import audio_leg
 import modeb_leg
+import modea_leg
 
 
 def parse_args():
@@ -167,63 +168,6 @@ def decide_legs(beats, t):
 
 
 
-def modeb_gate(ctx, channel_dir):
-    """Piece 3: the idiot-proof Mode B review gate. Prints a copy-paste block that assumes
-    NOTHING — labels each window, includes cd + venv + nvm + the literal tunnel command with
-    the real box IP, and says exactly what to do. Then waits for the user to type continue."""
-    t = ctx["t"]
-    proj = ctx["project_dir"]
-    shared = ctx["shared"]
-    box = ctx.get("box", "peter@116.202.18.68")
-    port = ctx.get("modeb_port", 8000)
-    beats = ctx["beats_list_json"]
-    durations = ctx.get("durations")
-    clips = ctx.get("clips_dir") or os.path.join(os.path.dirname(shared), "clips")
-
-    serve_cmd = (f"python {os.path.join(shared,'serve_modeb_review.py')} "
-                 f"--project {proj} --beats {beats} --clips {clips}"
-                 + (f" --durations {durations}" if durations else ""))
-
-    t.gate("MODE B GATE — review the 21 cards")
-    print(f"""
-  ┌─ MODE B GATE — do these 3 steps, in order ─────────────────────────────┐
-  │                                                                        │
-  │  STEP 1 — BOX terminal (the one logged into pipeline-prod).            │
-  │  Leave THIS orchestrator running; open/▸use your BOX window. Paste:    │
-  │                                                                        │
-  │     source ~/venvs/pipeline/bin/activate                               │
-  │     export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \\         │
-  │       . "$NVM_DIR/nvm.sh"                                              │
-  │     cd ~/Pipeline                                                      │
-  │     {serve_cmd}
-  │                                                                        │
-  │  It will say "Mode B review server on :{port}". Leave it running.       │
-  │                                                                        │
-  │  STEP 2 — LAPTOP terminal (a NEW window on your laptop). Paste:        │
-  │                                                                        │
-  │     lsof -ti :{port} | xargs kill 2>/dev/null; true                     │
-  │     ssh -p 443 -L {port}:localhost:{port} {box}                          │
-  │                                                                        │
-  │  STEP 3 — open your browser at:   http://localhost:{port}               │
-  │     • scroll top→bottom, every card autoplays                          │
-  │     • wrong text/number? edit the payload box → Re-render this beat     │
-  │     • wrong spoken line (audio) or a render bug? → Flag                 │
-  │     • when happy, click "Done reviewing" (or just close it)            │
-  │                                                                        │
-  └────────────────────────────────────────────────────────────────────────┘
-
-  When you have reviewed (and re-rendered/flagged anything needed), come BACK
-  to THIS window and type 'continue'. To stop the box server afterward: Ctrl-C
-  in the BOX window.
-""")
-    while True:
-        ans = input("  >>> type 'continue' when Mode B review is done: ").strip().lower()
-        if ans in ("continue", "c", "done", "y", "yes"):
-            t.ok("Mode B gate passed — continuing.")
-            return True
-        t.info("(type 'continue' when you've finished reviewing the cards)")
-
-
 def main():
     args = parse_args()
     print(BANNER)
@@ -289,7 +233,7 @@ def main():
         "project_dir": proj_dir, "beats_list_json": beats_list_json,
         "durations": os.path.join(proj_dir, "durations.json") if proj_dir else None,
         "clips_dir": os.path.join(os.path.dirname(shared_dir), "clips"),
-        "box": "peter@116.202.18.68", "modeb_port": 8000,
+        "box": "peter@116.202.18.68", "modeb_port": 8000, "modea_port": 8001,
         "run_cwd": None, "script_md": None, "dry_run": dry, "py": sys.executable,
     }
 
@@ -303,21 +247,30 @@ def main():
             t.halt("audio leg halted. Fix the reported issue and re-run.")
             sys.exit(1)
 
-    # ── 3b Half 1: MODE B LEG (render wired; gate is Half 2) ──────────────
+    # ── 3b: MODE B LEG (render) + MODE B GATE — both live in modeb_leg.py ──
     if "modeB" in legs:
         mb = modeb_leg.run_modeb_leg(ctx)
         if mb is None:
             t.halt("Mode B leg halted. Fix the reported issue and re-run.")
             sys.exit(1)
-        if not dry:
-            modeb_gate(ctx, channel_dir)
+        modeb_leg.modeb_gate(ctx, mb["count"])
 
-    # ── legs not yet wired (steps 4/5) ────────────────────────────────────
-    pending = [l for l in legs if l not in ("audio", "modeB")]
+    # ── 3c: MODE A LEG (stills → gate → animate-only) — lives in modea_leg.py ──
+    if "modeA" in legs:
+        if proj_dir is None:
+            t.halt("cannot run Mode A leg — channel/project unresolved (need channel.json + --project).")
+            sys.exit(1)
+        ma = modea_leg.run_modea_leg(ctx)
+        if ma is None:
+            t.halt("Mode A leg halted. Fix the reported issue and re-run.")
+            sys.exit(1)
+
+    # ── legs not yet wired (step 5) ───────────────────────────────────────
+    pending = [l for l in legs if l not in ("audio", "modeB", "modeA")]
     if pending:
         t.phase("LEGS NOT YET WIRED")
         for l in pending:
-            t.info(f"· {l} — wiring is a later build step (4 Mode A, 5 convergence)")
+            t.info(f"· {l} — wiring is a later build step (5 convergence; lip-sync future)")
 
     t.phase("RUN SUMMARY")
     t.info(f"channel {channel} · {project}")
