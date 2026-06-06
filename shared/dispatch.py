@@ -166,7 +166,12 @@ def component_durations():
 def render_mode_b(beat: dict, frames: int, render: bool = False) -> str:
     comp = beat["component"]
     comp_id = COMPOSITION_ID.get(comp, comp)
-    props, notes = shape_props(comp, beat.get("payload", {}), beat)
+    if beat.get("_props_override"):
+        # the Mode B gate edited the SHAPED props directly — render them verbatim, so
+        # "what you edited is what renders" (no reverse-mapping through shape_props).
+        props, notes = dict(beat["_props_override"]), ["props overridden by Mode B gate edit"]
+    else:
+        props, notes = shape_props(comp, beat.get("payload", {}), beat)
     os.makedirs(os.path.join(os.getcwd(), "clips"), exist_ok=True)
     clip = os.path.abspath(f"clips/beat_{beat['index']:02d}_B_{comp}.mp4")
 

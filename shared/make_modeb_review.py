@@ -15,6 +15,12 @@ Usage: make_modeb_review.py --project <dir> --beats <beats.json> --clips <clips_
 import os, sys, json, argparse, html
 from pathlib import Path
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    import dispatch  # for shape_props — show what ACTUALLY rendered, not the raw payload
+except Exception:
+    dispatch = None
+
 CARD_CSS = """
 :root{--navy:#0a1628;--amber:#d4a017;--bone:#f4f1ea;--indigo:#3b5bdb;--rust:#8b3a1e;}
 *{box-sizing:border-box}
@@ -75,6 +81,13 @@ function finish(){
 }
 """
 
+# Shaped-prop fields that are AUDIO-DERIVED and must NOT be edited here (editing them
+# would desync card from voice — the load-bearing-script rule). Keyed by component.
+LOCKED_FIELDS = {
+    "QuoteCard": {"quote"},   # the quote IS the spoken found_line — locked
+}
+
+
 def build_page(project, beats_path, clips_dir, out_path):
     beats = json.load(open(beats_path, encoding="utf-8"))
     durations = {}
@@ -87,15 +100,35 @@ def build_page(project, beats_path, clips_dir, out_path):
     for b in b_beats:
         idx = b["index"]
         comp = b["component"]
-        payload = b.get("payload", {})
+        # SHAPED props = what the renderer actually produced (matches the clip on screen),
+        # not the raw stored payload. This is the same transform dispatch used to render.
+        if b.get("_props_override"):
+            shaped = dict(b["_props_override"])   # show prior gate edits on reload
+        elif dispatch is not None:
+            try:
+                shaped, _notes = dispatch.shape_props(comp, b.get("payload", {}), b)
+            except Exception:
+                shaped = dict(b.get("payload", {}))
+        else:
+            shaped = dict(b.get("payload", {}))
+        locked_keys = LOCKED_FIELDS.get(comp, set())
+        editable = {k: v for k, v in shaped.items() if k not in locked_keys}
+        locked = {k: v for k, v in shaped.items() if k in locked_keys}
+
         spoken = b.get("found_line") or b.get("narration") or ""
         spoken_disp = html.escape(spoken) if spoken else "(silent card — no voiceover over this beat)"
         d = durations.get(str(idx), {})
         dur_s = d.get("duration")
         dur_disp = f"{dur_s:.1f}s slot" if isinstance(dur_s, (int, float)) else "slot from audio"
-        # find the clip file
         clip = f"beat_{idx:02d}_B_{comp}.mp4"
-        payload_json = html.escape(json.dumps(payload, indent=2, ensure_ascii=False))
+        payload_json = html.escape(json.dumps(editable, indent=2, ensure_ascii=False))
+        # locked fields shown read-only (e.g. QuoteCard.quote = the spoken line)
+        locked_html = ""
+        if locked:
+            rows = "".join(
+                f'<div class="locked" style="margin-bottom:6px"><b style="color:#7c8aa0">{html.escape(k)}</b> (audio-locked): {html.escape(str(v))}</div>'
+                for k, v in locked.items())
+            locked_html = f'<label>Locked fields (from the spoken line — edit via script, not here)</label>{rows}'
         cards.append(f"""
 <div class="beat" id="beat-{idx}">
   <div>
@@ -103,8 +136,9 @@ def build_page(project, beats_path, clips_dir, out_path):
     <video id="video-{idx}" src="/clip/{clip}" autoplay loop muted playsinline></video>
   </div>
   <div class="panel">
-    <label>Payload (editable — content only)</label>
+    <label>Editable props (what rendered — content only)</label>
     <textarea id="payload-{idx}">{payload_json}</textarea>
+    {locked_html}
     <label>Spoken line (read-only — what Victor says here)</label>
     <div class="spoken">{spoken_disp}</div>
     <label>Duration (LOCKED by audio — fills {dur_disp})</label>

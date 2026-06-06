@@ -96,8 +96,18 @@ class Handler(BaseHTTPRequestHandler):
             comp = None
             for b in beats:
                 if b.get("index") == idx:
-                    b["payload"] = new_payload
                     comp = b.get("component")
+                    # the page sent EDITED shaped props (editable fields only). Merge them
+                    # with the audio-locked fields (re-derived) so the override is complete,
+                    # then store as _props_override → renders verbatim (what you edited renders).
+                    try:
+                        import dispatch as _d
+                        full_shaped, _ = _d.shape_props(comp, b.get("payload", {}), b)
+                    except Exception:
+                        full_shaped = {}
+                    merged = dict(full_shaped)      # start from full shaped props (has locked fields)
+                    merged.update(new_payload)      # apply the user's edits on top
+                    b["_props_override"] = merged
                     break
             if comp is None:
                 self._send(200, {"ok": False, "error": f"beat {idx} not found / not Mode B"})
