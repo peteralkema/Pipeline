@@ -1,6 +1,6 @@
 # Pipeline Playbook
 *The full lifecycle from topic to published video, across all channels.*
-*Last updated: 5 June 2026 (later session) — 4c Piece 2 (audio spine) scaffolding built: narration_assembler.py + make_episode_vo.py. Prior same day: added PART 2B (dual-mode architecture, Mode A + Mode B) ahead of the Synthetic launch series. Prior: 30 May 2026, after shipping Six Minutes (Success Coach video 1) and setting up Hindenburg (Final Hours video 4).*
+*Last updated: 5 June 2026 (late) — PART 2B rewritten from design to AS-BUILT (Steps 1–4b proven on hardware); added PART 2C (THE ORCHESTRATOR — the channel-agnostic machine: five design principles, beats.json as sole input, channel.json as complete cross-mode identity, leg-detection, two gates, the new-channel reusability contract, future lip-sync leg). Earlier 5 June: added PART 2B. Prior: 30 May 2026, after shipping Six Minutes (Success Coach video 1) and setting up Hindenburg (Final Hours video 4).*
 
 This is the single source of truth for how to make a video. Read it before starting any new project. Update it when banking new rules from production.
 
@@ -370,7 +370,7 @@ Pinned comments generate the early engagement signal the algorithm watches.
 
 ## PART 2B — DUAL-MODE ARCHITECTURE (MODE A + MODE B)
 
-*Added 5 June 2026 for the Synthetic Press launch series; rewritten same day after the pipeline was actually BUILT and proven end to end. Mode A is the existing stills→clips engine (all Final Hours / Success Coach video). Mode B is Remotion motion-graphics. Synthetic is the first channel to use both; the architecture is general. **Status as of 5 June 2026: Steps 1–4b proven on real hardware. Step 4c is now under construction (Piece 2 audio-spine scaffolding built; Pieces 1 and 3 pending) — see "4c progress" below.***
+*Added 5 June 2026 for the Synthetic Press launch series; rewritten same day after the pipeline was actually BUILT and proven end to end. Mode A is the existing stills→clips engine (all Final Hours / Success Coach video). Mode B is Remotion motion-graphics. Synthetic is the first channel to use both; the architecture is general. **Status as of 5 June 2026: Steps 1–4b proven on real hardware. Step 4c (real A render + full-episode audio spine + dual-mode assemble) is specified and not yet built — see the separate 4c spec doc.***
 
 ### The four principles (the whole thing hangs off these)
 
@@ -463,76 +463,177 @@ Mode B Remotion renders 1920×1080. Mode A engine historically rendered 1280×72
 | 3 | real Mode B render (`render_mode_b` → Remotion) | ✅ real $650M clip rendered on laptop |
 | 4a | assemble plumbing (B clip between A placeholders) | ✅ proven on laptop |
 | 4b | Mode A translator + engine ingest under Synthetic channel | ✅ `OK Beat-script ingested: 41 beats` on box |
-| 4c | real A render + full-episode audio spine + dual-mode assemble | 🔨 in progress — see 4c sub-status below |
+| 4c | real A render + full-episode audio spine + dual-mode assemble | ⏳ specified, not built |
 
 **Three known component-feature gaps (small Remotion tweaks, not pipeline work):** QuoteCard attribution-only variant; NumberCounter startValue+countdown; NumberCounter plainYear. None block 4c; each makes one beat render exactly as scripted.
-
-### 4c progress — audio-spine scaffolding built (5 June 2026, later session)
-
-*Step 4c is being built bottom-up in the SPEC's "spend money last" order. Piece 2
-(the full-episode audio spine) is the first thing under construction because it
-de-risks timing before any fal/Kling spend. Two new files, both free/cheap, both
-proven on the box against the locked E1 script.*
-
-**New files (both in `shared/`):**
-
-- **`narration_assembler.py`** — Piece 2, step 1. Pure, free, instant transform of
-  `beats.json`. Emits two artifacts: `ep1_narration.txt` (the whole-episode VO
-  script — every beat's spoken words in beat order, the text the narrator actually
-  reads) and `ep1_beats_storyboard.json` (a 62-entry one-per-beat scaffold in the
-  flat-list shape the Whisper aligner accepts). The scaffold is given a DISTINCT
-  filename on purpose so it never collides with the engine's own 41-shot
-  `storyboard.json` (the Mode-A-only one the recreation pipeline writes and its
-  assemble reads). Run from inside `synthetic/`.
-
-- **`make_episode_vo.py`** — Piece 2, step 2. Turns `ep1_narration.txt` into ONE
-  continuous Victor voiceover by reusing the engine's `generate_voiceover` (so the
-  1800-char chunking + concat stay single-sourced — no second TTS path). Verifies
-  voice_id == Victor and the Inworld key before spending a credit. With `--whisper`
-  it then runs Whisper using the IDENTICAL invocation as the engine's
-  `_auto_align_with_whisper` (model=small, word timestamps, JSON), writing
-  `voiceover.json` next to the mp3 — exactly where the aligner will look, so Whisper
-  won't have to re-run when the per-beat aligner is wired. Run from inside
-  `synthetic/`, inside `~/venvs/pipeline` (bare python3 lacks the deps).
-
-**Banked lessons from this session:**
-
-- **`found_line` is already folded INTO `narration`.** `parse_script.flush_into()`
-  sets both fields from the same buffered blockquote. So the VO uses `narration`
-  ALONE — appending `found_line` again (as the SPEC's prose literally says) would
-  make Victor read every QuoteCard line TWICE. The assembler verifies this: each
-  QuoteCard's spoken line must appear exactly once in the assembled text. Lesson:
-  verify against the real parser output, not the SPEC's description of it.
-
-- **23 of 62 E1 beats carry no spoken words and are UNTIMABLE by Whisper** (nothing
-  to transcribe). Breakdown: beat 00 (cold-open black frame, its words live on beat
-  01's QuoteCard) + 16 held Mode B cards + 6 silent Mode A holds (beats
-  20, 25, 31, 43, 52, 54 — decision-point pauses like the empty chair after the
-  firing, the door closing on Altman). These get durations **ASSIGNED, not
-  measured**. The sizing signal for the silent A holds is **`silence_after=True`** —
-  every one of the six carries it; the script is encoding an editorial timing
-  decision the spine must honour, not stumble over.
-
-- **The audio spine is built at the Synthetic level over the whole 62-beat script**,
-  NOT delegated to the engine's per-mode `finish`. The beat-00 empty-narration tell
-  proves the VO is one continuous track across both modes. `make_episode_vo.py` owns
-  the episode VO; the engine will only animate (the `--animate-only` seam, still to
-  build in Piece 1).
-
-**Updated 4c sub-status:**
-
-| 4c piece | What | Status |
-|---|---|---|
-| 2 (spine) | narration assembler → VO text + 62-beat scaffold | ✅ built, proven on box |
-| 2 (spine) | whole-episode Victor VO + raw Whisper `voiceover.json` | ✅ built (run with `--whisper`) |
-| 2 (spine) | per-beat aligner: map word timestamps onto all 62 beats | ⏳ pending `align_with_whisper.py` |
-| 1 (A render) | `--animate-only` seam on `cmd_finish`; real stills+Kling | ⏳ not built (spend-last) |
-| 3 (assemble) | dual-mode interleave A+B in beat order at 1080p | ⏳ not built |
 
 The mental model in one line: **the tag is a routing instruction the author writes, the parser carries it, the dispatcher obeys it, two renderers feed one timeline, and (once 4c lands) the measured audio keeps them honest.**
 
 ---
 
+
+
+## PART 2C — THE ORCHESTRATOR (the channel-agnostic machine)
+
+*Written 5 June 2026 as intentional design BEFORE building, so the orchestrator is built from a settled design rather than discovered by accretion. This part defines the conductor that runs the whole post-script pipeline for ANY channel. The existing `orchestrate.py` (PART 2, six linear phases) is the Mode-A-only ancestor of this; this part describes what it becomes. **Status: designed here, not yet built. The dual-mode pieces it conducts are proven through Step 4b (see PART 2B build-status table); Step 4c builds the legs this conductor will run.***
+
+### The thesis: one machine, many channels
+
+The goal is a **single orchestrator** that is completely **channel-agnostic**. It does not know or care whether it is making Final Hours, Synthetic Press, or Lazarus. It reads one input artifact, discovers from that artifact what work needs doing, loads the relevant channel's identity from one config file, runs the necessary legs around the minimum number of human gates, and produces a finished video.
+
+The payoff this protects: **adding a new channel that reuses existing capabilities costs one config file and zero code.** The machine is the moat — not any single channel. Channel N+1 is a `channel.json` plus content.
+
+### The five design principles (these govern the whole machine)
+
+**1. The sentence decides the mode.** Every beat is born Mode A (cinematic recreation) or Mode B (Remotion graphic) because the *sentence* decides — a place/person/moment wants a recreated scene; a fact/number/quote/structure wants a drawn graphic. Mode is a property of the writing, set by the author, never inferred by the machine. (Full treatment in PART 2B.)
+
+**2. The voice decides the contract.** Audio is not one thing. A beat's audio has two independent axes, and together they decide how the audio leg treats it:
+   - *Cardinality:* one voice (narration) vs. many voices (a cast). Carried by an optional `speaker` field per beat (default: `narrator`).
+   - *Binding:* swappable vs. locked. **Narration and any off-camera / closed-mouth speech is SWAPPABLE** — it is a timing source only; the visuals are timed to it but not generated from it, so the voice can be replaced and everything re-times for free (the true-up). **Lip-synced on-camera speech is LOCKED** — the audio is a *render input* (mouths are animated to the specific waveform), so the voice must be final before render and a voice swap forces a re-render.
+   
+   The three live quadrants:
+   | | Swappable | Locked |
+   |---|---|---|
+   | **One voice** | Final Hours, Synthetic | (n/a) |
+   | **Many voices** | Lazarus v1 (heard, not seen speaking) | Lazarus v2 (lip-synced dialogue) |
+   
+   This is why "Lazarus with no lip-sync" rides the existing machine: multi-voice + swappable needs only a `speaker` field and a voice map — no new leg. Only lip-sync (locked) needs the new leg.
+
+**3. The composition decides the legs.** The orchestrator scans the beats and runs only the legs the work requires:
+   - Mode A beats present → run the **Mode A leg** (stills → review gate → Kling).
+   - Mode B beats present → run the **Mode B leg** (Remotion render) + the **Mode B correctness gate**.
+   - Any locked/lip-sync beats present → run the **lip-sync leg** (locked-audio contract).
+   - Always → run the **audio leg** first (it is the timing source every other leg depends on).
+   
+   A channel is a *signature* over these legs, not a category. Final Hours = {audio, A}. Synthetic = {audio, A, B}. Lazarus v1 = {audio (multi-voice), A, optionally B for titles/credits}. Lazarus v2 = {audio (multi-voice, some locked), A, B, lip-sync}. The machine composes legs; the channel is which legs its scripts tend to use.
+
+**4. The channel header decides the look.** The script declares its channel in a header line; `parse_script.py` stamps it into `beats.json`. The orchestrator reads that flag and loads `<channel>/channel.json`, which is the channel's **complete cross-mode identity** in one file: Mode A `style_suffix`, the `voices` map, render `width`/`height`, and a `mode_b` block (accent color, fonts, wordmark asset path, palette tokens). Composition decides the *machinery*; the channel flag decides the *identity*. They are orthogonal: a Final Hours video that happens to use one ChapterCard runs the Mode B leg (machinery) but stays Final Hours (identity) because that is what its header declares. No false positives from auto-detection, because identity is never inferred.
+
+**5. Maximal orchestration around minimal gates.** Everything that can run unattended, does. The only stops are genuine quality firewalls. Run unattended *to* the first gate; run unattended *after* it *to* done. Two gates only:
+   - **Stills review gate** (Mode A) — *aesthetic* firewall. The human-in-loop seam that protects recreation quality. Heavy: browser review over the tunnel. Non-negotiable; do not automate away.
+   - **Mode B correctness gate** — *factual* firewall. A contact sheet of the rendered cards (numbers, quotes, attributions). Light: "do these read correctly? y/n." Different in kind from the stills gate — it catches a misattributed quote or wrong figure, the errors that most damage a prestige-documentary brand. Cheaper to catch here than after publish.
+
+### The input boundary (precise)
+
+**The orchestrator's sole input is `beats.json`. It never reads `script.md`.**
+
+The script and the beat-writing are the *human-and-Claude phase* — the thinking, tagging, fact-locking, and discussion that happen before any machine runs. That phase produces two artifacts: `script.md` (human-readable source of truth) and, via `parse_script.py`, `beats.json` (the machine spec). The orchestrator begins where the thinking ends.
+
+```
+  [ HUMAN + CLAUDE PHASE ]   discuss → write → tag → fact-lock
+            script.md  ──parse_script.py──▶  beats.json
+                                                  │
+  ═══════════════════════════════════════════════╪═════════  ◀── orchestrator input boundary
+                                                  │
+  [ ORCHESTRATOR PHASE ]   beats.json is the only input
+```
+
+`beats.json` is self-sufficient: it carries the `channel` flag, and per beat the mode, payload, narration, found-line, `speaker`, and any lock flag. Everything the machine needs is in it. (The Mode A leg internally produces the recreation engine's own `storyboard.json` from the translated beats — but that is the leg's private business, downstream of the orchestrator's single input.)
+
+Principle: **the thinking produces a spec; the orchestrator executes the spec.** One input artifact, fully produced by the phase before.
+
+### The machine, top to bottom
+
+```
+beats.json  (carries `channel`; per-beat mode / speaker / lock / payload)
+   │
+   ├─▶ read `channel` ──▶ load <channel>/channel.json  (identity: style_suffix, voices, w/h, mode_b tokens)
+   │
+   ├─▶ scan composition ──▶ decide which legs to run
+   │
+   ▼
+ ┌───────────────── LEGS (run to the stills gate) ─────────────────┐
+ │                                                                  │
+ │  AUDIO leg (always, FIRST — timing source)                       │
+ │    assemble full narration in beat order (incl. found-lines;     │
+ │      per-beat speaker via voices map) → VO → Whisper align        │
+ │      → per-beat measured durations                               │
+ │                                                                  │
+ │  MODE B leg (if any B beats; unattended)                          │
+ │    payload → props (accent/fonts/wordmark from channel.json)      │
+ │      → remotion render → beat_NN_B_*.mp4 (at beat's duration)     │
+ │                                                                  │
+ │  MODE A leg (if any A beats; up to the gate)                      │
+ │    translate → engine storyboard → stills                         │
+ │                                                                  │
+ └───────────────────────────┬──────────────────────────────────────┘
+                             │
+                   ╳ STILLS REVIEW GATE (aesthetic; human, heavy)
+                             │
+                   ╳ MODE B CORRECTNESS GATE (factual; human, light)
+                             │
+ ┌───────────────── LEGS (run to done) ────────────────────────────┐
+ │  MODE A leg (continue): Kling animate → shot_NNN.mp4              │
+ │  LIP-SYNC leg (if any locked beats; locked-audio contract)        │
+ └───────────────────────────┬──────────────────────────────────────┘
+                             │
+                   DUAL-MODE ASSEMBLE
+            interleave all clips in true beat order (index map),
+            each held to its audio-measured duration,
+            over the (possibly multi-voice) VO, at channel w/h
+                             │
+                             ▼
+                       final_video.mp4
+```
+
+Sequential-unattended is acceptable for the legs that *could* parallelize (audio ∥ Mode B ∥ Mode A-stills) — matches the banked "sequential not parallel" instinct. Expressing them as legs makes the parallelism *available* later without redesign; it is not required now. The discipline that matters is the ordering constraint: **the audio leg runs first because both render legs depend on its durations.** (This is the orchestration consequence of "audio is the source of truth": durations must exist before either renderer is dispatched, or Mode B renders at guessed lengths. The current word-count proxy in `estimate_frames()` is the placeholder until this leg lands in 4c.)
+
+### channel.json — the complete cross-mode identity
+
+One file fully describes a channel across both modes. The orchestrator and both render legs read only from here for identity.
+
+```jsonc
+{
+  "name": "synthetic_press",
+  "voices": { "narrator": "Victor" },          // map, not a single id — Lazarus adds characters
+  "width": 1920, "height": 1080,               // per-channel resolution (read by _channel_aspect)
+  "style_suffix": "...prestige documentary...",// Mode A look (recreation engine prompt suffix)
+  "mode_b": {                                  // Mode B look — read by shape_props (replaces hardcoded accent)
+    "accent_color": "#3b5bdb",
+    "fonts": { "primary": "Inter" },
+    "wordmark": "assets/synthetic_wordmark.svg",// designer asset, placed by components
+    "palette": { "navy": "#0a1628", "amber": "#d4a017", "bone": "#f4f1ea", "rust": "#8b3a1e" }
+  },
+  "default_music_prompt": "..."
+}
+```
+
+The accent color currently hardcoded in `dispatch.py`'s `shape_props` (`#3b5bdb`) moves here, exactly as resolution did. The designer's wordmark (delivered as SVG) is a `mode_b.wordmark` token — components import it and place it; the ChapterCard / end-card / lower-third pull it from channel.json. Brand and machine meet in this one file: the wordmark is not decoration bolted on afterward, it is an asset the pipeline imports through config, like style_suffix and accent.
+
+### Adding a new channel (the reusability contract — stated precisely)
+
+**New channel that reuses existing legs → one new `channel.json` + a channel folder + content. Zero code.**
+
+That is the whole cost, because every piece of the machine reads from `beats.json` and `channel.json` and is channel-agnostic: the parser, the orchestrator, both render legs, the recreation engine, the Remotion components, the audio leg, the assemble. None contains a channel name. A new channel is a new *signature over existing legs* expressed entirely in config.
+
+**The one exception, by design: a new channel that needs a capability no leg provides → build that leg once, then it joins the reusable set forever.** You cannot config your way to a capability that does not exist (declaring `"lipsync": true` does nothing until the lip-sync leg is built). But the architecture guarantees the capability is added *as a leg*, in one place, and is then available to every channel via their channel.json.
+
+The rule in one line: **new sentence from existing words is free; a new word is built once, then free forever.** The legs are the vocabulary; channels are sentences in it.
+
+What is reusable (everything that is machinery): parse, dispatch, translate, orchestrator, recreation engine, Remotion components, audio leg, Whisper alignment, assemble. What is per-channel (everything that is identity): style_suffix, voices map, resolution, Mode B tokens, wordmark — all in `channel.json`. What is per-episode: the script, the beats, the content. Three clean layers; nothing channel-specific leaks into the machinery layer.
+
+### Future legs (anticipated, not built)
+
+- **Lip-sync leg** (Lazarus v2, ~2027–28). Locked-audio contract: voice final before render; a voice swap re-renders synced shots (the true-up is NOT free for this leg). Depends on the Hetzner avatar capability. The `speaker` field and `voices` map are added now so the audio leg is multi-voice-ready before lip-sync exists.
+- **Mode B as a universal capability**, not Synthetic-exclusive. Any channel may use it: Lazarus for opening titles and end credits ("just like a real movie"), Final Hours could use a ChapterCard. The mode is not the channel; the *mix* is the channel's fingerprint.
+- **Compositing / underlay** (graphics over live scenes — the "Vox" look), which would break visual exclusivity and need a compositing stage. Phase 2+. Cutaway-only until then.
+
+### What to build for the orchestrator (the slice)
+
+This conductor is built on top of the legs from PART 2B's Step 4c. Build order, cheapest-and-safest first:
+1. **`channel` header in `script.md`** + `parse_script.py` stamps it into `beats.json`. Tiny.
+2. **`speaker` field** plumbed through the parser (default `narrator`) + **`voices` map** in channel.json (one entry for current channels — no behaviour change). Tiny, anticipatory.
+3. **Move Mode B identity tokens** (accent, later fonts/wordmark) **into channel.json**; `shape_props` reads them. Small; removes the hardcoded accent.
+4. **Leg-detection** in the orchestrator: scan beats → decide legs. Small.
+5. **Audio leg to the front** (the 4c audio spine), feeding durations to both renderers. This is the real work — shared with 4c.
+6. **Mode B correctness gate** (contact sheet + y/n). Small.
+7. **Dual-mode assemble** as the convergence (the 4c assembler).
+
+Final Hours falls through unchanged throughout: a Mode-A-only `beats.json` stamped `final-hours` triggers no Mode B leg, no Mode B gate, single-voice audio — i.e. exactly today's behaviour, now expressed as one signature of the general machine.
+
+The mental model in one line: **the thinking writes a spec; the spec declares its channel and its modes; the machine reads the spec, loads that channel's identity, runs only the legs the spec needs around the two gates that protect quality and truth, and converges every clip onto one audio-timed timeline — and it does this identically for every channel, so the next channel is a config file.**
+
+---
 
 Common issues and resolutions:
 
@@ -565,6 +666,9 @@ Common issues and resolutions:
 
 **Voice sounds wrong**
 → Check channel.json voice_id. Reed for Success Coach, Ashley for Final Hours. Banked rule: verify voice_id before every finish run.
+
+**Long single beats (>~10s) hold one Kling clip far past its native length** *(banked 5 June 2026, Synthetic E1 audio leg)*
+→ When the audio leg measured E1's real per-beat durations, the longest single recreated beat came out at ~32s (some spoken A beats run 15-19s). Kling clips are only ~5s native. A 32s beat would either freeze on a held frame or stretch one clip well past where it looks good. This is a **4c / dual-mode-assemble concern, not an audio concern** — the audio measurement is correct; it's the *visual* side that has to cover that duration. Options when assembling: hold/slow the clip, loop subtle motion, or (better) break a long beat into 2-3 sub-shots at assemble time so no single Kling clip stretches. The word-count proxy HID this (it spread time evenly); real Whisper durations surface it. Decide the long-beat policy when building the 4c assembler. Note this also argues for the banked "beat-multiples" idea (PART 4) — a long beat is really N visual shots over one narration span.
 
 ---
 
