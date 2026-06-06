@@ -1,0 +1,402 @@
+{
+  "canon": {
+    "bridge_night": "The Tay Bridge on the night of 28 December 1879 \u2014 a long, low single-track wrought-iron lattice railway bridge crossing a wide black firth, the central 'high girders' forming a tall rectangular iron cage where the line runs about seventy feet above the water. Violent gale, driving rain, deep night, only faint signal lights and distant shore lights. Victorian wrought-iron engineering, NOT a modern steel or concrete bridge. Bleak, atmospheric, cinematic.",
+    "carriage": "Interior of a North British Railway passenger carriage, 1879 \u2014 wooden-panelled compartment lit by a single dim oil lamp, rain streaming down black windows, night beyond. Any passengers present only as dark wrapped shapes seen from behind or in deep shadow, faces never resolved. Period-accurate Victorian railway interior, no modern fittings. Warm lamplight against cold dark.",
+    "signal_box": "A small Victorian railway signal box at the south end of the Tay Bridge, 1879 \u2014 cramped timber cabin with a single oil lamp and signal levers, storm hammering the windows. Any men present seen only from behind or in silhouette against the lamp, faces never resolved. Night, gale outside. Period-accurate, no modern equipment.",
+    "firth": "The Firth of Tay at night, 28 December 1879 \u2014 a wide expanse of black wind-driven storm water with whitecaps, the iron bridge above, the scattered lights of Dundee distant on the far shore. Bleak, cold, cinematic, no modern elements."
+  },
+  "beats": [
+    {
+      "narration": "On the night of the twenty-eighth of December, 1879,",
+      "image_prompt": "{firth} A wide establishing shot of the Firth of Tay at night in winter, 1879. A vast dark estuary stretches to the horizon, the water black and restless under a stormy sky. The far shore is barely visible as a faint smear of lamplight. Low storm clouds press down, illuminated faintly from below by distant town glow. No figures yet. The scene is immense, cold, and foreboding.",
+      "motion_prompt": "Very slow drift across the water surface, moving left to right, as if the camera floats just above the waves.",
+      "index": 1
+    },
+    {
+      "narration": "the longest bridge in the world stood across the Firth of Tay, in the east of Scotland.",
+      "image_prompt": "{bridge_night} A long, wide shot of the Tay Bridge as seen from the southern shore in darkness, 1879. The iron lattice structure stretches across the full width of the frame, its gas lamps casting faint orange halos along its length. The high girders at the centre rise above the rest of the span, dark and imposing against the storm sky. The water below is barely visible. The bridge is immense, grand, and solitary.",
+      "motion_prompt": "Slow, steady push forward toward the bridge from a distance, the structure growing imperceptibly larger.",
+      "index": 2
+    },
+    {
+      "narration": "Nearly two miles of iron and lattice, carrying a single railway line seventy feet above the water.",
+      "image_prompt": "{bridge_night} A photorealistic close view of the iron lattice girders of the Tay Bridge at night, looking along the railway track from the bridge deck level. The single rail line disappears into darkness ahead. The lattice ironwork frames the sky on both sides, storm clouds visible through the gaps. Faint lamplight catches the riveted iron. The water is visible far below through gaps in the structure, black and distant.",
+      "motion_prompt": "Slow, gentle push along the rail line, the track receding into darkness ahead.",
+      "index": 3
+    },
+    {
+      "narration": "That evening a storm came down the firth from the west \u2014",
+      "image_prompt": "{firth} A wide landscape shot looking west up the Firth of Tay, 1879. Two figures \u2014 a man and a woman in heavy Victorian winter coats and hats \u2014 stand on the southern shore with their backs to the camera, facing the approaching weather. The western sky is a mass of dark churning cloud, pale grey light at the horizon giving way to blackness above. Their coats and scarves are pressed flat by the incoming wind.",
+      "motion_prompt": "Slow pan from left to right across the dark western horizon, wind-driven rain streaking diagonally through the frame.",
+      "index": 4,
+      "_audit": {
+        "original_prompt": "A wide landscape shot looking west up the Firth of Tay, 1879. Two figures \u2014 a man and a woman in heavy Victorian winter coats and hats \u2014 stand on the southern shore facing the approaching weather, their backs to the camera. The western sky is a mass of dark churning cloud, pale grey light at the horizon giving way to blackness above. Their coats and scarves are pressed flat by the incoming wind.",
+        "violations": [
+          "expression:stern"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "a gale the Dundee office would log at force ten, perhaps eleven.",
+      "image_prompt": "{carriage} Interior of a small Victorian meteorological or harbour office in Dundee, 1879. A middle-aged man in a dark wool coat sits at a wooden desk beneath a single oil lamp, seen from behind and to the side. He is bent over a large logbook, a pen in hand, writing. His coat shoulders and the nape of his neck catch the lamp's warm glow; his face remains turned away, lost in shadow. A window to his right shows streaming rain against dark glass. A barometer is mounted on the wall behind him.",
+      "motion_prompt": "Very slow push in toward the man at the desk, the lamplight flickering softly.",
+      "index": 5,
+      "_audit": {
+        "original_prompt": "Interior of a small Victorian meteorological or harbour office in Dundee, 1879. A middle-aged man in a dark wool coat sits at a wooden desk beneath a single oil lamp. He is bent over a large logbook, a pen in hand, writing. His face is weathered, lit from below by the lamp. A window to his right shows streaming rain against dark glass. A barometer is mounted on the wall behind him.",
+        "violations": [
+          "face:face"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "And at a quarter past seven, in the dark and the rain, a train began to cross.",
+      "image_prompt": "{bridge_night} A long-exposure style photorealistic image of a Victorian steam locomotive beginning to move out onto the Tay Bridge from the southern end, seen from a low angle on the shore. The engine belches a plume of white and grey steam that is immediately torn sideways by the gale. Its single headlamp casts a beam along the track. Three small lights are visible on the rear of the train. The bridge disappears into storm darkness ahead.",
+      "motion_prompt": "Slow drift of smoke and steam moving laterally across the frame, wind-blown.",
+      "index": 6
+    },
+    {
+      "narration": "By the time it reached the middle, the bridge, the train, and everyone aboard would be gone.",
+      "image_prompt": "{bridge_night} A wide, desolate shot of the centre span of the Tay Bridge at night, the high girders rising against the storm sky. The iron structure is lit only faintly by the distant bridge lamps and a pale, diffuse light from the clouds. There are no people visible. The structure looks enormous and vulnerable simultaneously against the raging sky. Rain streaks diagonally across the frame.",
+      "motion_prompt": "Slow pull back from the high girders, the structure growing slightly smaller, the surrounding darkness expanding.",
+      "index": 7
+    },
+    {
+      "narration": "What follows has been reconstructed from the Board of Trade inquiry,",
+      "image_prompt": "{carriage} Interior of a Victorian government inquiry room, 1879. A long mahogany table is lined with five serious-faced men in dark frock coats and side whiskers, seated behind papers and inkwells. A large window behind them shows a grey daylit sky. The room is sombre and formal. A clerk in the foreground has his back to the camera, seated and writing. The men at the table look attentive and grave.",
+      "motion_prompt": "Very slow push in along the table toward the seated officials, barely perceptible.",
+      "index": 8
+    },
+    {
+      "narration": "the testimony of the men in the signal box,",
+      "image_prompt": "{signal_box} Two men in Victorian working-class clothing stand inside a small wooden signal box at the south end of the Tay Bridge. The interior is cramped: a levers board on one wall, a small oil lamp on a shelf casting low amber light. One man \u2014 heavier-built, in a dark heavy coat \u2014 stands near the window, his back and shoulder turned toward the rain-streaked glass. The other \u2014 slightly shorter, standing close beside him \u2014 is seen from behind, his collar up against the chill. Both figures face away into the storm, their silhouettes framed against the grey, rain-blurred panes.",
+      "motion_prompt": "Very slight, slow push in toward the two men, the lamplight flickering gently on their faces.",
+      "index": 9,
+      "_audit": {
+        "original_prompt": "Two men in Victorian working-class clothing stand inside a small wooden signal box at the south end of the Tay Bridge. The interior is cramped: a levers board on one wall, a small oil lamp on a shelf. One man \u2014 Thomas Barclay, mid-forties, dark beard, heavy coat \u2014 stands near the window. The other \u2014 John Watt, thirties, clean-shaven, slightly shorter \u2014 stands beside him. Both look out into the storm through rain-streaked glass.",
+        "violations": [
+          "expression:lean"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "and the accounts of those who stood on the shore that night.",
+      "image_prompt": "{bridge_night} A small group of four or five Victorian figures \u2014 men and women in heavy coats and shawls \u2014 stand on the dark shore of the Tay, facing the bridge. They are seen from behind and slightly to the side. Some hold lanterns that swing gently in the wind. Their postures are tense and watchful. The bridge is visible in the middle distance, its lamps a faint string of orange in the dark. Rain blurs the scene.",
+      "motion_prompt": "Slow, gentle drift left to right along the line of watching figures, lanterns swaying.",
+      "index": 10
+    },
+    {
+      "narration": "The train was the evening service from Burntisland, bound for Dundee.",
+      "image_prompt": "{carriage} A Victorian railway station platform at night, Burntisland, 1879. A steam locomotive stands at the platform, exhaling slow clouds of white steam. Gas lamps on iron posts illuminate the platform. Passengers in heavy winter coats, scarves, and hats mill about on the platform \u2014 men in top hats and bowlers, women with travel bags. The scene is busy but unhurried. Rain is visible falling through the lamplight.",
+      "motion_prompt": "Slow pan across the lamplit platform from left to right, steam drifting lazily in the still air.",
+      "index": 11
+    },
+    {
+      "narration": "It had crossed the country in the worsening weather, and stopped at the small station of St Fort",
+      "image_prompt": "{bridge_night} A tiny, dim Victorian rural railway station at night \u2014 St Fort. A single gas lamp on the platform illuminates rain falling heavily. The station building is a modest stone structure. The train stands at the platform, steam rising from the engine. A stationmaster in uniform and cap stands under the overhang of the roof, collar up against the cold, watching the platform.",
+      "motion_prompt": "Slow push in toward the stationmaster figure standing under the roof, rain falling steadily through the lamplight.",
+      "index": 12
+    },
+    {
+      "narration": "to give up its tickets. Seventy-five were collected there.",
+      "image_prompt": "{carriage} A close scene at the St Fort station platform. A ticket collector in a dark uniform and peaked cap stands at the carriage door, his hand already extended holding a small fanned stack of paper tickets, the transaction already done. Passengers visible in the lit carriage doorway behind him are bundled in winter coats. The gas lamp overhead casts a warm, tight pool of light. Rain streams down beyond the platform edge.",
+      "motion_prompt": "Very slow drift inward toward the ticket collector, steam from the engine drifting past the lamplight.",
+      "index": 13
+    },
+    {
+      "narration": "The exact number of souls who went on past that point was never agreed \u2014",
+      "image_prompt": "{carriage} A wide shot looking along the length of the train at St Fort, the carriages stretching back into darkness. Passengers are visible as silhouettes behind the fogged and rain-streaked windows \u2014 seated figures, a child pressed against a pane, someone standing in a corridor. The gas lamps of the station give way to darkness rapidly. The scene is intimate and quietly ominous.",
+      "motion_prompt": "Slow, melancholy drift along the length of the train, windows passing one by one.",
+      "index": 14
+    },
+    {
+      "narration": "some travelled without tickets, some held returns.",
+      "image_prompt": "{carriage} Inside a Victorian second-class railway carriage, 1879. Five or six passengers sit on tufted bench seats in the warm lamplight of the carriage interior. A middle-aged man in a wool overcoat and bowler hat holds a return ticket in his gloved hand, looking down at it. A woman in a dark bonnet and shawl sits opposite, a travelling bag on her lap. The windows show only darkness and rain outside.",
+      "motion_prompt": "Very slow push in toward the man examining his return ticket, the carriage lamp flickering almost imperceptibly.",
+      "index": 15
+    },
+    {
+      "narration": "The river would keep its own count.",
+      "image_prompt": "{firth} A wide, dark shot of the Firth of Tay from water level, looking toward the bridge. The water is black and turbulent, low waves catching faint reflections of the bridge lamps far away. There are no people. The bridge is a dim, distant line of orange points of light over the heaving water. The sky is entirely black cloud. The image is desolate and immense.",
+      "motion_prompt": "Very slow drift forward across the dark water surface toward the distant bridge lights.",
+      "index": 16
+    },
+    {
+      "narration": "In the signal box at the south end stood Thomas Barclay and his friend John Watt, sheltering from the gale.",
+      "image_prompt": "{signal_box} Two figures in heavy dark wool coats and flat working caps stand inside the cramped signal box at the south end of the Tay Bridge \u2014 one broader, one slightly shorter \u2014 their backs and shoulders turned toward the rain-hammered window. The small room is lit by a single oil lamp on a shelf, casting warm light across the signal levers visible behind them. Rain streaks the single pane of glass. The men's posture is still, weight settled against the wall, the room tight around them, the wind audible in every surface.",
+      "motion_prompt": "Very slow push in toward the two men, the oil lamp flame gently wavering, shadows shifting on the walls.",
+      "index": 17,
+      "_audit": {
+        "original_prompt": "Thomas Barclay (mid-forties, dark beard, heavy dark wool coat, flat working cap) and John Watt (thirties, clean-shaven, slightly shorter, brown wool coat) stand together inside the cramped signal box at the south end of the Tay Bridge. The small room is lit by a single oil lamp on a shelf. Both men lean slightly against the wall, listening to the wind. Rain hammers the single window. The signal levers are visible behind them.",
+        "violations": [
+          "expression:lean"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "They watched the train's three lights move out onto the bridge,",
+      "image_prompt": "{signal_box} Two figures seen from outside the signal box window, their silhouettes pressed close behind rain-streaked glass, bodies angled toward the far window. Beyond them, seen through the opposite window of the signal box, the bridge stretches into darkness. Three small orange lights \u2014 the rear lights of the train \u2014 are visible moving slowly onto the bridge structure. The men's forms are lit softly from the interior lamp behind them, their outlines caught between the warm interior glow and the wet black night outside.",
+      "motion_prompt": "Very slow zoom in on the three distant train lights moving onto the bridge through the rain, barely perceptible.",
+      "index": 18,
+      "_audit": {
+        "original_prompt": "Thomas Barclay and John Watt as seen from outside the signal box window, their faces visible through rain-streaked glass, both looking intently outward. Beyond them, seen through the opposite window of the signal box, the bridge stretches into darkness. Three small orange lights \u2014 the rear lights of the train \u2014 are visible moving slowly onto the bridge structure. The men's faces are lit softly from the interior lamp behind them.",
+        "violations": [
+          "face:faces"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "into the high girders \u2014 the great iron cage at the centre, where the line ran highest above the water.",
+      "image_prompt": "{bridge_night} A dramatic upward-looking shot of the high central girders of the Tay Bridge from below, in darkness and storm. The iron lattice forms a tunnel of metal above, the railway track visible running through its centre. The girders are massive, riveted, dark with rain. Storm clouds are visible through the lattice above. A faint orange glow \u2014 the train's lights \u2014 is just barely visible in the far distance within the iron tunnel.",
+      "motion_prompt": "Very slow tilt upward along the ironwork, rain falling through the lattice of the girders.",
+      "index": 19
+    },
+    {
+      "narration": "The wind was striking the bridge broadside now, harder than anything its designer had reckoned for.",
+      "image_prompt": "{bridge_night} A low, wide shot from the shore showing the full profile of the Tay Bridge in the storm. The iron structure is silhouetted against a turbulent sky lit faintly from the town lights on the far shore. White spray and foam from the water below is just visible at the base of the piers. The high central girders dominate the skyline. The scene is violent with wind, rain streaking almost horizontally across the frame.",
+      "motion_prompt": "Slow pan across the full length of the bridge silhouette, rain and spray moving laterally through the frame.",
+      "index": 20
+    },
+    {
+      "narration": "Inside the carriages, lamplight.",
+      "image_prompt": "{carriage} A tight exterior shot of two lit Victorian railway carriage windows at night, seen from close outside. The interior is warm amber \u2014 a woman in a dark bonnet is visible as a silhouette against the lamplight. Rain streams down the outside of the window glass, distorting the warm light within. The contrast between the cold, dark, wet exterior and the lit, warm interior is stark.",
+      "motion_prompt": "Very slow drift along the outside of the carriage, rainwater running in rivulets down the window glass.",
+      "index": 21
+    },
+    {
+      "narration": "Passengers wrapped against the cold, the windows running with rain, the river invisible below.",
+      "image_prompt": "{carriage} Interior of a Victorian second-class railway carriage on the Tay Bridge crossing. Passengers in heavy coats and scarves sit in the warm lamplight. An older man has his collar turned up and his hat pulled low, face lost in shadow beneath the brim. A young woman leans her shoulder toward the dark rain-streaked window, one gloved hand raised almost touching the glass \u2014 but the window shows only blackness and running water, her reflection swallowed by it. The carriage lamp sways almost imperceptibly from the ceiling.",
+      "motion_prompt": "Very slow push in toward the young woman looking out the dark window, the carriage lamp swaying very gently.",
+      "index": 22,
+      "_audit": {
+        "original_prompt": "Interior of a Victorian second-class railway carriage on the Tay Bridge crossing. Passengers in heavy coats and scarves sit in the warm lamplight. An older man has his collar turned up and his hat pulled low. A young woman presses her face slightly toward the dark rain-streaked window, trying to see out \u2014 but the window shows only blackness and running water. The carriage lamp sways almost imperceptibly from the ceiling.",
+        "violations": [
+          "face:face"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "None of them could have known that the structure carrying them had been built without margin for a night like this.",
+      "image_prompt": "{bridge_night} A wide downward-looking shot through the iron lattice of the high girders, down to the black, churning water of the Tay seventy feet below. The bridge ironwork fills the frame on both sides. The water below is turbulent, white foam visible on dark waves. The railway track is visible running through the centre of the frame, extending into darkness. The scale is vertiginous and ominous.",
+      "motion_prompt": "Very slow tilt down through the lattice ironwork toward the churning water far below.",
+      "index": 23
+    },
+    {
+      "narration": "At about seven sixteen, John Watt saw a sudden rush of sparks burst from the high girders \u2014",
+      "image_prompt": "{signal_box} A man in a thirties brown wool coat stands at the signal box window, his body pressed forward, one hand braced against the window frame in a posture of sudden, sharp attention. The oil lamp inside throws warm light across his shoulders and the back of his head, leaving his face in shadow and silhouette. Through the rain-streaked glass behind him, in the far middle distance, the high girders of the bridge are visible as a dark mass against the night.",
+      "motion_prompt": "Hold almost entirely still on John Watt's face and posture, very slight flicker of lamplight across his features.",
+      "index": 24,
+      "_audit": {
+        "original_prompt": "John Watt (thirties, clean-shaven, brown wool coat) stands at the signal box window, his face lit from inside by the oil lamp. His expression is one of sudden, sharp attention \u2014 eyes wide, jaw slightly open. He is pressing one hand against the window frame, leaning forward. Through the rain-streaked window behind him, in the far middle distance, the high girders of the bridge are visible as a dark mass.",
+        "violations": [
+          "face:face",
+          "expression:expression",
+          "expression:lean",
+          "eye:eyes"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "bright, and then gone.",
+      "image_prompt": "{bridge_night} A wide shot of the high central girders of the Tay Bridge in the stormy night, as seen from the south shore. A shower of bright orange and white sparks \u2014 as if from a collision of metal against metal \u2014 illuminates the girders for a moment. The sparks trail downward and sideways in the wind, already fading. The three train lights that were visible are absent. The bridge's lamp chain continues on either side, but the centre is dark.",
+      "motion_prompt": "Slow fade of the sparks across the girders, the light dying away, the structure returning to darkness.",
+      "index": 25
+    },
+    {
+      "narration": "The three lights went with them.",
+      "image_prompt": "{signal_box} Two figures stand side by side at the signal box window, their backs to us, shoulders close, both turned toward the glass. The bridge is visible in the far distance through the window \u2014 the string of orange lamp points along its length has a conspicuous dark gap at the centre. The two men are still, their posture rigid, weight forward, hands near the sill. The interior of the signal box is quiet around them, the oil lamp burning steady behind, throwing their outlines sharp against the dark.",
+      "motion_prompt": "Very slow push in toward the faces of the two men, the dark gap in the bridge lights visible behind them through the window.",
+      "index": 26,
+      "_audit": {
+        "original_prompt": "Thomas Barclay and John Watt side by side at the signal box window, both staring intently out into the dark. The bridge is visible in the far distance through the glass \u2014 the string of orange lamp points along its length has a conspicuous dark gap at the centre. The two men's faces are taut with confusion and rising alarm. The interior of the signal box is still, the oil lamp steady.",
+        "violations": [
+          "face:faces"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "He thought, at first, that the train had only passed out of view.",
+      "image_prompt": "{signal_box} A man in a brown wool coat standing alone at the signal box window, one hand resting on the rain-streaked glass, his back to the viewer. The bridge is a faint dark line in the grey beyond. The signal box interior is close and warm, the oil lamp casting soft shadows across the wooden walls and instrument levers behind him.",
+      "motion_prompt": "Very slow push in toward John Watt's face, rain running down the window glass beside him.",
+      "index": 27,
+      "_audit": {
+        "original_prompt": "John Watt (thirties, clean-shaven, brown wool coat) standing alone at the signal box window, one hand resting on the glass, looking out with a furrowed brow. His expression is uncertain, trying to convince himself of something. The window is heavily rain-streaked. The bridge is a faint dark line outside. The signal box interior is close and warm, the oil lamp casting soft shadows.",
+        "violations": [
+          "expression:expression",
+          "expression:lean"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "The two men waited for it to appear on the Dundee side. It never did.",
+      "image_prompt": "{signal_box} Thomas Barclay and John Watt both standing at the signal box window, looking out toward the far, north shore of the bridge. The Dundee side shows a faint amber glow in the far distance \u2014 the town \u2014 but no train arrival lights. The two men stand in tense silence, their postures expectant and increasingly still. The oil lamp casts long shadows. Time has passed; both men look strained.",
+      "motion_prompt": "Slow, almost imperceptible drift toward the window and the dark far shore, the lamp flame barely moving.",
+      "index": 28
+    },
+    {
+      "narration": "When they tried to walk out onto the bridge to look, they could not stand against the wind.",
+      "image_prompt": "{bridge_night} A figure in a heavy coat is seen from a slight distance, standing at the entrance to the bridge from the south. He is bent almost double against the wind, one arm raised against the onslaught, his back and shoulders carrying the full force of the gale. He has not moved forward \u2014 he is planted at the threshold, unable to advance. The bridge stretches into darkness ahead. Rain and wind are ferocious, the iron bridge structure rattling.",
+      "motion_prompt": "Hold still on Barclay's straining figure, wind and rain lashing across the frame.",
+      "index": 29,
+      "_audit": {
+        "original_prompt": "Thomas Barclay (mid-forties, dark beard, heavy coat) is seen from a slight distance, standing at the entrance to the bridge from the south. He is bent almost double against the wind, one arm raised to shield his face. He has not moved forward \u2014 he is planted at the threshold, unable to advance. The bridge stretches into darkness ahead. Rain and wind are ferocious, the iron bridge structure rattling.",
+        "violations": [
+          "face:face"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "Down at the water's edge, others gathered, staring into the dark where the centre of the bridge should have been.",
+      "image_prompt": "{firth} Six or seven Victorian figures \u2014 men in dark coats and caps, one woman in a shawl \u2014 stand at the water's edge on the south shore. They are facing away from the camera, looking out at the bridge. Some carry lanterns. The bridge is visible ahead of them \u2014 its lights intact on the southern and northern sections \u2014 but the high central girders are dark, gone. The figures stand very still. The water laps at stones near their feet.",
+      "motion_prompt": "Slow drift along the line of watching figures from left to right, lanterns swaying in the wind.",
+      "index": 30
+    },
+    {
+      "narration": "The high girders were gone.",
+      "image_prompt": "{bridge_night} A wide, stark shot of the Tay Bridge from the south shore, showing the catastrophic gap at the centre. On either side, the low bridge sections with their lamp chains are intact, their orange lights reflected in the water. But the centre \u2014 where the high girders rose \u2014 is simply absent. Empty sky, dark and stormy, fills the gap. The bridge's silhouette is broken, jagged at each end of the gap.",
+      "motion_prompt": "Slow, mournful push in toward the dark gap at the centre of the bridge, the shore figures silhouetted in the foreground.",
+      "index": 31
+    },
+    {
+      "narration": "The train was in the river, seventy feet below, with everyone it carried.",
+      "image_prompt": "{firth} A near-water-level shot of the black Tay directly beneath where the high girders stood. The water is turbulent, dark, and featureless \u2014 no wreckage visible, no light, just heaving water in the stormy night. Faint storm-lit cloud above. On the left edge of the frame, the stump of a shattered bridge pier rises from the water, broken iron visible at its top. The scene is utterly desolate.",
+      "motion_prompt": "Slow drift across the dark water surface, the broken pier stump moving slowly through the frame.",
+      "index": 32
+    },
+    {
+      "narration": "In the days that followed,",
+      "image_prompt": "{firth} A grey, cold dawn over the Firth of Tay the morning after the disaster. Several small boats are on the water near the broken bridge, their occupants visible as small dark figures. The broken gap in the bridge is starkly visible in the daylight, the jagged iron ends jutting from the remaining spans. The sky is pale and overcast. The water is iron-grey and cold. Figures on the south shore watch from a distance.",
+      "motion_prompt": "Very slow push out from the bridge gap, the full broken silhouette coming into view in the pale morning light.",
+      "index": 33
+    },
+    {
+      "narration": "divers went down into the cold Tay.",
+      "image_prompt": "{firth} A photorealistic scene at the water's edge on the south shore of the Tay. A Victorian deep-sea diver in a full copper-helmeted suit stands at the edge of a small wooden diving barge, his back partly to the camera. He is already suited, the massive copper helmet bolted in place. Two tenders in dark clothing assist him, already finished fastening equipment. The water is grey and opaque. The broken bridge is visible in the distance.",
+      "motion_prompt": "Very slow drift around the figure of the suited diver, the cold grey water moving gently below.",
+      "index": 34
+    },
+    {
+      "narration": "They found the locomotive almost whole on the riverbed.",
+      "image_prompt": "{firth} A wide underwater scene, dim and green-grey, murky with silt. The massive form of the Victorian locomotive lies on the riverbed, canted slightly to one side but largely intact \u2014 its boiler, driving wheels, and cab structure recognisable through the gloom. Silt drifts slowly through the water around it. A small, dark figure of a diver in a copper helmet stands beside the locomotive, emphasising its enormous scale.",
+      "motion_prompt": "Very slow drift forward through the murky underwater space toward the locomotive on the riverbed.",
+      "index": 35
+    },
+    {
+      "narration": "It was raised, repaired, and put back into service,",
+      "image_prompt": "{bridge_night} A busy Victorian engineering yard in daylight. The recovered locomotive \u2014 dark with river silt and damage \u2014 sits on tracks, surrounded by workers in heavy aprons and caps. Men stand at various points around the machine. Scaffolding has been erected around the boiler. The yard is open-air, grey sky above. Steam rises from a nearby workshop building. The locomotive is clearly being worked on.",
+      "motion_prompt": "Very slow pan across the yard and the locomotive, workers stationary or barely moving.",
+      "index": 36
+    },
+    {
+      "narration": "where it ran on the railways for another forty years.",
+      "image_prompt": "{bridge_night} A Victorian steam locomotive \u2014 the same engine, now clean and repaired, dark green livery, brass fittings \u2014 stands at a rural Scottish railway station platform in daylight, steam rising gently from its stack. The station is quiet, a single porter visible from behind on the platform, his back turned as he attends to the luggage trolley. The locomotive looks solid and unremarkable, entirely at home. Morning light falls across the scene from the left.",
+      "motion_prompt": "Slow drift of steam from the locomotive's stack, rising and dispersing gently in still air.",
+      "index": 37,
+      "_audit": {
+        "original_prompt": "A Victorian steam locomotive \u2014 the same engine, now clean and repaired, dark green livery, brass fittings \u2014 stands at a rural Scottish railway station platform in daylight, steam rising gently from its stack. The station is quiet, a single porter visible on the platform. The locomotive looks solid and unremarkable, entirely at home. Morning light falls across the scene from the left.",
+        "violations": [
+          "expression:lean"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "The men who drove it called it The Diver.",
+      "image_prompt": "{carriage} Close view of the footplate cab of the Victorian locomotive. Two enginemen occupy the cab \u2014 the driver in oil-stained cap and heavy jacket, one hand resting on the regulator, and his fireman in shirtsleeves, both turned away toward the track ahead. Only their backs and hands are visible, the driver's grip on the regulator deliberate, the fireman's posture alert beside the firebox. The cab is dark metal and brass, firelight flickering from the open firebox door, catching the worn fabric of their jackets and the gleam of gauges on the boiler face.",
+      "motion_prompt": "Very slow push in toward the two men on the footplate, firelight from the firebox pulsing very gently on the metal.",
+      "index": 38,
+      "_audit": {
+        "original_prompt": "Close view of the footplate cab of the Victorian locomotive. Two enginemen \u2014 the driver (fifties, grey-bearded, oil-stained cap and heavy jacket) and his fireman (younger, sooty, shirtsleeves) \u2014 stand in the cab, the driver resting one hand on the regulator. Both men face slightly away from the camera, looking forward down the track. The cab is dark metal and brass, firelight flickering from the firebox door.",
+        "violations": [
+          "face:face",
+          "expression:bearded"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "Forty-six bodies were recovered.",
+      "image_prompt": "{carriage} A Victorian church or public hall interior, converted temporarily into a receiving space. Several plain wooden coffins are arranged in a row on the stone floor, covered with dark cloth. Candles burn at the head and foot of each. A minister in black robes stands at one end, head bowed. Several townspeople \u2014 men, women \u2014 stand at the sides of the room, still and grief-stricken, some with bowed heads.",
+      "motion_prompt": "Very slow drift along the row of coffins, candlelight barely flickering in the still air.",
+      "index": 39
+    },
+    {
+      "narration": "The rest the firth kept.",
+      "image_prompt": "{firth} A wide, grey daytime shot of the Firth of Tay from the shore, looking out to the open water. The water is cold and flat, grey-green under an overcast sky. The broken bridge is visible to one side \u2014 the gap at its centre prominent. There are no boats, no people visible close by. Just the vast, indifferent expanse of water. A single gull is visible far off, barely a speck.",
+      "motion_prompt": "Very slow drift across the grey water surface from right to left, utterly still and mournful.",
+      "index": 40
+    },
+    {
+      "narration": "The official count settled near sixty,",
+      "image_prompt": "{carriage} Interior of a Victorian government office in daylight. A clerk in a dark suit sits at a large desk covered with papers, lists, and open ledgers. His hand holds a pen above a column of names and numbers, the nib poised mid-entry. A window behind him shows a pale grey Dundee sky. A second man in a frock coat stands behind him, visible from the shoulders down, his attention directed toward the document on the desk.",
+      "motion_prompt": "Very slow push in toward the desk and the open ledger, the clerk barely moving, papers still.",
+      "index": 41,
+      "_audit": {
+        "original_prompt": "Interior of a Victorian government office in daylight. A clerk in a dark suit sits at a large desk covered with papers, lists, and open ledgers. He holds a pen above a column of names and numbers, his expression serious and tired. A window behind him shows a pale grey Dundee sky. A second man in a frock coat stands behind him, leaning over to look at the document.",
+        "violations": [
+          "expression:expression",
+          "expression:lean"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "but no one was ever certain \u2014",
+      "image_prompt": "{bridge_night} Close view of an open Victorian ledger page, filled with handwritten names in ink. Several entries are crossed out, queried with marginal annotations, or left with blank spaces after them. The handwriting is careful but the corrections and question marks tell the story. The page is lit by the pale light of a window. A hand holding a pen rests just off the page, motionless.",
+      "motion_prompt": "Very slow, barely perceptible push in toward the ledger page, the ink and handwriting filling the frame.",
+      "index": 42
+    },
+    {
+      "narration": "some who boarded that night were never named,",
+      "image_prompt": "{carriage} A quiet Victorian railway platform \u2014 perhaps Burntisland \u2014 in the early evening of December 28, 1879. A lone figure, a young man in a modest coat and cap, stands at the edge of the lamplight, just about to step into a carriage. He is seen from behind, his back turned to the viewer, one foot raised toward the carriage step. He has no ticket visible. The gas lamps cast pools of light on the wet platform. The train is dark and waiting.",
+      "motion_prompt": "Slow push in toward the lone figure on the dark platform edge, lamplight barely reaching him.",
+      "index": 43,
+      "_audit": {
+        "original_prompt": "A quiet Victorian railway platform \u2014 perhaps Burntisland \u2014 in the early evening of December 28, 1879. A lone figure, a young man in a modest coat and cap, stands at the edge of the lamplight, just about to step into a carriage. He is seen at slight distance, his face not clearly lit. He has no ticket visible. The gas lamps cast pools of light on the wet platform. The train is dark and waiting.",
+        "violations": [
+          "face:face"
+        ],
+        "rewritten": true
+      }
+    },
+    {
+      "narration": "and are missing from every record that survives.",
+      "image_prompt": "{bridge_night} A close, quiet shot of an open Victorian archive drawer filled with filed papers and envelopes. Several of the slots are clearly empty \u2014 gaps in the record, no document filed. The drawer is lit by a single shaft of pale window light from the side. Dust is visible on the wooden surface. No people are in shot. The emptiness of the missing files is the subject.",
+      "motion_prompt": "Very slow tilt down across the archive drawer, the gaps in the files passing slowly through the frame.",
+      "index": 44
+    },
+    {
+      "narration": "We cross such spans every day,",
+      "image_prompt": "{bridge_night} A wide shot of a Victorian iron railway bridge \u2014 not the Tay Bridge, a smaller, everyday one \u2014 crossing a river in rural Scotland in daylight. Several pedestrians in Victorian coats and hats are crossing a walkway alongside the tracks, not looking down, absorbed in their own journeys. The bridge is solid-looking, unremarkable. The river below is calm. The sky is grey and ordinary.",
+      "motion_prompt": "Slow pan across the pedestrian figures on the bridge, the river visible below through the ironwork.",
+      "index": 45
+    },
+    {
+      "narration": "and trust them to hold.",
+      "image_prompt": "{bridge_night} A detail shot of a Victorian iron bridge structure: massive riveted iron plate girders, their surfaces weathered but solid, bolted flanges and cross-bracing visible. The scale is impressive \u2014 a human hand for scale could span only a fraction of a rivet plate. The ironwork is lit by flat grey daylight. The structure looks both powerful and, in this context, quietly vulnerable.",
+      "motion_prompt": "Very slow drift across the surface of the riveted ironwork, light shifting almost imperceptibly.",
+      "index": 46
+    },
+    {
+      "narration": "On the night of the twenty-eighth of December, 1879,",
+      "image_prompt": "{bridge_night} A return to the night scene: a wide shot of the Tay as seen from the south shore in darkness and storm. The bridge is visible, its lamp chain stretching across the water \u2014 but the viewer now knows what is coming. A small group of Victorian figures stand on the shore, their backs to the camera, facing the bridge and the storm. Wind-blown rain streaks the frame diagonally. The scene is exactly as it was.",
+      "motion_prompt": "Very slow push toward the bridge from the shore, the figures on the bank motionless against the gale.",
+      "index": 47
+    },
+    {
+      "narration": "the longest bridge in the world did not.",
+      "image_prompt": "{bridge_night} The final shot: the Tay Bridge at night, seen from the south shore, showing the dark, permanent gap at the centre where the high girders once stood. On either side of the gap, the lamp chains continue \u2014 orange points of light reflected in black water. The centre is sky, dark cloud, and absence. No people. The water below the gap is still and dark. The scene is immense, quiet, and irreversible.",
+      "motion_prompt": "Imperceptibly slow pull back from the broken bridge, the dark gap at its centre holding the frame, rain fading to near-stillness.",
+      "index": 48
+    }
+  ]
+}

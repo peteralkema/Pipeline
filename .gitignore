@@ -12,6 +12,25 @@
 **/projects/**/*.json.backup
 **/stills/_backup/
 
+# Temp/scratch, logs, in-place backups — never commit
+*TEMP*
+*.log
+*.py.pre_*
+*.py.backup
+*.py.bak*
+**/projects/**/*.mp3
+
+# Derived pipeline artifacts — regenerable from script.md + beat scripts
+**/projects/**/beats.json
+**/projects/**/beats_full.json
+**/projects/**/durations.json
+**/projects/**/ep_audio.*
+**/projects/**/modeb_review.html
+**/projects/**/script.txt
+synthetic/ep1_beats_*.json
+synthetic/ep1_narration.txt
+synthetic/synthetic_modeA_beats_index.json
+
 # Python
 __pycache__/
 *.pyc
