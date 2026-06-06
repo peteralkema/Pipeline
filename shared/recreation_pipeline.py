@@ -1303,6 +1303,11 @@ def cmd_finish(args):
             animate_still(still, s["motion_prompt"], clip)
         clip_paths.append(clip)
 
+    if getattr(args, "animate_only", False):
+        print(f"\nAnimate-only: {len(clip_paths)} clips in {p['clips']}, "
+              f"stopping before narrate/score/assemble (audio + assembly are separate legs).")
+        return
+
     print("\nNarrating script (Victor)...")
     generate_voiceover(script, p["voice"])
     print(f"OK Voiceover -> {p['voice']}")
@@ -1372,6 +1377,8 @@ def main():
     c.add_argument("--music", default=None, help="use your own music mp3 instead of generating one")
     c.add_argument("--no-music", action="store_true", help="skip the music bed entirely")
     c.add_argument("--force", action="store_true", help="re-animate existing clips + regenerate music")
+    c.add_argument("--animate-only", action="store_true",
+                   help="animate stills to clips, then STOP (no narrate/score/assemble)")
     c.add_argument("--assemble-only", action="store_true",
                    help="re-stitch from existing clips/voice/music only (no rendering, no cost)")
     c.set_defaults(func=cmd_finish)
