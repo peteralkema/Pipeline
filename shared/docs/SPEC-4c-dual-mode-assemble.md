@@ -82,6 +82,16 @@ After Piece 1: `projects/ep1-the-promise/clips/shot_001.mp4 … shot_041.mp4` ex
 
 ### PIECE 2 — Full-episode audio spine (the real timing)
 
+> **✅ DONE & PROVEN ON BOX (5 June 2026, late).** Built as four scripts, all committed:
+> `build_audio_script.py` (2a: full read + manifest + silent-hold policy), `generate_episode_vo.py`
+> (2b: real Victor VO, reuses `generate_voiceover`), `build_beat_durations.py` (2c: wraps
+> `align_with_whisper.py`, emits `durations.json` — 39 whisper-measured + 23 silent-hold for E1),
+> and `dispatch.py --durations` (2d: consumes real frames, proxy is fallback-only). E1 measured at
+> 588s / 9.8min spoken vs the proxy's 13.3min guess — the ~35% drift is dead. The text below is kept
+> as the design record; it is built, not pending. Remaining 4c work is PIECE 1 (real A render) and
+> PIECE 3 (dual-mode assemble).
+
+
 This replaces the word-count proxy in `dispatch.py`'s `estimate_frames()` with real
 Whisper-measured per-beat durations, over ALL 62 beats.
 
@@ -130,9 +140,23 @@ This is the real version of `assemble_test.py`, scaled to the whole episode.
 3. **Concatenate in beat order** (ffmpeg concat demuxer, re-encode to uniform 1080p/30fps
    — both modes are already 1080p so no scaling, but re-encode guarantees clean seams,
    exactly as assemble_test.py proved at 720p).
-4. **Mux the episode Victor VO** over the silent concatenated video (the engine's
-   assemble has the voice+optional-music mux to copy). Optionally the Synthetic music bed
-   from channel.json's default_music_prompt.
+4. **Mux the episode Victor VO** over the silent concatenated video, then **the music
+   bed under it.** IMPORTANT — music ownership: music is added at ASSEMBLE, not in the
+   audio leg. The audio leg (Pieces 2a–2d) only produces the VO + durations; it has NO
+   music. The music-mux logic currently lives INSIDE `recreation_pipeline.py`'s
+   `assemble()` and must be PORTED into the dual-mode assembler — it does not come for
+   free, because Synthetic does not use the engine's assemble. What to lift across (it's
+   self-contained ffmpeg, ports cleanly):
+     - voice + music `amix` with the calibrated levels: `VOICE_LEVEL = 1.15`,
+       `MUSIC_LEVEL = 0.07` (the low bed tuned for Jamendo tracks);
+     - loop the music to cover full length (concat-repeat then trim — avoids the
+       music-stops-early bug);
+     - source the bed from Synthetic's `channel.json` `default_music_prompt` (cool, tense
+       underscore — distinct from Final Hours' funereal one), or `--music <file>` / skip
+       with `--no-music`.
+   Music is independent of per-beat timing (it's a bed over the finished timeline), so it
+   does not interact with the durations — but its HOME is the assembler. Bank this so it
+   is not lost between the audio leg and the engine.
 5. Output `projects/ep1-the-promise/final_video.mp4` at 1080p.
 
 After Piece 3: the complete Episode 1, watchable end to end.
