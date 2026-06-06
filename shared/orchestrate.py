@@ -52,12 +52,14 @@ def resolve_beats_path(args):
     if args.beats:
         return args.beats
     if args.project:
-        # prefer the {header,beats} wrapper; fall back to a plain beats.json
+        # from repo root we don't yet know the channel (it's in the header), so search
+        # each channel's projects/<project>/ for the wrapper. Explicit --beats avoids this.
+        import glob as _glob
         for name in ("beats_full.json", "beats.json"):
-            cand = os.path.join("projects", args.project, name)
-            if os.path.exists(cand):
-                return cand
-        return os.path.join("projects", args.project, "beats_full.json")
+            hits = _glob.glob(os.path.join("*", "projects", args.project, name))
+            if hits:
+                return hits[0]
+        return None
     return None
 
 
@@ -86,28 +88,45 @@ def load_beats(path, t):
     return header, beats
 
 
-def load_resolved_config(channel, t):
-    """Load <channel>/channel.json, resolve <project>/look.json override ON TOP.
-    Channel defaults -> project overrides. Most channels have no look.json; Lazarus
-    is the channel built on it. Returns the resolved config dict (or None if no channel)."""
+def load_resolved_config(channel, project, t):
+    """Resolve identity from the channel NAME (declared in the script header), so you
+    run from the repo root and NEVER think about which folder you're in. The header is
+    the single source of truth for which channel; the machine finds <channel>/channel.json
+    by name. Then resolve <project>/look.json override ON TOP (channel defaults ->
+    project overrides; most channels have none, Lazarus is built on it).
+    Returns (cfg, channel_dir) or (None, None)."""
     if not channel:
-        return None
-    # walk: we run from the channel folder, so channel.json is at ./channel.json,
-    # but also accept <channel>/channel.json from repo root.
-    candidates = ["channel.json", os.path.join(channel, "channel.json")]
-    cfg_path = next((c for c in candidates if os.path.exists(c)), None)
-    if not cfg_path:
-        t.warn(f"channel.json not found for '{channel}' (looked: {candidates}). "
-               f"Run from the channel folder, or check the channel name.")
-        return None
+        return None, None
+    channel_dir = channel  # <repo_root>/<channel>/
+    cfg_path = os.path.join(channel_dir, "channel.json")
+    if not os.path.exists(cfg_path):
+        # tolerate being run from inside the channel folder too (./channel.json)
+        if os.path.exists("channel.json"):
+            cfg_path, channel_dir = "channel.json", "."
+        else:
+            t.warn(f"channel.json not found for '{channel}' "
+                   f"(looked for {channel}/channel.json from repo root). "
+                   f"Run from ~/Pipeline, or check the channel name in the script header.")
+            return None, None
     try:
         cfg = json.load(open(cfg_path, encoding="utf-8"))
     except Exception as e:
         t.halt(f"channel.json did not parse: {e}")
         sys.exit(1)
-    t.ok(f"channel identity loaded → {cfg_path} (voice={cfg.get('voices', {}).get('narrator', cfg.get('voice_id','?'))}, "
+    # per-film look override (Lazarus): <channel>/projects/<project>/look.json on top
+    if project:
+        look_path = os.path.join(channel_dir, "projects", project, "look.json")
+        if os.path.exists(look_path):
+            try:
+                look = json.load(open(look_path, encoding="utf-8"))
+                cfg = {**cfg, **look}  # project overrides channel defaults
+                t.ok(f"per-film look override applied → {look_path}")
+            except Exception as e:
+                t.warn(f"look.json present but did not parse ({e}); using channel defaults")
+    voice = cfg.get("voices", {}).get("narrator", cfg.get("voice_id", "?"))
+    t.ok(f"channel identity loaded → {cfg_path} (voice={voice}, "
          f"{cfg.get('width','?')}x{cfg.get('height','?')})")
-    return cfg
+    return cfg, channel_dir
 
 
 def decide_legs(beats, t):
@@ -176,10 +195,12 @@ def main():
                f"re-run parse_script.py --json-full. (Halting now — before any render/spend.)")
         sys.exit(1)
     t.ok(f"header complete → title, description, tags, channel all present")
-    cfg = load_resolved_config(header.get("channel"), t)
+    cfg, channel_dir = load_resolved_config(header.get("channel"), args.project, t)
     if cfg is None:
         t.warn("proceeding without resolved channel identity (skeleton tolerates it; "
                "legs will require it).")
+    else:
+        t.info(f"channel folder → {channel_dir}/  (legs will run here; you stay in repo root)")
 
     t.phase("DECIDE LEGS (composition scan)")
     legs, modes = decide_legs(beats, t)
