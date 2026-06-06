@@ -16,6 +16,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from telemetry import Telemetry
 from banner import BANNER
+import audio_leg
 
 
 def parse_args():
@@ -207,17 +208,51 @@ def main():
 
     t.phase("PLAN")
     t.info(f"legs to run, in order: {' → '.join(legs)}")
-    if dry:
-        t.ok("DRY-RUN — plan only. No legs executed, nothing rendered, no cost.")
-        t.info("(Legs are not wired yet — this is the skeleton. Next build steps add them.)")
-    else:
-        t.warn("LIVE mode selected, but legs are not wired in the skeleton yet — "
-               "nothing to execute. Build steps 3-5 add the real legs.")
+
+    # Build the run context the legs receive.
+    shared_dir = os.path.dirname(os.path.abspath(__file__))
+    # resolve project dir under the channel folder; need the flat beats list for leg tools
+    proj_dir = None
+    if channel_dir and args.project:
+        proj_dir = os.path.join(channel_dir, "projects", args.project)
+    # the flat beats list (leg tools expect a list, not the wrapper) — write it next to the wrapper
+    beats_list_json = None
+    if proj_dir:
+        beats_list_json = os.path.join(proj_dir, "beats.json")
+        if not dry:
+            with open(beats_list_json, "w", encoding="utf-8") as f:
+                json.dump(beats, f, indent=2, ensure_ascii=False)
+            t.detail(f"wrote flat beats list for leg tools → {beats_list_json}")
+
+    ctx = {
+        "t": t, "shared": shared_dir, "channel_dir": channel_dir,
+        "project_dir": proj_dir, "beats_list_json": beats_list_json,
+        "script_md": None, "dry_run": dry, "py": sys.executable,
+    }
+
+    # ── 3a: AUDIO LEG (wired) ─────────────────────────────────────────────
+    if "audio" in legs:
+        if proj_dir is None:
+            t.halt("cannot run audio leg — channel/project unresolved (need channel.json + --project).")
+            sys.exit(1)
+        result = audio_leg.run_audio_leg(ctx)
+        if result is None:
+            t.halt("audio leg halted. Fix the reported issue and re-run.")
+            sys.exit(1)
+
+    # ── legs not yet wired (steps 3b/4/5) ─────────────────────────────────
+    pending = [l for l in legs if l not in ("audio",)]
+    if pending:
+        t.phase("LEGS NOT YET WIRED")
+        for l in pending:
+            t.info(f"· {l} — wiring is a later build step (3b Mode B, 4 Mode A, 5 convergence)")
 
     t.phase("RUN SUMMARY")
     t.info(f"channel {channel} · {project}")
     t.info(f"beats {n} (A:{n_a} B:{n_b}) · legs planned: {', '.join(legs)}")
-    t.ok("skeleton run complete — the machine speaks. ✦")
+    if "audio" in legs and not dry:
+        t.ok("audio leg complete — voiceover + real per-beat durations produced.")
+    t.ok("run complete. ✦")
 
 
 if __name__ == "__main__":
