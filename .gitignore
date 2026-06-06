@@ -31,3 +31,7 @@ clips/
 ~$*
 voiceover.mp3
 voiceover.json
+
+remotion/node_modules/
+remotion/out/
+remotion/.remotion/

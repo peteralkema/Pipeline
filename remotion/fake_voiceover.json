@@ -1,0 +1,16 @@
+{
+  "segments": [
+    {"words": [
+      {"word": "By",      "start": 3.00, "end": 3.20},
+      {"word": "Monday,",  "start": 3.20, "end": 3.70},
+      {"word": "the",     "start": 3.70, "end": 3.85},
+      {"word": "board",   "start": 3.85, "end": 4.20},
+      {"word": "had",     "start": 4.20, "end": 4.40},
+      {"word": "lost",    "start": 4.40, "end": 4.75},
+      {"word": "control", "start": 4.75, "end": 5.25},
+      {"word": "of",      "start": 5.25, "end": 5.35},
+      {"word": "the",     "start": 5.35, "end": 5.50},
+      {"word": "company.","start": 5.50, "end": 6.10}
+    ]}
+  ]
+}
