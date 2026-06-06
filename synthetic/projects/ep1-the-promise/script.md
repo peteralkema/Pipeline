@@ -1,3 +1,10 @@
+channel: synthetic
+title: The Promise — How OpenAI Began (Episode 1)
+description: >
+  In 2015, two men set out to save humanity from AI. A decade later they met in court.
+  The founding of OpenAI — the promise, the money, and the crack that broke it.
+tags: openai, sam altman, elon musk, ai history, ilya sutskever
+---
 # SYNTHETIC — Episode 1: "The Promise"
 *The OpenAI series, episode 1. Full tagged script (v4 — fact-locked, 5 June 2026).*
 *Register: documentary-witness — restrained, curious, never panicked, never gleeful. Stage, don't state.*

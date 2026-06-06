@@ -1,0 +1,666 @@
+{
+  "canon": {
+    "riley_hillside": "A bare grassy slope above a Derbyshire farm in August 1666, thin turf over grey limestone, the Peak District moors rolling away to the horizon under a hard pale summer sky. A lone figure \u2014 a farmer's wife in plain 17th-century woollen dress and apron, dark skirt, linen cap \u2014 always seen from behind, in silhouette, from a distance, or with her face turned away and never resolved; a spade, freshly turned earth, a low mound. Dignified, desolate, sunlit but cheerless. 1666 photoreal cinematic, NOT modern farmland, no fences, no modern walls, no telegraph poles.",
+    "riley_farmhouse": "A small poor 17th-century Derbyshire hill farm of rough grey stone with a low thatched or stone-slab roof, tiny windows, a heavy plank door, set apart and alone on the edge of moorland. Interior: a single dim room, earth or stone-flagged floor, a cold hearth, a wooden trestle, plain pewter and wood, low smoke-darkened beams. Figures only ever from behind or in deep shadow, faces never resolved. Overcast grey light through small panes. 1666 photoreal cinematic, period-accurate, no modern objects.",
+    "eyam_village": "A small 17th-century English Peak District village of grey limestone cottages with thatched and stone-slab roofs lining a narrow lane, a low Saxon church tower, dry-stone walls, kitchen gardens. Deserted, shuttered, doors marked, no crowds \u2014 emptiness and stillness carry the dread. Any figures distant, from behind, silhouetted, faces never resolved. Overcast, muted, mournful palette. 1666 photoreal cinematic, the medieval village NOT a modern restored tourist village, no tarmac, no modern signage.",
+    "boundary_stone": "A weathered grey gritstone boundary marker at the edge of the village where the moorland begins, with several round holes bored into its top. Coins sit in the holes, submerged in vinegar; a basket of provisions left on the grass beside it. No people at the stone, or a single distant figure walking away. Cold overcast Derbyshire light, wet grass, the empty moor beyond. 1666 photoreal cinematic, no modern path, no modern objects.",
+    "village_church": "The exterior and churchyard of a small ancient Derbyshire parish church, squat Saxon stone tower, weathered standing cross, leaning gravestones, a low stone wall, yew trees. Fresh-dug graves, bare earth. A single fresh grave near the cross for the closing of Catherine's strand. Overcast, still, solemn. 1666 photoreal cinematic, the original 17th-century church, NOT a modern restored churchyard, no modern headstones, no modern paths.",
+    "riley_graves_closing": "Seven simple weathered stone grave markers on an open grassy hillside, ringed by a single low dry-stone wall, entirely alone in a wide empty field with the Derbyshire moors stretching to the horizon and no village anywhere in sight. Long grass moving in the wind, pale overcast sky, utterly silent and solitary. The closing image of the film. 1666 period graves seen as they stand weathered and old, photoreal cinematic, no modern fences, no modern monuments, no visitors, no signage."
+  },
+  "beats": [
+    {
+      "narration": "She is on the hillside above Riley Farm, alone, with a spade in her hands",
+      "image_prompt": "{riley_hillside} A lone woman, Elizabeth Hancock, mid-30s, wearing a rough linen coif, dark wool dress with a soiled apron, stands on a rocky hillside in strong August sunlight. She grips a worn wooden-handled spade, her posture heavy with exhaustion. The hillside is sparse with dry grass and pale limestone outcrops. The Derbyshire moors stretch behind her under a bleached sky. Wide shot, figure positioned left of frame, the empty slope rising to the right.",
+      "motion_prompt": "Slow push-in toward the solitary figure on the hillside, heat shimmer rising faintly from the dry grass around her.",
+      "index": 1
+    },
+    {
+      "narration": "and the ground hard under the August sun.",
+      "image_prompt": "{riley_hillside} Close-up of the cracked, sun-baked earth on the hillside at Riley Farm. The soil is pale brown and dry, split with hairline fractures. A few withered grass roots cling to the surface. Strong raking sunlight from the right throws the cracks into sharp relief. No human figure, just the unyielding ground.",
+      "motion_prompt": "Extremely slow drift sideways across the parched earth surface, barely moving, heat haze shimmering at the edges.",
+      "index": 2
+    },
+    {
+      "narration": "It is the third of August, sixteen sixty-six.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock stands still on the hillside, looking down toward the valley below. Her face is turned slightly away, three-quarter profile. The August sky above is wide and pale blue with a few thin high clouds. The valley below is hazy and distant. Mid-shot from behind and slightly to the side, her figure small against the vast landscape.",
+      "motion_prompt": "Very slow pull back to reveal more of the hillside and valley below, a dry breeze lifting the edge of her apron slightly.",
+      "index": 3
+    },
+    {
+      "narration": "Her name is Elizabeth Hancock.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock stands three-quarters toward camera on the hillside, her figure framed chest-up against the pale sky. Her white linen coif catches the flat light, slightly askew. Her dark wool dress is dusty at the hem and shoulders, the fabric heavy with wear. Her hands \u2014 visible at her sides \u2014 are work-roughened, still. The hillside rises behind her, the earth disturbed, the sky empty and pale. Medium portrait shot, chest-up, face turned just enough into shadow that no feature resolves.",
+      "motion_prompt": "Hold nearly still on her face, a slow drift of thin cloud shadow moving across the hillside behind her.",
+      "index": 4
+    },
+    {
+      "narration": "Below her, the village of Eyam is dying, house by house,",
+      "image_prompt": "{eyam_village} A distant view from the hillside looking down into the valley where the village of Eyam sits \u2014 a cluster of grey stone cottages with smoke from a few chimneys, surrounded by stone-walled fields. The village looks quiet, almost peaceful from this height, but a faint haze hangs over it. Late afternoon light. Wide establishing shot from elevated perspective.",
+      "motion_prompt": "Slow downward tilt from the hillside to the village far below, the haze over the rooftops barely drifting.",
+      "index": 5
+    },
+    {
+      "narration": "and over the next eight days she will dig seven graves on this slope with her own hands.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock stands on the hillside looking down at the ground before her, the spade planted in the dry earth beside her right hand. The rocky slope stretches above and below her. The light is harsh and direct overhead. She is alone, her figure casting a short shadow. Medium shot, slightly elevated angle looking down at her.",
+      "motion_prompt": "Slow push-in from above toward the woman and the spade planted in the earth, heat haze rising around her.",
+      "index": 6
+    },
+    {
+      "narration": "Her husband. Then her children, one after another.",
+      "image_prompt": "{riley_hillside} Seven small mounds of disturbed earth arranged in a rough line on the hillside slope, enclosed within a low, mossy stone wall. The mounds are bare, freshly turned dark soil against the pale dry grass. The August sky is wide and bright above. No figures in frame \u2014 the graves speak alone. Wide shot of the enclosed burial ground on the slope.",
+      "motion_prompt": "Very slow pan across the row of earth mounds left to right, a gentle warm wind moving the dry grass at the edges.",
+      "index": 7
+    },
+    {
+      "narration": "No one will come up the hill to help her.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock alone on the hillside, spade in hand, a steep empty slope rising behind her and the valley visible far below. The hillside above her is bare and unpopulated. The silence of the landscape emphasizes her isolation. She stands still, looking upslope. Wide shot, figure small in the lower third of the frame.",
+      "motion_prompt": "Slow tilt upward from the figure to the empty ridge above, where nothing moves except sparse dry grass in the breeze.",
+      "index": 8
+    },
+    {
+      "narration": "They will watch from the ridge, and they will not come down.",
+      "image_prompt": "{riley_hillside} On the rocky ridge above the hillside, silhouetted against the pale sky, stand three or four distant figures \u2014 villagers \u2014 motionless. They are too far to make out features, dark shapes against the bright horizon. Below them, the hillside slopes away. Wide shot from a middle-ground position, ridge figures small and still at the top of frame.",
+      "motion_prompt": "Slow push-in toward the distant ridge figures, the dry grass of the hillside in the foreground swaying faintly.",
+      "index": 9
+    },
+    {
+      "narration": "Everything you are about to see has been drawn from the Eyam parish registers,",
+      "image_prompt": "{riley_farmhouse} A heavy open ledger book lying on a rough wooden table, its pages covered in dense handwritten entries in brown iron gall ink. The book is worn at the corners, the pages slightly yellowed and wavy from age. A small tallow candle stub burns to one side, casting warm flickering light across the open pages. Close-up, slightly angled.",
+      "motion_prompt": "Very slow push-in toward the open pages, the candle flame flickering gently at the edge of frame.",
+      "index": 10
+    },
+    {
+      "narration": "the letters the rector wrote that survive,",
+      "image_prompt": "{riley_farmhouse} A single folded letter lies open on a wooden surface, written in careful seventeenth-century hand with a quill pen visible resting beside it. The ink is dark brown, the paper cream and slightly foxed at the edges. Candlelight from off-left illuminates the page. Close-up portrait of the document.",
+      "motion_prompt": "Slow drift across the letter surface, the candle flame just visible at the left edge flickering slowly.",
+      "index": 11
+    },
+    {
+      "narration": "and the seven graves on the Riley hillside that still stand today, ringed by a low stone wall.",
+      "image_prompt": "{riley_graves_closing} The seven Hancock graves on the Riley hillside, enclosed by a low mossy limestone wall. The graves are small rectangular mounds with simple stone markers, surrounded by long coarse grass. The Derbyshire moorland stretches to the horizon under a wide overcast sky. The scene is ancient, windswept, isolated. Wide shot, the wall and graves in the middle ground.",
+      "motion_prompt": "Slow aerial-like drift forward and slightly downward toward the stone-walled enclosure, the long grass bending in the wind.",
+      "index": 12
+    },
+    {
+      "narration": "To understand her eight days, you have to go back almost a year, to the autumn before.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock stands on the hillside again, now seen from a distance, a small solitary figure against the vast moor. Behind her the sky is pale and the hills roll away. The camera is far back, making her tiny in the landscape \u2014 a figure in time as much as space. Wide shot.",
+      "motion_prompt": "Very slow pull back further from the figure, increasing her smallness against the great landscape, dry grass drifting.",
+      "index": 13
+    },
+    {
+      "narration": "It began with cloth.",
+      "image_prompt": "{riley_farmhouse} A folded bundle of dark cloth \u2014 wool broadcloth, roughly wrapped \u2014 resting on a worn wooden table in a dim interior. The cloth is slightly damp-looking, dark grey-blue, folds compressed from a long journey. A single small window behind admits grey autumn light. Simple, spare composition. Still life close-up.",
+      "motion_prompt": "Slow push-in toward the bundle of cloth, dust motes drifting in the faint window light behind it.",
+      "index": 14
+    },
+    {
+      "narration": "At the end of the summer of sixteen sixty-five, a bundle of cloth came up from London to the house of the village tailor.",
+      "image_prompt": "{eyam_village} The exterior of a modest seventeenth-century stone cottage in Eyam, one of a row along a narrow lane. A man \u2014 a carrier \u2014 is visible in the middle distance setting down a wrapped cloth bundle at the door. He wears a broad-brimmed hat and rough travel coat. The light is grey, end-of-summer overcast. Wide shot of the cottage and lane.",
+      "motion_prompt": "Slow push-in toward the cottage door and the bundle resting against it, a faint autumn breeze moving bare tree branches at the lane's edge.",
+      "index": 15
+    },
+    {
+      "narration": "London that year was deep in plague, though Eyam, sixty miles north in the Derbyshire hills, thought itself far away from it.",
+      "image_prompt": "{riley_hillside} A wide vista of the Derbyshire hills from a high vantage point \u2014 rolling moorland, grey-green fields, stone walls, distant villages small in the valley. The landscape is open and seemingly remote from any catastrophe. Late afternoon light under a partially clouded sky. No figures. Purely landscape.",
+      "motion_prompt": "Very slow pan across the moorland vista, clouds casting moving shadows across the hillsides below.",
+      "index": 16
+    },
+    {
+      "narration": "The cloth was damp from the journey.",
+      "image_prompt": "{riley_farmhouse} Extreme close-up of the cloth bundle on the wooden table, now partially unwrapped. The dark wool fabric has a damp sheen. A few folds are peeled back revealing the dense weave beneath. The detail is tactile and ominous. Candlelight from just off-frame catches the wet sheen.",
+      "motion_prompt": "Barely perceptible slow drift across the cloth surface, the candlelight glinting faintly on the damp fibers.",
+      "index": 17
+    },
+    {
+      "narration": "A man named George Viccars spread it out before the fire to dry.",
+      "image_prompt": "{riley_farmhouse} A figure in a leather apron over a linen shirt kneels beside a low stone hearth where a modest fire burns, their back turned to the viewer. The dark cloth is spread across the floor before the fire, the flickering orange light catching the rough weave of the fabric and the worn leather of the apron. The interior is dim, low-ceilinged with rough plaster walls. Medium shot.",
+      "motion_prompt": "Firelight flickering across the spread cloth and the still figure of Viccars beside it, slow breathing motion in his posture.",
+      "index": 18
+    },
+    {
+      "narration": "He did not know that the damp folds carried fleas,",
+      "image_prompt": "{riley_farmhouse} George Viccars crouches beside the fire, his hands resting on his knees, his gaze directed downward toward the cloth spread before him. His face is turned away from camera, angled into shadow, unresolved. The firelight rises from below, catching the fabric in amber and the rough weave of his sleeve. The room behind him is dark and simple \u2014 a few tools on the wall, a stool. Medium close shot from the side, framing held just past his shoulder.",
+      "motion_prompt": "Firelight flickers slowly across his still face, the cloth in the foreground barely visible in the warm glow.",
+      "index": 19
+    },
+    {
+      "narration": "and that the fleas carried the thing that was emptying London street by street.",
+      "image_prompt": "{eyam_village} A dimly lit view down a narrow seventeenth-century London street \u2014 cobblestones, overhanging timber-framed buildings, shuttered windows. The street is deserted except for a distant solitary figure standing motionless in the middle distance. The light is grey and oppressive. Wide shot looking down the empty lane.",
+      "motion_prompt": "Slow push-in down the empty street toward the distant still figure, faint wisps of smoke or haze drifting across the cobbles.",
+      "index": 20
+    },
+    {
+      "narration": "Within days Viccars was dead, raging with fever.",
+      "image_prompt": "{riley_farmhouse} George Viccars lies on a rough straw mattress in the corner of the low-ceilinged cottage. He is covered with a wool blanket, his face flushed and damp with sweat, eyes closed. A woman \u2014 his landlady \u2014 stands nearby in the shadows, arms folded, not approaching. The room is lit by a single rushlight. Medium shot, figure on the bed central.",
+      "motion_prompt": "The rushlight flame wavers slowly, casting shifting shadows across the prone figure, almost imperceptibly.",
+      "index": 21
+    },
+    {
+      "narration": "By the end of September, five more in the houses nearby.",
+      "image_prompt": "{eyam_village} A row of stone cottages on an Eyam lane in early autumn. Several have their shutters closed and doors shut. A woman in dark clothing stands in a doorway of one house, looking down the lane. Fallen leaves lie scattered on the path. The sky is grey and overcast. Wide shot down the lane.",
+      "motion_prompt": "Slow drift along the lane past the shuttered houses, dry leaves skittering faintly in the wind on the path.",
+      "index": 22
+    },
+    {
+      "narration": "By the end of October, twenty-three.",
+      "image_prompt": "{village_church} The Eyam parish church \u2014 a small stone church with a square tower \u2014 seen from across the graveyard. Several mounds of freshly turned earth are visible among the older gravestones. The trees around the churchyard are losing their autumn leaves. The sky is heavy and grey. Wide shot, the church in the background.",
+      "motion_prompt": "Slow pan across the churchyard, fallen leaves drifting gently across the graves in a light wind.",
+      "index": 23
+    },
+    {
+      "narration": "And then the cold came, and the dying slowed,",
+      "image_prompt": "{eyam_village} The Eyam hillside in early winter \u2014 frost on the grass, a thin grey sky. A few stone cottages visible in the middle distance. A villager, bundled in a heavy cloak, walks slowly along a path between dry stone walls. The landscape is bare and cold. Wide shot.",
+      "motion_prompt": "Slow push-in toward the bundled figure walking the frost-edged path, breath just barely visible in the cold air.",
+      "index": 24
+    },
+    {
+      "narration": "and through the winter the village let itself believe the worst had passed.",
+      "image_prompt": "{riley_farmhouse} Interior of a village cottage in winter. A family \u2014 a man, a woman, two children \u2014 gathered around a small fire, the man and woman turned toward each other, their postures close in quiet conversation. A frosted window admits grey light. The fire burns low. Medium wide shot of the domestic scene, figures seen from behind or in partial silhouette against the firelight.",
+      "motion_prompt": "Firelight slowly pulses and flickers across the family group, the frost-edged window behind them faintly glowing.",
+      "index": 25
+    },
+    {
+      "narration": "In the whole month of May, only two died.",
+      "image_prompt": "{village_church} The Eyam churchyard in late spring. Fresh green growth on the trees. The gravestones are bathed in gentle May light. A single figure \u2014 a woman in a dark dress \u2014 stands at a grave in the middle distance, head bowed. The churchyard is otherwise quiet. Wide shot, the church tower visible behind.",
+      "motion_prompt": "Slow drift toward the solitary mourning figure, spring leaves in the trees at the edge of frame moving softly.",
+      "index": 26
+    },
+    {
+      "narration": "The hills were greening.",
+      "image_prompt": "{eyam_village} The Derbyshire hills around Eyam in late spring, vivid green after winter. Dry stone walls cross the hillsides. A few figures \u2014 villagers \u2014 can be seen walking along a lane at the edge of a field in the middle distance. The sky is partly cloudy with warm light breaking through. Wide landscape shot.",
+      "motion_prompt": "Slow pan across the greening hillside, the figures on the distant lane barely moving, cloud shadows drifting.",
+      "index": 27
+    },
+    {
+      "narration": "People walked out again.",
+      "image_prompt": "{eyam_village} Two women in Eyam, wearing wool cloaks and coifs, walking along a village path between cottages. They are in conversation, one gesturing slightly, the other listening. The light is bright and spring-like. Stone walls border the path. Medium wide shot, figures walking slowly.",
+      "motion_prompt": "Slow push-in following the two women walking, the scene bright and almost hopeful in the spring light.",
+      "index": 28
+    },
+    {
+      "narration": "It felt, to the people of Eyam, like deliverance.",
+      "image_prompt": "{eyam_village} A wider view of Eyam village on a bright late-spring morning. Several villagers are visible in the lane and near the church \u2014 a man carrying a tool, children visible near a doorway, a woman hanging washing. The village looks alive. Warm light. Wide shot.",
+      "motion_prompt": "Very slow pan across the village scene, the washing on the line billowing gently, the scene quiet and almost peaceful.",
+      "index": 29
+    },
+    {
+      "narration": "It was not deliverance. It was the pause before the second wave.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock stands alone on the Riley hillside in the same spot as the opening \u2014 spade in hand, the village visible far below in the valley. The sky has a thin overcast now, the light harsher. She is utterly still. Wide shot from behind and above, the valley and village visible below.",
+      "motion_prompt": "Very slow push-in from behind toward Elizabeth on the hillside, the distant village small in the valley below.",
+      "index": 30
+    },
+    {
+      "narration": "In June of sixteen sixty-six, the plague came back, and this time it did not slow.",
+      "image_prompt": "{eyam_village} The Eyam lane in high summer \u2014 brutal sunshine, dusty cobbles. A cart draped with a rough cloth is being pushed slowly along the lane by a man in a broad hat, his posture stooped. Another figure stands back against a wall, watching from a distance. The village looks tense. Medium wide shot.",
+      "motion_prompt": "Slow push-in down the lane, heat shimmer rising from the stones, the distant watching figure perfectly still.",
+      "index": 31
+    },
+    {
+      "narration": "Twenty-one died that month.",
+      "image_prompt": "{village_church} The Eyam churchyard again, now in harsh summer light. Multiple fresh grave mounds are visible, some with rough wooden crosses. A man \u2014 the gravedigger \u2014 stands with a spade at one side, his posture exhausted, hat in hand. The churchyard is fuller, heavier. Wide shot.",
+      "motion_prompt": "Slow pan across the new graves, the gravedigger standing still, heat haze shimmering faintly above the mounds.",
+      "index": 32
+    },
+    {
+      "narration": "The new rector, William Mompesson, watched the burials multiply and understood what was coming.",
+      "image_prompt": "{village_church} A slender figure in a dark cassock and plain white collar stands at the edge of the churchyard, turned away toward the village beyond. Fresh grave mounds rise behind him in the middle distance, the disturbed earth dark against pale grass. The churchyard wall frames the composition to one side. Medium shot, three-quarter view from behind, the village rooftops visible in the distance over his shoulder.",
+      "motion_prompt": "Hold on Mompesson's still face, a slow drift of thin cloud shadow moving across the churchyard behind him.",
+      "index": 33
+    },
+    {
+      "narration": "He went to the people with a plan, and it was a terrible one.",
+      "image_prompt": "{village_church} Rector Mompesson stands at the front of the small church interior, addressing a gathered group of perhaps fifteen villagers \u2014 men and women in plain seventeenth-century dress \u2014 seated on rough pews or standing against the walls. The church is dim, lit by small windows. His posture is earnest, hands visible at his sides. Wide interior shot.",
+      "motion_prompt": "Very slow push-in toward Mompesson and the congregation, candlelight and window light barely shifting.",
+      "index": 34
+    },
+    {
+      "narration": "The villages all around them \u2014 Stoney Middleton, Grindleford, the farms toward Sheffield \u2014 had so far been spared.",
+      "image_prompt": "{eyam_village} A high wide view of the Derbyshire landscape \u2014 the village of Eyam visible in one valley, and in the distance other villages and scattered farmsteads visible across rolling moorland. The landscape is summer-green. A wide, sweeping vista showing the geographic isolation and the surrounding communities. No figures.",
+      "motion_prompt": "Very slow pan across the wide landscape, clouds casting slow shadows on the distant hillsides and villages.",
+      "index": 35
+    },
+    {
+      "narration": "If the people of Eyam scattered, ran for those villages the way the frightened always run, they would carry the plague north into a country that had so far escaped it.",
+      "image_prompt": "{eyam_village} A stone lane leading out of Eyam toward the open moor, bordered by dry stone walls, stretching toward the distant hills. The lane is empty but for one distant figure at the far end who appears to have paused, looking back. The light is intense August sun. Wide shot down the empty lane.",
+      "motion_prompt": "Slow push-in down the empty lane toward the distant paused figure, heat haze shimmering on the stones.",
+      "index": 36
+    },
+    {
+      "narration": "Mompesson asked them not to run.",
+      "image_prompt": "{eyam_village} Three figures stand in a village lane \u2014 a rector in dark clerical coat facing two farmers in rough linen and wool, a few paces between them. The rector's hands are open at his sides, posture steady and forward-facing, but the composition keeps all faces turned, angled away, or caught in the shadow of hat brims. The men hold their ground, still. Stone cottages line the lane behind them, their doorways dim in the summer afternoon light. Medium shot of the three figures, the distance between them holding the weight of the exchange.",
+      "motion_prompt": "Hold on the still group, a faint breeze barely moving the hem of Mompesson's cassock, the scene fixed and tense.",
+      "index": 37
+    },
+    {
+      "narration": "He asked them to draw a line around their own village and stay inside it.",
+      "image_prompt": "{boundary_stone} A large rough-hewn limestone boundary stone standing in open moorland at the edge of the parish, surrounded by dry grass and heather. A few villagers \u2014 four or five figures \u2014 stand near it in discussion. The moor stretches to the horizon. The stone is heavy and permanent-looking. Wide shot.",
+      "motion_prompt": "Slow push-in toward the boundary stone and the gathered figures, heather and dry grass moving in a steady breeze.",
+      "index": 38
+    },
+    {
+      "narration": "To seal themselves in with the thing that was killing them, so that it would die when they died, and go no further.",
+      "image_prompt": "{boundary_stone} Rector Mompesson stands alone on the open moor at dusk, near a boundary stone. His dark cassock is still. The village of Eyam is visible as a faint cluster of rooftops in the valley below him. The sky is a heavy grey-orange at the horizon. Wide shot, his figure small and dark against the moor.",
+      "motion_prompt": "Very slow pull back from Mompesson to emphasize the vast moor around him, the last light fading at the horizon.",
+      "index": 39
+    },
+    {
+      "narration": "They agreed.",
+      "image_prompt": "{village_church} Inside the church, the gathered villagers \u2014 men, women, some elderly \u2014 stand among the pews facing the rector. Several have bowed their heads. One older man has a hand pressed to his chest. The light is dim and solemn. Rector Mompesson's figure is visible at the front. Medium wide shot of the congregation.",
+      "motion_prompt": "Very slow push-in toward the bowed congregation, candlelight flickering at the front of the church.",
+      "index": 40
+    },
+    {
+      "narration": "We do not entirely know why.",
+      "image_prompt": "{village_church} A close-up portrait of a middle-aged villager woman \u2014 coif, plain dark dress \u2014 her head turned slightly downward, face falling into shadow. Behind her the church interior is dim. The light catches the fabric of her coif and the curve of her shoulder. The image is quiet and unknowable. Medium portrait shot.",
+      "motion_prompt": "Hold nearly still on her face, a slow drift of candlelight shadow moving across the church wall behind her.",
+      "index": 41
+    },
+    {
+      "narration": "Some out of faith, some out of fear, some perhaps because there was nowhere left to run to.",
+      "image_prompt": "{village_church} Three separate villagers visible in the same wide church interior shot: one man with hands folded together as if in prayer, one woman pressed close against the stone wall with her shoulders turned inward, one older man angled toward the door as though on the verge of leaving. The group represents different postures \u2014 devotion, withdrawal, reluctance. Candlelight.",
+      "motion_prompt": "Very slow pan across the three still figures, candlelight gently shifting across each face.",
+      "index": 42
+    },
+    {
+      "narration": "A ring of boundary stones was set around the parish, and the village closed itself like a fist.",
+      "image_prompt": "{eyam_village} A wide aerial-perspective view of the Eyam parish \u2014 the village in the centre of the frame, surrounded by open moorland, and around the perimeter of the frame, several boundary stones just visible at the edges, marking the invisible cordon. The landscape is vast. The village is enclosed. Wide establishing shot.",
+      "motion_prompt": "Very slow zoom out to reveal the encircled village, cloud shadows drifting slowly across the moorland.",
+      "index": 43
+    },
+    {
+      "narration": "Food and supplies were left at the stones by people from the outside who never came closer.",
+      "image_prompt": "{boundary_stone} One of the limestone boundary stones on the moorland edge. In front of it, a basket of bread and a cloth-wrapped bundle have been set on the grass. Two figures from outside \u2014 at a safe distance, perhaps twenty feet back \u2014 stand watching, wrapped in cloaks. A villager crouches to collect the goods, not looking up. Wide-to-medium shot.",
+      "motion_prompt": "Slow push-in toward the stone and the exchange, the distant outside figures perfectly still, moorland wind in the grass.",
+      "index": 44
+    },
+    {
+      "narration": "Coins were left in payment in holes filled with vinegar, or dropped into the running water of a well on the hill, because they believed the water and the vinegar would clean the sickness from the metal.",
+      "image_prompt": "{boundary_stone} A mossy stone well on a hillside above Eyam. A villager woman crouches beside it, her hand extended over the dark water, her back turned to the viewer. Several coins are visible on the stone rim near a small clay pot. The hill and moor stretch behind her. Medium shot, the well central.",
+      "motion_prompt": "The well water ripples very slowly in the wind, the woman's figure still, a faint shimmer on the water surface.",
+      "index": 45
+    },
+    {
+      "narration": "No one crossed the line outward.",
+      "image_prompt": "{boundary_stone} A view from inside the Eyam boundary, looking out across the moor toward the boundary stone. The empty moorland beyond is open and free. A villager \u2014 a young man \u2014 stands just inside the line, hands at his sides, looking out. His posture is one of restraint. Wide shot, the boundary stone visible ahead.",
+      "motion_prompt": "Hold on the young man standing at the invisible boundary, heather bending in a slow moorland wind beyond him.",
+      "index": 46
+    },
+    {
+      "narration": "That was the agreement. That was the sentence they passed on themselves.",
+      "image_prompt": "{boundary_stone} Rector Mompesson stands at the boundary stone on the open moor, facing the village direction. His figure is dark against the sky. The moor stretches in all directions. He is alone. The weight of the moment is in the stillness of his posture. Wide shot, the stone beside him.",
+      "motion_prompt": "Very slow push-in toward Mompesson at the stone, the moorland grass and heather bending in a slow persistent wind.",
+      "index": 47
+    },
+    {
+      "narration": "Elizabeth Hancock lived with her family at a farm called Riley, on the edge of the parish, a little apart from the village itself.",
+      "image_prompt": "{riley_farmhouse} Riley Farm \u2014 a modest seventeenth-century stone farmhouse with a low attached barn, sitting alone on the edge of a hillside pasture. Stone walls cross the surrounding fields. The farm is slightly removed from the village below. Warm summer light. A woman \u2014 Elizabeth Hancock \u2014 is visible as a small figure near the barn entrance. Wide establishing shot.",
+      "motion_prompt": "Slow push-in from across the fields toward the farmhouse, the figure of Elizabeth just visible, grass in the meadow swaying.",
+      "index": 48
+    },
+    {
+      "narration": "A farmer's wife. Seven children.",
+      "image_prompt": "{riley_farmhouse} A woman and seven children gathered informally in front of a stone farmhouse wall, ranging in height from a small child of perhaps four to a teenager of sixteen. Her arm is drawn around the youngest, who leans into her side. The figures are seen from a medium wide angle, their backs and profiles turned variously toward one another and away from camera, the group arranged in the easy, unposed way of a family at rest. Warm summer light falls across the rough stone wall behind them and catches the children's hair and clothing. The sense of the group is one of closeness and number \u2014 a household, held together.",
+      "motion_prompt": "Hold nearly still on the family group, a gentle summer breeze moving the children's hair and the edge of Elizabeth's apron.",
+      "index": 49
+    },
+    {
+      "narration": "For a while, the distance from the village seemed to protect them.",
+      "image_prompt": "{riley_hillside} Wide shot from behind the Hancock family group at Riley Farm, all of them looking out toward the valley and the distant village below. They stand together near the farm, the village small and far in the background. The space between them and the village is visible and significant. Summer light.",
+      "motion_prompt": "Very slow pull back from the family, increasing the distance between them and the village below, a warm breeze in the grass.",
+      "index": 50
+    },
+    {
+      "narration": "The dying was down in the houses by the church, not up here on the hill.",
+      "image_prompt": "{riley_hillside} A view looking down from the Riley hillside toward the church tower visible among the village rooftops far below. Smoke rises thinly from a chimney near the church. The hillside in the foreground where Elizabeth stands is open, clear, and distinct from the distant village below. Wide shot.",
+      "motion_prompt": "Slow tilt down from the open hillside to the smoke-wreathed village below, the smoke drifting slowly upward.",
+      "index": 51
+    },
+    {
+      "narration": "Then it came up the hill.",
+      "image_prompt": "{riley_farmhouse} Elizabeth Hancock stands at the open door of Riley Farm, looking down the hill. Her posture has changed \u2014 tense, watchful. The hillside path leading up from the valley is empty, but the change in her posture says enough. The August light is harsh. Medium shot of her in the doorway frame, the hill behind her.",
+      "motion_prompt": "Hold on Elizabeth in the doorway, a slow push-in compressing the space, heat shimmer on the hillside path behind her.",
+      "index": 52
+    },
+    {
+      "narration": "On the third of August, her husband John died.",
+      "image_prompt": "{riley_farmhouse} Inside Riley Farm \u2014 a low stone room with a small window admitting harsh summer light. A broad-shouldered figure lies on a straw mattress, covered in a rough blanket, turned away from the viewer, still beneath the coarse weave. Elizabeth kneels beside him, her hand pressed to his chest, her back to camera. The room is spare and dim. Medium shot.",
+      "motion_prompt": "Hold nearly still on the scene, the summer light through the small window barely shifting, Elizabeth motionless.",
+      "index": 53
+    },
+    {
+      "narration": "The ground at Riley is thin over rock, and there was no one to dig but her, so she dug.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock on the hillside above Riley Farm, driving a spade into the hard pale earth. The spade is struck into the ground and she leans on it with both hands, her back to camera, posture heavy with fatigue and effort. The thin soil is broken, pale limestone just beneath. The farm is visible below. Medium shot from the side, her face turned away toward the ground.",
+      "motion_prompt": "Hold nearly still on Elizabeth leaning on the spade, a faint hot breeze lifting her coif edges, heat shimmer rising.",
+      "index": 54
+    },
+    {
+      "narration": "She wrapped him, and she dragged him up the slope,",
+      "image_prompt": "{riley_hillside} The hillside at Riley, seen from a distance. A small, struggling figure \u2014 Elizabeth \u2014 is on the slope below the burial ground, visible as a distant shape against the hillside. The dragging motion is implied by her posture and position on the slope, but the figure is small and the landscape is the main subject. Wide shot.",
+      "motion_prompt": "Slow push-in from across the hillside toward the struggling distant figure, the August landscape utterly silent around her.",
+      "index": 55
+    },
+    {
+      "narration": "and she buried him, and she went back down to the house where her children were.",
+      "image_prompt": "{riley_hillside} A woman stands beside a fresh low mound of earth on the hillside, a rough wooden cross pressed into the soil at its head. She has turned away, facing down the slope toward the farmhouse below, her back to camera, posture spent but upright. The hillside is bare and exposed. Medium wide shot.",
+      "motion_prompt": "Slow tilt from the grave mound down toward Elizabeth's face and then toward the farmhouse below, the warm wind barely moving.",
+      "index": 56
+    },
+    {
+      "narration": "The next day, a child. Then the next, another.",
+      "image_prompt": "{riley_farmhouse} Inside Riley Farm, a young child \u2014 perhaps nine years old, a girl in a linen shift \u2014 lies in a small bed, pale and still. Elizabeth sits beside her in a wooden chair, her hands in her lap, staring. The light from the window is harsh afternoon sun. The room is silent. Medium shot.",
+      "motion_prompt": "Hold still on the scene, the harsh window light barely shifting, the room utterly quiet.",
+      "index": 57
+    },
+    {
+      "narration": "Across eight days in that hot August, Elizabeth Hancock buried her husband and six of her seven children on the Riley hillside, one grave at a time, alone.",
+      "image_prompt": "{riley_hillside} The Riley burial ground from above \u2014 five or six mounds of fresh earth now inside the low stone wall, the hillside pale and dry. Elizabeth is visible as a small figure at the edge of the enclosure, head bowed. The August sun is high and merciless. Wide overhead-perspective shot of the graves and the lone figure.",
+      "motion_prompt": "Very slow descent toward the burial ground and Elizabeth's small figure, heat haze shimmering over the freshly turned earth.",
+      "index": 58
+    },
+    {
+      "narration": "There is a detail that has come down through three centuries, and it is almost unbearable.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock's hands in close-up \u2014 three-quarter framing, caught in the harsh August sun. Fingers dusty, knuckles whitened, a strand of damp hair fallen loose from her coif visible at the edge of frame. The sky behind her is pale and white-hot. Medium portrait shot.",
+      "motion_prompt": "Hold nearly still on her face, a faint dry wind moving a single strand of hair at her temple.",
+      "index": 59
+    },
+    {
+      "narration": "From the ridge above, people of the village watched her.",
+      "image_prompt": "{riley_hillside} The ridge above the Riley hillside. A group of five or six villagers \u2014 men and women \u2014 stand on the rocky ridge silhouetted against the pale sky. They are looking down toward the hillside below. Their postures are still, watching. Their faces are not clearly visible from this distance. Wide shot from the hillside looking up.",
+      "motion_prompt": "Slow push-in toward the ridge and the watching figures, the dry grass of the hillside between bending in the wind.",
+      "index": 60
+    },
+    {
+      "narration": "They saw a woman dragging the bodies of her own family up a hill in the heat,",
+      "image_prompt": "{riley_hillside} From the ridge perspective looking down: Elizabeth Hancock is visible far below on the hillside slope, a small dark figure struggling up the incline. The hillside is pale and exposed in the August sun. The perspective from above makes her vulnerability and isolation total. Wide shot from the elevated ridge viewpoint.",
+      "motion_prompt": "Hold on the distant struggling figure below, the vast landscape around her still and merciless, heat haze rising.",
+      "index": 61
+    },
+    {
+      "narration": "digging, kneeling, covering them over, and going back down for the next one.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock kneels at the edge of a freshly dug grave on the hillside, both hands pressed flat on the dark turned earth. Her posture is one of having just finished \u2014 the grave is covered. She looks down at the mound. The other mounds are visible beside her. The stone wall surrounds them. Medium shot from a slight elevation.",
+      "motion_prompt": "Hold nearly still on Elizabeth kneeling, a warm dry wind moving the edge of her apron, the sky behind her white and still.",
+      "index": 62
+    },
+    {
+      "narration": "And they did not come to help her.",
+      "image_prompt": "{riley_hillside} The watching figures on the ridge, seen now from a medium distance \u2014 five people standing in a loose group on the rocky ridge. One woman has her hand raised slightly as if in an arrested gesture of wanting to go. The others are still. The hillside drops away below them. Medium wide shot of the ridge group.",
+      "motion_prompt": "Hold on the watching figures, perfectly still, the only motion a faint wind in their clothing, the arrested gesture unchanging.",
+      "index": 63
+    },
+    {
+      "narration": "They dared not. To come close to the Hancock farm was to invite the same death into their own houses, and they had already buried so many.",
+      "image_prompt": "{riley_hillside} A close-up of a woman on the ridge, middle-aged, in a dark wool cloak. She is turned away, her gaze directed down toward the hillside below \u2014 only the line of her jaw and the curve of her hood visible against the pale sky behind her. Her hands grip the cloak's edge. Medium portrait shot.",
+      "motion_prompt": "Hold nearly still on her face, a slow drift of cloud shadow crossing the landscape behind her.",
+      "index": 64
+    },
+    {
+      "narration": "So they stood on the ridge, and they watched, and they let her do it alone.",
+      "image_prompt": "{riley_hillside} Wide shot of the full scene: in the foreground, the ridge with its line of watching villagers, dark against the sky. In the middle distance, the hillside drops away to where Elizabeth \u2014 tiny \u2014 works at the burial ground. The valley and village are far below. The August sky is bleached white. A vast, terrible tableau.",
+      "motion_prompt": "Extremely slow pull back to reveal the full scope of the scene, the watching figures above and the tiny working figure below.",
+      "index": 65
+    },
+    {
+      "narration": "That was what the plague made of them. Not cruel. Only afraid past the point where help was possible.",
+      "image_prompt": "{riley_hillside} The watching villagers on the ridge, seen from behind. Their backs are to camera. Below them the hillside and the tiny figure of Elizabeth. The landscape is vast and indifferent. The watching figures are still. Wide shot from just behind the group.",
+      "motion_prompt": "Slow push-in from behind the watching group toward the hillside view before them, a persistent dry moorland wind.",
+      "index": 66
+    },
+    {
+      "narration": "She did not stop to ring a bell for them.",
+      "image_prompt": "{village_church} The village church of Eyam seen from outside \u2014 the stone tower with its bell visible in the belfry arch, silent. The summer light is harsh. The churchyard is visible at the base. No one is at the tower. The bell hangs absolutely still. Wide shot of the church tower.",
+      "motion_prompt": "Hold on the still church tower and silent bell, a faint breeze moving a wisp of cloud past the tower top.",
+      "index": 67
+    },
+    {
+      "narration": "No one in Eyam had time to toll bells anymore.",
+      "image_prompt": "{village_church} The Eyam churchyard in the height of summer \u2014 harsh sun, multiple fresh grave mounds visible, more than before. A single gravedigger crouches at a newly dug pit, working. The church is behind him. The scene speaks of relentless labour and no ceremony. Wide shot.",
+      "motion_prompt": "Slow pan across the churchyard from the graves to the silent bell tower, heat haze rising from the summer earth.",
+      "index": 68
+    },
+    {
+      "narration": "She dug, and she carried, and she covered, and the August sun did not let up,",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock on the Riley hillside \u2014 a wide shot showing her solitary figure on the bleached slope with the burial enclosure behind her. The sun is directly overhead, shadows short and hard. The landscape is utterly washed out with August heat. She stands between a grave and the farm below, paused for a moment.",
+      "motion_prompt": "Hold nearly still on Elizabeth's figure, the heat shimmer intense above the pale earth around her, sky blazing.",
+      "index": 69
+    },
+    {
+      "narration": "and by the time it was over there were seven fresh graves on the slope above her house",
+      "image_prompt": "{riley_hillside} The Riley burial enclosure from a slight distance \u2014 all seven mounds now complete within the low stone wall. The graves are arranged in a rough line, the earth dark against the pale dry grass. The farmhouse is just visible below the slope. Wide shot of the enclosure.",
+      "motion_prompt": "Slow push-in toward the seven graves within the stone wall, the dry grass around them bending in the August wind.",
+      "index": 70
+    },
+    {
+      "narration": "and she was the only one of her family left standing on the earth.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock stands alone just outside the stone wall of the burial enclosure, seven mounds visible behind her. She faces outward, away from the graves, her back to the camera. Her figure is upright but diminished against the vast Derbyshire landscape stretching away in all directions. Wide shot, figure centred.",
+      "motion_prompt": "Very slow pull back from Elizabeth standing alone at the burial enclosure, the vast empty landscape expanding around her.",
+      "index": 71
+    },
+    {
+      "narration": "She lived.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock stands on the Riley hillside in close-to-medium shot, facing slightly away from camera. The graves are just at the edge of the frame behind her. Her posture is not triumphant \u2014 it is simply present. She is standing. She is still here. The August light falls on her. Quiet and bare.",
+      "motion_prompt": "Hold nearly still on Elizabeth standing, a slow drift of wind-blown dry grass in the foreground, the sky behind her unchanging.",
+      "index": 72
+    },
+    {
+      "narration": "That is the thing about Eyam that the story almost forgets to tell you.",
+      "image_prompt": "{riley_hillside} A medium close shot of Elizabeth Hancock, her coif dusty and weathered from days of sun and labour. The framing holds on her from behind or in three-quarter silhouette \u2014 the set of her shoulders, the fabric at her collar, the tired stillness of someone who has endured. The sky behind her is clear pale blue. Her hands, roughened and present, carry the weight the face does not show.",
+      "motion_prompt": "Hold nearly still on her face, a very faint dry breeze at the edge of the frame, nothing else moving.",
+      "index": 73
+    },
+    {
+      "narration": "The woman who buried everyone she loved did not die.",
+      "image_prompt": "{riley_hillside} Wide shot of the Riley hillside \u2014 the seven graves within their stone wall on the slope above, and Elizabeth Hancock's figure standing at the bottom of the slope below, alive, upright. The scale of the graves above and the single living figure below tells the whole story. Afternoon August light.",
+      "motion_prompt": "Slow push-in from a distance toward the living figure at the base of the burial slope, the graves visible above.",
+      "index": 74
+    },
+    {
+      "narration": "Elizabeth Hancock survived the plague that took her husband and six children in eight days,",
+      "image_prompt": "{riley_farmhouse} Elizabeth Hancock stands at the farm entrance of Riley Farm, her back partially to camera, looking back toward the burial slope above. The seven mounds are just visible through the stone wall up the hill. She is alive, standing, the farm around her. Late afternoon golden light. Medium wide shot.",
+      "motion_prompt": "Hold on Elizabeth at the farm, a warm late afternoon wind moving the grass of the slope above, the graves still.",
+      "index": 75
+    },
+    {
+      "narration": "and when it was finally over she left the hillside and the graves and went to Sheffield with her one remaining son, and lived.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock walks away from Riley Farm along a stone-walled lane heading out across the moor, a young teenage boy \u2014 her remaining son \u2014 walking at her side. Both carry bundles. They are moving away from the farm, toward the wider world. Wide shot from behind, their figures diminishing along the lane.",
+      "motion_prompt": "Very slow push-in following the two figures walking away along the lane, the moor opening around them, wind in the grass.",
+      "index": 76
+    },
+    {
+      "narration": "She was not the only one to lose everything.",
+      "image_prompt": "{eyam_village} The village of Eyam in late August \u2014 the lane quiet, a few figures visible standing outside cottages, the general atmosphere one of depletion and grief. Several houses have closed shutters. The church tower is visible. Wide shot down the village lane.",
+      "motion_prompt": "Slow pan down the quiet village lane, the still figures outside their cottages barely moving, silence in the scene.",
+      "index": 77
+    },
+    {
+      "narration": "That same August, down in the village, the rector's wife was dying too.",
+      "image_prompt": "{riley_farmhouse} Inside a modest but slightly better-appointed cottage \u2014 the rectory interior. A slender woman in a plain dark dress and white collar lies in a bed, her form slight beneath the linen, one pale hand resting above the coverlet. A candle burns beside the bed, its light catching the damp cloth folded at the wrist. The rector sits in a chair nearby, head bowed, his hands clasped between his knees. Medium wide shot.",
+      "motion_prompt": "The candle flame beside the bed flickers slowly, casting shifting shadows across Catherine's pale still face.",
+      "index": 78
+    },
+    {
+      "narration": "Catherine Mompesson had sent her children away to safety months before,",
+      "image_prompt": "{eyam_village} A recall image: a narrow lane at the edge of Eyam, several months earlier in better light. Two young children \u2014 a boy and a girl \u2014 walk away along the lane beside an older woman who is leading them away from the village. Catherine Mompesson stands at the lane edge watching them go, her figure still. Wide shot.",
+      "motion_prompt": "Hold on Catherine watching the children and the guiding woman disappear down the lane, a gentle spring breeze moving the hedgerow.",
+      "index": 79
+    },
+    {
+      "narration": "but she had refused to leave her husband,",
+      "image_prompt": "{eyam_village} Catherine Mompesson and Rector Mompesson stand together in the doorway of the rectory. She is facing inward toward the village \u2014 not outward toward escape. He is beside her, looking at her. They are close, their postures speaking of a shared decision. Medium wide shot.",
+      "motion_prompt": "Hold on the couple in the doorway, the village lane behind them, a faint breeze moving her dress.",
+      "index": 80
+    },
+    {
+      "narration": "and through all the months of dying she had walked among the sick, nursing them.",
+      "image_prompt": "{riley_farmhouse} Catherine Mompesson moves through a village cottage interior \u2014 several sick figures on mattresses on the floor, wrapped in blankets. She kneels at one, offering water from a clay cup. The room is dim and heavy. She is the only person upright and moving. Medium shot of the interior scene.",
+      "motion_prompt": "Very slow push-in toward Catherine kneeling with the cup, the dim room around her barely lit by a small window.",
+      "index": 81
+    },
+    {
+      "narration": "One evening, walking home with her husband, she said she could smell something sweet in the air.",
+      "image_prompt": "{eyam_village} William and Catherine Mompesson walk side by side along the Eyam lane at dusk. The village is quiet around them. Catherine has paused mid-step, her head slightly lifted, as if catching a scent. Mompesson looks at her. The dusk light is low and golden-grey. Medium shot of the two figures paused on the lane.",
+      "motion_prompt": "Hold nearly still on the couple paused on the lane, the dusk light barely fading, a breathless stillness in the air.",
+      "index": 82
+    },
+    {
+      "narration": "A sweet smell, with nothing there to cause it, was one of the first signs.",
+      "image_prompt": "{eyam_village} Close-up of Catherine Mompesson at dusk, her head turned slightly upward and away, the line of her jaw and the curve of her collar visible in profile, her posture caught in a moment of stillness. Her husband's shoulder is visible in soft focus behind her, the lane receding beyond. The light is low and golden. Medium portrait.",
+      "motion_prompt": "Hold nearly still on Catherine's face, the dusk light almost imperceptibly fading, nothing else moving.",
+      "index": 83
+    },
+    {
+      "narration": "Within days she was dead, on the twenty-fifth of August,",
+      "image_prompt": "{riley_farmhouse} A figure lies still in the bed in the rectory, linen sheet folded at the chest, hands resting motionless above the cloth. Rector Mompesson sits at her side, his head in his hands, his back to camera. The candle beside the bed has burned lower. Morning grey light falls from the window across the bedclothes and the hunched silhouette of the man keeping watch. Medium shot.",
+      "motion_prompt": "Hold still on the scene, the candle flickering faintly, morning light barely increasing in the window.",
+      "index": 84
+    },
+    {
+      "narration": "and her grave is the only plague grave inside the churchyard, because her husband was given leave to bury her there.",
+      "image_prompt": "{village_church} Inside the Eyam churchyard \u2014 a freshly dug grave close to the church wall, a simple cross at its head. Rector Mompesson kneels beside it, head bowed in prayer, his cassock dusty. The church wall is behind him. The rest of the churchyard is beyond. Morning light. Medium shot of the rector at the grave.",
+      "motion_prompt": "Hold nearly still on Mompesson kneeling at the grave, a very slow drift of morning mist at the church wall base.",
+      "index": 85
+    },
+    {
+      "narration": "By the autumn the dying began at last to slow, the way a fire slows when it has run out of things to burn.",
+      "image_prompt": "{riley_farmhouse} The hearth of a village cottage \u2014 a dying fire, embers fading, the last logs mostly ash. The red glow is almost gone. The room behind is dark. Close-up of the dying hearth.",
+      "motion_prompt": "The last embers pulse and dim very slowly, the glow fading almost imperceptibly.",
+      "index": 86
+    },
+    {
+      "narration": "The last to go was a man named Abraham Morten, at the beginning of November sixteen sixty-six.",
+      "image_prompt": "{riley_farmhouse} A man lies on a mattress in a spare cottage room in early November light, his form turned away from the viewer, the shape of age visible in his stillness. The light through the window is thin and grey. A single figure \u2014 a neighbour \u2014 sits nearby in profile, hands folded in the lap. The room is austere. Medium shot.",
+      "motion_prompt": "Hold still on the scene, the thin November light barely shifting through the small window.",
+      "index": 87
+    },
+    {
+      "narration": "Fourteen months after the cloth came up from London, it was over.",
+      "image_prompt": "{riley_farmhouse} The bundle of dark cloth \u2014 the same cloth from the beginning \u2014 now rotten and disintegrated, lying in a heap on a floor in a empty, abandoned room. The room is bare, a small window letting in cold autumn light. The cloth has become ruin. Still life close-up.",
+      "motion_prompt": "Hold still on the decayed cloth in the empty room, a faint draught stirring a loose fibre at its edge.",
+      "index": 88
+    },
+    {
+      "narration": "Of the roughly three hundred and fifty people who had stayed inside the line, somewhere close to two hundred and sixty were dead.",
+      "image_prompt": "{village_church} The Eyam churchyard and surroundings visible from an elevated vantage point \u2014 the many grave mounds visible among the old stones, the village with its closed shutters and reduced presence. Only a few living figures are visible moving in the lane. The November landscape is bare. Wide elevated shot.",
+      "motion_prompt": "Very slow pan across the depleted village and churchyard, bare November trees at the margins, barely any movement.",
+      "index": 89
+    },
+    {
+      "narration": "And the villages to the north were untouched. The plague had not crossed the line.",
+      "image_prompt": "{eyam_village} A wide view of the Derbyshire landscape looking northward from above Eyam \u2014 other villages and farmsteads visible in the valleys and hills beyond, smoke rising from their chimneys, signs of normal life continuing. The view is sweeping and the northern landscape is intact, living. Wide panoramic shot.",
+      "motion_prompt": "Very slow pan northward across the living landscape beyond Eyam, the chimneys smoking, the villages untouched.",
+      "index": 90
+    },
+    {
+      "narration": "It is tempting to end there, with the clean shape of it \u2014 they sacrificed themselves and they saved the others, and the arithmetic balances.",
+      "image_prompt": "{boundary_stone} A lone figure in clerical coat stands at the boundary stone on the moor in late autumn, back turned to camera, facing out beyond the boundary. The stone is weathered. The moor around it is brown and bare under a pale sky. The clean line of the stone and the figure's silhouette against the sky. Wide shot.",
+      "motion_prompt": "Hold on Mompesson at the boundary stone, the November moorland wind bending the dead heather around him.",
+      "index": 91
+    },
+    {
+      "narration": "But that is the comfort we give ourselves, looking back.",
+      "image_prompt": "{riley_graves_closing} The Riley burial ground from a distance in autumn \u2014 the seven graves within their stone wall, the hillside brown and bare. The farmhouse below is abandoned-looking, its door closed. The scene is beautiful and terrible. Wide shot, autumn light low and raking.",
+      "motion_prompt": "Slow push-in toward the burial enclosure from across the field, the autumn wind in the dead grass.",
+      "index": 92
+    },
+    {
+      "narration": "They did not have it.",
+      "image_prompt": "{village_church} Inside the church during the height of the plague \u2014 the congregation of Eyam gathered, some kneeling, some standing. Their bowed heads and clasped hands speak only of endurance and fear. At the front, the dark figure of Rector Mompesson stands apart from the rest, his back to us, facing the altar. Candlelight. Medium wide interior shot.",
+      "motion_prompt": "Very slow push-in toward the congregation, candle flames flickering, the faces dimly lit and unresolved.",
+      "index": 93
+    },
+    {
+      "narration": "Standing inside that ring of stones in the summer of sixteen sixty-six, no one in Eyam knew whether their staying would save anyone at all.",
+      "image_prompt": "{boundary_stone} A villager \u2014 a middle-aged man in plain linen shirt and breeches \u2014 stands alone in a field near one of the boundary stones on a summer's day. He looks outward across the line, his posture one of doubt and dread. The boundary stone is at his shoulder. The moor beyond is open and free. Medium shot.",
+      "motion_prompt": "Hold on the figure at the boundary stone, the moorland wind in the heather beyond, the man utterly still.",
+      "index": 94
+    },
+    {
+      "narration": "There were learned men, even then and afterward, who doubted it had been wise,",
+      "image_prompt": "{boundary_stone} A man in better-quality seventeenth-century dress \u2014 a scholar or physician, dark coat and white collar \u2014 stands outside the Eyam boundary looking in toward the village from the safe side of the line. His posture is that of an observer: arms folded, brow furrowed. The village is visible in the middle distance beyond. Medium wide shot.",
+      "motion_prompt": "Hold on the scholar figure outside the boundary, barely moving, a slow wind in the grass around the boundary stone.",
+      "index": 95
+    },
+    {
+      "narration": "who thought sealing the healthy in with the sick had only killed more of Eyam without certainty of sparing anyone else.",
+      "image_prompt": "{eyam_village} A view down the Eyam village lane in the deep summer of the plague \u2014 shuttered windows, a solitary figure huddled against a wall, another figure lying in a doorway, half-inside. The lane is mostly empty. The oppression of the sealed village is visible in the stillness. Wide shot.",
+      "motion_prompt": "Slow push-in down the oppressively still lane, heat haze shimmering, the lane silent and sealed.",
+      "index": 96
+    },
+    {
+      "narration": "The people who stayed did not get to know how it ended.",
+      "image_prompt": "{boundary_stone} A group of five villagers \u2014 men and women \u2014 stand in the lane near a boundary stone at dusk in summer. They are looking outward across the moor in the direction of other villages they cannot see. Their postures are ones of not-knowing. Wide shot from behind the group, the moor before them darkening.",
+      "motion_prompt": "Very slow pull back from the group, the darkening moor before them expanding, no resolution in sight.",
+      "index": 97
+    },
+    {
+      "narration": "They could not see the untouched villages to the north.",
+      "image_prompt": "{eyam_village} Looking northward from the Eyam hillside at dusk \u2014 the moorland stretches away into darkness, the northern villages invisible in the failing light. There is nothing to see, only the dark moor. A few Eyam villagers are visible in silhouette on the edge of the frame, looking out. Wide shot.",
+      "motion_prompt": "Hold on the darkening northern vista, nothing visible beyond the moor, the village silhouettes absolutely still.",
+      "index": 98
+    },
+    {
+      "narration": "They only had the line, and their word, and the next grave to dig.",
+      "image_prompt": "{boundary_stone} The limestone boundary stone on the open moor, close-up. The stone is weathered and ancient-looking. At its base, a few wildflowers. Beyond it, the open landscape. The stone is simple and absolute. No figures. The sky is wide above it.",
+      "motion_prompt": "Slow drift around the boundary stone, the moorland wind in the heather, the stone immovable and permanent.",
+      "index": 99
+    },
+    {
+      "narration": "That is the part that is theirs and no one else's.",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock stands on the Riley hillside one final time, facing toward the graves. Her back is mostly to camera. The seven mounds are before her within the stone wall. The Derbyshire landscape surrounds her. The sky is wide and open. She is alone with it. Wide shot.",
+      "motion_prompt": "Very slow push-in toward Elizabeth and the graves before her, the wind in the long grass of the hillside.",
+      "index": 100
+    },
+    {
+      "narration": "Not the outcome. The choice, made blind.",
+      "image_prompt": "{riley_hillside} Close-up of Elizabeth Hancock's hands clasped at her front, knuckles whitened, held with the stillness of absolute determination and absolute cost. No triumph in the set of her shoulders, only the fact of what she has done. The pale sky fills the background behind her turned figure. Medium portrait, tight.",
+      "motion_prompt": "Hold nearly still on her face, the faintest breath of wind moving a strand of hair, nothing else.",
+      "index": 101
+    },
+    {
+      "narration": "Elizabeth Hancock did not bury her family on that hillside because she had been promised it would mean something.",
+      "image_prompt": "{riley_graves_closing} The seven graves within the stone wall at Riley \u2014 close-up of one of the simple rough stone markers. The marker is plain and unadorned, just a slab of local limestone pressed into the earth. Dry grass grows around its base. The sky is wide behind it. No figures.",
+      "motion_prompt": "Slow drift from one grave marker to the next along the row, the wind in the coarse grass around each stone.",
+      "index": 102
+    },
+    {
+      "narration": "She buried them because they were hers and there was no one else to do it,",
+      "image_prompt": "{riley_hillside} Elizabeth Hancock kneels at a grave mound within the enclosure \u2014 not digging now, but with her hands pressed flat against the covered earth in a gesture of farewell. Her head is slightly bowed. The other mounds are around her. The stone wall encircles them all. Medium shot from the side.",
+      "motion_prompt": "Hold nearly still on Elizabeth kneeling with hands on the earth, a slow warm wind lifting the edges of her apron.",
+      "index": 103
+    },
+    {
+      "narration": "inside a village that had agreed to stay and face the thing rather than carry it to strangers.",
+      "image_prompt": "{eyam_village} Wide view of Eyam village from the Riley hillside \u2014 the village in the valley below, the boundary of the parish visible in the surrounding moors, the boundary stones just discernible as small marks on the landscape. The village is contained within its self-imposed boundary. Wide landscape shot.",
+      "motion_prompt": "Very slow drift over the landscape from the hillside graves toward the contained village below, clouds moving slowly.",
+      "index": 104
+    },
+    {
+      "narration": "The graves are still there, on the slope above Riley,",
+      "image_prompt": "{riley_graves_closing} The Riley burial ground as it exists today \u2014 seven graves within a low stone wall on a grassy hillside. The stones are ancient and mossy, the wall weathered. The graves are quiet and permanent. Long coarse moorland grass surrounds the enclosure. Late afternoon light, timeless. Wide shot.",
+      "motion_prompt": "Slow push-in toward the ancient enclosure, the long grass bending in the moorland wind.",
+      "index": 105
+    },
+    {
+      "narration": "seven of them inside a low stone wall,",
+      "image_prompt": "{riley_graves_closing} A close-up of the low stone wall surrounding the Riley graves \u2014 rough limestone blocks, mossy and lichened, mortared with age. The tops of the grave mounds are visible just beyond the wall. The wall is simple, human-built, permanent. Close-up detail shot.",
+      "motion_prompt": "Slow drift along the top of the stone wall, the moss on the stones barely moving, the graves visible beyond.",
+      "index": 106
+    },
+    {
+      "narration": "alone in a field with the Derbyshire hills going on for miles in every direction.",
+      "image_prompt": "{riley_graves_closing} The widest possible shot of the Riley burial enclosure \u2014 a tiny square of stone wall with seven graves, surrounded by vast open Derbyshire moorland that stretches in all directions to distant hills. The enclosure is minuscule against the landscape. The sky is enormous above. The utter scale of the hills dwarfs the tiny human marker.",
+      "motion_prompt": "Very slow pull back to reveal the full vastness of the moorland around the tiny burial enclosure, clouds moving above.",
+      "index": 107
+    },
+    {
+      "narration": "No village around them.",
+      "image_prompt": "{riley_graves_closing} The Riley graves from a medium distance \u2014 the enclosure in the centre of frame, the hillside all around bare and empty. No farmhouse visible, no village. Just the graves and the grass and the open sky. The isolation is total. Medium wide shot.",
+      "motion_prompt": "Hold on the isolated enclosure, the coarse grass bending around it in the moorland wind, nothing else.",
+      "index": 108
+    },
+    {
+      "narration": "Just the wall, and the long grass, and the wind coming over the moor.",
+      "image_prompt": "{riley_graves_closing} Ground-level shot from just outside the stone wall of the Riley burial enclosure. The long coarse grass in the foreground bends in a strong moorland wind. The mossy wall is in the mid-ground. Behind it, the grave mounds and the grey sky of the Derbyshire moor. The wind is the only movement. Low wide shot.",
+      "motion_prompt": "The long grass in the foreground bends and ripples in a strong steady moorland wind, the wall and graves behind it perfectly still.",
+      "index": 109
+    }
+  ]
+}
