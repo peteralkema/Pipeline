@@ -378,7 +378,7 @@ Pinned comments generate the early engagement signal the algorithm watches.
 
 2. **Visual exclusivity (the load-bearing rule).** At any instant the screen belongs to *either* a Mode A recreated scene *or* a Mode B graphic — never both. One renderer owns the frame at a time. This makes the build tractable: exclusivity means the timeline is a pure **sequence** (clips butted end to end), so assemble needs **no compositing**. (Layering graphics *over* live scenes — the "underlay/Vox" look — is Phase 2 and needs a compositing stage. Cutaway-only for launch.) Narration pausing on a Mode B beat is an *editorial* choice, fully decoupled from the visual.
 
-3. **The audio is the source of truth (shared spine).** Generate the voiceover, measure it with Whisper, hang visuals off the measurement — for *both* modes. A beat's measured duration is handed to whichever renderer it routes to: a NumberCounter given 3.1s counts over 3.1s; a recreated shot given 3.1s holds 3.1s. One measurement, two consumers. **NOTE (5 June): this is the one principle not yet wired — `estimate_frames()` currently uses a word-count proxy. Real Whisper timing lands in Step 4c.**
+3. **The audio is the source of truth (shared spine).** Generate the voiceover, measure it with Whisper, hang visuals off the measurement — for *both* modes. A beat's measured duration is handed to whichever renderer it routes to: a NumberCounter given 3.1s counts over 3.1s; a recreated shot given 3.1s holds 3.1s. One measurement, two consumers. **WIRED & PROVEN (5 June, late): the audio leg is built end to end — `build_audio_script.py` (2a) assembles the full-episode read incl. found-lines; `generate_episode_vo.py` (2b) produces the real Victor VO; `build_beat_durations.py` (2c) wraps `align_with_whisper.py` to emit real per-beat `durations.json` (39 whisper-measured + 23 silent-hold for E1); `dispatch.py --durations` (2d) consumes it, replacing the word-count proxy. E1 real spoken runtime measured at 588s (9.8min) vs the proxy's 13.3min guess — the ~35% drift is gone. Proxy remains only as a no-durations-file fallback.**
 
 4. **The tagged script IS the pipeline spec (the seam).** Because a Mode B beat is written in the known component vocabulary, scripting it *is* the design — the tag payload is the render spec. `grep '[B:'` on a finished script yields the exact component list the episode needs. Proven literally true: `parse_script.py` reads the tags into a complete beat list where every B beat already carries its full render payload.
 
@@ -463,7 +463,8 @@ Mode B Remotion renders 1920×1080. Mode A engine historically rendered 1280×72
 | 3 | real Mode B render (`render_mode_b` → Remotion) | ✅ real $650M clip rendered on laptop |
 | 4a | assemble plumbing (B clip between A placeholders) | ✅ proven on laptop |
 | 4b | Mode A translator + engine ingest under Synthetic channel | ✅ `OK Beat-script ingested: 41 beats` on box |
-| 4c | real A render + full-episode audio spine + dual-mode assemble | ⏳ specified, not built |
+| 4c-audio | full-episode audio spine: VO + Whisper → real per-beat durations → dispatch consumes | ✅ proven on box (2a/2b/2c/2d) |
+| 4c-rest | real A render (stills→gate→Kling) + dual-mode assemble | ⏳ specified, not built |
 
 **Three known component-feature gaps (small Remotion tweaks, not pipeline work):** QuoteCard attribution-only variant; NumberCounter startValue+countdown; NumberCounter plainYear. None block 4c; each makes one beat render exactly as scripted.
 
@@ -576,7 +577,7 @@ beats.json  (carries `channel`; per-beat mode / speaker / lock / payload)
                        final_video.mp4
 ```
 
-Sequential-unattended is acceptable for the legs that *could* parallelize (audio ∥ Mode B ∥ Mode A-stills) — matches the banked "sequential not parallel" instinct. Expressing them as legs makes the parallelism *available* later without redesign; it is not required now. The discipline that matters is the ordering constraint: **the audio leg runs first because both render legs depend on its durations.** (This is the orchestration consequence of "audio is the source of truth": durations must exist before either renderer is dispatched, or Mode B renders at guessed lengths. The current word-count proxy in `estimate_frames()` is the placeholder until this leg lands in 4c.)
+Sequential-unattended is acceptable for the legs that *could* parallelize (audio ∥ Mode B ∥ Mode A-stills) — matches the banked "sequential not parallel" instinct. Expressing them as legs makes the parallelism *available* later without redesign; it is not required now. The discipline that matters is the ordering constraint: **the audio leg runs first because both render legs depend on its durations.** (This is the orchestration consequence of "audio is the source of truth": durations must exist before either renderer is dispatched, or Mode B renders at guessed lengths. The audio leg is now BUILT — see PART 2B principle 3: `build_audio_script.py` → `generate_episode_vo.py` → `build_beat_durations.py` → `dispatch.py --durations`. The orchestrator's job is to sequence these before the render legs.)
 
 ### channel.json — the complete cross-mode identity
 
