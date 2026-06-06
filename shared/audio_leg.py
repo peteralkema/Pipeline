@@ -19,21 +19,55 @@ import os, sys, subprocess
 from pathlib import Path
 
 
-def _run(cmd, t, label, cwd=None, dry_run=False):
-    """Run a subprocess at orchestrator altitude: log the step, stream nothing unless
-    verbose, halt loudly on failure."""
+def _run(cmd, t, label, cwd=None, dry_run=False, stream=False):
+    """Run a subprocess at orchestrator altitude. Two modes:
+      - captured (default): buffer output, surface at verbose, halt loudly on fail.
+        Fine for FAST steps (2a, 2c).
+      - stream=True: for LONG steps (2b Inworld, whisper) — let the child's stdout
+        flow through live, line by line, so the screen never goes silent. A step that
+        can run >~10s MUST stream or heartbeat; silence reads as death. (banked principle)
+    """
     t.detail(f"$ {' '.join(str(c) for c in cmd)}  (cwd={cwd or '.'})")
     if dry_run:
         t.info(f"[dry-run] would run: {label}")
         return True
-    r = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
-    if r.returncode != 0:
-        tail = (r.stderr or r.stdout).strip().splitlines()
-        t.halt(f"{label} failed (exit {r.returncode}): {tail[-1] if tail else '?'}")
+
+    if not stream:
+        r = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+        if r.returncode != 0:
+            tail = (r.stderr or r.stdout).strip().splitlines()
+            t.halt(f"{label} failed (exit {r.returncode}): {tail[-1] if tail else '?'}")
+            return False
+        for line in (r.stdout or "").splitlines():
+            t.detail(line)
+        return True
+
+    # streamed: live child output + heartbeat so long quiet stretches still pulse
+    import time, threading
+    proc = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT, text=True, bufsize=1)
+    start = time.time()
+    last_line = [start]
+    stop = threading.Event()
+
+    def heartbeat():
+        while not stop.wait(15):
+            quiet = time.time() - last_line[0]
+            if quiet >= 15:
+                el = int(time.time() - start)
+                t.step_progress(f"still working ({label}, {el//60}:{el%60:02d})")
+    hb = threading.Thread(target=heartbeat, daemon=True); hb.start()
+
+    for line in proc.stdout:
+        line = line.rstrip()
+        if line:
+            t.detail(line)          # the child narrates itself (chunk 1/6, whisper %, …)
+            last_line[0] = time.time()
+    proc.wait()
+    stop.set()
+    if proc.returncode != 0:
+        t.halt(f"{label} failed (exit {proc.returncode}).")
         return False
-    # surface verbose stdout only at verbose level
-    for line in (r.stdout or "").splitlines():
-        t.detail(line)
     return True
 
 
@@ -70,7 +104,7 @@ def run_audio_leg(ctx):
     t.info("2b · generating Victor voiceover (Inworld)")
     if not _run([py, str(Path(shared)/"generate_episode_vo.py"),
                  "--text", str(audio_txt), "--project", str(proj),
-                 "--shared", str(shared)], t, "generate_episode_vo (2b)", dry_run=dry):
+                 "--shared", str(shared)], t, "generate_episode_vo (2b)", dry_run=dry, stream=True):
         return None
     if not dry and voiceover.exists():
         t.ok(f"2b · voiceover.mp3 → {voiceover.stat().st_size/1_000_000:.1f} MB")
@@ -79,7 +113,7 @@ def run_audio_leg(ctx):
     t.info("whisper · measuring real word timestamps (3-5 min on box)")
     if not _run(["whisper", str(voiceover), "--model", "small", "--output_format", "json",
                  "--output_dir", str(proj), "--word_timestamps", "True"],
-                t, "whisper", dry_run=dry):
+                t, "whisper", dry_run=dry, stream=True):
         return None
 
     # 2c — build real per-beat durations (+ captions.srt in 3a extension)
@@ -144,7 +178,7 @@ def audio_gate(ctx, artifacts):
         t.info("re-measuring human audio — re-running whisper + rebuilding durations")
         if not _run(["whisper", str(proj/"voiceover.mp3"), "--model", "small",
                      "--output_format", "json", "--output_dir", str(proj),
-                     "--word_timestamps", "True"], t, "whisper (human swap)"):
+                     "--word_timestamps", "True"], t, "whisper (human swap)", stream=True):
             return None
         if not _run([py, str(Path(shared)/"build_beat_durations.py"),
                      "--manifest", str(artifacts["manifest"]),
