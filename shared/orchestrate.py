@@ -52,44 +52,62 @@ def resolve_beats_path(args):
     if args.beats:
         return args.beats
     if args.project:
-        # run from channel folder; project under projects/
-        cand = os.path.join("projects", args.project, "beats.json")
-        if os.path.exists(cand):
-            return cand
-        # also accept a bare /tmp-style or given name
-        return cand
+        # prefer the {header,beats} wrapper; fall back to a plain beats.json
+        for name in ("beats_full.json", "beats.json"):
+            cand = os.path.join("projects", args.project, name)
+            if os.path.exists(cand):
+                return cand
+        return os.path.join("projects", args.project, "beats_full.json")
     return None
 
 
 def load_beats(path, t):
+    """Accepts the {header, beats} wrapper (orchestrator input from --json-full) OR a
+    bare list (back-compat). Returns (header, beats_list)."""
     if not path or not os.path.exists(path):
-        t.halt(f"beats.json not found at {path or '(no path)'} — run parse_script.py first, "
-               f"or pass --beats <path>.")
+        t.halt(f"beats file not found at {path or '(no path)'} — run parse_script.py "
+               f"--json-full first, or pass --beats <path>.")
         sys.exit(1)
     try:
-        beats = json.load(open(path, encoding="utf-8"))
+        data = json.load(open(path, encoding="utf-8"))
     except Exception as e:
-        t.halt(f"beats.json did not parse: {e}")
+        t.halt(f"beats file did not parse: {e}")
         sys.exit(1)
-    if not isinstance(beats, list) or not beats:
-        t.halt("beats.json is empty or not a list of beats.")
+    if isinstance(data, dict) and "beats" in data:
+        header, beats = data.get("header", {}), data["beats"]
+    elif isinstance(data, list):
+        header, beats = {}, data
+    else:
+        t.halt("beats file is neither a {header,beats} wrapper nor a list.")
         sys.exit(1)
-    return beats
+    if not beats:
+        t.halt("beats file has no beats.")
+        sys.exit(1)
+    return header, beats
 
 
-def read_channel(beats, t):
-    # channel is declared in the script header and stamped into beats.json.
-    # SKELETON: beats.json may not carry it yet (parser update is a later step),
-    # so fall back gracefully and SAY so, rather than guessing silently.
-    ch = None
-    if isinstance(beats, dict):
-        ch = beats.get("channel")
-    # list-form beats: look for a header beat or a sibling — not present yet.
-    if not ch:
-        # try a conventional first-element header {"channel": "..."}
-        if beats and isinstance(beats[0], dict) and beats[0].get("channel"):
-            ch = beats[0]["channel"]
-    return ch
+def load_resolved_config(channel, t):
+    """Load <channel>/channel.json, resolve <project>/look.json override ON TOP.
+    Channel defaults -> project overrides. Most channels have no look.json; Lazarus
+    is the channel built on it. Returns the resolved config dict (or None if no channel)."""
+    if not channel:
+        return None
+    # walk: we run from the channel folder, so channel.json is at ./channel.json,
+    # but also accept <channel>/channel.json from repo root.
+    candidates = ["channel.json", os.path.join(channel, "channel.json")]
+    cfg_path = next((c for c in candidates if os.path.exists(c)), None)
+    if not cfg_path:
+        t.warn(f"channel.json not found for '{channel}' (looked: {candidates}). "
+               f"Run from the channel folder, or check the channel name.")
+        return None
+    try:
+        cfg = json.load(open(cfg_path, encoding="utf-8"))
+    except Exception as e:
+        t.halt(f"channel.json did not parse: {e}")
+        sys.exit(1)
+    t.ok(f"channel identity loaded → {cfg_path} (voice={cfg.get('voices', {}).get('narrator', cfg.get('voice_id','?'))}, "
+         f"{cfg.get('width','?')}x{cfg.get('height','?')})")
+    return cfg
 
 
 def decide_legs(beats, t):
@@ -135,8 +153,8 @@ def main():
     t.info(f"verbosity={level}   mode={'DRY-RUN (nothing renders)' if dry else 'LIVE'}")
 
     beats_path = resolve_beats_path(args)
-    beats = load_beats(beats_path, t)
-    channel = read_channel(beats, t) or "(unknown — not in beats.json yet)"
+    header, beats = load_beats(beats_path, t)
+    channel = header.get("channel") or "(unknown — no channel in header)"
     project = args.project or "(unnamed)"
     n = len(beats)
     n_a = sum(1 for b in beats if isinstance(b, dict) and b.get("mode") == "A")
@@ -148,12 +166,20 @@ def main():
     t.rule()
 
     t.phase("PREFLIGHT")
-    t.ok(f"beats.json loaded → {n} beats from {beats_path}")
-    if channel.startswith("(unknown"):
-        t.warn("channel not declared in beats.json yet — the script-header→channel stamp "
-               "is a later build step. Proceeding with channel unknown for the skeleton.")
-    else:
-        t.ok(f"channel resolved → {channel}")
+    t.ok(f"beats loaded → {n} beats from {beats_path}")
+    # metadata lives in the script header (single input, no metadata.json). Halt EARLY
+    # (before any leg, before any spend) if the header is incomplete.
+    required = ("channel", "title", "description", "tags")
+    missing = [k for k in required if not header.get(k)]
+    if missing:
+        t.halt(f"script header missing {missing}. Add them to the top of script.md and "
+               f"re-run parse_script.py --json-full. (Halting now — before any render/spend.)")
+        sys.exit(1)
+    t.ok(f"header complete → title, description, tags, channel all present")
+    cfg = load_resolved_config(header.get("channel"), t)
+    if cfg is None:
+        t.warn("proceeding without resolved channel identity (skeleton tolerates it; "
+               "legs will require it).")
 
     t.phase("DECIDE LEGS (composition scan)")
     legs, modes = decide_legs(beats, t)

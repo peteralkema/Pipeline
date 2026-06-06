@@ -77,9 +77,61 @@ def _strip_md(s: str) -> str:
     return s.strip().strip("*").strip().lstrip(">").strip()
 
 
+
+HEADER_KEYS = {"channel", "title", "description", "tags"}
+
+def parse_header(lines):
+    """Read the front-matter key:value block at the top of script.md (before the first
+    ## COLD OPEN / ## PART). Supports multi-line values via a '>' continuation: a line
+    'description: >' takes all subsequent more-indented lines until the next top-level key.
+    Returns (header_dict, body_start_index). The script header is the SINGLE source of
+    channel + YouTube metadata — there is no separate metadata.json."""
+    header = {}
+    i = 0
+    key = None
+    buf = []
+    def flush():
+        nonlocal key, buf
+        if key is not None:
+            val = " ".join(x.strip() for x in buf).strip()
+            if key == "tags":
+                header[key] = [t.strip() for t in val.split(",") if t.strip()]
+            else:
+                header[key] = val
+        key, buf = None, []
+    for i, ln in enumerate(lines):
+        s = ln.strip()
+        # stop at the first beat-body heading or a '---' front-matter terminator
+        if s.startswith("## COLD OPEN") or s.startswith("## PART") or s.startswith("## ACT"):
+            flush()
+            return header, i
+        if s == "---" and header:
+            flush()
+            return header, i + 1
+        m = re.match(r"^([a-zA-Z_]\w*):\s*(.*)$", ln)
+        if m and (m.group(1) in HEADER_KEYS or key is None or not ln.startswith((" ", "\t"))):
+            # new top-level key
+            flush()
+            key = m.group(1)
+            rest = m.group(2).strip()
+            if rest == ">":
+                buf = []            # multi-line value follows on indented lines
+            elif rest:
+                buf = [rest]
+            else:
+                buf = []
+        elif key is not None and (ln.startswith((" ", "\t")) or s):
+            # continuation line for a multi-line value
+            buf.append(s)
+    flush()
+    return header, len(lines)
+
+
 def parse_script(path: str):
     with open(path, "r", encoding="utf-8") as f:
         lines = [ln.rstrip("\n") for ln in f.readlines()]
+
+    header, _hdr_end = parse_header(lines)
 
     # Parse only the body: from the first COLD OPEN / PART heading...
     start = 0
@@ -221,16 +273,17 @@ def parse_script(path: str):
         beats.append(beat)
         idx += 1
 
-    return beats
+    return beats, header
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("script")
-    ap.add_argument("--json")
+    ap.add_argument("--json", help="write the flat beats LIST (back-compat for leg tools)")
+    ap.add_argument("--json-full", dest="json_full", help="write {header, beats} wrapper (the orchestrator input)")
     args = ap.parse_args()
 
-    beats = parse_script(args.script)
+    beats, header = parse_script(args.script)
     a  = sum(1 for b in beats if b.mode == "A")
     bb = sum(1 for b in beats if b.mode == "B")
     comp_counts, warnings = {}, []
@@ -269,10 +322,24 @@ def main():
         for idx, w in warnings:
             print(f"  beat {idx}: {w}")
 
+    if header:
+        print("\n--- script header (single-input metadata) ---")
+        for k, v in header.items():
+            shown = v if not isinstance(v, list) else ", ".join(v)
+            print(f"  {k}: {str(shown)[:80]}")
+        missing = [k for k in ("channel", "title", "description", "tags") if not header.get(k)]
+        if missing:
+            print(f"  !! header missing: {missing} — orchestrator preflight will halt on these.")
+
     if args.json:
         with open(args.json, "w", encoding="utf-8") as f:
             json.dump([asdict(b) for b in beats], f, indent=2, ensure_ascii=False)
-        print(f"\nWrote {args.json}")
+        print(f"\nWrote {args.json} (flat beats list)")
+
+    if args.json_full:
+        with open(args.json_full, "w", encoding="utf-8") as f:
+            json.dump({"header": header, "beats": [asdict(b) for b in beats]}, f, indent=2, ensure_ascii=False)
+        print(f"Wrote {args.json_full} (header + beats — the orchestrator input)")
 
 
 if __name__ == "__main__":
