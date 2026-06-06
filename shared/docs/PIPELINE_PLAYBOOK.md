@@ -741,3 +741,36 @@ This document is a living artefact. Update it when:
 Date the changes at the top of the document. Bank rules in the rulebook for things that affect prompts; bank workflow lessons here.
 
 The goal of this document is that future-Peter (or a future hire) could pick up the system without re-deriving it from chat threads.
+
+---
+
+# PART 2D — ORCHESTRATOR BUILD STATUS (as of 6 June 2026)
+
+*This section records what is actually BUILT and PROVEN of the orchestrator described in PART 2C + SPEC-orchestrator-v1.md, so future-Peter never wonders "did we finish that?". Update the status markers as legs land. Full cold-start detail lives in `shared/docs/SESSION-NOTES-2026-06-06-orchestrator.md`.*
+
+## The machine, leg by leg — current status
+
+| Stage | What it does | Status |
+|---|---|---|
+| **Kickoff + banner** | `orchestrate.py` run from repo root; banner; interactive prompt (verbosity 1/2/3 + dry/live) | ✅ PROVEN on box |
+| **Single input + preflight** | reads `{header,beats}` wrapper from `parse_script.py --json-full`; halts EARLY if header (channel/title/description/tags) incomplete | ✅ PROVEN |
+| **Two reads** | channel resolved BY NAME from header → `<channel>/channel.json` + `<project>/look.json` override; composition scan decides legs | ✅ PROVEN |
+| **Audio leg + audio gate** | 2a→2b(Victor)→whisper→2c→durations.json; keep/swap gate (swap = scp human VO + re-whisper); long steps stream + heartbeat | ✅ PROVEN end-to-end on box |
+| **Mode B leg (render)** | renders all Mode B cards via dispatch.py at each component's OWN duration, real durations.json fed | ✅ PROVEN — 21/21 clips render on box |
+| **Mode B gate (review)** | autoplay/loop/muted scrollable page; shaped props shown (matches clip), audio-locked fields read-only; edit payload + one-click Re-render (hot-swap) + Flag; idiot-proof 3-step launch printout | ✅ BUILT + tested; final 2 files (modeb_leg.py, orchestrate.py wiring) pending commit (see session notes §1) |
+| **Mode A leg + Mode A gate** | stills → stills review gate → Kling animate; needs `--animate-only` seam in recreation_pipeline | ⏳ NEXT (Step 4); translate+ingest proven, full render not wired |
+| **Convergence** | dual-mode assemble (interleave + freeze-fill + music mux + chapters + SRT) → thumbnail gate → convergence gate (DDMM @ 01:00 CET, Publish & Schedule y/n) → universal per-channel uploader | ⏳ Step 5; specified in SPEC §9, not built |
+| **Resume / polish** | `--from <leg>`, verbosity polish, end-run summary; validate Final Hours as Mode-A-only; retire orchestrate_legacy.py | ⏳ Steps 6-7 |
+
+## Box environment (DONE — do not re-debug)
+Node 20.20.2 (nvm) + Remotion 4.0.472 (linux compositor) + Remotion project IN the repo at `~/Pipeline/remotion/` + `REMOTION_DIR` in bashrc/profile + headless-Chromium system libs installed (libnspr4 et al.). All nine components are 120 frames except SyntheticSequence(210)/HelloWorld(150)/OnlyLogo(150). See session notes §3.
+
+## Principles banked while building (now load-bearing)
+- **Mode B renders each component at its OWN durationInFrames** (queried from `npx remotion compositions`), never audio-derived frames. The assembler freeze-fills the gap to the measured slot. Render is therefore unbreakable — it can never ask for more frames than a component has.
+- **The orchestrator must not assume the interactive shell's environment.** Subprocesses don't inherit `.bashrc`. Resolve needed things (node bin, REMOTION_DIR) in code or fail loudly with the fix. (Hit twice: REMOTION_DIR, node PATH.)
+- **Mode B script-craft limit** (in `script-craft-principles.md`): cards carry ≤~12-15 words; silent cards carry zero; more words → it's a Mode A beat. Resilience in pipeline, quality judgment with the writer.
+- **A step that can run >~10s must emit liveness** (stream child stdout or heartbeat); silence reads as death.
+- **Audio-locked fields are read-only in the Mode B gate** (e.g. QuoteCard.quote = the spoken found_line). Card-vs-audio distinction = load-bearing-script principle made mechanical.
+
+## Build discipline that worked
+Leg-by-leg, each rung tested on the box before the next. The verify-before-run rule broke the debugging circle: confirm the code landed AND the query returns real data BEFORE spending a run. The biggest non-code time-sink was box environment setup (Remotion headless) and laptop↔box file-sync — the latter being addressed by GitHub Integration (Claude settings) so Claude reads the repo directly. See session notes §6.
