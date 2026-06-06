@@ -615,6 +615,25 @@ The rule in one line: **new sentence from existing words is free; a new word is 
 
 What is reusable (everything that is machinery): parse, dispatch, translate, orchestrator, recreation engine, Remotion components, audio leg, Whisper alignment, assemble. What is per-channel (everything that is identity): style_suffix, voices map, resolution, Mode B tokens, wordmark — all in `channel.json`. What is per-episode: the script, the beats, the content. Three clean layers; nothing channel-specific leaks into the machinery layer.
 
+### Per-film look: the channel owns the frame, the film owns the interior
+
+*(Design principle banked 6 June 2026, prompted by Lazarus Films. Not built; applies when Lazarus is built. Final Hours and Synthetic do not need it — their look is uniform per channel.)*
+
+A tension surfaces with **Lazarus Films**: the *channel* has a fixed brand identity, but each *film* may need a vastly different look — Saki's wry Edwardian irony and a Shakespearean tragedy want different palettes, type, and grade. Per-film art direction must NOT be forced into a reusable channel asset, and channel identity must NOT constrain a film's visual uniqueness. The resolution does not require new architecture — it is a **third resolution layer**, and it falls straight out of the existing canon-override pattern (channel base_canon underneath, project canon on top, project wins).
+
+**Look resolves channel-then-project.** `channel.json` provides the *default* identity (style_suffix, Mode B tokens, palette). A film may carry a per-project **`look.json`** (in the project folder, or a script-header block) that *overrides* those defaults for that one film. Resolution order: channel defaults → project overrides → resolved look handed to the legs. The machinery is unchanged (it still reads a resolved config); it just resolves two layers instead of one. Reusability is preserved because the *machinery* never hard-codes a look; uniqueness is preserved because a film overrides as much or as little as it wants.
+
+- **Most channels never use the override.** Final Hours and Synthetic have one look per channel — they set it in channel.json and no project overrides it. The override path is dormant for them.
+- **Lazarus is the channel built on the override.** Per-film art direction lives in the *content layer* (it is a property of the film, like its script), not the identity layer.
+
+**What stays constant vs. what varies (the line that protects the brand):**
+- **Constant — channel identity (the connective tissue):** the Lazarus wordmark + "Public DomAIn Revival" lockup, and *where/how it appears* — the title-card frame, the end-card, the corner bug. This is the thread that makes ten radically different films unmistakably *Lazarus*. The channel owns **the frame and the signature**.
+- **Variable — per-film look (the interior):** palette, in-content type, colour grade, recreation style_suffix, Mode B card styling. The film owns **the interior**.
+
+This is the prestige-anthology pattern (Black Mirror, Criterion): interiors vary wildly, connective tissue is rigorously constant. **Deliberate decision to make before Lazarus builds:** how much variance the channel absorbs before it stops reading as one channel — total per-film freedom risks an anthology with no spine. Hold at least one constant element beyond the logo (a framing device, a consistent title-card grammar) as the spine. This principle also reframes the channel-designer's brief: their deliverable is the *constant system* (wordmark, lockup, title-card frame that holds any film's art while staying Lazarus), not per-film art — the same "fixed shell, variable interior" logic as the thumbnail-template pattern.
+
+So the layering is really **3.5 layers**: machinery (channel-agnostic) → channel identity (channel.json, constant per channel) → *per-film look override (look.json, the variable interior — used only where a channel wants per-film variance)* → content (script, beats). The override sits between identity and content because it is content-scoped identity.
+
 ### Future legs (anticipated, not built)
 
 - **Lip-sync leg** (Lazarus v2, ~2027–28). Locked-audio contract: voice final before render; a voice swap re-renders synced shots (the true-up is NOT free for this leg). Depends on the Hetzner avatar capability. The `speaker` field and `voices` map are added now so the audio leg is multi-voice-ready before lip-sync exists.
