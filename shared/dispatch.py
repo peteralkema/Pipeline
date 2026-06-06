@@ -34,6 +34,31 @@ FPS = 30  # Remotion frame rate; durations (once measured) become frame counts.
 # Where the Remotion project lives. Override with env REMOTION_DIR so moving the
 # folder into the repo later is a one-line change, not a code edit.
 REMOTION_DIR = os.environ.get("REMOTION_DIR", os.path.expanduser("~/Projects/remotion-learning"))
+
+
+def _node_bin_dir():
+    """Find the node/npx bin directory so render subprocesses can find npx even when the
+    launching shell didn't load nvm (.bashrc isn't sourced by non-interactive subprocesses).
+    Order: NODE_BIN env override -> dir of any npx already on PATH -> newest nvm install.
+    Returns the dir or None."""
+    import glob, shutil
+    if os.environ.get("NODE_BIN") and os.path.isdir(os.environ["NODE_BIN"]):
+        return os.environ["NODE_BIN"]
+    found = shutil.which("npx")
+    if found:
+        return os.path.dirname(found)
+    nvm = os.environ.get("NVM_DIR", os.path.expanduser("~/.nvm"))
+    candidates = sorted(glob.glob(os.path.join(nvm, "versions", "node", "*", "bin")))
+    return candidates[-1] if candidates else None
+
+
+def _render_env():
+    """Subprocess env with the node bin dir guaranteed on PATH (resilient to bare shells)."""
+    env = os.environ.copy()
+    nb = _node_bin_dir()
+    if nb and nb not in env.get("PATH", "").split(os.pathsep):
+        env["PATH"] = nb + os.pathsep + env.get("PATH", "")
+    return env
 ACCENT = "#3b5bdb"   # Synthetic channel accent; every prototype takes accentColor
 COMPOSITION_ID = {c: c for c in KNOWN_COMPONENTS}  # parsed name -> Remotion composition id (1:1)
 
@@ -124,7 +149,8 @@ def component_durations():
     _COMP_DUR_CACHE = {}
     try:
         r = subprocess.run(["npx", "remotion", "compositions", "--quiet"],
-                           cwd=REMOTION_DIR, capture_output=True, text=True, timeout=120)
+                           cwd=REMOTION_DIR, capture_output=True, text=True, timeout=120,
+                           env=_render_env())
         # output lines look like:  CompId   1920x1080   120 frames ...
         import re as _re
         for line in (r.stdout or "").splitlines():
@@ -174,7 +200,8 @@ def render_mode_b(beat: dict, frames: int, render: bool = False) -> str:
         os.unlink(tf.name)
         return clip
     try:
-        res = subprocess.run(cmd, cwd=REMOTION_DIR, capture_output=True, text=True, timeout=600)
+        res = subprocess.run(cmd, cwd=REMOTION_DIR, capture_output=True, text=True, timeout=600,
+                             env=_render_env())
         if res.returncode != 0:
             tail = res.stderr.strip().splitlines()[-1] if res.stderr.strip() else "no stderr"
             print(f"     !! FAILED (exit {res.returncode}): {tail}")
