@@ -1,285 +1,176 @@
 #!/usr/bin/env python3
 """
-orchestrate.py — the conductor.
+orchestrate.py — Peter's Pipeline Orchestrator v1.0
+The master, singular, channel-agnostic conductor. SKELETON (build step 1):
+banner → kickoff prompt → read beats.json → run-context → decide_legs() → narrate plan.
+No legs run yet; this proves the decision logic + the telemetry voice, costs nothing.
 
-Runs the post-script pipeline end to end, so the only human work after script-lock
-is: (gate 1) confirm the canon distribution, and (gate 2) review the stills. Every
-other step is sequenced automatically.
+Build path: this is the new Path-2 leg-based conductor. Legs get wired in later steps.
 
-It does NOT contain any generation logic. It calls the existing scripts as
-subprocesses and guards their outputs between phases. If a phase's expected output
-is missing or wrong, it halts and tells you — it never barrels on.
-
-INPUTS (the two things only a human/Claude produces):
-  - projects/<project>/<project>_script.txt   (pure narration prose)
-  - projects/<project>/canon.json             (dict: {token: scene description})
-
-PHASES:
-  1 storyboard   recreation_pipeline.py stills --script ... --storyboard-only
-  2 audit        audit_storyboard_discipline.py --project ...
-  3 canon        build_canon.py --project ... --canon ...
-     >>> GATE 1: confirm canon distribution (y/n)
-  4 stills       recreation_pipeline.py stills --beats ... --project ...
-     (auto silent-reject check)
-     >>> GATE 2: review stills in browser, then "continue?" (y/n)
-  5 finish       recreation_pipeline.py finish --project ... --no-music
-  6 trueup       recreation_pipeline.py finish --project ... --no-music --assemble-only
-
-Usage (from channel root, e.g. final-hours/):
-    python ../shared/orchestrate.py --project tay_bridge
-
-    # script/canon at non-default paths:
-    python ../shared/orchestrate.py --project tay_bridge \
-        --script projects/tay_bridge/tay_bridge_script.txt \
-        --canon  projects/tay_bridge/canon.json
-
-    # re-run from a later phase (e.g. after fixing the canon at gate 1):
-    python ../shared/orchestrate.py --project tay_bridge --start-phase canon
-
-After it finishes: make the thumbnail in Clickly, write metadata.json, then
-    python upload.py --project projects/<project> --privacy unlisted
+Usage:
+    python3 orchestrate.py --project ep1-the-promise [--beats path] [--log L] [--dry-run/--live]
 """
+import os, sys, json, argparse
+from datetime import datetime
 
-import argparse
-import json
-import subprocess
-import sys
-from pathlib import Path
-
-SHARED = Path(__file__).resolve().parent
-PYTHON = sys.executable
-
-PHASES = ["storyboard", "audit", "canon", "stills", "finish", "trueup"]
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from telemetry import Telemetry
+from banner import BANNER
 
 
-def die(msg: str):
-    print(f"\n!! HALTED: {msg}", file=sys.stderr)
-    sys.exit(1)
+def parse_args():
+    ap = argparse.ArgumentParser(description="Peter's Pipeline Orchestrator v1.0")
+    ap.add_argument("--project", help="project name (beats default: projects/<p>/beats.json)")
+    ap.add_argument("--beats", default=None, help="explicit beats.json path")
+    ap.add_argument("--log", choices=["quiet", "normal", "verbose"], default=None,
+                    help="verbosity (skips the kickoff prompt if given)")
+    ap.add_argument("--dry-run", action="store_true", help="plan only, render nothing")
+    ap.add_argument("--live", action="store_true", help="actually run (skips kickoff prompt if given)")
+    return ap.parse_args()
 
 
-def run(cmd: list, label: str):
-    """Run a subprocess, streaming its output. Halt the orchestration if it fails."""
-    print(f"\n=== {label} ===")
-    print("    " + " ".join(str(c) for c in cmd))
-    result = subprocess.run(cmd)
-    if result.returncode != 0:
-        die(f"{label} exited with code {result.returncode}. Fix it, then re-run "
-            f"with --start-phase <this phase>.")
+def kickoff_prompt(args):
+    """Interactive launch menu — verbosity + dry/live. Flags bypass it. Extensible block."""
+    # verbosity
+    if args.log:
+        level = args.log
+    else:
+        ans = input("  ▸ verbosity?  [1] quiet  [2] normal  [3] verbose   (default 2): ").strip()
+        level = {"1": "quiet", "2": "normal", "3": "verbose", "": "normal"}.get(ans, "normal")
+    # mode
+    if args.live:
+        dry = False
+    elif args.dry_run:
+        dry = True
+    else:
+        ans = input("  ▸ mode?  [1] dry-run (plan + cost, render nothing)  [2] live   (default dry-run): ").strip()
+        dry = {"1": True, "2": False, "": True}.get(ans, True)
+    return level, dry
 
 
-def resolve_project_dir(project_arg: str) -> Path:
-    p = Path(project_arg)
-    if not p.is_absolute() and len(p.parts) == 1 and Path("projects").is_dir():
-        return Path("projects") / p
-    return p
+def resolve_beats_path(args):
+    if args.beats:
+        return args.beats
+    if args.project:
+        # run from channel folder; project under projects/
+        cand = os.path.join("projects", args.project, "beats.json")
+        if os.path.exists(cand):
+            return cand
+        # also accept a bare /tmp-style or given name
+        return cand
+    return None
 
 
-def load_shots(path: Path) -> list:
-    data = json.loads(path.read_text())
-    if isinstance(data, list):
-        return data
-    if isinstance(data, dict):
-        return data.get("beats", data.get("shots", []))
-    return []
-
-
-def confirm(question: str) -> bool:
-    """Blocking y/n gate. Anything but y/yes is treated as no."""
+def load_beats(path, t):
+    if not path or not os.path.exists(path):
+        t.halt(f"beats.json not found at {path or '(no path)'} — run parse_script.py first, "
+               f"or pass --beats <path>.")
+        sys.exit(1)
     try:
-        ans = input(f"\n>>> {question} [y/n] ").strip().lower()
-    except (EOFError, KeyboardInterrupt):
-        print()
-        return False
-    return ans in ("y", "yes")
+        beats = json.load(open(path, encoding="utf-8"))
+    except Exception as e:
+        t.halt(f"beats.json did not parse: {e}")
+        sys.exit(1)
+    if not isinstance(beats, list) or not beats:
+        t.halt("beats.json is empty or not a list of beats.")
+        sys.exit(1)
+    return beats
+
+
+def read_channel(beats, t):
+    # channel is declared in the script header and stamped into beats.json.
+    # SKELETON: beats.json may not carry it yet (parser update is a later step),
+    # so fall back gracefully and SAY so, rather than guessing silently.
+    ch = None
+    if isinstance(beats, dict):
+        ch = beats.get("channel")
+    # list-form beats: look for a header beat or a sibling — not present yet.
+    if not ch:
+        # try a conventional first-element header {"channel": "..."}
+        if beats and isinstance(beats[0], dict) and beats[0].get("channel"):
+            ch = beats[0]["channel"]
+    return ch
+
+
+def decide_legs(beats, t):
+    """Scan composition → which legs fire. Pure logic; logs each decision (teaching lines)."""
+    modes = [b.get("mode") for b in beats if isinstance(b, dict) and "mode" in b]
+    has_a = "A" in modes
+    has_b = "B" in modes
+    has_lock = any(b.get("lock") or b.get("lipsync") for b in beats if isinstance(b, dict))
+
+    legs = ["audio"]  # always — timing source
+    t.decision("audio leg WILL run (always — it is the timing source)")
+
+    if has_b:
+        legs.append("modeB")
+        n = modes.count("B")
+        t.decision(f"composition has {n} Mode B beats → Mode B leg WILL run (+ Mode B gate)")
+    else:
+        t.decision("no Mode B beats → Mode B leg skipped")
+
+    if has_a:
+        legs.append("modeA")
+        n = modes.count("A")
+        t.decision(f"composition has {n} Mode A beats → Mode A leg WILL run (+ Mode A gate)")
+    else:
+        t.decision("no Mode A beats → Mode A leg skipped")
+
+    if has_lock:
+        legs.append("lipsync")
+        t.decision("locked/lip-sync beats present → lip-sync leg WILL run (FUTURE — not built)")
+    else:
+        t.decision("no locked beats → lip-sync leg skipped")
+
+    legs.append("convergence")
+    t.decision("convergence WILL run (assemble → thumbnail gate → convergence gate → upload)")
+    return legs, modes
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Final Hours pipeline orchestrator")
-    ap.add_argument("--project", required=True)
-    ap.add_argument("--script", default=None, help="narration .txt (default: projects/<p>/<p>_script.txt)")
-    ap.add_argument("--canon", default=None, help="canon.json (default: projects/<p>/canon.json)")
-    ap.add_argument("--start-phase", choices=PHASES, default="storyboard",
-                    help="resume from a later phase (skips earlier ones)")
-    ap.add_argument("--model", default="fal-ai/flux-pro/v1.1", help="passed to serve_review reminder only")
-    ap.add_argument("--box", default="peter@116.202.18.68",
-                    help="ssh target printed in the laptop tunnel block at gate 2")
-    args = ap.parse_args()
+    args = parse_args()
+    print(BANNER)
+    level, dry = kickoff_prompt(args)
+    t = Telemetry(level)
+    t.info(f"verbosity={level}   mode={'DRY-RUN (nothing renders)' if dry else 'LIVE'}")
 
-    project_dir = resolve_project_dir(args.project)
-    name = project_dir.name
-    if not project_dir.is_dir():
-        die(f"Project dir not found: {project_dir} (create it and place the script + canon.json first)")
+    beats_path = resolve_beats_path(args)
+    beats = load_beats(beats_path, t)
+    channel = read_channel(beats, t) or "(unknown — not in beats.json yet)"
+    project = args.project or "(unnamed)"
+    n = len(beats)
+    n_a = sum(1 for b in beats if isinstance(b, dict) and b.get("mode") == "A")
+    n_b = sum(1 for b in beats if isinstance(b, dict) and b.get("mode") == "B")
+    when = datetime.now().strftime("%Y-%m-%d %H:%M")
 
-    script_path = Path(args.script) if args.script else project_dir / f"{name}_script.txt"
-    canon_path = Path(args.canon) if args.canon else project_dir / "canon.json"
-    storyboard = project_dir / "storyboard.json"
-    audited = project_dir / "storyboard_audited.json"
-    beats = Path("beat-scripts") / f"{name}_beats.json"
-    stills_dir = project_dir / "stills"
-    final_video = project_dir / "final_video.mp4"
+    t.rule()
+    t.context(channel, project, n, n_a, n_b, when)
+    t.rule()
 
-    recreation = SHARED / "recreation_pipeline.py"
-    audit = SHARED / "audit_storyboard_discipline.py"
-    build_canon = SHARED / "build_canon.py"
+    t.phase("PREFLIGHT")
+    t.ok(f"beats.json loaded → {n} beats from {beats_path}")
+    if channel.startswith("(unknown"):
+        t.warn("channel not declared in beats.json yet — the script-header→channel stamp "
+               "is a later build step. Proceeding with channel unknown for the skeleton.")
+    else:
+        t.ok(f"channel resolved → {channel}")
 
-    start_i = PHASES.index(args.start_phase)
+    t.phase("DECIDE LEGS (composition scan)")
+    legs, modes = decide_legs(beats, t)
 
-    def active(phase: str) -> bool:
-        return PHASES.index(phase) >= start_i
+    t.phase("PLAN")
+    t.info(f"legs to run, in order: {' → '.join(legs)}")
+    if dry:
+        t.ok("DRY-RUN — plan only. No legs executed, nothing rendered, no cost.")
+        t.info("(Legs are not wired yet — this is the skeleton. Next build steps add them.)")
+    else:
+        t.warn("LIVE mode selected, but legs are not wired in the skeleton yet — "
+               "nothing to execute. Build steps 3-5 add the real legs.")
 
-    # ── Phase 0: preflight ────────────────────────────────────────────────
-    print("=== preflight ===")
-    if active("storyboard"):
-        if not script_path.exists() or not script_path.read_text().strip():
-            die(f"Script missing or empty: {script_path}")
-        print(f"    script:  {script_path} ({len(script_path.read_text().split())} words)")
-    if active("canon"):
-        if not canon_path.exists():
-            die(f"canon.json missing: {canon_path}")
-        try:
-            cdata = json.loads(canon_path.read_text())
-        except Exception as e:
-            die(f"canon.json is not valid JSON: {e}")
-        if not isinstance(cdata, dict) or not cdata:
-            die(f"canon.json must be a non-empty object of token->description: {canon_path}")
-        print(f"    canon:   {canon_path} ({len(cdata)} scenes: {list(cdata.keys())})")
-    for tool in (recreation, audit, build_canon):
-        if not tool.exists():
-            die(f"Required tool not found: {tool}")
-    print("    preflight OK")
-
-    # ── Phase 1: storyboard ───────────────────────────────────────────────
-    if active("storyboard"):
-        run([PYTHON, str(recreation), "stills",
-             "--script", str(script_path),
-             "--project", str(project_dir),
-             "--storyboard-only"], "PHASE 1 — storyboard")
-        if not storyboard.exists():
-            die("storyboard.json was not created.")
-        n = len(load_shots(storyboard))
-        if n < 5:
-            die(f"storyboard.json has only {n} shots — generation likely failed.")
-        print(f"    storyboard OK: {n} shots")
-
-    # ── Phase 2: discipline audit ─────────────────────────────────────────
-    if active("audit"):
-        run([PYTHON, str(audit), "--project", str(project_dir)], "PHASE 2 — discipline audit")
-        if not audited.exists():
-            die("storyboard_audited.json was not created.")
-        print(f"    audit OK -> {audited.name}")
-
-    # ── Phase 3: build canon-aware beats ──────────────────────────────────
-    if active("canon"):
-        run([PYTHON, str(build_canon),
-             "--project", str(project_dir),
-             "--canon", str(canon_path)], "PHASE 3 — build canon-aware beats")
-        if not beats.exists():
-            die(f"beats file was not created: {beats}")
-        # GATE 1 — the distribution was printed by build_canon.py above.
-        if not confirm("Canon distribution above — does it look right?"):
-            print("\nStopped at canon gate. To fix: edit the {token} prefixes in")
-            print(f"    {beats}")
-            print("then re-run:")
-            print(f"    {PYTHON} {recreation.parent.name}/build... or: python ../shared/orchestrate.py "
-                  f"--project {name} --start-phase stills")
-            print("(Use --start-phase stills to skip straight to generation once the beats are fixed,")
-            print(" or --start-phase canon to regenerate the assignment from scratch.)")
-            sys.exit(0)
-
-    # ── Phase 4: stills ───────────────────────────────────────────────────
-    if active("stills"):
-        run([PYTHON, str(recreation), "stills",
-             "--beats", str(beats),
-             "--project", str(project_dir)], "PHASE 4 — stills generation")
-        pngs = sorted(stills_dir.glob("shot_*.png"))
-        expected = len(load_shots(beats))
-        if len(pngs) < expected:
-            die(f"only {len(pngs)}/{expected} stills present — generation incomplete.")
-        # Auto silent-reject check. True flux rejects are ~7KB black PNGs; dark
-        # night shots can be legitimately small, so only HALT on true blacks
-        # (<10KB) and merely REPORT the dark-but-real range.
-        true_blacks = [p.name for p in pngs if p.stat().st_size < 10_000]
-        dark_fyi = [p.name for p in pngs if 10_000 <= p.stat().st_size < 200_000]
-        print(f"    stills OK: {len(pngs)} generated")
-        if dark_fyi:
-            print(f"    FYI: {len(dark_fyi)} stills are small (<200KB) — likely real dark/night shots, "
-                  f"not rejects. Review them in the page.")
-        if true_blacks:
-            die(f"{len(true_blacks)} stills are <10KB (true safety rejects): {true_blacks[:8]}"
-                f"{' ...' if len(true_blacks) > 8 else ''}. "
-                f"Restill these (review page Override mode) then re-run --start-phase stills, "
-                f"or proceed manually.")
-
-    # ── GATE 2: human review ──────────────────────────────────────────────
-    if active("stills"):
-        channel_root = Path.cwd()                    # we run from the channel root
-        venv_activate = "source ~/venvs/pipeline/bin/activate"
-        bar = "=" * 64
-        print("\n" + bar)
-        print("STILLS READY FOR REVIEW")
-        print(bar)
-        print("Two windows. Copy-paste each block exactly. Do this window LAST.\n")
-
-        print("-" * 64)
-        print("WINDOW A  — BOX  (open a NEW ssh session to the box, then paste):")
-        print("-" * 64)
-        print(f"{venv_activate}")
-        print(f"cd {channel_root}")
-        print(f"python ../shared/make_review_page.py --project {project_dir}")
-        print(f"python ../shared/serve_review.py --project {project_dir}")
-        print("   # leave this running — it should print 'AI fix: enabled'\n")
-
-        print("-" * 64)
-        print(f"WINDOW B  — LAPTOP  (open a NEW laptop terminal, then paste):")
-        print("-" * 64)
-        print("lsof -ti :8000 | xargs kill 2>/dev/null; true")
-        print(f"ssh -p 443 -L 8000:localhost:8000 {args.box}")
-        print("   # leave this connected — it forwards the page to your browser\n")
-
-        print("-" * 64)
-        print("THEN: open  http://localhost:8000  in your browser.")
-        print("Review every shot: Accept / Reject / AI-fix / Regenerate.")
-        print("Whatever is on disk when you continue is what gets animated.")
-        print(bar)
-        if not confirm("Continue to clips + voiceover + assembly + true-up?"):
-            print("\nStopped before finish. When ready, come back to THIS window")
-            print("(or a new box session) and run:")
-            print(f"    {venv_activate}")
-            print(f"    cd {channel_root}")
-            print(f"    python ../shared/orchestrate.py --project {name} --start-phase finish")
-            sys.exit(0)
-
-    # ── Phase 5: finish (animate + voiceover + whisper align + assemble) ──
-    if active("finish"):
-        run([PYTHON, str(recreation), "finish",
-             "--project", str(project_dir),
-             "--no-music"], "PHASE 5 — finish (animate + voiceover + assemble)")
-        if not final_video.exists():
-            die("final_video.mp4 was not created by finish.")
-        print(f"    finish OK -> {final_video.name}")
-
-    # ── Phase 6: true-up (zero-drift re-assemble, $0) ─────────────────────
-    if active("trueup"):
-        run([PYTHON, str(recreation), "finish",
-             "--project", str(project_dir),
-             "--no-music", "--assemble-only"], "PHASE 6 — true-up (assemble-only)")
-        if not final_video.exists():
-            die("final_video.mp4 missing after true-up.")
-
-    # ── Report ────────────────────────────────────────────────────────────
-    print("\n" + "=" * 60)
-    print(f"DONE — {final_video}")
-    try:
-        size_mb = final_video.stat().st_size / 1_000_000
-        print(f"  size: {size_mb:.1f} MB")
-    except OSError:
-        pass
-    print("\nNext (manual):")
-    print("  1. Thumbnail in Clickly (laptop), scp to projects/<p>/thumbnail.png")
-    print("  2. Write projects/<p>/metadata.json (title / description / tags)")
-    print(f"  3. python upload.py --project projects/{name} --privacy unlisted")
-    print("  4. Review the unlisted video, then schedule in Studio.")
-    print("=" * 60)
+    t.phase("RUN SUMMARY")
+    t.info(f"channel {channel} · {project}")
+    t.info(f"beats {n} (A:{n_a} B:{n_b}) · legs planned: {', '.join(legs)}")
+    t.ok("skeleton run complete — the machine speaks. ✦")
 
 
 if __name__ == "__main__":
