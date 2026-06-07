@@ -87,7 +87,7 @@ def build_html(project_name: str, beats: list, canon: dict, stills_dir_rel: str)
   button:disabled {{ opacity: 0.4; cursor: not-allowed; }}
   button.secondary {{ background: transparent; color: var(--text-muted); border: 1px solid var(--border); }}
   main {{ padding: 24px; max-width: 1600px; margin: 0 auto; }}
-  .shot {{ display: grid; grid-template-columns: 360px 1fr 380px; gap: 20px; background: var(--card); border: 2px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; transition: border-color 0.15s, background 0.15s; }}
+  .shot {{ display: grid; grid-template-columns: minmax(480px, 1.6fr) minmax(0, 1fr) 340px; gap: 20px; background: var(--card); border: 2px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; transition: border-color 0.15s, background 0.15s; }}
   .shot.accept {{ border-color: var(--accept); background: var(--accept-bg); }}
   .shot.reject {{ border-color: var(--reject); background: var(--reject-bg); }}
   .shot.regenerating {{ border-color: var(--regen); }}
@@ -139,7 +139,7 @@ def build_html(project_name: str, beats: list, canon: dict, stills_dir_rel: str)
   .status-indicator.regen-ok {{ color: var(--accept); }}
   .status-indicator.regen-fail {{ color: var(--reject); }}
   .field-group {{ display: flex; flex-direction: column; gap: 4px; }}
-  @media (max-width: 1200px) {{ .shot {{ grid-template-columns: 280px 1fr 320px; }} }}
+  @media (max-width: 1200px) {{ .shot {{ grid-template-columns: minmax(360px, 1.4fr) minmax(0, 1fr) 300px; }} }}
   @media (max-width: 900px) {{ .shot {{ grid-template-columns: 1fr; }} }}
 </style>
 </head>
