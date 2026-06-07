@@ -219,3 +219,59 @@ Apply deliberately. Update as you learn. Ship Hindenburg.
 **Practical rule of thumb when drafting:** a Mode B beat should carry **no more than ~12–15 words** (a single short spoken line), and silent cards carry **zero**. If a beat wants more words than that, it is really a Mode A beat (recreation footage carrying the narration), possibly preceded by a brief card. When in doubt: cards are punctuation; shots carry speech.
 
 **Why this is here and not enforced in code:** we deliberately did NOT build parse-time validation against component lengths (too much logic, fragile). The pipeline is made *resilient* instead (component renders its own length; assembler freeze-fills) so nothing breaks. The *quality* judgment — is this beat well-proportioned? — stays with the writer, referencing this principle. Resilient pipeline, editorial freedom.
+
+
+---
+
+# Part II — The Synthetic Press Dual-Mode Authoring Model
+*Added 7 June 2026, after the first end-to-end Synthetic ep1 assembly surfaced a structural assumption that had been built into the pipeline without ever being stated.*
+
+## Why this part exists, and how it differs from the seven principles above
+
+Everything above is Final Hours narration craft — how to *write* a single-mode cinematic recreation so it hooks, breathes, and lands. This part is different in kind. It is the *structural* model for Synthetic Press, a two-mode format: Mode A (cinematic recreation, the same engine Final Hours uses) interleaved with Mode B (Remotion motion-graphics cards — headlines, quotes, counters, chapter cards, document reveals). The seven principles are about the words. This part is about how the words, the recreation, and the graphics fit together without fighting each other.
+
+It lives in this document because it is still script craft — it governs how a Synthetic script is authored. But it is scoped to Synthetic, and where it appears to contradict the Final Hours principles (notably Principle 6 on silence), the contradiction is only apparent. The reconciliation is below.
+
+## The invariant: the spoken narration is one continuous, unbroken piece
+
+The single rule from which everything else follows: **the narration is continuous end to end, and it is the sole source of truth for timing.** Every beat — Mode A or Mode B — carries narration, and every beat's duration is the duration of its spoken words, measured by Whisper. The audio is never cut, never padded with forced silence, never stopped to let a graphic play. There is nothing to cut *to*, because every second of the finished episode has narration underneath it.
+
+This is the principle that was missing from the first build, and its absence was inaudible until the first full assembly was watched. Mode B cards had been authored as silent holds; the timing table dutifully inserted a couple of seconds of silence for each one; and so the narration stopped dead every time a card appeared and resumed only when the next recreation began. The fix was not a downstream patch. The fix was to state this invariant and author to it.
+
+## Mode B is a transformation of the narration, never an addition to it
+
+Because the narration is continuous and authored first, Mode B can never introduce silence — the words already exist before any graphic is chosen. The authoring sequence is deliberate and ordered:
+
+First, write the complete script as pure continuous narration against Mode A only — one unbroken spoken piece, exactly as the seven principles above teach. At this stage there are no graphics, no cards, no Mode B at all. Just the witness voice, end to end.
+
+Then, select phrases from that finished narration to *promote* into Mode B. A promoted phrase does not gain or lose words — it stays in the narration, spoken, exactly as written. What changes is only what is *on screen* while it is spoken: instead of a recreation, the viewer sees a graphic treatment of that phrase. "We have a verdict" remains spoken in full; on screen the card might show only "A verdict," with "verdict" highlighted. The on-screen text is a deliberately reduced visual treatment of the spoken line — and choosing that reduction is a design act, not a transcription.
+
+When a promoted phrase sits in the middle of a Mode A beat, that beat splits into two Mode A beats around it, so beat order and spoken order stay identical. This is what keeps the final alignment tractable: beats are always in spoken order, contiguous, gapless.
+
+## Remotion duration is a filter on eligibility, not a constraint on the narration
+
+Each Mode B component can only display so much before it stops working as a graphic — a NumberCounter or a HighlightedHeadline has a natural ceiling. The temptation is to read this as "keep the Mode B words short." That inverts the invariant. The narration is never trimmed to fit a graphic. Instead, the component's limit is a *filter on which phrases are eligible to be promoted*: a phrase may become Mode B only if its natural spoken duration fits what that component can hold. If it doesn't fit, choose a shorter phrase to promote, or leave it as Mode A. The audio never bends to the visual; the visual choice bends to the audio.
+
+## The review page is the design step, not just review
+
+A consequence worth stating plainly: deciding what a promoted phrase shows on screen — "A verdict," with "verdict" highlighted — is the Remotion design act, and the Mode B review page is where it happens. The page is not merely a place to check rendered cards after the fact; it is where the reduction from spoken phrase to on-screen treatment is authored and iterated. Treat it as the design surface it is, not an inspection step.
+
+## On silence — reconciling with Principle 6
+
+Principle 6 above says let emotional beats land in silence, and calls for at least two silent beats per Final Hours video. This part says the narration is never cut. These do not contradict, and the distinction is the entire point: **silence is legitimate when it is a deliberate authored choice, and wrong when it is an accidental byproduct of a Mode B card that happens to lack words.**
+
+A Final Hours recreation that falls silent so the image and the music can carry a death is craft. A Synthetic cold-open black frame held before the first spoken word is craft. A Mode B headline that forces two seconds of dead air because no narration was ever written for it is a bug. The first two are chosen; the third is an accident the old build tolerated. The invariant forbids the accident, not the choice.
+
+(An open authoring question sits here, to be decided deliberately rather than inherited: whether Synthetic wants any author-controlled pauses at all — the `silence_after` mechanism carried over from the parser. A deliberate pause is a legitimate choice under the rule above; but it should be a decision, not a default that survives because no one questioned it.)
+
+## What this model forbids
+
+No beat without narration, except a deliberately authored silent beat (the cold-open frame, or an emotional hold chosen on purpose). No Mode B card that stops the narration or plays over silence. No trimming the narration to fit a graphic. No graphic that introduces words or screen-time the spoken script does not already contain. If a beat has no spoken words and was not deliberately chosen as silence, that is an authoring error to be surfaced and fixed — not a category to be detected and tolerated downstream.
+
+## What is deferred (named so it is not mistaken for solved)
+
+The micro-alignment of each Mode B card to the exact moment its source phrase is spoken — placing the card precisely over its words in the continuous audio — is done by Whisper at the end, against the finished continuous narration. The mechanism is tractable precisely *because* of this model: a promoted phrase has a known position in the script, and Whisper gives word-level timestamps for the whole VO, so the card can be snapped to its source phrase rather than fuzzy-matched. But that snapping is its own build and is not yet written. Until it is, cards land in beat order at a fixed display position — continuous and watchable, but not yet word-snapped.
+
+## How this connects to the beats.json input contract
+
+This model is the *why* behind the beats.json the orchestrator consumes. The companion task — documenting the beats.json input contract (its structure, where channel metadata lives, the per-beat fields, the A/B mode marker, the index map) — is the *what*. They are two halves of one thing: this part says how a Synthetic script is authored; the input-contract document says what the authored artifact must contain before it enters the orchestrator. Finalising `parse_script.py` to implement the promote-and-split sequence — and to treat a wordless, non-deliberate beat as an error rather than a tolerated silent hold — is where the two meet. That is the next design discussion, reviewed and agreed before it is built.
