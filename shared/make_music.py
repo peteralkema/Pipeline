@@ -108,7 +108,7 @@ def write_music_prompt(narration, channel_default, channel_name):
     return prompt
 
 
-def generate_bed(prompt, length_ms, out_path):
+def generate_bed(prompt, length_ms, out_path, model):
     """Stage 3: fal generates ONE instrumental bed at length_ms -> out_path (mp3)."""
     import fal_client
 
@@ -119,9 +119,9 @@ def generate_bed(prompt, length_ms, out_path):
                 if msg:
                     print("   fal:", msg)
 
-    print(f"   generating bed: {length_ms} ms, instrumental, model={FAL_MUSIC_MODEL}")
+    print(f"   generating bed: {length_ms} ms, instrumental, model={model}")
     result = fal_client.subscribe(
-        FAL_MUSIC_MODEL,
+        model,
         arguments={
             "prompt": prompt,
             "music_length_ms": int(length_ms),
@@ -159,9 +159,6 @@ def main():
                     help="stage 1+2 only: write the Claude prompt to stdout, DO NOT call fal (free)")
     args = ap.parse_args()
 
-    global FAL_MUSIC_MODEL
-    FAL_MUSIC_MODEL = args.model
-
     if not ANTHROPIC_API_KEY:
         sys.exit("!! ANTHROPIC_API_KEY not set.")
 
@@ -197,7 +194,7 @@ def main():
         length_ms = min(int((vdur + 2.0) * 1000) if vdur > 0 else 60_000, MODEL_MAX_MS)
     print(f"   bed length: {length_ms} ms (voice {'~%.1fs' % (length_ms/1000)})")
 
-    generate_bed(prompt, length_ms, out_path)
+    generate_bed(prompt, length_ms, out_path, args.model)
 
     if not out_path.exists() or out_path.stat().st_size < MIN_OK_BYTES:
         sz = out_path.stat().st_size if out_path.exists() else 0
