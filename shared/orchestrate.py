@@ -100,15 +100,28 @@ def load_resolved_config(channel, project, t):
     Returns (cfg, channel_dir) or (None, None)."""
     if not channel:
         return None, None
-    channel_dir = channel  # <repo_root>/<channel>/
-    cfg_path = os.path.join(channel_dir, "channel.json")
-    if not os.path.exists(cfg_path):
+    # Channel NAME (header / channel.json) uses underscores; the FOLDER on disk uses
+    # hyphens (final_hours -> final-hours/, synthetic_press -> synthetic/ via alias).
+    # Try the name as-given, then the '-'/'_' swaps, and use whichever folder has a
+    # channel.json. (channel-agnostic: you never think about which spelling you used.)
+    candidates = []
+    for cand in (channel, channel.replace("_", "-"), channel.replace("-", "_")):
+        if cand not in candidates:
+            candidates.append(cand)
+    channel_dir = None
+    cfg_path = None
+    for cand in candidates:
+        p = os.path.join(cand, "channel.json")
+        if os.path.exists(p):
+            channel_dir, cfg_path = cand, p
+            break
+    if cfg_path is None:
         # tolerate being run from inside the channel folder too (./channel.json)
         if os.path.exists("channel.json"):
             cfg_path, channel_dir = "channel.json", "."
         else:
             t.warn(f"channel.json not found for '{channel}' "
-                   f"(looked for {channel}/channel.json from repo root). "
+                   f"(tried {', '.join(c + '/channel.json' for c in candidates)} from repo root). "
                    f"Run from ~/Pipeline, or check the channel name in the script header.")
             return None, None
     try:
