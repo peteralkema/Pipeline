@@ -175,19 +175,22 @@ def render_mode_b(beat: dict, frames: int, render: bool = False) -> str:
     os.makedirs(os.path.join(os.getcwd(), "clips"), exist_ok=True)
     clip = os.path.abspath(f"clips/beat_{beat['index']:02d}_B_{comp}.mp4")
 
-    # FIRST PRINCIPLE: a Mode B element renders at ITS OWN declared length. The audio-
-    # derived `frames` is IGNORED here — Remotion enforces the component's durationInFrames
-    # and refuses anything longer, so we render exactly what the component declares. The
-    # gap between this clip's length and the beat's measured audio slot is filled by the
-    # ASSEMBLER (freeze-fill), not here. This makes Mode B render unbreakable: it can never
-    # ask for more frames than the component has.
-    comp_frames = component_durations().get(comp_id)
-    if comp_frames is None:
-        comp_frames = frames  # query unavailable (e.g. dry-run/no-node): fall back, render still attempts component length
-        note_dur = f"{comp_frames} frames (audio-fallback; component duration unqueried)"
+    # CONTINUOUS-NARRATION MODEL: a Mode B clip's duration = its beat's MEASURED spoken
+    # duration (the `frames` passed in), exactly like Mode A. The script-stage eligibility
+    # filter keeps a promoted phrase within the component's capacity, so this normally fits.
+    # FAILSAFE ONLY (avoid by good script design): if a phrase overflows the component's max
+    # frames, render at the component max and let the ASSEMBLER freeze-tail the remainder —
+    # never ask Remotion for more frames than the component has (that would error mid-batch).
+    target = frames                                  # measured spoken duration for this beat
+    cap = component_durations().get(comp_id)
+    if cap is not None and target > cap:
+        print(f"     !! OVERFLOW: measured {target}f > component max {cap}f — rendering {cap}f; "
+              f"assembler will freeze-tail {target - cap}f. SHORTEN this Mode B phrase in the script.")
+        frames = cap
+        note_dur = f"{cap} frames (component max — measured {target}f OVERFLOWED; failsafe)"
     else:
-        note_dur = f"{comp_frames} frames (component's own duration)"
-    frames = comp_frames
+        frames = target
+        note_dur = f"{target} frames (measured spoken duration)"
 
     print(f"  -> MODE B  {comp}   ({note_dur})")
     print(f"     props  : {props}")
@@ -262,8 +265,7 @@ def estimate_frames(beat: dict) -> int:
         seconds = max(1.5, words / 135 * 60)
     else:
         seconds = 3.0 if beat["mode"] == "B" else 2.5
-    if beat.get("silence_after"):
-        seconds += 1.5
+    # (no silence_after bonus — the continuous-narration model codifies nothing about silence)
     return round(seconds * FPS)
 
 

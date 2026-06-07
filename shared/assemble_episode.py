@@ -158,6 +158,53 @@ def make_audio_segment(beat, dur, voiceover, work, i):
     return dst
 
 
+def build_audio_track(beats, voiceover, work):
+    """Build ONE continuous audio track in a single ffmpeg pass. Replaces the
+    per-beat make_audio_segment + AAC-concat, which left encoder-delay gaps at
+    every beat boundary ('audio cuts then resumes'). For each beat in order:
+      - spoken (vo_span>0): atrim the real VO at [vo_start, vo_start+vo_span].
+        These slices are contiguous across spoken beats, so they reconstruct the
+        continuous voiceover exactly, sample-accurate (atrim is on decoded samples,
+        unlike -ss). Any remainder (audio_duration - vo_span = silence_after bonus)
+        becomes trailing silence.
+      - fully silent beat (hold): anullsrc of audio_duration.
+    Joined with the concat FILTER (single decode+encode) so there are NO inter-
+    segment gaps. Total == sum(audio_duration) == the video track."""
+    SR = 48000
+    AFMT = f"aformat=sample_fmts=fltp:sample_rates={SR}:channel_layouts=stereo"
+    parts, labels, k = [], [], 0
+    for b in sorted(beats, key=lambda x: x["index"]):
+        a_dur = float(b["audio_duration"])
+        vo_span = float(b.get("vo_span") or 0.0)
+        vo_start = b.get("vo_start")
+        if vo_span > 0 and vo_start is not None:
+            lbl = f"s{k}"; k += 1
+            parts.append(f"[0:a]atrim=start={float(vo_start):.3f}:duration={vo_span:.3f},"
+                         f"asetpts=PTS-STARTPTS,{AFMT}[{lbl}]")
+            labels.append(lbl)
+            gap = a_dur - vo_span
+            if gap > 0.001:
+                lbl = f"s{k}"; k += 1
+                parts.append(f"anullsrc=r={SR}:cl=stereo,atrim=duration={gap:.3f},{AFMT}[{lbl}]")
+                labels.append(lbl)
+        else:
+            if a_dur > 0.001:
+                lbl = f"s{k}"; k += 1
+                parts.append(f"anullsrc=r={SR}:cl=stereo,atrim=duration={a_dur:.3f},{AFMT}[{lbl}]")
+                labels.append(lbl)
+    if not labels:
+        raise SystemExit("build_audio_track: no audio segments produced (empty/invalid timing table).")
+    parts.append("".join(f"[{l}]" for l in labels) + f"concat=n={len(labels)}:v=0:a=1[aout]")
+    graph = ";\n".join(parts)
+    script = work / "audio_filter.txt"
+    script.write_text(graph)
+    out = work / "audio.m4a"
+    run(["ffmpeg", "-y", "-i", str(voiceover),
+         "-filter_complex_script", str(script),
+         "-map", "[aout]", "-c:a", "aac", "-b:a", "192k", str(out)], "build continuous audio")
+    return out
+
+
 def concat(segments, out, work, kind):
     listfile = work / f"concat_{kind}.txt"
     listfile.write_text("".join(f"file '{s.resolve()}'\n" for s in segments))
@@ -216,7 +263,6 @@ def main():
             if is_ph: n_ph += 1
             else: n_real += 1
             v_segs.append(make_video_segment(b, src, is_ph, dur, W, H, work, i))
-            a_segs.append(make_audio_segment(b, dur, voiceover, work, i))
             tag = b["mode"] if b["mode"] == "A" else f"B:{b.get('component')}"
             kind = "ph" if is_ph else "real"
             if i % 10 == 0 or i == len(beats) - 1:
@@ -224,7 +270,7 @@ def main():
 
         print("\n  concatenating video + audio tracks...")
         silent_v = concat(v_segs, work / "video.mp4", work, "v")
-        full_a = concat(a_segs, work / "audio.m4a", work, "a")
+        full_a = build_audio_track(beats, voiceover, work)
 
         print("  muxing...")
         # music bed: <project>/music.mp3 by default, or --music FILE; --no-music skips.

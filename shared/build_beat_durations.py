@@ -74,12 +74,18 @@ def main():
 
     # 4. merge: every beat in manifest order. spoken -> measured; silent -> default_hold.
     durations = {}
+    n_no_narr = 0
     for m in manifest:
         idx = m["index"]
         if m.get("spoken"):
             d = spoken_dur.get(idx, {"duration": 0.0, "source": "whisper_MISSING"})
         else:
-            d = {"duration": round(float(m.get("default_hold", 2.5)), 3), "source": "silent_hold"}
+            # Continuous-narration model: every beat MUST carry spoken words. A wordless
+            # beat is an AUTHORING ERROR, not a silent hold to fabricate. Assign 0s and
+            # mark it loudly rather than inventing time the protected voice track does not
+            # contain. (No more default_hold / silent_hold.)
+            d = {"duration": 0.0, "source": "no_narration"}
+            n_no_narr += 1
         d["frames"] = round(d["duration"] * args.fps)
         d["mode"] = m["mode"]
         d["component"] = m.get("component")
@@ -89,11 +95,12 @@ def main():
 
     total = sum(d["duration"] for d in durations.values())
     n_w = sum(1 for d in durations.values() if d["source"] == "whisper")
-    n_s = sum(1 for d in durations.values() if d["source"] == "silent_hold")
+    n_nn = sum(1 for d in durations.values() if d["source"] == "no_narration")
     n_miss = sum(1 for d in durations.values() if d["source"] == "whisper_MISSING")
     print(f"\n=== per-beat durations ===")
     print(f"wrote {args.out}")
-    print(f"{len(durations)} beats: {n_w} whisper-measured, {n_s} silent-hold"
+    print(f"{len(durations)} beats: {n_w} whisper-measured"
+          + (f", {n_nn} NO-NARRATION (authoring error)" if n_nn else "")
           + (f", {n_miss} MISSING" if n_miss else ""))
     print(f"total episode length: {total:.1f}s ({total/60:.2f} min)")
     print(f"\nfirst 10 beats:")
@@ -102,6 +109,10 @@ def main():
         d = durations[idx]
         tag = d["mode"] if d["mode"]=="A" else f"B:{d['component']}"
         print(f"  [{idx:>2}] ({tag:<18}) {d['duration']:5.2f}s  {d['frames']:>3}f  [{d['source']}]")
+    if n_no_narr:
+        print(f"\n!! {n_no_narr} beat(s) have NO narration. The continuous-narration model requires "
+              f"every beat to carry spoken words; these are authoring errors (assigned 0s, NOT a hold). "
+              f"Fix the script so every beat has narration, or promote/merge the beat.")
     if n_miss:
         print("\n!! some spoken beats got no Whisper match — alignment drift; check word counts.")
 
