@@ -1,147 +1,133 @@
-# Orchestrator Dependency Map
+# Orchestrator Dependency Map (v2 — 7 June 2026 evening)
 
-*Destination in repo: `shared/docs/ORCHESTRATOR-DEPENDENCY-MAP.md`*
+*Destination in repo: `shared/docs/ORCHESTRATOR-DEPENDENCY-MAP.md` (replaces v1)*
 
-Reconstructed from direct observation during the 7 June 2026 end-to-end validation run — every
-edge below was either read in the source on the box or watched running, EXCEPT the two flagged as
-inferred/unwired at the bottom. This is the map we built one grep at a time; here it is in one place.
+Updated after wiring the convergence leg and building Tier-2 music. Changes from v1 are marked **[NEW]**.
+Every edge was read in source on the box or watched running, except the items flagged at the bottom.
 
 ---
 
-## 1. Control flow — the conductor and its four legs
+## 1. Control flow — the conductor and its legs (convergence now WIRED)
 
 ```
                           script.md
-                              │
-                              ▼
-                        parse_script.py            → beats.json (flat list, for leg tools)
-                              │                     → beats_full.json (header + beats, orchestrator input)
-                              ▼
-                        orchestrate.py             reads beats_full.json; decide_legs(); sequences the legs
-                              │
-              ┌───────────────┼───────────────┐
-              ▼               ▼               ▼
+                              |
+                              v
+                        parse_script.py            -> beats.json (flat) + beats_full.json (header+beats)
+                              |
+                              v
+                        orchestrate.py             resolve channel (hyphen/underscore tolerant [NEW]);
+                              |                     decide_legs(); sequence
+              +---------------+---------------+
+              v               v               v
         audio_leg.py     modeb_leg.py     modea_leg.py
-        (timing +        (graphics +      (stills, clips,
-         voiceover)       gate)            gate)
-              └───────────────┼───────────────┘
-                              ▼
-                       assemble_episode.py          reads durations + voiceover + index + clips
-                              │
-                              ▼
+        (timing+voice)   (graphics+gate)  (stills,clips,gate)
+              +---------------+---------------+
+                              v
+                  convergence_leg.py  [NEW - WIRED]
+                  (pool clips -> assemble_episode -> final_video; optional music)
+                              |
+                              v
                         final_video.mp4
 ```
 
-`orchestrate.py` imports `audio_leg`, `modeb_leg`, `modea_leg`, plus `telemetry` and `banner`.
-Each leg SHELLS OUT to proven scripts rather than reimplementing them — the orchestrator just
-sequences proven black boxes.
+`orchestrate.py` now imports `audio_leg`, `modeb_leg`, `modea_leg`, **`convergence_leg`** [NEW], plus
+`telemetry`, `banner`. After Mode A it calls `convergence_leg.run_convergence_leg(ctx, ma)`. The whole
+arc runs in ONE command. (The "legs not yet wired" message is gone for convergence.)
+
+`decide_legs` skips legs by composition: no Mode B beats -> Mode B leg skipped (proven on the Final
+Hours Mode-A-only test -> plan `audio -> modeA -> convergence`).
 
 ---
 
 ## 2. What each leg shells out to (in run order)
 
-**audio_leg.py → run_audio_leg(ctx):**
-1. `build_audio_script.py`   reads `beats.json` → `<out>.txt` (one continuous read) + `<out>.manifest.json`
-2. `generate_episode_vo.py`  imports `recreation_pipeline.py` (`generate_voiceover`, Inworld/Victor) → `voiceover.mp3`
-3. `whisper`                 `voiceover.mp3` → `voiceover.json` (word timestamps)
-4. `build_beat_durations.py` reads manifest + `voiceover.json`; shells `align_with_whisper.py` → `durations.json`
-   - (audio keep/swap gate)
+**audio_leg.py -> run_audio_leg(ctx):**
+1. `build_audio_script.py`   beats.json -> `<out>.txt` (continuous read) + `<out>.manifest.json`
+2. `generate_episode_vo.py`  imports `recreation_pipeline.py` (generate_voiceover, Inworld) -> voiceover.mp3
+3. `whisper`                 voiceover.mp3 -> voiceover.json (word timestamps)
+4. `build_beat_durations.py` manifest + voiceover.json; shells `align_with_whisper.py` -> durations.json
 
-**modeb_leg.py → run_modeb_leg(ctx) + modeb_gate(ctx):**
-- `dispatch.py`              reads `beats.json` + `durations.json`; shells `npx remotion render` → `clips/beat_NN_B_*.mp4`
-- `make_modeb_review.py`     builds the review page (imports `dispatch` for shape_props; reads `durations.json`)
-- `serve_modeb_review.py`    serves the page (imports `make_modeb_review`; re-render POST → `dispatch`)
+**modeb_leg.py -> run_modeb_leg(ctx) + modeb_gate(ctx):**
+- `dispatch.py` (reads durations.json; `npx remotion render` -> beat_NN_B_*.mp4),
+  `make_modeb_review.py` + `serve_modeb_review.py` (gate)
 
-**modea_leg.py → run_modea_leg(ctx):**
-1. `modea_beats.py`                          translate `beats.json` → `modea_engine_beats.json` + `modea_index.json`
-2. `recreation_pipeline.py stills`           reads engine beats (via `_load_beats_with_canon`) → `storyboard.json` + stills (fal Flux)
-   - (Mode A stills gate)
-3. `recreation_pipeline.py finish --animate-only`  reviewed stills → `clips/shot_NNN.mp4` (fal Kling)
+**modea_leg.py -> run_modea_leg(ctx):**  returns {clips, count, indices, index_json, engine_project}
+1. `modea_beats.py`  beats.json -> engine_beats.json + `_index.json` (at project root)
+2. `recreation_pipeline.py stills`  -> storyboard.json + stills (fal Flux)  [Mode A stills gate]
+3. `recreation_pipeline.py finish --animate-only`  -> modea/clips/shot_NNN.mp4 (fal Kling)
 
-**convergence (assemble_episode.py):**
-- reads `durations.json` (timing+mode+component+order) + `modea_index.json` (beat→shot) + `voiceover.mp3`
-  + pooled `clips/` → `final_video.mp4` (direct ffmpeg). VOICE WINS: output pinned to voice length.
-
----
-
-## 3. The two cross-cutting dependencies (the hard-won discoveries)
-
-### a) durations.json is the SINGLE timing source
-```
-        build_beat_durations.py   (audio leg · via whisper + align_with_whisper.py)
-                  │
-                  ▼
-           durations.json   ── single source of timing + mode + component + order ──
-                  │
-        ┌─────────┼─────────────────────┐
-        ▼         ▼                     ▼
-   dispatch.py  assemble_episode.py  make_modeb_review.py
-   (Mode B      (beat durations,     (shows each
-    frames)      voice-wins)          beat's duration)
-```
-Produced ONCE by the audio leg; read by three downstream consumers. This is the architecture the
-continuous-narration cleanup created — no holds, no silence objects, every beat measured from the
-voice. Shape: `{str(idx): {duration, frames, source, mode, component}}`.
-
-### b) recreation_pipeline.py is the SHARED engine (two callers)
-- audio leg → `generate_episode_vo.py` → `recreation_pipeline.generate_voiceover()` (Inworld/Victor)
-- Mode A leg → `recreation_pipeline.py stills` (fal Flux) AND `recreation_pipeline.py finish --animate-only` (fal Kling)
-
-A change to `recreation_pipeline.py` ripples into BOTH the audio leg and the Mode A leg. Treat edits
-to it with extra care.
+**convergence_leg.py -> run_convergence_leg(ctx, modea):  [NEW]**
+- pools Mode A `shot_NNN.mp4` (from `<project>/modea/clips/`, path from modea["engine_project"]) +
+  Mode B `beat_NN_B_*.mp4` (from `<project>/clips/`) into `<project>/clips/`
+- uses modea["index_json"] as the authoritative beat->shot map
+- shells PROVEN `assemble_episode.py` (`--durations --index --voiceover --clips --out`) -> final_video.mp4
+- music OFF by default; `ctx["music"]` hook (see section 5)
 
 ---
 
-## 4. Shared data spine (artifacts touched by more than one program)
+## 3. durations.json - still the SINGLE timing source (unchanged)
+```
+   build_beat_durations.py -> durations.json -> { dispatch.py | assemble_episode.py | make_modeb_review.py }
+```
+Produced once by the audio leg; read by three consumers. Shape:
+`{str(idx): {duration, frames, source, mode, component}}`.
+
+## 4. recreation_pipeline.py - still the SHARED engine (unchanged)
+- audio leg -> generate_episode_vo.py -> `recreation_pipeline.generate_voiceover()` (Inworld)
+- Mode A leg -> `recreation_pipeline.py stills` (fal Flux) + `finish --animate-only` (fal Kling)
+A change to it ripples into BOTH legs. Treat with care.
+
+## 5. make_music.py - Tier-2 music [NEW]
+```
+   narration (<out>.txt or beats.json)
+        |
+        v
+   make_music.py
+     stage 1: read narration
+     stage 2: Claude (claude-sonnet-4-6) writes ONE loopable instrumental prompt (per-episode)
+     stage 3: fal (fal-ai/elevenlabs/music) generates ONE bed -> <project>/music.mp3
+        |
+        v
+   assemble_episode.py / convergence_leg.py  (muxes music.mp3 under voice; loops if shorter)
+```
+Standalone for now (run before convergence). Reuses anthropic + fal_client plumbing. `--print-prompt-only`
+= stages 1+2, no fal spend. Model swappable via `--model`. NOT YET wired into convergence_leg (next session).
+
+---
+
+## 6. Shared data spine (artifacts touched by more than 1 program)
 
 | Artifact | Produced by | Read by |
 |---|---|---|
-| `beats.json` (flat) | parse_script.py | build_audio_script.py, dispatch.py, modea_beats.py |
-| `beats_full.json` (wrapper) | parse_script.py | orchestrate.py (header preflight) |
-| `voiceover.mp3` | generate_episode_vo.py | whisper, assemble_episode.py |
-| `voiceover.json` | whisper | build_beat_durations.py (and the source of word timestamps for future word-sync) |
-| `durations.json` | build_beat_durations.py | dispatch.py, assemble_episode.py, make_modeb_review.py |
-| `modea_index.json` | modea_beats.py | assemble_episode.py (reunites contiguous shot_NNN clips with their beats) |
-| `clips/` (pooled) | dispatch.py (Mode B) + recreation_pipeline.py (Mode A) | assemble_episode.py |
+| beats.json (flat) | parse_script.py | build_audio_script.py, dispatch.py, modea_beats.py, make_music.py (fallback) |
+| beats_full.json | parse_script.py | orchestrate.py (header preflight) |
+| voiceover.mp3 | generate_episode_vo.py | whisper, assemble_episode.py, make_music.py (sizing) |
+| voiceover.json | whisper | build_beat_durations.py (future: word-sync) |
+| durations.json | build_beat_durations.py | dispatch.py, assemble_episode.py, make_modeb_review.py |
+| _index.json | modea_beats.py (leg returns path) | convergence_leg.py -> assemble_episode.py |
+| clips/ (pooled) | dispatch.py (B) + recreation_pipeline.py (A); pooled by convergence_leg.py [NEW] | assemble_episode.py |
+| music.mp3 [NEW] | make_music.py (Claude+fal) | assemble_episode.py / convergence_leg.py (mux) |
+| final_video.mp4 | assemble_episode.py (via convergence_leg.py) | (output) |
 
----
+## 7. External tools / engines
+Inworld TTS (Victor) via recreation_pipeline; Whisper (local); fal Flux (stills); fal Kling (animate);
+fal ElevenLabs music [NEW] (make_music); Remotion (dispatch, Mode B); ffmpeg (assemble); Claude API
+(recreation_pipeline storyboard - skipped on --beats path; AND make_music prompt-writing [NEW]).
 
-## 5. External tools / engines (the "how", reached via the scripts above)
+## 8. Honesty flags / still-open
+- **PUBLISH half of convergence NOT wired:** thumbnail gate, convergence gate, upload/OAuth are still
+  unbuilt. convergence_leg does auto-ASSEMBLE only. (FH has auth.py + client_secret.json; Synthetic OAuth absent.)
+- **make_music NOT yet wired into convergence_leg** - it's standalone; next session connects it so
+  `--music` on the orchestrator runs Claude->fal->mux automatically.
+- **One INFERRED edge (still unverified):** narration_assembler.py -> make_episode_vo.py may be a
+  legacy/alternate path (active leg uses generate_episode_vo.py). One grep settles it.
+- **Channel alias vs hyphen-swap:** resolver now tolerates `_`<->`-`, but genuine aliases (synthetic->
+  synthetic_press) still need header==folder. synthetic/channel.json `name` still says synthetic_press.
 
-| Tool | Reached via | Used for |
-|---|---|---|
-| Inworld TTS (Victor) | recreation_pipeline.generate_voiceover (called by generate_episode_vo.py) | voiceover.mp3 |
-| Whisper (local) | audio leg directly | word timestamps → durations |
-| fal.ai Flux (flux-pro/v1.1) | recreation_pipeline.py stills | Mode A stills |
-| fal.ai Kling | recreation_pipeline.py finish --animate-only | Mode A clips |
-| Remotion (npx) | dispatch.py | Mode B clips |
-| ffmpeg (direct) | assemble_episode.py | concat + conform + mux |
-| Claude API | recreation_pipeline.build_storyboard | ONLY on the prose-script path; SKIPPED when --beats is supplied (our path) |
-
----
-
-## 6. Honesty flags — verify these next session
-
-- **Convergence tail not fully wired.** `assemble_episode.py` is proven and standalone, but the
-  orchestrator's convergence leg (thumbnail gate → schedule gate → upload) is still a STUB. Diagram §1
-  shows the intended flow to `final_video.mp4`; the upload leg beyond it is not built, and Synthetic's
-  OAuth is not set up.
-- **One INFERRED edge, not directly verified:** `make_episode_vo.py` depends on `narration_assembler.py`
-  (this is WHY we kept narration_assembler rather than retiring it). But it was NOT confirmed that
-  `make_episode_vo.py` is in the ACTIVE leg path — the audio leg we ran uses `generate_episode_vo.py`,
-  not `make_episode_vo.py`. So `narration_assembler.py → make_episode_vo.py` may be an alternate/legacy
-  path. One grep next session settles it: `grep -rn "make_episode_vo" shared/ --include=*.py`.
-- **Channel resolution blocker (from the orchestrator dry-run):** header says `channel: synthetic_press`
-  but the channel folder on disk is `synthetic/`. orchestrate.py resolves channel→folder by name and
-  halts. Fix before any live orchestrator run (align header to folder, rename folder, add an alias in
-  the resolver, or ensure `synthetic/channel.json` exists).
-
----
-
-## 7. Known papercuts on these dependencies
-
-- `build_beat_durations.py` `--aligner` default is RELATIVE (`../shared/align_with_whisper.py`) — breaks
-  when run from repo root; pass `--aligner shared/align_with_whisper.py`. Banked fix: resolve via `__file__`.
-- Mode A gate / various scripts have cwd assumptions (run from channel root). Banked: cwd-proofing pass.
-- `narration_assembler.py` still carries `categorise_empty` silent-beat detection — banked minor patch to
-  strip it (keep `build_narration`), consistent with the no-silence model.
+## 9. Known papercuts
+- `build_beat_durations.py` `--aligner` relative default - pass `shared/align_with_whisper.py` from repo root.
+- `make_music.py` needs shell-sourced `.env` (no `load_dotenv()` yet) - add it when next touched.
+- Mode A stills gate is honor-system (accepts `go` without verifying review). Stills page too small;
+  Mode A clip review never built.
+- narration_assembler.py still has `categorise_empty` silent-beat detection - banked strip (keep build_narration).
