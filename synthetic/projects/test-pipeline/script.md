@@ -1,4 +1,4 @@
-channel: synthetic_press
+channel: synthetic
 title: The Test That Proves The Pipeline
 description: A tiny six-beat episode authored under the continuous-narration model — every beat carries spoken words, Mode B beats are promoted phrases, and the assembler lays one protected voice track over the conformed video. This exists to validate the cleaned pipeline end to end, cheaply.
 tags: test, synthetic press, pipeline, continuous narration, dual mode
