@@ -1,38 +1,47 @@
 #!/usr/bin/env python3
 """
-assemble_episode.py - Synthetic 4c, Piece 3: the dual-mode assemble.
+assemble_episode.py — dual-mode assemble (continuous-narration model).
 
-Walks all 62 beats IN TRUE ORDER and builds one episode:
-  - video: each beat's clip laid end-to-end, conformed to its timing-table
-    duration (Mode A via the reversed index map -> shot_NNN.mp4; Mode B via
-    beat_NN_B_<Component>.mp4). Missing clips (or --placeholders) become solid
-    colour blocks so the cut still assembles.
-  - audio: for each beat, the real VO sliced at [vo_start, vo_start+vo_span]
-    then padded with silence to the beat's full duration; silent beats are pure
-    silence. Concatenated, this is the VO with the holds' silence INSERTED at the
-    right places — so audio length == video length, perfectly synced, and the
-    silent holds are real pauses, not drift.
+Walks every beat IN ORDER and builds one episode:
+  - VIDEO: each beat's clip, conformed to its MEASURED duration (durations.json).
+    Mode A via the reversed index map -> shot_NNN.mp4; Mode B via
+    beat_NN_B_<Component>.mp4. Short clips: Mode A SLOW-fills (cinematic), Mode B
+    FREEZE-tails (graphics must not warp). Long clips trim. Missing clips (or
+    --placeholders) become solid colour blocks so the cut still assembles.
+  - AUDIO: the ONE continuous voiceover.mp3, laid over the video UNTOUCHED.
+    No slicing, no silence, no reconstruction. The voice track is sacred.
 
-THE KEY IDEA: build it once, run it on placeholders FIRST (free), watch the cut
-to settle pacing/runtime, then run the SAME command without --placeholders once
-the real Mode A clips exist. Nothing else changes.
+THE INVARIANT (script-craft Part II): the narration is one continuous, protected
+voice track and the sole source of timing. Every beat's clip duration == its
+spoken-words duration (Whisper-measured, in durations.json). The video conforms to
+the voice; the voice is never touched. VOICE WINS: the output is pinned to the
+voiceover's length, so the voice always plays in full; trailing video is trimmed
+if there's any sub-second rounding mismatch.
 
-Inputs (defaults assume you're in the synthetic/ channel folder):
-  --timed      ep1_beats_timed.json                       (from align_episode.py)
-  --index      synthetic_modeA_beats_index.json           (from modea_beats.py)
-  --voiceover  projects/ep1-the-promise/voiceover.mp3     (from make_episode_vo.py)
+There is NO codified silence anywhere. A beat with no narration is an authoring
+error (duration 0, source "no_narration" in durations.json) — it is WARNED and
+SKIPPED here, never held.
+
+Inputs:
+  --durations  projects/ep1-the-promise/durations.json   (timing + mode + component + order;
+                                                           from the audio leg / build_beat_durations.py)
+  --index      synthetic_modeA_beats_index.json           (Mode A beat -> shot number; from modea_beats.py)
+  --voiceover  projects/ep1-the-promise/voiceover.mp3     (the protected continuous track)
   --project    projects/ep1-the-promise                   (clips/ + output live here)
 
 Usage:
-  # free pacing cut — grey A blocks, navy B blocks, real VO + real timing:
-  python3 ../shared/assemble_episode.py --placeholders
+  # free pacing cut — colour blocks, real VO + real timing:
+  python3 ../shared/assemble_episode.py --placeholders \
+      --durations projects/ep1-the-promise/durations.json \
+      --index synthetic_modeA_beats_index.json \
+      --voiceover projects/ep1-the-promise/voiceover.mp3 \
+      --project projects/ep1-the-promise
 
-  # final cut — uses real clips/shot_NNN.mp4 and clips/beat_NN_B_*.mp4 if present:
-  python3 ../shared/assemble_episode.py
+  # real cut — uses real clips/shot_NNN.mp4 and clips/beat_NN_B_*.mp4:
+  python3 ../shared/assemble_episode.py  <same flags, no --placeholders>
 
 Banked ffmpeg lessons applied: duration via d= INSIDE the lavfi filter, hex
-colours (0xRRGGBB), -r after the input, and every emitted command is printed
-before it runs so a failure shows exactly what was attempted.
+colours (0xRRGGBB), -r after the input, every emitted command printed before it runs.
 """
 
 import os
@@ -83,6 +92,24 @@ def reverse_index(index_path):
     return rev
 
 
+def load_beats_from_durations(durations_path):
+    """durations.json is the single timing+structure source: {str(idx): {duration,
+    frames, source, mode, component}}. Return an ordered list of beat dicts
+    [{index, mode, component, duration, source}, ...] sorted by index."""
+    durs = json.load(open(durations_path, encoding="utf-8"))
+    beats = []
+    for k in sorted(durs, key=lambda x: int(x)):
+        d = durs[k]
+        beats.append({
+            "index": int(k),
+            "mode": d.get("mode"),
+            "component": d.get("component"),
+            "duration": float(d.get("duration", 0.0)),
+            "source": d.get("source"),
+        })
+    return beats
+
+
 def clip_for(beat, rev_map, clips_dir, force_placeholders):
     """Return (path_or_None, is_placeholder). None path means make a placeholder."""
     idx, mode = beat["index"], beat["mode"]
@@ -101,11 +128,12 @@ def clip_for(beat, rev_map, clips_dir, force_placeholders):
 
 
 def make_video_segment(beat, src, is_ph, dur, W, H, work, i):
-    """Build a video segment of EXACTLY `dur` seconds at WxH/FPS."""
+    """Build a video segment of EXACTLY `dur` seconds at WxH/FPS.
+    Short clips: Mode A SLOW-fills (cinematic), Mode B FREEZE-tails (graphics must
+    not warp/slow). Long clips trim. native<=0 (probe failed) -> freeze-tail."""
     dst = work / f"v_{i:03d}.mp4"
     if is_ph:
         color = COLDOPEN_COLOR if (beat["index"] == 0) else (B_COLOR if beat["mode"] == "B" else A_COLOR)
-        # d= INSIDE the filter; -r after; hex colour. (banked lesson)
         run(["ffmpeg", "-y", "-f", "lavfi",
              "-i", f"color=c={color}:s={W}x{H}:d={dur:.3f}",
              "-r", str(FPS), "-c:v", "libx264", "-pix_fmt", "yuv420p", str(dst)],
@@ -120,62 +148,50 @@ def make_video_segment(beat, src, is_ph, dur, W, H, work, i):
              "-vf", vf, "-c:v", "libx264", "-preset", "medium", "-crf", "18",
              "-pix_fmt", "yuv420p", "-an", str(dst)], f"trim video beat {beat['index']}")
     else:
-        # clip shorter than the slot -> SLOW it to fill (slow-to-fill, not freeze).
-        # setpts factor > 1 slows playback; the fps filter (in scale_pad) resamples
-        # to constant FPS so it stays smooth. Guard native<=0 (probe failed).
+        # clip shorter than the slot
         if native <= 0:
+            # probe failed — hold a frame to fill so the cut still assembles
             vf = f"{scale_pad},tpad=stop_mode=clone:stop_duration={dur:.3f}"
+            label = "hold(probe-fail)"
+        elif beat["mode"] == "B":
+            # Mode B: FREEZE the tail. A graphic must never be slowed/warped. This is
+            # the FAILSAFE for a Mode B phrase that overflowed its component (dispatch
+            # rendered at the component max; we freeze the last frame for the remainder).
+            # Avoid by good script design (keep promoted phrases within component capacity).
+            vf = f"{scale_pad},tpad=stop_mode=clone:stop_duration={dur - native:.3f}"
+            label = "freeze-tail(B)"
         else:
+            # Mode A: slow-to-fill (cinematic). setpts factor > 1 slows; fps resamples.
             factor = dur / native
             if factor > 2.5:
                 print(f"     beat {beat['index']}: slow-fill {native:.1f}s -> {dur:.1f}s "
                       f"({factor:.1f}x — heavy stretch; candidate for more/shorter beats)")
             vf = f"setpts=PTS*{factor:.6f},{scale_pad}"
+            label = "slow-fill(A)"
         run(["ffmpeg", "-y", "-i", str(src),
              "-vf", vf, "-t", f"{dur:.3f}",
              "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-             "-pix_fmt", "yuv420p", "-an", str(dst)], f"slow-fill video beat {beat['index']}")
+             "-pix_fmt", "yuv420p", "-an", str(dst)], f"{label} video beat {beat['index']}")
     return dst
 
 
-def make_audio_segment(beat, dur, voiceover, work, i):
-    """Build an audio segment of EXACTLY `dur` seconds: VO slice + silence pad,
-    or pure silence for silent beats. 48k stereo AAC-friendly PCM."""
-    dst = work / f"a_{i:03d}.m4a"
-    span = float(beat.get("vo_span") or 0.0)
-    if beat.get("vo_start") is not None and span > 0:
-        start = float(beat["vo_start"])
-        # take the VO window, then pad with silence out to the full beat duration
-        run(["ffmpeg", "-y", "-ss", f"{start:.3f}", "-t", f"{span:.3f}", "-i", str(voiceover),
-             "-af", f"apad=whole_dur={dur:.3f},aformat=sample_rates=48000:channel_layouts=stereo",
-             "-t", f"{dur:.3f}", "-c:a", "aac", "-b:a", "192k", str(dst)],
-            f"vo+pad audio beat {beat['index']}")
-    else:
-        run(["ffmpeg", "-y", "-f", "lavfi",
-             "-i", f"anullsrc=channel_layout=stereo:sample_rate=48000",
-             "-t", f"{dur:.3f}", "-c:a", "aac", "-b:a", "192k", str(dst)],
-            f"silence audio beat {beat['index']}")
-    return dst
-
-
-def concat(segments, out, work, kind):
-    listfile = work / f"concat_{kind}.txt"
+def concat_video(segments, out, work):
+    listfile = work / "concat_v.txt"
     listfile.write_text("".join(f"file '{s.resolve()}'\n" for s in segments))
-    if kind == "v":
-        run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(listfile),
-             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
-             "-r", str(FPS), str(out)], "concat video")
-    else:
-        run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(listfile),
-             "-c:a", "aac", "-b:a", "192k", str(out)], "concat audio")
+    run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(listfile),
+         "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+         "-r", str(FPS), str(out)], "concat video")
     return out
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--timed", default="ep1_beats_timed.json")
-    ap.add_argument("--index", default="synthetic_modeA_beats_index.json")
-    ap.add_argument("--voiceover", default="projects/ep1-the-promise/voiceover.mp3")
+    ap.add_argument("--durations", default="projects/ep1-the-promise/durations.json",
+                    help="durations.json — per-beat measured duration + mode + component + order")
+    ap.add_argument("--index", default="synthetic_modeA_beats_index.json",
+                    help="Mode A beat -> shot-number map (from modea_beats.py)")
+    ap.add_argument("--voiceover", default="projects/ep1-the-promise/voiceover.mp3",
+                    help="the ONE continuous protected voice track")
     ap.add_argument("--project", default="projects/ep1-the-promise")
     ap.add_argument("--clips", default=None, help="clips dir (default: <project>/clips)")
     ap.add_argument("--music", default=None, help="music bed mp3 (default: <project>/music.mp3 if present)")
@@ -187,48 +203,58 @@ def main():
     ap.add_argument("--height", type=int, default=1080)
     args = ap.parse_args()
 
-    timed = Path(args.timed); index = Path(args.index)
+    durations = Path(args.durations); index = Path(args.index)
     voiceover = Path(args.voiceover); project = Path(args.project)
     clips_dir = Path(args.clips) if args.clips else project / "clips"
     W, H = args.width, args.height
 
-    for p, label in [(timed, "timed table"), (index, "index map"), (voiceover, "voiceover")]:
+    for p, label in [(durations, "durations.json"), (index, "index map"), (voiceover, "voiceover")]:
         if not p.exists():
             sys.exit(f"missing {label}: {p}")
 
     out = Path(args.out) if args.out else project / ("pacing_cut.mp4" if args.placeholders else "final_video.mp4")
 
-    beats = json.load(open(timed, encoding="utf-8"))
-    beats.sort(key=lambda b: b["index"])
+    beats = load_beats_from_durations(durations)
     rev_map = reverse_index(index)
+    voice_dur = probe(voiceover)
 
     print(f"\n=== dual-mode assemble: {len(beats)} beats -> {out} ===")
     print(f"mode: {'PLACEHOLDERS (free pacing cut)' if args.placeholders else 'real clips where present'}")
-    print(f"resolution: {W}x{H} @ {FPS}fps   voiceover: {voiceover} ({probe(voiceover):.1f}s)\n")
+    print(f"resolution: {W}x{H} @ {FPS}fps   voiceover: {voiceover} ({voice_dur:.1f}s) [VOICE WINS]\n")
+
+    # Surface any no-narration authoring errors (0-duration beats) and drop them.
+    bad = [b for b in beats if b["source"] == "no_narration" or b["duration"] <= 0.0]
+    if bad:
+        idxs = [b["index"] for b in bad]
+        print(f"  !! {len(bad)} beat(s) have NO narration (0s) — authoring errors, SKIPPED: {idxs}")
+        print(f"     Every beat must carry spoken words (continuous-narration model). Fix the script.")
+        beats = [b for b in beats if b not in bad]
 
     work = Path(tempfile.mkdtemp(prefix="assemble_ep_", dir=str(project)))
     n_real, n_ph = 0, 0
     try:
-        v_segs, a_segs = [], []
+        v_segs = []
         for i, b in enumerate(beats):
-            dur = float(b["audio_duration"])
+            dur = float(b["duration"])
             src, is_ph = clip_for(b, rev_map, clips_dir, args.placeholders)
             if is_ph: n_ph += 1
             else: n_real += 1
             v_segs.append(make_video_segment(b, src, is_ph, dur, W, H, work, i))
-            a_segs.append(make_audio_segment(b, dur, voiceover, work, i))
             tag = b["mode"] if b["mode"] == "A" else f"B:{b.get('component')}"
             kind = "ph" if is_ph else "real"
             if i % 10 == 0 or i == len(beats) - 1:
                 print(f"  [{b['index']:02d}] {tag:18s} {dur:5.2f}s  {kind}")
 
-        print("\n  concatenating video + audio tracks...")
-        silent_v = concat(v_segs, work / "video.mp4", work, "v")
-        full_a = concat(a_segs, work / "audio.m4a", work, "a")
+        print("\n  concatenating video...")
+        silent_v = concat_video(v_segs, work / "video.mp4", work)
+        vid_dur = probe(silent_v)
+        print(f"  video track: {vid_dur:.1f}s   voice track: {voice_dur:.1f}s   "
+              f"(diff {abs(vid_dur - voice_dur):.2f}s)")
 
-        print("  muxing...")
-        # music bed: <project>/music.mp3 by default, or --music FILE; --no-music skips.
-        # Defensive: no music file present -> behaves exactly as the VO-only mux below.
+        # ── AUDIO: the WHOLE voiceover, untouched. VOICE WINS — output pinned to the
+        # voice length so the voice always plays in full; trailing video trimmed if any
+        # sub-second mismatch. No per-beat audio, no silence, no reconstruction.
+        print("  muxing (whole voiceover over conformed video; voice untouched)...")
         music_path = None
         if not args.no_music:
             cand = Path(args.music).expanduser() if args.music else (project / "music.mp3")
@@ -236,40 +262,42 @@ def main():
                 music_path = cand
             elif args.music:
                 print(f"  !! --music {cand} not found; assembling without music")
+
         if music_path:
             import math as _math
             print(f"  music bed: {music_path.name} (VOICE {VOICE_LEVEL} / MUSIC {MUSIC_LEVEL})")
-            ad = probe(full_a); md = probe(music_path)
+            md = probe(music_path)
             music_src = music_path
-            if md > 0 and md < ad:
-                reps = _math.ceil(ad / md)
+            if md > 0 and md < voice_dur:
+                reps = _math.ceil(voice_dur / md)
                 mlist = work / "mlist.txt"
                 mlist.write_text("".join(f"file '{music_path.resolve()}'\n" for _ in range(reps)))
                 looped = work / "music_looped.m4a"
                 run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(mlist),
                      "-c", "copy", str(looped)], "loop music")
                 music_src = looped
-            run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(full_a), "-i", str(music_src),
+            run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(voiceover), "-i", str(music_src),
                  "-filter_complex",
                  f"[1:a]volume={VOICE_LEVEL}[v];[2:a]volume={MUSIC_LEVEL}[m];"
                  f"[v][m]amix=inputs=2:duration=first:dropout_transition=0[a]",
                  "-map", "0:v:0", "-map", "[a]",
-                 "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", str(out)],
-                "mux video+vo+music")
-        else:
-            run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(full_a),
                  "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
-                 "-map", "0:v:0", "-map", "1:a:0", "-shortest", str(out)], "final mux")
+                 "-t", f"{voice_dur:.3f}", str(out)],
+                "mux video+voice+music")
+        else:
+            run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(voiceover),
+                 "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                 "-map", "0:v:0", "-map", "1:a:0",
+                 "-t", f"{voice_dur:.3f}", str(out)],
+                "mux video+voice")
 
-        vd, ad, fd = probe(silent_v), probe(full_a), probe(out)
-        print(f"\n  video track: {vd:.1f}s   audio track: {ad:.1f}s   final: {fd:.1f}s ({fd/60:.2f} min)")
-        if abs(vd - ad) > 1.0:
-            print(f"  !! video/audio length differ by {abs(vd-ad):.1f}s — investigate before trusting sync")
+        fd = probe(out)
+        print(f"\n  final: {fd:.1f}s ({fd/60:.2f} min)  [pinned to voice {voice_dur:.1f}s]")
         print(f"\nDONE -> {out}")
         print(f"  {n_real} real clips, {n_ph} placeholders")
         if args.placeholders:
             print("\n  This is the PACING CUT: watch it to judge runtime/rhythm before any spend.")
-            print("  When the real Mode A clips exist, re-run WITHOUT --placeholders for the real episode.")
+            print("  When the real clips exist, re-run WITHOUT --placeholders for the real episode.")
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
