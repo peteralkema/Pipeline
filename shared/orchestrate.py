@@ -19,6 +19,7 @@ from banner import BANNER
 import audio_leg
 import modeb_leg
 import modea_leg
+import convergence_leg
 
 
 def parse_args():
@@ -277,9 +278,18 @@ def main():
         if ma is None:
             t.halt("Mode A leg halted. Fix the reported issue and re-run.")
             sys.exit(1)
+    else:
+        ma = None
+
+    # ── 3d: CONVERGENCE LEG (pool clips → assemble → final_video) — convergence_leg.py ──
+    if "convergence" in legs:
+        cv = convergence_leg.run_convergence_leg(ctx, ma)
+        if cv is None:
+            t.halt("convergence leg halted. Fix the reported issue and re-run.")
+            sys.exit(1)
 
     # ── legs not yet wired (step 5) ───────────────────────────────────────
-    pending = [l for l in legs if l not in ("audio", "modeB", "modeA")]
+    pending = [l for l in legs if l not in ("audio", "modeB", "modeA", "convergence")]
     if pending:
         t.phase("LEGS NOT YET WIRED")
         for l in pending:
