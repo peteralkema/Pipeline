@@ -48,6 +48,8 @@ FPS = 30
 A_COLOR = "0x222222"   # grey placeholder for recreated (Mode A) beats
 B_COLOR = "0x0a1628"   # Synthetic navy placeholder for graphic (Mode B) beats
 COLDOPEN_COLOR = "0x000000"
+VOICE_LEVEL = 1.15   # VO full (calibrated)
+MUSIC_LEVEL = 0.07   # music bed sits low under narration (Jamendo-calibrated)
 
 
 def run(cmd, desc, quiet=True):
@@ -118,12 +120,21 @@ def make_video_segment(beat, src, is_ph, dur, W, H, work, i):
              "-vf", vf, "-c:v", "libx264", "-preset", "medium", "-crf", "18",
              "-pix_fmt", "yuv420p", "-an", str(dst)], f"trim video beat {beat['index']}")
     else:
-        # clip shorter than the slot -> hold the last frame to fill (tpad clone)
-        vf = f"{scale_pad},tpad=stop_mode=clone:stop_duration={dur - native:.3f}"
+        # clip shorter than the slot -> SLOW it to fill (slow-to-fill, not freeze).
+        # setpts factor > 1 slows playback; the fps filter (in scale_pad) resamples
+        # to constant FPS so it stays smooth. Guard native<=0 (probe failed).
+        if native <= 0:
+            vf = f"{scale_pad},tpad=stop_mode=clone:stop_duration={dur:.3f}"
+        else:
+            factor = dur / native
+            if factor > 2.5:
+                print(f"     beat {beat['index']}: slow-fill {native:.1f}s -> {dur:.1f}s "
+                      f"({factor:.1f}x — heavy stretch; candidate for more/shorter beats)")
+            vf = f"setpts=PTS*{factor:.6f},{scale_pad}"
         run(["ffmpeg", "-y", "-i", str(src),
              "-vf", vf, "-t", f"{dur:.3f}",
              "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-             "-pix_fmt", "yuv420p", "-an", str(dst)], f"hold video beat {beat['index']}")
+             "-pix_fmt", "yuv420p", "-an", str(dst)], f"slow-fill video beat {beat['index']}")
     return dst
 
 
@@ -167,6 +178,8 @@ def main():
     ap.add_argument("--voiceover", default="projects/ep1-the-promise/voiceover.mp3")
     ap.add_argument("--project", default="projects/ep1-the-promise")
     ap.add_argument("--clips", default=None, help="clips dir (default: <project>/clips)")
+    ap.add_argument("--music", default=None, help="music bed mp3 (default: <project>/music.mp3 if present)")
+    ap.add_argument("--no-music", action="store_true", help="assemble without any music bed")
     ap.add_argument("--out", default=None, help="output mp4 (default: pacing_cut.mp4 or final_video.mp4)")
     ap.add_argument("--placeholders", action="store_true",
                     help="force colour-block placeholders for ALL beats (free pacing cut)")
@@ -214,9 +227,39 @@ def main():
         full_a = concat(a_segs, work / "audio.m4a", work, "a")
 
         print("  muxing...")
-        run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(full_a),
-             "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
-             "-map", "0:v:0", "-map", "1:a:0", "-shortest", str(out)], "final mux")
+        # music bed: <project>/music.mp3 by default, or --music FILE; --no-music skips.
+        # Defensive: no music file present -> behaves exactly as the VO-only mux below.
+        music_path = None
+        if not args.no_music:
+            cand = Path(args.music).expanduser() if args.music else (project / "music.mp3")
+            if cand.exists():
+                music_path = cand
+            elif args.music:
+                print(f"  !! --music {cand} not found; assembling without music")
+        if music_path:
+            import math as _math
+            print(f"  music bed: {music_path.name} (VOICE {VOICE_LEVEL} / MUSIC {MUSIC_LEVEL})")
+            ad = probe(full_a); md = probe(music_path)
+            music_src = music_path
+            if md > 0 and md < ad:
+                reps = _math.ceil(ad / md)
+                mlist = work / "mlist.txt"
+                mlist.write_text("".join(f"file '{music_path.resolve()}'\n" for _ in range(reps)))
+                looped = work / "music_looped.m4a"
+                run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(mlist),
+                     "-c", "copy", str(looped)], "loop music")
+                music_src = looped
+            run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(full_a), "-i", str(music_src),
+                 "-filter_complex",
+                 f"[1:a]volume={VOICE_LEVEL}[v];[2:a]volume={MUSIC_LEVEL}[m];"
+                 f"[v][m]amix=inputs=2:duration=first:dropout_transition=0[a]",
+                 "-map", "0:v:0", "-map", "[a]",
+                 "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", str(out)],
+                "mux video+vo+music")
+        else:
+            run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(full_a),
+                 "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                 "-map", "0:v:0", "-map", "1:a:0", "-shortest", str(out)], "final mux")
 
         vd, ad, fd = probe(silent_v), probe(full_a), probe(out)
         print(f"\n  video track: {vd:.1f}s   audio track: {ad:.1f}s   final: {fd:.1f}s ({fd/60:.2f} min)")
