@@ -193,6 +193,7 @@ def modea_gate(ctx, engine_project, engine_cwd, stills_count):
   │  STEP 1 ▸ In your BOX window (prompt: peter@pipeline-prod), paste:     │
   │                                                                        │
         source ~/venvs/pipeline/bin/activate
+        python {os.path.join(shared, 'make_review_page.py')} --project {engine_project}
         python {os.path.join(shared, 'serve_review.py')} --project {engine_project} --port {port}
   │                                                                        │
   │  STEP 2 ▸ In your LAPTOP window (prompt: your-name@laptop), paste:     │
