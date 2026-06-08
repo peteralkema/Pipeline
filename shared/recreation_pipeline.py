@@ -883,16 +883,28 @@ def assemble(clip_paths: list, voice_path: Path, out_path: Path,
         for i, (clip, target) in enumerate(zip(clip_paths, durations), 1):
             dst = work / f"t_{i:03d}.mp4"
             native = _probe(clip)
-            cut = min(target, native) if native > 0 else target
-            _run([
-                "ffmpeg", "-y", "-i", str(clip),
-                "-t", f"{cut:.3f}",
-                "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-                "-pix_fmt", "yuv420p", "-an",
-                "-vf", f"scale={ASPECT['width']}:{ASPECT['height']}:force_original_aspect_ratio=decrease,"
-                       f"pad={ASPECT['width']}:{ASPECT['height']}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=24",
-                str(dst),
-            ], f"trim clip {i}")
+            scale_pad = (f"scale={ASPECT['width']}:{ASPECT['height']}:force_original_aspect_ratio=decrease,"
+                         f"pad={ASPECT['width']}:{ASPECT['height']}:(ow-iw)/2:(oh-ih)/2,setsar=1")
+            if native > 0 and target > native + 0.05:
+                factor = target / native
+                _run([
+                    "ffmpeg", "-y", "-i", str(clip),
+                    "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+                    "-pix_fmt", "yuv420p", "-an",
+                    "-vf", f"setpts={factor:.6f}*PTS,{scale_pad},fps=24",
+                    "-t", f"{target:.3f}",
+                    str(dst),
+                ], f"stretch clip {i} ({native:.1f}->{target:.1f}s {factor:.2f}x)")
+            else:
+                cut = min(target, native) if native > 0 else target
+                _run([
+                    "ffmpeg", "-y", "-i", str(clip),
+                    "-t", f"{cut:.3f}",
+                    "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+                    "-pix_fmt", "yuv420p", "-an",
+                    "-vf", f"{scale_pad},fps=24",
+                    str(dst),
+                ], f"trim clip {i}")
             trimmed.append(dst)
             if i % 10 == 0 or i == n:
                 print(f"   assemble: trimmed {i}/{n}")
