@@ -22,11 +22,28 @@ Usage (from channel root, e.g. final-hours/):
 The pipeline's assemble() step then reads audio_duration from storyboard.json
 and uses it instead of the word-count proxy that caused drift on Mary Celeste.
 
-Banked as the permanent fix for sync drift. Capability serves Lazarus Films
-dialogue-driven scripts as well — same mechanism, different application.
+ALIGNMENT METHOD (the Troy-drift fix, 8 Jun 2026)
+-------------------------------------------------
+Earlier versions located each shot's start by COUNTING storyboard narration
+words and indexing that running count straight into the Whisper word list. That
+silently assumed the two token streams were 1:1 in length and order. They are
+not: spelled-out numbers in the script ("eleven eighty-four") are transcribed by
+Whisper as digits ("1184"), dropped fillers and merges add more divergence. Each
+mismatch nudged the cursor permanently ahead of the Whisper stream, so audio_start
+ran progressively further ahead of the spoken word (Troy: +9s by beat 32, +46s by
+beat 141), and the tail beats collapsed to claw the total back. A ~3% token
+divergence — under the old 5% warning — produced 46s of drift.
+
+The fix aligns the storyboard token stream to the Whisper token stream with a
+real sequence alignment (difflib, autojunk disabled), anchors each storyboard
+word to its MATCHED Whisper word's timestamp, and interpolates across the
+mismatch gaps. Errors stay local instead of accumulating. This is the original
+"audio_start = Whisper start-time of the beat's first spoken word" intent, with
+the word->word matching made robust rather than positional.
 """
 
 import argparse
+import difflib
 import json
 import re
 import sys
@@ -46,6 +63,76 @@ def words_in(text: str) -> list:
     return [w for w in normalize(text).split() if w]
 
 
+def build_sb_time_map(sb_tokens, wh_tokens, wh_times, last_audio_end):
+    """
+    Map every storyboard token index -> an audio time (seconds).
+
+    sb_tokens / wh_tokens : parallel normalized token lists.
+    wh_times              : wh_times[j] is the start time of wh_tokens[j].
+    Returns a list sb_time of len(sb_tokens), non-decreasing.
+
+    Matched tokens take the exact Whisper start time. Unmatched storyboard
+    tokens (e.g. number words Whisper rendered as digits) are linearly
+    interpolated between their surrounding matched anchors, so a local
+    transcription mismatch never propagates into later beats.
+    """
+    m = len(sb_tokens)
+    if m == 0:
+        return []
+
+    # Collect anchors: (sb_index, time) for every element-wise 'equal' match.
+    anchors = []
+    sm = difflib.SequenceMatcher(None, sb_tokens, wh_tokens, autojunk=False)
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "equal":
+            for k in range(i2 - i1):
+                anchors.append((i1 + k, wh_times[j1 + k]))
+
+    sb_time = [0.0] * m
+
+    if not anchors:
+        # Degenerate: nothing matched. Spread the audio evenly so we still
+        # produce a monotonic timeline rather than crashing.
+        for i in range(m):
+            sb_time[i] = last_audio_end * (i / m)
+        return sb_time
+
+    # Head: indices before the first anchor interpolate from 0.0 at index 0
+    # up to the first anchor time.
+    first_idx, first_t = anchors[0]
+    for i in range(0, first_idx + 1):
+        sb_time[i] = first_t * (i / first_idx) if first_idx > 0 else first_t
+
+    # Interior: linear interpolation between consecutive anchors.
+    for (i_a, t_a), (i_b, t_b) in zip(anchors, anchors[1:]):
+        sb_time[i_a] = t_a
+        span = i_b - i_a
+        if span <= 0:
+            continue
+        for i in range(i_a + 1, i_b):
+            frac = (i - i_a) / span
+            sb_time[i] = t_a + (t_b - t_a) * frac
+    last_idx, last_t = anchors[-1]
+    sb_time[last_idx] = last_t
+
+    # Tail: indices after the last anchor interpolate toward last_audio_end.
+    tail_span = (m - 1) - last_idx
+    for i in range(last_idx + 1, m):
+        if tail_span > 0:
+            frac = (i - last_idx) / tail_span
+            sb_time[i] = last_t + (last_audio_end - last_t) * frac
+        else:
+            sb_time[i] = last_t
+
+    # Enforce non-decreasing (interpolation already is, but guard against
+    # any pathological anchor ordering from a noisy transcript).
+    for i in range(1, m):
+        if sb_time[i] < sb_time[i - 1]:
+            sb_time[i] = sb_time[i - 1]
+
+    return sb_time
+
+
 def main():
     parser = argparse.ArgumentParser(description="Align storyboard shots to Whisper-measured audio timestamps.")
     parser.add_argument("--project", required=False, default=None, help="Project name (looks in projects/<name>/)")
@@ -54,6 +141,9 @@ def main():
     parser.add_argument("--whisper", default=None,
                         help="explicit path to the Whisper voiceover.json (overrides --project; pass with --storyboard)")
     parser.add_argument("--verbose", action="store_true", help="Print per-shot timing details")
+    parser.add_argument("--min-duration", type=float, default=0.3,
+                        help="Safety floor for a shot duration in seconds. With correct alignment this should "
+                             "essentially never fire; if it does, Whisper likely dropped a whole beat's words.")
     args = parser.parse_args()
 
     # Path resolution: explicit file overrides take precedence; otherwise the
@@ -126,55 +216,69 @@ def main():
             sys.exit(1)
         shots = storyboard[storyboard_key]
 
-    # Build a flat list of (shot_idx, narration_word_index_in_shot) for every word in narration
-    storyboard_words = []
+    # Flatten storyboard narration to a token stream, recording which shot each
+    # token belongs to and the index of each shot's FIRST token in that stream.
+    sb_tokens = []
+    shot_first_token_idx = {}
     for shot_idx, shot in enumerate(shots):
-        narration = shot.get("narration", "")
-        for word in words_in(narration):
-            storyboard_words.append((shot_idx, word))
+        shot_first_token_idx[shot_idx] = len(sb_tokens)
+        for word in words_in(shot.get("narration", "")):
+            sb_tokens.append(word)
 
-    print(f"Storyboard contains {len(storyboard_words)} narration words across {len(shots)} shots")
+    print(f"Storyboard contains {len(sb_tokens)} narration words across {len(shots)} shots")
 
-    if len(storyboard_words) == 0:
+    if len(sb_tokens) == 0:
         print("ERROR: no narration words found in storyboard", file=sys.stderr)
         sys.exit(1)
 
-    # Sanity check
-    diff = len(all_words) - len(storyboard_words)
-    if abs(diff) > len(storyboard_words) * 0.05:
-        print(f"WARNING: Whisper word count ({len(all_words)}) differs from storyboard word count ({len(storyboard_words)}) by {diff}", flush=True)
-        print(f"This may indicate transcription errors. Alignment may drift slightly.", flush=True)
-
-    # For each shot, find its starting word index in the full storyboard word list
-    # then look up that index in the Whisper word list to get the actual audio time
-    shot_start_indices = {}
-    cursor = 0
-    for shot_idx, shot in enumerate(shots):
-        shot_start_indices[shot_idx] = cursor
-        n_narration_words = len(words_in(shot.get("narration", "")))
-        cursor += n_narration_words
-
-    # Now look up the audio start time for each shot
-    for shot_idx, shot in enumerate(shots):
-        start_word_index = shot_start_indices[shot_idx]
-
-        # Clamp to bounds
-        if start_word_index >= len(all_words):
-            shot["audio_start"] = all_words[-1]["end"] if all_words else 0.0
-        else:
-            shot["audio_start"] = all_words[start_word_index]["start"]
-
-    # Compute audio_duration for each shot from consecutive starts
     last_audio_end = all_words[-1]["end"] if all_words else 0.0
+    wh_tokens = [w["word"] for w in all_words]
+    wh_times = [w["start"] for w in all_words]
+
+    # Sequence-align the two token streams and resolve a time for every
+    # storyboard token. This replaces the old cursor-count indexing that let
+    # number/transcription mismatches accumulate into multi-second drift.
+    sb_time = build_sb_time_map(sb_tokens, wh_tokens, wh_times, last_audio_end)
+
+    # Coverage = fraction of storyboard tokens that matched a Whisper token.
+    # This is the real health metric (the old 5% length-diff check missed the
+    # Troy drift entirely because the drift came from in-order substitutions,
+    # not a length mismatch).
+    sm = difflib.SequenceMatcher(None, sb_tokens, wh_tokens, autojunk=False)
+    matched = sum(b.size for b in sm.get_matching_blocks())
+    coverage = matched / len(sb_tokens) if sb_tokens else 0.0
+
+    # Assign each shot its start from the resolved time of its first token.
+    for shot_idx, shot in enumerate(shots):
+        idx = shot_first_token_idx[shot_idx]
+        if idx >= len(sb_tokens):
+            # Shot with no narration words sitting at the very end.
+            shot["audio_start"] = last_audio_end
+        else:
+            shot["audio_start"] = round(sb_time[idx], 3)
+
+    # The episode's audio is one continuous track from t=0; the first shot must
+    # start at 0.0 regardless of any lead-in silence before the first word.
+    if shots:
+        shots[0]["audio_start"] = 0.0
+
+    # Keep starts non-decreasing across shots (a shot with no narration inherits
+    # the next spoken shot's start, which can equal its neighbour's).
+    for i in range(1, len(shots)):
+        if shots[i]["audio_start"] < shots[i - 1]["audio_start"]:
+            shots[i]["audio_start"] = shots[i - 1]["audio_start"]
+
+    # Compute audio_duration for each shot from consecutive starts.
+    n_floored = 0
     for i, shot in enumerate(shots):
         if i + 1 < len(shots):
-            shot["audio_duration"] = shots[i + 1]["audio_start"] - shot["audio_start"]
+            shot["audio_duration"] = round(shots[i + 1]["audio_start"] - shot["audio_start"], 3)
         else:
-            shot["audio_duration"] = last_audio_end - shot["audio_start"]
+            shot["audio_duration"] = round(last_audio_end - shot["audio_start"], 3)
 
-        # Floor to a reasonable minimum (avoid zero-duration shots)
-        if shot["audio_duration"] < 0.3:
-            shot["audio_duration"] = 0.3
+        if shot["audio_duration"] < args.min_duration:
+            shot["audio_duration"] = args.min_duration
+            n_floored += 1
 
     # Save updated storyboard
     if storyboard_key is None:
@@ -191,16 +295,26 @@ def main():
     print(f"\nAlignment complete:")
     print(f"  Total measured audio time:  {total:.1f}s ({total/60:.2f} min)")
     print(f"  Whisper audio length:       {last_audio_end:.1f}s")
+    print(f"  Word-match coverage:        {coverage*100:.1f}%  ({matched}/{len(sb_tokens)} storyboard words)")
     print(f"  Shortest shot:              {min(durations):.2f}s")
     print(f"  Longest shot:               {max(durations):.2f}s")
     print(f"  Mean shot:                  {total/len(shots):.2f}s")
 
+    if coverage < 0.85:
+        print(f"\n!! LOW COVERAGE ({coverage*100:.1f}%). Many storyboard words did not match the "
+              f"transcript. Check that the Whisper voiceover.json is for THIS script, and that the "
+              f"narration text matches what was spoken. Alignment may be approximate.")
+    if n_floored:
+        print(f"\n!! {n_floored} shot(s) hit the {args.min_duration}s duration floor. With correct alignment "
+              f"this should not happen — it usually means Whisper dropped an entire beat's words, so two "
+              f"beats resolved to nearly the same start. Inspect those beats.")
+
     if args.verbose:
         print(f"\nPer-shot timing (first 10 + last 5):")
-        for i in list(range(min(10, len(shots)))) + list(range(max(10, len(shots)-5), len(shots))):
+        for i in list(range(min(10, len(shots)))) + list(range(max(10, len(shots) - 5), len(shots))):
             s = shots[i]
             narration_preview = s.get("narration", "")[:60]
-            print(f"  Shot {i+1:3d}: start={s['audio_start']:7.2f}s  dur={s['audio_duration']:5.2f}s  | {narration_preview!r}")
+            print(f"  Shot {i+1:3d}: start={s['audio_start']:8.2f}s  dur={s['audio_duration']:5.2f}s  | {narration_preview!r}")
 
     print(f"\nNow patch the pipeline assemble() to use audio_duration when present, then run --assemble-only")
 
