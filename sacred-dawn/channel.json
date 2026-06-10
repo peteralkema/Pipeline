@@ -1,0 +1,26 @@
+{
+  "channel": "sacred_dawn",
+  "name": "Sacred Dawn",
+  "handle": "@sacredawn",
+  "premise": "The Bible's origin story as a film series — cosmic and primeval scripture, rendered cinematically. Reverent, not sensational.",
+
+  "voiceId": "Elliot",
+  "tts_model": "inworld-tts-1.5-max",
+
+  "mode": "A",
+  "resolution": "landscape_16_9",
+
+  "style_suffix": "cinematic biblical epic, painterly oil-painting light, dramatic chiaroscuro, volumetric god-rays, warm gold and amber deepening to storm-grey and ash, weathered antiquity, fine atmospheric haze, reverent and majestic, deep shadow, faceless figures, no text, no modern elements, photoreal-painterly, 16:9",
+
+  "music": {
+    "source": "jamendo",
+    "voice_level": 1.15,
+    "music_level": 0.07
+  },
+
+  "upload": {
+    "category": "Entertainment",
+    "enabled": false,
+    "_note": "OAuth/upload not set up for this channel yet — uploads are manual until the channel-agnostic upload step is built."
+  }
+}
