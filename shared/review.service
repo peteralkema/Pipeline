@@ -1,0 +1,16 @@
+[Unit]
+Description=Final Hours stills review server (always-on, user service)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/peter/Pipeline
+EnvironmentFile=/home/peter/Pipeline/.env
+ExecStart=/home/peter/venvs/pipeline/bin/python /home/peter/Pipeline/shared/serve_review.py \
+  --project /home/peter/Pipeline/.review_current \
+  --host 0.0.0.0 --port 8001 --key fh2026
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target
