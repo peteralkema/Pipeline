@@ -94,6 +94,23 @@ def _pool_clips(project_dir, engine_clips_dir, t, dry_run):
     return pool
 
 
+def _maybe_upload(ctx, proj, t, py, shared, dry):
+    """Channel-agnostic publish: shell out to upload_episode.py (header = metadata,
+    channel folder = identity). Batch-exit-gate and parts-skip live inside that script.
+    An upload FAILURE never discards the finished video — warn and carry on."""
+    up = Path(shared) / "upload_episode.py"
+    if not up.exists():
+        t.warn(f"upload step skipped — {up} not found (final_video.mp4 is safe; upload manually).")
+        return
+    if dry:
+        t.info(f"[dry-run] would publish via upload_episode.py --project {proj} (private)")
+        return
+    if not _run([py, str(up), "--project", str(proj)], t, "upload_episode", cwd=None, dry_run=False):
+        t.warn("upload failed — final_video.mp4 is complete and safe. Re-run:  "
+               f"python shared/upload_episode.py --project {proj}")
+
+
+
 def run_convergence_leg(ctx, modea=None):
     """Assemble the episode: pool clips, lay the whole voiceover over the conformed
     video via assemble_episode.py → <project_dir>/final_video.mp4. Returns
@@ -176,4 +193,8 @@ def run_convergence_leg(ctx, modea=None):
         t.halt(f"assemble ran but {final_out} was not produced. Check the assemble log above.")
         return None
     t.ok(f"convergence complete → {final_out}")
+
+    # ── PUBLISH (channel-agnostic upload; private by default) ──
+    _maybe_upload(ctx, proj, t, py, shared, dry)
+
     return {"final": str(final_out)}
