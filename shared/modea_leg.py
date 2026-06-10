@@ -190,20 +190,12 @@ def modea_gate(ctx, engine_project, engine_cwd, stills_count):
     print(f"""
   ┌─ MODE A REVIEW — 3 steps, copy-paste each block ──────────────────────┐
   │                                                                        │
-  │  STEP 1 ▸ In your BOX window (prompt: peter@pipeline-prod), paste:     │
+  │  ONE STEP ▸ the review server is always on. Get your URL:            │
   │                                                                        │
-        source ~/venvs/pipeline/bin/activate
-        python {os.path.join(shared, 'make_review_page.py')} --project {engine_project}
-        python {os.path.join(shared, 'serve_review.py')} --project {engine_project} --port {port}
+        /home/peter/venvs/pipeline/bin/python {os.path.join(shared, 'review.py')} --project {engine_project}
   │                                                                        │
-  │  STEP 2 ▸ In your LAPTOP window (prompt: your-name@laptop), paste:     │
-  │                                                                        │
-        lsof -ti :{port} | xargs kill 2>/dev/null; true
-        ssh -p 443 -L {port}:localhost:{port} {box}
-  │                                                                        │
-  │  STEP 3 ▸ Open this in your browser:                                   │
-  │                                                                        │
-        http://localhost:{port}
+  │  Prints a clickable URL like  http://116.202.18.68:8001/?key=fh2026    │
+  │  Click it. No tunnel, no localhost, no path typing.                   │
   │                                                                        │
   │  Scroll top→bottom. Spell-breakers (modern clothing, extra hands,      │
   │  illegible text, anachronisms) → edit the prompt + Restill. Three      │
