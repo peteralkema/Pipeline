@@ -192,7 +192,7 @@ def modea_gate(ctx, engine_project, engine_cwd, stills_count):
   │                                                                        │
   │  ONE STEP ▸ the review server is always on. Get your URL:            │
   │                                                                        │
-        /home/peter/venvs/pipeline/bin/python {os.path.join(shared, 'review.py')} --project {engine_project}
+        /home/peter/venvs/pipeline/bin/python {os.path.join(shared, 'review.py')} --project {os.path.join(engine_cwd, engine_project)}
   │                                                                        │
   │  Prints a clickable URL like  http://116.202.18.68:8001/?key=fh2026    │
   │  Click it. No tunnel, no localhost, no path typing.                   │
