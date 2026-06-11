@@ -78,7 +78,7 @@ def _strip_md(s: str) -> str:
 
 
 
-HEADER_KEYS = {"channel", "title", "description", "tags"}
+HEADER_KEYS = {"channel", "title", "description", "tags", "look", "era"}
 
 def parse_header(lines):
     """Read the front-matter key:value block at the top of script.md (before the first

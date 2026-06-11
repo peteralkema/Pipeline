@@ -130,6 +130,26 @@ class ReviewServer(HTTPServer):
             self.anthropic = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
 
+# Optional shared secret for public-bind mode. Set by main() from --key.
+SERVER_KEY = None
+
+
+def _key_ok(handler) -> bool:
+    """True if auth is satisfied. No key configured (localhost mode) -> always ok.
+    Static images (/stills/) and the health check are EXEMPT: they are not
+    spend-capable and the page loads images via <img> tags that carry no key.
+    Everything else (the page, /api/restill, /api/aifix) requires ?key=<SERVER_KEY>."""
+    if not SERVER_KEY:
+        return True
+    from urllib.parse import urlparse, parse_qs, unquote as _unq
+    parsed = urlparse(handler.path)
+    p = _unq(parsed.path)
+    if p.startswith("/stills/") or p == "/api/health":
+        return True
+    q = parse_qs(parsed.query)
+    return q.get("key", [""])[0] == SERVER_KEY
+
+
 class Handler(BaseHTTPRequestHandler):
 
     def log_message(self, format, *args):
@@ -165,6 +185,9 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
         srv: ReviewServer = self.server  # type: ignore
+        if not _key_ok(self):
+            self.send_response(403); self.end_headers()
+            self.wfile.write(b"403 - missing or bad ?key"); return
 
         if path == "/" or path == "/index.html" or path == "/review.html":
             html_path = srv.project_dir / "review.html"
@@ -196,6 +219,8 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
+        if not _key_ok(self):
+            self.send_response(403); self.end_headers(); return
         if path == "/api/restill":
             self._handle_restill(); return
         if path == "/api/aifix":
@@ -357,6 +382,10 @@ def main():
     parser.add_argument("--project", required=True)
     parser.add_argument("--beats")
     parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--host", default="127.0.0.1",
+                        help="bind address; use 0.0.0.0 for tunnel-free public access")
+    parser.add_argument("--key", default=None,
+                        help="shared secret required as ?key=... (MANDATORY when --host is public)")
     parser.add_argument("--model", default="fal-ai/flux-pro/v1.1")
     args = parser.parse_args()
 
@@ -384,7 +413,12 @@ def main():
     print(f"Negatives loaded: {len(negatives)} (used in NORMAL mode only)")
     print(f"Model: {args.model}")
 
-    addr = ("127.0.0.1", args.port)
+    global SERVER_KEY
+    if args.host not in ("127.0.0.1", "localhost") and not args.key:
+        sys.exit("ERROR: refusing to bind public without --key. "
+                 "This server can spend fal/Claude credits; pass --key <secret>.")
+    SERVER_KEY = args.key
+    addr = (args.host, args.port)
     server = ReviewServer(addr, Handler, project_dir, beats, canon, negatives, args.model)
 
     if server.anthropic is not None:
@@ -393,7 +427,12 @@ def main():
         print("AI fix: DISABLED (anthropic not installed or ANTHROPIC_API_KEY not set)")
 
     print()
-    print(f"Server running at http://localhost:{args.port}/")
+    if args.host in ("127.0.0.1", "localhost"):
+        print(f"Server running at http://localhost:{args.port}/")
+    else:
+        _q = f"?key={args.key}" if args.key else ""
+        print(f"Server running at http://{args.host}:{args.port}/{_q}")
+        print("  (open that exact URL — the key is required on every request)")
     print(f"Press Ctrl+C to stop.")
     print()
 

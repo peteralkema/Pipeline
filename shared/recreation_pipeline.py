@@ -113,9 +113,9 @@ def _find_channel_marker(start: Path = None) -> Path | None:
     return None
 
 
-_CHANNEL_CACHE = None
+_CHANNEL_CACHE = {}   # keyed by resolved channel dir
 
-def load_channel_config(strict: bool = False) -> dict:
+def load_channel_config(strict: bool = False, anchor: Path = None) -> dict:
     """
     Find and load the current channel's config by walking up from CWD.
     Cached after first call so we don't re-read the file 85 times per render.
@@ -129,19 +129,22 @@ def load_channel_config(strict: bool = False) -> dict:
     so callers don't need to defensively .get() each field.
     """
     global _CHANNEL_CACHE
-    if _CHANNEL_CACHE is not None:
-        return _CHANNEL_CACHE
 
-    marker = _find_channel_marker()
+    marker = _find_channel_marker(anchor)
+    cache_key = str(marker.parent) if marker is not None else "__none__"
+    if cache_key in _CHANNEL_CACHE:
+        return _CHANNEL_CACHE[cache_key]
+
     if marker is None:
         if strict:
             raise SystemExit(
-                f"No {CHANNEL_MARKER} found by walking up from {Path.cwd()}. "
+                f"No {CHANNEL_MARKER} found by walking up from {anchor or Path.cwd()}. "
                 f"Run pipeline commands from inside a channel folder (e.g. final-hours/ or success-coach/)."
             )
-        _CHANNEL_CACHE = dict(CHANNEL_DEFAULTS)
-        _CHANNEL_CACHE["_marker_path"] = None
-        return _CHANNEL_CACHE
+        defaults = dict(CHANNEL_DEFAULTS)
+        defaults["_marker_path"] = None
+        _CHANNEL_CACHE[cache_key] = defaults
+        return defaults
 
     try:
         loaded = json.loads(marker.read_text())
@@ -156,7 +159,7 @@ def load_channel_config(strict: bool = False) -> dict:
     config.update(loaded)
     config["_marker_path"] = str(marker)
     config["_channel_dir"] = str(marker.parent)
-    _CHANNEL_CACHE = config
+    _CHANNEL_CACHE[cache_key] = config
     return config
 
 
@@ -526,7 +529,8 @@ Rules:
 def generate_still(image_prompt: str, out_path: Path) -> Path:
     rb = load_rulebook()
     config = load_channel_config(strict=False)
-    style_suffix = config["style_suffix"]
+    from look_resolver import resolve_look
+    style_suffix = resolve_look(out_path, config)["style_suffix"]
     people = rb.get("people_directive", "")
     full_prompt = f"{image_prompt}, {people}, {style_suffix}" if people else f"{image_prompt}, {style_suffix}"
     negative = ", ".join(rb["negative"])
@@ -616,10 +620,14 @@ def animate_still(still_path: Path, motion_prompt: str, out_path: Path) -> Path:
 
 # ── Step 5: narrate full script via Inworld (Victor) ───────────────────────────
 
-def _synthesize_chunk(text: str) -> bytes:
+def _synthesize_chunk(text: str, anchor: Path = None) -> bytes:
     """One Inworld call -> raw audio bytes. Handles the current JSON+base64 API."""
-    config = load_channel_config(strict=False)
+    config = load_channel_config(strict=False, anchor=anchor)
     voice_id = config["voice_id"]
+    if not getattr(_synthesize_chunk, "_announced", False):
+        _ch = Path(config.get("_channel_dir", "?")).name
+        print(f"   voice: {voice_id}  [channel: {_ch}]")
+        _synthesize_chunk._announced = True
     headers = {
         "Authorization": f"Basic {INWORLD_API_KEY}",
         "Content-Type": "application/json",
@@ -664,7 +672,7 @@ def generate_voiceover(script: str, out_path: Path) -> Path:
     """
     chunks = _chunk_text(script)
     if len(chunks) == 1:
-        out_path.write_bytes(_synthesize_chunk(chunks[0]))
+        out_path.write_bytes(_synthesize_chunk(chunks[0], anchor=out_path.parent))
         return out_path
 
     # Multiple chunks: synthesize each, then concat the audio with moviepy
@@ -673,7 +681,7 @@ def generate_voiceover(script: str, out_path: Path) -> Path:
     for i, ch in enumerate(chunks, 1):
         print(f"   narrating chunk {i}/{len(chunks)}...")
         p = out_path.parent / f"_voice_part_{i:02d}.mp3"
-        p.write_bytes(_synthesize_chunk(ch))
+        p.write_bytes(_synthesize_chunk(ch, anchor=out_path.parent))
         part_paths.append(p)
 
     from moviepy.editor import concatenate_audioclips

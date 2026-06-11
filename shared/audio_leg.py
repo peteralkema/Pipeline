@@ -152,6 +152,20 @@ def audio_gate(ctx, artifacts):
         d = json.load(open(artifacts["durations"]))
         dur_min = f"{sum(x['duration'] for x in d.values())/60:.1f}"
 
+    # --- audio continuity QC (read-only; fails soft) -------------------
+    if not dry:
+        try:
+            from audio_qc import audio_continuity_check
+            _ok, _msg = audio_continuity_check(artifacts["whisper"])
+            if _ok:
+                t.ok(_msg)
+            else:
+                # loud, unmissable — a detected hole means re-run audio, not swap
+                t.gate("AUDIO CONTINUITY WARNING")
+                print("  !! " + _msg)
+        except Exception as _e:
+            t.info(f"continuity check unavailable ({_e}) — proceeding without it.")
+    # -------------------------------------------------------------------
     t.gate("AUDIO GATE")
     box = ctx.get("box", "peter@116.202.18.68")
     print(f"""
