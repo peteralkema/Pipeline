@@ -339,8 +339,18 @@ async function gate(decision) {
   poll();
 }
 
+let LAST_RENDER_KEY = null;
+function renderKey(state) {
+  // re-render only when something the user SEES changes:
+  // phase, or which gate is waiting, or its status.
+  const g = state.gate || {};
+  return [state.phase, state.job_id, g.name, g.status].join("|");
+}
 async function poll() {
   const state = await api("/api/state");
+  const key = renderKey(state);
+  if (key === LAST_RENDER_KEY) return;   // nothing visible changed -> don't clobber the DOM
+  LAST_RENDER_KEY = key;
   if (state.phase === "idle") renderIdle(state);
   else renderRunning(state);
 }
