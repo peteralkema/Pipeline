@@ -147,7 +147,11 @@ def _key_ok(handler) -> bool:
     if p.startswith("/stills/") or p == "/api/health":
         return True
     q = parse_qs(parsed.query)
-    return q.get("key", [""])[0] == SERVER_KEY
+    if q.get("key", [""])[0] == SERVER_KEY:
+        return True
+    # POST buttons (aifix / regenerate / restill) can't put the key in the URL;
+    # accept it from the X-Review-Key request header instead.
+    return handler.headers.get("X-Review-Key", "") == SERVER_KEY
 
 
 class Handler(BaseHTTPRequestHandler):

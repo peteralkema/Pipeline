@@ -164,6 +164,7 @@ const PROJECT = {json.dumps(project_name)};
 const SHOTS = {shots_json};
 const STORAGE_PREFIX = `review:${{PROJECT}}:`;
 const IS_SERVED = window.location.protocol === "http:" || window.location.protocol === "https:";
+    const REVIEW_KEY = new URLSearchParams(window.location.search).get("key") || "";
 let SERVER_AVAILABLE = false;
 let AIFIX_AVAILABLE = false;
 
@@ -289,7 +290,7 @@ async function aiFixShot(idx) {{
   try {{
     const res = await fetch("/api/aifix", {{
       method: "POST",
-      headers: {{"Content-Type": "application/json"}},
+      headers: {{"Content-Type": "application/json", "X-Review-Key": REVIEW_KEY}},
       body: JSON.stringify({{shot: idx}})
     }});
     const data = await res.json();
@@ -347,7 +348,7 @@ async function regenerateShot(idx) {{
   try {{
     const res = await fetch("/api/restill", {{
       method: "POST",
-      headers: {{"Content-Type": "application/json"}},
+      headers: {{"Content-Type": "application/json", "X-Review-Key": REVIEW_KEY}},
       body: JSON.stringify({{shot: idx, note: note, override: override}})
     }});
     const data = await res.json();
