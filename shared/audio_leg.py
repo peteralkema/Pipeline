@@ -17,6 +17,8 @@ same philosophy as every leg: the orchestrator sequences proven black boxes.
 """
 import os, sys, subprocess
 from pathlib import Path
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mission_control"))
+from gate_protocol import await_gate
 
 
 def _run(cmd, t, label, cwd=None, dry_run=False, stream=False):
@@ -177,9 +179,18 @@ def audio_gate(ctx, artifacts):
     if dry:
         t.info("[dry-run] audio gate would prompt KEEP/SWAP here.")
         return artifacts
-    choice = input("  >>> [1] keep / [2] swap: ").strip()
+    choice = await_gate(
+        ctx, name="audio",
+        payload={"voiceover": str(proj / "voiceover.mp3"),
+                 "minutes": dur_min,
+                 "voice_id": ctx.get("voice_id")},
+        options=["keep", "swap"],
+        cli_prompt="  >>> [1] keep / [2] swap: ",
+        cli_map={"1": "keep", "2": "swap", "keep": "keep", "swap": "swap"},
+        phase="gate_audio",
+    )
 
-    if choice == "2":
+    if choice == "swap":
         print(f"""
   SWAP — get your human recording onto the box. On your LAPTOP, paste:
 

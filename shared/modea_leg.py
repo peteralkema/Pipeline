@@ -46,6 +46,8 @@ ctx keys used: t, shared, project_dir, beats_list_json, dry_run, py, run_cwd, bo
 """
 import os, sys, re, json, subprocess
 from pathlib import Path
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mission_control"))
+from gate_protocol import await_gate
 
 
 def _stream(cmd, t, label, cwd=None):
@@ -208,12 +210,19 @@ def modea_gate(ctx, engine_project, engine_cwd, stills_count):
     if ctx["dry_run"]:
         t.info("[dry-run] Mode A gate would wait for stills review here.")
         return True
-    while True:
-        ans = input("  >>> type 'go' when you've finished reviewing the stills (or 'skip'): ").strip().lower()
-        if ans in ("go", "skip", "continue", "c", "done", "y", "yes"):
-            t.ok(f"Mode A gate cleared ({ans}).")
-            return True
-        t.info("(type 'go' when the stills pass the aesthetic firewall)")
+    decision = await_gate(
+        ctx, name="stills",
+        payload={"stills_count": stills_count,
+                 "stills_dir": stills_dir,
+                 "engine_project": engine_project},
+        options=["go", "skip"],
+        cli_prompt="  >>> type 'go' when you've finished reviewing the stills (or 'skip'): ",
+        cli_map={"go": "go", "skip": "skip", "continue": "go", "c": "go",
+                 "done": "go", "y": "go", "yes": "go"},
+        phase="gate_stills",
+    )
+    t.ok(f"Mode A gate cleared ({decision}).")
+    return True
 
 
 def run_modea_leg(ctx):

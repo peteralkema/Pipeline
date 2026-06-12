@@ -30,6 +30,11 @@ def parse_args():
                     help="verbosity (skips the kickoff prompt if given)")
     ap.add_argument("--dry-run", action="store_true", help="plan only, render nothing")
     ap.add_argument("--live", action="store_true", help="actually run (skips kickoff prompt if given)")
+    ap.add_argument("--gate-mode", choices=["cli", "job"], default="cli",
+                    help="cli = terminal input() gates (default, unchanged); "
+                         "job = drive gates via the job record (Mission Control)")
+    ap.add_argument("--job-id", default=None,
+                    help="job record id (Mission Control passes this; manual runs mint one)")
     return ap.parse_args()
 
 
@@ -242,6 +247,9 @@ def main():
             json.dump(beats, f, indent=2, ensure_ascii=False)
         t.detail(f"wrote flat beats list for leg tools → {beats_list_json}")
 
+    import time as _time
+    _repo_root = os.path.dirname(shared_dir)
+    _job_id = args.job_id or f"{channel}__{args.project}__{int(_time.time())}"
     ctx = {
         "t": t, "shared": shared_dir, "channel_dir": channel_dir,
         "project_dir": proj_dir, "beats_list_json": beats_list_json,
@@ -249,7 +257,16 @@ def main():
         "clips_dir": os.path.join(os.path.dirname(shared_dir), "clips"),
         "box": "peter@116.202.18.68", "modeb_port": 8000, "modea_port": 8001,
         "run_cwd": None, "script_md": None, "dry_run": dry, "py": sys.executable,
+        "gate_mode": getattr(args, "gate_mode", "cli"),
+        "job_id": _job_id,
+        "repo_root": __import__("pathlib").Path(_repo_root),
+        "voice_id": None,
     }
+    if ctx["gate_mode"] == "job":
+        sys.path.insert(0, os.path.join(shared_dir, "mission_control"))
+        from gate_protocol import init_job
+        init_job(_job_id, channel, args.project, ctx["repo_root"])
+        t.info(f"gate-mode=job · job_id={_job_id}")
 
     # ── 3a: AUDIO LEG (wired) ─────────────────────────────────────────────
     if "audio" in legs:
