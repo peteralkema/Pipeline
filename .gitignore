@@ -54,3 +54,21 @@ voiceover.json
 remotion/node_modules/
 remotion/out/
 remotion/.remotion/
+
+# Pipeline-generated artifacts (regenerated every run — never track)
+.review_current
+.mc_jobs/
+**/_index.json
+**/engine_beats.json
+**/modea_engine_beats.json
+**/modea_index.json
+**/*_audio.txt
+**/*_audio.manifest.json
+
+# Local backups from idempotent patches
+*.pre_*
+*.bak*
+
+# Filmora / office clutter
+*.wfp
+*.pptx
