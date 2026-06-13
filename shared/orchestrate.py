@@ -295,6 +295,13 @@ def main():
         if ma is None:
             t.halt("Mode A leg halted. Fix the reported issue and re-run.")
             sys.exit(1)
+        if ma.get("stopped"):  # A2 Stop at the stills gate: end cleanly, no convergence
+            t.info("Mode A gate STOP — stills are on disk; ending the run cleanly without "
+                   "convergence. Re-launch later to resume (existing stills are skipped).")
+            if ctx["gate_mode"] == "job":
+                set_phase(_job_id, "stopped", ctx["repo_root"])
+            t.ok("run stopped at stills gate — stills preserved.")
+            sys.exit(0)
     else:
         ma = None
 

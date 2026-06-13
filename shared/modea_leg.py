@@ -209,7 +209,7 @@ def modea_gate(ctx, engine_project, engine_cwd, stills_count):
   (stills on the box at: {stills_dir})""")
     if ctx["dry_run"]:
         t.info("[dry-run] Mode A gate would wait for stills review here.")
-        return True
+        return "go"
     decision = await_gate(
         ctx, name="stills",
         payload={"stills_count": stills_count,
@@ -222,7 +222,7 @@ def modea_gate(ctx, engine_project, engine_cwd, stills_count):
         phase="gate_stills",
     )
     t.ok(f"Mode A gate cleared ({decision}).")
-    return True
+    return decision
 
 
 def run_modea_leg(ctx):
@@ -256,7 +256,12 @@ def run_modea_leg(ctx):
         return None
 
     # Phase 2: the aesthetic firewall
-    modea_gate(ctx, engine_project, engine_cwd, stills_count)
+    decision = modea_gate(ctx, engine_project, engine_cwd, stills_count)
+    if decision == "skip":  # A2 Stop: keep stills on disk, end run without clips/convergence
+        t.info("stills gate STOP — stills are on disk; ending without clips or convergence. "
+               "Re-launch later to resume (existing stills are skipped).")
+        return {"stopped": True, "engine_project": engine_project,
+                "engine_cwd": engine_cwd, "index_json": index_json}
 
     # Phase 3: animate-only
     clips = _animate(ctx, engine_project, engine_cwd)
