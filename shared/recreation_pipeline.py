@@ -1239,8 +1239,12 @@ def cmd_stills(args):
         print("Storyboard-only mode: skipping still generation.")
         return
     print(f"\nGenerating {len(shots)} stills with {IMAGE_MODEL}...")
+    force = bool(getattr(args, "force", False))
     for s in shots:
         out = p["stills"] / f"shot_{s['index']:03d}.png"
+        if out.exists() and not force:  # resume-safe: skip stills already on disk
+            print(f"  [{s['index']}/{len(shots)}] already done, skipping")
+            continue
         print(f"  [{s['index']}/{len(shots)}] {s['image_prompt'][:60]}...")
         generate_still(s["image_prompt"], out)
     print(f"\nOK Stills done -> {p['stills']}")
@@ -1382,6 +1386,7 @@ def main():
                         "where canon tags like {hartley} get substituted into prompts")
     a.add_argument("--project", required=True)
     a.add_argument("--storyboard-only", action="store_true", help="generate storyboard JSON and stop (no image generation)")
+    a.add_argument("--force", action="store_true", help="re-generate stills even if they already exist on disk")
     a.set_defaults(func=cmd_stills)
 
     b = sub.add_parser("restill", help="regenerate one shot's still")
