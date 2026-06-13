@@ -61,6 +61,7 @@ from gate_protocol import (
     read_job, write_job, init_job, jobs_dir, job_path,
 )
 from build_view import build_beats_view, resolve_paths
+from ingest import create_project, rich_list_projects
 
 
 # Module-global key, set by main(). Our own _key_ok mirrors serve_review's
@@ -95,13 +96,8 @@ def list_channels() -> list[str]:
 
 
 def list_projects(channel: str) -> list[str]:
-    # channel here is a folder name (hyphen form). projects live under projects/.
-    pdir = _REPO / channel / "projects"
-    if not pdir.is_dir():
-        return []
-    return sorted(d.name for d in pdir.iterdir()
-                  if d.is_dir() and (d / "beats_full.json").is_file()
-                  or (d.is_dir() and (d / "script.md").is_file()))
+    # back-compat: plain slug list (newest-first via rich_list_projects)
+    return [p["slug"] for p in rich_list_projects(channel)]
 
 
 def _channel_header_name(channel_folder: str) -> str:
@@ -258,14 +254,37 @@ async function loadProjects(folder) {
 }
 function el(html){ const d=document.createElement("div"); d.innerHTML=html.trim(); return d.firstChild; }
 
+async function loadProjectsRich(folder) {
+  const r = await api("/api/projects?channel="+encodeURIComponent(folder));
+  return r.projects_rich || [];
+}
 async function renderIdle(state) {
   const app = document.getElementById("app");
   const channels = state.channels || [];
   app.innerHTML = "";
+
+  // ---- CREATE PANEL (paste script.md text OR upload .md, + slug) ----
+  const create = el(`<div class="panel">
+    <label>New project — paste your script.md, or upload it</label>
+    <textarea id="scripttext" rows="6" placeholder="paste the full script.md here (channel: header included)…"
+      style="width:100%;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:10px;font:13px/1.4 ui-monospace,monospace;box-sizing:border-box;"></textarea>
+    <div class="row" style="margin-top:8px">
+      <input type="file" id="scriptfile" accept=".md,text/markdown,text/plain"
+        style="color:#8a8a99;font-size:13px;">
+    </div>
+    <label>Project slug (folder name — lowercase, hyphens)</label>
+    <input id="slug" placeholder="watchers-daughters"
+      style="background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:8px 10px;min-width:280px;">
+    <div class="row"><button id="create">Create project</button></div>
+    <div id="createmsg" class="phase" style="margin-top:10px;white-space:pre-wrap;"></div>
+  </div>`);
+  app.appendChild(create);
+
+  // ---- LAUNCH PANEL (pick existing project) ----
   const panel = el(`<div class="panel">
     <label>Channel</label>
     <select id="chan"></select>
-    <label>Project</label>
+    <label>Project (newest first)</label>
     <select id="proj"><option>—</option></select>
     <label>Mode</label>
     <select id="mode">
@@ -275,19 +294,22 @@ async function renderIdle(state) {
     <div class="row"><button id="launch" disabled>Launch</button></div>
   </div>`);
   app.appendChild(panel);
+
   const chan = panel.querySelector("#chan");
   const proj = panel.querySelector("#proj");
   const launch = panel.querySelector("#launch");
   chan.innerHTML = '<option value="">— pick a channel —</option>' +
      channels.map(c=>`<option value="${c}">${c}</option>`).join("");
-  chan.onchange = async () => {
+  async function refreshProjects(folder, selectSlug) {
+    if (!folder) { proj.innerHTML='<option>—</option>'; launch.disabled=true; return; }
     proj.innerHTML = '<option>loading…</option>';
-    launch.disabled = true;
-    if (!chan.value) { proj.innerHTML='<option>—</option>'; return; }
-    const ps = await loadProjects(chan.value);
+    const ps = await loadProjectsRich(folder);
     proj.innerHTML = '<option value="">— pick a project —</option>' +
-      ps.map(p=>`<option value="${p}">${p}</option>`).join("");
-  };
+      ps.map(p=>`<option value="${p.slug}">${p.slug} · ${p.created_label} · ${p.stage}</option>`).join("");
+    if (selectSlug) { proj.value = selectSlug; }
+    launch.disabled = !proj.value;
+  }
+  chan.onchange = () => { launch.disabled = true; refreshProjects(chan.value); };
   proj.onchange = () => { launch.disabled = !(chan.value && proj.value); };
   launch.onclick = async () => {
     launch.disabled = true; launch.textContent = "Launching…";
@@ -296,6 +318,37 @@ async function renderIdle(state) {
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify({channel:chan.value, project:proj.value, dry: mode==="dry"})});
     poll();
+  };
+
+  // ---- Create wiring ----
+  const fileInput = create.querySelector("#scriptfile");
+  const textArea = create.querySelector("#scripttext");
+  fileInput.onchange = async () => {
+    const f = fileInput.files[0]; if (!f) return;
+    textArea.value = await f.text();
+  };
+  const slugInput = create.querySelector("#slug");
+  const msg = create.querySelector("#createmsg");
+  create.querySelector("#create").onclick = async () => {
+    msg.textContent = "Creating — parsing + verifying…";
+    const r = await api("/api/create", {method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({script: textArea.value, slug: slugInput.value.trim()})});
+    if (!r.ok) {
+      let m = "✗ " + (r.error || "create failed") + " (stage: " + (r.stage||"?") + ")";
+      if (r.verify) m += "\n  wordless beats: " + JSON.stringify(r.verify.wordless) +
+                         "\n  Mode A no-VISUAL: " + JSON.stringify(r.verify.no_visual);
+      msg.textContent = m; return;
+    }
+    const v = r.verify;
+    let g = r.git && r.git.pushed ? "pushed to GitHub" :
+            (r.git && r.git.warn ? ("⚠ " + r.git.warn) : "git skipped");
+    msg.textContent = "✓ created " + r.folder + "/projects/" + r.slug +
+      "\n  " + v.beats + " beats · modes " + JSON.stringify(v.modes) +
+      "\n  " + g + "\n  selected below — pick mode and Launch.";
+    // select the channel + new project in the launch panel
+    chan.value = r.folder;
+    await refreshProjects(r.folder, r.slug);
   };
 }
 
@@ -433,7 +486,9 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/projects":
             q = parse_qs(parsed.query)
             ch = q.get("channel", [""])[0]
-            self._json(200, {"projects": list_projects(ch)}); return
+            rich = rich_list_projects(ch)
+            self._json(200, {"projects": [p["slug"] for p in rich],
+                             "projects_rich": rich}); return
         if path == "/api/state":
             self._json(200, build_state()); return
         if path.startswith("/stills/"):
@@ -461,6 +516,14 @@ class Handler(BaseHTTPRequestHandler):
         body, err = self._read_json()
         if err:
             self._json(400, {"ok": False, "error": err}); return
+
+        if path == "/api/create":
+            script_text = body.get("script", "")
+            slug = (body.get("slug") or "").strip()
+            if not script_text.strip():
+                self._json(400, {"ok": False, "error": "empty script"}); return
+            result = create_project(script_text, slug, do_git=True)
+            self._json(200 if result.get("ok") else 422, result); return
 
         if path == "/api/launch":
             ch = body.get("channel"); pr = body.get("project")
