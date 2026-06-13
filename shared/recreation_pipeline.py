@@ -1315,6 +1315,50 @@ def cmd_restill(args):
     print(f"OK -> {out}")
 
 
+def _tiered_kling_count(project_root, override=None):
+    """TIERED RENDER policy N: first N beats Kling, the rest Ken Burns.
+    Precedence: --kling-count override > render_policy.json > default 40."""
+    import json as _json
+    if override is not None:
+        return max(0, int(override))
+    rp = project_root / "render_policy.json"
+    if rp.is_file():
+        try:
+            return max(0, int(_json.loads(rp.read_text()).get("kling_count", 40)))
+        except Exception:
+            return 40
+    return 40
+
+
+def _tiered_beat_index(engine_shot, project_root):
+    """Map a 1-based engine shot to its 0-based timeline beat index via _index.json.
+    Falls back to engine_shot-1 (pure Mode A) when the map is absent."""
+    import json as _json
+    idx = project_root / "_index.json"
+    if idx.is_file():
+        try:
+            m = _json.loads(idx.read_text())
+            if str(engine_shot) in m:
+                return int(m[str(engine_shot)])
+        except Exception:
+            pass
+    return engine_shot - 1
+
+
+def _tiered_duration(beat_index, project_root):
+    """Whisper-measured duration for a beat from durations.json, or None if absent."""
+    import json as _json
+    dp = project_root / "durations.json"
+    if dp.is_file():
+        try:
+            e = _json.loads(dp.read_text()).get(str(beat_index))
+            if e and "duration" in e:
+                return float(e["duration"])
+        except Exception:
+            pass
+    return None
+
+
 def cmd_finish(args):
     p = proj_paths(args.project)
     p["clips"].mkdir(exist_ok=True)
@@ -1356,16 +1400,37 @@ def cmd_finish(args):
         print(f"\nDONE -> {p['final']}")
         return
 
-    print(f"Animating {len(shots)} stills with Kling (this is the expensive part)...")
-    clip_paths = []
+    project_root = p["root"].parent  # durations.json / _index.json / render_policy.json live one level up
+    kling_count = _tiered_kling_count(project_root, getattr(args, "kling_count", None))
+    plan = []
     for s in shots:
+        bi = _tiered_beat_index(s["index"], project_root)
+        engine = "kling" if bi < kling_count else "kenburns"
+        plan.append((s, bi, engine))
+    n_kling = sum(1 for _, _, e in plan if e == "kling")
+    n_kb = len(plan) - n_kling
+    print(f"TIERED RENDER: N={kling_count}  ->  {n_kling} Kling (~${n_kling * 0.42:.2f}) "
+          f"+ {n_kb} Ken Burns (free)")
+    if getattr(args, "plan", False):
+        for s, bi, engine in plan:
+            dur = _tiered_duration(bi, project_root)
+            durtxt = (f"{dur:.2f}s" if dur is not None else "?")
+            print(f"  shot {s['index']:03d}  beat {bi:>3}  {durtxt:>7}  -> {engine}")
+        print("(--plan: routing only, nothing rendered, no cost)")
+        return
+    clip_paths = []
+    for s, bi, engine in plan:
         still = p["stills"] / f"shot_{s['index']:03d}.png"
         clip  = p["clips"] / f"shot_{s['index']:03d}.mp4"
         if clip.exists() and not args.force:
             print(f"  [{s['index']}/{len(shots)}] already done, skipping")
-        else:
-            print(f"  [{s['index']}/{len(shots)}] animating...")
+        elif engine == "kling":
+            print(f"  [{s['index']}/{len(shots)}] Kling animating...")
             animate_still(still, s["motion_prompt"], clip)
+        else:
+            dur = _tiered_duration(bi, project_root) or float(SHOT_DURATION)
+            print(f"  [{s['index']}/{len(shots)}] Ken Burns ({dur:.2f}s, free)...")
+            ken_burns_still(still, clip, dur)
         clip_paths.append(clip)
 
     if getattr(args, "animate_only", False):
@@ -1466,6 +1531,11 @@ def main():
                    help="animate stills to clips, then STOP (no narrate/score/assemble)")
     c.add_argument("--assemble-only", action="store_true",
                    help="re-stitch from existing clips/voice/music only (no rendering, no cost)")
+    c.add_argument("--kling-count", type=int, default=None,
+                   help="TIERED RENDER: render the first N beats with Kling, the rest with free "
+                        "Ken Burns (overrides render_policy.json; default 40)")
+    c.add_argument("--plan", action="store_true",
+                   help="TIERED RENDER: print the Kling/Ken-Burns routing and exit (no render, no cost)")
     c.set_defaults(func=cmd_finish)
 
     # TIERED RENDER (step a) — isolation test for the Ken Burns producer (no fal, no cost)
