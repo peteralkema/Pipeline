@@ -579,6 +579,47 @@ def _still_to_held_clip(still_path: Path, out_path: Path, duration: float = None
     return out_path
 
 
+def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) -> Path:
+    """
+    TIERED RENDER — the free clip floor. Turn a still into a slow zoom-in clip via
+    ffmpeg zoompan, rendered to the beat's EXACT duration (no Kling, no stretch, no
+    cost). Writes the SAME artifact Kling writes (clips/shot_NNN.mp4, channel aspect),
+    so assembly can't tell them apart and needs zero changes.
+
+    Craft (banked): zooming the source directly judders — upscale the still first,
+    then zoom, for smoothness. Slow zoom-IN always (one default, zero per-beat
+    decisions). Cap the zoom so long beats do not creep too far in.
+    """
+    import subprocess
+    dur = float(duration or SHOT_DURATION)
+    fps = 24
+    total_frames = max(1, int(round(dur * fps)))
+    W, H = ASPECT["width"], ASPECT["height"]
+    # Upscale to 4x the target first (smoothness), cover-crop to the 4x frame, then a
+    # slow zoom-in (cap 1.25x), output at channel aspect.
+    up_w, up_h = W * 4, H * 4
+    vf = (
+        f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
+        f"crop={up_w}:{up_h},"
+        f"zoompan=z='min(zoom+0.0006,1.25)':d={total_frames}:"
+        f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
+        f"s={W}x{H}:fps={fps},setsar=1"
+    )
+    cmd = [
+        "ffmpeg", "-y", "-i", str(still_path),
+        "-vf", vf,
+        "-t", f"{dur:.3f}",
+        "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+        "-pix_fmt", "yuv420p", "-r", str(fps),
+        str(out_path),
+    ]
+    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if res.returncode != 0:
+        tail = " | ".join(res.stderr.strip().splitlines()[-6:])
+        raise RuntimeError(f"ken_burns ffmpeg failed: {tail}")
+    return out_path
+
+
 def _is_content_policy_error(exc) -> bool:
     """Detect Kling's content-policy refusal across the ways it can surface."""
     s = str(exc).lower()
@@ -1364,6 +1405,25 @@ def cmd_finish(args):
 
 # ── CLI ─────────────────────────────────────────────────────────────────────────
 
+def cmd_kenburns(args):
+    """Isolation test for the Ken Burns producer: still -> duration-correct mp4.
+    Free (ffmpeg only). Prints the measured duration so length can be verified."""
+    import subprocess
+    still = Path(args.still).expanduser()
+    out = Path(args.out).expanduser()
+    if not still.exists():
+        raise SystemExit(f"still not found: {still}")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    print(f"Ken Burns: {still.name} -> {out.name} @ {args.duration:.2f}s ...")
+    ken_burns_still(still, out, args.duration)
+    r = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1", str(out)],
+        stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+    print(f"OK -> {out}")
+    print(f"   measured duration: {r.stdout.strip()}s  (target {args.duration:.2f}s)")
+
+
 def cmd_rulebook(args):
     if args.add:
         add_negative_rule(args.add)
@@ -1407,6 +1467,14 @@ def main():
     c.add_argument("--assemble-only", action="store_true",
                    help="re-stitch from existing clips/voice/music only (no rendering, no cost)")
     c.set_defaults(func=cmd_finish)
+
+    # TIERED RENDER (step a) — isolation test for the Ken Burns producer (no fal, no cost)
+    e = sub.add_parser("kenburns",
+                       help="still -> ffmpeg ken-burns zoom clip at a target duration (TIERED RENDER floor)")
+    e.add_argument("--still", required=True, help="path to the still PNG")
+    e.add_argument("--out", required=True, help="output mp4 path")
+    e.add_argument("--duration", type=float, default=9.0, help="target clip duration in seconds")
+    e.set_defaults(func=cmd_kenburns)
 
     # Rulebook management — no project needed
     d = sub.add_parser("rulebook", help="view or edit the rulebook (the moat)")
