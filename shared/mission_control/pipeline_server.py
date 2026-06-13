@@ -1002,11 +1002,23 @@ function bindAnimateButtons(wrap) {
     const msg = cell.querySelector(".animmsg");
     function reloadClip() {
       const n3 = String(shot).padStart(3, "0");
-      const grid = cell.parentElement;  // the 5-col grid
+      const grid = cell.parentElement.parentElement;  // the 5-col grid (cell is inside the motion column)
+      const q = "?channel=" + encodeURIComponent(CH) + "&project=" + encodeURIComponent(PR) + "&key=" + KEY;
+      const src = "/clips/shot_" + n3 + ".mp4" + q + "&_t=" + Date.now();
       const vid = grid.querySelector('video[src*="shot_' + n3 + '.mp4"]');
       if (vid) {
-        const base = vid.src.split("&_t=")[0];
-        vid.src = base + "&_t=" + Date.now(); vid.load();
+        vid.src = src; vid.load();
+        return true;
+      }
+      const clipCol = grid.lastElementChild;  // column 5 = the clip cell
+      if (clipCol) {
+        const v = document.createElement("video");
+        v.src = src; v.muted = true; v.loop = true; v.autoplay = true;
+        v.setAttribute("playsinline", "");
+        v.style.cssText = "width:100%;max-width:1100px;border-radius:8px;background:#000;display:block;";
+        const ph = clipCol.firstElementChild;
+        if (ph) { clipCol.insertBefore(v, ph); ph.remove(); }
+        else { clipCol.insertBefore(v, clipCol.firstChild); }
         return true;
       }
       return false;
