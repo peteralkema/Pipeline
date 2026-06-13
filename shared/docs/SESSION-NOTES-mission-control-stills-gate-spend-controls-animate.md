@@ -209,7 +209,23 @@ All three are the same family: **the page doesn't cleanly handle a run that isn'
 
 ---
 
-### Lower priority / cosmetic
+**A4 — STILLS-GATE BUTTONS DON'T WRITE THE DECISION (confirmed live on war-in-heaven — this is the one that actually blocks you).**
+*Symptom:* clicking **Generate Clips (approve stills)** did nothing. Diagnosis showed the run was perfectly healthy — alive (PID), parked at `gate_stills / waiting`, all 87 stills on disk, process idle (0% CPU, sleeping) — but `gate.decision` stayed `None`. The click never wrote through to the job record, so `await_gate` (polling the record) never woke. Same family as A2's broken Skip button: **the stills-gate decision buttons' POST → `/api/gate/stills` → `decide_gate` write is not landing.**
+*Distinguish from A0/A3:* A0/A3 are the *display* ("working…" label); A4 is the *button failing to act*. A4 is higher impact — it stranded a healthy run with $36 of stills waiting.
+*Manual workaround (used live, WORKS):* write the decision straight into the job record on the box —
+```
+python3 - <<'PY'
+import json, glob, os
+f = sorted(glob.glob(".mc_jobs/<job-glob>*.json"), key=os.path.getmtime)[-1]
+d = json.load(open(f)); g = d.get("gate") or {}
+assert g.get("name") == "stills" and g.get("status") == "waiting"
+g["decision"] = "go"; d["gate"] = g; json.dump(d, open(f,"w"), indent=2)
+PY
+```
+`await_gate` picks it up within ~1.5s and the run proceeds to animate. (Set `"go"` to approve, or the stop value once A2 is built.)
+*The fix (spec):* debug why the gate-button POST doesn't write. Likely candidates: (1) the button's `gate(...)` handler isn't sending to `/api/gate/stills` correctly (check the served handler — it goes through the same quote-built path as the broken buttons); (2) `decide_gate` rejects silently (it returns `{ok:false}` JSON the page ignores — check it accepts `go`/`skip` for the stills gate and that `active_job_id()` resolves the right job); (3) the POST fires but to the wrong job/gate name. Add a visible success/error toast on the gate buttons so a failed write isn't silent. **This + A2 + the audio gate's Accept (which DID work) should all share one verified gate-decision path.** Note: the audio gate's Accept worked this session, so the path isn't universally broken — compare the stills-gate button wiring against the working audio-gate button to find the divergence.
+
+
 
 3. **Motion-direction text doesn't persist** across re-render — the `window.__MOTION_EDITS` in-memory map isn't wired to a save endpoint, and a poll re-render rebuilds the row, wiping typed motion direction. Cosmetic but noticed in testing. Fix: persist motion edits server-side (a small `/api/motion` save, or fold into the job/view) so the textarea repopulates from saved state on render. **First cosmetic task.**
 4. **Gate-button human/wire split** (§6.3) — convert the remaining `go`/`keep`/`swap`/`skip` onclick verbs to human labels + wire values. (A2's relabel is part of this.)
