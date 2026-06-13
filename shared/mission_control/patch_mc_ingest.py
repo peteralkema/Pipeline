@@ -200,22 +200,23 @@ async function renderIdle(state) {
   const slugInput = create.querySelector("#slug");
   const msg = create.querySelector("#createmsg");
   create.querySelector("#create").onclick = async () => {
+    const NL = String.fromCharCode(10);
     msg.textContent = "Creating — parsing + verifying…";
     const r = await api("/api/create", {method:"POST",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify({script: textArea.value, slug: slugInput.value.trim()})});
     if (!r.ok) {
       let m = "✗ " + (r.error || "create failed") + " (stage: " + (r.stage||"?") + ")";
-      if (r.verify) m += "\\n  wordless beats: " + JSON.stringify(r.verify.wordless) +
-                         "\\n  Mode A no-VISUAL: " + JSON.stringify(r.verify.no_visual);
+      if (r.verify) m += NL + "  wordless beats: " + JSON.stringify(r.verify.wordless) +
+                         NL + "  Mode A no-VISUAL: " + JSON.stringify(r.verify.no_visual);
       msg.textContent = m; return;
     }
     const v = r.verify;
     let g = r.git && r.git.pushed ? "pushed to GitHub" :
             (r.git && r.git.warn ? ("⚠ " + r.git.warn) : "git skipped");
     msg.textContent = "✓ created " + r.folder + "/projects/" + r.slug +
-      "\\n  " + v.beats + " beats · modes " + JSON.stringify(v.modes) +
-      "\\n  " + g + "\\n  selected below — pick mode and Launch.";
+      NL + "  " + v.beats + " beats · modes " + JSON.stringify(v.modes) +
+      NL + "  " + g + NL + "  selected below — pick mode and Launch.";
     // select the channel + new project in the launch panel
     chan.value = r.folder;
     await refreshProjects(r.folder, r.slug);
