@@ -61,6 +61,124 @@ from gate_protocol import (
     read_job, write_job, init_job, jobs_dir, job_path,
 )
 from build_view import build_beats_view, resolve_paths
+
+# ---- stills-edit endpoint machinery (ported from serve_review.py) ----------
+# These two endpoints (/api/restill, /api/aifix) are the PROVEN stills controls.
+# serve_review.py ran them against a boot-pinned single project; here they run
+# PER-REQUEST, resolving the project from the active job or ?channel=&project=.
+import base64 as _base64
+
+try:
+    from restill_from_feedback import (
+        resolve_canon_tokens, find_beats_file, load_rulebook_negatives,
+        backup_existing_still, generate_still,
+    )
+    _RESTILL_OK = True
+except Exception as _e:
+    _RESTILL_OK = False
+    _RESTILL_IMPORT_ERR = str(_e)
+
+try:
+    from anthropic import Anthropic as _Anthropic
+    _ANTHROPIC_AVAILABLE = True
+except Exception:
+    _ANTHROPIC_AVAILABLE = False
+
+import os as _os
+_ANTHROPIC_CLIENT = None
+if _ANTHROPIC_AVAILABLE and _os.environ.get("ANTHROPIC_API_KEY"):
+    try:
+        _ANTHROPIC_CLIENT = _Anthropic(api_key=_os.environ["ANTHROPIC_API_KEY"])
+    except Exception:
+        _ANTHROPIC_CLIENT = None
+
+try:
+    from recreation_pipeline import animate_still as _animate_still
+    _ANIMATE_OK = True
+except Exception as _ae:
+    _ANIMATE_OK = False
+    _ANIMATE_IMPORT_ERR = str(_ae)
+
+import threading as _threading
+# Per-shot once-off animate status, keyed "channel/project/shot". Module-level
+# (not the job record) so animate works with no active job. Values:
+#   {"status": "running"|"done"|"error", "error": <str?>}
+_ANIMATE_JOBS = {}
+_ANIMATE_LOCK = _threading.Lock()
+
+def _animate_key(ch, pr, shot):
+    return f"{ch}/{pr}/{shot}"
+
+def _run_animate_bg(key, still_path, motion_prompt, out_path):
+    try:
+        _animate_still(still_path, motion_prompt, out_path)
+        with _ANIMATE_LOCK:
+            _ANIMATE_JOBS[key] = {"status": "done"}
+    except Exception as e:
+        with _ANIMATE_LOCK:
+            _ANIMATE_JOBS[key] = {"status": "error", "error": str(e)}
+
+_FLUX_MODEL = "fal-ai/flux-pro/v1.1"
+_VISION_MODEL = "claude-sonnet-4-6"
+_AIFIX_SYSTEM_PROMPT = (
+    "You are a strict art director reviewing an AI-generated still against its "
+    "intended prompt and brand rules (faceless where required, no spell-breakers, "
+    "period-accurate, drift-safe). Respond with STRICT JSON only, no preamble, no "
+    "markdown:\n"
+    '{"verdict": "fine" | "fix", "diagnosis": "<one short sentence naming what is '
+    'wrong, or why it is fine>", "corrected_prompt": "<the full corrected prompt '
+    'if verdict is fix, else empty string>"}'
+)
+
+# Per-(channel/project) cache of the restill inputs, so 184 rapid clicks don't
+# re-read files 184 times; a project switch loads fresh.
+_STILLS_CACHE = {}
+
+def _stills_ctx(channel: str, project: str):
+    """Resolve + cache (beats_by_idx, canon, negatives, stills_dir, model) for a
+    project, keyed by ENGINE shot number (storyboard index) like serve_review."""
+    key = f"{channel}/{project}"
+    if key in _STILLS_CACHE:
+        return _STILLS_CACHE[key]
+    paths = resolve_paths(channel, project, _REPO)
+    project_dir = paths["project"]
+    # storyboard.json lives under modea/ (not project root); find_beats_file
+    # builds <dir>/storyboard.json, so give it the modea dir. negatives below
+    # still get the project root so their parent.parent hits the channel root.
+    beats_file = find_beats_file(paths["modea"], None)  # storyboard-shaped beats
+    import json as _json
+    beats_data = _json.loads(Path(beats_file).read_text())
+    beats_by_idx = {b["index"]: b for b in beats_data}  # ENGINE shot keyed
+    # canon: project data file if present (mirrors serve_review main())
+    canon = {}
+    canon_file = project_dir / "canon.json"
+    if canon_file.is_file():
+        try:
+            canon = _json.loads(canon_file.read_text()).get("canon", {}) or {}
+        except Exception:
+            canon = {}
+    negatives = load_rulebook_negatives(project_dir)
+    ctx = {
+        "beats_by_idx": beats_by_idx,
+        "canon": canon,
+        "negatives": negatives,
+        "stills_dir": paths["stills_dir"],
+        "model": _FLUX_MODEL,
+    }
+    _STILLS_CACHE[key] = ctx
+    return ctx
+
+def _resolve_request_project(body):
+    """Project for a stills POST: explicit channel/project in body, else active job."""
+    ch = (body or {}).get("channel")
+    pr = (body or {}).get("project")
+    if ch and pr:
+        return ch, pr
+    jid = active_job_id()
+    if jid:
+        rec = read_job(jid, _REPO)
+        return rec.get("channel"), rec.get("project")
+    return None, None
 from ingest import create_project, rich_list_projects
 
 
@@ -144,10 +262,17 @@ def launch_job(channel_folder: str, project: str, dry_run: bool, log: str) -> di
     # Detach: new session so it survives this server restarting. Logs to a file
     # in the job dir so we can surface them later (no live streaming in v1).
     logf = open(jobs_dir(_REPO) / f"{job_id}.log", "ab")
+    # The detached subprocess does NOT inherit our interactive shell's venv PATH.
+    # sys.executable is the venv python, so its parent IS the venv bin dir —
+    # prepend it to PATH so bare tool names (whisper, ffmpeg, ...) resolve.
+    _env = dict(_os.environ)
+    _venv_bin = str(Path(sys.executable).parent)
+    _env["PATH"] = _venv_bin + ":" + _env.get("PATH", "")
     subprocess.Popen(
         cmd, cwd=str(_REPO),
         stdout=logf, stderr=subprocess.STDOUT,
         start_new_session=True,        # detach from this process group
+        env=_env,
     )
     return {"job_id": job_id, "cmd": " ".join(cmd)}
 
@@ -309,8 +434,14 @@ async function renderIdle(state) {
     if (selectSlug) { proj.value = selectSlug; }
     launch.disabled = !proj.value;
   }
-  chan.onchange = () => { launch.disabled = true; refreshProjects(chan.value); };
-  proj.onchange = () => { launch.disabled = !(chan.value && proj.value); };
+  chan.onchange = () => { launch.disabled = true; clearStoryboard(); refreshProjects(chan.value); };
+  proj.onchange = () => {
+    launch.disabled = !(chan.value && proj.value);
+    if (chan.value && proj.value) {
+      window.__SEL_VIEW = chan.value + "/" + proj.value;
+      renderStoryboard(chan.value, proj.value);
+    } else { clearStoryboard(); }
+  };
   launch.onclick = async () => {
     launch.disabled = true; launch.textContent = "Launching…";
     const mode = panel.querySelector("#mode").value;
@@ -355,6 +486,7 @@ async function renderIdle(state) {
 
 function renderRunning(state) {
   const app = document.getElementById("app");
+  var _SQ = String.fromCharCode(39);  // single quote, quote-proof (no literal ' in source)
   const g = state.gate;
   let gateHtml = "";
   if (g && g.status === "waiting" && g.name === "audio") {
@@ -368,14 +500,29 @@ function renderRunning(state) {
         <button class="secondary" onclick="gate('swap')">Swap (use my own recording)</button>
       </div></div>`;
   } else if (g && g.status === "waiting" && g.name === "stills") {
-    const n = (g.payload && g.payload.stills_count) || "?";
-    gateHtml = `<div class="panel gate">
-      <label>Stills gate</label>
-      <div>${n} stills rendered. (Rich review body lands in the next phase.)</div>
-      <div class="row">
-        <button onclick="gate('go')">Generate Clips (approve stills)</button>
-        <button class="secondary" onclick="gate('skip')">Skip</button>
-      </div></div>`;
+    // STILLS GATE BODY — the gate IS the storyboard. Render the five-column
+    // body from the view already attached to state (no re-fetch), controls live.
+    const view = state.view || {};
+    const beats = view.beats || [];
+    const ch = state.channel, pr = state.project;
+    window.__SEL_VIEW = ch + "/" + pr;  // so bindStillControls posts to this project
+    const n = beats.length || (g.payload && g.payload.stills_count) || "?";
+    const head = '<div class="panel gate">' +
+      '<label>Stills gate — review before clips</label>' +
+      '<div>' + n + ' stills rendered. Review (AI Fix / Regenerate any that break), ' +
+      'then approve.</div>' +
+      '<div class="row">' +
+        '<button onclick=' + _SQ + 'gate(' + _SQ + 'go' + _SQ + ')' + _SQ +
+          '>Generate Clips (approve stills)</button>' +
+        '<button class="secondary" onclick=' + _SQ + 'gate(' + _SQ + 'skip' + _SQ + ')' + _SQ +
+          '>Skip</button>' +
+      '</div></div>';
+    const body = '<div id="storyboard" class="panel" style="max-width:2400px;">' +
+      '<label>Storyboard — ' + pr + ' · ' + n + ' beats</label>' +
+      beats.map(b => beatRow(b, ch, pr)).join("") + '</div>';
+    // buttons appear BOTH above (quick approve) and the body below them.
+    gateHtml = head + body;
+    window.__BIND_GATE_BODY = true;  // edit 2 binds controls after innerHTML
   }
   app.innerHTML = `<div class="panel">
       <div class="phase">job <code>${state.job_id}</code></div>
@@ -383,6 +530,11 @@ function renderRunning(state) {
       <div class="phase">phase: <b>${state.phase}</b>
         ${(!g||g.status!=="waiting") ? '<span class="spin"> — working…</span>' : ''}</div>
     </div>` + gateHtml;
+  if (window.__BIND_GATE_BODY) {
+    window.__BIND_GATE_BODY = false;
+    const sb = document.getElementById("storyboard");
+    if (sb && typeof bindMotionBoxes === "function") bindMotionBoxes(sb);
+  }
 }
 
 async function gate(decision) {
@@ -395,10 +547,15 @@ async function gate(decision) {
 
 let LAST_RENDER_KEY = null;
 function renderKey(state) {
-  // re-render only when something the user SEES changes:
-  // phase, or which gate is waiting, or its status.
+  // re-render only when something the user SEES changes. Include the idle
+  // project selection so picking a project (no job) triggers a body render.
   const g = state.gate || {};
-  return [state.phase, state.job_id, g.name, g.status].join("|");
+  // gate_view_token: at the stills gate, key on stills_count so the body
+  // renders once when the gate opens (controls then drive in-place reloads).
+  const gate_view_token = (g.name === "stills" && g.payload)
+                          ? ("stills:" + (g.payload.stills_count || "")) : "";
+  return [state.phase, state.job_id, g.name, g.status,
+          window.__SEL_VIEW || "", gate_view_token].join("|");
 }
 async function poll() {
   const state = await api("/api/state");
@@ -407,6 +564,310 @@ async function poll() {
   LAST_RENDER_KEY = key;
   if (state.phase === "idle") renderIdle(state);
   else renderRunning(state);
+}
+function clearStoryboard() {
+  const e = document.getElementById("storyboard"); if (e) e.remove();
+  window.__SEL_VIEW = "";
+}
+// per-beat motion edits held in memory for this session (display+persist seam).
+// Keyed by "channel/project/beatIndex". A backend save endpoint wires in later.
+window.__MOTION_EDITS = window.__MOTION_EDITS || {};
+function motionKey(ch, pr, idx) { return ch + "/" + pr + "/" + idx; }
+
+function beatRow(b, ch, pr) {
+  const a = b.assets || {};
+  const shot = a.still && a.still.engine_shot;
+  const hasStill = a.still && a.still.exists;
+  const hasClip = a.clip && a.clip.exists;
+  const n3 = String(shot).padStart(3,"0");
+  const q = "?channel=" + encodeURIComponent(ch) + "&project=" + encodeURIComponent(pr) +
+            "&key=" + KEY;
+  const dur = (b.duration_s != null) ? (b.duration_s.toFixed(2) + "s") : "—";
+  const prompt = b.visual_rendered || b.visual_authored || "";
+
+  // COL 2 — Flux still (fills its column up to a cap)
+  let stillCell;
+  if (hasStill) {
+    stillCell = '<img src="/stills/shot_' + n3 + '.png' + q +
+      '" loading="lazy" style="width:100%;max-width:1100px;border-radius:8px;background:#000;display:block;">';
+  } else {
+    stillCell = '<div style="width:100%;max-width:480px;aspect-ratio:16/9;border-radius:8px;' +
+      'background:#1c1c26;display:flex;align-items:center;justify-content:center;' +
+      'color:#55556a;font-size:13px;">not rendered</div>';
+  }
+
+  // COL 4 — Kling clip
+  let clipCell;
+  if (hasClip) {
+    clipCell = '<video src="/clips/shot_' + n3 + '.mp4' + q +
+      '" muted loop autoplay playsinline style="width:100%;max-width:1100px;border-radius:8px;background:#000;display:block;"></video>';
+  } else {
+    clipCell = '<div style="width:100%;max-width:480px;aspect-ratio:16/9;border-radius:8px;' +
+      'background:#1c1c26;display:flex;align-items:center;justify-content:center;' +
+      'color:#55556a;font-size:13px;">not rendered</div>';
+  }
+
+  // COL 3 — MOTION DIRECTION (editable; pre-filled with stored value or prior edit)
+  const mkey = motionKey(ch, pr, b.index);
+  const stored = (window.__MOTION_EDITS[mkey] != null)
+                 ? window.__MOTION_EDITS[mkey]
+                 : (b.motion_prompt || "");
+  const _canAnimate = (hasStill && shot != null);
+  const motionCell =
+    '<div class="motioncell" data-shot="' + (shot==null?'':shot) + '">' +
+    '<textarea data-mkey="' + mkey + '" class="motionbox" rows="5" ' +
+    'placeholder="motion direction (blank = engine default)…" ' +
+    'style="width:100%;box-sizing:border-box;background:#1c1c26;color:#e8e6e3;' +
+    'border:1px solid #32323e;border-radius:8px;padding:10px;' +
+    'font:13px/1.45 ui-monospace,monospace;resize:vertical;">' +
+    escapeHtml(stored) + '</textarea>' +
+    '<div style="color:#55556a;font-size:11px;margin-top:4px;">motion direction</div>' +
+    (_canAnimate ?
+      ('<button class="animbtn" style="width:100%;margin-top:8px;background:#7a4ddb;' +
+       'color:#fff;border:0;border-radius:6px;padding:9px;cursor:pointer;' +
+       'font:13px ui-monospace,monospace;font-weight:600;">Render this clip</button>' +
+       '<div class="animmsg" style="color:#55556a;font-size:11px;margin-top:6px;min-height:14px;"></div>')
+      : '') +
+    '</div>';
+
+  // COL 1 — TEXT spine
+  const textCell =
+    '<div style="color:#d4a017;font-size:12px;margin-bottom:8px;">beat ' + b.index +
+      ' · shot ' + (shot==null?"—":shot) + ' · ' + (b.stage||"") +
+      ' · ' + dur + ' · ' + (b.mode||"") + '</div>' +
+    '<div style="color:#e8e6e3;font-size:14px;line-height:1.5;">' + (b.narration||"") + '</div>' +
+    '<div style="color:#8a8a99;font-size:12px;margin-top:8px;font-style:italic;line-height:1.45;">' +
+      prompt + '</div>' +
+    '<div style="color:#55556a;font-size:11px;margin-top:8px;">look: ' + (b.look_resolved||"") + '</div>';
+
+  // COL 3 — STILL CONTROLS (Accept/Reject, AI Fix, Regenerate, Notes, Override).
+  // Only meaningful when a still exists and we know the engine shot number.
+  let controlsCell;
+  if (hasStill && shot != null) {
+    const jkey = motionKey(ch, pr, b.index);  // reuse the channel/project/beat key
+    const judged = window.__JUDGED && window.__JUDGED[jkey];
+    const accSel = judged === "accept" ? "background:#1c7c4a;" : "";
+    const rejSel = judged === "reject" ? "background:#7c1c1c;" : "";
+    controlsCell =
+      '<div class="stillctl" data-shot="' + shot + '" data-jkey="' + jkey + '">' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button class="jbtn acc" style="flex:1;background:#2a2a36;' + accSel +
+            'color:#e8e6e3;border:0;border-radius:6px;padding:8px;cursor:pointer;font:13px ui-monospace,monospace;">Accept</button>' +
+          '<button class="jbtn rej" style="flex:1;background:#2a2a36;' + rejSel +
+            'color:#e8e6e3;border:0;border-radius:6px;padding:8px;cursor:pointer;font:13px ui-monospace,monospace;">Reject</button>' +
+        '</div>' +
+        '<button class="aifix" style="width:100%;margin-top:8px;background:#14a3b8;color:#fff;' +
+          'border:0;border-radius:6px;padding:9px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:600;">AI Fix</button>' +
+        '<button class="regen" style="width:100%;margin-top:8px;background:#3b5bdb;color:#fff;' +
+          'border:0;border-radius:6px;padding:9px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:600;">Regenerate</button>' +
+        '<textarea class="note" rows="2" placeholder="Notes — appended to prompt as regeneration feedback" ' +
+          'style="width:100%;box-sizing:border-box;margin-top:8px;background:#1c1c26;color:#e8e6e3;' +
+          'border:1px solid #32323e;border-radius:6px;padding:8px;font:12px/1.4 ui-monospace,monospace;resize:vertical;"></textarea>' +
+        '<textarea class="override" rows="2" placeholder="Override — raw prompt sent straight to fal, bypasses canon" ' +
+          'style="width:100%;box-sizing:border-box;margin-top:6px;background:#1c1c26;color:#e8e6e3;' +
+          'border:1px solid rgba(168,85,247,0.4);border-radius:6px;padding:8px;font:12px/1.4 ui-monospace,monospace;resize:vertical;"></textarea>' +
+        '<div class="ctlmsg" style="color:#55556a;font-size:11px;margin-top:6px;min-height:14px;"></div>' +
+      '</div>';
+  } else {
+    controlsCell = '<div style="color:#55556a;font-size:11px;">no still yet</div>';
+  }
+
+  // Five columns: text | still | controls | motion | clip
+  const grid =
+    '<div style="display:grid;gap:14px;align-items:start;' +
+    'grid-template-columns:minmax(180px,0.7fr) minmax(360px,2.6fr) minmax(190px,0.85fr) minmax(160px,0.7fr) minmax(360px,2.6fr);">' +
+      '<div>' + textCell + '</div>' +
+      '<div>' + stillCell + '<div style="color:#55556a;font-size:11px;margin-top:4px;">Flux still</div></div>' +
+      '<div>' + controlsCell + '</div>' +
+      '<div>' + motionCell + '</div>' +
+      '<div>' + clipCell + '<div style="color:#55556a;font-size:11px;margin-top:4px;">Kling motion</div></div>' +
+    '</div>';
+
+  // MODE B strip — full width, beneath the row, ONLY when an overlay exists.
+  // Hard rule: at most one Mode B per Mode A beat -> render overlays[0] only.
+  let modeB = "";
+  const ov = (b.overlays && b.overlays.length) ? b.overlays[0] : null;
+  if (ov) {
+    modeB =
+      '<div style="margin-top:14px;padding:12px 14px;border-left:3px solid #d4a017;' +
+      'background:#16161e;border-radius:0 8px 8px 0;">' +
+        '<div style="color:#d4a017;font-size:12px;margin-bottom:6px;">' +
+          'Mode B · ' + (ov.component || "card") + ' · overlays beat ' + b.index + '</div>' +
+        '<div style="color:#e8e6e3;font-size:13px;">“' + (ov.phrase || "") + '”</div>' +
+        '<div style="color:#55556a;font-size:11px;margin-top:6px;">' +
+          'Remotion edit box wires in here (later).</div>' +
+      '</div>';
+  }
+
+  return '<div style="padding:18px 0;border-bottom:1px solid #1e1e28;">' +
+         grid + modeB + '</div>';
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")
+                  .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+async function renderStoryboard(ch, pr) {
+  clearStoryboard();
+  const app = document.getElementById("app");
+  const wrap = document.createElement("div");
+  wrap.id = "storyboard";
+  wrap.className = "panel";
+  wrap.style.maxWidth = "2400px";  // five columns with large media
+  wrap.innerHTML = '<span class="spin">loading storyboard…</span>';
+  app.appendChild(wrap);
+  let view;
+  try {
+    view = await api("/api/view?channel=" + encodeURIComponent(ch) +
+                     "&project=" + encodeURIComponent(pr));
+  } catch (e) { wrap.innerHTML = "view error: " + e; return; }
+  if (view.error) { wrap.innerHTML = "view error: " + view.error; return; }
+  const beats = view.beats || [];
+  const head = '<label>Storyboard — ' + pr + ' · ' + beats.length + ' beats · ' +
+               (view.has_mode_b ? "dual-mode" : "Mode A") + '</label>';
+  wrap.innerHTML = head + beats.map(b => beatRow(b, ch, pr)).join("");
+  bindMotionBoxes(wrap);
+}
+function bindMotionBoxes(wrap) {
+  // Keep typed motion direction in the in-memory map so a poll re-render
+  // (or scroll) doesn't wipe it. Backend save endpoint wires in a later phase.
+  wrap.querySelectorAll("textarea.motionbox").forEach(function(t) {
+    t.addEventListener("input", function() {
+      window.__MOTION_EDITS[t.getAttribute("data-mkey")] = t.value;
+    });
+  });
+  bindStillControls(wrap);
+}
+function bindStillControls(wrap) {
+  window.__JUDGED = window.__JUDGED || {};
+  const CH = (window.__SEL_VIEW || "/").split("/")[0];
+  const PR = (window.__SEL_VIEW || "/").split("/").slice(1).join("/");
+  function reloadStill(ctl) {
+    // bust the cache so the regenerated still shows immediately
+    const shot = ctl.getAttribute("data-shot");
+    const n3 = String(shot).padStart(3, "0");
+    const row = ctl.closest("div");  // controls cell; the still img is a sibling cell
+    const grid = ctl.parentElement.parentElement;  // the 5-col grid
+    const img = grid.querySelector('img[src*="shot_' + n3 + '.png"]');
+    if (img) {
+      const base = img.src.split("&_t=")[0];
+      img.src = base + "&_t=" + Date.now();
+    }
+  }
+  wrap.querySelectorAll(".stillctl").forEach(function(ctl) {
+    const shot = parseInt(ctl.getAttribute("data-shot"), 10);
+    const jkey = ctl.getAttribute("data-jkey");
+    const msg = ctl.querySelector(".ctlmsg");
+    const note = ctl.querySelector("textarea.note");
+    const override = ctl.querySelector("textarea.override");
+    const acc = ctl.querySelector("button.acc");
+    const rej = ctl.querySelector("button.rej");
+    const aifix = ctl.querySelector("button.aifix");
+    const regen = ctl.querySelector("button.regen");
+
+    acc.addEventListener("click", function() {
+      window.__JUDGED[jkey] = "accept";
+      acc.style.background = "#1c7c4a"; rej.style.background = "#2a2a36";
+    });
+    rej.addEventListener("click", function() {
+      window.__JUDGED[jkey] = "reject";
+      rej.style.background = "#7c1c1c"; acc.style.background = "#2a2a36";
+    });
+
+    async function post(endpoint, payload, label) {
+      msg.style.color = "#8a8a99"; msg.textContent = label + "...";
+      try {
+        const r = await api(endpoint, {method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(Object.assign({channel: CH, project: PR}, payload))});
+        if (r.ok) {
+          if (r.changed === false) {
+            msg.style.color = "#8a8a99";
+            msg.textContent = "AI: fine — " + (r.diagnosis || "no change");
+          } else {
+            msg.style.color = "#14a3b8";
+            msg.textContent = (r.diagnosis ? ("fixed: " + r.diagnosis) :
+                               ("regenerated (" + (r.mode || "ok") + ")"));
+            reloadStill(ctl);
+          }
+        } else {
+          msg.style.color = "#d46a6a"; msg.textContent = "error: " + (r.error || "failed");
+        }
+      } catch (e) {
+        msg.style.color = "#d46a6a"; msg.textContent = "error: " + e;
+      }
+    }
+
+    aifix.addEventListener("click", function() {
+      post("/api/aifix", {shot: shot}, "AI Fix diagnosing");
+    });
+    regen.addEventListener("click", function() {
+      post("/api/restill", {shot: shot, note: note.value, override: override.value},
+           override.value.trim() ? "Regenerating (override)" : "Regenerating");
+    });
+  });
+  bindAnimateButtons(wrap);
+}
+function bindAnimateButtons(wrap) {
+  const CH = (window.__SEL_VIEW || "/").split("/")[0];
+  const PR = (window.__SEL_VIEW || "/").split("/").slice(1).join("/");
+  wrap.querySelectorAll(".motioncell").forEach(function(cell) {
+    const btn = cell.querySelector("button.animbtn");
+    if (!btn) return;
+    const shot = parseInt(cell.getAttribute("data-shot"), 10);
+    const box = cell.querySelector("textarea.motionbox");
+    const msg = cell.querySelector(".animmsg");
+    function reloadClip() {
+      const n3 = String(shot).padStart(3, "0");
+      const grid = cell.parentElement;  // the 5-col grid
+      const vid = grid.querySelector('video[src*="shot_' + n3 + '.mp4"]');
+      if (vid) {
+        const base = vid.src.split("&_t=")[0];
+        vid.src = base + "&_t=" + Date.now(); vid.load();
+        return true;
+      }
+      return false;
+    }
+    function pollAnimate(label0) {
+      const url = "/api/animate_status?channel=" + encodeURIComponent(CH) +
+                  "&project=" + encodeURIComponent(PR) + "&shot=" + shot;
+      const iv = setInterval(async function() {
+        let st;
+        try { st = await api(url); } catch (e) { return; }  // transient blip: keep polling
+        if (st.status === "done") {
+          clearInterval(iv);
+          msg.style.color = "#7a4ddb";
+          msg.textContent = reloadClip() ? "clip rendered" : "clip rendered — refresh to view";
+          btn.disabled = false; btn.textContent = label0;
+        } else if (st.status === "error") {
+          clearInterval(iv);
+          msg.style.color = "#d46a6a"; msg.textContent = "error: " + (st.error || "failed");
+          btn.disabled = false; btn.textContent = label0;
+        }
+        // status "running"/"idle": keep waiting (spinner stays)
+      }, 3000);
+    }
+    btn.addEventListener("click", async function() {
+      btn.disabled = true; const label0 = btn.textContent;
+      btn.textContent = "Rendering (Kling)…";
+      msg.style.color = "#8a8a99"; msg.textContent = "animating — this takes a bit…";
+      try {
+        const r = await api("/api/animate", {method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({channel: CH, project: PR, shot: shot,
+                                motion_prompt: box.value})});
+        if (r.ok && r.started) {
+          pollAnimate(label0);  // fire-and-poll: connection returned, now poll for the file
+        } else {
+          msg.style.color = "#d46a6a"; msg.textContent = "error: " + (r.error || "failed to start");
+          btn.disabled = false; btn.textContent = label0;
+        }
+      } catch (e) {
+        msg.style.color = "#d46a6a"; msg.textContent = "error: " + e;
+        btn.disabled = false; btn.textContent = label0;
+      }
+    });
+  });
 }
 poll();
 setInterval(poll, 2500);
@@ -454,12 +915,16 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(data)
 
     # --- per-request active-project asset resolution (no boot pin) ---
-    def _serve_asset(self, kind: str, rel: str):
-        jid = active_job_id()
-        if not jid:
-            self.send_response(404); self.end_headers(); return
-        rec = read_job(jid, _REPO)
-        paths = resolve_paths(rec["channel"], rec["project"], _REPO)
+    def _serve_asset(self, kind: str, rel: str, channel=None, project=None):
+        # Resolve from explicit channel/project (browse any project) or fall
+        # back to the active job. No active job + no params -> 404.
+        if not (channel and project):
+            jid = active_job_id()
+            if not jid:
+                self.send_response(404); self.end_headers(); return
+            rec = read_job(jid, _REPO)
+            channel, project = rec["channel"], rec["project"]
+        paths = resolve_paths(channel, project, _REPO)
         base = {"stills": paths["stills_dir"], "clips": paths["clips_dir"],
                 "video": paths["modea"]}.get(kind)
         if base is None:
@@ -482,6 +947,15 @@ class Handler(BaseHTTPRequestHandler):
             self._html(render_page(SERVER_KEY)); return
         if path == "/api/health":
             self._json(200, {"ok": True, "service": "mission-control"}); return
+        if path == "/api/animate_status":
+            q = parse_qs(parsed.query)
+            ch = q.get("channel", [""])[0]
+            pr = q.get("project", [""])[0]
+            shot = q.get("shot", [""])[0]
+            key = _animate_key(ch, pr, shot)
+            with _ANIMATE_LOCK:
+                st = dict(_ANIMATE_JOBS.get(key, {"status": "idle"}))
+            self._json(200, st); return
         if path == "/api/channels":
             self._json(200, {"channels": list_channels()}); return
         if path == "/api/projects":
@@ -492,12 +966,28 @@ class Handler(BaseHTTPRequestHandler):
                              "projects_rich": rich}); return
         if path == "/api/state":
             self._json(200, build_state()); return
+        if path == "/api/view":
+            q = parse_qs(parsed.query)
+            ch = q.get("channel", [""])[0]; pr = q.get("project", [""])[0]
+            if not ch or not pr:
+                self._json(400, {"error": "channel + project required"}); return
+            try:
+                self._json(200, build_beats_view(ch, pr, _REPO))
+            except Exception as e:
+                self._json(500, {"error": str(e)})
+            return
         if path.startswith("/stills/"):
-            self._serve_asset("stills", path[len("/stills/"):]); return
+            q = parse_qs(parsed.query)
+            self._serve_asset("stills", path[len("/stills/"):],
+                              q.get("channel",[None])[0], q.get("project",[None])[0]); return
         if path.startswith("/clips/"):
-            self._serve_asset("clips", path[len("/clips/"):]); return
+            q = parse_qs(parsed.query)
+            self._serve_asset("clips", path[len("/clips/"):],
+                              q.get("channel",[None])[0], q.get("project",[None])[0]); return
         if path.startswith("/video/"):
-            self._serve_asset("video", path[len("/video/"):]); return
+            q = parse_qs(parsed.query)
+            self._serve_asset("video", path[len("/video/"):],
+                              q.get("channel",[None])[0], q.get("project",[None])[0]); return
 
         self.send_response(404); self.end_headers()
         self.wfile.write(b"Not found")
@@ -508,6 +998,136 @@ class Handler(BaseHTTPRequestHandler):
             return json.loads(self.rfile.read(n).decode("utf-8")), None
         except Exception as e:
             return None, str(e)
+
+    def _handle_animate(self, body):
+        if not _ANIMATE_OK:
+            self._json(503, {"ok": False,
+                "error": f"animate unavailable: {_ANIMATE_IMPORT_ERR}"}); return
+        shot_idx = body.get("shot")
+        motion_prompt = (body.get("motion_prompt") or "").strip()
+        if not isinstance(shot_idx, int):
+            self._json(400, {"ok": False, "error": "shot must be an integer"}); return
+        if not motion_prompt:
+            motion_prompt = ("Slow, subtle atmospheric motion. Drifting light, "
+                             "faint air. No fast movement, no camera shake.")
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        ctx = _stills_ctx(ch, pr)
+        stills_dir = ctx["stills_dir"]
+        still_path = stills_dir / f"shot_{shot_idx:03d}.png"
+        if not still_path.exists():
+            self._json(404, {"ok": False, "error": f"still not found: {still_path.name}"}); return
+        # clips dir is the sibling of stills under modea/
+        clips_dir = stills_dir.parent / "clips"
+        clips_dir.mkdir(parents=True, exist_ok=True)
+        out_path = clips_dir / f"shot_{shot_idx:03d}.mp4"
+        sys.stderr.write(f"[Animate] shot {shot_idx:03d} started in background ...\n")
+        # Fire-and-poll: start the Kling call in a thread, return immediately.
+        key = _animate_key(ch, pr, shot_idx)
+        with _ANIMATE_LOCK:
+            _ANIMATE_JOBS[key] = {"status": "running"}
+        th = _threading.Thread(target=_run_animate_bg,
+                               args=(key, still_path, motion_prompt, out_path),
+                               daemon=True)
+        th.start()
+        self._json(200, {"ok": True, "started": True, "shot": shot_idx}); return
+
+    def _handle_restill(self, body):
+        if not _RESTILL_OK:
+            self._json(503, {"ok": False,
+                "error": f"restill unavailable: {_RESTILL_IMPORT_ERR}"}); return
+        shot_idx = body.get("shot")
+        note = (body.get("note") or "").strip()
+        override = (body.get("override") or "").strip()
+        if not isinstance(shot_idx, int):
+            self._json(400, {"ok": False, "error": "shot must be an integer"}); return
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        ctx = _stills_ctx(ch, pr)
+        beats_by_idx = ctx["beats_by_idx"]
+        if shot_idx not in beats_by_idx:
+            self._json(404, {"ok": False, "error": f"shot {shot_idx} not in beats"}); return
+
+        if override:
+            final_prompt = override; mode = "OVERRIDE"; negs = []
+        else:
+            beat = beats_by_idx[shot_idx]
+            resolved = resolve_canon_tokens(beat.get("image_prompt", ""), ctx["canon"])
+            final_prompt = (f"{resolved.rstrip(' .')}. REGENERATION FEEDBACK: {note}"
+                            if note else resolved)
+            mode = "NORMAL"; negs = ctx["negatives"]
+
+        sys.stderr.write(f"[Regenerate] shot {shot_idx:03d} [{mode}]\n")
+        backup_existing_still(ctx["stills_dir"], shot_idx)
+        out = ctx["stills_dir"] / f"shot_{shot_idx:03d}.png"
+        ok = generate_still(final_prompt, negs, out, ctx["model"])
+        if ok:
+            self._json(200, {"ok": True, "shot": shot_idx, "mode": mode})
+        else:
+            self._json(500, {"ok": False, "error": "fal generation failed"})
+
+    def _handle_aifix(self, body):
+        if not _RESTILL_OK:
+            self._json(503, {"ok": False,
+                "error": f"restill unavailable: {_RESTILL_IMPORT_ERR}"}); return
+        if _ANTHROPIC_CLIENT is None:
+            self._json(503, {"ok": False, "error":
+                "AI fix unavailable: anthropic not installed or ANTHROPIC_API_KEY not set"}); return
+        shot_idx = body.get("shot")
+        if not isinstance(shot_idx, int):
+            self._json(400, {"ok": False, "error": "shot must be an integer"}); return
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        ctx = _stills_ctx(ch, pr)
+        beats_by_idx = ctx["beats_by_idx"]
+        if shot_idx not in beats_by_idx:
+            self._json(404, {"ok": False, "error": f"shot {shot_idx} not in beats"}); return
+        still_path = ctx["stills_dir"] / f"shot_{shot_idx:03d}.png"
+        if not still_path.exists():
+            self._json(404, {"ok": False, "error": f"still not found: {still_path.name}"}); return
+
+        beat = beats_by_idx[shot_idx]
+        intended = resolve_canon_tokens(beat.get("image_prompt", ""), ctx["canon"])
+        sys.stderr.write(f"[AI fix] shot {shot_idx:03d} diagnosing...\n")
+        try:
+            img = still_path.read_bytes()
+            mtype = _sniff_media_type(img[:16])
+            b64 = _base64.standard_b64encode(img).decode("ascii")
+            resp = _ANTHROPIC_CLIENT.messages.create(
+                model=_VISION_MODEL, max_tokens=1024,
+                system=_AIFIX_SYSTEM_PROMPT,
+                messages=[{"role": "user", "content": [
+                    {"type": "image", "source": {"type": "base64",
+                        "media_type": mtype, "data": b64}},
+                    {"type": "text", "text":
+                        f"Intended prompt for this shot:\n\n{intended}\n\n"
+                        f"Judge the image against the brand rules and respond with the JSON object."},
+                ]}],
+            )
+            raw = resp.content[0].text.strip()
+            if raw.startswith("```"):
+                raw = raw.strip("`"); raw = raw[raw.find("{"):raw.rfind("}") + 1]
+            import json as _json
+            verdict = _json.loads(raw)
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"vision diagnosis failed: {e}"}); return
+
+        diagnosis = (verdict.get("diagnosis") or "").strip()
+        corrected = (verdict.get("corrected_prompt") or "").strip()
+        if not (verdict.get("verdict") == "fix" and corrected):
+            self._json(200, {"ok": True, "shot": shot_idx, "changed": False,
+                "diagnosis": diagnosis or "Image looks consistent with the brand rules."}); return
+
+        backup_existing_still(ctx["stills_dir"], shot_idx)
+        ok = generate_still(corrected, [], still_path, ctx["model"])
+        if ok:
+            self._json(200, {"ok": True, "shot": shot_idx, "changed": True,
+                "diagnosis": diagnosis, "corrected_prompt": corrected}); return
+        self._json(500, {"ok": False, "error": "fal generation failed after diagnosis",
+                         "diagnosis": diagnosis})
 
     def do_POST(self):
         if not _key_ok(self):
@@ -539,6 +1159,13 @@ class Handler(BaseHTTPRequestHandler):
             jid = active_job_id()
             decision = body.get("decision")
             self._json(200, decide_gate(jid, decision)); return
+
+        if path == "/api/restill":
+            self._handle_restill(body); return
+        if path == "/api/aifix":
+            self._handle_aifix(body); return
+        if path == "/api/animate":
+            self._handle_animate(body); return
 
         self.send_response(404); self.end_headers()
 

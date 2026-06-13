@@ -264,7 +264,7 @@ def main():
     }
     if ctx["gate_mode"] == "job":
         sys.path.insert(0, os.path.join(shared_dir, "mission_control"))
-        from gate_protocol import init_job
+        from gate_protocol import init_job, set_phase
         init_job(_job_id, channel, args.project, ctx["repo_root"])
         t.info(f"gate-mode=job · job_id={_job_id}")
 
@@ -300,6 +300,8 @@ def main():
 
     # ── 3d: CONVERGENCE LEG (pool clips → assemble → final_video) — convergence_leg.py ──
     if "convergence" in legs:
+        if ctx["gate_mode"] == "job":
+            set_phase(_job_id, "assembling", ctx["repo_root"])
         cv = convergence_leg.run_convergence_leg(ctx, ma)
         if cv is None:
             t.halt("convergence leg halted. Fix the reported issue and re-run.")
@@ -317,6 +319,8 @@ def main():
     t.info(f"beats {n} (A:{n_a} B:{n_b}) · legs planned: {', '.join(legs)}")
     if "audio" in legs and not dry:
         t.ok("audio leg complete — voiceover + real per-beat durations produced.")
+    if ctx["gate_mode"] == "job":
+        set_phase(_job_id, "done", ctx["repo_root"])
     t.ok("run complete. ✦")
 
 
