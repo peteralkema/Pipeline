@@ -391,6 +391,16 @@ def render_page(key: str | None) -> str:
 <script>
 const KEY = new URLSearchParams(location.search).get("key") || "";
 const H = KEY ? {"X-Review-Key": KEY} : {};
+const _U0 = new URLSearchParams(location.search);
+const URL_CH = _U0.get("channel") || "";
+const URL_PR = _U0.get("project") || "";
+if (URL_CH && URL_PR) { window.__SEL_VIEW = URL_CH + "/" + URL_PR; }
+function setUrlProject(ch, pr) {
+  const u = new URL(location.href);
+  if (ch && pr) { u.searchParams.set("channel", ch); u.searchParams.set("project", pr); }
+  else { u.searchParams.delete("channel"); u.searchParams.delete("project"); }
+  history.replaceState(null, "", u.toString());
+}
 async function api(path, opts={}) {
   opts.headers = Object.assign({}, H, opts.headers||{});
   const r = await fetch(path + (path.includes("?")?"":("?key="+KEY)), opts);
@@ -510,15 +520,16 @@ function ensureShell(state) {
   }
   chan.onchange = () => {
     launch.disabled = true; window.__SEL_VIEW = ""; window.__BODY_KEY = "__none__";
-    clearStoryboard(); refreshProjects(chan.value);
+    setUrlProject("", ""); clearStoryboard(); refreshProjects(chan.value);
   };
   proj.onchange = () => {
     if (chan.value && proj.value) {
       window.__SEL_VIEW = chan.value + "/" + proj.value;
       window.__BODY_KEY = chan.value + "/" + proj.value + "|";  // matches idle poll key -> no double render
+      setUrlProject(chan.value, proj.value);
       renderStoryboard(chan.value, proj.value);
     } else {
-      window.__SEL_VIEW = ""; window.__BODY_KEY = "__none__"; clearStoryboard();
+      window.__SEL_VIEW = ""; window.__BODY_KEY = "__none__"; setUrlProject("", ""); clearStoryboard();
     }
     launch.disabled = !(chan.value && proj.value);
   };
@@ -561,8 +572,19 @@ function ensureShell(state) {
     chan.value = r.folder;
     window.__SEL_VIEW = r.folder + "/" + r.slug;
     window.__BODY_KEY = "__none__";
+    setUrlProject(r.folder, r.slug);
     await refreshProjects(r.folder, r.slug);
   };
+
+  if (URL_CH && URL_PR && !isActiveRun(state.phase)) {
+    (async function() {
+      chan.value = URL_CH;
+      await refreshProjects(URL_CH, URL_PR);
+      window.__SEL_VIEW = URL_CH + "/" + URL_PR;
+      window.__BODY_KEY = "";
+      launch.disabled = !(chan.value && proj.value);
+    })();
+  }
 
   return shell;
 }
@@ -706,6 +728,7 @@ async function resetAll() {
       headers: {"Content-Type": "application/json"}, body: "{}"});
   } catch (e) {}
   window.__SEL_VIEW = ""; window.__BODY_KEY = "__none__";
+  setUrlProject("", "");
   clearStoryboard();
   const chan = document.getElementById("chan");
   const proj = document.getElementById("proj");
