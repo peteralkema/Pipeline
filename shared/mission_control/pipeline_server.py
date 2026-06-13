@@ -537,11 +537,19 @@ function ensureShell(state) {
 }
 
 function updateControls(state) {
+  // A0b: disable-in-place — never hide the panels (the page shape stays constant);
+  // during an active run they go inert + dimmed, otherwise fully live.
   const run = isActiveRun(state.phase);
-  const cp = document.getElementById("createpanel");
-  const lp = document.getElementById("launchpanel");
-  if (cp) cp.style.display = run ? "none" : "";
-  if (lp) lp.style.display = run ? "none" : "";
+  ["createpanel", "launchpanel"].forEach(function(id) {
+    const panel = document.getElementById(id);
+    if (!panel) return;
+    panel.style.opacity = run ? "0.45" : "1";
+    panel.querySelectorAll("input,select,button,textarea").forEach(function(elm) {
+      elm.disabled = run;
+    });
+  });
+  // Launch stays disabled during a run, and otherwise only enables once a
+  // project is picked (overrides the blanket enable above for this one button).
   const chan = document.getElementById("chan");
   const proj = document.getElementById("proj");
   const launch = document.getElementById("launch");
