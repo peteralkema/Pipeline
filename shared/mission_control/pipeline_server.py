@@ -342,7 +342,7 @@ def render_page(key: str | None) -> str:
     # renders from /api/state, nothing stored client-side.
     return """<!doctype html><html><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mission Control</title>
+<title>AI Film Director Storyboard and Control Panel</title>
 <style>
   :root { color-scheme: dark; }
   body { background:#0a0a0f; color:#e8e6e3; font:15px/1.5 -apple-system,system-ui,sans-serif;
@@ -367,7 +367,7 @@ def render_page(key: str | None) -> str:
   .spin { color:#8a8a99; }
   code { background:#1c1c26; padding:1px 6px; border-radius:4px; font-size:13px; }
 </style></head><body>
-<h1>MISSION CONTROL</h1>
+<h1>AI FILM DIRECTOR STORYBOARD AND CONTROL PANEL</h1>
 <div id="app"><div class="panel"><span class="spin">loading…</span></div></div>
 <script>
 const KEY = new URLSearchParams(location.search).get("key") || "";
@@ -429,11 +429,16 @@ function ensureShell(state) {
   shell.id = "shell";
   app.appendChild(shell);
 
-  const strip = el(`<div class="panel" id="strip" style="border-left:4px solid #8a8a99;">
-    <div id="stripmain" class="phase" style="font-size:14px;"></div>
-    <div id="stripsub" class="phase" style="margin-top:4px;"></div>
+  const strip = el(`<div class="panel" id="strip" style="border-left:4px solid #8a8a99;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
+    <div style="flex:1;min-width:0;">
+      <div id="stripmain" class="phase" style="font-size:14px;"></div>
+      <div id="stripsub" class="phase" style="margin-top:4px;"></div>
+    </div>
+    <button id="resetbtn" class="secondary" style="margin-top:0;white-space:nowrap;">Reset</button>
   </div>`);
   shell.appendChild(strip);
+  const resetbtn = strip.querySelector("#resetbtn");
+  if (resetbtn) resetbtn.onclick = resetAll;
 
   const create = el(`<div class="panel" id="createpanel">
     <label>New project — paste your script.md, or upload it</label>
@@ -671,6 +676,26 @@ function clearStoryboard() {
   const e = document.getElementById("storyboard"); if (e) e.remove();
 }
 
+async function resetAll() {
+  let st;
+  try { st = await api("/api/state"); } catch (e) { st = {}; }
+  if (isActiveRun(st.phase)) {
+    if (!confirm("A render is in progress. Reset clears it from the page (the render keeps running on the server). Continue?")) return;
+  }
+  try {
+    await api("/api/reset", {method: "POST",
+      headers: {"Content-Type": "application/json"}, body: "{}"});
+  } catch (e) {}
+  window.__SEL_VIEW = ""; window.__BODY_KEY = "__none__";
+  clearStoryboard();
+  const chan = document.getElementById("chan");
+  const proj = document.getElementById("proj");
+  const launch = document.getElementById("launch");
+  if (chan) chan.value = "";
+  if (proj) proj.innerHTML = "<option>\u2014</option>";
+  if (launch) launch.disabled = true;
+  poll();
+}
 async function gate(decision) {
   const s = await api("/api/state");
   const name = s.gate ? s.gate.name : "";
@@ -1209,6 +1234,24 @@ class Handler(BaseHTTPRequestHandler):
             self._json(500, {"ok": False, "error": f"write failed: {e}"}); return
         self._json(200, {"ok": True, "kling_count": kc}); return
 
+    def _handle_reset(self):
+        """Clear the active job record (+log) so the page returns to idle base.
+        Mirrors the manual rm of .mc_jobs/<id>.{json,log}. A detached render keeps
+        running server-side; this only drops the page's handle on it."""
+        jid = active_job_id()
+        if not jid:
+            self._json(200, {"ok": True, "cleared": None}); return
+        d = jobs_dir(_REPO)
+        removed = []
+        for ext in (".json", ".log"):
+            f = d / f"{jid}{ext}"
+            try:
+                if f.exists():
+                    f.unlink(); removed.append(f.name)
+            except Exception:
+                pass
+        self._json(200, {"ok": True, "cleared": jid, "removed": removed}); return
+
     def _handle_animate(self, body):
         if not _ANIMATE_OK:
             self._json(503, {"ok": False,
@@ -1387,6 +1430,8 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_motion(body); return
         if path == "/api/animate":
             self._handle_animate(body); return
+        if path == "/api/reset":
+            self._handle_reset(); return
 
         self.send_response(404); self.end_headers()
 
