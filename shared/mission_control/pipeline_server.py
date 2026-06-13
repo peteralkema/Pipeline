@@ -596,10 +596,36 @@ function updateGatebar(state) {
     bar.innerHTML = '<div class="panel gate">' +
       '<label>Stills gate — review before clips</label>' +
       '<div>' + n + ' stills rendered. Review the body below (AI Fix / Regenerate any that break), then decide.</div>' +
+      '<div class="row" style="margin:10px 0;align-items:center;">' +
+        '<label style="margin:0 8px 0 0;text-transform:none;letter-spacing:0;color:#e8e6e3;">Kling clips: first</label>' +
+        '<input id="klingn" type="number" min="0" step="1" value="40" style="width:80px;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:6px 8px;">' +
+        '<span style="color:#8a8a99;margin-left:8px;">beats — the rest render free (Ken Burns zoom). <span id="klingmsg" style="color:#14a3b8;"></span></span>' +
+      '</div>' +
       '<div class="row">' +
         '<button onclick="gate(' + _SQ + 'go' + _SQ + ')">Generate Clips (approve stills)</button>' +
         '<button class="secondary" onclick="gate(' + _SQ + 'skip' + _SQ + ')">Stop here (keep stills, no clips)</button>' +
       '</div></div>';
+    (async function() {
+      const inp = document.getElementById("klingn");
+      if (!inp) return;
+      const ch = state.channel, pr = state.project;
+      try {
+        const r = await api("/api/render_policy?channel=" + encodeURIComponent(ch) +
+                            "&project=" + encodeURIComponent(pr));
+        if (r && r.ok && typeof r.kling_count === "number") inp.value = r.kling_count;
+      } catch (e) {}
+      inp.addEventListener("change", async function() {
+        const v = parseInt(inp.value, 10);
+        const msg = document.getElementById("klingmsg");
+        if (isNaN(v) || v < 0) { if (msg) msg.textContent = "?"; return; }
+        try {
+          const rr = await api("/api/render_policy", {method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({channel: ch, project: pr, kling_count: v})});
+          if (msg) msg.textContent = (rr && rr.ok) ? ("saved N=" + rr.kling_count) : "save failed";
+        } catch (e) { if (msg) msg.textContent = "save failed"; }
+      });
+    })();
   } else {
     bar.innerHTML = "";
   }
@@ -1073,6 +1099,10 @@ class Handler(BaseHTTPRequestHandler):
                              "projects_rich": rich}); return
         if path == "/api/state":
             self._json(200, build_state()); return
+        if path == "/api/render_policy":
+            q = parse_qs(parsed.query)
+            self._handle_render_policy_get(q.get("channel", [None])[0],
+                                           q.get("project", [None])[0]); return
         if path == "/api/view":
             q = parse_qs(parsed.query)
             ch = q.get("channel", [""])[0]; pr = q.get("project", [""])[0]
@@ -1138,6 +1168,39 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e:
             self._json(500, {"ok": False, "error": f"storyboard write failed: {e}"}); return
         self._json(200, {"ok": True, "shot": shot_idx, "saved": True}); return
+
+    def _handle_render_policy_get(self, ch, pr):
+        """Read TIERED RENDER N for a project: render_policy.json kling_count (default 40)."""
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "channel + project required"}); return
+        import json as _json
+        paths = resolve_paths(ch, pr, _REPO)
+        rp = paths["project"] / "render_policy.json"
+        n = 40
+        if rp.is_file():
+            try:
+                n = int(_json.loads(rp.read_text()).get("kling_count", 40))
+            except Exception:
+                n = 40
+        self._json(200, {"ok": True, "kling_count": n, "default": 40}); return
+
+    def _handle_render_policy_post(self, body):
+        """Write TIERED RENDER N to render_policy.json at the project root (next to durations.json)."""
+        import json as _json
+        try:
+            kc = max(0, int(body.get("kling_count")))
+        except Exception:
+            self._json(400, {"ok": False, "error": "kling_count must be a non-negative integer"}); return
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        paths = resolve_paths(ch, pr, _REPO)
+        rp = paths["project"] / "render_policy.json"
+        try:
+            rp.write_text(_json.dumps({"kling_count": kc}, indent=2))
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"write failed: {e}"}); return
+        self._json(200, {"ok": True, "kling_count": kc}); return
 
     def _handle_animate(self, body):
         if not _ANIMATE_OK:
@@ -1300,6 +1363,8 @@ class Handler(BaseHTTPRequestHandler):
             decision = body.get("decision")
             self._json(200, decide_gate(jid, decision)); return
 
+        if path == "/api/render_policy":
+            self._handle_render_policy_post(body); return
         if path == "/api/restill":
             self._handle_restill(body); return
         if path == "/api/aifix":
