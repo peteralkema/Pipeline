@@ -907,9 +907,21 @@ function bindAnimateButtons(wrap) {
   const PR = (window.__SEL_VIEW || "/").split("/").slice(1).join("/");
   wrap.querySelectorAll(".motioncell").forEach(function(cell) {
     const btn = cell.querySelector("button.animbtn");
-    if (!btn) return;
     const shot = parseInt(cell.getAttribute("data-shot"), 10);
     const box = cell.querySelector("textarea.motionbox");
+    // motion-persist: write the typed direction to storyboard.json so it survives
+    // a body re-render AND drives the batch animate (both read motion_prompt).
+    async function saveMotion() {
+      if (!box || isNaN(shot)) return;
+      try {
+        await api("/api/motion", {method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({channel: CH, project: PR, shot: shot,
+                                motion_prompt: box.value})});
+      } catch (e) { /* non-fatal: in-memory __MOTION_EDITS still holds it */ }
+    }
+    if (box) box.addEventListener("blur", saveMotion);
+    if (!btn) return;
     const msg = cell.querySelector(".animmsg");
     function reloadClip() {
       const n3 = String(shot).padStart(3, "0");
@@ -945,6 +957,7 @@ function bindAnimateButtons(wrap) {
       btn.disabled = true; const label0 = btn.textContent;
       btn.textContent = "Rendering (Kling)…";
       msg.style.color = "#8a8a99"; msg.textContent = "animating — this takes a bit…";
+      await saveMotion();  // persist the typed direction before it drives the render
       try {
         const r = await api("/api/animate", {method: "POST",
           headers: {"Content-Type": "application/json"},
@@ -1092,6 +1105,39 @@ class Handler(BaseHTTPRequestHandler):
             return json.loads(self.rfile.read(n).decode("utf-8")), None
         except Exception as e:
             return None, str(e)
+
+    def _handle_motion(self, body):
+        """Persist a typed motion direction into storyboard.json[shot].motion_prompt.
+        Resolved per-request like restill/animate. Drives both the once-off button
+        and the batch animate, since both read storyboard.json's motion_prompt."""
+        import json as _json
+        shot_idx = body.get("shot")
+        motion = (body.get("motion_prompt") or "").strip()
+        if not isinstance(shot_idx, int):
+            self._json(400, {"ok": False, "error": "shot must be an integer"}); return
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        paths = resolve_paths(ch, pr, _REPO)
+        sb_path = paths["storyboard"]
+        if not sb_path.is_file():
+            self._json(404, {"ok": False, "error": "storyboard.json not found"}); return
+        try:
+            sb = _json.loads(sb_path.read_text())
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"storyboard parse failed: {e}"}); return
+        hit = None
+        for s in sb:
+            if int(s.get("index", -1)) == shot_idx:
+                hit = s; break
+        if hit is None:
+            self._json(404, {"ok": False, "error": f"shot {shot_idx} not in storyboard"}); return
+        hit["motion_prompt"] = motion
+        try:
+            sb_path.write_text(_json.dumps(sb, indent=2))
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"storyboard write failed: {e}"}); return
+        self._json(200, {"ok": True, "shot": shot_idx, "saved": True}); return
 
     def _handle_animate(self, body):
         if not _ANIMATE_OK:
@@ -1258,6 +1304,8 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_restill(body); return
         if path == "/api/aifix":
             self._handle_aifix(body); return
+        if path == "/api/motion":
+            self._handle_motion(body); return
         if path == "/api/animate":
             self._handle_animate(body); return
 
