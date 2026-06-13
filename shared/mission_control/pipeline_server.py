@@ -93,7 +93,11 @@ if _ANTHROPIC_AVAILABLE and _os.environ.get("ANTHROPIC_API_KEY"):
         _ANTHROPIC_CLIENT = None
 
 try:
-    from recreation_pipeline import animate_still as _animate_still
+    from recreation_pipeline import (
+        animate_still as _animate_still,
+        ken_burns_still as _ken_burns_still,
+        _tiered_kling_count, _tiered_beat_index, _tiered_duration,
+    )
     _ANIMATE_OK = True
 except Exception as _ae:
     _ANIMATE_OK = False
@@ -109,11 +113,14 @@ _ANIMATE_LOCK = _threading.Lock()
 def _animate_key(ch, pr, shot):
     return f"{ch}/{pr}/{shot}"
 
-def _run_animate_bg(key, still_path, motion_prompt, out_path):
+def _run_animate_bg(key, still_path, motion_prompt, out_path, engine="kling", duration=None):
     try:
-        _animate_still(still_path, motion_prompt, out_path)
+        if engine == "kenburns":
+            _ken_burns_still(still_path, out_path, duration)
+        else:
+            _animate_still(still_path, motion_prompt, out_path)
         with _ANIMATE_LOCK:
-            _ANIMATE_JOBS[key] = {"status": "done"}
+            _ANIMATE_JOBS[key] = {"status": "done", "engine": engine}
     except Exception as e:
         with _ANIMATE_LOCK:
             _ANIMATE_JOBS[key] = {"status": "error", "error": str(e)}
@@ -1227,14 +1234,21 @@ class Handler(BaseHTTPRequestHandler):
         out_path = clips_dir / f"shot_{shot_idx:03d}.mp4"
         sys.stderr.write(f"[Animate] shot {shot_idx:03d} started in background ...\n")
         # Fire-and-poll: start the Kling call in a thread, return immediately.
+        # TIERED RENDER (d): route this single beat by the same policy as the batch.
+        project_root = stills_dir.parent.parent  # <project>/ — render_policy/durations/_index live here
+        kling_count = _tiered_kling_count(project_root)
+        beat_index = _tiered_beat_index(shot_idx, project_root)
+        engine = "kling" if beat_index < kling_count else "kenburns"
+        duration = _tiered_duration(beat_index, project_root)
+        sys.stderr.write(f"[Animate] shot {shot_idx:03d} -> {engine} (beat {beat_index}, N={kling_count})\n")
         key = _animate_key(ch, pr, shot_idx)
         with _ANIMATE_LOCK:
             _ANIMATE_JOBS[key] = {"status": "running"}
         th = _threading.Thread(target=_run_animate_bg,
-                               args=(key, still_path, motion_prompt, out_path),
+                               args=(key, still_path, motion_prompt, out_path, engine, duration),
                                daemon=True)
         th.start()
-        self._json(200, {"ok": True, "started": True, "shot": shot_idx}); return
+        self._json(200, {"ok": True, "started": True, "shot": shot_idx, "engine": engine}); return
 
     def _handle_restill(self, body):
         if not _RESTILL_OK:
