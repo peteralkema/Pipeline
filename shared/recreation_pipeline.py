@@ -99,6 +99,10 @@ CHANNEL_DEFAULTS = {
         "distant piano. Funereal, foreboding, restrained. No percussion, no melody "
         "that competes with a narrator. Builds dread very slowly. Dark and solemn."
     ),
+    "default_motion": (
+        "Slow, subtle atmospheric motion. Drifting light, faint air. "
+        "No fast movement, no camera shake."
+    ),
     "base_canon": {},   # auto-merged into every beat-script's canon block
 }
 
@@ -1251,11 +1255,13 @@ def cmd_stills(args):
         if canon:
             print(f"Canon block loaded with {len(canon)} tag(s): {sorted(canon.keys())}")
         # Normalise: ensure sequential indices, required fields, and canon-expansion.
+        _default_motion = (load_channel_config(strict=False).get("default_motion")
+                           or CHANNEL_DEFAULTS["default_motion"])
         shots = []
         for i, b in enumerate(beats, 1):
             image_prompt = _expand_canon(b["image_prompt"].strip(), canon)
             motion_prompt = _expand_canon(
-                b.get("motion_prompt", "Slow, subtle atmospheric motion. Drifting light. No fast movement.").strip(),
+                (b.get("motion_prompt") or _default_motion).strip(),
                 canon,
             )
             shots.append({

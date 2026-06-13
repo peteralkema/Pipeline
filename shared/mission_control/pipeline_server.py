@@ -175,6 +175,25 @@ def _stills_ctx(channel: str, project: str):
     _STILLS_CACHE[key] = ctx
     return ctx
 
+_GLOBAL_DEFAULT_MOTION = ("Slow, subtle atmospheric motion. Drifting light, "
+                          "faint air. No fast movement, no camera shake.")
+
+
+def _channel_default_motion(ch, pr):
+    """The channel's default_motion (channel.json) for an empty motion box,
+    falling back to the global default."""
+    try:
+        import json as _json
+        cj = resolve_paths(ch, pr, _REPO)["channel_json"]
+        if cj.is_file():
+            v = _json.loads(cj.read_text()).get("default_motion")
+            if v and str(v).strip():
+                return str(v).strip()
+    except Exception:
+        pass
+    return _GLOBAL_DEFAULT_MOTION
+
+
 def _resolve_request_project(body):
     """Project for a stills POST: explicit channel/project in body, else active job."""
     ch = (body or {}).get("channel")
@@ -1260,12 +1279,11 @@ class Handler(BaseHTTPRequestHandler):
         motion_prompt = (body.get("motion_prompt") or "").strip()
         if not isinstance(shot_idx, int):
             self._json(400, {"ok": False, "error": "shot must be an integer"}); return
-        if not motion_prompt:
-            motion_prompt = ("Slow, subtle atmospheric motion. Drifting light, "
-                             "faint air. No fast movement, no camera shake.")
         ch, pr = _resolve_request_project(body)
         if not ch or not pr:
             self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        if not motion_prompt:
+            motion_prompt = _channel_default_motion(ch, pr)
         ctx = _stills_ctx(ch, pr)
         stills_dir = ctx["stills_dir"]
         still_path = stills_dir / f"shot_{shot_idx:03d}.png"
