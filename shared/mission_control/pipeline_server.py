@@ -512,10 +512,8 @@ function renderRunning(state) {
       '<div>' + n + ' stills rendered. Review (AI Fix / Regenerate any that break), ' +
       'then approve.</div>' +
       '<div class="row">' +
-        '<button onclick=' + _SQ + 'gate(' + _SQ + 'go' + _SQ + ')' + _SQ +
-          '>Generate Clips (approve stills)</button>' +
-        '<button class="secondary" onclick=' + _SQ + 'gate(' + _SQ + 'skip' + _SQ + ')' + _SQ +
-          '>Skip</button>' +
+        '<button onclick="gate(' + _SQ + 'go' + _SQ + ')">Generate Clips (approve stills)</button>' +
+        '<button class="secondary" onclick="gate(' + _SQ + 'skip' + _SQ + ')">Stop here (keep stills, no clips)</button>' +
       '</div></div>';
     const body = '<div id="storyboard" class="panel" style="max-width:2400px;">' +
       '<label>Storyboard — ' + pr + ' · ' + n + ' beats</label>' +
@@ -539,10 +537,28 @@ function renderRunning(state) {
 
 async function gate(decision) {
   const s = await api("/api/state");
-  await api("/api/gate/"+ (s.gate?s.gate.name:"") , {method:"POST",
+  const name = s.gate ? s.gate.name : "";
+  const r = await api("/api/gate/" + name, {method:"POST",
     headers:{"Content-Type":"application/json"},
     body: JSON.stringify({decision})});
+  if (r && r.ok === false) { toast("gate error: " + (r.error || "write failed")); }
+  else { toast("decision sent: " + decision); }
   poll();
+}
+function toast(text) {
+  let tt = document.getElementById("mc_toast");
+  if (!tt) {
+    tt = document.createElement("div");
+    tt.id = "mc_toast";
+    tt.style.cssText = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);" +
+      "background:#1c1c26;color:#e8e6e3;border:1px solid #d4a017;border-radius:8px;" +
+      "padding:10px 16px;font-size:13px;z-index:9999;max-width:80vw;box-shadow:0 4px 20px rgba(0,0,0,.5);";
+    document.body.appendChild(tt);
+  }
+  tt.textContent = text;
+  tt.style.opacity = "1";
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(function(){ tt.style.opacity = "0"; }, 4000);
 }
 
 let LAST_RENDER_KEY = null;
