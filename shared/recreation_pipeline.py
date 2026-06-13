@@ -601,7 +601,7 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) ->
     vf = (
         f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
         f"crop={up_w}:{up_h},"
-        f"zoompan=z='min(zoom+0.0006,1.25)':d={total_frames}:"
+        f"zoompan=z='min(zoom+0.0016,1.30)':d={total_frames}:"
         f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
         f"s={W}x{H}:fps={fps},setsar=1"
     )
