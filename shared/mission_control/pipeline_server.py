@@ -383,13 +383,52 @@ async function loadProjectsRich(folder) {
   const r = await api("/api/projects?channel="+encodeURIComponent(folder));
   return r.projects_rich || [];
 }
-async function renderIdle(state) {
-  const app = document.getElementById("app");
-  const channels = state.channels || [];
-  app.innerHTML = "";
+// ── A0: one continuous page — persistent shell, per-phase strip, always-visible body ──
+// Built ONCE by ensureShell, then only UPDATED in place. The status strip changes
+// with phase; the gate bar shows controls when a gate is waiting; the storyboard
+// body always shows the selected/running project. Nothing is wiped wholesale, so
+// idle/running/gate/done/stopped/stale each render cleanly (no "working…" catch-all).
 
-  // ---- CREATE PANEL (paste script.md text OR upload .md, + slug) ----
-  const create = el(`<div class="panel">
+function selCh() { return (window.__SEL_VIEW || "/").split("/")[0]; }
+function selPr() { return (window.__SEL_VIEW || "/").split("/").slice(1).join("/"); }
+
+const ACTIVE_PHASES = ["running", "gate_audio", "gate_stills", "animating", "assembling"];
+function isActiveRun(phase) { return ACTIVE_PHASES.indexOf(phase) !== -1; }
+
+function phaseStrip(state) {
+  const p = state.phase;
+  const g = state.gate;
+  if (p === "idle") return {text: "Idle — pick a project and Launch.", color: "#8a8a99"};
+  if (g && g.status === "waiting" && g.name === "audio")
+    return {text: "Audio gate — review the voiceover, then Accept or Swap.", color: "#d4a017"};
+  if (g && g.status === "waiting" && g.name === "stills")
+    return {text: "Stills gate — review the stills below, then Generate Clips or Stop.", color: "#d4a017"};
+  if (p === "running")    return {text: "Running — audio leg (voiceover + timing)…", color: "#5b9bd5"};
+  if (p === "animating")  return {text: "Animating clips (Kling)…", color: "#5b9bd5"};
+  if (p === "assembling") return {text: "Assembling the final video…", color: "#5b9bd5"};
+  if (p === "done")       return {text: "✓ Complete — final video assembled. Pick a project to launch another.", color: "#1c7c4a"};
+  if (p === "stopped")    return {text: "■ Stopped at the stills gate — stills kept on disk. Re-launch to resume (existing stills are skipped).", color: "#b58900"};
+  if (p === "error" || p === "stale")
+    return {text: "⚠ This run ended unexpectedly. Pick a project and Launch to start fresh.", color: "#d46a6a"};
+  return {text: "Phase: " + p, color: "#8a8a99"};
+}
+
+function ensureShell(state) {
+  let shell = document.getElementById("shell");
+  if (shell) return shell;
+  const app = document.getElementById("app");
+  app.innerHTML = "";
+  shell = document.createElement("div");
+  shell.id = "shell";
+  app.appendChild(shell);
+
+  const strip = el(`<div class="panel" id="strip" style="border-left:4px solid #8a8a99;">
+    <div id="stripmain" class="phase" style="font-size:14px;"></div>
+    <div id="stripsub" class="phase" style="margin-top:4px;"></div>
+  </div>`);
+  shell.appendChild(strip);
+
+  const create = el(`<div class="panel" id="createpanel">
     <label>New project — paste your script.md, or upload it</label>
     <textarea id="scripttext" rows="6" placeholder="paste the full script.md here (channel: header included)…"
       style="width:100%;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:10px;font:13px/1.4 ui-monospace,monospace;box-sizing:border-box;"></textarea>
@@ -403,10 +442,9 @@ async function renderIdle(state) {
     <div class="row"><button id="create">Create project</button></div>
     <div id="createmsg" class="phase" style="margin-top:10px;white-space:pre-wrap;"></div>
   </div>`);
-  app.appendChild(create);
+  shell.appendChild(create);
 
-  // ---- LAUNCH PANEL (pick existing project) ----
-  const panel = el(`<div class="panel">
+  const panel = el(`<div class="panel" id="launchpanel">
     <label>Channel</label>
     <select id="chan"></select>
     <label>Project (newest first)</label>
@@ -418,40 +456,51 @@ async function renderIdle(state) {
     </select>
     <div class="row"><button id="launch" disabled>Launch</button></div>
   </div>`);
-  app.appendChild(panel);
+  shell.appendChild(panel);
 
+  const gatebar = document.createElement("div");
+  gatebar.id = "gatebar";
+  shell.appendChild(gatebar);
+
+  const channels = state.channels || [];
   const chan = panel.querySelector("#chan");
   const proj = panel.querySelector("#proj");
   const launch = panel.querySelector("#launch");
   chan.innerHTML = '<option value="">— pick a channel —</option>' +
-     channels.map(c=>`<option value="${c}">${c}</option>`).join("");
+     channels.map(c => `<option value="${c}">${c}</option>`).join("");
   async function refreshProjects(folder, selectSlug) {
-    if (!folder) { proj.innerHTML='<option>—</option>'; launch.disabled=true; return; }
+    if (!folder) { proj.innerHTML = '<option>—</option>'; launch.disabled = true; return; }
     proj.innerHTML = '<option>loading…</option>';
     const ps = await loadProjectsRich(folder);
     proj.innerHTML = '<option value="">— pick a project —</option>' +
-      ps.map(p=>`<option value="${p.slug}">${p.slug} · ${p.created_label} · ${p.stage}</option>`).join("");
+      ps.map(p => `<option value="${p.slug}">${p.slug} · ${p.created_label} · ${p.stage}</option>`).join("");
     if (selectSlug) { proj.value = selectSlug; }
     launch.disabled = !proj.value;
   }
-  chan.onchange = () => { launch.disabled = true; clearStoryboard(); refreshProjects(chan.value); };
+  chan.onchange = () => {
+    launch.disabled = true; window.__SEL_VIEW = ""; window.__BODY_KEY = "__none__";
+    clearStoryboard(); refreshProjects(chan.value);
+  };
   proj.onchange = () => {
-    launch.disabled = !(chan.value && proj.value);
     if (chan.value && proj.value) {
       window.__SEL_VIEW = chan.value + "/" + proj.value;
+      window.__BODY_KEY = chan.value + "/" + proj.value + "|";  // matches idle poll key -> no double render
       renderStoryboard(chan.value, proj.value);
-    } else { clearStoryboard(); }
+    } else {
+      window.__SEL_VIEW = ""; window.__BODY_KEY = "__none__"; clearStoryboard();
+    }
+    launch.disabled = !(chan.value && proj.value);
   };
   launch.onclick = async () => {
     launch.disabled = true; launch.textContent = "Launching…";
     const mode = panel.querySelector("#mode").value;
-    await api("/api/launch", {method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({channel:chan.value, project:proj.value, dry: mode==="dry"})});
+    await api("/api/launch", {method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({channel: chan.value, project: proj.value, dry: mode === "dry"})});
+    launch.textContent = "Launch";
     poll();
   };
 
-  // ---- Create wiring ----
   const fileInput = create.querySelector("#scriptfile");
   const textArea = create.querySelector("#scripttext");
   fileInput.onchange = async () => {
@@ -463,11 +512,11 @@ async function renderIdle(state) {
   create.querySelector("#create").onclick = async () => {
     const NL = String.fromCharCode(10);
     msg.textContent = "Creating — parsing + verifying…";
-    const r = await api("/api/create", {method:"POST",
-      headers:{"Content-Type":"application/json"},
+    const r = await api("/api/create", {method: "POST",
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify({script: textArea.value, slug: slugInput.value.trim()})});
     if (!r.ok) {
-      let m = "✗ " + (r.error || "create failed") + " (stage: " + (r.stage||"?") + ")";
+      let m = "✗ " + (r.error || "create failed") + " (stage: " + (r.stage || "?") + ")";
       if (r.verify) m += NL + "  wordless beats: " + JSON.stringify(r.verify.wordless) +
                          NL + "  Mode A no-VISUAL: " + JSON.stringify(r.verify.no_visual);
       msg.textContent = m; return;
@@ -478,61 +527,107 @@ async function renderIdle(state) {
     msg.textContent = "✓ created " + r.folder + "/projects/" + r.slug +
       NL + "  " + v.beats + " beats · modes " + JSON.stringify(v.modes) +
       NL + "  " + g + NL + "  selected below — pick mode and Launch.";
-    // select the channel + new project in the launch panel
     chan.value = r.folder;
+    window.__SEL_VIEW = r.folder + "/" + r.slug;
+    window.__BODY_KEY = "__none__";
     await refreshProjects(r.folder, r.slug);
   };
+
+  return shell;
 }
 
-function renderRunning(state) {
-  const app = document.getElementById("app");
-  var _SQ = String.fromCharCode(39);  // single quote, quote-proof (no literal ' in source)
+function updateControls(state) {
+  const run = isActiveRun(state.phase);
+  const cp = document.getElementById("createpanel");
+  const lp = document.getElementById("launchpanel");
+  if (cp) cp.style.display = run ? "none" : "";
+  if (lp) lp.style.display = run ? "none" : "";
+  const chan = document.getElementById("chan");
+  const proj = document.getElementById("proj");
+  const launch = document.getElementById("launch");
+  if (launch) launch.disabled = run || !(chan && proj && chan.value && proj.value);
+}
+
+function updateStrip(state) {
+  const s = phaseStrip(state);
+  const strip = document.getElementById("strip");
+  const main = document.getElementById("stripmain");
+  const sub = document.getElementById("stripsub");
+  if (!strip || !main) return;
+  strip.style.borderLeftColor = s.color;
+  main.innerHTML = '<b style="color:' + s.color + ';">' + s.text + '</b>';
+  if (sub) {
+    sub.textContent = state.job_id
+      ? ((state.channel || "") + " · " + (state.project || "") + "  ·  phase: " + state.phase)
+      : "";
+  }
+}
+
+function updateGatebar(state) {
+  const bar = document.getElementById("gatebar");
+  if (!bar) return;
   const g = state.gate;
-  let gateHtml = "";
-  if (g && g.status === "waiting" && g.name === "audio") {
+  const waiting = g && g.status === "waiting";
+  const token = waiting ? (g.name + ":" + g.status) : "none";
+  if (bar.__token === token) return;   // unchanged — leave it (buttons hold no input)
+  bar.__token = token;
+  if (!waiting) { bar.innerHTML = ""; return; }
+  var _SQ = String.fromCharCode(39);
+  if (g.name === "audio") {
     const v = (g.payload && g.payload.voice_id) || "the channel voice";
     const m = (g.payload && g.payload.minutes) || "?";
-    gateHtml = `<div class="panel gate">
+    bar.innerHTML = `<div class="panel gate">
       <label>Audio gate</label>
       <div>Voiceover produced — measured <b>${m}</b> min, voice: <b>${v}</b>.</div>
       <div class="row">
         <button onclick="gate('keep')">Accept (keep this read)</button>
         <button class="secondary" onclick="gate('swap')">Swap (use my own recording)</button>
       </div></div>`;
-  } else if (g && g.status === "waiting" && g.name === "stills") {
-    // STILLS GATE BODY — the gate IS the storyboard. Render the five-column
-    // body from the view already attached to state (no re-fetch), controls live.
-    const view = state.view || {};
-    const beats = view.beats || [];
-    const ch = state.channel, pr = state.project;
-    window.__SEL_VIEW = ch + "/" + pr;  // so bindStillControls posts to this project
-    const n = beats.length || (g.payload && g.payload.stills_count) || "?";
-    const head = '<div class="panel gate">' +
+  } else if (g.name === "stills") {
+    const n = (g.payload && g.payload.stills_count) || "";
+    bar.innerHTML = '<div class="panel gate">' +
       '<label>Stills gate — review before clips</label>' +
-      '<div>' + n + ' stills rendered. Review (AI Fix / Regenerate any that break), ' +
-      'then approve.</div>' +
+      '<div>' + n + ' stills rendered. Review the body below (AI Fix / Regenerate any that break), then decide.</div>' +
       '<div class="row">' +
         '<button onclick="gate(' + _SQ + 'go' + _SQ + ')">Generate Clips (approve stills)</button>' +
         '<button class="secondary" onclick="gate(' + _SQ + 'skip' + _SQ + ')">Stop here (keep stills, no clips)</button>' +
       '</div></div>';
-    const body = '<div id="storyboard" class="panel" style="max-width:2400px;">' +
-      '<label>Storyboard — ' + pr + ' · ' + n + ' beats</label>' +
-      beats.map(b => beatRow(b, ch, pr)).join("") + '</div>';
-    // buttons appear BOTH above (quick approve) and the body below them.
-    gateHtml = head + body;
-    window.__BIND_GATE_BODY = true;  // edit 2 binds controls after innerHTML
+  } else {
+    bar.innerHTML = "";
   }
-  app.innerHTML = `<div class="panel">
-      <div class="phase">job <code>${state.job_id}</code></div>
-      <div class="phase">${state.channel} · ${state.project}</div>
-      <div class="phase">phase: <b>${state.phase}</b>
-        ${(!g||g.status!=="waiting") ? '<span class="spin"> — working…</span>' : ''}</div>
-    </div>` + gateHtml;
-  if (window.__BIND_GATE_BODY) {
-    window.__BIND_GATE_BODY = false;
-    const sb = document.getElementById("storyboard");
-    if (sb && typeof bindMotionBoxes === "function") bindMotionBoxes(sb);
-  }
+}
+
+function bodyTarget(state) {
+  // Active run -> body follows the RUN; otherwise -> the dropdown selection,
+  // defaulting to the run's project if nothing is selected.
+  if (isActiveRun(state.phase)) return {ch: state.channel, pr: state.project};
+  return {ch: selCh() || state.channel, pr: selPr() || state.project};
+}
+
+function maybeUpdateBody(state) {
+  const t = bodyTarget(state);
+  if (!t.ch || !t.pr) { clearStoryboard(); window.__BODY_KEY = "__none__"; return; }
+  const sc = (state.gate && state.gate.payload && state.gate.payload.stills_count) || "";
+  const key = t.ch + "/" + t.pr + "|" + sc;
+  if (window.__BODY_KEY === key) return;   // same project + stills count -> leave the DOM (and typed notes) alone
+  window.__BODY_KEY = key;
+  window.__SEL_VIEW = t.ch + "/" + t.pr;   // so still/motion controls POST to this project
+  renderStoryboard(t.ch, t.pr);
+}
+
+async function poll() {
+  let state;
+  try { state = await api("/api/state"); }
+  catch (e) { return; }   // transient blip — keep the page as-is, retry next tick
+  ensureShell(state);
+  updateStrip(state);
+  updateGatebar(state);
+  updateControls(state);
+  maybeUpdateBody(state);
+}
+
+function clearStoryboard() {
+  const e = document.getElementById("storyboard"); if (e) e.remove();
 }
 
 async function gate(decision) {
@@ -559,31 +654,6 @@ function toast(text) {
   tt.style.opacity = "1";
   clearTimeout(window.__toastTimer);
   window.__toastTimer = setTimeout(function(){ tt.style.opacity = "0"; }, 4000);
-}
-
-let LAST_RENDER_KEY = null;
-function renderKey(state) {
-  // re-render only when something the user SEES changes. Include the idle
-  // project selection so picking a project (no job) triggers a body render.
-  const g = state.gate || {};
-  // gate_view_token: at the stills gate, key on stills_count so the body
-  // renders once when the gate opens (controls then drive in-place reloads).
-  const gate_view_token = (g.name === "stills" && g.payload)
-                          ? ("stills:" + (g.payload.stills_count || "")) : "";
-  return [state.phase, state.job_id, g.name, g.status,
-          window.__SEL_VIEW || "", gate_view_token].join("|");
-}
-async function poll() {
-  const state = await api("/api/state");
-  const key = renderKey(state);
-  if (key === LAST_RENDER_KEY) return;   // nothing visible changed -> don't clobber the DOM
-  LAST_RENDER_KEY = key;
-  if (state.phase === "idle") renderIdle(state);
-  else renderRunning(state);
-}
-function clearStoryboard() {
-  const e = document.getElementById("storyboard"); if (e) e.remove();
-  window.__SEL_VIEW = "";
 }
 // per-beat motion edits held in memory for this session (display+persist seam).
 // Keyed by "channel/project/beatIndex". A backend save endpoint wires in later.
