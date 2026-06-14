@@ -326,11 +326,27 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
+APP_VERSION = "v0.5"  # hand-bumped each shipped page change; pairs with the auto git SHA
+
+
+def _build_sha() -> str:
+    """Short SHA of the deployed commit — the half of the version that can't lie."""
+    try:
+        out = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            cwd=str(_REPO), capture_output=True, text=True, timeout=3,
+        )
+        return out.stdout.strip() or "?"
+    except Exception:
+        return "?"
+
+
 def build_state() -> dict:
     jid = active_job_id()
     if not jid:
         return {"phase": "idle", "job_id": None,
-                "channels": list_channels()}
+                "channels": list_channels(),
+                "version": APP_VERSION, "sha": _build_sha()}
     rec = read_job(jid, _REPO)
     phase = rec.get("phase", "running")
     state = {
@@ -340,6 +356,8 @@ def build_state() -> dict:
         "project": rec.get("project"),
         "gate": rec.get("gate"),
         "channels": list_channels(),
+        "version": APP_VERSION,
+        "sha": _build_sha(),
     }
     # Once stills exist, attach the beats view so the body can render (2b/3 use it).
     if phase in ("gate_stills", "animating", "assembling", "done"):
@@ -440,7 +458,8 @@ def render_page(key: str | None) -> str:
     # Minimal Phase-2a page: dropdowns, Launch, phase line, bare audio gate.
     # Intentionally small — rich panels are 2b/3. State-driven: everything
     # renders from /api/state, nothing stored client-side.
-    return """<!doctype html><html><head><meta charset="utf-8">
+    _verstamp = f"{APP_VERSION} \u00b7 {_build_sha()}"  # e.g. v0.5 \u00b7 2723e25
+    _page = """<!doctype html><html><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Film Director Storyboard and Control Panel</title>
 <style>
@@ -467,7 +486,7 @@ def render_page(key: str | None) -> str:
   .spin { color:#8a8a99; }
   code { background:#1c1c26; padding:1px 6px; border-radius:4px; font-size:13px; }
 </style></head><body>
-<h1>AI FILM DIRECTOR STORYBOARD AND CONTROL PANEL</h1>
+<h1>AI FILM DIRECTOR STORYBOARD AND CONTROL PANEL <span style="font-size:12px;font-weight:400;color:#8a8a99;letter-spacing:0;">@@VERSTAMP@@</span></h1>
 <div id="app"><div class="panel"><span class="spin">loading…</span></div></div>
 <script>
 const KEY = new URLSearchParams(location.search).get("key") || "";
@@ -1177,6 +1196,7 @@ poll();
 setInterval(poll, 2500);
 </script>
 </body></html>"""
+    return _page.replace("@@VERSTAMP@@", _verstamp)
 
 
 # --------------------------------------------------------------------------
