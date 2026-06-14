@@ -326,7 +326,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v0.7"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v0.8"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -578,6 +578,14 @@ function ensureShell(state) {
   const resetbtn = strip.querySelector("#resetbtn");
   if (resetbtn) resetbtn.onclick = resetAll;
 
+  // v0.8: two-column top -- controls left, FINAL VIDEO panel right (the U layout).
+  const topgrid = el(`<div id="topgrid" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;">
+    <div id="topleft" style="flex:1 1 360px;min-width:300px;"></div>
+    <div id="toppanel" style="flex:1.15 1 380px;min-width:320px;"></div>
+  </div>`);
+  shell.appendChild(topgrid);
+  renderTopPlaceholder();
+
   const create = el(`<div class="panel" id="createpanel">
     <label>New project — paste your script.md, or upload it</label>
     <textarea id="scripttext" rows="6" placeholder="paste the full script.md here (channel: header included)…"
@@ -592,7 +600,7 @@ function ensureShell(state) {
     <div class="row"><button id="create">Create project</button></div>
     <div id="createmsg" class="phase" style="margin-top:10px;white-space:pre-wrap;"></div>
   </div>`);
-  shell.appendChild(create);
+  document.getElementById("topleft").appendChild(create);
 
   const panel = el(`<div class="panel" id="launchpanel">
     <label>Channel</label>
@@ -606,7 +614,7 @@ function ensureShell(state) {
     </select>
     <div class="row"><button id="launch" disabled>Launch</button></div>
   </div>`);
-  shell.appendChild(panel);
+  document.getElementById("topleft").appendChild(panel);
 
   const gatebar = document.createElement("div");
   gatebar.id = "gatebar";
@@ -818,17 +826,18 @@ function maybeUpdateBody(state) {
 
 function removeDonePanel() {
   const e = document.getElementById("donepanel"); if (e) e.remove();
+  if (typeof renderTopPlaceholder === "function") renderTopPlaceholder();
 }
 
 async function renderDonePanel(ch, pr) {
   removeDonePanel();
-  const app = document.getElementById("app");
-  if (!app) return;
+  const slotEl = document.getElementById("toppanel");
+  if (!slotEl) return;
   const q = "?channel=" + encodeURIComponent(ch) + "&project=" + encodeURIComponent(pr) + "&key=" + KEY;
   let meta = {};
   try { meta = await api("/api/meta?channel=" + encodeURIComponent(ch) + "&project=" + encodeURIComponent(pr)); }
   catch (e) { meta = {}; }
-  if (!meta || !meta.has_video) return;   // no assembled video -> no panel
+  if (!meta || !meta.has_video) { renderTopPlaceholder(); return; }   // no video -> placeholder
   const vsrc = "/video/" + encodeURIComponent(meta.video_name || "final_video.mp4") + q;
   const esc = function(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); };
   const panel = document.createElement("div");
@@ -855,9 +864,18 @@ async function renderDonePanel(ch, pr) {
       'style="background:#ff0000;opacity:.4;cursor:not-allowed;">Upload to YouTube Studio</button>' +
     '<div style="color:#8a8a99;font-size:11px;margin-top:6px;">Upload goes live once auth + /api/upload are wired ' +
       '(next session). Download works now.</div>';
-  // insert ABOVE the storyboard (or at the end of #app if no storyboard yet)
-  const sb = document.getElementById("storyboard");
-  if (sb) { app.insertBefore(panel, sb); } else { app.appendChild(panel); }
+  // v0.8: render into the top-right slot (fills the dead space beside the controls)
+  const slot = document.getElementById("toppanel");
+  if (slot) { slot.innerHTML = ""; slot.appendChild(panel); }
+}
+
+function renderTopPlaceholder() {
+  const slot = document.getElementById("toppanel");
+  if (!slot) return;
+  if (document.getElementById("donepanel")) return;  // a real panel is showing -> leave it
+  slot.innerHTML =
+    '<div class="panel" style="border:1px dashed #32323e;color:#8a8a99;text-align:center;' +
+      'padding:28px 18px;">FINAL VIDEO appears here when a run completes.</div>';
 }
 
 async function poll() {
