@@ -347,7 +347,88 @@ def build_state() -> dict:
             state["view"] = build_beats_view(rec["channel"], rec["project"], _REPO)
         except Exception as e:
             state["view_error"] = str(e)
+    # Live status detail (item 1a): activity + count off disk, or elapsed time.
+    try:
+        state["status_detail"] = _status_detail(rec, phase)
+    except Exception:
+        state["status_detail"] = ""
     return state
+
+
+def _beat_total(paths: dict) -> int:
+    """Beat total from durations.json (the timing source). 0 if not found yet."""
+    cand = []
+    d = paths.get("durations")
+    if d:
+        cand.append(Path(d))
+    # fall back to walking the project root (stills_dir = <project>/modea/stills)
+    try:
+        root = Path(paths["stills_dir"]).parent.parent
+        cand.append(root / "durations.json")
+    except Exception:
+        pass
+    for p in cand:
+        try:
+            if p and Path(p).exists():
+                data = json.load(open(p))
+                return len(data) if isinstance(data, (dict, list)) else 0
+        except Exception:
+            continue
+    return 0
+
+
+def _count_pngs(d) -> int:
+    try:
+        return sum(1 for _ in Path(d).glob("shot_*.png"))
+    except Exception:
+        return 0
+
+
+def _count_mp4s(d) -> int:
+    try:
+        return sum(1 for _ in Path(d).glob("shot_*.mp4"))
+    except Exception:
+        return 0
+
+
+def _elapsed_str(rec: dict) -> str:
+    """Elapsed since heartbeat (A1, when present) else started_at."""
+    t0 = rec.get("heartbeat") or rec.get("started_at")
+    if not t0:
+        return ""
+    secs = max(0, int(time.time() - float(t0)))
+    if secs < 60:
+        return f"{secs}s"
+    return f"{secs // 60}m"
+
+
+def _status_detail(rec: dict, phase: str) -> str:
+    """One short line: count where artifacts exist, elapsed time where they don't."""
+    ch, pr = rec.get("channel"), rec.get("project")
+    if not ch or not pr:
+        return ""
+    try:
+        paths = resolve_paths(ch, pr, _REPO)
+    except Exception:
+        return ""
+    total = _beat_total(paths)
+    den = f" / {total}" if total else ""
+
+    if phase == "animating":
+        return f"clips {_count_mp4s(paths.get('clips_dir'))}{den}"
+    if phase == "gate_stills":
+        return f"stills {_count_pngs(paths.get('stills_dir'))}{den} ready"
+    if phase == "running":
+        # running covers the audio leg (no countable artifact yet) AND stills generation.
+        # durations.json existing => audio leg done => we're generating stills.
+        if total:
+            return f"stills {_count_pngs(paths.get('stills_dir'))}{den}"
+        e = _elapsed_str(rec)
+        return f"audio · working {e}" if e else "audio · working"
+    if phase == "assembling":
+        e = _elapsed_str(rec)
+        return f"assembling {e}" if e else "assembling"
+    return ""
 
 
 # --------------------------------------------------------------------------
@@ -618,9 +699,13 @@ function updateStrip(state) {
   strip.style.borderLeftColor = s.color;
   main.innerHTML = '<b style="color:' + s.color + ';">' + s.text + '</b>';
   if (sub) {
-    sub.textContent = state.job_id
-      ? ((state.channel || "") + " · " + (state.project || "") + "  ·  phase: " + state.phase)
-      : "";
+    if (state.job_id) {
+      var base = (state.channel || "") + " · " + (state.project || "") + "  ·  phase: " + state.phase;
+      var det = state.status_detail || "";
+      sub.textContent = det ? (base + "  ·  " + det) : base;
+    } else {
+      sub.textContent = "";
+    }
   }
 }
 
