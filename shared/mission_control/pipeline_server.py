@@ -326,7 +326,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v0.8"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v0.9"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -579,9 +579,9 @@ function ensureShell(state) {
   if (resetbtn) resetbtn.onclick = resetAll;
 
   // v0.8: two-column top -- controls left, FINAL VIDEO panel right (the U layout).
-  const topgrid = el(`<div id="topgrid" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;">
-    <div id="topleft" style="flex:1 1 360px;min-width:300px;"></div>
-    <div id="toppanel" style="flex:1.15 1 380px;min-width:320px;"></div>
+  const topgrid = el(`<div id="topgrid" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;max-width:1500px;">
+    <div id="topleft" style="flex:0 1 420px;min-width:300px;"></div>
+    <div id="toppanel" style="flex:1 1 560px;min-width:320px;max-width:760px;"></div>
   </div>`);
   shell.appendChild(topgrid);
   renderTopPlaceholder();
