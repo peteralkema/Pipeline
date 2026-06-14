@@ -326,7 +326,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v0.6"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v0.7"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -806,13 +806,58 @@ function bodyTarget(state) {
 
 function maybeUpdateBody(state) {
   const t = bodyTarget(state);
-  if (!t.ch || !t.pr) { clearStoryboard(); window.__BODY_KEY = "__none__"; return; }
+  if (!t.ch || !t.pr) { clearStoryboard(); removeDonePanel(); window.__BODY_KEY = "__none__"; return; }
   const sc = (state.gate && state.gate.payload && state.gate.payload.stills_count) || "";
-  const key = t.ch + "/" + t.pr + "|" + sc;
-  if (window.__BODY_KEY === key) return;   // same project + stills count -> leave the DOM (and typed notes) alone
+  const key = t.ch + "/" + t.pr + "|" + sc + "|" + (state.phase || "");
+  if (window.__BODY_KEY === key) return;   // same project + stills count + phase -> leave the DOM alone
   window.__BODY_KEY = key;
   window.__SEL_VIEW = t.ch + "/" + t.pr;   // so still/motion controls POST to this project
+  if (state.phase === "done") { renderDonePanel(t.ch, t.pr); } else { removeDonePanel(); }
   renderStoryboard(t.ch, t.pr);
+}
+
+function removeDonePanel() {
+  const e = document.getElementById("donepanel"); if (e) e.remove();
+}
+
+async function renderDonePanel(ch, pr) {
+  removeDonePanel();
+  const app = document.getElementById("app");
+  if (!app) return;
+  const q = "?channel=" + encodeURIComponent(ch) + "&project=" + encodeURIComponent(pr) + "&key=" + KEY;
+  let meta = {};
+  try { meta = await api("/api/meta?channel=" + encodeURIComponent(ch) + "&project=" + encodeURIComponent(pr)); }
+  catch (e) { meta = {}; }
+  if (!meta || !meta.has_video) return;   // no assembled video -> no panel
+  const vsrc = "/video/" + encodeURIComponent(meta.video_name || "final_video.mp4") + q;
+  const esc = function(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); };
+  const panel = document.createElement("div");
+  panel.id = "donepanel";
+  panel.className = "panel";
+  panel.style.cssText = "max-width:720px;border:1px solid #d4a017;";
+  panel.innerHTML =
+    '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">' +
+      '<span style="width:8px;height:8px;border-radius:50%;background:#ff0000;display:inline-block;"></span>' +
+      '<b style="letter-spacing:.04em;">FINAL VIDEO &mdash; UPLOAD TO STUDIO</b></div>' +
+    '<video src="' + vsrc + '" autoplay muted loop playsinline ' +
+      'style="width:100%;border-radius:8px;background:#000;display:block;margin-bottom:8px;"></video>' +
+    '<div style="margin-bottom:14px;">' +
+      '<a href="' + vsrc + '" download style="display:inline-block;background:#2a2a36;color:#e8e6e3;' +
+        'text-decoration:none;border-radius:6px;padding:8px 14px;font-weight:600;font-size:13px;">' +
+        '&#8595; Download final video</a></div>' +
+    '<label>Title</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+      'background:#1c1c26;padding:8px 10px;margin-bottom:8px;">' + esc(meta.title) + '</div>' +
+    '<label>Description</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+      'background:#1c1c26;padding:8px 10px;margin-bottom:8px;white-space:pre-wrap;">' + esc(meta.description) + '</div>' +
+    '<label>Tags</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+      'background:#1c1c26;padding:8px 10px;margin-bottom:14px;">' + esc(meta.tags) + '</div>' +
+    '<button disabled title="Upload wiring next session (auth + /api/upload)" ' +
+      'style="background:#ff0000;opacity:.4;cursor:not-allowed;">Upload to YouTube Studio</button>' +
+    '<div style="color:#8a8a99;font-size:11px;margin-top:6px;">Upload goes live once auth + /api/upload are wired ' +
+      '(next session). Download works now.</div>';
+  // insert ABOVE the storyboard (or at the end of #app if no storyboard yet)
+  const sb = document.getElementById("storyboard");
+  if (sb) { app.insertBefore(panel, sb); } else { app.appendChild(panel); }
 }
 
 async function poll() {
@@ -1259,7 +1304,7 @@ class Handler(BaseHTTPRequestHandler):
             channel, project = rec["channel"], rec["project"]
         paths = resolve_paths(channel, project, _REPO)
         base = {"stills": paths["stills_dir"], "clips": paths["clips_dir"],
-                "video": paths["modea"]}.get(kind)
+                "video": paths["project"]}.get(kind)
         if base is None:
             self.send_response(404); self.end_headers(); return
         fp = (Path(base) / rel).resolve()
@@ -1303,6 +1348,10 @@ class Handler(BaseHTTPRequestHandler):
             q = parse_qs(parsed.query)
             self._handle_render_policy_get(q.get("channel", [None])[0],
                                            q.get("project", [None])[0]); return
+        if path == "/api/meta":
+            q = parse_qs(parsed.query)
+            self._handle_meta_get(q.get("channel", [None])[0],
+                                  q.get("project", [None])[0]); return
         if path == "/api/view":
             q = parse_qs(parsed.query)
             ch = q.get("channel", [""])[0]; pr = q.get("project", [""])[0]
@@ -1368,6 +1417,33 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e:
             self._json(500, {"ok": False, "error": f"storyboard write failed: {e}"}); return
         self._json(200, {"ok": True, "shot": shot_idx, "saved": True}); return
+
+    def _handle_meta_get(self, ch, pr):
+        """Read the YouTube metadata (title/description/tags) from the project's
+        beats_full.json header. Also reports whether final_video.mp4 exists."""
+        if not (ch and pr):
+            self._json(400, {"error": "channel + project required"}); return
+        try:
+            paths = resolve_paths(ch, pr, _REPO)
+            bf = Path(paths["project"]) / "beats_full.json"
+            header = {}
+            if bf.exists():
+                data = json.load(open(bf))
+                header = data.get("header", {}) if isinstance(data, dict) else {}
+            tags = header.get("tags", [])
+            if isinstance(tags, list):
+                tags = ", ".join(str(t) for t in tags)
+            video = Path(paths["project"]) / "final_video.mp4"
+            self._json(200, {
+                "ok": True,
+                "title": header.get("title", ""),
+                "description": header.get("description", ""),
+                "tags": tags,
+                "has_video": video.exists(),
+                "video_name": "final_video.mp4",
+            })
+        except Exception as e:
+            self._json(500, {"error": str(e)})
 
     def _handle_render_policy_get(self, ch, pr):
         """Read TIERED RENDER N for a project: render_policy.json kling_count (default 40)."""
