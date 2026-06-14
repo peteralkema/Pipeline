@@ -47,7 +47,7 @@ ctx keys used: t, shared, project_dir, beats_list_json, dry_run, py, run_cwd, bo
 import os, sys, re, json, subprocess
 from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "mission_control"))
-from gate_protocol import await_gate
+from gate_protocol import await_gate, set_phase
 
 
 def _stream(cmd, t, label, cwd=None):
@@ -263,6 +263,10 @@ def run_modea_leg(ctx):
         return {"stopped": True, "engine_project": engine_project,
                 "engine_cwd": engine_cwd, "index_json": index_json}
 
+    # A1: the gate cleared with "go" -> we are about to animate. Update the record so
+    # the page stops showing a live stills gate during the (possibly long) animate.
+    if ctx.get("gate_mode") == "job" and ctx.get("job_id"):
+        set_phase(ctx["job_id"], "animating", ctx.get("repo_root"))
     # Phase 3: animate-only
     clips = _animate(ctx, engine_project, engine_cwd)
     if clips is None:

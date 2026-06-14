@@ -95,6 +95,18 @@ def set_phase(job_id: str, phase: str, repo_root: Path | None = None) -> None:
     rec = read_job(job_id, repo_root)
     if rec:
         rec["phase"] = phase
+        rec["heartbeat"] = time.time()
+        write_job(job_id, rec, repo_root)
+
+
+def touch_heartbeat(job_id: str, repo_root: Path | None = None) -> None:
+    """Pulse the record's liveness clock without changing phase. Called every poll
+    while a JOB-mode gate is blocking, so a run parked at a gate keeps proving the
+    process is alive (a dead process simply stops pulsing). Atomic read-modify-write,
+    same as set_phase; safe against the page writing a decision concurrently."""
+    rec = read_job(job_id, repo_root)
+    if rec:
+        rec["heartbeat"] = time.time()
         write_job(job_id, rec, repo_root)
 
 
@@ -150,6 +162,7 @@ def await_gate(ctx, name: str, payload: dict, options: list[str],
 
     # Block the JOB (not a terminal) until a decision appears in the record.
     while True:
+        touch_heartbeat(job_id, repo_root)  # A1: prove the process is alive each poll
         rec = read_job(job_id, repo_root)
         gate = rec.get("gate") or {}
         decision = gate.get("decision")

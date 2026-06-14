@@ -326,7 +326,8 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v0.5"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v0.6"  # hand-bumped each shipped page change; pairs with the auto git SHA
+STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
 def _build_sha() -> str:
@@ -349,6 +350,14 @@ def build_state() -> dict:
                 "version": APP_VERSION, "sha": _build_sha()}
     rec = read_job(jid, _REPO)
     phase = rec.get("phase", "running")
+    # A1: a run parked at a gate pulses a heartbeat every poll; if it has gone silent
+    # for STALE_SECONDS the process is dead -> show it as stale so the page recovers.
+    # Gate phases only: work legs (animating/assembling) are long blocking calls that
+    # do not pulse mid-leg, so we never stale-flag a slow-but-alive render here.
+    if phase in ("gate_audio", "gate_stills"):
+        hb = rec.get("heartbeat")
+        if hb and (time.time() - float(hb)) > STALE_SECONDS:
+            phase = "stale"
     state = {
         "phase": phase,
         "job_id": jid,
