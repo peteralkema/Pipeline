@@ -314,10 +314,33 @@ def _channel_header_name(channel_folder: str) -> str:
 # (One operator, one run at a time — Phase 2a keeps this simple and honest.)
 # --------------------------------------------------------------------------
 
+# Phases that mean the run is over (terminal). Everything else is a live run.
+_TERMINAL_PHASES = ("done", "stopped", "error", "stale")
+
 def active_job_id() -> str | None:
-    jobs = sorted(jobs_dir(_REPO).glob("*.json"),
-                  key=lambda p: p.stat().st_mtime, reverse=True)
-    return jobs[0].stem if jobs else None
+    """Return the freshest LIVE run, not merely the most-recently-touched file.
+
+    Sorts records by started_at (record content, not file mtime -- a touched `done`
+    record must not re-float above the live run), then returns the newest NON-TERMINAL
+    record. If none are live, returns the newest overall (so a just-finished run still
+    shows its done panel). This is what makes close/refresh/restart always rejoin the
+    correct run instead of locking onto a stale `done` ghost.
+    """
+    recs = []
+    for p in jobs_dir(_REPO).glob("*.json"):
+        try:
+            import json as _json
+            d = _json.loads(p.read_text())
+        except Exception:
+            continue
+        recs.append((float(d.get("started_at") or 0.0), str(d.get("phase") or ""), p.stem))
+    if not recs:
+        return None
+    recs.sort(key=lambda r: r[0], reverse=True)  # newest started_at first
+    for started, phase, stem in recs:
+        if phase not in _TERMINAL_PHASES:
+            return stem          # freshest live run wins
+    return recs[0][2]            # none live -> newest overall (shows its done panel)
 
 
 def launch_job(channel_folder: str, project: str, dry_run: bool, log: str) -> dict:
@@ -386,7 +409,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v1.5"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v1.6"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
