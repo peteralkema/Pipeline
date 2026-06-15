@@ -291,6 +291,8 @@ def main():
         if proj_dir is None:
             t.halt("cannot run Mode A leg — channel/project unresolved (need channel.json + --project).")
             sys.exit(1)
+        if ctx["gate_mode"] == "job":
+            set_phase(_job_id, "running", ctx["repo_root"])  # audio->stills seam: leave gate_audio so the strip counts + no false-stale
         ma = modea_leg.run_modea_leg(ctx)
         if ma is None:
             t.halt("Mode A leg halted. Fix the reported issue and re-run.")
