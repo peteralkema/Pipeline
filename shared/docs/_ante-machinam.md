@@ -1,9 +1,9 @@
-# Ante Machinam — v2.0
+# Ante Machinam — v3.0
 *Before the Machine. The single a priori reference for authoring a script and its beats, so that what enters the channel-agnostic pipeline orchestrator is already shaped to run clean and land well.*
 
 *Destination in repo: `shared/docs/ante-machinam.md`. Read this BEFORE brainstorming a topic — not after a script exists.*
 
-*v2.0 consolidates the former `script-craft-principles.md` into this document (Part IV is now the full craft canon, not a summary), folds in the 70s-nostalgia retention lessons and the Sacred Dawn packaging doctrine, and reconciles every craft principle to the current machine. `script-craft-principles.md` is retired to a one-line pointer to here. There is now ONE craft source of truth.*
+*v3.0 slims the document to **pure craft**. The control plane (Mission Control) now runs the machine, so the old Part VI command mechanics — parse / verify / dry-run / launch / babysit-the-gates over SSH — are replaced by a two-paragraph bridge (you paste a `script.md` and press Launch; the console is documented in the canonical reference §5). Everything that makes a script *land* is untouched: the Constitution (Part I), the VISUAL-writing craft (Part III), the full retention canon (Part IV), the channel briefs (Part V). This is the half the machine cannot do for you — the moat. v2.0's consolidation of `script-craft-principles.md` into Part IV stands; that file remains a stub pointing here. There is one craft source of truth.*
 
 ---
 
@@ -282,59 +282,30 @@ Before any script is locked, fill this in. Any "weak" or "missing" → revise be
 
 ---
 
-# PART VI — Crossing the threshold (the bridge into the machine)
+# PART VI — Crossing the threshold (into the machine)
 
-**1. The `script.md` shape.** Header (four keys) → blank line → `## COLD OPEN` → `## PART ONE`, … Each beat is `[A]` + narration on one line, then `VISUAL: …` on the next, then a blank line. (Mode B beats: the spoken line ABOVE the `[B:Component] …` tag.) Numbers spelled out in narration; numerals fine in the header.
+*This used to be a page of terminal commands — parse, verify, dry-run, launch, babysit the gates over SSH. **Mission Control replaced all of it.** The craft above is what still matters; the mechanics below are now two paragraphs.*
 
-**2. Parse — always write both files.**
-```
-python shared/parse_script.py <channel>/projects/<slug>/script.md \
-  --json      <channel>/projects/<slug>/beats.json \
-  --json-full <channel>/projects/<slug>/beats_full.json
-```
+**What you hand the machine.** A `script.md` with the right shape: the four-key header (`channel`, `title`, `description`, `tags`) before the first `## COLD OPEN`; then each beat as `[A]` + narration on one line, `VISUAL: …` on the next, a blank line between. Mode B beats put the spoken line *above* the `[B:Component] …` tag. Numbers spelled out in narration; numerals fine in the header. That is the entire contract — get the script right and the machine does the rest.
 
-**3. Verify before spending.**
-```
-python3 -c "
-import json
-b=json.load(open('<channel>/projects/<slug>/beats.json'))
-bad=[x['index'] for x in b if not (x.get('narration') or '').strip()]
-novis=[x['index'] for x in b if x['mode']=='A' and not (x.get('visual') or '').strip()]
-print('beats:', len(b), '| modes:', {m: sum(1 for x in b if x['mode']==m) for m in {x['mode'] for x in b}})
-print('wordless beats:', bad if bad else 'none')
-print('Mode A beats with no VISUAL:', novis if novis else 'none')
-"
-```
+**How you run it.** Paste the script into Mission Control (`:8002`), pick the channel, hit **Launch**. The page is the operator surface now: the parse, the preflight halt-on-bad-header, the leg planning, the spend all happen behind the **Launch** button. The two firewalls you authored *for* are now page state — the **audio gate** (keep the synthetic read, or swap in a human VO) and the **stills gate** (review every still, then Generate Clips, or Stop and keep the stills). After the stills gate: tiered render (Kling front-N / Ken-Burns floor), assemble, and the finished video appears in the panel with Download. *(The canonical reference §5 is the full operator's manual for the console; this doc's job ends where the script enters the page.)*
 
-**4. Dry-run — and pass `--project`.**
-```
-python3 shared/orchestrate.py --project <slug> \
-  --beats <channel>/projects/<slug>/beats_full.json --log normal --dry-run
-```
-Banner names the project; preflight confirms header complete and channel folder resolved; legs are what you expect (Mode-A-only: `audio → modeA → convergence`, Mode B skipped).
+**The one pre-lock discipline that survives unchanged:** fill the Part IV audit table (IV.7) and run the Constitution check (Part I) *before* you paste. The machine will faithfully render a bad script into a bad video — the gates catch a drifted still, not a slow open or a dead wide. The audit is upstream of the machine because the machine can't do it for you.
 
-**5. Live, and the gates.** Drop `--dry-run`.
-- **Audio gate:** `keep` or `swap`. *Listen first — the log label may name a default voice; the real read is whatever `voice_id` resolves to.*
-- **Stills gate:** the orchestrator prints the review-server block and waits for `go`. **Honour-system — actually review.** Holds indefinitely, spends nothing further. *(Run long box jobs in `tmux` — a dropped SSH pipe orphans the run.)*
-- After `go`: Kling animates, convergence assembles `final_video.mp4`. *(Orphaned after stills approved? Recover from the project dir: `python ~/Pipeline/shared/recreation_pipeline.py finish --project modea --animate-only` — reads existing stills/durations, re-spends nothing.)*
-
-**6. Know what isn't there yet.** No `--from` resume — a re-run re-spends every leg. Publish half of convergence is built for some channels, not others; treat upload as a separate, channel-specific step.
-
-### Pre-flight checklist
+### Pre-flight checklist (author against these before you paste)
 
 | Check | Pass condition |
 |---|---|
 | Header complete | `channel`, `title`, `description`, `tags` all present |
-| Channel resolves | matches a folder with `channel.json` (or hyphen/underscore swap) |
-| Every beat has words | `wordless beats: none` |
-| Every Mode A beat has a VISUAL | `Mode A beats with no VISUAL: none` |
+| Channel name | the exact folder name (hyphen/underscore auto-resolves; a true alias does not — Synthetic is `synthetic`, not `synthetic_press`) |
+| Every beat has words | no wordless beats (they halt the audio build) |
+| Every Mode A beat has a VISUAL | one `VISUAL:` line each |
 | Numbers spelled out | no bare digits in narration |
 | Granularity | no beat over ~55 words; long passages split |
 | Animatable foreground | every beat has a kinetic foreground subject (or a deliberately short wide); no run of dead wides |
 | Craft audit | the Part IV pre-lock table is filled, no "weak/missing" |
 | Mode mix | Mode-A channels → all `A`; Synthetic → A + B |
 | Mode B beats short | each promoted phrase ≤ ~12–15 words, ≤ ~4 s |
-| Dry-run clean | expected legs; no preflight halt |
 
 ---
 
@@ -358,8 +329,8 @@ Banner names the project; preflight confirms header complete and channel folder 
 - **Lazarus Films** — dignified PD adaptation; Mode A narrated; per-film look override; confirm folder.
 - **You Had To Be There** — un-filmable nostalgia; Mode A; wry/Vinny; list format; `you_had_to_be_there`.
 
-**The threshold:** parse (both files) → verify one-liner → dry-run **with `--project`** → live → `keep` at audio (listen first), review then `go` at stills → `final_video.mp4`.
+**The threshold:** paste `script.md` into Mission Control → Launch → `keep` at the audio gate (listen first), review then Generate Clips at the stills gate → tiered render → assemble → the finished video in the panel.
 
 ---
 
-*v2.0 — major consolidation. Folds the former `script-craft-principles.md` into Part IV (now the full craft canon, not a summary), reconciling its principles to the current machine: the old "silent beats / `[silent beat]` syntax / three-per-7-minute" rule is superseded by the silence reconciliation (Constitution §1); the 7-minute fixed grid by long-form; the 135 wpm plan by the measured 150–190; and the duplicated/colliding principle numbering (two 8s, two 9s, two 10s, two 11s in the old doc) is de-duplicated into one clean sequence. Adds the 70s-nostalgia retention lessons (front-load the payload, recognition-as-retention-mechanic, the recurring-payoff spine, comment-bait-in-the-subject, accelerate-don't-decelerate) and the Sacred Dawn packaging doctrine (title/thumbnail complement-not-echo). Adds Sacred Dawn and You Had To Be There briefs to Part V. Carries forward v1.01's animatable-foreground principle (Constitution §7 + Part III "Author for motion") and the launch threshold lessons (listen at the audio gate; tmux; `finish --animate-only` recovery). **`script-craft-principles.md` is retired to a pointer to this document — there is one craft source of truth.** Precedence rule stands: this document supersedes the silent-beat/hold model, the separate metadata.json, and the 7-minute fixed-grid format wherever older notes still describe them. Maintenance: bump the version and note the change when a new run banks a lesson that changes how a script is authored before it enters the machine.*
+*v3.0 — craft-only slim. Strips the Part VI terminal mechanics (obsoleted by Mission Control; the canonical reference §5 is the console manual) down to a paste-and-Launch bridge, and reconciles the appendix threshold line to the control plane. No craft was removed: Parts I, III, IV, V are carried forward intact, including the animatable-foreground principle (Constitution §7 + Part III "Author for motion") and the full IV.7 pre-lock audit. Maintenance: bump the version when a run banks a lesson that changes how a script is authored before it enters the machine — operational/console lessons go in the canonical reference, craft lessons stay here.*
