@@ -386,7 +386,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v1.4"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v1.5"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -882,7 +882,7 @@ function maybeUpdateBody(state) {
   if (window.__BODY_KEY === key) return;   // same project + stills count + phase -> leave the DOM alone
   window.__BODY_KEY = key;
   window.__SEL_VIEW = t.ch + "/" + t.pr;   // so still/motion controls POST to this project
-  if (state.phase === "done") { renderDonePanel(t.ch, t.pr); } else { removeDonePanel(); }
+  renderDonePanel(t.ch, t.pr);  // panel persists across polls: artifact-aware (shows video iff has_video, else placeholder) -- no more flicker-then-wipe
   renderStoryboard(t.ch, t.pr);
 }
 
