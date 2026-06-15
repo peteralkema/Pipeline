@@ -386,7 +386,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v1.3"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v1.4"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -572,7 +572,8 @@ function setUrlProject(ch, pr) {
 }
 async function api(path, opts={}) {
   opts.headers = Object.assign({}, H, opts.headers||{});
-  const r = await fetch(path + (path.includes("?")?"":("?key="+KEY)), opts);
+  const _kq = KEY ? ((path.includes("?")?"&":"?") + "key=" + KEY) : "";  // key always appended (right separator)
+  const r = await fetch(path + _kq, opts);
   return r.json();
 }
 let CH_PROJECTS = {};
