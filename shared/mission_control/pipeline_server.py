@@ -133,15 +133,48 @@ _ASSEMBLE_LOCK = _threading.Lock()
 def _assemble_key(ch, pr):
     return f"{ch}/{pr}"
 
-def _run_assemble_bg(key, cwd, engine_project):
-    """Re-stitch final_video.mp4 from existing clips via `finish --assemble-only`
-    (no render cost). Subprocess so it uses the same path resolution the legs do."""
+def _run_assemble_bg(key, project_dir):
+    """Re-stitch final_video.mp4 using the SAME aligned assembler the launched run uses
+    (assemble_episode.py + _index.json + frozen durations.json) -- NOT recreation_pipeline
+    .assemble(), which ignores the beat->shot map and drifts. Re-pools the engine clips
+    first so re-rendered clips reach assembly."""
     import subprocess as _sp
+    import shutil
     try:
-        cmd = [sys.executable, str(Path(_SHARED) / "recreation_pipeline.py"),
-               "finish", "--project", engine_project, "--assemble-only"]
-        r = _sp.run(cmd, cwd=str(cwd), capture_output=True, text=True)
-        if r.returncode == 0:
+        project_dir = Path(project_dir)
+        pool = project_dir / "clips"
+        engine_clips = project_dir / "modea" / "clips"
+        durations = project_dir / "durations.json"
+        index_json = project_dir / "_index.json"
+        voiceover = project_dir / "voiceover.mp3"
+        final_out = project_dir / "final_video.mp4"
+
+        # preflight the alignment inputs (same set convergence requires)
+        missing = [p.name for p in (durations, index_json, voiceover) if not p.exists()]
+        if missing:
+            with _ASSEMBLE_LOCK:
+                _ASSEMBLE_JOBS[key] = {"status": "error",
+                    "error": "missing alignment inputs: " + ", ".join(missing)}
+            return
+
+        # RE-POOL: copy modea/clips/shot_*.mp4 -> <project>/clips/ (overwrite), mirroring
+        # convergence_leg._pool_clips, so re-rendered clips actually reach assembly.
+        pool.mkdir(parents=True, exist_ok=True)
+        if engine_clips.exists() and engine_clips.resolve() != pool.resolve():
+            for f in sorted(engine_clips.glob("shot_*.mp4")):
+                shutil.copy2(f, pool / f.name)
+
+        # SHELL the aligned assembler with the exact convergence flagset.
+        cmd = [sys.executable, str(Path(_SHARED) / "assemble_episode.py"),
+               "--durations", str(durations),
+               "--index", str(index_json),
+               "--voiceover", str(voiceover),
+               "--project", str(project_dir),
+               "--clips", str(pool),
+               "--out", str(final_out),
+               "--no-music"]
+        r = _sp.run(cmd, capture_output=True, text=True)
+        if r.returncode == 0 and final_out.exists():
             with _ASSEMBLE_LOCK:
                 _ASSEMBLE_JOBS[key] = {"status": "done"}
         else:
@@ -353,7 +386,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v1.1"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v1.2"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1516,8 +1549,6 @@ class Handler(BaseHTTPRequestHandler):
         try:
             paths = resolve_paths(ch, pr, _REPO)
             project_dir = Path(paths["project"])
-            cwd = project_dir.parent                 # the channel's projects/ dir
-            engine_project = f"{project_dir.name}/modea"   # <slug>/modea (proven by enoch1)
         except Exception as e:
             self._json(500, {"ok": False, "error": str(e)}); return
         key = _assemble_key(ch, pr)
@@ -1528,7 +1559,7 @@ class Handler(BaseHTTPRequestHandler):
         if running:
             self._json(200, {"ok": True, "already": True}); return
         th = _threading.Thread(target=_run_assemble_bg,
-                               args=(key, cwd, engine_project), daemon=True)
+                               args=(key, project_dir), daemon=True)
         th.start()
         self._json(200, {"ok": True, "started": True}); return
 
