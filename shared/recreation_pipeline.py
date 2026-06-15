@@ -1388,22 +1388,28 @@ def cmd_finish(args):
         if missing:
             raise SystemExit(f"Cannot assemble — missing clips: {missing[:5]}"
                              f"{' ...' if len(missing) > 5 else ''}")
-        if not p["voice"].exists():
-            raise SystemExit(f"Cannot assemble — missing voiceover: {p['voice']}")
+        # assemble-only: root-level artifacts (voiceover, final, music) live at the
+        # PROJECT ROOT, one level above p["root"] when --project is "<slug>/modea"
+        # (same as the normal path's project_root = p["root"].parent). Clips stay under modea.
+        _asm_root = p["root"].parent
+        _voice = _asm_root / "voiceover.mp3"
+        _final = _asm_root / "final_video.mp4"
+        if not _voice.exists():
+            raise SystemExit(f"Cannot assemble — missing voiceover: {_voice}")
 
         music = None
         if args.music:
             music = Path(args.music).expanduser()
         elif not args.no_music:
-            music_path = p["root"] / "music.mp3"
+            music_path = _asm_root / "music.mp3"
             if music_path.exists():
                 music = music_path
             else:
                 print("   (no music.mp3 found — assembling without music bed)")
 
         print("\nAssembling final video...")
-        assemble(clip_paths, p["voice"], p["final"], music_path=music)
-        print(f"\nDONE -> {p['final']}")
+        assemble(clip_paths, _voice, _final, music_path=music)
+        print(f"\nDONE -> {_final}")
         return
 
     project_root = p["root"].parent  # durations.json / _index.json / render_policy.json live one level up
