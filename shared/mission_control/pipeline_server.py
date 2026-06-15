@@ -346,8 +346,25 @@ def active_job_id() -> str | None:
 def launch_job(channel_folder: str, project: str, dry_run: bool, log: str) -> dict:
     """Spawn orchestrate.py as a DETACHED subprocess in gate-mode=job.
     Returns {job_id}. The render runs in its own process group, so restarting
-    THIS server never kills it."""
+    THIS server never kills it.
+
+    Hardening B: refuse if a run is already live (one live run total). A live LAUNCH while
+    another run is mid-flight is the duplicate-spawn that stranded an orphan + dup records.
+    dry-run is exempt (no spawn, no spend)."""
     header_channel = _channel_header_name(channel_folder)
+    if not dry_run:
+        _live = active_job_id()
+        if _live:
+            try:
+                import json as _json
+                _rec = _json.loads((jobs_dir(_REPO) / f"{_live}.json").read_text())
+            except Exception:
+                _rec = {}
+            _ph = str(_rec.get("phase") or "")
+            if _ph and _ph not in _TERMINAL_PHASES:
+                return {"ok": False, "already_running": _live, "phase": _ph,
+                        "error": f"A run is already live ({_rec.get('project','?')}, phase {_ph}). "
+                                 f"Wait for it to finish or reach a gate, or Reset it, before launching another."}
     beats_full = _REPO / channel_folder / "projects" / project / "beats_full.json"
     job_id = f"{header_channel}__{project}__{int(time.time())}"
 
@@ -409,7 +426,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v1.6"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v1.7"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -738,11 +755,20 @@ function ensureShell(state) {
   launch.onclick = async () => {
     launch.disabled = true; launch.textContent = "Launching…";
     const mode = panel.querySelector("#mode").value;
-    await api("/api/launch", {method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({channel: chan.value, project: proj.value, dry: mode === "dry"})});
+    let resp = null;
+    try {
+      resp = await api("/api/launch", {method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({channel: chan.value, project: proj.value, dry: mode === "dry"})});
+    } catch (e) { resp = null; }
     launch.textContent = "Launch";
-    poll();
+    if (resp && resp.ok === false && resp.already_running) {
+      // refuse if a run is already live: tell the operator, don't silently re-arm into a duplicate
+      const cm = document.getElementById("createmsg");
+      if (cm) cm.textContent = resp.error || "A run is already live.";
+      else alert(resp.error || "A run is already live.");
+    }
+    poll();   // poll governs the button: it stays disabled while a run is live
   };
 
   const fileInput = create.querySelector("#scriptfile");
@@ -1831,7 +1857,10 @@ class Handler(BaseHTTPRequestHandler):
             log = body.get("log", "normal")
             if not ch or not pr:
                 self._json(400, {"ok": False, "error": "channel + project required"}); return
-            self._json(200, {"ok": True, **launch_job(ch, pr, dry, log)}); return
+            _lr = launch_job(ch, pr, dry, log)
+            if _lr.get("ok") is False:
+                self._json(409, _lr); return            # refuse-if-live: not a success
+            self._json(200, {"ok": True, **_lr}); return
 
         if path.startswith("/api/gate/"):
             name = path[len("/api/gate/"):]
