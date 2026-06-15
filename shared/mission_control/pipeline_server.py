@@ -386,7 +386,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v1.2"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v1.3"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -705,6 +705,7 @@ function ensureShell(state) {
       window.__BODY_KEY = chan.value + "/" + proj.value + "|";  // matches idle poll key -> no double render
       setUrlProject(chan.value, proj.value);
       renderStoryboard(chan.value, proj.value);
+      renderDonePanel(chan.value, proj.value);  // panel on select: show final video if one exists (else placeholder)
     } else {
       window.__SEL_VIEW = ""; window.__BODY_KEY = "__none__"; setUrlProject("", ""); clearStoryboard();
     }
