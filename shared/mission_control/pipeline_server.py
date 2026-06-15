@@ -315,7 +315,7 @@ def _channel_header_name(channel_folder: str) -> str:
 # --------------------------------------------------------------------------
 
 # Phases that mean the run is over (terminal). Everything else is a live run.
-_TERMINAL_PHASES = ("done", "stopped", "error", "stale")
+_TERMINAL_PHASES = ("done", "stopped", "error", "stale", "dead")
 
 def active_job_id() -> str | None:
     """Return the freshest LIVE run, not merely the most-recently-touched file.
@@ -426,7 +426,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v1.7"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v1.8"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -450,6 +450,19 @@ def build_state() -> dict:
                 "version": APP_VERSION, "sha": _build_sha()}
     rec = read_job(jid, _REPO)
     phase = rec.get("phase", "running")
+    # Hardening C: pid liveness reaping. If the record is non-terminal but its orchestrate
+    # process is gone (hard kill / crash -- the case the gate-only heartbeat check below
+    # cannot see, e.g. a killed `animating` leg), flip it to terminal "dead" so the page
+    # recovers and A/B stop treating it as live. Same-box, same-user: os.kill(pid,0) raises
+    # ProcessLookupError iff the pid is gone.
+    _pid = rec.get("pid")
+    if phase not in _TERMINAL_PHASES and isinstance(_pid, int):
+        try:
+            os.kill(_pid, 0)
+        except ProcessLookupError:
+            phase = "dead"
+        except PermissionError:
+            pass  # alive but not ours -> treat as alive
     # A1: a run parked at a gate pulses a heartbeat every poll; if it has gone silent
     # for STALE_SECONDS the process is dead -> show it as stale so the page recovers.
     # Gate phases only: work legs (animating/assembling) are long blocking calls that

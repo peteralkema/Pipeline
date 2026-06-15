@@ -96,6 +96,7 @@ def set_phase(job_id: str, phase: str, repo_root: Path | None = None) -> None:
     if rec:
         rec["phase"] = phase
         rec["heartbeat"] = time.time()
+        rec["pid"] = os.getpid()  # pid liveness reaping: orchestrate's real pid (set_phase runs in it)
         write_job(job_id, rec, repo_root)
 
 
