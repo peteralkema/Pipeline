@@ -54,12 +54,17 @@ def translate(beats):
         for marker in ["\u2b50", "FACE-HOLD #1.", "FACE-HOLD #2.", "FACE-HOLD #1", "FACE-HOLD #2"]:
             visual = visual.replace(marker, "").strip()
         narration = (b.get("narration") or "").strip()
-        motion = FACEHOLD_MOTION if b.get("face_hold") else DEFAULT_MOTION
-        shot_beats.append({
+        # motion omitted when not face-hold: leave normal beats with NO
+        # motion_prompt so cmd_stills falls through to the channel's
+        # default_motion (channel.json). Only a real override (face-hold) is
+        # written here; the channel owns the default register otherwise.
+        shot = {
             "narration": narration,
             "image_prompt": visual,
-            "motion_prompt": motion,
-        })
+        }
+        if b.get("face_hold"):
+            shot["motion_prompt"] = FACEHOLD_MOTION
+        shot_beats.append(shot)
         index_map[engine_idx] = b["index"]
     return {"beats": shot_beats}, index_map
 
@@ -86,13 +91,13 @@ def main():
     # show the first few + the index map so the contiguity is visible
     print("first 5 shots (engine sees these as shot_001..):")
     for i, s in enumerate(beat_script["beats"][:5], 1):
-        face = "  [face-hold motion]" if s["motion_prompt"] == FACEHOLD_MOTION else ""
+        face = "  [face-hold motion]" if s.get("motion_prompt") == FACEHOLD_MOTION else ""
         print(f"  shot_{i:03d} (beat {index_map[i]:02d}){face}")
         print(f"     img: {s['image_prompt'][:74]}")
         print(f"     narr: {s['narration'][:74]}{'...' if len(s['narration'])>74 else ''}")
     print(f"\nindex map (first 12): {dict(list(index_map.items())[:12])}")
     # sanity: every face-hold beat carried its motion
-    fh = [index_map[i] for i,s in enumerate(beat_script['beats'],1) if s['motion_prompt']==FACEHOLD_MOTION]
+    fh = [index_map[i] for i,s in enumerate(beat_script['beats'],1) if s.get('motion_prompt')==FACEHOLD_MOTION]
     print(f"face-hold shots -> original beats {fh}")
 
 if __name__ == "__main__":
