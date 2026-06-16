@@ -72,3 +72,12 @@ remotion/.remotion/
 # Filmora / office clutter
 *.wfp
 *.pptx
+
+# Loose media anywhere (renders, music, thumbnails, stray stills) — never track
+*.mp4
+*.mp3
+*.jpeg
+*.jpg
+*.png
+*.wav
+*.mov
