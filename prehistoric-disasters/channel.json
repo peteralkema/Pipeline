@@ -1,0 +1,50 @@
+{
+  "name": "prehistoric_disasters",
+  "voice_id": "Victor",
+  "style_suffix": "cinematic prehistoric disaster documentary, epic natural catastrophe, dark and high-contrast, desaturated ash-grey, bone, and ember-orange palette, vast overwhelming scale, a tiny lone human silhouette dwarfed by the catastrophe for scale, deep shadow, volumetric haze and falling ash, photoreal, dramatic and ominous, weathered primeval earth, no text, no modern elements, 16:9",
+  "default_music_prompt": "Slow, ominous deep-time documentary underscore. Low sustained drones, sub-bass swells, sparse distant percussion like settling earth, a thread of cold tension. Vast, dreadful, patient. No melody that competes with a narrator. Builds slow grandeur and unease, then holds.",
+  "base_canon": {},
+  "upload": {
+    "category_id": "24",
+    "privacy_status": "private"
+  },
+  "default_motion": "slow, gentle drift and push-in only; restrained minimal motion (this channel builds Ken-Burns-only — Kling beat count 0 at launch)",
+  "thumbnail": {
+    "composition": "low_silhouette",
+    "candidates": 2,
+    "candidate_prompt_suffix": "thumbnail composition: one single overwhelming catastrophe fills the entire frame (a towering wall of ash, a wildfire sky, a tidal wall, a supervolcano column), rendered dark and high-contrast; one tiny lone human silhouette placed LOW in the frame for scale and dread; deliberately clean, darker, uncluttered negative space across the TOP-LEFT of the frame reserved for a large headline; no clutter, single subject only, no text",
+    "selection_rules": [
+      "ONE overwhelming catastrophe that reads instantly at phone-thumbnail size",
+      "maximum dark, high-contrast cinematic drama — it must stand out in a dim feed",
+      "an unmistakable TINY human silhouette low in the frame giving terrifying scale",
+      "clean, darker, uncluttered negative space in the TOP-LEFT where the headline lands",
+      "no garbled detail, no accidental letterforms, no duplicated or broken figures, one subject only"
+    ],
+    "font": "shared/fonts/Anton-Regular.ttf",
+    "font_fallbacks": [
+      "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+      "Impact",
+      "Arial Black"
+    ],
+    "title_color": [245, 240, 235],
+    "subtitle_color": [255, 200, 90],
+    "stroke_width": 12,
+    "stroke_color": [0, 0, 0],
+    "shadow": true,
+    "shadow_offset": [5, 6],
+    "shadow_blur": 6,
+    "darken_factor": 0.72,
+    "vignette_strength": 0.30,
+    "text_anchor": "top-left",
+    "text_align": "left",
+    "title_area_pct": 0.60,
+    "title_max_height_pct": 0.42,
+    "title_start_size": 200,
+    "subtitle_area_pct": 0.55,
+    "subtitle_max_height_pct": 0.14,
+    "subtitle_start_size": 90,
+    "margin": 56,
+    "uppercase": true,
+    "segment_foreground": false
+  }
+}

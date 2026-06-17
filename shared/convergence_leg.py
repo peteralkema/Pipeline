@@ -30,6 +30,7 @@ convergence assembles with --no-music.
 The orchestrator calls run_convergence_leg(ctx, modea_result).
 """
 import os
+import json
 import sys
 import shutil
 import subprocess
@@ -109,6 +110,60 @@ def _maybe_upload(ctx, proj, t, py, shared, dry):
         t.warn("upload failed — final_video.mp4 is complete and safe. Re-run:  "
                f"python shared/upload_episode.py --project {proj}")
 
+
+
+def _maybe_thumbnail(ctx, proj, t, py, shared, dry):
+    """Auto thumbnail before upload. If <proj>/thumbnail.json exists, generate
+    candidate stills, let Sonnet pick the best on the CTR job, overlay the locked
+    headline -> thumbnail.png (upload_episode.py attaches it). Graceful + idempotent:
+    a missing spec or any failure ships final_video.mp4 + upload untouched; an existing
+    thumbnail.png is left in place (no fal re-spend). channel.json look resolves by
+    walk-up from the project dir, same pattern as look_resolver."""
+    proj = Path(proj)
+    spec_file = proj / "thumbnail.json"
+    out_png = proj / "thumbnail.png"
+    if out_png.exists():
+        t.info(f"thumbnail.png present — skipping generation ({out_png})")
+        return
+    if not spec_file.exists():
+        t.info("no thumbnail.json — skipping auto-thumbnail (upload ships without a custom one).")
+        return
+    if dry:
+        t.info(f"[dry-run] would generate + select + overlay thumbnail from {spec_file}")
+        return
+    try:
+        spec = json.loads(spec_file.read_text())
+    except Exception as e:
+        t.warn(f"thumbnail.json unreadable ({e}) — skipping thumbnail.")
+        return
+    subject = (spec.get("subject") or "").strip()
+    title = (spec.get("title") or "").strip()
+    subtitle = (spec.get("subtitle") or "").strip()
+    if not subject or not title:
+        t.warn("thumbnail.json missing 'subject' or 'title' — skipping thumbnail.")
+        return
+    sel = Path(shared) / "select_thumbnail_still.py"
+    mk = Path(shared) / "make_thumbnail.py"
+    if not sel.exists() or not mk.exists():
+        t.warn("select_thumbnail_still.py / make_thumbnail.py missing — skipping thumbnail.")
+        return
+    # 1) generate candidates + Sonnet-select -> <proj>/thumbnail_still.png
+    if not _run([py, str(sel), "--project", str(proj), "--subject", subject],
+                t, "select_thumbnail_still", cwd=None, dry_run=False):
+        t.warn("thumbnail selection failed — shipping without a custom thumbnail.")
+        return
+    still = proj / "thumbnail_still.png"
+    if not still.exists():
+        t.warn("thumbnail_still.png not produced — skipping overlay.")
+        return
+    # 2) overlay the locked headline -> <proj>/thumbnail.png
+    cmd = [py, str(mk), "--project", str(proj), "--still", str(still), "--title", title]
+    if subtitle:
+        cmd += ["--subtitle", subtitle]
+    if not _run(cmd, t, "make_thumbnail", cwd=None, dry_run=False):
+        t.warn("thumbnail overlay failed — shipping without a custom thumbnail.")
+        return
+    t.ok(f"thumbnail → {out_png}")
 
 
 def run_convergence_leg(ctx, modea=None):
@@ -193,6 +248,9 @@ def run_convergence_leg(ctx, modea=None):
         t.halt(f"assemble ran but {final_out} was not produced. Check the assemble log above.")
         return None
     t.ok(f"convergence complete → {final_out}")
+
+    # ── THUMBNAIL (auto-generate + Sonnet-select + overlay; graceful skip) ──
+    _maybe_thumbnail(ctx, proj, t, py, shared, dry)
 
     # ── PUBLISH (channel-agnostic upload; private by default) ──
     _maybe_upload(ctx, proj, t, py, shared, dry)
