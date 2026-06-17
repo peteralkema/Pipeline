@@ -131,6 +131,14 @@ def await_gate(ctx, name: str, payload: dict, options: list[str],
     gate_mode = ctx.get("gate_mode", "cli")
     cli_map = cli_map or {}
 
+    # ---- AUTO mode: unattended — resolve to the accept default, no prompt/poll ----
+    if gate_mode == "auto":
+        auto_map = ctx.get("auto_decisions") or {}
+        decision = auto_map.get(name)
+        if decision not in options:
+            decision = options[0]  # accept path is first for all real gates
+        return decision
+
     # ---- CLI mode: exactly today's behaviour -----------------------------
     if gate_mode == "cli":
         while True:

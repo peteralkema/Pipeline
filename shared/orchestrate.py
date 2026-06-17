@@ -30,9 +30,13 @@ def parse_args():
                     help="verbosity (skips the kickoff prompt if given)")
     ap.add_argument("--dry-run", action="store_true", help="plan only, render nothing")
     ap.add_argument("--live", action="store_true", help="actually run (skips kickoff prompt if given)")
-    ap.add_argument("--gate-mode", choices=["cli", "job"], default="cli",
+    ap.add_argument("--gate-mode", choices=["cli", "job", "auto"], default="cli",
                     help="cli = terminal input() gates (default, unchanged); "
-                         "job = drive gates via the job record (Mission Control)")
+                         "job = drive gates via the job record (Mission Control); "
+                         "auto = unattended, gates auto-resolve to accept")
+    ap.add_argument("--unattended", action="store_true",
+                    help="fully unattended: forces gate-mode=auto + live + normal "
+                         "verbosity, so no gate or kickoff prompt ever blocks (batch runs)")
     ap.add_argument("--job-id", default=None,
                     help="job record id (Mission Control passes this; manual runs mint one)")
     return ap.parse_args()
@@ -189,6 +193,11 @@ def decide_legs(beats, t):
 
 def main():
     args = parse_args()
+    if getattr(args, "unattended", False):
+        args.gate_mode = "auto"
+        args.live = True
+        args.log = args.log or "normal"
+
     print(BANNER)
     level, dry = kickoff_prompt(args)
     t = Telemetry(level)
