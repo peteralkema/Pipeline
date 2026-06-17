@@ -218,18 +218,18 @@ def run_convergence_leg(ctx, modea=None):
     # Music: channel music-dir wiring takes precedence, then single bed, then off.
     music_flag = "--no-music"
     music_dir_args = None
+    # proj is <channel>/projects/<project>, so the channel folder is two up.
+    _channel_dir = proj.parent.parent
     _mcfg = (ctx.get("channel_cfg") or {}).get("music") if isinstance(ctx.get("channel_cfg"), dict) else None
     if not _mcfg:
-        # try to read it off channel.json directly via the channel dir
-        try:
-            import json as _json
-            _cj = (channel_dir / "channel.json")
-            if _cj.exists():
-                _mcfg = _json.loads(_cj.read_text()).get("music")
-        except Exception:
-            _mcfg = None
+        import json as _json
+        _cj = (_channel_dir / "channel.json")
+        if _cj.exists():
+            _mcfg = _json.loads(_cj.read_text()).get("music")
+        else:
+            t.warn(f"no channel.json at {_cj} -- music block not resolved")
     if _mcfg and _mcfg.get("dir"):
-        _mdir = (channel_dir / _mcfg["dir"])
+        _mdir = (_channel_dir / _mcfg["dir"])
         if _mdir.is_dir():
             music_dir_args = ["--music-dir", str(_mdir),
                               "--music-tracks", str(int(_mcfg.get("tracks", 3))),
