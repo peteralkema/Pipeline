@@ -184,6 +184,57 @@ def concat_video(segments, out, work):
     return out
 
 
+
+def _build_music_bed(music_dir, voice_dur, work, n_tracks, crossfade_s, run_fn, probe_fn):
+    """Pick n random tracks from music_dir, crossfade the joins, loop to >= voice_dur.
+    Returns a Path to the bed (m4a) or None if the dir has no usable tracks.
+    run_fn/probe_fn are the module's existing run() and probe() helpers."""
+    import random as _random, math as _math
+    md = Path(music_dir).expanduser()
+    tracks = sorted([p for p in md.glob("*.mp3")] + [p for p in md.glob("*.m4a")]
+                    + [p for p in md.glob("*.wav")])
+    if not tracks:
+        print(f"  !! --music-dir {md} has no audio files; assembling without music")
+        return None
+    # pick n (or all, if fewer than n exist), in random order
+    n = max(1, min(n_tracks, len(tracks)))
+    picked = _random.sample(tracks, n)
+    print(f"  music-dir: {md.name}/  picked {n} of {len(tracks)} -> "
+          + ", ".join(p.name for p in picked))
+
+    # 1) crossfade-chain the picked tracks into one sequence
+    if len(picked) == 1:
+        seq = picked[0]
+    else:
+        seq = work / "music_seq.m4a"
+        cur = picked[0]
+        for k, nxt in enumerate(picked[1:], start=1):
+            out = work / f"music_xf_{k}.m4a"
+            run_fn(["ffmpeg", "-y", "-i", str(cur), "-i", str(nxt),
+                    "-filter_complex",
+                    f"[0][1]acrossfade=d={crossfade_s}:c1=tri:c2=tri[a]",
+                    "-map", "[a]", "-c:a", "aac", "-b:a", "192k", str(out)],
+                   f"crossfade music {k}")
+            cur = out
+        seq = cur
+
+    seq_dur = probe_fn(seq)
+    if seq_dur <= 0:
+        print("  !! music sequence has zero duration; assembling without music")
+        return None
+
+    # 2) loop the crossfaded sequence to cover the voiceover
+    if seq_dur >= voice_dur:
+        return seq
+    reps = _math.ceil(voice_dur / seq_dur)
+    mlist = work / "music_seq_list.txt"
+    mlist.write_text("".join(f"file '{Path(seq).resolve()}'\n" for _ in range(reps)))
+    looped = work / "music_bed.m4a"
+    run_fn(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(mlist),
+            "-c", "copy", str(looped)], "loop music bed")
+    return looped
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--durations", default="projects/ep1-the-promise/durations.json",
@@ -196,6 +247,10 @@ def main():
     ap.add_argument("--clips", default=None, help="clips dir (default: <project>/clips)")
     ap.add_argument("--music", default=None, help="music bed mp3 (default: <project>/music.mp3 if present)")
     ap.add_argument("--no-music", action="store_true", help="assemble without any music bed")
+    ap.add_argument("--music-dir", default=None,
+                    help="folder of tracks: pick N random, crossfade, loop to fill (overrides --music)")
+    ap.add_argument("--music-tracks", type=int, default=3, help="how many random tracks to cycle (default 3)")
+    ap.add_argument("--music-crossfade", type=float, default=2.0, help="crossfade seconds between tracks (default 2)")
     ap.add_argument("--out", default=None, help="output mp4 (default: pacing_cut.mp4 or final_video.mp4)")
     ap.add_argument("--placeholders", action="store_true",
                     help="force colour-block placeholders for ALL beats (free pacing cut)")
@@ -257,11 +312,16 @@ def main():
         print("  muxing (whole voiceover over conformed video; voice untouched)...")
         music_path = None
         if not args.no_music:
-            cand = Path(args.music).expanduser() if args.music else (project / "music.mp3")
-            if cand.exists():
-                music_path = cand
-            elif args.music:
-                print(f"  !! --music {cand} not found; assembling without music")
+            if args.music_dir:
+                music_path = _build_music_bed(
+                    args.music_dir, voice_dur, work,
+                    args.music_tracks, args.music_crossfade, run, probe)
+            else:
+                cand = Path(args.music).expanduser() if args.music else (project / "music.mp3")
+                if cand.exists():
+                    music_path = cand
+                elif args.music:
+                    print(f"  !! --music {cand} not found; assembling without music")
 
         if music_path:
             import math as _math
