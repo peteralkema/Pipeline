@@ -339,7 +339,7 @@ def main():
             run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(voiceover), "-i", str(music_src),
                  "-filter_complex",
                  f"[1:a]volume={VOICE_LEVEL}[v];[2:a]volume={MUSIC_LEVEL}[m];"
-                 f"[v][m]amix=inputs=2:duration=first:dropout_transition=0[a]",
+                 f"[v][m]amix=inputs=2:normalize=0:duration=first:dropout_transition=0[a]",
                  "-map", "0:v:0", "-map", "[a]",
                  "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
                  "-t", f"{voice_dur:.3f}", str(out)],
