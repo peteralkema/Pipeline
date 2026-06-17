@@ -215,9 +215,28 @@ def run_convergence_leg(ctx, modea=None):
 
     pool = _pool_clips(proj_dir, engine_clips_dir, t, dry)
 
-    # Music: OFF by default. Hook for the Tier-2 step (Claude→fal one loopable bed).
+    # Music: channel music-dir wiring takes precedence, then single bed, then off.
     music_flag = "--no-music"
-    if ctx.get("music"):
+    music_dir_args = None
+    _mcfg = (ctx.get("channel_cfg") or {}).get("music") if isinstance(ctx.get("channel_cfg"), dict) else None
+    if not _mcfg:
+        # try to read it off channel.json directly via the channel dir
+        try:
+            import json as _json
+            _cj = (channel_dir / "channel.json")
+            if _cj.exists():
+                _mcfg = _json.loads(_cj.read_text()).get("music")
+        except Exception:
+            _mcfg = None
+    if _mcfg and _mcfg.get("dir"):
+        _mdir = (channel_dir / _mcfg["dir"])
+        if _mdir.is_dir():
+            music_dir_args = ["--music-dir", str(_mdir),
+                              "--music-tracks", str(int(_mcfg.get("tracks", 3))),
+                              "--music-crossfade", str(float(_mcfg.get("crossfade_seconds", 2)))]
+            t.info(f"music dir → {_mdir.name}/ (random {_mcfg.get('tracks', 3)}, "
+                   f"crossfade {_mcfg.get('crossfade_seconds', 2)}s)")
+    if music_dir_args is None and ctx.get("music"):
         cand = proj / "music.mp3"
         if cand.exists():
             music_flag = f"--music {cand}"  # split below
@@ -232,7 +251,9 @@ def run_convergence_leg(ctx, modea=None):
            "--project", str(proj),
            "--clips", str(pool),
            "--out", str(final_out)]
-    if music_flag == "--no-music":
+    if music_dir_args is not None:
+        cmd += music_dir_args
+    elif music_flag == "--no-music":
         cmd.append("--no-music")
     else:
         cmd += ["--music", str(proj / "music.mp3")]
