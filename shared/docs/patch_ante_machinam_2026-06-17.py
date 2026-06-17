@@ -38,21 +38,22 @@ def _find_target():
             return c
     return None
 
-# --- Insertion 1: runtime calibration, appended to the "Pacing reality" paragraph ---
-ANCHOR_1 = ("**Pacing reality:** Inworld reads ~**190\u2013200 wpm measured** (not the old "
-            "135 plan). For a target runtime, spoken words \u2248 minutes \u00d7 ~195. A true "
-            "10-min episode \u2248 1,900 spoken words. (Sacred Dawn's \"Watchers\": 2,716 words "
-            "\u2192 17.7 min.)")
-ADD_1 = (" **Runtime is beat-floored, not words-only (banked 17 June):** the Ken-Burns "
+# --- Insertion 1: runtime calibration, appended to the IV.6 "write long" paragraph ---
+ANCHOR_1 = ("**Inworld renders faster than you plan \u2014 write long.** Measured ~150\u2013190 "
+            "wpm against a 135 wpm plan; the rendered cut is ~85\u201390% of the word-count "
+            "estimate. Doesn't affect sync (Whisper measures the real audio) but does affect "
+            "runtime. Write 10\u201315% more than the target. (The Watchers: 2,716 words \u2192 "
+            "17.7 min, ~195 wpm.)")
+ADD_1 = (" **But runtime is beat-floored, not words-only (banked 17 June).** The Ken-Burns "
          "minimum hold stretches short beats up to the clip floor, so a words-only estimate "
          "UNDERSHOOTS real runtime. Real runtime \u2248 **beat count \u00d7 ~14s**. Prehistoric "
          "Disasters' Toba: 88 beats \u2192 20.7 min measured (a words-only estimate predicted "
          "~13). A ~28-min words-estimate script lands closer to ~40 min. Sanity-check runtime "
-         "from beat count \u00d7 ~14s, not from wpm alone.")
+         "from beat count \u00d7 ~14s, not from wpm alone \u2014 the two estimates bracket the "
+         "truth, and the beat-count one is the floor.")
 
 # ASCII fallback for ANCHOR_1 in case the live file uses plain hyphens / quotes.
-ANCHOR_1_ASCII = ("**Pacing reality:** Inworld reads ~**190-200 wpm measured** (not the old "
-                  "135 plan).")
+ANCHOR_1_ASCII = ("**Inworld renders faster than you plan -- write long.**")
 
 # --- Insertion 2: script-format-from-exemplar, appended to the Part VI handoff para ---
 ANCHOR_2 = ("Numbers spelled out in narration; numerals fine in the header. That is the "
@@ -90,9 +91,9 @@ def main():
     a1 = ANCHOR_1 if text.count(ANCHOR_1) == 1 else (
         ANCHOR_1_ASCII if text.count(ANCHOR_1_ASCII) == 1 else None)
     if a1 is None:
-        sys.exit("FAIL: 'Pacing reality' anchor not found exactly once "
+        sys.exit("FAIL: 'Inworld renders faster' anchor not found exactly once "
                  f"(unicode={text.count(ANCHOR_1)}, ascii={text.count(ANCHOR_1_ASCII)}) "
-                 "\u2014 paste the Pacing-reality paragraph and I'll re-cut.")
+                 "\u2014 paste the IV.6 'write long' paragraph and I'll re-cut.")
     if text.count(ANCHOR_2) != 1:
         sys.exit(f"FAIL: Part VI 'entire contract' anchor found {text.count(ANCHOR_2)} "
                  "times (expected 1) \u2014 paste the 'What you hand the machine' paragraph "
