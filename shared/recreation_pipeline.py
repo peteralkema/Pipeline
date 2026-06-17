@@ -681,7 +681,8 @@ def _synthesize_chunk(text: str, anchor: Path = None) -> bytes:
         "text": text,
         "voiceId": voice_id,                # camelCase in current API
         "modelId": INWORLD_MODEL,           # camelCase in current API
-        "audioConfig": {"audioEncoding": "MP3"},
+        "audioConfig": {"audioEncoding": "MP3",
+                        "speakingRate": float(config.get("speaking_rate", 1.0))},
         "deliveryMode": "EXPRESSIVE",
     }
     resp = requests.post(INWORLD_TTS_URL, json=payload, headers=headers, verify=REQUESTS_VERIFY)
