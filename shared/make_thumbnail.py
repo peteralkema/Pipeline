@@ -217,10 +217,11 @@ def _fit_text(text: str, max_width: int, max_height: int,
 
 
 def _anchor_x(cfg: dict, frame_w: int) -> tuple[int, str]:
-    """Return (x_anchor, align) from the configured text_anchor / text_align."""
+    """Return (x_anchor, align) from the configured text_anchor / text_align.
+    Horizontal inset uses margin_x, falling back to margin."""
     anchor = cfg["text_anchor"]
     align = cfg["text_align"]
-    margin = cfg["margin"]
+    margin = cfg.get("margin_x", cfg["margin"])
     if anchor == "top-left":
         return margin, (align or "left")
     if anchor == "top-right":
@@ -379,7 +380,7 @@ def make_thumbnail(still_path: Path, title: str, subtitle: str,
                                         cfg, cfg["title_start_size"])
 
     x_anchor, align = _anchor_x(cfg, target_w)
-    title_y = cfg["margin"]
+    title_y = cfg.get("margin_y", cfg["margin"])
     bg = _draw_block(bg, title_lines, title_font, cfg["title_color"],
                      x_anchor, title_y, align, cfg)
 
