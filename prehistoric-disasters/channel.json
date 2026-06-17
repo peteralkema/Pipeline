@@ -49,7 +49,7 @@
     "subtitle_area_pct": 0.55,
     "subtitle_max_height_pct": 0.14,
     "subtitle_start_size": 90,
-    "margin": 14,
+    "margin": 20,
     "uppercase": true,
     "segment_foreground": false
   }
