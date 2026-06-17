@@ -48,6 +48,7 @@ import json
 import subprocess
 import sys
 import time
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -57,6 +58,29 @@ def _repo_root() -> Path:
 
 def _log(msg: str):
     print(f"[batch] {msg}", flush=True)
+
+
+def _parse_publish_start(s: str) -> "datetime":
+    """[scheduler] Parse --publish-start to a tz-AWARE datetime. Reject naive (a release
+    calendar with no timezone is ambiguous). Accepts a trailing 'Z' for UTC."""
+    raw = s.strip()
+    try:
+        dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        sys.exit(f"--publish-start not ISO-8601: {s!r} "
+                 f"(want e.g. 2026-06-18T19:00:00-04:00 or 2026-06-18T23:00:00Z)")
+    if dt.tzinfo is None or dt.utcoffset() is None:
+        sys.exit(f"--publish-start has no timezone: {s!r} -- include an offset "
+                 f"(e.g. -04:00) or 'Z'. A release calendar must be unambiguous.")
+    return dt
+
+
+def _publish_at_for_slot(start: "datetime", interval: "timedelta", slot: int):
+    """[scheduler] (utc_rfc3339, local_iso) for video index `slot`. YouTube's publishAt
+    must be RFC3339 UTC; the local string is for the human-readable calendar."""
+    local_dt = start + slot * interval
+    utc = local_dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return utc, local_dt.isoformat()
 
 
 def _load_ingest(shared: Path):
@@ -156,6 +180,13 @@ def main():
                     help="tiered render: first N beats Kling, rest Ken Burns (0 = all Ken Burns)")
     ap.add_argument("--plan", action="store_true", help="prep preview only — no parsing, no orchestrator")
     ap.add_argument("--limit", type=int, default=None, help="process at most this many (testing)")
+    ap.add_argument("--publish-start", default=None,
+                    help="[scheduler] ISO-8601 timestamp WITH timezone for the FIRST "
+                         "video's publishAt, e.g. 2026-06-18T19:00:00-04:00 or ...Z. "
+                         "Omit for private-immediate (unchanged behaviour).")
+    ap.add_argument("--publish-interval-hours", type=float, default=12.0,
+                    help="[scheduler] hours between successive videos' publishAt "
+                         "(default 12 = twice daily).")
     args = ap.parse_args()
 
     py = sys.executable
@@ -176,7 +207,21 @@ def main():
     _log(f"inbox={inbox}  channel={args.channel}  kling_count={args.kling_count}  "
          f"scripts={len(mds)}  plan={args.plan}")
 
+    # [scheduler] optional release schedule (no-state: this batch's calendar starts at
+    # --publish-start; set the next batch's start past this one's tail by hand).
+    publish_start = None
+    interval = None
+    if args.publish_start:
+        publish_start = _parse_publish_start(args.publish_start)
+        interval = timedelta(hours=args.publish_interval_hours)
+        _log(f"schedule ON  start={publish_start.isoformat()}  "
+             f"interval={args.publish_interval_hours}h  "
+             f"(upload PRIVATE + publishAt; YouTube auto-publishes; front-48h clock starts at publishAt)")
+    else:
+        _log("schedule OFF  (private-immediate; pass --publish-start <ISO+tz> to schedule)")
+
     manifest = []
+    scheduled = 0  # [scheduler] gap-free slot index; increments only on a successful prep
     for md in mds:
         name = md.stem
         thumb = md.with_suffix(".thumb.json")
@@ -189,9 +234,25 @@ def main():
         if proj is None:
             manifest.append({"name": name, "status": "prep_failed", "detail": "see log"})
             continue
+
+        # [scheduler] this video gets the next release slot (only reached on a good prep,
+        # so the calendar has no gaps for shipped videos).
+        pub_utc = pub_local = None
+        if publish_start is not None:
+            pub_utc, pub_local = _publish_at_for_slot(publish_start, interval, scheduled)
+        slot = scheduled
+        scheduled += 1
+
         if args.plan:
-            manifest.append({"name": name, "status": "planned", "detail": str(proj)})
+            if pub_utc:
+                _log(f"  [plan] slot {slot}: publish {pub_local}  (UTC {pub_utc})")
+            manifest.append({"name": name, "status": "planned",
+                             "detail": str(proj) + (f"  publishAt={pub_utc}" if pub_utc else "")})
             continue
+
+        if pub_utc:
+            (proj / "publish.json").write_text(json.dumps({"publish_at": pub_utc}, indent=2))
+            _log(f"  scheduled -> publish.json publish_at={pub_utc}  ({pub_local} local)")
 
         try:
             ok, detail = run_one(name, proj, args.channel, shared, py)

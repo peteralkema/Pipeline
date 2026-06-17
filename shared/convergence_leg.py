@@ -103,12 +103,28 @@ def _maybe_upload(ctx, proj, t, py, shared, dry):
     if not up.exists():
         t.warn(f"upload step skipped — {up} not found (final_video.mp4 is safe; upload manually).")
         return
+    # [scheduler] if the batch runner wrote a release slot, upload PRIVATE + publishAt
+    # (upload_episode.py forces private whenever --publish-at is set). Written once at
+    # prep, read once here -- nothing in between can corrupt it. No file -> private-immediate.
+    upload_cmd = [py, str(up), "--project", str(proj)]
+    _pa = ""
+    pub_file = Path(proj) / "publish.json"
+    if pub_file.exists():
+        try:
+            _pa = (json.loads(pub_file.read_text()).get("publish_at") or "").strip()
+        except Exception as e:
+            _pa = ""
+            t.warn(f"publish.json unreadable ({e}) — uploading private-immediate.")
+        if _pa:
+            upload_cmd += ["--publish-at", _pa]
+    sched_note = f" (scheduled publishAt {_pa})" if _pa else ""
     if dry:
-        t.info(f"[dry-run] would publish via upload_episode.py --project {proj} (private)")
+        t.info(f"[dry-run] would publish via upload_episode.py --project {proj} (private){sched_note}")
         return
-    if not _run([py, str(up), "--project", str(proj)], t, "upload_episode", cwd=None, dry_run=False):
+    if not _run(upload_cmd, t, "upload_episode", cwd=None, dry_run=False):
         t.warn("upload failed — final_video.mp4 is complete and safe. Re-run:  "
-               f"python shared/upload_episode.py --project {proj}")
+               f"python shared/upload_episode.py --project {proj}"
+               + (f" --publish-at {_pa}" if _pa else ""))
 
 
 
