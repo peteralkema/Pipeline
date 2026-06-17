@@ -228,6 +228,69 @@ def _anchor_x(cfg: dict, frame_w: int) -> tuple[int, str]:
     return frame_w // 2, (align or "center")   # top-center
 
 
+def _apply_scrim(img: Image.Image, cfg: dict) -> Image.Image:
+    """
+    Lay a directional black gradient ('scrim') over the text side ONLY, so the
+    headline gets a dark backing for contrast while the rest of the image keeps
+    full brightness. This is the fix for global-darkening washing out the picture.
+
+    Config (under `thumbnail.scrim`):
+      side        "left" | "right" | "top" | "bottom"   (where the text lives)
+      width       0..1 fraction of the frame the gradient spans (e.g. 0.55)
+      opacity     0..1 max darkness at the text edge (e.g. 0.85)
+      feather     0..1 how much of `width` is the fade tail vs solid (e.g. 0.7)
+    Returns img unchanged if no scrim configured.
+    """
+    sc = cfg.get("scrim")
+    if not sc:
+        return img
+    side = sc.get("side", "left")
+    width = float(sc.get("width", 0.55))
+    opacity = float(sc.get("opacity", 0.85))
+    feather = float(sc.get("feather", 0.7))   # fraction of width that fades
+    w, h = img.size
+    max_a = int(max(0.0, min(1.0, opacity)) * 255)
+
+    # Build a 1-D alpha ramp along the span, then project to 2-D.
+    horizontal = side in ("left", "right")
+    span = int((w if horizontal else h) * max(0.05, min(1.0, width)))
+    if span <= 0:
+        return img
+    solid = int(span * (1.0 - max(0.0, min(1.0, feather))))   # fully-opaque head
+    ramp = []
+    for i in range(span):
+        if i < solid:
+            a = max_a
+        else:
+            # linear fade from max_a -> 0 across the feather tail
+            t = (i - solid) / max(1, (span - solid))
+            a = int(max_a * (1.0 - t))
+        ramp.append(a)
+    # For "right"/"bottom" the opaque head is at the far edge, so reverse.
+    if side in ("right", "bottom"):
+        ramp = ramp[::-1]
+
+    mask = Image.new("L", (w, h), 0)
+    px = mask.load()
+    if horizontal:
+        x0 = 0 if side == "left" else w - span
+        for i, a in enumerate(ramp):
+            x = x0 + i
+            if 0 <= x < w:
+                for y in range(h):
+                    px[x, y] = a
+    else:
+        y0 = 0 if side == "top" else h - span
+        for i, a in enumerate(ramp):
+            y = y0 + i
+            if 0 <= y < h:
+                for x in range(w):
+                    px[x, y] = a
+
+    overlay = Image.new("RGB", (w, h), (0, 0, 0))
+    return Image.composite(overlay, img, mask)
+
+
 def _draw_block(base: Image.Image, lines: list[str], font: ImageFont.FreeTypeFont,
                 color: tuple, x_anchor: int, y: int, align: str, cfg: dict) -> Image.Image:
     """Draw `lines` with optional stroke (outline) and a soft, blurred drop shadow."""
@@ -300,6 +363,10 @@ def make_thumbnail(still_path: Path, title: str, subtitle: str,
     # Layer 1 — darkened, vignetted background
     bg = ImageEnhance.Brightness(base).enhance(cfg["darken_factor"])
     bg = _apply_vignette(bg, cfg["vignette_strength"])
+
+    # Layer 1b — directional scrim on the text side only (keeps the image bright
+    # everywhere else; the real fix for global-darkening washing out the picture).
+    bg = _apply_scrim(bg, cfg)
 
     # Layer 2/3 — headline (+ optional subtitle)
     if cfg.get("uppercase", True):

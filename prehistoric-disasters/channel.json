@@ -33,8 +33,14 @@
     "shadow": true,
     "shadow_offset": [5, 6],
     "shadow_blur": 6,
-    "darken_factor": 0.78,
-    "vignette_strength": 0.42,
+    "darken_factor": 0.96,
+    "vignette_strength": 0.12,
+    "scrim": {
+      "side": "left",
+      "width": 0.55,
+      "opacity": 0.88,
+      "feather": 0.7
+    },
     "text_anchor": "top-left",
     "text_align": "left",
     "title_area_pct": 0.52,
