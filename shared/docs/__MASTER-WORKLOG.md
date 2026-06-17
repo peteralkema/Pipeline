@@ -1,7 +1,7 @@
 # _MASTER-WORKLOG.md — YouTube Media Flywheel
 
 _The one living operational log. Solo operator (Peter, The Hague). All edits LAPTOP → GitHub → box; never hand-edit on box._
-_Last updated: 17 June 2026._
+_Last updated: 17 June 2026 (evening — audio-chain fixes, Prehistoric live, scheduler designed)._
 
 ---
 
@@ -22,55 +22,56 @@ This file replaces the pile of dated `SESSION-NOTES-*.md`. It has two halves:
 
 # THE BACKLOG
 
-_Standing read: the system is browser-only end to end, uploads from the browser across five channels on non-expiring auth, renders at a fixed ~$16.80/video (cinematic) or ~$3/video (Ken-Burns-only lanes), and now **runs a fully-unattended batch path** (scripts + thumbnail specs in → private videos out, scored and packaged). **The highest-leverage move is shipping real videos and letting first-48h CTR + AVD drive what to fix — not grinding this list.** Most of what's below is optional polish; Tier 1 is the only part that's truly "do next."_
+_Standing read: the system is browser-only end to end, uploads from the browser across six channels on non-expiring auth, renders at a fixed ~$16.80/video (cinematic) or ~$3/video (Ken-Burns-only lanes), and **runs a fully-unattended batch path** (scripts + thumbnail specs in → private videos out, scored and packaged, music + per-channel voice speed baked in). **The highest-leverage move is shipping real videos and letting first-48h CTR + AVD drive what to fix — not grinding this list.** Most of what's below is optional polish; Tier 1 is the only part that's truly "do next."_
 
 ## Live state / pending publish (operational, not backlog)
-- **toba** (Prehistoric Disasters, "10 Prehistoric Disasters That Almost Ended Humanity", 88 beats, ~20.7 min) — rendered + thumbnailed + uploaded private via the batch runner, BUT **YouTube rejected it: "Processing abandoned — video too long."** The channel is unverified (15-min cap). **ACTION: verify the account (youtube.com/verify, phone), delete the abandoned upload, re-assemble with music (the render predated the music wiring), and re-run `upload_episode.py --project prehistoric-disasters/projects/toba`.** Then decide 88-beat vs the expanded ~28-min `toba-full.md` for the real publish.
+- **Prehistoric Disasters — LIVE with 2 videos** (account verified, 15-min cap lifted). **toba** ("10 Prehistoric Disasters That Almost Ended Humanity", 88 beats, ~20.7 min) and **chicxulub** ("The Last Day of the Dinosaurs", 81 beats, ~8:55 — re-rendered through the full process with music + 0.9 Victor + front-2 Kling) both **published public**. **ACTION (next session): read both videos' first-48h CTR + AVD before authoring the rest of the slate. Benchmark = Wild Horizons (UC0g0WbvanQND4dC1JDaW1_w), the lane's flat ~218K/video high-floor channel — see THE RECORD.**
 - **gustloff** (Final Hours) — uploaded **private**, video ID `wiykuEhTY1k`. **ACTION: set Altered content = Yes in Studio before publishing.**
 - **Esther** (Scripture on Screen, 119 beats) — rendered + downloaded; needs packaging/thumbnail/publish.
 - **Enoch** (Sacred Dawn, 132 beats) — rendered; needs packaging + thumbnail.
 - **70smusic** (You Had To Be There, 105 beats) — was `animating` at the 15 June session end. **ACTION: confirm it reached done and is publishable.**
 
 ## Tier 1 — Ship & verify (the real work)
-1. **Verify the Prehistoric Disasters account + publish Toba** (see live state) — the one external gate between a proven pipeline and a live video. Then ship **Chicxulub as ep2** (slate #1, `prehistoric-slate-19.md`), and **read ep1 + ep2 first-48h CTR + AVD before authoring the other 18.** The machine made each at-bat cheap; let the data pick the batch order. Do NOT author 19 scripts blind.
-2. **Prove dramatic motion end-to-end on a real render.** `cain-abel` (Sacred Dawn) is the clean test — the motion root-fix means its front Kling beats should read dramatic with zero hot-fix.
-3. **Get the other pending-publish videos out** (gustloff disclosure, Esther/Enoch packaging) — rendered; the bottleneck is packaging, the layer that drives distribution.
-4. **Add account-verification to the new-channel setup checklist** — the 15-min cap is a hard gate on EVERY new unverified channel; bake it in so the next channel doesn't hit "Processing abandoned" after a full render.
+1. **Read Prehistoric ep1 (Toba) + ep2 (Chicxulub) first-48h CTR + AVD** — the data that picks the slate order. Pull via NexLev `get_my_video_analytics` + `get_my_audience_retention`; read the first 10-15s specifically for the front-2-Kling hook lift, and compare CTR/AVD to the Wild Horizons ~218K floor. Decide tight-~20min vs long-form-~40min (the 88-beat toba vs `toba-full.md` question) from the curve. Do NOT author the other 17 blind.
+2. **Build the upload scheduler** (Tier-4 #18 below, promoted to do-next) — no-state, `--publish-start <ISO+tz>` + `--publish-interval-hours` in `run_batch.py`, each video uploaded private with a computed `publishAt`, YouTube auto-publishes. Then a batch is hands-off. Design banked below.
+3. **Run the next batch** (validated topics only) once the scheduler exists and ep1/ep2 data is in.
+4. **Prove dramatic motion end-to-end on a real render.** `cain-abel` (Sacred Dawn) — the motion root-fix means its front Kling beats should read dramatic with zero hot-fix. (Chicxulub's front-2 Kling already proved the tiered path works; this proves it on a Kling-heavy channel.)
+5. **Get the other pending-publish videos out** (gustloff disclosure, Esther/Enoch packaging).
 
 ## Tier 2 — Correctness / safety still genuinely open
-5. **Retire or guard `finish --assemble-only`.** It calls the alignment-UNSAFE `recreation_pipeline.assemble()` (positional zip, ignores `_index.json`, drifts). The Mission Control Re-assemble button now uses the aligned `assemble_episode.py`, but the unsafe path is still reachable from the CLI.
-6. **Confirm `cmd_stills` passes `safety_tolerance:"5"` on the FIRST stills pass.** The Toba run produced 88 clean stills, which is strong evidence the batch first-pass gates it — but confirm in code and close this. (Without it, ~50% silent ~7KB black-PNG rejects can ship; the 3 June audit found 40/78.)
-7. **`finish --plan` not side-effect-free** — mkdirs before the early-exit + CWD-relative path. Tiny.
-8. **`proj_paths` auto-prefix latent bug** — auto-prepends `projects/` to a bare name; under the channel-folder architecture it builds the wrong path. Workaround: pass the full path.
-9. **Inworld model-string reconcile** — doc said `inworld-tts-1.5-max`, code sets `INWORLD_MODEL = "inworld-tts-2"`. Verify against the box, fix whichever is stale.
-10. **Inworld chunk-validation guard** — the PREVENTION half of the audio-QC pair (detection shipped 9 June). A failed/empty chunk should retry or hard-fail, not silently concatenate as dead air.
+6. **Retire or guard `finish --assemble-only`.** Calls the alignment-UNSAFE `recreation_pipeline.assemble()` (drifts). Still reachable from the CLI.
+7. **Confirm `cmd_stills` passes `safety_tolerance:"5"` on the FIRST stills pass.** Multiple clean ~88-still runs are strong evidence it does — but confirm in code and close.
+8. **`finish --plan` not side-effect-free** — mkdirs before the early-exit + CWD-relative path. Tiny.
+9. **`proj_paths` auto-prefix latent bug** — auto-prepends `projects/`; workaround is pass the full path.
+10. **Inworld model-string reconcile** — doc/code drift (`inworld-tts-1.5-max` vs `inworld-tts-2`); the speakingRate work (17 June eve) confirmed the live model is `inworld-tts-2` and `speakingRate` inside `audioConfig` works. Reconcile the doc note.
+11. **Inworld chunk-validation guard** — the PREVENTION half of the audio-QC pair. A failed/empty chunk should retry or hard-fail, not silently concatenate as dead air.
 
 ## Tier 3 — Console / cosmetic polish
-11. **Mission Control thumbnail integration (the panel half of the thumbnail system).** Two linked builds: (a) capture thumbnail text (subject/title/subtitle → `thumbnail.json`) in the panel's create flow, alongside the script paste-box — so the panel path matches the batch path (which already pairs `.md` + `.thumb.json`); (b) show the generated thumbnail beside the final video with a regenerate/accept control at review time. Needs a panel grep. This is the manual-review-workflow equivalent of the stills gate and is arguably higher day-to-day value than more batch work.
-12. **Tiered-aware strip label** — `phaseStrip` says "Animating clips (Kling)…" regardless of the split (wrong when Kling=0, all Ken Burns, which is now the Prehistoric default). Reflect Kling-≤N / Ken-Burns->N using `kling_count`.
-13. **Move the Kling-count field into the always-visible controls strip.** Pairs with #12.
-14. **`voice_id` cosmetic label** — audio gate prints "Victor" regardless of the resolved voice; read the real `voice_id`.
-15. **Gate-button human/wire split remnants** — convert any remaining `go`/`keep`/`swap`/`skip` onclick verbs to human labels + wire values.
-16. **Upload polish** — per-channel `channel.json` `upload` blocks for the channels lacking them; **schedule control: `upload_episode.py` already has `--schedule-cet-1am`/`--publish-at`; the batch runner should pass a per-project `publishAt` (Peter's design: every 6h from the latest video).** Rename the OAuth consent-screen app "Success Coach Upload Tool" → "Pipeline."
-17. **Retire the redundant per-channel `auth.py` files** — superseded by `upload_episode.py --auth-only`. Harmless but drift-prone.
+12. **Mission Control thumbnail integration (the panel half of the thumbnail system).** (a) capture thumbnail text (subject/title/subtitle → `thumbnail.json`) in the panel's create flow; (b) show the generated thumbnail beside the final video with a regenerate/accept control at review time. The manual-review equivalent of the stills gate.
+13. **Tiered-aware strip label** — `phaseStrip` says "Animating clips (Kling)…" regardless of split (wrong when Kling=0). Reflect Kling-≤N / Ken-Burns->N.
+14. **Move the Kling-count field into the always-visible controls strip.** Pairs with #13.
+15. **`voice_id` cosmetic label** — audio gate prints "Victor" regardless of resolved voice.
+16. **Gate-button human/wire split remnants** — convert remaining onclick verbs to human labels + wire values.
+17. **Upload polish** — per-channel `channel.json` `upload` blocks for channels lacking them; rename the OAuth consent-screen app "Success Coach Upload Tool" → "Pipeline."
 
 ## Tier 4 — Bigger builds (deliberate, when justified by a shipped-video need)
-18. **Faster final encode** — the Toba run spent ~20 min in the `-preset medium -crf 18` final concat/encode (CPU-bound, no GPU). For Ken-Burns lanes the source is already a soft pan over a still, so `-preset fast`/`veryfast` would roughly halve it with no visible loss. The single biggest batch-throughput lever (20 videos × ~20 min of encode = hours). One-word change in `assemble_episode.py`; tune + verify on one video first.
-19. **Decade-look Phase 2 — the grade layer.** `film_emulate.py` does not exist. ffmpeg grade presets, single final grade pass into `assemble()`, fail-soft to ungraded.
-20. **v2 motion routing** — route Kling-vs-Ken-Burns by which beats *earn* motion (duration/action), not the positional first-N split.
-21. **Parallel fal animation** — bounded-concurrency semaphore (~5–10) could cut animation ~5–8×; matters on high-beat-count cinematic runs (moot on the Ken-Burns lanes).
-22. **Batch orchestration polish** — the unattended batch runner SHIPPED (see THE RECORD 17 June). Remaining: per-project `publishAt` scheduling (pairs with #16); a re-run story (`ingest.create_project` refuses if the project already exists — fine as a safety default, but a partially-completed inbox can't be resumed without manual cleanup); optional parallelism (deliberately sequential now — no human watching, don't want N concurrent fal/Inworld bursts).
-23. **Mode B within-card word-sync** (Synthetic) — thread each Mode B card its key word's Whisper timestamp.
-24. **Mode B "design-on-page"** — banked big idea: a Mode B beat carries only words + duration + flag; pick the component on the review page.
-25. **Synthetic Remotion component gaps** — NumberCounter countdown/plainYear; QuoteCard attribution-only variant.
+18. **Upload scheduler (PROMOTED to Tier 1 #2 — design banked here).** No local state, variable per batch: `run_batch.py` takes `--publish-start <ISO timestamp WITH timezone>` + `--publish-interval-hours` (default 12 → twice-daily). For video N it computes `publishAt = publish_start + N × interval` and uploads private with `status.publishAt` set; YouTube auto-flips to public on schedule (no box daemon, no manual Studio scheduling). `--plan` prints the full release calendar (each `publishAt` echoed in both the input tz AND UTC) before any spend. CRITICAL: a scheduled video MUST be uploaded `privacyStatus: private` + `publishAt` together — NOT public; public+publishAt is contradictory and rejected. Confirm `upload_episode.py --publish-at` sets `status.publishAt` with privacy=private. Front-48h clock starts at `publishAt`, not upload time. No-state means successive batches don't auto-extend — set the next `--publish-start` past the last batch's tail (glance at Studio's Scheduled tab; the human review IS the collision check). Studio stays the REVIEW surface (open the Scheduled tab anytime, watch/edit/delete/re-time any individual video by hand; the pipeline sets a sane default, your eyeball overrides per-video).
+19. **Faster final encode** — the heaviest step is the `-preset medium -crf 18` final concat/encode (~20 min for a 20-min Ken-Burns video, CPU-bound). For Ken-Burns lanes `-preset fast`/`veryfast` would roughly halve it with no visible loss. Biggest batch-throughput lever. One-word change; tune + verify on one video first.
+20. **Decade-look Phase 2 — the grade layer.** `film_emulate.py` does not exist.
+21. **v2 motion routing** — route Kling-vs-Ken-Burns by which beats *earn* motion, not the positional first-N split.
+22. **Parallel fal animation** — bounded-concurrency semaphore; matters on Kling-heavy runs (moot on Ken-Burns lanes).
+23. **Batch orchestration polish** — re-run story (`ingest.create_project` refuses if the project exists → a partial inbox needs manual cleanup, OR delete the project + re-ingest, which is how chicxulub was re-run with new settings 17 June eve); optional parallelism (deliberately sequential now).
+24. **Mode B within-card word-sync** (Synthetic) — thread each Mode B card its key word's Whisper timestamp.
+25. **Mode B "design-on-page"** — a Mode B beat carries only words + duration + flag; pick the component on the review page.
+26. **Synthetic Remotion component gaps** — NumberCounter countdown/plainYear; QuoteCard attribution-only variant.
 
 ## Tier 5 — Authoring discipline (bake into the craft doc, not code)
-26. **Beat-granularity + runtime calibration bake-in** — "~5–12s/beat" stands, but the Toba run gave a REAL data point: 88 beats → 20.7 min, **~14s/beat once the Ken-Burns minimum hold applies** — beats run LONGER than the words-only ~195wpm estimate predicts, because short beats are stretched up to the clip floor. So a words-only runtime estimate UNDERSHOOTS; a ~28-min words-estimate script lands closer to ~40 min. Graduated to ante-machinam §6.
-27. **Script-format-from-exemplar discipline** — graduated to ante-machinam Part VI (see THE RECORD 17 June). Author by copying a known-good script's structure, never from the doc's prose description.
+27. **Beat-granularity + runtime calibration bake-in** — graduated to ante-machinam §6 (runtime ≈ beat count × ~14s; words-only undershoots).
+28. **Script-format-from-exemplar discipline** — graduated to ante-machinam Part VI.
 
 ## Banked-for-later / low (do not lose, do not prioritise)
-- **review-server look patch** — `serve_review.py`'s 4-arg `generate_still` doesn't apply `resolve_look`; moot now Mission Control is the surface.
-- **Multi-project / daemonized review server** (the :8001 legacy) — superseded by Mission Control. Keep the spec only as reference.
+- **`.gitignore` for generated artifacts** — `render_policy.json`, `thumbnail_selection.json`, `*.pre_*`, `_index.json` etc. show as untracked on the box (correct — they're outputs, not source). A `.gitignore` would quiet the noise. Not urgent.
+- **review-server look patch** / **multi-project daemonized review server** — superseded by Mission Control. Reference only.
 
 ---
 ---
@@ -79,53 +80,70 @@ _Standing read: the system is browser-only end to end, uploads from the browser 
 
 _Each block: date · what shipped · what it left open (now tracked in THE BACKLOG above). Durable lessons have graduated to the canonical (§-refs) / ante-machinam; this is the index, not the detail._
 
-### 17 June 2026 — the Prehistoric Disasters channel, end to end, fully unattended
-A whole channel stood up and proven from zero in one session, plus three pieces of permanent infrastructure.
+### 17 June 2026 (evening) — audio-chain fixes, Prehistoric live, competitor benchmark, scheduler designed
+The launch session's follow-on: hunted three real bugs in the music/audio path, dialed Victor's pace, published, found the lane benchmark, and speced the scheduler.
 
-**Thumbnail pipeline (built, tuned, locked).** `make_thumbnail.py` (channel-resolved rewrite; two composition modes — `centered_subject` and `low_silhouette`), `select_thumbnail_still.py` (renders N=2 Flux candidates, Sonnet-4-6 vision picks the best *substrate* on CTR rules, fail-safe to candidate 1, logs the verdict), and `patch_convergence_thumbnail.py` (inserts `_maybe_thumbnail()` before `_maybe_upload()`). Per-project `thumbnail.json` carries subject/title/subtitle. Tuned by eye on a Sacred Dawn still as scaffold: the **left gradient scrim** replaced global darkening (the fix for the image washing out under the text — bank: darken only where the text lands, never the whole frame), then `darken_factor 1.0` / `vignette 0` (image at full brightness, scrim does the contrast), independent `margin_x`/`margin_y`, asymmetric `candidate_prompt_suffix` (catastrophe right two-thirds, dark empty left). The Sonnet selector picked correctly and for the right reason (clean top-left negative space). **LOCKED.** → canonical §6 (Thumbnails) + §5; durable principles graduated to canonical §9.
+**Three real audio-chain bugs found + fixed (all had been silently shipping in every video the pipeline ever made):**
+- **Music never reached the batch path** (`patch_convergence_channeldir_fix.py`). The music block in `convergence_leg.py` referenced `channel_dir` — a variable that was **never defined** in `run_convergence_leg()`. It threw `NameError`, a bare `try/except` swallowed it, `_mcfg` stayed `None`, and convergence silently passed `--no-music`. Fix: derive `_channel_dir = proj.parent.parent` (proj is `<channel>/projects/<project>`), and drop the blanket try/except so a real failure surfaces. (This was MY error — I wrote `patch_convergence_musicdir.py` around an unconfirmed variable, flagged the risk in words, shipped it anyway. Cost a 4-video batch rendered without music.)
+- **Music ducked under the voice** (`patch_amix_normalize.py`). The mux `amix=inputs=2:duration=first:dropout_transition=0` had no `normalize` option → ffmpeg defaults to `normalize=1`, which dynamically renormalizes the mix against its inputs, pumping the music DOWN under loud narration and up in pauses (read as intermittent music + overall-too-quiet). Fix: add `normalize=0` so amix sums the pre-scaled streams (VOICE 1.15 / MUSIC 0.07) at fixed levels. Also fixed the "music feels a touch low" complaint (normalize=1 was halving the output).
+- **Diagnosis discipline banked:** "music works" was declared on Toba from a one-listen PRESENCE check; the ducking was only caught by listening END TO END for LEVEL CONSISTENCY. Bank: validate audio by playing the whole thing and listening for steadiness, not by confirming music exists.
 
-**Unattended batch runner (built, applied, proven).** Three patches: `patch_gate_auto.py` (adds a third gate-mode `auto` to `await_gate` — returns the accept default, no prompt/poll), `patch_orchestrate_unattended.py` (`--unattended` flag forces gate-mode=auto + live + normal so no gate or kickoff prompt blocks), and `run_batch.py` (for each `<name>.md` + `<name>.thumb.json` pair in an inbox: calls the REAL `ingest.create_project()` so batch projects are byte-identical to panel projects — incl. the wordless/no-VISUAL verify-refuse guard — then writes `render_policy.json` (`kling_count`) + `thumbnail.json`, runs the orchestrator unattended; sequential, per-project failure isolation, manifest log, `--plan` zero-spend preview). Orchestrator reads channel from the script HEADER, not a flag.
+**Per-channel voice speed** (`patch_inworld_speaking_rate.py`). Victor read a touch rushed for the slow deep-time register. The Inworld payload had NO speed key at all (every channel ran at default 1.0 — the "we slowed Victor for Final Hours" memory was false; confirmed by grep, no speed setting anywhere). Fix: add `speakingRate` inside `audioConfig`, read from `channel.json` `speaking_rate` (default 1.0 when absent, so all other channels unchanged). Confirmed via standalone curl on the box that `speakingRate` works at this endpoint with `inworld-tts-2`. Prehistoric set to **0.9** (proven by ear on a full paragraph). Affects FUTURE renders only (speed is baked into voiceover.mp3).
 
-**Music into convergence (decided + wired).** The open Tier-4 decision resolved: **curated per-channel folder, NOT fal-generated.** `patch_music_dir.py` adds a `--music-dir` path to `assemble_episode.py` — picks N random tracks from `<channel>/music/`, crossfades the joins (`acrossfade`, default 2s), loops the sequence to fill the voiceover, feeds the EXISTING amix mux at VOICE 1.15 / MUSIC 0.07 untouched. `patch_convergence_musicdir.py` drives it from a `channel.json` `music` block (`{dir, tracks, crossfade_seconds, level}`). 8 ominous beds loaded; random-3 gives variance across renders. Tuned + approved by ear on the Toba clips. Now every render on a music-configured channel auto-scores.
+**Published.** Account verified (15-min cap lifted). Re-ran **chicxulub** through the FULL real process (`rm -rf` the project → re-ingest from inbox → `run_batch.py --kling-count 2 --limit 1`) so it got music + 0.9 Victor + front-2 Kling all live — proving every fix end to end on a fresh render (81 beats, ~8:55). Both Toba and Chicxulub now **public**. Verified by eye: music perfect + steady, narration perfect, first two stills in motion (Kling) perfect, thumbnails consistent and on-brand side by side.
 
-**The channel.** Created `@PrehistoricDisasters` (display name "Prehistoric Disasters" — keyword-forward beats brandy for a packaging-first channel; repo slug `prehistoric-disasters`). OAuth authed via `upload_episode.py --auth-only` (the `_authstub` project-dir trick to satisfy the `is_dir()` check), correct channel picked at the chooser, token + client_secret scp'd to the box. Banner art generated (full-frame catastrophe collage, baked cracked-stone title — the one case where prompt-baked text won, since it reads as intentional). Locked `channel.json` (Victor voice, prehistoric `style_suffix`, Ken-Burns-only via `kling_count:0`, full thumbnail block, music block). Decided Ken-Burns-only for the lane (~$3/video) — packaging+topic+cadence carry these lanes, not motion.
+**Front-2 Kling decision (per-batch, not baked):** `run_batch.py --kling-count N` already exists (default 0). Decision: keep the channel default at 0 (Ken-Burns floor, $3) and pass `--kling-count 2` per batch when you want a ~10-15s motion hook on the cold open (~$0.84 extra). Dial up/down per batch as retention data comes in. Don't bake it as a permanent channel default until a curve proves the lift.
 
-**The end-to-end run.** Toba script (88 beats) → `--plan` clean → `--limit 1`: create_project → Victor audio → 88 Ken-Burns stills → assemble → Sonnet thumbnail → upload private. Landed in Studio with correct metadata + thumbnail, bound to the right channel. **The whole machine worked; only YouTube's 15-min cap stopped it** (unverified account → "Processing abandoned"). Real runtime: 88 beats = 20.7 min (calibration: ~14s/beat, longer than the words-only estimate — Tier-5 #26).
+**Silhouette-stays decision.** The channel-wide `style_suffix` puts a "tiny lone human silhouette for scale" in every still — an apparent anachronism on pre-human topics (Chicxulub etc.). Decided to KEEP it: it's read symbolically (a witness/scale-anchor, like the Chloe-vs-History time-traveller but stripped to a dignified minimum), gives a focal point vs a National Geographic spread, is distinctive (nobody else in the lane does it), and does the channel's core job (felt scale). Let the data rule it — watch comments on pre-human videos for literal-reading complaints ("there were no humans then"); only reconsider if the audience says so, not on theory.
 
-**Deliverables banked outside the box:** `prehistoric-slate-19.md` (ranked 19-topic authoring queue, deep-dive + listicle mix, silhouette ✅/⚠️ flags for human-era vs pre-human topics, Chicxulub = ep2), `toba-full.md` (expanded ~28-min version, held for the real publish pending the 88-beat-vs-expanded decision).
+**Competitor benchmark found — Wild Horizons** (`UC0g0WbvanQND4dC1JDaW1_w`, @WildHorizons6688). This IS the Prehistoric Disasters lane: faceless AI-cinematic deep-time catastrophe, Google-Trends keyword `dinosaurs`, even a Toba video ("The 74,000-Year-Old Monster That Killed 99% of Our Ancestors," 326K). Numbers: outlier score 6.33, 48.7K subs, ~$4,300/mo, 13.7M total views, **avg ~218K views/video** — and NO outliers even at 1.3× threshold, meaning a FLAT high-floor curve (every video clears six figures; the lane delivers reliably, not via jackpots). Avg video length **~32 min**, biggest hit a 72-min full doc → signal that the lane rewards LONG-FORM (supports the `toba-full.md` cut). It appeared as a SUGGESTED video next to chicxulub in Studio → YouTube has already classified the channel into this neighbourhood, positioning it to draw Wild Horizons' recommendation traffic. → graduated to `_Prehistoric-Disasters.md` §7 + canonical §9.
 
-**Durable lessons graduated this session:**
-- **Script-format-from-exemplar** (→ ante-machinam Part VI): author by copying a known-good script's exact structure (bare key:value header, `## COLD OPEN`/`## PART` double-hash sections, `[A] narration` then `VISUAL:` per beat), never from the doc's prose description. The first Toba draft used YAML fences + `#` headers + `NARRATION:` labels → parsed to ZERO beats (ZeroDivisionError). The reusable fix is a mechanical reformatter: keep the words, swap the markup to match a working script.
-- **Runtime calibration** (→ ante-machinam §6): words-only runtime estimates undershoot; the Ken-Burns minimum hold stretches short beats, so real ≈ ~14s/beat.
-- **The 15-min account cap** (→ canonical §12 + channel-setup): unverified YouTube accounts reject >15-min uploads at processing. Hard gate per new channel.
-- **Thumbnail-as-paired-artifact** (→ canonical §6): design the thumbnail WITH the script (one authoring moment), but store it as a separate `thumbnail.json` (not the script header — the YouTube title and the thumbnail headline are different strings). The pair travels together; the separation is the architecture. Text never travels as a passed variable — it's written once at prep, read once at the end; nothing in the middle can corrupt it.
-- **Scrim-not-global-darkening** (→ canonical §6): for legible text over a bright image, darken only the text zone with a directional gradient scrim; a global brightness multiply washes out the whole picture.
+**Scheduler designed (not built — Tier-1 #2 / Tier-4 #18):** no-state, timestamp-in, 12h increments, YouTube `publishAt` does the scheduling. Full spec in the backlog.
 
-→ canonical roster (+Prehistoric Disasters), §5 (thumbnail + batch legs), §6 (thumbnails, music decided), §9 (packaging principles), §12 (gotchas).
+**YouTube quota — the old "6 uploads/day" wall is GONE** (confirmed via search). Google cut `videos.insert` from ~1,600 to ~100 units on 4 Dec 2025; the 10,000/day quota now covers ~100 uploads/day. A 20-video batch is a non-issue on quota. Stagger releases for AUDIENCE reasons (don't split your own session traffic), not quota. → canonical §6.
+
+**Durable lessons graduated this session:** the three audio-chain fixes' principles → canonical §6 (amix normalize=0; convergence derives channel dir from proj; per-channel speakingRate) + §12; the "validate audio end-to-end for level, not presence" discipline → §6; the Wild Horizons benchmark + flat-high-floor lane read → §9 + channel doc; the YouTube quota update → §6.
+
+### 17 June 2026 (day) — the Prehistoric Disasters channel, end to end, fully unattended
+A whole channel stood up and proven from zero, plus three pieces of permanent infrastructure.
+
+**Thumbnail pipeline (built, tuned, locked).** `make_thumbnail.py` (two composition modes — `centered_subject`, `low_silhouette`), `select_thumbnail_still.py` (N=2 Flux candidates, Sonnet-4-6 vision picks best substrate on CTR rules, fail-safe to candidate 1), `patch_convergence_thumbnail.py` (`_maybe_thumbnail()` before `_maybe_upload()`). Per-project `thumbnail.json` (subject/title/subtitle). Banked: **left gradient scrim, not global darkening**, image at full brightness, scrim does the contrast. **LOCKED.** → canonical §6, §9.
+
+**Unattended batch runner (built, proven).** `patch_gate_auto.py` (`auto` gate-mode), `patch_orchestrate_unattended.py` (`--unattended`), `run_batch.py` (inbox of `<name>.md` + `<name>.thumb.json` pairs → real `ingest.create_project()` → `render_policy.json` + `thumbnail.json` → orchestrator `--unattended`; sequential, per-project isolation, `--plan` zero-spend). → canonical §5.8.
+
+**Music into convergence (decided + wired).** Curated per-channel folder, NOT fal-generated. `patch_music_dir.py` (`--music-dir`: random-N + crossfade + loop, feeds the existing amix), `patch_convergence_musicdir.py` (drives it from `channel.json` `music` block). 8 ominous beds, normalized `track_NN.mp3`. (NOTE: this is where the `channel_dir` bug was introduced — fixed in the evening block above.) → canonical §6.
+
+**The channel.** `@PrehistoricDisasters` created + OAuth'd (Production token, `_authstub` trick), banner art (baked cracked-stone title — the prompt-baked-text exception), locked `channel.json` (Victor, prehistoric `style_suffix`, `kling_count:0` Ken-Burns-only ~$3/video, full thumbnail + music blocks). First run: Toba (88 beats → 20.7 min) fully unattended, blocked only by the 15-min unverified-account cap.
+
+**Deliverables:** `prehistoric-slate-19.md` (ranked 19-topic queue), `toba-full.md` (expanded ~40-min version, held).
+
+**Durable lessons graduated:** script-format-from-exemplar (→ ante-machinam Part VI); runtime calibration ~14s/beat (→ ante-machinam §6); 15-min account cap (→ canonical §12); thumbnail-as-paired-artifact + scrim-not-global-darkening (→ canonical §6, §9).
+
+**Channel doctrine written:** `_Prehistoric-Disasters.md` (sibling to the other `_`-channel docs; carries the 19-topic launch backlog as §8).
 
 ### 16 June 2026 — motion root-fix + upload live across five channels
-Fixed the `default_motion` dead-default at its true source (`modea_beats.py translate()` now omits motion on normal beats so the channel default fires) — proven `all dramatic: True` on Sacred Dawn. Upload went spec→working: `upload_episode.py` proven on a real private upload (gustloff `wiykuEhTY1k`); 7-day token expiry killed by publishing the OAuth app to **Production**; **five channels authed** with bindings verified; Mission Control **Upload button wired** (v1.9, private-only). Banked: the phantom `auth.py` swap bug doesn't exist; "no `modea/` folder = un-rendered project, not broken." → canonical §5.3, §5.5, §5.7, §6, §12.
+Fixed `default_motion` dead-default at its true source (`modea_beats.py translate()` omits motion on normal beats). Upload spec→working: `upload_episode.py` proven (gustloff `wiykuEhTY1k`); OAuth app → Production (no more 7-day expiry); five channels authed; Mission Control Upload button (v1.9, private-only). → canonical §5.3, §5.5, §5.7, §6, §12.
 
 ### 15 June 2026 — Mission Control v1.0 → v1.8 (the big hardening session)
-Nine patches. v1.0 audio→stills seam fix + decided-gate stale guard. v1.1 Re-assemble button. v1.2 **the drift fix** — Re-assemble through the ALIGNED `assemble_episode.py` (banked: two assemblers, only one honors `_index.json`). v1.3–1.5 FINAL VIDEO panel persistence (incl. the `api()` key-on-querystring 403 fix). v1.6–1.8 reliability trio: freshest-live-run by `started_at`; refuse duplicate launch (409); pid-liveness reaping. Doc set consolidated to two (canonical + ante-machinam v3.0). → canonical §5.6, §5.7; ante-machinam v3.0.
+Nine patches. Audio→stills seam fix; Re-assemble button; the drift fix (aligned `assemble_episode.py`); FINAL VIDEO panel persistence; reliability trio (freshest-live-run, refuse-duplicate-launch 409, pid-liveness reaping). → canonical §5.6, §5.7.
 
-### 13–15 June 2026 — Mission Control build arc (v0.5 → v1.1) + TIERED RENDER
-Built Mission Control into the full operator console. **TIERED RENDER** shipped + proven on Enoch (132 beats): Kling front-N / free Ken-Burns floor, fixed ~$16.80/video at N=40. Banked the front-loaded-effort-curve principle. → canonical §5.1–§5.4, §9.10.
+### 13–15 June 2026 — Mission Control build arc + TIERED RENDER
+Built Mission Control into the full operator console. TIERED RENDER proven on Enoch (132 beats): Kling front-N / free Ken-Burns floor, ~$16.80/video at N=40. Front-loaded-effort-curve principle. → canonical §5.1–§5.4, §9.10.
 
-### 12 June 2026 — Sacred Dawn ep2 (the-daughters) + browser-pipeline decision
-Episode 2 (184 beats) end to end. Clickly thumbnail A/B locked (gold/white caps = the brand). **Decided the browser-driven pipeline** (became Mission Control). Banked: `search_videos` is corrupted — use `search_niche_finder_channels`; un-referenced-sublime as the channel filter.
+### 12 June 2026 — Sacred Dawn ep2 + browser-pipeline decision
+Episode 2 (184 beats). Decided the browser-driven pipeline (became Mission Control). Banked: `search_videos` corrupted — use `search_niche_finder_channels`; un-referenced-sublime filter.
 
 ### 8–9 June 2026 — You Had To Be There launch + pipeline hardening
-Channel launched. Shipped: decade look-override Phase 1; audio-continuity QC at the gate; tunnel-free review server. Banked the durable strategy laws: spike-chasing doesn't suit this op; un-filmable vs re-watchable; served vs searched; title↔thumbnail complement; Vinny markup allowlist; ffprobe for true duration; Inworld ~190–200 wpm. → canonical §9.3–§9.8; ante-machinam.
+Channel launched. Decade look-override Phase 1; audio-continuity QC; tunnel-free review server. Banked strategy laws: spike-chasing doesn't suit this op; un-filmable vs re-watchable; served vs searched; title↔thumbnail complement; Vinny markup; ffprobe for true duration; Inworld ~190–200 wpm. → canonical §9.
 
-### 6–7 June 2026 — the orchestrator + first-principles audio reset + second channel + music
-Built the channel-agnostic `orchestrate.py`. First-principles reset: one continuous protected voice track; Mode B is a transformation of narration. Wired the convergence leg. Built Tier-2 music (`make_music.py`, standalone — now superseded by the curated `--music-dir` path, 17 June). Banked: resolve-identity-explicitly-fail-loudly. → canonical §5 (legs), §5 design law.
+### 6–7 June 2026 — orchestrator + first-principles audio reset + second channel + music
+Built `orchestrate.py`. First-principles reset: one continuous voice track; Mode B transforms narration. Wired convergence. Built `make_music.py` (standalone — superseded 17 June by the curated `--music-dir` path). Banked: resolve-identity-explicitly-fail-loudly.
 
-### 5 June 2026 — Synthetic Press dual-mode pipeline (Steps 1–4c)
-Built + box-proved the dual-mode pipeline: `parse_script.py`, `dispatch.py`, Remotion Mode B, `modea_beats.py` + `_index.json`, dual-mode `assemble_episode.py`. The two engines meet only at assemble.
+### 5 June 2026 — Synthetic Press dual-mode pipeline
+Built + box-proved the dual-mode pipeline: `parse_script.py`, `dispatch.py`, Remotion Mode B, `modea_beats.py` + `_index.json`, dual-mode `assemble_episode.py`.
 
-### 3 June 2026 — Final Hours #7 (KLM Tenerife) + stills-review infrastructure
-Shipped FH#7. Built the stills-review system. Banked: **Flux silent safety-reject** (pass `safety_tolerance:"5"`); Override > Notes for hard corrections. → canonical §6, §12; ante-machinam.
+### 3 June 2026 — Final Hours #7 + stills-review infrastructure
+Shipped FH#7. Built the stills-review system. Banked: Flux silent safety-reject (`safety_tolerance:"5"`); Override > Notes. → canonical §6, §12.
 
 ---
 
