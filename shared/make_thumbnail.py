@@ -206,14 +206,14 @@ def _fit_text(text: str, max_width: int, max_height: int,
         if not words:
             return font, [""]
         for wrap_chars in range(60, 4, -1):
-            lines = textwrap.wrap(text, width=wrap_chars) or [text]
+            lines = textwrap.wrap(text, width=wrap_chars, break_long_words=False, break_on_hyphens=False) or [text]
             widths = [font.getbbox(l)[2] - font.getbbox(l)[0] for l in lines]
             line_h = font.getbbox("Ag")[3] - font.getbbox("Ag")[1]
             total_h = line_h * len(lines) + gap * (len(lines) - 1)
             if max(widths) <= max_width and total_h <= max_height:
                 return font, lines
         size -= 6
-    return _load_font(40, cfg), textwrap.wrap(text, width=20) or [text]
+    return _load_font(40, cfg), textwrap.wrap(text, width=20, break_long_words=False, break_on_hyphens=False) or [text]
 
 
 def _anchor_x(cfg: dict, frame_w: int) -> tuple[int, str]:
