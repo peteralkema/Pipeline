@@ -3,5 +3,11 @@
   "voice_id": "Vinny",
   "style_suffix": "1970s home-movie aesthetic, Super 8 film look, warm faded color palette, heavy film grain, soft focus, slight halation and gentle light leaks, slightly overexposed, vignette, period-accurate 1970s American detail, nostalgic and intimate, shot on vintage film stock",
   "default_music_prompt": "Warm, wistful nostalgic underscore for a gentle documentary about growing up in 1970s America. Soft acoustic guitar and mellow electric piano, warm analog pads, slow unhurried tempo. Bittersweet and tender, never grand, never mournful. Light and reminiscent, leaving plenty of room for a narrator. No heavy percussion, no big swells.",
-  "base_canon": {}
+  "base_canon": {},
+  "music": {
+    "dir": "music",
+    "tracks": 3,
+    "crossfade_seconds": 2,
+    "level": 0.07
+  }
 }
