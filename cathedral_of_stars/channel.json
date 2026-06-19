@@ -17,13 +17,26 @@
   },
   "thumbnail": {
     "composition": "low_silhouette",
-    "scrim": { "side": "left", "width": 0.42, "opacity": 0.78, "feather": 0.18 },
+    "scrim": {
+      "side": "left",
+      "width": 0.42,
+      "opacity": 0.78,
+      "feather": 0.18
+    },
     "darken_factor": 1.0,
     "vignette": 0,
     "margin_x": 70,
     "margin_y": 70,
-    "title_color": "#F4F6FF",
-    "subtitle_color": "#FFC04A",
+    "title_color": [
+      244,
+      246,
+      255
+    ],
+    "subtitle_color": [
+      255,
+      192,
+      74
+    ],
     "candidate_prompt_suffix": "a colossal glowing star or cosmic object dominating the right two-thirds, a tiny lone human silhouette small in the foreground for scale, deep space, gold-to-blue palette, dark empty space across the left third, awe-inspiring, cinematic, painterly photoreal, no text",
     "selection_rules": "pick the candidate with the cleanest dark negative space on the left where the headline lands; the strongest sense of overwhelming scale at a glance; the cosmic object glowing and awe-inspiring, not garish or frightening; reject any with garbled detail, distorted shapes, or text artifacts"
   },
