@@ -1,69 +1,135 @@
 #!/usr/bin/env python3
-"""Idempotent: add thumbnail + music + kling_count blocks to sacred-dawn/channel.json.
-Safe to re-run. Backs up to channel.json.pre_blocks. Verifies before and after."""
-import json, shutil, sys
-from pathlib import Path
+# patch_sacred_dawn_blocks.py
+#
+# Idempotent. Adds the thumbnail + music blocks (and a kling_count default) to
+# sacred-dawn/channel.json so Sacred Dawn matches channels built after the
+# thumbnail/music systems landed.
+#
+# It does NOT guess the thumbnail styling: it ports the proven block from
+# prehistoric-disasters/channel.json at runtime, then overrides only
+# `composition` and `candidate_prompt_suffix` for faceless biblical art.
+#
+# Safety:
+#   - REFUSES unless the resolved channel name is exactly "sacred_dawn".
+#   - Backs up once to channel.json.pre_blocks before writing.
+#   - Idempotent: re-running is a no-op once the blocks exist.
+#   - Validates JSON round-trip before writing.
+#
+# Workflow: run on the LAPTOP from the repo root, commit, push to GitHub,
+# then `git pull --no-edit` on the box. Never hand-edit on the box.
 
-CJ = Path(__file__).resolve().parent.parent / "sacred-dawn" / "channel.json"
+import json
+import os
+import shutil
+import sys
 
-THUMB = {
-  "composition": "centered_subject",
-  "candidates": 2,
-  "candidate_prompt_suffix": "YouTube thumbnail composition, cinematic biblical epic, painterly oil-painting light, dramatic chiaroscuro and volumetric god-rays; ONE dominant faceless silhouette or colossal form massed in the RIGHT TWO-THIRDS of the frame, lit against a vast dramatic sky; the LEFT THIRD deliberately dark, shadowed, low-detail negative space reserved for a headline; warm gold and amber deepening to storm-grey and ash; high contrast, deep shadow, reverent and majestic, weathered antiquity; single subject only, no clutter, faceless, no text, no letters, no modern elements",
-  "selection_rules": [
-    "ONE reverent, awe-striking biblical subject that reads instantly at phone-thumbnail size",
-    "maximum cinematic chiaroscuro drama so it stands out in a dim feed",
-    "faceless figures only - no resolved faces, no garbled features",
-    "clean darker uncluttered negative space in the TOP-LEFT where the headline lands",
-    "no accidental letterforms, no duplicated or broken figures, one subject only"
-  ],
-  "font": "shared/fonts/Anton-Regular.ttf",
-  "font_fallbacks": ["/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", "Impact", "Arial Black"],
-  "title_color": [245, 240, 235],
-  "subtitle_color": [255, 200, 90],
-  "stroke_width": 12, "stroke_color": [0, 0, 0],
-  "shadow": True, "shadow_offset": [5, 6], "shadow_blur": 6,
-  "darken_factor": 1.0, "vignette_strength": 0.0,
-  "scrim": {"side": "left", "width": 0.42, "opacity": 0.55, "feather": 0.7},
-  "text_anchor": "top-left", "text_align": "left",
-  "title_area_pct": 0.52, "title_max_height_pct": 0.34, "title_start_size": 150,
-  "subtitle_area_pct": 0.55, "subtitle_max_height_pct": 0.14, "subtitle_start_size": 90,
-  "margin": 20, "margin_x": 40, "margin_y": 20,
-  "uppercase": True, "segment_foreground": False
-}
-MUSIC = {"dir": "music", "tracks": 3, "crossfade_seconds": 2, "level": 0.07}
+HERE = os.path.dirname(os.path.abspath(__file__))          # .../shared
+REPO = os.path.dirname(HERE)                               # repo root
+SD = os.path.join(REPO, "sacred-dawn", "channel.json")
+PD = os.path.join(REPO, "prehistoric-disasters", "channel.json")
+
+MUSIC_BLOCK = {"dir": "music", "tracks": 3, "crossfade_seconds": 2, "level": 0.07}
+
+FACELESS_SUFFIX = (
+    "Reverent cinematic biblical scene, faceless: silhouettes, figures seen from "
+    "behind, hands, or distant forms; never a resolved human face; God is never "
+    "depicted, only light or presence; violence and death only by implication. "
+    "Deep shadow, volumetric light, painterly realism, muted sacred palette. "
+    "Keep one third of the frame dark and near-empty as a text-safe zone."
+)
+
+
+def load(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def resolve_name(cfg):
+    """Find the channel-name field without assuming the schema."""
+    for key in ("name", "channel", "slug", "id", "channel_name"):
+        val = cfg.get(key)
+        if isinstance(val, str):
+            return key, val
+    return None, None
+
 
 def main():
-    if not CJ.exists():
-        sys.exit(f"NOT FOUND: {CJ}")
-    d = json.loads(CJ.read_text())
-    if d.get("name") != "sacred_dawn":
-        sys.exit(f"REFUSE: expected name 'sacred_dawn', got {d.get('name')!r}")
+    if not os.path.exists(SD):
+        sys.exit("REFUSE: not found: %s (run from repo root on the laptop)" % SD)
 
-    backup = CJ.with_suffix(".json.pre_blocks")
-    if not backup.exists():
-        shutil.copy2(CJ, backup)
-        print(f"backup -> {backup}")
-    else:
-        print(f"backup already exists -> {backup} (idempotent re-run)")
+    cfg = load(SD)
+    key, name = resolve_name(cfg)
+    if name != "sacred_dawn":
+        sys.exit(
+            "REFUSE: resolved channel name is %r (from key %r), expected "
+            "'sacred_dawn'. If the name lives under a different key, paste the "
+            "head of channel.json and adjust resolve_name()." % (name, key)
+        )
 
     changed = []
-    if d.get("thumbnail") != THUMB:
-        d["thumbnail"] = THUMB; changed.append("thumbnail")
-    if d.get("music") != MUSIC:
-        d["music"] = MUSIC; changed.append("music")
-    if d.get("kling_count") != 2:
-        d["kling_count"] = 2; changed.append("kling_count")
 
-    CJ.write_text(json.dumps(d, indent=2) + "\n")
+    # ---- thumbnail block (ported from prehistoric, overridden for biblical) ----
+    if "thumbnail" not in cfg:
+        thumb = None
+        if os.path.exists(PD):
+            try:
+                pd = load(PD)
+                if isinstance(pd.get("thumbnail"), dict):
+                    thumb = json.loads(json.dumps(pd["thumbnail"]))  # deep copy
+                    print("ported thumbnail block from prehistoric-disasters")
+            except Exception as exc:  # noqa: BLE001
+                print("WARN: could not port from prehistoric (%s); using fallback" % exc)
+        if thumb is None:
+            thumb = {
+                "scrim": {"opacity": 0.45, "direction": "left"},
+                "font": "Anton",
+                "title_color": "#FFFFFF",
+                "subtitle_color": "#E8C36B",
+            }
+            print("used self-contained thumbnail fallback")
+        thumb["composition"] = "centered_subject"
+        thumb["candidate_prompt_suffix"] = FACELESS_SUFFIX
+        cfg["thumbnail"] = thumb
+        changed.append("thumbnail")
+    else:
+        print("skip: thumbnail block already present")
 
-    v = json.loads(CJ.read_text())
-    assert v["thumbnail"]["composition"] == "centered_subject"
-    assert v["music"]["tracks"] == 3
-    assert v["kling_count"] == 2
-    assert v["name"] == "sacred_dawn" and v["voice_id"] == "Elliot"
-    print(f"changed: {changed or '(nothing - already current)'}")
-    print(f"VERIFIED: thumbnail+music+kling_count present, name/voice intact")
+    # ---- music block ----
+    if "music" not in cfg:
+        cfg["music"] = dict(MUSIC_BLOCK)
+        changed.append("music")
+    else:
+        print("skip: music block already present")
+
+    # ---- kling_count default ----
+    if cfg.get("kling_count") != 2:
+        cfg["kling_count"] = 2
+        changed.append("kling_count")
+    else:
+        print("skip: kling_count already 2")
+
+    if not changed:
+        print("No changes needed -- sacred-dawn/channel.json already patched.")
+        return
+
+    bak = SD + ".pre_blocks"
+    if not os.path.exists(bak):
+        shutil.copy2(SD, bak)
+        print("backup: %s" % bak)
+
+    out = json.dumps(cfg, indent=2, ensure_ascii=False)
+    json.loads(out)  # validate round-trip before writing
+    with open(SD, "w", encoding="utf-8") as f:
+        f.write(out + "\n")
+
+    print("PATCHED %s" % SD)
+    print("added/updated: %s" % ", ".join(changed))
+    print("--- thumbnail / music / kling_count now: ---")
+    print(json.dumps(
+        {k: cfg.get(k) for k in ("thumbnail", "music", "kling_count")},
+        indent=2, ensure_ascii=False,
+    ))
+
 
 if __name__ == "__main__":
     main()
