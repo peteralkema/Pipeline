@@ -81,3 +81,12 @@ remotion/.remotion/
 *.png
 *.wav
 *.mov
+
+# Per-run pipeline artifacts (newer filenames — regenerated every render)
+**/projects/**/render_policy.json
+**/projects/**/thumbnail_selection.json
+**/projects/**/publish.json
+
+# Stray local test scaffolding — never track
+inbox-test/
+**/projects/pipetest*/
