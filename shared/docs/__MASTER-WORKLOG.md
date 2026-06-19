@@ -1,7 +1,7 @@
 # _MASTER-WORKLOG.md — YouTube Media Flywheel
 
 _The one living operational log. Solo operator (Peter, The Hague). All edits LAPTOP → GitHub → box; never hand-edit on box._
-_Last updated: 17 June 2026 (evening — audio-chain fixes, Prehistoric live, scheduler designed)._
+_Last updated: 19 June 2026 (batch-of-batches built + launched; music on four channels; thumbnail word-fit; first multi-channel run)._
 
 ---
 
@@ -33,7 +33,7 @@ _Standing read: the system is browser-only end to end, uploads from the browser 
 
 ## Tier 1 — Ship & verify (the real work)
 1. **Read Prehistoric ep1 (Toba) + ep2 (Chicxulub) first-48h CTR + AVD** — the data that picks the slate order. Pull via NexLev `get_my_video_analytics` + `get_my_audience_retention`; read the first 10-15s specifically for the front-2-Kling hook lift, and compare CTR/AVD to the Wild Horizons ~218K floor. Decide tight-~20min vs long-form-~40min (the 88-beat toba vs `toba-full.md` question) from the curve. Do NOT author the other 17 blind.
-2. **Build the upload scheduler** (Tier-4 #18 below, promoted to do-next) — no-state, `--publish-start <ISO+tz>` + `--publish-interval-hours` in `run_batch.py`, each video uploaded private with a computed `publishAt`, YouTube auto-publishes. Then a batch is hands-off. Design banked below.
+2. **Read the live multi-channel run + close the gaps it surfaced.** The 20-video run (lady-be-good + Cathedral 9 + Sacred Dawn 10) launched 19 June. When it completes: check the manifest for ✗, spot-check Studio (private + correct 01:00 `+02:00` schedule + **thumbnail attached** — the thumbnail-set call can silently fail), and before ANY next run move shipped pairs out of the inboxes (re-ingest gap). The scheduler + batch-of-batches SHIPPED 19 June. **Three real gaps to close (Tier 2):** (a) re-ingest auto-archive in `run_batch.py`; (b) thumbnail-set retry + persist video ID + a standalone `set_thumbnail.py`; (c) `--plan` should run `validate_slug` so bad filenames fail cheap.
 3. **Run the next batch** (validated topics only) once the scheduler exists and ep1/ep2 data is in.
 4. **Prove dramatic motion end-to-end on a real render.** `cain-abel` (Sacred Dawn) — the motion root-fix means its front Kling beats should read dramatic with zero hot-fix. (Chicxulub's front-2 Kling already proved the tiered path works; this proves it on a Kling-heavy channel.)
 5. **Get the other pending-publish videos out** (gustloff disclosure, Esther/Enoch packaging).
@@ -77,6 +77,32 @@ _Standing read: the system is browser-only end to end, uploads from the browser 
 ---
 
 # THE RECORD (compressed, newest first)
+
+_Each block: date · what shipped · what it left open (now tracked in THE BACKLOG above). Durable lessons have graduated to the canonical (§-refs) / ante-machinam; this is the index, not the detail._
+
+### 19 June 2026 — the batch-of-batches, music across four channels, thumbnail word-fit, first multi-channel run
+The day the factory ran many channels in one launch. Built the driver, rolled music onto four channels, fixed a thumbnail bug, and ran a real multi-channel scheduled batch end to end — catching several production-grade gaps live.
+
+**The batch-of-batches (`run_all_batches.py`, built + proven).** A thin sequential driver over `run_batch.py`: reads `batch_plan.json` (one entry per channel — channel, inbox, kling_count, publish_start, interval, skip), runs each channel's batch in turn, isolates per-channel failures, passes `--plan` through for a zero-spend dry-run of every channel's calendar, writes a combined manifest, exits non-zero if any failed. Sequential by design. The inbox convention is now uniform: every channel owns `<channel>/batch_inbox/`. → canonical §5.9.
+
+**Music rolled onto four channels.** Curated per-channel `music/` libraries (8 tracks each, normalized `track_NN.mp3`) + the `channel.json` `music` block, now live on Prehistoric Disasters, You Had To Be There, Scripture On Screen, Final Hours — all on the identical proven config (`{dir:music,tracks:3,crossfade_seconds:2,level:0.07}`). **Banked: music is BOX-LOCAL, not git** — `.gitignore:78` is `*.mp3`, so libraries are scp'd to the box, never committed (repo tracks only the `channel.json` block). Caused an empty-commit + fast-forward-reject confusion mid-session; the rule is "music = scp, config = git." **The `level` key in the music block is currently INERT** — the mux reads a hardcoded `MUSIC_LEVEL = 0.07` constant in `assemble_episode.py:61`, not the block; per-channel level would need wiring (deliberately not built — 0.07 is the proven global). 0.07 is still unverified by ear on the three new channels.
+
+**Thumbnail word-break fixed (`patch_thumbnail_nobreak.py`).** A Scripture thumbnail rendered "HE LOST E / VERYTHING" — `_fit_text` wrapped via `textwrap.wrap()` with no break flags, chopping a long word at the char limit. Fix: `break_long_words=False, break_on_hyphens=False` on both wrap calls; the existing shrink-to-fit loop then shrinks the font until the unbroken word fits. Structural fix in the shared `make_thumbnail.py` — EVERY channel inherits it. → canonical §6.
+
+**First multi-channel scheduled run — launched, corrected, relaunched.** A 20-video run across Final Hours / YHTBT / Scripture / Cathedral. First attempt was killed mid-flight and corrected for a timezone error (below); franklin-expedition + herculaneum shipped from an earlier proof and were pulled to `_shipped/`. After correction, FH (5) + YHTBT (3) + Scripture (3) shipped; **Cathedral's 9 all prep-failed on the slug rule** (below) — caught at zero spend. Renamed + relaunched with Sacred Dawn (10) added: a 20-video run (lady-be-good 1 + Cathedral 9 + Sacred Dawn 10). **LIVE-STATE: confirm the run's manifest (X/20) + spot-check Studio (private + correct schedule + thumbnail attached) when it completes.**
+
+**Banked this session (durable, → canonical):**
+- **Slug rule: filenames must be `^[a-z0-9][a-z0-9-]{0,60}$`** — lowercase letters/numbers/hyphens, start alphanumeric, no underscores, no `NN_` prefixes. `create_project` (`mission_control/ingest.py:validate_slug`) refuses otherwise, at the slug stage, BEFORE any spend. Cathedral's `02_ton-618`… and three Sacred Dawn scripts (`elijah_carmel`, `sun_stood_still`, `ten_plagues`) failed this; fix is `_`→`-` rename of both pair members. **Bake into the authoring checklist.** → canonical §12 + ante-machinam.
+- **`--plan` does NOT catch slug errors** — it skips the real `create_project`, so a bad filename sails through the dry-run as "planned" then fails at real-run time. The dry-run validates inboxes + schedules but not slugs. Pre-run slug scan: `for f in <inbox>/*.md; do basename "${f%.md}" | grep -qE '^[a-z0-9][a-z0-9-]*$' || echo BAD; done`. (Backlog: `--plan` should run `validate_slug` on each stem.) → canonical §5.9 + Tier 2.
+- **Channel-header vs folder slug** — `cathedral_of_stars` uses an underscore slug (folder + script headers agree); `sacred_dawn` headers auto-resolve to the `sacred-dawn/` folder; the rest are hyphenated. The plan's `channel` must match the FOLDER; the script `channel:` header must match what the orchestrator resolves. An empty hyphen-`cathedral-of-stars` stub created by mistake had to be deleted. Resolve identity explicitly — check the folder AND the header.
+- **The timezone +02:00 summer trap** — a scheduled `publish_start` written `+01:00` (winter CET) in June schedules an hour later than intended (01:00 typed as `+01:00` displays as 02:00 in Studio; the actual summer offset is CEST/`+02:00`). Caught after a video showed 02:00; fixed the whole plan to `+02:00`. → canonical §5.9.
+- **The render-vs-publish race** — a scheduled video only honors `publishAt` if it finishes uploading before that instant; a start too close to "now" means a late-in-queue video uploads past its slot and YouTube publishes it immediately. Date the earliest start far enough ahead for the queue to clear. → canonical §5.9.
+
+**Two open gaps surfaced (Tier 2):**
+- **Re-ingest:** `run_batch.py` writes a manifest but does NOT move shipped pairs out of the inbox — a re-run re-renders + re-uploads (duplicates) everything still in `batch_inbox`. Until closed, move shipped pairs to `<inbox>/_shipped/` by hand before re-running. Durable fix (decided to live at the channel-batch level, `run_batch.py`): auto-archive to `_shipped/` on `ok=True` only. Patch drafted (`patch_batch_archive_shipped.py`), NOT applied (don't change the machine mid-run).
+- **Thumbnail-set is fire-once, no retry, failure not surfaced.** `upload_episode.py` uploads the video (line 257) then sets the thumbnail in a SEPARATE call (line 262); if that call fails/skips, the video ships with the auto-grab and nothing errors. Hit noahs-flood (thumbnail.png was perfect on disk, 1MB, just never attached). Also: the **video ID is never persisted to the project**, so there's no on-disk link from project → uploaded video to fix it after the fact. Fix path: a standalone `set_thumbnail.py` (video ID + png → `thumbnails().set()`, no re-upload) + persist the video ID + retry the set call. For now, re-set by hand in Studio.
+
+→ canonical roster + §5.8/§5.9 (batch + batch-of-batches), §6 (music box-local, thumbnail word-fit), §12 (slug/timezone/re-ingest/thumbnail-upload gotchas).
 
 _Each block: date · what shipped · what it left open (now tracked in THE BACKLOG above). Durable lessons have graduated to the canonical (§-refs) / ante-machinam; this is the index, not the detail._
 
