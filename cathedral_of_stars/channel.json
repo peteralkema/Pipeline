@@ -17,16 +17,21 @@
   },
   "thumbnail": {
     "composition": "low_silhouette",
-    "scrim": {
-      "side": "left",
-      "width": 0.42,
-      "opacity": 0.78,
-      "feather": 0.18
-    },
-    "darken_factor": 1.0,
-    "vignette": 0,
-    "margin_x": 70,
-    "margin_y": 70,
+    "candidates": 2,
+    "candidate_prompt_suffix": "YouTube thumbnail composition, strongly asymmetric: a colossal glowing cosmic object (a vast star, galaxy, or nebula) massed in the RIGHT TWO-THIRDS of the frame, radiant in warm gold and amber cooling to blue-white; the LEFT THIRD deliberately dark, deep, low-detail negative space reserved for a headline; one tiny lone faceless human silhouette LOW and right-of-centre giving overwhelming scale; cinematic, painterly photoreal, the cosmic object brightly lit against the dark left; single subject only, no clutter, no text, no letters",
+    "selection_rules": [
+      "ONE overwhelming cosmic subject that reads instantly at phone-thumbnail size",
+      "awe-inspiring, reverent, luminous, never garish or frightening; it must glow in a dim feed",
+      "an unmistakable TINY human silhouette low in the frame giving overwhelming scale",
+      "clean, darker, uncluttered negative space in the TOP-LEFT where the headline lands",
+      "no garbled detail, no accidental letterforms, no duplicated or broken figures, one subject only"
+    ],
+    "font": "shared/fonts/Anton-Regular.ttf",
+    "font_fallbacks": [
+      "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+      "Impact",
+      "Arial Black"
+    ],
     "title_color": [
       244,
       246,
@@ -37,8 +42,39 @@
       192,
       74
     ],
-    "candidate_prompt_suffix": "a colossal glowing star or cosmic object dominating the right two-thirds, a tiny lone human silhouette small in the foreground for scale, deep space, gold-to-blue palette, dark empty space across the left third, awe-inspiring, cinematic, painterly photoreal, no text",
-    "selection_rules": "pick the candidate with the cleanest dark negative space on the left where the headline lands; the strongest sense of overwhelming scale at a glance; the cosmic object glowing and awe-inspiring, not garish or frightening; reject any with garbled detail, distorted shapes, or text artifacts"
+    "stroke_width": 12,
+    "stroke_color": [
+      0,
+      0,
+      0
+    ],
+    "shadow": true,
+    "shadow_offset": [
+      5,
+      6
+    ],
+    "shadow_blur": 6,
+    "darken_factor": 1.0,
+    "vignette_strength": 0.0,
+    "scrim": {
+      "side": "left",
+      "width": 0.42,
+      "opacity": 0.5,
+      "feather": 0.7
+    },
+    "text_anchor": "top-left",
+    "text_align": "left",
+    "title_area_pct": 0.52,
+    "title_max_height_pct": 0.34,
+    "title_start_size": 150,
+    "subtitle_area_pct": 0.55,
+    "subtitle_max_height_pct": 0.14,
+    "subtitle_start_size": 90,
+    "margin": 20,
+    "margin_x": 40,
+    "margin_y": 20,
+    "uppercase": true,
+    "segment_foreground": false
   },
   "upload": {
     "category_id": "24",
