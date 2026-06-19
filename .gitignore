@@ -90,3 +90,7 @@ remotion/.remotion/
 # Stray local test scaffolding — never track
 inbox-test/
 **/projects/pipetest*/
+
+# Inbox queues — transient staging the runner consumes; authored .md lives elsewhere
+**/batch_inbox/
+**/inbox/
