@@ -1,6 +1,6 @@
 # Scripture On Screen — Channel Doctrine
-*The single consolidated reference for **Scripture On Screen** — the faithful-canonical Bible channel, sister channel to Sacred Dawn. Load this, with the four `_` system docs, on any session for this channel. Captures positioning, the two-audience thesis, the Sacred Dawn boundary, competitive analysis, the moat, content model, length doctrine, craft spine, packaging doctrine, the episode backlog, config facts, and roadmap.*
-*Drafted 14 June 2026 from the naming-and-scope session. The `_` prefix floats it to the top of `shared/docs/`. Channel-scoped, load-on-demand — not a system doc.*
+*The single consolidated reference for **Scripture On Screen** — the faithful-canonical Bible channel, sister channel to Sacred Dawn. Load this, with the four `_` system docs, on any session for this channel. Captures positioning, the two-audience thesis, the Sacred Dawn boundary, competitive analysis, the moat, content model, length doctrine, craft spine, packaging doctrine, the episode backlog, config facts, roadmap, and (§12) the reusable batch-runner launch playbook.*
+*Drafted 14 June 2026 from the naming-and-scope session. **Updated 18 June 2026: channel LAUNCHED. Esther flagship (~30 min) + Job (Phase-1, 56 beats) shipped; the first 10-video batch is rendering through `run_batch.py`, publishing nightly 19–28 June. Curated Artlist music bed, the `thumbnail`/`music` `channel.json` blocks, and the per-channel batch-inbox design are all live and recorded below.** The `_` prefix floats it to the top of `shared/docs/`. Channel-scoped, load-on-demand — not a system doc.*
 *[Naming note: resolved 14 June to **Scripture On Screen** (`@Scripture-On-Screen`, open). Chosen on an expectation-management argument — the name makes a *medium* promise, not a *fidelity* promise, which is the right contract for AI output that will take visual liberties. Rejected: "Biblical Canon" (over-promises textual fidelity → invites the faithful audience to police the gap), "Reimagined" (implies altered), "____ Cinema" (saturated swarm). See §1, §4, §9.]*
 
 ---
@@ -143,10 +143,10 @@ Across the data, female-protagonist stories massively over-index: **Esther 2.4M,
   - **The rule in one line:** *face only at peaks, rationed and spaced; identity carried by costume/silhouette everywhere else; faceless by default.* Not "face once" — reserve a face for the two or three later beats that genuinely need one (the climax especially).
   - **Phase-2 upgrade path (NOT a launch dependency):** a character-reference / IP-adapter approach (generate one canonical hero portrait, feed it as an image reference to later generations) would tighten consistency further — but it's a real change to the still leg, adds cost/complexity, and the costume-carrier method gets ~90% of the way for free. Bank it as the upgrade if drift outruns the rationing; do not block launch on it.
 
-- **Music:** **warmer than Sacred Dawn** — melody-and-movement, not drone-and-dread. `default_music_prompt` (draft):
+- **Music:** **warmer than Sacred Dawn** — melody-and-movement, not drone-and-dread. `default_music_prompt` (live):
   > *warm orchestral storytelling score, emotive strings and woodwinds, hopeful and cinematic, swelling brass on triumph, harp and gentle choir on tender beats, restrained percussion only on deliverance/action beats, no modern instruments*
   >
-  > The more dynamic score is a stronger case for **generated `make_music.py`** than Sacred Dawn's static bed was — folds into the open generated-vs-curated music decision.
+  > **Decision resolved (18 June): curated Artlist bed, not generated.** The generated-vs-curated question was open at launch; settled in favour of a curated bed for the prestige tier (generated reads thinner than "Amazon Prime of the Bible" demands). **8 tracks** (`track_01.mp3`–`track_08.mp3`, space-free names) live in `scripture-on-screen/music/`; the assembler picks **3 at random**, lays them end-to-end with a **2-second crossfade**, at **`level: 0.07`**, per the `music` block in `channel.json`. **Validated on the Job test (18 June): music choice AND level both correct on the first try — `0.07` confirmed right for a warm melodic bed under Ren, no change needed.** Artlist's license clears YouTube monetisation cleanly (a copyright claim on a faithful Bible channel is exactly the trust/revenue risk we avoid). **Track-selection test when curating:** *"does this sound like Sacred Dawn?"* — if yes, it's the wrong track; this channel must be audibly warmer/melodic to keep the two Bible channels separate at the audio layer (the third separation layer, alongside voice and look). `make_music.py` is fallback-only; not used here.
 
 ---
 
@@ -164,6 +164,10 @@ There's a production-risk leg too: a 30-min script is ~180+ beats — more still
 **The counter-pressure, on record:** the niche skews long (Immersive runs 60–85 min from near-cold, and long-form stacks ad breaks in a 5–11 RPM niche). But Immersive is documentary narration over loose visuals — cheap per minute, easy to pad. Our format is photoreal recreation, where every minute is expensive. **We cannot out-length a documentary channel on a per-minute-expensive format; we out-execute it on hold rate.** Play our game, not theirs.
 
 **The framing that resolves it:** *length is an output of retention, not an input.* Make each video as long as the story holds and not one beat longer. Let the curve tell you when you've earned the minutes.
+
+**Phase 1 as executed (18 June 2026):** the launch slate shipped at Phase-1 length. Esther stands as the **30-min flagship** (the one deliberate long-form exception, the anchor). The **ten-video batch** runs **~7–13 min each** (28–56 beats; beat-floor runtime ≈ beat count × ~14s, which exceeds the words/153-wpm estimate — count beats, not words). Job (first shipped, 56 beats / ~13 min) sits at the top of the band; the back half runs leaner (Leah 28 beats, Daniel 32, David & Goliath 33, Samson 32). **On record: the leaner back half came in under the 12–14 target and was shipped as-is rather than padded** — consistent with "length is retention-earned, never padded to a benchmark." If Esther's and Job's curves prove longer earns its keep, extend the lean ones in Phase 2; do not pre-pad. The batch deliberately hedged a 10-video commit with shorter/cheaper/more-at-bats rather than ten blind 30-min renders.
+
+**Dark-content handling — fidelity-of-intent, not fidelity-of-detail (banked from the batch).** Several batch stories carry genuinely difficult material (Sodom's mob, the stonings, Jezebel's death and the dogs, Samson's downfall, the temple collapse). The rule applied: **convey the wickedness/horror and its meaning faithfully, but imply rather than depict — no gore, no gratuitous specifics.** Sodom's mob reads as cruelty and threat without sexual specifics or Lot's daughters-offer; deaths are shown by aftermath and restraint ("only her skull, her feet, and the palms of her hands"), never graphically. This keeps the faithful audience's trust and protects monetisation while staying true to the text's intent. **If a story can't be told without graphic depiction, soften the frame, never the truth.**
 
 **Instrumentation (non-negotiable, or Phase 1 teaches nothing):** read the retention graph in Studio per video, log *where* the drops happen (intro runway, midpoint lull, a specific weak beat), feed it back as pacing principles. The length decision and the retention-logging discipline are the same decision.
 
@@ -185,28 +189,35 @@ There's a production-risk leg too: a 30-min script is ~180+ beats — more still
 
 Apocrypha stripped out (that's Sacred Dawn). Canonical only, ordered by a blend of proven demand and cold-start success. Ship the top few fast — you only need one to catch. Best-first ordering: do **not** let channel averages drive sequencing.
 
-1. **Esther** — 2.4M proven. The orphan who became queen and stopped a genocide. Female lead. The launch video.
-2. **Job** — 1.4M proven. The man God let Satan destroy to test him. Universal suffering-and-faith.
-3. **Sodom & Gomorrah** — 1M proven. Judgment and fire from the sky — photoreal destruction spectacle.
-4. **Jezebel** — 968K proven. The most wicked queen who ever lived. Villain hook, female lead.
-5. **Ruth** — 930K proven. Loyalty and devotion; the foreign widow who became King David's bloodline.
-6. **Noah's Flood** *(human-drama lens — Noah and family, NOT the cosmic order; that's Sacred Dawn)* — inferred tentpole (GIDEON Genesis 10.9M). Destruction spectacle everyone knows.
-7. **Joseph** — the coat, the betrayal by his brothers, the rise in Egypt. A glaring tentpole; reliable evergreen draw.
-8. **David & Goliath** — the shepherd and the giant. Maximum recognition; a single iconic beat.
-9. **Daniel: The Lion's Den & The Fiery Furnace** — two photoreal set-pieces in one figure.
-10. **Leah** — 611K proven. The unloved sister nobody chose. Female lead.
-11. **Samson & Delilah** — superhuman strength, betrayal, the temple collapse finale. Spectacle-rich.
-12. **The Ten Plagues of Egypt** — blood, locusts, darkness, the firstborn. Photoreal gold.
-13. **Nebuchadnezzar** — 158K proven. The king who went mad and ate grass like an animal for seven years.
-14. **Cain & Abel** — 54K proven. The first murder ever; clean dramatic two-hander.
-15. **Abraham & Isaac** — the binding; the hardest test of faith in the canon.
-16. **Jacob & Esau** — 96K proven. The stolen birthright, the brothers' rupture.
-17. **Jonah** — the prophet, the storm, the great fish, the reluctant mission.
-18. **Abigail** — 90K proven. The woman who stopped David from a massacre. Female lead.
-19. **Moses at the Red Sea** — the parting; the single most iconic spectacle in the canon.
-20. **The Revelation / end-times cluster** *(canonical — stays here, unlike apocrypha; the devotional audience cares deeply about prophecy)* — run as its own sub-lane once the channel has trust.
+**Status as of 18 June 2026 — first 12 of the slate authored; Esther + Job shipped; 10 batching.** Each item is a `<slug>.md` beat-script + `<slug>.thumb.json` pair. Legend: **[SHIPPED]** / **[BATCHING]** (rendering, publishing nightly 19–28 June) / unmarked = backlog.
 
-*Sequence logic: open on Esther (highest proven + female lead), then alternate a curiosity/recognition draw with a proven mega-drama so you never publish two "quiet" topics back to back (Esther → Job → Sodom → Ruth → Joseph). Every topic is evergreen — no timing pressure, the served best-execution lane this operation is built for.*
+1. **Esther** — 2.4M proven. The orphan who became queen and stopped a genocide. Female lead. **[SHIPPED — flagship, 119 beats / ~30 min, the one long-form exception. Needed a phone-verified account for the >15-min upload.]**
+2. **Job** — 1.4M proven. The man God let Satan destroy to test him. Universal suffering-and-faith. **[SHIPPED — Phase-1, 56 beats / ~13 min; the single-video test that proved upload path + music level on this channel.]**
+3. **Sodom & Gomorrah** — 1M proven. Judgment and fire from the sky — photoreal destruction spectacle. **[BATCHING — 47 beats; spine = "do not look back" → Lot's wife → pillar of salt.]**
+4. **Jezebel** — 968K proven. The most wicked queen who ever lived. Villain hook, female lead. **[BATCHING — 49 beats; spine = the "dogs will devour her" prophecy → wall of Jezreel, twenty years later.]**
+5. **Ruth** — 930K proven. Loyalty and devotion; the foreign widow who became King David's bloodline. **[BATCHING — 37 beats; the warm tonal palette-cleanser; vow on the road → the line of David.]**
+6. **Noah's Flood** *(human-drama lens — Noah and family, NOT the cosmic order; that's Sacred Dawn)* — inferred tentpole (GIDEON Genesis 10.9M). **[BATCHING — 34 beats; Watchers/Nephilim deliberately kept OUT per the Genesis-seam ruling; flood cause = general human violence. The spectacle showcase.]**
+7. **Joseph** — the coat, the betrayal by his brothers, the rise in Egypt. **[BATCHING — 38 beats; spine = the coat + "you meant it for evil, God meant it for good."]**
+8. **David & Goliath** — the shepherd and the giant. Maximum recognition; a single iconic beat. **[BATCHING — 33 beats; spine = "measure the giant against God, not yourself."]**
+9. **Daniel: The Lion's Den** — photoreal set-piece. **[BATCHING — 32 beats; spine = the open window. NOTE: authored as the lions' den ALONE, not the den+furnace two-hander the original slate proposed — the den is the tighter single arc; the fiery furnace is now its own future topic (#20).]**
+10. **Leah** — 611K proven. The unloved sister nobody chose. Female lead. **[BATCHING — 28 beats, the leanest; spine = the son named in praise (Judah) → the line of kings; "God saw her."]**
+11. **Samson & Delilah** — superhuman strength, betrayal, the temple collapse finale. **[BATCHING — 32 beats; spine = "his hair began to grow again."]**
+12. **Moses at the Red Sea** — the parting; the single most iconic spectacle in the canon. **[BATCHING — 35 beats; the batch's spectacle capstone; God acts only when they've run out of their own way. PROMOTED from #19 to round out the batch of ten — max recognition + clean Sacred Dawn separation.]**
+
+*Remaining backlog (unbuilt), best-first:*
+13. **The Ten Plagues of Egypt** — blood, locusts, darkness, the firstborn. Photoreal gold. *(Note: lightly covered inside Red Sea's Act 1; the standalone can go deeper.)*
+14. **Nebuchadnezzar** — 158K proven. The king who went mad and ate grass for seven years.
+15. **Cain & Abel** — 54K proven. The first murder; clean dramatic two-hander.
+16. **Abraham & Isaac** — the binding; the hardest test of faith in the canon.
+17. **Jacob & Esau** — 96K proven. The stolen birthright, the brothers' rupture.
+18. **Jonah** — the prophet, the storm, the great fish, the reluctant mission.
+19. **Abigail** — 90K proven. The woman who stopped David from a massacre. Female lead.
+20. **The Fiery Furnace** — Shadrach, Meshach, Abednego; the fourth man in the fire. *(Split out from the Daniel entry — its own set-piece.)*
+21. **The Revelation / end-times cluster** *(canonical — stays here; the devotional audience cares deeply about prophecy)* — its own sub-lane once the channel has trust.
+
+**The craft spine (banked from authoring all ten — the reusable script skeleton).** Every batch script was built on the same structure, and it should be the template for future authoring: **cold open *mid-action*** (the disaster/threat already happening — Sodom opens on the fire and the salt pillar, Jezebel at the window facing her killer, Joseph already in the pit), then "to understand… you have to go back," then the story; a **recurring spine object/phrase planted early and paid off at the climax** (the spines listed per-item above); **face tiers folded into the VISUAL lines** (FACELESS default / identity-by-costume carrier / rationed single hero-face at peaks); a **moralised close** that turns the story to the viewer; a **comment-bait question**; and a **sequel hook chaining to the next video** (Job → Sodom → Jezebel → Ruth…). Numbers spelled out, no beat over ~55 words, one VISUAL per beat.
+
+*Sequence logic: open on Esther (highest proven + female lead), then alternate a recognition draw with a proven mega-drama so you never publish two "quiet" topics back to back. **As executed, the batch publishes in inbox filename-sort order, NOT curated best-first order** (daniel → david-goliath → jezebel → joseph → leah → noahs-flood → red-sea → ruth → samson-delilah → sodom-gomorrah). For evergreen content this doesn't matter; if publish sequence ever matters, control it via slug naming or separate staggered runs. Every topic is evergreen — no timing pressure.*
 
 ---
 
@@ -214,49 +225,59 @@ Apocrypha stripped out (that's Sacred Dawn). Canonical only, ordered by a blend 
 
 - **Name / handle:** **Scripture On Screen** — `@Scripture-On-Screen` (**created 14 June**). **Channel ID:** `UCTNSGkPgEHGZtXQeFoPvjcQ` (for the YouTube Data API upload step). **URL:** youtube.com/channel/UCTNSGkPgEHGZtXQeFoPvjcQ. **Display name:** Scripture On Screen (note: capital "On", per the live channel). Chosen on the expectation-management argument (§4): a *medium* promise, not a *fidelity* promise — the right contract for output that takes visual liberties. **Rejected and why:** "The Biblical Canon" (open, but over-promises textual fidelity → invites the knowledgeable faithful audience to police the gap); "Biblical Reimagined" / "Screened Scripture" (imply *altered* / *filtered*); "Canon & Cinema" / "Biblical Cinema" / "Canon Cinematic" (the "____ Cinema" root is a saturated swarm — Scripture Cinema TV, Scripture Cinema Films, Bible Cinema, Sacred Cinema — newest-entrant trap); the render-family roots (Rendered Scripture etc.) likewise saturated. **Claim the handle in YouTube Studio now**, before art is ready, to lock it.
 - **`channel:` header value:** `scripture_on_screen` → resolves to `scripture-on-screen/` via the underscore→hyphen swap. (When in doubt set to exact folder name.)
-- **channel.json schema** (match `final-hours/channel.json` / `sacred-dawn/channel.json`): `name`, **`voice_id`** (snake_case), `style_suffix`, `default_music_prompt`, `base_canon`, `upload: {category_id, privacy_status}`. No resolution key.
+- **channel.json schema** (matches live `prehistoric-disasters/channel.json` — the reference carrying both blocks): `name`, **`voice_id`** (snake_case), `style_suffix`, `default_music_prompt`, `base_canon`, `default_motion`, `upload: {category_id, privacy_status}`, **`thumbnail: {...}`** (auto-thumbnail config), **`music: {dir, tracks, crossfade_seconds, level}`**. No resolution key. **`thumbnail` + `music` blocks added 18 June** via `patch_sos_thumbnail_music.py` (idempotent, schema-checked against Prehistoric). Thumbnail block tuned for this channel: `composition: "figure_right"` (figure massed right-two-thirds, left third reserved for the headline), warm-gold `subtitle_color: [240,195,90]`, softened `scrim.opacity: 0.45` (vs Prehistoric's 0.55, so vivid thumbnails aren't crushed to murk), Anton font + proven overlay mechanics kept. `speaking_rate` deliberately **omitted** — Ren runs native (Prehistoric's `0.9` was tuned for Victor; don't copy blindly).
 - **Voice:** **`voice_id: "Ren"`** (selected — §5). Model `inworld-tts-1.5-max`.
 - **Look (`style_suffix`):** vivid jewel-toned painterly-photoreal — see §5 draft. Per-story palette override layered on top (Esther = crimson/gold/lapis).
 - **Motion:** per-channel guidance (livelier push-in/pull character carried from Sacred Dawn) + per-clip discretion on Mission Control. Per-beat MOTION vocabulary is **banked for later**, cross-channel (§5).
 - **Face policy:** single expressive hero faces permitted; avoid 3+ crowds; **always `safety_tolerance: "5"`** on Flux (§5).
 - **Presentation:** narrator style, no lip-sync (lip-sync is a future upgrade — §5).
-- **Music:** warm orchestral storytelling score (§5 draft); candidate for generated `make_music.py`.
+- **Music:** warm orchestral storytelling score (§5). **Curated Artlist bed (resolved 18 June)** — 8 tracks in `scripture-on-screen/music/`, assembler picks 3 at random end-to-end, 2s crossfade, `level: 0.07` (validated correct on Job). `make_music.py` is fallback-only.
 - **Mode:** Mode A only. **Length:** 10–14 min (Phase 1).
 - **Category:** Entertainment (`24`). Tags from the header.
 - **Source text:** `base_canon` = WEB default (KJV only where cadence earns it) — §5.
 - **Production economics:** ~$20/video target; the "Amazon Prime of the Bible category" quality tier (§1).
 
-**Draft `channel.json` (to stand up at build — confirm keys against the live `sacred-dawn/channel.json` before writing):**
+**Live `channel.json` (as built; `thumbnail`/`music` blocks added 18 June via `patch_sos_thumbnail_music.py`):**
 ```json
 {
-  "name": "Scripture On Screen",
+  "name": "scripture_on_screen",
   "voice_id": "Ren",
-  "style_suffix": "cinematic biblical epic, richly saturated jewel tones, vivid technicolor-painterly palette, deep oil-painting colour, luminous golden-hour light, lush fabrics and ornament, warm dramatic chiaroscuro, period-accurate ancient Near East / Egypt / Persia, painterly photorealism, expressive single figures, no text, no modern elements, 16:9",
-  "default_music_prompt": "warm orchestral storytelling score, emotive strings and woodwinds, hopeful and cinematic, swelling brass on triumph, harp and gentle choir on tender beats, restrained percussion only on deliverance and action beats, no modern instruments",
-  "base_canon": "WEB",
-  "upload": { "category_id": "24", "privacy_status": "private" }
+  "style_suffix": "cinematic biblical epic, richly saturated jewel tones, vivid technicolor-painterly palette, deep oil-painting colour, luminous golden-hour light, lush fabrics and gold and lapis ornament, warm dramatic chiaroscuro, period-accurate ancient Near East, Egypt and Persia, painterly photorealism, expressive single figures, no text, no modern elements, 16:9",
+  "default_music_prompt": "Warm orchestral storytelling score for a cinematic biblical drama. Emotive strings and woodwinds, hopeful and humane, swelling brass on moments of triumph, harp and gentle choir on tender beats, restrained low percussion only on deliverance and action beats. Melodic but never competing with a narrator. Intimate and grand by turns. No modern instruments.",
+  "base_canon": {},
+  "upload": { "category_id": "24", "privacy_status": "private" },
+  "default_motion": "dramatic cinematic motion, lively pan and zoom interplay, expressive movement across the scene, warm dramatic lighting, intimate slow push-in by default with dramatic reveals",
+  "thumbnail": { "composition": "figure_right", "candidates": 2, "subtitle_color": [240,195,90], "scrim": {"side":"left","width":0.42,"opacity":0.45,"feather":0.7}, "font": "shared/fonts/Anton-Regular.ttf", "...": "(full overlay block — see live file / patch)" },
+  "music": { "dir": "music", "tracks": 3, "crossfade_seconds": 2, "level": 0.07 }
 }
 ```
-*Per-story palette (e.g. Esther's crimson/gold/lapis) is applied as a prompt-level override on the slug, not baked into `style_suffix` — keep the base channel-generic.*
+*Live `name` is `scripture_on_screen` (snake_case, resolves to `scripture-on-screen/`), `base_canon` is `{}` (not `"WEB"`), `privacy_status` is `private` — batch uploads go up private + `publishAt` so YouTube auto-publishes on schedule. Per-story palette (Esther's crimson/gold/lapis) is a prompt-level override on the slug, not baked into `style_suffix`.*
+
+**Batch inbox location (design decision, 18 June) — per-channel, never pipeline-root.** The inbox lives at **`scripture-on-screen/batch_inbox/`**, beside `projects/`, `music/`, `channel.json`. Rationale: multiple channels may batch concurrently; a shared pipeline-root `batch_inbox/` collides on slug names and makes `--channel` ambiguous. The runner takes `--inbox <path>` as a free path, so this needed **no code change** — just `--inbox scripture-on-screen/batch_inbox`. **This is now the standing convention for all channels.** (One trap seen: a `git mv` of the old root inbox dragged the already-published Job along — always `ls` the inbox and eyeball the count before a run.)
 
 ---
 
 ## 10. Launch state & roadmap
 
-**Pre-launch — channel created, build pending.** As of 14 June 2026: positioning, two-audience thesis, Sacred Dawn boundary, length doctrine, expectation-management principle, the canonical slate, the name (Scripture On Screen), the look/motion/face/music spec, the production tier (~$20/video, "Amazon Prime of the Bible category"), narrator-style (lip-sync later), and the launch topic (Esther) are locked. **The YouTube channel `@Scripture-On-Screen` has been created** (confirm display-name capitalisation reads "Scripture On Screen"; resolver/API indexing lags for new channels — don't be alarmed by an empty lookup in the first days). Voice is **Ren** (selected). The Esther launch script (`esther-script.md`, 119 beats, ~30 min, Amalek thread included) is written to beat spec and ready to parse.
+**LAUNCHED — Esther + Job shipped; 10-video batch rendering (as of 18 June 2026).** Everything in the 14 June pre-launch list (positioning, thesis, boundary, length doctrine, expectation-management, slate, name, look/motion/face/music spec, $20 tier, narrator-style, Ren voice) is locked and proven in production.
 
-**Open items, in order:**
-1. ~~Claim the handle~~ **done** — set/verify display name "Scripture On Screen"; add the dramatisation description line for the §4 expectation-management cover.
-2. **Stand up `channel.json`** (draft in §9) + `scripture-on-screen/` folder + `projects/esther/`; confirm keys against live `sacred-dawn/channel.json` before writing.
-3. **Parse the Esther script** (`parse_script.py`) → beats_full.json; check parse cleanliness (no wordless beats, numbers spelled, one visual per beat).
-4. **Run the audio leg first** — get the **real TTS duration** before committing compute to 119 stills; trim per the footer cut-list only if it overshoots ~31 min.
-5. **Validate Ren on the Esther cut** — confirm it holds the intimate beats across all 119; fall back to a richer stock voice directed warm-and-slow only if it reads flat (§5).
-6. **Stills pass** with the vivid crimson/gold/lapis palette + face policy; eyeball the gate for spell-breakers (prioritise the HERO beats 4, 59, 66, 83, 101, 115).
-7. **Finish + review**, manual upload (Entertainment, AI-disclosure = Yes, tags), read the retention curve before episode two — do not pre-commit slate length until the curve speaks (§6).
+**What shipped, in order:**
+1. `channel.json` stood up (`scripture-on-screen/`); Ren verified working on the box (real synth, no silent Victor fallback). **Done.**
+2. **Esther flagship published** — 119 beats / ~30 min, the deliberate long-form anchor (needed a phone-verified account for the >15-min upload).
+3. **`thumbnail` + `music` blocks added** to `channel.json` (18 June, `patch_sos_thumbnail_music.py`), tuned for the vivid figure-led look (§9). Curated Artlist bed of 8 tracks dropped into `scripture-on-screen/music/`.
+4. **Job single-video test** — run via an isolated inbox at `--kling-count 0` (all Ken Burns, cheap) to validate the two unknowns: **upload path (passed — landed private with auto-thumbnail) and music level (passed — choice and `0.07` both correct first try).** Then published. (Motion not re-tested — proven identical on other channels.)
+5. **Per-channel batch-inbox design** adopted — moved the inbox under `scripture-on-screen/` (§9, §12).
+6. **Ten-video batch launched** (18 June) via `run_batch.py`, `--kling-count 2`, staggered `--publish-interval-hours 24` from `2026-06-19T01:00:00+02:00`. Publishes nightly 19–28 June. Dry `--plan` confirmed 10 projects, all pairs matched, slots stepping 24h. See §12.
 
-**Banked for later (not launch dependencies):** per-beat MOTION vocabulary → Kling (cross-channel Mission Control upgrade, §5); lip-sync (§5); generated `make_music.py` for the dynamic score (§5); character-reference for tighter face consistency (§5).
+**Open / next, in order:**
+1. **Let the batch finish** — sequential, failure-isolated; **do NOT restart `mission-control.service` while it animates** (cgroup teardown kills the in-flight run). Read the manifest (`scripture-on-screen/batch_inbox/_batch_manifest_*.json`) for shipped/failed per slug when done; re-run any failed slug via an isolated inbox.
+2. **Read the curves — the actual job now.** Pull **CTR + AVD in the first 48 h** for Esther, then Job, then each batch video as it goes live — **via NexLev MCP from the connected channel, never pasted tables/screenshots** (a scrambled paste once caused a wrong cut recommendation). NexLev AVD field is unreliable for recently-launched channels; compute AVD as `(total watch-minutes × 60) ÷ total views`. Log *where* retention drops (§6).
+3. **Decide Phase 2 from the data, not speculation:** does the leaner back half (Leah/Daniel/David ~7–8 min) hold as well as Job's ~13 min? If longer earns its keep, extend the lean ones and/or commit more 30-min flagships. If not, tight Phase-1 length is vindicated. Let the curve speak before authoring the next slate.
+4. **Next authoring batch** from the §8 remaining backlog (Ten Plagues, Nebuchadnezzar, Cain & Abel, Abraham & Isaac, Jacob & Esau, Jonah, Abigail, Fiery Furnace), sequenced by which *story type* (female-lead drama / spectacle / quiet) over-performs on THIS channel specifically once the first curves are in.
 
-**Watch on the first video:** retention curve shape (first-30s runway and act-break transitions), CTR on the Esther packaging, whether the chosen voice holds US viewers, and which beats spike. Let the data — not speculation — drive episode two and the length call.
+**Banked for later (not dependencies):** per-beat MOTION vocabulary → Kling (cross-channel Mission Control upgrade, §5); lip-sync (§5); character-reference for tighter face consistency (§5); per-story Kling-count tuning (the batch ran `--kling-count 2` — first two beats Kling, rest Ken Burns; raise for spectacle-heavy stories once curves justify the spend); generated `make_music.py` (fallback only).
+
+**Watch across the batch:** retention curve shape (first-30s runway, act-break transitions), CTR per packaging, whether Ren holds US viewers across the leaner cuts, which *stories* spike (female-lead vs spectacle vs quiet), and whether the figure-led `figure_right` thumbnails out-click the niche's sepia-mystery wash. Data drives the next slate and the length call.
 
 ---
 
@@ -269,6 +290,56 @@ The faithful-recognition titles read *coherent* under this channel; the shock/ap
 **Never run these (shock-bait / apocrypha — wrong audience, wrong channel, monetisation risk):** "The Book They BANNED From the Bible" · "Noah Was NOT Human" · "The TERRIFYING Truth About the Nephilim" · "What the Church is HIDING." *(These are Audience B — if a title like this fits the video, the video belongs on Sacred Dawn.)*
 
 *The line: faithful recognition over manufactured mystery. The canon is the asset; reverent photoreal best-execution is the moat; the two-audience split is the strategy.*
+
+---
+
+## 12. The batch-runner launch playbook (executed 18 June 2026 — the reusable recipe)
+
+*Exactly how the first 10-video batch shipped through `shared/run_batch.py`, banked as the repeatable procedure for every future batch on any channel. The runner takes a folder of `<slug>.md` + `<slug>.thumb.json` pairs and runs each through the FULL pipeline unattended (gates auto-accept; audio → Mode A → convergence → assemble → thumbnail → upload), sequential and failure-isolated, ending in a private upload (+ `publishAt` if scheduled).*
+
+### The pair format (per topic)
+- **`<slug>.md`** — the locked beat-script. 4-line header (`channel: scripture_on_screen` / `title:` full SEO title / `description:` ending "Welcome to Scripture On Screen." / `tags:`), then `## SECTION` headers, then beats as an `[A] <narration>` line + a `VISUAL: <prompt>` line. **No beat numbers** — only the `[A]` marker. Face tiers folded into the VISUAL text (FACELESS / identity-by-costume / "single expressive hero face"). Numbers spelled out. One VISUAL per beat. Runtime ≈ beat count × ~14 s.
+- **`<slug>.thumb.json`** — `{"subject": <Flux scene, with composition note putting the figure right-two-thirds + left third open for text>, "title": <short punchy thumbnail headline>, "subtitle": <small descriptor>}`. The thumb `title` is **deliberately different** from the SEO `title` in the .md header (§7 complement-never-echo). Dot-naming matters: `<slug>.thumb.json`, not `<slug>_thumb.json`, or the runner silently skips it. A `.md` with no sibling `.thumb.json` is SKIPPED with a warning.
+
+### `run_batch.py` flags (full set)
+- `--inbox PATH` (required) — folder of pairs. **Use the per-channel path `scripture-on-screen/batch_inbox` (§9), never pipeline-root.**
+- `--channel NAME` (required) — channel dir name, e.g. `scripture-on-screen`.
+- `--kling-count N` — tiered render: **first N beats get Kling true-motion, the rest Ken Burns.** `0` = all Ken Burns (cheapest; the Job test path). The batch ran **`2`** (cold-open beats move, rest free).
+- `--plan` — prep preview only, **zero spend**, prints the full release calendar. Always run first.
+- `--limit N` — process at most N (testing). No per-slug "only this one" flag exists → isolate a single video via a dedicated inbox folder.
+- `--publish-start ISO8601+TZ` — `publishAt` for the FIRST video; **timezone offset is mandatory** (naive timestamps rejected). Omit → private-immediate.
+- `--publish-interval-hours H` — spacing between successive `publishAt` (default 12). Batch used **24** — wide enough that each video's first-48 h CTR/AVD is legible before the next drops.
+
+### The executed sequence (LAPTOP edits → GitHub → BOX pull-only)
+1. **Author** all pairs; copy into `scripture-on-screen/batch_inbox/` in the repo on **LAPTOP**.
+2. **Drop the music bed** — 8 space-free-named tracks into `scripture-on-screen/music/`.
+3. **Commit + push** (`git add` inbox + music; `git pull --no-edit`; commit; push). **BOX:** `git pull`.
+4. **Remove any already-published slug from the inbox** or the runner re-renders it (`ls` and eyeball the count first).
+5. **BOX:** `set -a; source .env; set +a`.
+6. **BOX dry plan (zero spend):** `python shared/run_batch.py --inbox scripture-on-screen/batch_inbox --channel scripture-on-screen --kling-count 2 --plan --publish-start 2026-06-19T01:00:00+02:00 --publish-interval-hours 24`. Confirm: correct **count**, every `.md` has its `.thumb.json` (no skip warnings), slots step by the interval.
+7. **BOX real run, detached:** `nohup python shared/run_batch.py --inbox scripture-on-screen/batch_inbox --channel scripture-on-screen --kling-count 2 --publish-start 2026-06-19T01:00:00+02:00 --publish-interval-hours 24 > ~/sos_batch.log 2>&1 &` then `tail -f ~/sos_batch.log`.
+
+### Hard-won gotchas (bank these)
+- **`mission-control.service` restart = death.** Never restart it while a batch animates — cgroup teardown kills in-flight runs. (Backlog: daemonize.)
+- **Publish-slot vs render-time.** Each video must finish uploading *before* its `publishAt`, or YouTube publishes immediately on upload (past timestamp). A 01:00 first slot against a multi-hour render is tight — give cushion (later start) if the render might overrun the first slot.
+- **Filename-sort publish order, not curated order** — control via slug naming or separate runs if it ever matters.
+- **Test the unknowns cheaply first** — one slug via isolated inbox at `--kling-count 0` validates upload + music without Kling spend. Motion didn't need re-testing (proven on other channels).
+- **`safety_tolerance: "5"` on Flux** (channel-wide) or stills silently return ~7KB black PNGs.
+- **`assemble_episode.py` is the only safe assembler** (honors the beat→shot map); never the alignment-unsafe `finish --assemble-only` path.
+
+---
+
+## 13. Next-session focus (set 18 June 2026)
+
+**The job next chat is to READ THE DATA, not author.** The Phase-1 batch exists to produce curves; the curves are the deliverable.
+
+1. **Confirm the batch shipped clean** — check `_batch_manifest_*.json` for failed slugs; re-run any that errored (failure-isolated, so the rest completed).
+2. **Pull CTR + AVD first-48 h via NexLev MCP** (connected channel, never pasted) for Esther → Job → each batch video as it goes live. By next session some videos are live with real numbers and others still pending — **don't read a curve before a video has a genuine 48 h.**
+3. **Answer the three questions the data settles:** does the lean back half (~7–8 min) hold like Job's ~13 min (→ length call)? which story type over-performs on this channel (→ slate weighting)? do `figure_right` thumbnails out-click the sepia wash (→ packaging)?
+4. **Log where retention drops** per video (§6 instrumentation) → pacing principles.
+5. **Only then** author the next backlog batch (§8 #13–20), sequenced by what won.
+
+**Cross-channel promotion owed:** the §12 batch playbook and the per-channel-inbox convention are **not** Scripture-specific — promote them to the canonical reference / `run_batch.py` docstring when those are next touched, so every channel inherits them.
 
 ---
 
