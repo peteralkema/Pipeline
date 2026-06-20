@@ -1,0 +1,28 @@
+{
+  "_meta": {
+    "channel_dir": "synthetic",
+    "channel_title": "Synthetic Press",
+    "uploads_playlist": "UUoiObjaF56A_dn4ZlN1V5jw",
+    "dumped_at_utc": "2026-06-20T19:37:32Z",
+    "video_count": 0,
+    "parts_captured": [
+      "snippet",
+      "status",
+      "contentDetails",
+      "statistics",
+      "topicDetails",
+      "recordingDetails",
+      "localizations",
+      "liveStreamingDetails",
+      "player",
+      "paidProductPlacementDetails"
+    ],
+    "blind_spots": [
+      "AI-content disclosure flag (not in API)",
+      "Content ID copyright claims (needs partner scope)",
+      "end screens / cards / editor state",
+      "statistics.* is a snapshot at dump time, not live"
+    ]
+  },
+  "videos": []
+}

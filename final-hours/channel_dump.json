@@ -1,0 +1,2334 @@
+{
+  "_meta": {
+    "channel_dir": "final-hours",
+    "channel_title": "Final Hours",
+    "uploads_playlist": "UUoRxAQ6kqaz7o-LAYqtHGDQ",
+    "dumped_at_utc": "2026-06-20T19:37:29Z",
+    "video_count": 23,
+    "parts_captured": [
+      "snippet",
+      "status",
+      "contentDetails",
+      "statistics",
+      "topicDetails",
+      "recordingDetails",
+      "localizations",
+      "liveStreamingDetails",
+      "player",
+      "paidProductPlacementDetails"
+    ],
+    "blind_spots": [
+      "AI-content disclosure flag (not in API)",
+      "Content ID copyright claims (needs partner scope)",
+      "end screens / cards / editor state",
+      "statistics.* is a snapshot at dump time, not live"
+    ]
+  },
+  "videos": [
+    {
+      "kind": "youtube#video",
+      "etag": "fA7eX9kIA6tJpHbSIQCQUaCsCzQ",
+      "id": "odvRcUYLP50",
+      "snippet": {
+        "publishedAt": "2026-06-19T23:00:13Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "A Ghost Ship Ran Aground in 1921 With Her Sails Set and Food on the Stove. The Entire Crew Was Gone.",
+        "description": "On the morning of January 31, 1921, a great five-masted schooner was found run aground on the treacherous Diamond Shoals off Cape Hatteras, North Carolina. Her sails were set, food was reportedly laid out in the galley as if a meal were being prepared — and every one of her crew had vanished. The Carroll A. Deering became one of the most famous ghost ships in American history, and the mystery of what happened to her men has never been solved. This is the documented story: what the rescuers found aboard, the theories from piracy to mutiny, and why the truth was never recovered. Recreated from the official investigations. What do you think happened to her crew? Tell us in the comments.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/odvRcUYLP50/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/odvRcUYLP50/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/odvRcUYLP50/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/odvRcUYLP50/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/odvRcUYLP50/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1921",
+          "bermuda triangle",
+          "cape hatteras",
+          "carroll a deering",
+          "diamond shoals",
+          "final hours",
+          "ghost ship",
+          "ghost ship of the outer banks",
+          "maritime mystery",
+          "missing crew",
+          "north carolina",
+          "schooner",
+          "sea mystery",
+          "unsolved mystery",
+          "vanished"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "A Ghost Ship Ran Aground in 1921 With Her Sails Set and Food on the Stove. The Entire Crew Was Gone.",
+          "description": "On the morning of January 31, 1921, a great five-masted schooner was found run aground on the treacherous Diamond Shoals off Cape Hatteras, North Carolina. Her sails were set, food was reportedly laid out in the galley as if a meal were being prepared — and every one of her crew had vanished. The Carroll A. Deering became one of the most famous ghost ships in American history, and the mystery of what happened to her men has never been solved. This is the documented story: what the rescuers found aboard, the theories from piracy to mutiny, and why the truth was never recovered. Recreated from the official investigations. What do you think happened to her crew? Tell us in the comments."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT6M15S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "3",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/odvRcUYLP50\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "A Ghost Ship Ran Aground in 1921 With Her Sails Set and Food on the Stove. The Entire Crew Was Gone.",
+          "description": "On the morning of January 31, 1921, a great five-masted schooner was found run aground on the treacherous Diamond Shoals off Cape Hatteras, North Carolina. Her sails were set, food was reportedly laid out in the galley as if a meal were being prepared — and every one of her crew had vanished. The Carroll A. Deering became one of the most famous ghost ships in American history, and the mystery of what happened to her men has never been solved. This is the documented story: what the rescuers found aboard, the theories from piracy to mutiny, and why the truth was never recovered. Recreated from the official investigations. What do you think happened to her crew? Tell us in the comments."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "bIbEIJAet01oNppNFR25d-Ybm7Y",
+      "id": "PCTEasHZjwI",
+      "snippet": {
+        "publishedAt": "2026-06-19T10:15:15Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "This Bomber Was Found Perfectly Preserved After 16 Years. Its Crew Had Walked Off Into the Sahara.",
+        "description": "In April 1943, an American B-24 bomber called the Lady Be Good failed to return from a mission and was declared lost with all nine men aboard. Sixteen years later, oil surveyors found her sitting almost perfectly preserved in the deep Sahara — but the crew was nowhere aboard. They had survived the crash, parachuted into the desert, and tried to walk out. This is the documented story of the Lady Be Good: what really happened that night, the astonishing distance the men walked, and the diary that finally told us how they died. Recreated from the official investigation and the crew's own recovered diaries. Tell us in the comments how far you think you could have walked.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/PCTEasHZjwI/default.jpg?sqp=COTW29EG&rs=AOn4CLCuLwR_MxgamDZ4xuFnpjFUbn2VQQ",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/PCTEasHZjwI/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDOTDErSPC71zf3njw9xSm-qO653g",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/PCTEasHZjwI/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAjbPkX1VsMX0cKc-ZOUluv3lXeXw",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/PCTEasHZjwI/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLAiaDYAxqRh1ccbdLyFK_ZFNEOD3w",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/PCTEasHZjwI/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLB9BfNy8roUBedNWQ-Yc4E0fg8Zgg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1943",
+          "aviation history",
+          "b-24",
+          "b-24 liberator",
+          "desert survival",
+          "final hours",
+          "lady be good",
+          "libya",
+          "lost bomber",
+          "missing crew",
+          "robert toner diary",
+          "sahara",
+          "unsolved",
+          "world war 2",
+          "ww2 mystery"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "This Bomber Was Found Perfectly Preserved After 16 Years. Its Crew Had Walked Off Into the Sahara.",
+          "description": "In April 1943, an American B-24 bomber called the Lady Be Good failed to return from a mission and was declared lost with all nine men aboard. Sixteen years later, oil surveyors found her sitting almost perfectly preserved in the deep Sahara — but the crew was nowhere aboard. They had survived the crash, parachuted into the desert, and tried to walk out. This is the documented story of the Lady Be Good: what really happened that night, the astonishing distance the men walked, and the diary that finally told us how they died. Recreated from the official investigation and the crew's own recovered diaries. Tell us in the comments how far you think you could have walked."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT6M45S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-24T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/PCTEasHZjwI\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "4CnMJiibkwEUkjFNPJlGWFbZ5V0",
+      "id": "4KDDkcAyb9I",
+      "snippet": {
+        "publishedAt": "2026-06-19T06:17:40Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "The Doors Were Locked to Save a Few Dollars. In 1911, 146 Garment Workers Had Minutes to Escape.",
+        "description": "On the afternoon of March 25, 1911, a fire broke out on the upper floors of the Triangle Shirtwaist factory in New York City. Inside were hundreds of garment workers, most of them young immigrant women and girls. A locked door, a flimsy fire escape, and ladders that could not reach the top floors turned a workplace fire into one of the deadliest disasters in the city's history. 146 people died in about half an hour. This is the documented story of their final minutes — and how their deaths changed American working life forever. Recreated with dignity from the testimony, the inquest, and the historical record. Their names deserve to be remembered. Tell us in the comments.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/4KDDkcAyb9I/default.jpg?sqp=COTW29EG&rs=AOn4CLBshfb3nSpQ7N1crZXHb7OUNuOdAA",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/4KDDkcAyb9I/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAqePWuTzTCMCnqteQQS-UD5SSgVg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/4KDDkcAyb9I/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLBtxV1AtZSUT2gTOfi3x-BBROeCjA",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/4KDDkcAyb9I/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLDj01xEssnu9jXCe2pH3zyrTTP0Jg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/4KDDkcAyb9I/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLBxqTHi-ji-KiFHOgTQVX1_VSyouw",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1911",
+          "american history",
+          "asch building",
+          "disaster",
+          "final hours",
+          "fire safety",
+          "garment workers",
+          "immigrant women",
+          "labor history",
+          "locked doors",
+          "new york history",
+          "triangle fire",
+          "triangle shirtwaist factory fire",
+          "workers rights"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Doors Were Locked to Save a Few Dollars. In 1911, 146 Garment Workers Had Minutes to Escape.",
+          "description": "On the afternoon of March 25, 1911, a fire broke out on the upper floors of the Triangle Shirtwaist factory in New York City. Inside were hundreds of garment workers, most of them young immigrant women and girls. A locked door, a flimsy fire escape, and ladders that could not reach the top floors turned a workplace fire into one of the deadliest disasters in the city's history. 146 people died in about half an hour. This is the documented story of their final minutes — and how their deaths changed American working life forever. Recreated with dignity from the testimony, the inquest, and the historical record. Their names deserve to be remembered. Tell us in the comments."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT6M22S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-27T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/4KDDkcAyb9I\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "37yXrrjpoEurvVVUUznxG_AUt7c",
+      "id": "Zbmh4Ba17OI",
+      "snippet": {
+        "publishedAt": "2026-06-19T06:04:43Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "He Dreamed the Ship Would Sink, So He Got Off. Days Later, the Waratah Vanished With 211 Aboard.",
+        "description": "In July 1909, the brand-new ocean liner Waratah — a ship some called Australia's Titanic — sailed from Durban for Cape Town with 211 people aboard. She steamed into a storm off the South African coast and was never seen again. No wreck, no bodies, no wreckage was ever found. But one passenger had left the ship at Durban, refusing to sail on, because of a series of terrifying dreams. This is the documented story of the Waratah: the man who listened to his nightmares, the last ship to see her, and one of the great unsolved disappearances in maritime history. Recreated from the inquiry records and survivors' testimony. Would you have trusted the dream? Tell us in the comments.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/Zbmh4Ba17OI/default.jpg?sqp=COTW29EG&rs=AOn4CLCSXObXCmznNqJCW2AchLoSuM7F_A",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/Zbmh4Ba17OI/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLB-BB4mZ9_ynfNIPUouvJUuvBKJ6Q",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/Zbmh4Ba17OI/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDfg5T5RUohl61kwa4eigwzvcYO0Q",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/Zbmh4Ba17OI/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLChJ1KKMMQCdmNcfiiGhsaV1_KUYA",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/Zbmh4Ba17OI/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLCrKAtlKDP7iCdITvRkRdrpL_IvFQ",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1909",
+          "australias titanic",
+          "blue anchor line",
+          "cape town",
+          "claude sawyer",
+          "durban",
+          "final hours",
+          "lost ship",
+          "maritime mystery",
+          "ocean liner",
+          "ship disappearance",
+          "ss waratah",
+          "unsolved mystery",
+          "vanished",
+          "waratah"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "He Dreamed the Ship Would Sink, So He Got Off. Days Later, the Waratah Vanished With 211 Aboard.",
+          "description": "In July 1909, the brand-new ocean liner Waratah — a ship some called Australia's Titanic — sailed from Durban for Cape Town with 211 people aboard. She steamed into a storm off the South African coast and was never seen again. No wreck, no bodies, no wreckage was ever found. But one passenger had left the ship at Durban, refusing to sail on, because of a series of terrifying dreams. This is the documented story of the Waratah: the man who listened to his nightmares, the last ship to see her, and one of the great unsolved disappearances in maritime history. Recreated from the inquiry records and survivors' testimony. Would you have trusted the dream? Tell us in the comments."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT6M20S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-26T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "1",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/Zbmh4Ba17OI\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "CneyseY0VopV-HzJ-v406KAPeS8",
+      "id": "g5fwOmLbkjM",
+      "snippet": {
+        "publishedAt": "2026-06-19T05:51:48Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "He Left His Family on This Island in 1587. When He Came Back, There Was Only a Word Carved in a Post",
+        "description": "In 1587, more than a hundred English colonists settled on Roanoke Island, off the coast of what is now North Carolina. Their governor, John White, sailed back to England for supplies — and a war with Spain kept him away for three years. When he finally returned in August 1590, the colony was gone. The houses were dismantled, the people vanished, and a single word was carved into a post: CROATOAN. This is the documented story of England's lost colony — what John White found, what the clues actually say, and the leading theory for where the colonists went. Recreated from White's own narratives and the colonial records. Where do you think they went? Tell us in the comments.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/g5fwOmLbkjM/default.jpg?sqp=COTW29EG&rs=AOn4CLAutEwNr0c3GpwjpzaVBtfZWhbX-Q",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/g5fwOmLbkjM/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDx0IFjfh1Ag2NddfQMzvauLUCjDw",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/g5fwOmLbkjM/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLBLbs2E0vZuS-Hmuj6YhUo0Nat6Rw",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/g5fwOmLbkjM/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLBWvtHosCb4ka0ekWLxGfdds_waPQ",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/g5fwOmLbkjM/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLBuegqd4svUqFwi7BP751h4cTXGCQ",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1587",
+          "american history",
+          "colonial america",
+          "croatoan",
+          "disappeared",
+          "final hours",
+          "john white",
+          "lost colony",
+          "lost colony of roanoke",
+          "north carolina history",
+          "roanoke",
+          "roanoke island",
+          "unsolved mystery",
+          "vanished",
+          "virginia dare"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "He Left His Family on This Island in 1587. When He Came Back, There Was Only a Word Carved in a Post",
+          "description": "In 1587, more than a hundred English colonists settled on Roanoke Island, off the coast of what is now North Carolina. Their governor, John White, sailed back to England for supplies — and a war with Spain kept him away for three years. When he finally returned in August 1590, the colony was gone. The houses were dismantled, the people vanished, and a single word was carved into a post: CROATOAN. This is the documented story of England's lost colony — what John White found, what the clues actually say, and the leading theory for where the colonists went. Recreated from White's own narratives and the colonial records. Where do you think they went? Tell us in the comments."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT5M50S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-25T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "1",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/g5fwOmLbkjM\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "3foStLgcCJWerPOUIS_V8Nbujqw",
+      "id": "P-lHDy6FuP8",
+      "snippet": {
+        "publishedAt": "2026-06-19T05:39:09Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "A 17-Year-Old Watched Vesuvius Destroy Pompeii in AD 79. His Letters Are the Only Eyewitness Account",
+        "description": "When Vesuvius erupted in AD 79 and buried Pompeii and Herculaneum, one young man watched the whole catastrophe unfold from across the Bay of Naples — and lived to write it down. Pliny the Younger was seventeen. His two letters describing the eruption, and the death of his uncle who sailed toward the disaster to rescue people, are the only surviving eyewitness account of that day. This is the documented story of what Pliny saw: the strange cloud, the falling ash, the panic, the dark, and the choice between the man who acted and the boy who watched. Recreated from Pliny's letters to the historian Tacitus. Tell us in the comments which of them you would rather have been.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/P-lHDy6FuP8/default.jpg?sqp=COTW29EG&rs=AOn4CLA7Uz6-G1PhSfkO0SP-3IVv2syTwA",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/P-lHDy6FuP8/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLBwou-1cNa1aX1Wath4njJ6Y94C8w",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/P-lHDy6FuP8/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAPJz6QrdZqw1-BfcsMamGVxxW2EQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/P-lHDy6FuP8/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLBzJnfKUYVbWnpHm3p2EjWp0BNoAQ",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/P-lHDy6FuP8/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLBVXhRRCB-GD3zXRgx_kO72U8uNtg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "ad 79",
+          "ancient rome",
+          "bay of naples",
+          "eruption",
+          "eyewitness",
+          "final hours",
+          "misenum",
+          "plinian eruption",
+          "pliny the elder",
+          "pliny the younger",
+          "pompeii",
+          "roman history",
+          "tacitus",
+          "vesuvius",
+          "volcano"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "A 17-Year-Old Watched Vesuvius Destroy Pompeii in AD 79. His Letters Are the Only Eyewitness Account",
+          "description": "When Vesuvius erupted in AD 79 and buried Pompeii and Herculaneum, one young man watched the whole catastrophe unfold from across the Bay of Naples — and lived to write it down. Pliny the Younger was seventeen. His two letters describing the eruption, and the death of his uncle who sailed toward the disaster to rescue people, are the only surviving eyewitness account of that day. This is the documented story of what Pliny saw: the strange cloud, the falling ash, the panic, the dark, and the choice between the man who acted and the boy who watched. Recreated from Pliny's letters to the historian Tacitus. Tell us in the comments which of them you would rather have been."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT6M42S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-24T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/P-lHDy6FuP8\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "Ycj5S9Hm2tuw99xqLuRSzKtcJeA",
+      "id": "LLlmYVJS3h0",
+      "snippet": {
+        "publishedAt": "2026-06-19T05:21:24Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "They Ran to the Shore to Escape Vesuvius in AD 79. We Found Them Still Waiting for the Boats.",
+        "description": "When Vesuvius erupted in AD 79, the town of Herculaneum sat even closer to the volcano than Pompeii. Hundreds of its people fled to the waterfront and crowded into the stone boat chambers along the shore, hoping to be rescued by sea. The boats never came. For nearly two thousand years they were thought to have escaped — until, in the 1980s, archaeologists opened the vaults and found them. This is the documented story of the people of Herculaneum, their final hours on the shore, and what the boat chambers revealed. Recreated from the excavations and the eyewitness record of the eruption. What would you have done — run, or waited for rescue? Tell us in the comments.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/LLlmYVJS3h0/default.jpg?sqp=COTW29EG&rs=AOn4CLDkdt5pGhV0pBPBRBERZ-lsCiW-nA",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/LLlmYVJS3h0/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAS6hR6yS_F4GH2vyGjKSwEwg7qag",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/LLlmYVJS3h0/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLC9LRPdW6FVoLM8mI9iHxs2iNsLgQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/LLlmYVJS3h0/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLB5Es4DLdXg7vo476OFOm8orPBkaQ",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/LLlmYVJS3h0/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLBmLb53UlW7VsaLa16OkBcr9U0Nkg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "ad 79",
+          "ancient rome",
+          "archaeology",
+          "bay of naples",
+          "boat houses",
+          "disaster",
+          "final hours",
+          "herculaneum",
+          "herculaneum skeletons",
+          "pompeii",
+          "pyroclastic surge",
+          "ring lady",
+          "roman history",
+          "vesuvius",
+          "volcano"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "They Ran to the Shore to Escape Vesuvius in AD 79. We Found Them Still Waiting for the Boats.",
+          "description": "When Vesuvius erupted in AD 79, the town of Herculaneum sat even closer to the volcano than Pompeii. Hundreds of its people fled to the waterfront and crowded into the stone boat chambers along the shore, hoping to be rescued by sea. The boats never came. For nearly two thousand years they were thought to have escaped — until, in the 1980s, archaeologists opened the vaults and found them. This is the documented story of the people of Herculaneum, their final hours on the shore, and what the boat chambers revealed. Recreated from the excavations and the eyewitness record of the eruption. What would you have done — run, or waited for rescue? Tell us in the comments."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT5M39S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-24T00:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/LLlmYVJS3h0\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "aFHlDiBeCH0F2seGfSdh4LfdCIw",
+      "id": "hY9QFoKtGcE",
+      "snippet": {
+        "publishedAt": "2026-06-19T05:09:17Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "Two Ships Sailed Into the Arctic in 1845. The Fate of All 129 Men Aboard Took 170 Years to Uncover.",
+        "description": "In May 1845, the most advanced expedition the British Navy had ever assembled sailed for the Arctic to find the Northwest Passage — two ships, HMS Erebus and HMS Terror, and 129 men under Sir John Franklin. They were never seen by European eyes again. This is the documented story of what happened to Franklin's men: the ships beset in the ice, the long dying, the desperate walk south, and the Inuit testimony that was dismissed for over a century before it was finally proven right. Recreated from the Victory Point record, the search expeditions, Inuit oral history, and the modern discovery of both wrecks. What do you think those last men were walking toward? Tell us in the comments.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/hY9QFoKtGcE/default.jpg?sqp=COTW29EG&rs=AOn4CLCK1D-XqFgPu3TLFg7MxaE-g031zQ",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/hY9QFoKtGcE/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCg-KVVImjRRwjlURd9Fq9gLpjRXw",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/hY9QFoKtGcE/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCoe0dr3QdsZXQDgCp-XbXlk0QzIA",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/hY9QFoKtGcE/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLDYeW1kM8EKTPbMyyAw-32J7f3cbQ",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/hY9QFoKtGcE/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDRuuRqLWVgmQB__-DDphdmAZUeJg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1845",
+          "arctic exploration",
+          "arctic mystery",
+          "final hours",
+          "francis crozier",
+          "franklin expedition",
+          "hms erebus",
+          "hms terror",
+          "inuit testimony",
+          "king william island",
+          "lost franklin expedition",
+          "northwest passage",
+          "sir john franklin",
+          "unsolved mystery",
+          "vanished",
+          "victory point note"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Two Ships Sailed Into the Arctic in 1845. The Fate of All 129 Men Aboard Took 170 Years to Uncover.",
+          "description": "In May 1845, the most advanced expedition the British Navy had ever assembled sailed for the Arctic to find the Northwest Passage — two ships, HMS Erebus and HMS Terror, and 129 men under Sir John Franklin. They were never seen by European eyes again. This is the documented story of what happened to Franklin's men: the ships beset in the ice, the long dying, the desperate walk south, and the Inuit testimony that was dismissed for over a century before it was finally proven right. Recreated from the Victory Point record, the search expeditions, Inuit oral history, and the modern discovery of both wrecks. What do you think those last men were walking toward? Tell us in the comments."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT6M44S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-23T00:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/hY9QFoKtGcE\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "5TfjiFYYDTa5J84SKkWclnd9F30",
+      "id": "c_5aTQpla80",
+      "snippet": {
+        "publishedAt": "2026-06-19T02:30:48Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "Three Men Tended This Light. One Night in December 1900, They Vanished Without a Trace.",
+        "description": "On a bare rock at the western edge of Scotland stands the Flannan Isles lighthouse. In December 1900, the light went dark — and when a relief ship finally reached the island after eleven days, all three keepers were gone. The lamp was trimmed and ready. The kitchen was tidy. Two sets of oilskins were missing, and one keeper's coat still hung on its peg. This is the documented story of James Ducat, Thomas Marshall, and Donald MacArthur, the last hours they can be accounted for, and what the official Northern Lighthouse Board investigation actually found at the wrecked west landing — separated from the legend that grew up around it. Recreated from the keepers' log, the relief records, and Robert Muirhead's report. What do you believe happened in those last minutes on the rock? Tell us in the comments.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/c_5aTQpla80/default.jpg?sqp=COTW29EG&rs=AOn4CLCj3kSFoxmkhvRsYc8V4vTBrKLwFQ",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/c_5aTQpla80/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLBPozBReqSRKwijEm1QXUhAoej8_Q",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/c_5aTQpla80/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLBurDhfM7CeP9nXBqvtr0dGZPJ0dA",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/c_5aTQpla80/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLCZzx2JnTHFZVf2Dj0cvFuR95iUBg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/c_5aTQpla80/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDG3G6s_SQbGCJhwsgfPF-Vt5CaCg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1900",
+          "disappeared",
+          "donald macarthur",
+          "eilean mor",
+          "final hours",
+          "flannan isles",
+          "flannan isles lighthouse",
+          "flannan isles mystery",
+          "james ducat",
+          "lighthouse mystery",
+          "maritime mystery",
+          "northern lighthouse board",
+          "outer hebrides",
+          "scotland mystery",
+          "thomas marshall",
+          "three lighthouse keepers",
+          "unsolved mystery",
+          "vanished"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Three Men Tended This Light. One Night in December 1900, They Vanished Without a Trace.",
+          "description": "On a bare rock at the western edge of Scotland stands the Flannan Isles lighthouse. In December 1900, the light went dark — and when a relief ship finally reached the island after eleven days, all three keepers were gone. The lamp was trimmed and ready. The kitchen was tidy. Two sets of oilskins were missing, and one keeper's coat still hung on its peg. This is the documented story of James Ducat, Thomas Marshall, and Donald MacArthur, the last hours they can be accounted for, and what the official Northern Lighthouse Board investigation actually found at the wrecked west landing — separated from the legend that grew up around it. Recreated from the keepers' log, the relief records, and Robert Muirhead's report. What do you believe happened in those last minutes on the rock? Tell us in the comments."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT8M41S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-21T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/c_5aTQpla80\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "1bzPZ4mLWWIzQXs90nYoFSVtdIw",
+      "id": "sTLHXuZjCeE",
+      "snippet": {
+        "publishedAt": "2026-06-18T23:03:42Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "They Took a Shortcut to California in 1846. The Mountains Trapped Them in the Snow for Four Months.",
+        "description": "In the spring of 1846, a group of ordinary families set out for California with everything they owned. Persuaded to try an unproven shortcut, they lost crucial weeks in the desert and the mountains, and reached the Sierra Nevada just as the first heavy snows closed the pass. Trapped in makeshift camps for four months, nearly half of them died — and the survivors were driven to the unspeakable to stay alive. This is the documented story of the Donner Party: the decision that doomed them, the long winter in the snow, and the rescues that came too late for so many. Recreated with dignity from the survivors' accounts and the relief records. Would you have taken the shortcut? Tell us in the comments.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/sTLHXuZjCeE/default.jpg?sqp=COTW29EG&rs=AOn4CLBgSrK8MDiKep4ec5o85rNNkjpzWQ",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/sTLHXuZjCeE/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCvojg2s_7jAsrxl21k0bvki9QBQg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/sTLHXuZjCeE/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLD3Jw2OcBC0-KgQcaPCsD_J0QRTLA",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/sTLHXuZjCeE/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLAn90jSm3gRsj3ZJjCtUomIK7rNzQ",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/sTLHXuZjCeE/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLAfsu_K6EOP4pZb9tIpnr-9XwyYIw",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1846",
+          "american history",
+          "california trail",
+          "donner party",
+          "donner pass",
+          "final hours",
+          "hastings cutoff",
+          "james reed",
+          "pioneers",
+          "sierra nevada",
+          "snowbound",
+          "survival",
+          "tamsen donner",
+          "truckee lake",
+          "westward expansion"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "They Took a Shortcut to California in 1846. The Mountains Trapped Them in the Snow for Four Months.",
+          "description": "In the spring of 1846, a group of ordinary families set out for California with everything they owned. Persuaded to try an unproven shortcut, they lost crucial weeks in the desert and the mountains, and reached the Sierra Nevada just as the first heavy snows closed the pass. Trapped in makeshift camps for four months, nearly half of them died — and the survivors were driven to the unspeakable to stay alive. This is the documented story of the Donner Party: the decision that doomed them, the long winter in the snow, and the rescues that came too late for so many. Recreated with dignity from the survivors' accounts and the relief records. Would you have taken the shortcut? Tell us in the comments."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT6M22S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-20T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/sTLHXuZjCeE\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "1rtjhLSHzhremYb4PBYtyBLC5SE",
+      "id": "3a3I_8MQjCs",
+      "snippet": {
+        "publishedAt": "2026-06-16T14:29:49Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "Troy 1184 BC: The Night the Trojan Horse Ended the War (AI Reconstruction)",
+        "description": "Around 1184 BC, after a ten-year siege, the greatest city on the Aegean was destroyed in a single night by a wooden horse. Using AI reconstruction we rebuild Troy as it actually stood — its god-built walls, the ten-year war of Achilles and Hector, and the trick of Odysseus that ended it. From the burning city one man, Odysseus, began the long journey home that Homer turned into the Odyssey. This is Troy, and its final hours.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/3a3I_8MQjCs/default.jpg?sqp=COTW29EG&rs=AOn4CLAzKGB6CO8IqzUmGs9FmNJP7wzIYQ",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/3a3I_8MQjCs/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCtYZv1uQliEPVsz4Y4STFsByl-tg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/3a3I_8MQjCs/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAWym4WngnfZoEVJp92-e-YSrHeyg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/3a3I_8MQjCs/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLCBITbpyE3A4OCNXaUwO2L9IE2UYg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/3a3I_8MQjCs/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDfnXPQjevqfyqYBl-lIg7DN6dixA",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "AI reconstruction",
+          "Achilles",
+          "Bronze Age",
+          "Hector",
+          "Helen of Troy",
+          "Homer",
+          "Iliad",
+          "Odysseus",
+          "Trojan Horse",
+          "Trojan War",
+          "Troy",
+          "ancient Greece",
+          "fall of Troy",
+          "the Odyssey"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Troy 1184 BC: The Night the Trojan Horse Ended the War (AI Reconstruction)",
+          "description": "Around 1184 BC, after a ten-year siege, the greatest city on the Aegean was destroyed in a single night by a wooden horse. Using AI reconstruction we rebuild Troy as it actually stood — its god-built walls, the ten-year war of Achilles and Hector, and the trick of Odysseus that ended it. From the burning city one man, Odysseus, began the long journey home that Homer turned into the Odyssey. This is Troy, and its final hours."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT25M16S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": false
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/3a3I_8MQjCs\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "8wTDC89nEvomDWNfUzH7yzg1pHg",
+      "id": "wiykuEhTY1k",
+      "snippet": {
+        "publishedAt": "2026-06-16T13:37:54Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "She Had Seven Hours Left — The Wilhelm Gustloff, 1945 (AI Reconstruction)",
+        "description": "On the night of 30 January 1945, more than nine thousand people drowned in the freezing Baltic — the deadliest disaster in maritime history, and almost no one remembers it. This is the story of one of them. Part one of The Forgotten Sea. Recreated from survivor accounts and naval records.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/wiykuEhTY1k/default.jpg?sqp=COTW29EG&rs=AOn4CLDHmIg49Or2lyYxDTqFkdozE4u-9Q",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/wiykuEhTY1k/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLA2irJNiVm_LXf49XfoK2eSwSgQlQ",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/wiykuEhTY1k/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAvh0OPUCr28uf0zS1W5Dr3f9VIrA",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/wiykuEhTY1k/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLCSLUm9wA44RXbujlpiYCl2rXRz4w",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/wiykuEhTY1k/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLAq8-dfJ7EPvbuxtRl9-WKswRzvaw",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "baltic sea 1945",
+          "deadliest shipwreck",
+          "final hours",
+          "forgotten history",
+          "history documentary",
+          "maritime disaster",
+          "operation hannibal",
+          "refugees",
+          "s-13",
+          "titanic",
+          "wilhelm gustloff",
+          "world war 2"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "She Had Seven Hours Left — The Wilhelm Gustloff, 1945 (AI Reconstruction)",
+          "description": "On the night of 30 January 1945, more than nine thousand people drowned in the freezing Baltic — the deadliest disaster in maritime history, and almost no one remembers it. This is the story of one of them. Part one of The Forgotten Sea. Recreated from survivor accounts and naval records."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT8M17S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": false
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/wiykuEhTY1k\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "JW7dKXeJNb6sOw1U_bbA7uHVhSU",
+      "id": "owe2TrRGFZE",
+      "snippet": {
+        "publishedAt": "2026-06-10T23:00:22Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "She Had Seven Hours Left — The Wilhelm Gustloff, 1945 (AI Reconstruction)",
+        "description": "On the night of 30 January 1945, more than nine thousand people drowned in the freezing Baltic — the deadliest disaster in maritime history, and almost no one remembers it. This is the story of one of them. Part one of The Forgotten Sea. Recreated from survivor accounts and naval records.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/owe2TrRGFZE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/owe2TrRGFZE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/owe2TrRGFZE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/owe2TrRGFZE/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/owe2TrRGFZE/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "baltic sea 1945",
+          "deadliest shipwreck",
+          "final hours",
+          "forgotten history",
+          "history documentary",
+          "maritime disaster",
+          "operation hannibal",
+          "refugees",
+          "s-13",
+          "titanic",
+          "wilhelm gustloff",
+          "world war 2"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "She Had Seven Hours Left — The Wilhelm Gustloff, 1945 (AI Reconstruction)",
+          "description": "On the night of 30 January 1945, more than nine thousand people drowned in the freezing Baltic — the deadliest disaster in maritime history, and almost no one remembers it. This is the story of one of them. Part one of The Forgotten Sea. Recreated from survivor accounts and naval records."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT8M17S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "13",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/owe2TrRGFZE\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Entertainment"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "She Had Seven Hours Left — The Wilhelm Gustloff, 1945 (AI Reconstruction)",
+          "description": "On the night of 30 January 1945, more than nine thousand people drowned in the freezing Baltic — the deadliest disaster in maritime history, and almost no one remembers it. This is the story of one of them. Part one of The Forgotten Sea. Recreated from survivor accounts and naval records."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "6GIaA2wUY4ISJnjHCpHKXi4Ff1M",
+      "id": "sSgWM7OA4mo",
+      "snippet": {
+        "publishedAt": "2026-06-08T09:58:34Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "The Last Night of Troy | The Final Hours Before the Fall (1184 BC)",
+        "description": "The night before Troy fell, the city believed it had won. Ten years of war were over, the Greek ships had vanished from the horizon, and a strange wooden horse stood at the gates. This is the story of Troy and its final hours — the last night before everything burned.\n\nIn this cinematic recreation, we walk through the fall of Troy in 1184 BC: the celebration inside the walls, the soldiers hidden in the horse, the fatal decision to bring it through the gates, and the silence before the city was lost. It's a story remembered for three thousand years — first sung by Homer, argued over by historians, and still buried in the ruins at Hisarlik in modern Turkey.\n\nThe wooden horse was the idea of one man: Odysseus. And when Troy finally fell, his story was only beginning — the ten-year journey home that Homer would tell in the Odyssey. With Christopher Nolan's The Odyssey bringing that legend back to the screen, there's never been a better moment to return to where it all started: the last night of Troy.\n\nWhere does history end and legend begin? That's part of what makes this night endure. Watch, and decide for yourself.\n\n⏳ More final hours of history — subscribe for new cinematic recreations of the moments before everything changed.\n\n#Troy #Odyssey #ChristopherNolan #AncientHistory #TrojanWar #Homer #History #Mythology",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/sSgWM7OA4mo/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/sSgWM7OA4mo/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/sSgWM7OA4mo/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/sSgWM7OA4mo/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/sSgWM7OA4mo/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "The Last Night of Troy | The Final Hours Before the Fall (1184 BC)",
+          "description": "The night before Troy fell, the city believed it had won. Ten years of war were over, the Greek ships had vanished from the horizon, and a strange wooden horse stood at the gates. This is the story of Troy and its final hours — the last night before everything burned.\n\nIn this cinematic recreation, we walk through the fall of Troy in 1184 BC: the celebration inside the walls, the soldiers hidden in the horse, the fatal decision to bring it through the gates, and the silence before the city was lost. It's a story remembered for three thousand years — first sung by Homer, argued over by historians, and still buried in the ruins at Hisarlik in modern Turkey.\n\nThe wooden horse was the idea of one man: Odysseus. And when Troy finally fell, his story was only beginning — the ten-year journey home that Homer would tell in the Odyssey. With Christopher Nolan's The Odyssey bringing that legend back to the screen, there's never been a better moment to return to where it all started: the last night of Troy.\n\nWhere does history end and legend begin? That's part of what makes this night endure. Watch, and decide for yourself.\n\n⏳ More final hours of history — subscribe for new cinematic recreations of the moments before everything changed.\n\n#Troy #Odyssey #ChristopherNolan #AncientHistory #TrojanWar #Homer #History #Mythology"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT21M52S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "87",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/sSgWM7OA4mo\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Entertainment"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "The Last Night of Troy | The Final Hours Before the Fall (1184 BC)",
+          "description": "The night before Troy fell, the city believed it had won. Ten years of war were over, the Greek ships had vanished from the horizon, and a strange wooden horse stood at the gates. This is the story of Troy and its final hours — the last night before everything burned.\n\nIn this cinematic recreation, we walk through the fall of Troy in 1184 BC: the celebration inside the walls, the soldiers hidden in the horse, the fatal decision to bring it through the gates, and the silence before the city was lost. It's a story remembered for three thousand years — first sung by Homer, argued over by historians, and still buried in the ruins at Hisarlik in modern Turkey.\n\nThe wooden horse was the idea of one man: Odysseus. And when Troy finally fell, his story was only beginning — the ten-year journey home that Homer would tell in the Odyssey. With Christopher Nolan's The Odyssey bringing that legend back to the screen, there's never been a better moment to return to where it all started: the last night of Troy.\n\nWhere does history end and legend begin? That's part of what makes this night endure. Watch, and decide for yourself.\n\n⏳ More final hours of history — subscribe for new cinematic recreations of the moments before everything changed.\n\n#Troy #Odyssey #ChristopherNolan #AncientHistory #TrojanWar #Homer #History #Mythology"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "V2RUlWtqnmDIjnbdpFBAq3fQPPI",
+      "id": "E_pTKZWtT28",
+      "snippet": {
+        "publishedAt": "2026-06-05T23:00:25Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "She Buried Her Family Alone. The Village Watched and Did Nothing.",
+        "description": "She is on the hillside above Riley Farm, alone, with a spade in her hands and the ground hard under the August sun. It is the third of August, sixteen sixty-six.\n\nOver the next eight days, Elizabeth Hancock will dig seven graves on that slope with her own hands — her husband, then her children, one after another — while the village of Eyam seals itself inside a ring of stones and waits for the plague to finish its work. This is a slow cinematic reconstruction of eight days on a Derbyshire hillside, drawn from parish registers, surviving letters, and the seven graves that still stand there today.\n\nNew episodes every week — if this kind of history matters to you, subscribe and don't miss the next one.\n\n#FinalHours #history #Eyam #BlackDeath #ElizabethHancock #plague #Derbyshire",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/E_pTKZWtT28/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/E_pTKZWtT28/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/E_pTKZWtT28/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/E_pTKZWtT28/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/E_pTKZWtT28/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1666 England",
+          "Black Death England",
+          "Derbyshire plague village",
+          "Elizabeth Hancock",
+          "English plague sacrifice",
+          "Eyam 1666",
+          "Eyam plague",
+          "Riley Farm Eyam",
+          "William Mompesson",
+          "bubonic plague England",
+          "cinematic history documentary",
+          "historical recreation",
+          "plague graves Eyam",
+          "plague quarantine history",
+          "village quarantine 1666"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "She Buried Her Family Alone. The Village Watched and Did Nothing.",
+          "description": "She is on the hillside above Riley Farm, alone, with a spade in her hands and the ground hard under the August sun. It is the third of August, sixteen sixty-six.\n\nOver the next eight days, Elizabeth Hancock will dig seven graves on that slope with her own hands — her husband, then her children, one after another — while the village of Eyam seals itself inside a ring of stones and waits for the plague to finish its work. This is a slow cinematic reconstruction of eight days on a Derbyshire hillside, drawn from parish registers, surviving letters, and the seven graves that still stand there today.\n\nNew episodes every week — if this kind of history matters to you, subscribe and don't miss the next one.\n\n#FinalHours #history #Eyam #BlackDeath #ElizabethHancock #plague #Derbyshire"
+        }
+      },
+      "contentDetails": {
+        "duration": "PT7M51S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "33",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/E_pTKZWtT28\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Entertainment"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "She Buried Her Family Alone. The Village Watched and Did Nothing.",
+          "description": "She is on the hillside above Riley Farm, alone, with a spade in her hands and the ground hard under the August sun. It is the third of August, sixteen sixty-six.\n\nOver the next eight days, Elizabeth Hancock will dig seven graves on that slope with her own hands — her husband, then her children, one after another — while the village of Eyam seals itself inside a ring of stones and waits for the plague to finish its work. This is a slow cinematic reconstruction of eight days on a Derbyshire hillside, drawn from parish registers, surviving letters, and the seven graves that still stand there today.\n\nNew episodes every week — if this kind of history matters to you, subscribe and don't miss the next one.\n\n#FinalHours #history #Eyam #BlackDeath #ElizabethHancock #plague #Derbyshire"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "FGP3WCo2LEmHr2bMRi0rJHBm3lc",
+      "id": "SH3GnBcHWxY",
+      "snippet": {
+        "publishedAt": "2026-06-04T23:00:37Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "75 People Crossed the World's Longest Bridge in 1879. None Reached the Other Side.",
+        "description": "On the night of 28 December 1879, a train began to cross the Tay Bridge in Scotland — the longest bridge in the world. Halfway across, in a violent storm, the bridge gave way. Everyone aboard fell seventy feet into the freezing firth below.\n\nThis is a recreation of those final minutes, reconstructed from the Board of Trade inquiry, the testimony of the signalmen who watched the train's lights move out onto the bridge and vanish, and the accounts of those who stood on the shore that night.\n\nForty-six bodies were recovered. The official count settled near sixty, but no one was ever certain — some who boarded that night were never named, and are missing from every record that survives.\n\n#history #taybridge #victorian #disaster #scotland",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/SH3GnBcHWxY/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/SH3GnBcHWxY/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/SH3GnBcHWxY/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/SH3GnBcHWxY/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/SH3GnBcHWxY/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1879",
+          "Dundee",
+          "Scotland history",
+          "Tay Bridge",
+          "Tay Bridge disaster",
+          "Victorian",
+          "final hours",
+          "historical recreation",
+          "history documentary",
+          "railway disaster"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "75 People Crossed the World's Longest Bridge in 1879. None Reached the Other Side.",
+          "description": "On the night of 28 December 1879, a train began to cross the Tay Bridge in Scotland — the longest bridge in the world. Halfway across, in a violent storm, the bridge gave way. Everyone aboard fell seventy feet into the freezing firth below.\n\nThis is a recreation of those final minutes, reconstructed from the Board of Trade inquiry, the testimony of the signalmen who watched the train's lights move out onto the bridge and vanish, and the accounts of those who stood on the shore that night.\n\nForty-six bodies were recovered. The official count settled near sixty, but no one was ever certain — some who boarded that night were never named, and are missing from every record that survives.\n\n#history #taybridge #victorian #disaster #scotland"
+        }
+      },
+      "contentDetails": {
+        "duration": "PT2M54S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "5",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/SH3GnBcHWxY\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Society"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "75 People Crossed the World's Longest Bridge in 1879. None Reached the Other Side.",
+          "description": "On the night of 28 December 1879, a train began to cross the Tay Bridge in Scotland — the longest bridge in the world. Halfway across, in a violent storm, the bridge gave way. Everyone aboard fell seventy feet into the freezing firth below.\n\nThis is a recreation of those final minutes, reconstructed from the Board of Trade inquiry, the testimony of the signalmen who watched the train's lights move out onto the bridge and vanish, and the accounts of those who stood on the shore that night.\n\nForty-six bodies were recovered. The official count settled near sixty, but no one was ever certain — some who boarded that night were never named, and are missing from every record that survives.\n\n#history #taybridge #victorian #disaster #scotland"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "obc9umPopllEA854v0pxiisQr0Q",
+      "id": "WSK9ss86Y8k",
+      "snippet": {
+        "publishedAt": "2026-06-03T23:00:22Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "His Face Was On KLM's Safety Manual. His Last Decision Killed 583 People.",
+        "description": "The deadliest aviation accident in history happened in eight seconds, on a foggy runway on a small Atlantic island, on a Sunday afternoon in March 1977.\n\nThe captain who made the fatal decision was the most senior pilot at KLM — their chief of flight training. His photograph appeared on every safety poster in every KLM cockpit. When news of the disaster reached Amsterdam, the airline tried to send him to investigate. Before someone realised who they were about to phone.\n\nThis is the story of Captain Jacob Veldhuyzen van Zanten, his first officer Klaas Meurs, Pan Am Captain Victor Grubbs, and the eight seconds that killed five hundred and eighty-three people on the runway at Los Rodeos airport.\n\nEvery word of dialogue in this video is verbatim from the cockpit voice recorders. Every detail is drawn from the Spanish and Dutch accident investigation reports, the published transcripts, and survivor testimony.\n\nIf this kind of story is what you came here for, the channel is Final Hours — the last hours of people and places history remembers, recreated slowly and cinematically.\n\n#FinalHours #aviationhistory #tenerife #KLM #PanAm #1977 #Boeing747 #aviationdisaster\n\n---\n\nMusic via Jamendo (Creative Commons license)",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/WSK9ss86Y8k/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/WSK9ss86Y8k/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/WSK9ss86Y8k/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/WSK9ss86Y8k/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/WSK9ss86Y8k/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1977",
+          "aviation",
+          "aviation disaster",
+          "boeing 747",
+          "cockpit voice recorder",
+          "deadliest plane crash",
+          "history",
+          "jacob van zanten",
+          "klaas meurs",
+          "klm",
+          "klm flight 4805",
+          "los rodeos",
+          "pan am flight 1736",
+          "tenerife disaster",
+          "victor grubbs"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "His Face Was On KLM's Safety Manual. His Last Decision Killed 583 People.",
+          "description": "The deadliest aviation accident in history happened in eight seconds, on a foggy runway on a small Atlantic island, on a Sunday afternoon in March 1977.\n\nThe captain who made the fatal decision was the most senior pilot at KLM — their chief of flight training. His photograph appeared on every safety poster in every KLM cockpit. When news of the disaster reached Amsterdam, the airline tried to send him to investigate. Before someone realised who they were about to phone.\n\nThis is the story of Captain Jacob Veldhuyzen van Zanten, his first officer Klaas Meurs, Pan Am Captain Victor Grubbs, and the eight seconds that killed five hundred and eighty-three people on the runway at Los Rodeos airport.\n\nEvery word of dialogue in this video is verbatim from the cockpit voice recorders. Every detail is drawn from the Spanish and Dutch accident investigation reports, the published transcripts, and survivor testimony.\n\nIf this kind of story is what you came here for, the channel is Final Hours — the last hours of people and places history remembers, recreated slowly and cinematically.\n\n#FinalHours #aviationhistory #tenerife #KLM #PanAm #1977 #Boeing747 #aviationdisaster\n\n---\n\nMusic via Jamendo (Creative Commons license)"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT5M46S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "90",
+        "likeCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/WSK9ss86Y8k\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "His Face Was On KLM's Safety Manual. His Last Decision Killed 583 People.",
+          "description": "The deadliest aviation accident in history happened in eight seconds, on a foggy runway on a small Atlantic island, on a Sunday afternoon in March 1977.\n\nThe captain who made the fatal decision was the most senior pilot at KLM — their chief of flight training. His photograph appeared on every safety poster in every KLM cockpit. When news of the disaster reached Amsterdam, the airline tried to send him to investigate. Before someone realised who they were about to phone.\n\nThis is the story of Captain Jacob Veldhuyzen van Zanten, his first officer Klaas Meurs, Pan Am Captain Victor Grubbs, and the eight seconds that killed five hundred and eighty-three people on the runway at Los Rodeos airport.\n\nEvery word of dialogue in this video is verbatim from the cockpit voice recorders. Every detail is drawn from the Spanish and Dutch accident investigation reports, the published transcripts, and survivor testimony.\n\nIf this kind of story is what you came here for, the channel is Final Hours — the last hours of people and places history remembers, recreated slowly and cinematically.\n\n#FinalHours #aviationhistory #tenerife #KLM #PanAm #1977 #Boeing747 #aviationdisaster\n\n---\n\nMusic via Jamendo (Creative Commons license)"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "DatJ7-UBUWhpXYL8lJmcy6xsiag",
+      "id": "Bn4uKhO7Xo4",
+      "snippet": {
+        "publishedAt": "2026-06-01T23:00:25Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "He Waved Goodbye in November 1872. They Never Came Back.",
+        "description": "December 1872. A merchant ship is found drifting on the Atlantic, sails set, crew gone. The boarding party finds breakfast cooling on the table. They find Sarah Briggs's sewing basket. They find toys. They find a little girl's clothes.\n\nMost of what you've read about the Mary Celeste is wrong.\n\nThere were eight adults and a two-year-old child aboard. None of them were ever found. The pirates and the sea monsters came later — first from a young writer named Arthur Conan Doyle, then from a hundred years of retelling.\n\nBut there is one person the story almost always leaves out. A seven-year-old boy named Arthur Stanley Briggs. He was the captain's son. He should have been on board. He wasn't.\n\nThis is his story.\n\n—\n\nSources for this video:\n— Brian Hicks, Ghost Ship: The Mysterious True Story of the Mary Celeste and Her Missing Crew (2004)\n— Charles Edey Fay, The Story of the Mary Celeste (1942)\n— Records of the Gibraltar Vice-Admiralty Court inquiry, 1872-1873\n— Letters and family records held by the Marion Massachusetts Historical Society\n\n—\n\nFinal Hours documents the small last moments before historical disasters — through the people, not the spectacle.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Bn4uKhO7Xo4/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Bn4uKhO7Xo4/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Bn4uKhO7Xo4/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/Bn4uKhO7Xo4/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/Bn4uKhO7Xo4/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1872",
+          "arthur conan doyle",
+          "atlantic ocean",
+          "captain briggs",
+          "documentary",
+          "final hours",
+          "ghost ship",
+          "historical mystery",
+          "history documentary",
+          "maritime mystery",
+          "mary celeste",
+          "ship abandoned",
+          "unsolved mystery"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "He Waved Goodbye in November 1872. They Never Came Back.",
+          "description": "December 1872. A merchant ship is found drifting on the Atlantic, sails set, crew gone. The boarding party finds breakfast cooling on the table. They find Sarah Briggs's sewing basket. They find toys. They find a little girl's clothes.\n\nMost of what you've read about the Mary Celeste is wrong.\n\nThere were eight adults and a two-year-old child aboard. None of them were ever found. The pirates and the sea monsters came later — first from a young writer named Arthur Conan Doyle, then from a hundred years of retelling.\n\nBut there is one person the story almost always leaves out. A seven-year-old boy named Arthur Stanley Briggs. He was the captain's son. He should have been on board. He wasn't.\n\nThis is his story.\n\n—\n\nSources for this video:\n— Brian Hicks, Ghost Ship: The Mysterious True Story of the Mary Celeste and Her Missing Crew (2004)\n— Charles Edey Fay, The Story of the Mary Celeste (1942)\n— Records of the Gibraltar Vice-Admiralty Court inquiry, 1872-1873\n— Letters and family records held by the Marion Massachusetts Historical Society\n\n—\n\nFinal Hours documents the small last moments before historical disasters — through the people, not the spectacle."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT15M55S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "197",
+        "likeCount": "4",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/Bn4uKhO7Xo4\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Entertainment"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "He Waved Goodbye in November 1872. They Never Came Back.",
+          "description": "December 1872. A merchant ship is found drifting on the Atlantic, sails set, crew gone. The boarding party finds breakfast cooling on the table. They find Sarah Briggs's sewing basket. They find toys. They find a little girl's clothes.\n\nMost of what you've read about the Mary Celeste is wrong.\n\nThere were eight adults and a two-year-old child aboard. None of them were ever found. The pirates and the sea monsters came later — first from a young writer named Arthur Conan Doyle, then from a hundred years of retelling.\n\nBut there is one person the story almost always leaves out. A seven-year-old boy named Arthur Stanley Briggs. He was the captain's son. He should have been on board. He wasn't.\n\nThis is his story.\n\n—\n\nSources for this video:\n— Brian Hicks, Ghost Ship: The Mysterious True Story of the Mary Celeste and Her Missing Crew (2004)\n— Charles Edey Fay, The Story of the Mary Celeste (1942)\n— Records of the Gibraltar Vice-Admiralty Court inquiry, 1872-1873\n— Letters and family records held by the Marion Massachusetts Historical Society\n\n—\n\nFinal Hours documents the small last moments before historical disasters — through the people, not the spectacle."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "1W0cnq8vLHUUC_IR32JNjmDyMww",
+      "id": "f1LT9g1un_Y",
+      "snippet": {
+        "publishedAt": "2026-05-31T23:00:16Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "She Wouldn't Jump.",
+        "description": "The first victim of the Great Fire of London was a young woman whose name was never recorded. She worked in Thomas Farriner's bakery on Pudding Lane.\n\nIn the early hours of 2 September 1666, she would not jump from the upstairs window. She became the first of six recorded deaths in a fire that destroyed four-fifths of the City of London over the next four days — thirteen thousand two hundred houses, eighty-seven parish churches, Old St Paul's Cathedral, about a hundred thousand Londoners made homeless.\n\nThe Monument to the Great Fire stands 202 feet tall, 202 feet from where the bakery stood. It bears the names of the kings, the architects, and the city officials who built it. It does not bear hers.\n\nRecreated from the household accounts, the British Library letter of October 1666, and the parliamentary investigation that followed.\n\n#FinalHours #history #GreatFireOfLondon #1666 #PuddingLane",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/f1LT9g1un_Y/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/f1LT9g1un_Y/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/f1LT9g1un_Y/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/f1LT9g1un_Y/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/f1LT9g1un_Y/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "1666",
+          "17th century history",
+          "Christopher Wren",
+          "Final Hours",
+          "Great Fire of London",
+          "London history",
+          "Monument",
+          "Old St Pauls Cathedral",
+          "Pudding Lane",
+          "Thomas Farriner",
+          "historical disaster",
+          "historical recreation",
+          "history documentary"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "She Wouldn't Jump.",
+          "description": "The first victim of the Great Fire of London was a young woman whose name was never recorded. She worked in Thomas Farriner's bakery on Pudding Lane.\n\nIn the early hours of 2 September 1666, she would not jump from the upstairs window. She became the first of six recorded deaths in a fire that destroyed four-fifths of the City of London over the next four days — thirteen thousand two hundred houses, eighty-seven parish churches, Old St Paul's Cathedral, about a hundred thousand Londoners made homeless.\n\nThe Monument to the Great Fire stands 202 feet tall, 202 feet from where the bakery stood. It bears the names of the kings, the architects, and the city officials who built it. It does not bear hers.\n\nRecreated from the household accounts, the British Library letter of October 1666, and the parliamentary investigation that followed.\n\n#FinalHours #history #GreatFireOfLondon #1666 #PuddingLane"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT6M24S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "10",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/f1LT9g1un_Y\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Society"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "She Wouldn't Jump.",
+          "description": "The first victim of the Great Fire of London was a young woman whose name was never recorded. She worked in Thomas Farriner's bakery on Pudding Lane.\n\nIn the early hours of 2 September 1666, she would not jump from the upstairs window. She became the first of six recorded deaths in a fire that destroyed four-fifths of the City of London over the next four days — thirteen thousand two hundred houses, eighty-seven parish churches, Old St Paul's Cathedral, about a hundred thousand Londoners made homeless.\n\nThe Monument to the Great Fire stands 202 feet tall, 202 feet from where the bakery stood. It bears the names of the kings, the architects, and the city officials who built it. It does not bear hers.\n\nRecreated from the household accounts, the British Library letter of October 1666, and the parliamentary investigation that followed.\n\n#FinalHours #history #GreatFireOfLondon #1666 #PuddingLane"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "iSk7VVMNaz3cCHaxyV0QC3cG55Q",
+      "id": "J1w2JkpG5xU",
+      "snippet": {
+        "publishedAt": "2026-05-30T22:13:27Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "She Had 34 Seconds to Save Her Children. She Couldn't Save All Three.",
+        "description": "On the evening of May 6th, 1937, Matilde Doehner was sitting in the dining room of the Hindenburg with her three children. In twelve minutes, the air outside the windows would catch fire.\n\nWhat followed has been recreated from the Doehner family's own surviving accounts, period photographs, and the official Lakehurst investigation records. This is what the disaster looked like from inside the ship — from one family's table in the dining room, in the thirty-four seconds it took for the Hindenburg to reach the ground.\n\nIf this kind of history stays with you, subscribe — we rebuild the last hours of people history remembers, one frame at a time.\n\n#FinalHours #history #Hindenburg #HindenburgDisaster #1937",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/J1w2JkpG5xU/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/J1w2JkpG5xU/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/J1w2JkpG5xU/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/J1w2JkpG5xU/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/J1w2JkpG5xU/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "Doehner family Hindenburg",
+          "Hermann Doehner",
+          "Hindenburg 1937",
+          "Hindenburg disaster",
+          "Hindenburg fire",
+          "Hindenburg inside",
+          "Hindenburg survivors",
+          "LZ 129 Hindenburg",
+          "Lakehurst 1937",
+          "Matilde Doehner",
+          "Werner Doehner",
+          "airship disaster",
+          "final hours Hindenburg",
+          "historical recreation",
+          "zeppelin disaster"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "She Had 34 Seconds to Save Her Children. She Couldn't Save All Three.",
+          "description": "On the evening of May 6th, 1937, Matilde Doehner was sitting in the dining room of the Hindenburg with her three children. In twelve minutes, the air outside the windows would catch fire.\n\nWhat followed has been recreated from the Doehner family's own surviving accounts, period photographs, and the official Lakehurst investigation records. This is what the disaster looked like from inside the ship — from one family's table in the dining room, in the thirty-four seconds it took for the Hindenburg to reach the ground.\n\nIf this kind of history stays with you, subscribe — we rebuild the last hours of people history remembers, one frame at a time.\n\n#FinalHours #history #Hindenburg #HindenburgDisaster #1937"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT5M11S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": false
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "60",
+        "likeCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "1"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/J1w2JkpG5xU\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Society"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "She Had 34 Seconds to Save Her Children. She Couldn't Save All Three.",
+          "description": "On the evening of May 6th, 1937, Matilde Doehner was sitting in the dining room of the Hindenburg with her three children. In twelve minutes, the air outside the windows would catch fire.\n\nWhat followed has been recreated from the Doehner family's own surviving accounts, period photographs, and the official Lakehurst investigation records. This is what the disaster looked like from inside the ship — from one family's table in the dining room, in the thirty-four seconds it took for the Hindenburg to reach the ground.\n\nIf this kind of history stays with you, subscribe — we rebuild the last hours of people history remembers, one frame at a time.\n\n#FinalHours #history #Hindenburg #HindenburgDisaster #1937"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "TDNzh1I3nG4yYvIRZp8g1vEg7oc",
+      "id": "NgoR79XzTAw",
+      "snippet": {
+        "publishedAt": "2026-05-29T23:00:10Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "He Could Have Run. Instead, He Picked Up His Violin.",
+        "description": "He is thirty-three years old. He plays the violin for a living. Tonight he is on the Titanic.\nNo one would have blamed him for trying for a boat. He chose to play instead.\n\nOn the night of April 14th, 1912, as the RMS Titanic sank beneath the North Atlantic, bandmaster Wallace Hartley led his eight musicians onto the open deck and kept playing until the ship was gone. None of them survived. This is a cinematic recreation of his final hours — and the violin that came back when he didn't.\n\nNew episodes every week. If this is the kind of history that stays with you, subscribe — it's the only thing we make.\n\n#FinalHours #history #Titanic #WallaceHartley #RMSTitanic",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/NgoR79XzTAw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/NgoR79XzTAw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/NgoR79XzTAw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/NgoR79XzTAw/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/NgoR79XzTAw/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "April 14 1912",
+          "Maria Robinson Hartley",
+          "Nearer My God to Thee",
+          "RMS Titanic sinking",
+          "Titanic",
+          "Titanic 1912",
+          "Titanic band",
+          "Titanic bandmaster",
+          "Titanic documentary cinematic",
+          "Titanic final hours",
+          "Titanic musicians",
+          "Titanic untold story",
+          "Titanic violin auction",
+          "Wallace Hartley",
+          "Wallace Hartley violin"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "He Could Have Run. Instead, He Picked Up His Violin.",
+          "description": "He is thirty-three years old. He plays the violin for a living. Tonight he is on the Titanic.\nNo one would have blamed him for trying for a boat. He chose to play instead.\n\nOn the night of April 14th, 1912, as the RMS Titanic sank beneath the North Atlantic, bandmaster Wallace Hartley led his eight musicians onto the open deck and kept playing until the ship was gone. None of them survived. This is a cinematic recreation of his final hours — and the violin that came back when he didn't.\n\nNew episodes every week. If this is the kind of history that stays with you, subscribe — it's the only thing we make.\n\n#FinalHours #history #Titanic #WallaceHartley #RMSTitanic"
+        }
+      },
+      "contentDetails": {
+        "duration": "PT5M27S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "true",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "62",
+        "likeCount": "2",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/NgoR79XzTAw\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Classical_music",
+          "https://en.wikipedia.org/wiki/Entertainment"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "He Could Have Run. Instead, He Picked Up His Violin.",
+          "description": "He is thirty-three years old. He plays the violin for a living. Tonight he is on the Titanic.\nNo one would have blamed him for trying for a boat. He chose to play instead.\n\nOn the night of April 14th, 1912, as the RMS Titanic sank beneath the North Atlantic, bandmaster Wallace Hartley led his eight musicians onto the open deck and kept playing until the ship was gone. None of them survived. This is a cinematic recreation of his final hours — and the violin that came back when he didn't.\n\nNew episodes every week. If this is the kind of history that stays with you, subscribe — it's the only thing we make.\n\n#FinalHours #history #Titanic #WallaceHartley #RMSTitanic"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "h1kGV2B4hCKXxfz0wt7g4iD5CWU",
+      "id": "4A6bLIWMYXc",
+      "snippet": {
+        "publishedAt": "2026-05-28T22:21:07Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "They Gave Anne Boleyn One Day To Die. She Made It Last Five Hundred Years.",
+        "description": "She has been awake since two in the morning. The candle is nearly gone.\nIt is the nineteenth of May, fifteen thirty-six. The Tower is quiet. She asked for the sword herself.\n\nThis is a slow, cinematic recreation of Anne Boleyn's final hours inside the Tower of London — the delays, the waiting, the silence, and the single stroke that ended a queen. The king tried to erase her from history. What he left behind undid him.\n\nNew episodes recreate the last hours of people and places history remembers. Subscribe if that's the kind of history you're here for.\n#FinalHours #history #AnneBoleyn #TudorHistory #ExecutionOfAnneBoleyn",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/4A6bLIWMYXc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/4A6bLIWMYXc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/4A6bLIWMYXc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/4A6bLIWMYXc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/4A6bLIWMYXc/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "Anne Boleyn",
+          "Anne Boleyn death",
+          "Anne Boleyn documentary",
+          "Anne Boleyn execution",
+          "Anne Boleyn final hours",
+          "Elizabeth I mother",
+          "Henry VIII Anne Boleyn",
+          "Henry VIII wives",
+          "May 19 1536",
+          "Tower of London 1536",
+          "Tudor history",
+          "Tudor queen execution",
+          "cinematic history",
+          "final hours",
+          "historical recreation"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "They Gave Anne Boleyn One Day To Die. She Made It Last Five Hundred Years.",
+          "description": "She has been awake since two in the morning. The candle is nearly gone.\nIt is the nineteenth of May, fifteen thirty-six. The Tower is quiet. She asked for the sword herself.\n\nThis is a slow, cinematic recreation of Anne Boleyn's final hours inside the Tower of London — the delays, the waiting, the silence, and the single stroke that ended a queen. The king tried to erase her from history. What he left behind undid him.\n\nNew episodes recreate the last hours of people and places history remembers. Subscribe if that's the kind of history you're here for.\n#FinalHours #history #AnneBoleyn #TudorHistory #ExecutionOfAnneBoleyn"
+        }
+      },
+      "contentDetails": {
+        "duration": "PT6M33S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "true",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "48",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/4A6bLIWMYXc\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Entertainment"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "They Gave Anne Boleyn One Day To Die. She Made It Last Five Hundred Years.",
+          "description": "She has been awake since two in the morning. The candle is nearly gone.\nIt is the nineteenth of May, fifteen thirty-six. The Tower is quiet. She asked for the sword herself.\n\nThis is a slow, cinematic recreation of Anne Boleyn's final hours inside the Tower of London — the delays, the waiting, the silence, and the single stroke that ended a queen. The king tried to erase her from history. What he left behind undid him.\n\nNew episodes recreate the last hours of people and places history remembers. Subscribe if that's the kind of history you're here for.\n#FinalHours #history #AnneBoleyn #TudorHistory #ExecutionOfAnneBoleyn"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "J0OBwQ1kgUsvtM3gy6mjH6Wepp4",
+      "id": "CkbWHjkQa1Q",
+      "snippet": {
+        "publishedAt": "2026-05-28T16:02:57Z",
+        "channelId": "UCoRxAQ6kqaz7o-LAYqtHGDQ",
+        "title": "Pompeii Had One Day to Escape. Most of Them Chose to Stay.",
+        "description": "They thought they had time.\nThe terrible truth is that they did — they just didn't know what it was for.\n\nOn the morning of August 24th, 79 AD, the people of Pompeii woke to an ordinary day. What followed was not a sudden catastrophe — it was a slow, reasonable series of decisions that led thousands of people to wait, shelter, and hope, while the window to escape quietly closed around them. This is the story of the hours before the end, and the families who ran toward the sea believing rescue was coming.\n\nNew films regularly — subscribe if you want history told the way it actually felt to live it.\n#FinalHours #history #Pompeii #Herculaneum #AncientRome",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/CkbWHjkQa1Q/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/CkbWHjkQa1Q/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/CkbWHjkQa1Q/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/CkbWHjkQa1Q/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/CkbWHjkQa1Q/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Final Hours",
+        "tags": [
+          "Herculaneum",
+          "Mount Vesuvius eruption 79 AD",
+          "Pliny the Younger Vesuvius",
+          "Pompeii",
+          "Pompeii ash casts",
+          "Pompeii boat chambers Herculaneum",
+          "Pompeii cinematic recreation",
+          "Pompeii families",
+          "Pompeii victims",
+          "Roman history documentary",
+          "Vesuvius eruption documentary",
+          "ancient Rome disaster",
+          "last hours of Pompeii",
+          "pyroclastic surge Pompeii",
+          "why people stayed in Pompeii"
+        ],
+        "categoryId": "27",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Pompeii Had One Day to Escape. Most of Them Chose to Stay.",
+          "description": "They thought they had time.\nThe terrible truth is that they did — they just didn't know what it was for.\n\nOn the morning of August 24th, 79 AD, the people of Pompeii woke to an ordinary day. What followed was not a sudden catastrophe — it was a slow, reasonable series of decisions that led thousands of people to wait, shelter, and hope, while the window to escape quietly closed around them. This is the story of the hours before the end, and the families who ran toward the sea believing rescue was coming.\n\nNew films regularly — subscribe if you want history told the way it actually felt to live it.\n#FinalHours #history #Pompeii #Herculaneum #AncientRome"
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT5M39S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "46",
+        "likeCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/CkbWHjkQa1Q\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Knowledge"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "Pompeii Had One Day to Escape. Most of Them Chose to Stay.",
+          "description": "They thought they had time.\nThe terrible truth is that they did — they just didn't know what it was for.\n\nOn the morning of August 24th, 79 AD, the people of Pompeii woke to an ordinary day. What followed was not a sudden catastrophe — it was a slow, reasonable series of decisions that led thousands of people to wait, shelter, and hope, while the window to escape quietly closed around them. This is the story of the hours before the end, and the families who ran toward the sea believing rescue was coming.\n\nNew films regularly — subscribe if you want history told the way it actually felt to live it.\n#FinalHours #history #Pompeii #Herculaneum #AncientRome"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    }
+  ]
+}

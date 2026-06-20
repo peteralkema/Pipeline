@@ -1,0 +1,1632 @@
+{
+  "_meta": {
+    "channel_dir": "sacred-dawn",
+    "channel_title": "Sacred Dawn",
+    "uploads_playlist": "UUs-VNV8IY6eiklcKprDWqIA",
+    "dumped_at_utc": "2026-06-20T19:37:31Z",
+    "video_count": 17,
+    "parts_captured": [
+      "snippet",
+      "status",
+      "contentDetails",
+      "statistics",
+      "topicDetails",
+      "recordingDetails",
+      "localizations",
+      "liveStreamingDetails",
+      "player",
+      "paidProductPlacementDetails"
+    ],
+    "blind_spots": [
+      "AI-content disclosure flag (not in API)",
+      "Content ID copyright claims (needs partner scope)",
+      "end screens / cards / editor state",
+      "statistics.* is a snapshot at dump time, not live"
+    ]
+  },
+  "videos": [
+    {
+      "kind": "youtube#video",
+      "etag": "usigHq4YJowGaIPvfozwZqHuv4Y",
+      "id": "TYDmV9RCA4c",
+      "snippet": {
+        "publishedAt": "2026-06-20T08:46:01Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Satan: How Heaven's Most Beloved Angel Became God's Enemy — The Fall of the Morning Star",
+        "description": "He was the brightest creature God ever made — the seal of perfection, the morning star, the angel who stood nearest the throne. Heaven had a favourite, and it was him.\n\nSo how does the most beloved being in all creation become its enemy?\n\nThis is the story of the fall — told the way the old texts actually tell it: not as a battle between God and a monster, but as a tragedy. A creature loved most, who could not bear to honour anything above himself, and broke heaven in two rather than bow. The pride. The refusal to kneel. The whisper that turned a third of the angels. The war that emptied the sky of its brightest light. And the long campaign that followed him down — out of heaven, into a garden, and into every human heart since.\n\nDrawn faithfully from Isaiah, Ezekiel, Luke, Jude, and the Book of Revelation, with the older traditions named plainly where they speak. Reverent, cinematic, and built to be felt.⛧ CHAPTERS ⛧\n\n0:00 The Falling Star\n2:02 The Light-Bearer\n5:17 The Turning\n11:23 War in Heaven\n16:17 The Fall\n19:51 The War Comes to Earth\n23:37 The Promised End\n\nHe did not fall because he was a monster. He fell because he was magnificent, and could not bear to be second — and that is a wound we carry too.\n\nSo here is the question we leave with you: did the morning star fall because he was evil, or because he was proud? Tell us below.\n\n▶ Next: we follow the one who cast him down — the angel whose name is the question that ended the war. Who is like God? The story of Michael.🕊 \n\nSubscribe to Sacred Dawn for the Bible's cosmic and primeval drama, rendered as cinematic recreation — the origin story, retold.\n—\nSacred Dawn creates reverent, faithful cinematic recreations of scripture. All imagery is artistic interpretation; supernatural events are presented as the ancient texts describe them, with canon and tradition distinguished throughout.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/TYDmV9RCA4c/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/TYDmV9RCA4c/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/TYDmV9RCA4c/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/TYDmV9RCA4c/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Satan: How Heaven's Most Beloved Angel Became God's Enemy — The Fall of the Morning Star",
+          "description": "He was the brightest creature God ever made — the seal of perfection, the morning star, the angel who stood nearest the throne. Heaven had a favourite, and it was him.\n\nSo how does the most beloved being in all creation become its enemy?\n\nThis is the story of the fall — told the way the old texts actually tell it: not as a battle between God and a monster, but as a tragedy. A creature loved most, who could not bear to honour anything above himself, and broke heaven in two rather than bow. The pride. The refusal to kneel. The whisper that turned a third of the angels. The war that emptied the sky of its brightest light. And the long campaign that followed him down — out of heaven, into a garden, and into every human heart since.\n\nDrawn faithfully from Isaiah, Ezekiel, Luke, Jude, and the Book of Revelation, with the older traditions named plainly where they speak. Reverent, cinematic, and built to be felt.⛧ CHAPTERS ⛧\n\n0:00 The Falling Star\n2:02 The Light-Bearer\n5:17 The Turning\n11:23 War in Heaven\n16:17 The Fall\n19:51 The War Comes to Earth\n23:37 The Promised End\n\nHe did not fall because he was a monster. He fell because he was magnificent, and could not bear to be second — and that is a wound we carry too.\n\nSo here is the question we leave with you: did the morning star fall because he was evil, or because he was proud? Tell us below.\n\n▶ Next: we follow the one who cast him down — the angel whose name is the question that ended the war. Who is like God? The story of Michael.🕊 \n\nSubscribe to Sacred Dawn for the Bible's cosmic and primeval drama, rendered as cinematic recreation — the origin story, retold.\n—\nSacred Dawn creates reverent, faithful cinematic recreations of scripture. All imagery is artistic interpretation; supernatural events are presented as the ancient texts describe them, with canon and tradition distinguished throughout."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT26M22S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "4",
+        "likeCount": "1",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "2"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/TYDmV9RCA4c\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "Satan: How Heaven's Most Beloved Angel Became God's Enemy — The Fall of the Morning Star",
+          "description": "He was the brightest creature God ever made — the seal of perfection, the morning star, the angel who stood nearest the throne. Heaven had a favourite, and it was him.\n\nSo how does the most beloved being in all creation become its enemy?\n\nThis is the story of the fall — told the way the old texts actually tell it: not as a battle between God and a monster, but as a tragedy. A creature loved most, who could not bear to honour anything above himself, and broke heaven in two rather than bow. The pride. The refusal to kneel. The whisper that turned a third of the angels. The war that emptied the sky of its brightest light. And the long campaign that followed him down — out of heaven, into a garden, and into every human heart since.\n\nDrawn faithfully from Isaiah, Ezekiel, Luke, Jude, and the Book of Revelation, with the older traditions named plainly where they speak. Reverent, cinematic, and built to be felt.⛧ CHAPTERS ⛧\n\n0:00 The Falling Star\n2:02 The Light-Bearer\n5:17 The Turning\n11:23 War in Heaven\n16:17 The Fall\n19:51 The War Comes to Earth\n23:37 The Promised End\n\nHe did not fall because he was a monster. He fell because he was magnificent, and could not bear to be second — and that is a wound we carry too.\n\nSo here is the question we leave with you: did the morning star fall because he was evil, or because he was proud? Tell us below.\n\n▶ Next: we follow the one who cast him down — the angel whose name is the question that ended the war. Who is like God? The story of Michael.🕊 \n\nSubscribe to Sacred Dawn for the Bible's cosmic and primeval drama, rendered as cinematic recreation — the origin story, retold.\n—\nSacred Dawn creates reverent, faithful cinematic recreations of scripture. All imagery is artistic interpretation; supernatural events are presented as the ancient texts describe them, with canon and tradition distinguished throughout."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "cMoakJrBZQRzD4D0mXrVknUIXgc",
+      "id": "rB4K-zgv7Ng",
+      "snippet": {
+        "publishedAt": "2026-06-20T06:24:22Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Satan: How Heaven's Most Beloved Angel Became God's Enemy — The Fall of the Morning Star",
+        "description": "He was the brightest creature God ever made — the seal of perfection, the morning star, the angel who stood nearest the throne. This is the story of how he fell: the pride, the refusal to bow, the war that split heaven in two, and the long campaign that followed him down to earth and into us. Drawn from Isaiah, Ezekiel, Luke, Jude and the Book of Revelation, with the old apocryphal traditions named plainly where they speak. A cinematic recreation.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/rB4K-zgv7Ng/default.jpg?sqp=COTW29EG&rs=AOn4CLBGq0NJ8NNWU2shbFOwaqTKW9TDTA",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/rB4K-zgv7Ng/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCJdGEgkXGIuhb_fVhvS3jJU6JqlQ",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/rB4K-zgv7Ng/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDX7pwdE7j4PU7kb_YiLlY6c0Y4TQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/rB4K-zgv7Ng/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLC-1TLt9eumzdnC6hB2lfZkGsKoPg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/rB4K-zgv7Ng/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDK2ELNnbBnuXbZAQ1OYomgacGf3g",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "bible stories",
+          "biblical mysteries",
+          "book of enoch",
+          "book of revelation",
+          "cinematic recreation",
+          "fall of satan",
+          "fallen angels",
+          "lucifer",
+          "michael the archangel",
+          "morning star",
+          "sacred dawn",
+          "satan",
+          "war in heaven"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Satan: How Heaven's Most Beloved Angel Became God's Enemy — The Fall of the Morning Star",
+          "description": "He was the brightest creature God ever made — the seal of perfection, the morning star, the angel who stood nearest the throne. This is the story of how he fell: the pride, the refusal to bow, the war that split heaven in two, and the long campaign that followed him down to earth and into us. Drawn from Isaiah, Ezekiel, Luke, Jude and the Book of Revelation, with the old apocryphal traditions named plainly where they speak. A cinematic recreation."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT26M22S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": false
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "1",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/rB4K-zgv7Ng\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "UehlQ7gA-NXV6IN42bivK8sGAUA",
+      "id": "XdyBY6BN45w",
+      "snippet": {
+        "publishedAt": "2026-06-19T23:00:37Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "The Tower of Babel: The Day Humanity Climbed Toward Heaven — and Heaven Came Down",
+        "description": "After the Flood, the whole world spoke one language — and used it to build the most ambitious thing the human race had ever attempted: a tower meant to reach the sky, and a name that would never be forgotten. This is the story of Babel as the Book of Genesis tells it: the one tongue, the burning ambition, the tower climbing toward heaven — and the strange, almost gentle way that God answered it, not with fire, but by coming down to look at a tower so small he had to stoop. Drawn from the Book of Genesis. Was Babel a punishment, or a mercy in disguise? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/XdyBY6BN45w/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/XdyBY6BN45w/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/XdyBY6BN45w/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/XdyBY6BN45w/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/XdyBY6BN45w/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "babel",
+          "babel explained",
+          "babylon origins",
+          "biblical documentary",
+          "book of genesis",
+          "confusion of languages",
+          "god came down",
+          "nimrod",
+          "one language",
+          "pride bible",
+          "reaching heaven",
+          "scattered nations",
+          "shinar",
+          "tower of babel",
+          "ziggurat"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "The Tower of Babel: The Day Humanity Climbed Toward Heaven — and Heaven Came Down",
+          "description": "After the Flood, the whole world spoke one language — and used it to build the most ambitious thing the human race had ever attempted: a tower meant to reach the sky, and a name that would never be forgotten. This is the story of Babel as the Book of Genesis tells it: the one tongue, the burning ambition, the tower climbing toward heaven — and the strange, almost gentle way that God answered it, not with fire, but by coming down to look at a tower so small he had to stoop. Drawn from the Book of Genesis. Was Babel a punishment, or a mercy in disguise? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT16M5S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "2",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/XdyBY6BN45w\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "The Tower of Babel: The Day Humanity Climbed Toward Heaven — and Heaven Came Down",
+          "description": "After the Flood, the whole world spoke one language — and used it to build the most ambitious thing the human race had ever attempted: a tower meant to reach the sky, and a name that would never be forgotten. This is the story of Babel as the Book of Genesis tells it: the one tongue, the burning ambition, the tower climbing toward heaven — and the strange, almost gentle way that God answered it, not with fire, but by coming down to look at a tower so small he had to stoop. Drawn from the Book of Genesis. Was Babel a punishment, or a mercy in disguise? Tell us below."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "EA-44dkehjH2bg4hM8rSozbb0lA",
+      "id": "fLHkRiOwNwI",
+      "snippet": {
+        "publishedAt": "2026-06-19T16:53:10Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "The Watchers: The Night Two Hundred Angels Fell — and the Forbidden Oath That Doomed the Ancient Wor",
+        "description": "Genesis hides it in a single haunting line — that there were giants in the earth in those days. But an ancient book left out of the Bible tells the whole terrible story behind it. This is the story of the Watchers: two hundred angels who looked down from heaven, desired the daughters of men, and swore a forbidden oath on a mountaintop to take what was never theirs — the knowledge they unleashed, the monstrous children they fathered, and the chains that hold them still, deep beneath the world, awaiting judgment. Drawn from Genesis and the Book of Enoch. Should the Book of Enoch have stayed lost? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/fLHkRiOwNwI/default.jpg?sqp=COTW29EG&rs=AOn4CLCE6aAfU3hCVVUvccxCnUgZfHbyPA",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/fLHkRiOwNwI/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLC5zbW6nk8ZHV0JsC_9L_xy2mgDRQ",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/fLHkRiOwNwI/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCZiiLG1LNZkIyVoawQPzzkrh9JnQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/fLHkRiOwNwI/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLDcrIfzJswvCYMSjqA7TzBDS6T77g",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/fLHkRiOwNwI/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDCnMpgqdtSwg8M5IL6539eMRBMeA",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "apocrypha",
+          "azazel",
+          "biblical documentary",
+          "book of enoch",
+          "fallen angels",
+          "forbidden knowledge",
+          "genesis 6",
+          "giants in the earth",
+          "mount hermon",
+          "nephilim",
+          "shemihazah",
+          "sons of god",
+          "the descent",
+          "the watchers",
+          "watchers explained"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Watchers: The Night Two Hundred Angels Fell — and the Forbidden Oath That Doomed the Ancient Wor",
+          "description": "Genesis hides it in a single haunting line — that there were giants in the earth in those days. But an ancient book left out of the Bible tells the whole terrible story behind it. This is the story of the Watchers: two hundred angels who looked down from heaven, desired the daughters of men, and swore a forbidden oath on a mountaintop to take what was never theirs — the knowledge they unleashed, the monstrous children they fathered, and the chains that hold them still, deep beneath the world, awaiting judgment. Drawn from Genesis and the Book of Enoch. Should the Book of Enoch have stayed lost? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT16M30S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-28T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/fLHkRiOwNwI\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "nW_CTFOR5tSWSQr4uKEitxuV6O4",
+      "id": "QEqx_FwXmAk",
+      "snippet": {
+        "publishedAt": "2026-06-19T16:26:02Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "The Ten Plagues of Egypt: How God Humbled an Empire — and the Night the Angel of Death Came",
+        "description": "A shepherd walked back into the most powerful empire on earth carrying nothing but a staff and a single demand from God — and the king laughed. What followed were ten blows, falling one after another on a kingdom that would not listen, each one worse than the last, building toward a final midnight that Egypt would never forget. This is the story of the Ten Plagues as the Book of Exodus tells it: a war between the God of a nation of slaves and all the gods of Egypt, the hardening of a king's heart, and the night the destroyer passed over. Drawn from the Book of Exodus. Was Pharaoh's heart his own doing, or God's? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/QEqx_FwXmAk/default.jpg?sqp=COTW29EG&rs=AOn4CLDpdnX3bO-JcgMuqYk2DyLHjkWiNQ",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/QEqx_FwXmAk/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLD64JRjKyttBTVkcZLABjFYAU8SfA",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/QEqx_FwXmAk/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCvKtQEwy-OnwJ-61-cq_pxU14rQQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/QEqx_FwXmAk/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLD7-iPrtUXQ_xQ-VDclEeFT6kvY5Q",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/QEqx_FwXmAk/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLAKDwv0Cs2-XwiZJJxl04zxTA7KBw",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "angel of death",
+          "biblical documentary",
+          "book of exodus",
+          "egypt judgment",
+          "firstborn",
+          "let my people go",
+          "moses",
+          "nile to blood",
+          "parting of the red sea",
+          "passover",
+          "pharaoh",
+          "plagues explained",
+          "ten plagues of egypt",
+          "the exodus",
+          "the plagues"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Ten Plagues of Egypt: How God Humbled an Empire — and the Night the Angel of Death Came",
+          "description": "A shepherd walked back into the most powerful empire on earth carrying nothing but a staff and a single demand from God — and the king laughed. What followed were ten blows, falling one after another on a kingdom that would not listen, each one worse than the last, building toward a final midnight that Egypt would never forget. This is the story of the Ten Plagues as the Book of Exodus tells it: a war between the God of a nation of slaves and all the gods of Egypt, the hardening of a king's heart, and the night the destroyer passed over. Drawn from the Book of Exodus. Was Pharaoh's heart his own doing, or God's? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT16M40S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-27T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/QEqx_FwXmAk\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "Dm4pUOWFloi3-Zn5E6Ux17HFn_M",
+      "id": "jlAUPlcsFak",
+      "snippet": {
+        "publishedAt": "2026-06-19T16:00:05Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "The Day the Sun Stood Still: The Battle Where God Stopped the Sky — and the Hail That Fell from Heav",
+        "description": "In the middle of a battle, a man lifted his eyes to the sky and gave a command no human being had ever dared to give. He told the sun to stop. And the strangest thing in all the Bible happened next — the sun hung motionless in the middle of the sky and did not set, for the length of an entire day. This is the story of Joshua's longest day as the Book of Joshua tells it: the all-night march, the hailstones that fell from heaven, the impossible prayer, and the day the cosmos itself held still. Drawn from the Book of Joshua. Do you think the sun truly stopped? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/jlAUPlcsFak/default.jpg?sqp=COTW29EG&rs=AOn4CLCSS21KWA0d8dCKw1CoEENuv3f9FQ",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/jlAUPlcsFak/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDaGTckJNjXqOYyoLfGiKrm5C3Lbg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/jlAUPlcsFak/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDC531rKqDsgJ-W32vR3sPCL1Naag",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/jlAUPlcsFak/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLDjJJQk1qMzuixxXiKYE-9_FbxY-A",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/jlAUPlcsFak/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLCbnPlXQ9WveSFzxNrqjX_B-L3Ifg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "amorites",
+          "battle of beth-horon",
+          "biblical documentary",
+          "book of joshua",
+          "divine intervention",
+          "five kings",
+          "gibeon",
+          "hailstones from heaven",
+          "joshua",
+          "joshua's long day",
+          "makkedah",
+          "miracle",
+          "sun stand still",
+          "the day the sun stood still",
+          "the lord fought for israel"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Day the Sun Stood Still: The Battle Where God Stopped the Sky — and the Hail That Fell from Heav",
+          "description": "In the middle of a battle, a man lifted his eyes to the sky and gave a command no human being had ever dared to give. He told the sun to stop. And the strangest thing in all the Bible happened next — the sun hung motionless in the middle of the sky and did not set, for the length of an entire day. This is the story of Joshua's longest day as the Book of Joshua tells it: the all-night march, the hailstones that fell from heaven, the impossible prayer, and the day the cosmos itself held still. Drawn from the Book of Joshua. Do you think the sun truly stopped? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT16M41S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-26T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/jlAUPlcsFak\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "XL26jEHJhi92Tfn8ZnhGnMSyQIw",
+      "id": "alBMhkpH57s",
+      "snippet": {
+        "publishedAt": "2026-06-19T15:33:45Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Sodom and Gomorrah: The Day Fire Fell from the Sky — and the Woman Who Looked Back",
+        "description": "Two cities so corrupt that fire fell out of heaven and unmade them in a single morning — and one family God reached in to drag out before it did. This is the story of Sodom and Gomorrah as the Book of Genesis tells it: the outcry that rose to heaven, the old man who stood before God and bargained for mercy, the angels at the gate, the fire and sulphur, and the woman who could not stop herself from looking back. Drawn from the Book of Genesis. Why do you think she looked back? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/alBMhkpH57s/default.jpg?sqp=COTW29EG&rs=AOn4CLBE5TXAMudgTlCHFFgKNA06ohF3dw",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/alBMhkpH57s/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAgRB__72XeH6ct5l-2bffxy00J0Q",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/alBMhkpH57s/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCYLf-izZy0ptTE0dnghSIAww7rVQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/alBMhkpH57s/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLAEX8SkfdglyOy7zdDpS_j4nmdyag",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/alBMhkpH57s/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLCxZIbhQHBJu1VBsb4RvIYzMJQRkg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "abraham",
+          "abraham intercession",
+          "biblical documentary",
+          "book of genesis",
+          "brimstone",
+          "divine judgment",
+          "do not look back",
+          "fire from heaven",
+          "lot",
+          "lots wife",
+          "pillar of salt",
+          "remember lots wife",
+          "sodom and gomorrah",
+          "sodom explained",
+          "two angels"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Sodom and Gomorrah: The Day Fire Fell from the Sky — and the Woman Who Looked Back",
+          "description": "Two cities so corrupt that fire fell out of heaven and unmade them in a single morning — and one family God reached in to drag out before it did. This is the story of Sodom and Gomorrah as the Book of Genesis tells it: the outcry that rose to heaven, the old man who stood before God and bargained for mercy, the angels at the gate, the fire and sulphur, and the woman who could not stop herself from looking back. Drawn from the Book of Genesis. Why do you think she looked back? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT16M27S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-25T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/alBMhkpH57s\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "TneBUqY23tzCz26yMizc8eW9HCI",
+      "id": "LEgu51RCv_Y",
+      "snippet": {
+        "publishedAt": "2026-06-19T14:58:36Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Noah's Flood: The Day the World Drowned — and the Door God Shut Himself",
+        "description": "Everyone knows the picture — the ark, the animals, the rainbow. Almost no one knows the story underneath it. This is the Flood as the Book of Genesis tells it: a world so broken that the God who made it grieved he ever had; one man who kept building an impossible ship under a clear sky while the whole world laughed; the day the deep itself broke open; and the small, devastating detail most people miss — that when the family was finally aboard, it was not Noah who shut the door. It was God. Drawn from the Book of Genesis. Was the Flood God's wrath, or his grief? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/LEgu51RCv_Y/default.jpg?sqp=COTW29EG&rs=AOn4CLDrwzHw_IONZTovuG4e9gJRb9w6dA",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/LEgu51RCv_Y/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAQTRIBSvI4fS9y0WgTBCT2sgvl6g",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/LEgu51RCv_Y/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAq3R02KbuCwJC_UoUsCoeKggGKKQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/LEgu51RCv_Y/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLC2BcvVXPisoQTBwKcdYu4vJmBpmA",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/LEgu51RCv_Y/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLA6qVUMdiePFLLlO1a7Vjnigewwvw",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "antediluvian world",
+          "ararat",
+          "before the flood",
+          "biblical documentary",
+          "book of genesis",
+          "eight souls",
+          "flood explained",
+          "god shut the door",
+          "great flood",
+          "noah",
+          "noah's ark",
+          "rainbow covenant",
+          "the deluge",
+          "the dove",
+          "the flood"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Noah's Flood: The Day the World Drowned — and the Door God Shut Himself",
+          "description": "Everyone knows the picture — the ark, the animals, the rainbow. Almost no one knows the story underneath it. This is the Flood as the Book of Genesis tells it: a world so broken that the God who made it grieved he ever had; one man who kept building an impossible ship under a clear sky while the whole world laughed; the day the deep itself broke open; and the small, devastating detail most people miss — that when the family was finally aboard, it was not Noah who shut the door. It was God. Drawn from the Book of Genesis. Was the Flood God's wrath, or his grief? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT16M49S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-23T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/LEgu51RCv_Y\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "0ueGzXFCl9JIrXmlGyCBRFLzngs",
+      "id": "x2imWl56VAI",
+      "snippet": {
+        "publishedAt": "2026-06-19T14:31:36Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Elijah and the Fire from Heaven: The Prophet Who Challenged a Kingdom — and the Fire That Answered",
+        "description": "A kingdom had abandoned its God. A queen was hunting down every prophet who remained. And one man walked out of hiding, stood on a mountaintop before a hostile king and an army of false prophets, and proposed a single test that would settle everything: the God who answers with fire is the true God. This is the story of Elijah on Mount Carmel as the Book of Kings tells it — the lone prophet against the many, the silence of Baal, the drenched altar, the fire that fell from heaven, and the rain that ended a three-year drought. Drawn from the Book of Kings. Who else could stand against a whole kingdom alone? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/x2imWl56VAI/default.jpg?sqp=COTW29EG&rs=AOn4CLBnnWHSsCIw4KnfDrg8gyIO_v3Glw",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/x2imWl56VAI/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLB_XwfANPsNLO2MwwPDF-zUKzRDMw",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/x2imWl56VAI/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAz9-Fhq2RWGlM5ebUs-U7ak6GcqQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/x2imWl56VAI/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLBk7N5AQsoXWriGb462s5PE-GzlJQ",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/x2imWl56VAI/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDAU3gchkSnqXKLfHS7wHPyXuWuIQ",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "ahab",
+          "baal",
+          "biblical documentary",
+          "book of kings",
+          "divine fire",
+          "drought",
+          "elijah",
+          "elijah explained",
+          "false prophets",
+          "fire from heaven",
+          "jezebel",
+          "mount carmel",
+          "prophets of baal",
+          "the lord he is god",
+          "the still small voice"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Elijah and the Fire from Heaven: The Prophet Who Challenged a Kingdom — and the Fire That Answered",
+          "description": "A kingdom had abandoned its God. A queen was hunting down every prophet who remained. And one man walked out of hiding, stood on a mountaintop before a hostile king and an army of false prophets, and proposed a single test that would settle everything: the God who answers with fire is the true God. This is the story of Elijah on Mount Carmel as the Book of Kings tells it — the lone prophet against the many, the silence of Baal, the drenched altar, the fire that fell from heaven, and the rain that ended a three-year drought. Drawn from the Book of Kings. Who else could stand against a whole kingdom alone? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT17M",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-22T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/x2imWl56VAI\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "UPBudaOq5nc4w01a5gXV7ZSRo8A",
+      "id": "-i_MO8xUXig",
+      "snippet": {
+        "publishedAt": "2026-06-19T14:04:55Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "The Fall: How Paradise Was Lost — and the Promise Hidden in the Curse",
+        "description": "It is the story underneath every other story — the day the first two people, who had everything, threw it all away for a single piece of fruit. This is the Fall as the Book of Genesis tells it: the garden, the one command, the serpent more crafty than any creature, the first lie ever spoken, and the terrible moment a human hand reached out and took. But hidden inside the curse that followed is something most people never notice — the very first promise that one day, someone would come to undo it all. Drawn from the Book of Genesis. Was paradise stolen from us, or did we give it away? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/-i_MO8xUXig/default.jpg?sqp=COTW29EG&rs=AOn4CLAR25_P8M4Tuqj6K5GlD6E6QM_dOw",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/-i_MO8xUXig/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLB5pAmzuA3UFg5sLNUwjdd2BSA12g",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/-i_MO8xUXig/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLArr81Y0rRi9Bsn2r48iyka6Lth4A",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/-i_MO8xUXig/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLBLag9k_jiVwcm-uEwqaLPb0saCqA",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/-i_MO8xUXig/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLCDLBwIfbboPzUVZJjse0mmwwnKrw",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "adam and eve",
+          "biblical documentary",
+          "book of genesis",
+          "cherubim",
+          "fall of man explained",
+          "flaming sword",
+          "forbidden fruit",
+          "garden of eden",
+          "original sin",
+          "paradise lost",
+          "protoevangelium",
+          "the fall of man",
+          "the first sin",
+          "the serpent",
+          "tree of knowledge"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Fall: How Paradise Was Lost — and the Promise Hidden in the Curse",
+          "description": "It is the story underneath every other story — the day the first two people, who had everything, threw it all away for a single piece of fruit. This is the Fall as the Book of Genesis tells it: the garden, the one command, the serpent more crafty than any creature, the first lie ever spoken, and the terrible moment a human hand reached out and took. But hidden inside the curse that followed is something most people never notice — the very first promise that one day, someone would come to undo it all. Drawn from the Book of Genesis. Was paradise stolen from us, or did we give it away? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT15M28S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-21T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/-i_MO8xUXig\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "e2BPIykz_yFQa4oxbo2rO2WdGqA",
+      "id": "XteFiFOwB3Q",
+      "snippet": {
+        "publishedAt": "2026-06-19T13:39:43Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Cain and Abel: The First Murder — and the Mark God Gave the Man Who Did It",
+        "description": "It is the oldest story of brothers in the world, and it ends in the first grave that was ever dug. Two sons of Adam, two offerings, one rejected — and a warning from God himself that came before the blood was ever spilled. This is the story of Cain and Abel as the Book of Genesis tells it: the sin that crouched at the door, the voice that cried up from the ground, the question that has haunted every age since — \"Am I my brother's keeper?\" — and the strange mark God set on the murderer, not to condemn him, but to keep him alive. Drawn from the Book of Genesis. What do you think the mark was? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/XteFiFOwB3Q/default.jpg?sqp=COTW29EG&rs=AOn4CLBgc3mNUVtMwHJANhpa45R4ZRqV3A",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/XteFiFOwB3Q/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDZlapKRUBrWgTMMUUP1xNJZgdGGw",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/XteFiFOwB3Q/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLD0B58k3Zegrd0wKoUkSDRLdKuYlg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/XteFiFOwB3Q/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLB6oVz96ypWmf6mSVR3l3NicjyNHw",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/XteFiFOwB3Q/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDtCIJvwIIpiBb03FxTOgQtL4ZXmA",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "adam and eve sons",
+          "am i my brother's keeper",
+          "bible story",
+          "biblical documentary",
+          "book of genesis",
+          "cain and abel",
+          "cain offering",
+          "east of eden",
+          "fratricide bible",
+          "lamech",
+          "line of cain",
+          "mark of cain",
+          "seth",
+          "sin at the door",
+          "the first murder"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Cain and Abel: The First Murder — and the Mark God Gave the Man Who Did It",
+          "description": "It is the oldest story of brothers in the world, and it ends in the first grave that was ever dug. Two sons of Adam, two offerings, one rejected — and a warning from God himself that came before the blood was ever spilled. This is the story of Cain and Abel as the Book of Genesis tells it: the sin that crouched at the door, the voice that cried up from the ground, the question that has haunted every age since — \"Am I my brother's keeper?\" — and the strange mark God set on the murderer, not to condemn him, but to keep him alive. Drawn from the Book of Genesis. What do you think the mark was? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT15M19S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-29T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/XteFiFOwB3Q\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "HH7DfbhR0I095qSxG04cNjvaXus",
+      "id": "_RoOXD6wAXs",
+      "snippet": {
+        "publishedAt": "2026-06-16T23:00:00Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Cain and Abel: The First Murder — and the Mark God Gave the Man Who Did It",
+        "description": "It is the oldest story of brothers in the world, and it ends in the first grave that was ever dug. Two sons of Adam, two offerings, one rejected — and a warning from God himself that came before the blood was ever spilled. \n\nThis is the story of Cain and Abel as the Book of Genesis tells it: the sin that crouched at the door, the voice that cried up from the ground, the question that has haunted every age since — \"Am I my brother's keeper?\" — and the strange mark God set on the murderer, not to condemn him, but to keep him alive. Drawn from the Book of Genesis. What do you think the mark was? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/_RoOXD6wAXs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/_RoOXD6wAXs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/_RoOXD6wAXs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/_RoOXD6wAXs/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/_RoOXD6wAXs/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "categoryId": "22",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Cain and Abel: The First Murder — and the Mark God Gave the Man Who Did It",
+          "description": "It is the oldest story of brothers in the world, and it ends in the first grave that was ever dug. Two sons of Adam, two offerings, one rejected — and a warning from God himself that came before the blood was ever spilled. \n\nThis is the story of Cain and Abel as the Book of Genesis tells it: the sin that crouched at the door, the voice that cried up from the ground, the question that has haunted every age since — \"Am I my brother's keeper?\" — and the strange mark God set on the murderer, not to condemn him, but to keep him alive. Drawn from the Book of Genesis. What do you think the mark was? Tell us below."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT15M56S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "141",
+        "likeCount": "6",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/_RoOXD6wAXs\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "Cain and Abel: The First Murder — and the Mark God Gave the Man Who Did It",
+          "description": "It is the oldest story of brothers in the world, and it ends in the first grave that was ever dug. Two sons of Adam, two offerings, one rejected — and a warning from God himself that came before the blood was ever spilled. \n\nThis is the story of Cain and Abel as the Book of Genesis tells it: the sin that crouched at the door, the voice that cried up from the ground, the question that has haunted every age since — \"Am I my brother's keeper?\" — and the strange mark God set on the murderer, not to condemn him, but to keep him alive. Drawn from the Book of Genesis. What do you think the mark was? Tell us below."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "01zWfRG7wdYqN9Sa-2T8yEnQAZc",
+      "id": "NBOMkfk0rZM",
+      "snippet": {
+        "publishedAt": "2026-06-16T11:56:52Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "The Book of Giants: The Lost Story of the Nephilim — and the Demons They Became",
+        "description": "Before the Flood, the earth belonged to giants — the monstrous sons of fallen angels and mortal women. This is their story, told from a book left out of the Bible and buried for two thousand years: the Book of Giants of the Dead Sea Scrolls. The warning dreams God sent them. \n\nThe winged messenger they flew to Enoch. The verdict he carried back. And the terrible thing their spirits became when their bodies finally died — the origin, the old texts say, of every demon that has walked the earth since. Drawn from Genesis, the Book of Enoch, and the Book of Giants. Was it scripture that was lost — or kept out for a reason? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/NBOMkfk0rZM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/NBOMkfk0rZM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/NBOMkfk0rZM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/NBOMkfk0rZM/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/NBOMkfk0rZM/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "categoryId": "22",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "The Book of Giants: The Lost Story of the Nephilim — and the Demons They Became",
+          "description": "Before the Flood, the earth belonged to giants — the monstrous sons of fallen angels and mortal women. This is their story, told from a book left out of the Bible and buried for two thousand years: the Book of Giants of the Dead Sea Scrolls. The warning dreams God sent them. \n\nThe winged messenger they flew to Enoch. The verdict he carried back. And the terrible thing their spirits became when their bodies finally died — the origin, the old texts say, of every demon that has walked the earth since. Drawn from Genesis, the Book of Enoch, and the Book of Giants. Was it scripture that was lost — or kept out for a reason? Tell us below."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT30M32S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "194",
+        "likeCount": "3",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "4"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/NBOMkfk0rZM\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "The Book of Giants: The Lost Story of the Nephilim — and the Demons They Became",
+          "description": "Before the Flood, the earth belonged to giants — the monstrous sons of fallen angels and mortal women. This is their story, told from a book left out of the Bible and buried for two thousand years: the Book of Giants of the Dead Sea Scrolls. The warning dreams God sent them. \n\nThe winged messenger they flew to Enoch. The verdict he carried back. And the terrible thing their spirits became when their bodies finally died — the origin, the old texts say, of every demon that has walked the earth since. Drawn from Genesis, the Book of Enoch, and the Book of Giants. Was it scripture that was lost — or kept out for a reason? Tell us below."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "Q-1HYRuUvLpiat06wUUxrZUDQ94",
+      "id": "l7HAcImyAGc",
+      "snippet": {
+        "publishedAt": "2026-06-14T06:30:07Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Enoch: The Man Who Walked With God — and Was Taken Before the Flood",
+        "description": "He was the seventh from Adam, the one man in a drowning world who walked so closely with God that death never came for him. This is the life of Enoch — the world of violence he was born into, the Watchers who fell from the sky, the journey through the heavens no living man has made, and the verdict he carried back before the Flood. Drawn from Genesis, the Book of Enoch, and the Book of the Watchers. The book that recorded all of this was left out of the Bible — should it have been? Tell us below.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/l7HAcImyAGc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/l7HAcImyAGc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/l7HAcImyAGc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/l7HAcImyAGc/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "tags": [
+          "book of enoch",
+          "enoch",
+          "the watchers",
+          "nephilim",
+          "before the flood",
+          "methuselah",
+          "fallen angels",
+          "bible mysteries",
+          "enoch walked with god",
+          "taken to heaven",
+          "antediluvian",
+          "sons of god",
+          "apocrypha",
+          "biblical documentary"
+        ],
+        "categoryId": "22",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Enoch: The Man Who Walked With God — and Was Taken Before the Flood",
+          "description": "He was the seventh from Adam, the one man in a drowning world who walked so closely with God that death never came for him. This is the life of Enoch — the world of violence he was born into, the Watchers who fell from the sky, the journey through the heavens no living man has made, and the verdict he carried back before the Flood. Drawn from Genesis, the Book of Enoch, and the Book of the Watchers. The book that recorded all of this was left out of the Bible — should it have been? Tell us below."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT30M42S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "175",
+        "likeCount": "6",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/l7HAcImyAGc\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "Enoch: The Man Who Walked With God — and Was Taken Before the Flood",
+          "description": "He was the seventh from Adam, the one man in a drowning world who walked so closely with God that death never came for him. This is the life of Enoch — the world of violence he was born into, the Watchers who fell from the sky, the journey through the heavens no living man has made, and the verdict he carried back before the Flood. Drawn from Genesis, the Book of Enoch, and the Book of the Watchers. The book that recorded all of this was left out of the Bible — should it have been? Tell us below."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "mA8WpCCkBElmlryEU2ECgoYZ90w",
+      "id": "WHIp5uXTQAg",
+      "snippet": {
+        "publishedAt": "2026-06-13T15:18:56Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "War in Heaven: How the Morning Star Became Satan (Cinematic Biblical Recreation)",
+        "description": "Before the first man, before the first sin, there was a war in heaven.\n\nThis is the story of the morning star — the brightest and most beloved angel God ever made — and the pride that turned the light-bearer into the adversary. From the perfection of his beginning in the garden of God, to the secret rebellion that drew a third of heaven after him, to the war that broke the sky and the fall that changed creation forever.\n\nWhat follows is a cinematic recreation. There are no images of these things — only the words the prophets left behind, and what they allow us to imagine. The story is drawn together from the Book of Isaiah, the Book of Ezekiel, the Book of Revelation, and the words of Christ in the Gospel of Luke.\n\nWas the morning star's fall pride — or was it freedom? It is the oldest argument there is, and it is still not settled. Tell us what you believe in the comments.\n\n#WarInHeaven #FallOfLucifer #Lucifer #ArchangelMichael #Bible #SacredDawn",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/WHIp5uXTQAg/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/WHIp5uXTQAg/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/WHIp5uXTQAg/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/WHIp5uXTQAg/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "categoryId": "22",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "War in Heaven: How the Morning Star Became Satan (Cinematic Biblical Recreation)",
+          "description": "Before the first man, before the first sin, there was a war in heaven.\n\nThis is the story of the morning star — the brightest and most beloved angel God ever made — and the pride that turned the light-bearer into the adversary. From the perfection of his beginning in the garden of God, to the secret rebellion that drew a third of heaven after him, to the war that broke the sky and the fall that changed creation forever.\n\nWhat follows is a cinematic recreation. There are no images of these things — only the words the prophets left behind, and what they allow us to imagine. The story is drawn together from the Book of Isaiah, the Book of Ezekiel, the Book of Revelation, and the words of Christ in the Gospel of Luke.\n\nWas the morning star's fall pride — or was it freedom? It is the oldest argument there is, and it is still not settled. Tell us what you believe in the comments.\n\n#WarInHeaven #FallOfLucifer #Lucifer #ArchangelMichael #Bible #SacredDawn"
+        }
+      },
+      "contentDetails": {
+        "duration": "PT13M31S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "676",
+        "likeCount": "12",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/WHIp5uXTQAg\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "War in Heaven: How the Morning Star Became Satan (Cinematic Biblical Recreation)",
+          "description": "Before the first man, before the first sin, there was a war in heaven.\n\nThis is the story of the morning star — the brightest and most beloved angel God ever made — and the pride that turned the light-bearer into the adversary. From the perfection of his beginning in the garden of God, to the secret rebellion that drew a third of heaven after him, to the war that broke the sky and the fall that changed creation forever.\n\nWhat follows is a cinematic recreation. There are no images of these things — only the words the prophets left behind, and what they allow us to imagine. The story is drawn together from the Book of Isaiah, the Book of Ezekiel, the Book of Revelation, and the words of Christ in the Gospel of Luke.\n\nWas the morning star's fall pride — or was it freedom? It is the oldest argument there is, and it is still not settled. Tell us what you believe in the comments.\n\n#WarInHeaven #FallOfLucifer #Lucifer #ArchangelMichael #Bible #SacredDawn"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "cY4Uu68nYsE3K5FZCHR6M_9MxWw",
+      "id": "OH6Cugzt78U",
+      "snippet": {
+        "publishedAt": "2026-06-12T17:27:12Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "The Watchers' Daughters: What the Book of Enoch Hides About the Female Nephilim",
+        "description": "Before the Flood, the sons of God looked down on the daughters of men — and what they wanted, they took. This is the story Genesis tells in three verses and the Book of Enoch tells in terror: the Watchers who fell for the daughters of men, the forbidden gifts they brought down the mountain, the giants their daughters carried, and the world that drowned for a single look. A cinematic recreation drawn from the Book of Genesis, the Book of Enoch, and the Book of the Watchers. | Sacred Dawn — the Bible's origin story, retold.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/OH6Cugzt78U/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/OH6Cugzt78U/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/OH6Cugzt78U/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/OH6Cugzt78U/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/OH6Cugzt78U/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "categoryId": "22",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "The Watchers' Daughters: What the Book of Enoch Hides About the Female Nephilim",
+          "description": "Before the Flood, the sons of God looked down on the daughters of men — and what they wanted, they took. This is the story Genesis tells in three verses and the Book of Enoch tells in terror: the Watchers who fell for the daughters of men, the forbidden gifts they brought down the mountain, the giants their daughters carried, and the world that drowned for a single look. A cinematic recreation drawn from the Book of Genesis, the Book of Enoch, and the Book of the Watchers. | Sacred Dawn — the Bible's origin story, retold."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT33M7S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "329",
+        "likeCount": "8",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/OH6Cugzt78U\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "The Watchers' Daughters: What the Book of Enoch Hides About the Female Nephilim",
+          "description": "Before the Flood, the sons of God looked down on the daughters of men — and what they wanted, they took. This is the story Genesis tells in three verses and the Book of Enoch tells in terror: the Watchers who fell for the daughters of men, the forbidden gifts they brought down the mountain, the giants their daughters carried, and the world that drowned for a single look. A cinematic recreation drawn from the Book of Genesis, the Book of Enoch, and the Book of the Watchers. | Sacred Dawn — the Bible's origin story, retold."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "qOhPEstIBH6ZK03GOWXv_GgnosI",
+      "id": "yTWSyeDYOws",
+      "snippet": {
+        "publishedAt": "2026-06-11T00:57:59Z",
+        "channelId": "UCs-VNV8IY6eiklcKprDWqIA",
+        "title": "Before the Flood: The True Story of the Nephilim and the Watchers",
+        "description": "Before the Flood, the Book of Genesis says the sons of God came down to the daughters of men, and their children were the Nephilim — the giants, the mighty men of old, men of renown. The Book of Enoch tells the rest: two hundred Watchers, an oath sworn on a mountain, forbidden knowledge handed to mankind, and a world that drowned for what it became.\n\nThis is a cinematic recreation of the oldest catastrophe in scripture — drawn from Genesis 6, the Book of Enoch, and the Book of the Watchers.\n\nWho do you believe they were — the sons of God who came down? Angels who fell? The line of Seth, gone astray? Or only men who reached too high? Three thousand years, and no one has agreed. Tell me in the comments.\n\nChapters:\nThe giants in the valley\nThe descent — the oath on the mountain\nThe forbidden knowledge — the blade, the mask, the stars\nThe Nephilim — the giants and the house at the edge of the valley\nThe cry and the verdict\nThe waters\nWhat survived the Flood\n\nSources: Genesis 6; the Book of Enoch (the Book of the Watchers).\n\nNew cinematic recreations regularly. Subscribe, and walk back with us to the beginning of the world.\n\n#Nephilim #TheWatchers #BookOfEnoch #BeforeTheFlood #Giants #Genesis #BiblicalDocumentary #SacredDawn",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/yTWSyeDYOws/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/yTWSyeDYOws/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/yTWSyeDYOws/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/yTWSyeDYOws/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/yTWSyeDYOws/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Sacred Dawn",
+        "categoryId": "22",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Before the Flood: The True Story of the Nephilim and the Watchers",
+          "description": "Before the Flood, the Book of Genesis says the sons of God came down to the daughters of men, and their children were the Nephilim — the giants, the mighty men of old, men of renown. The Book of Enoch tells the rest: two hundred Watchers, an oath sworn on a mountain, forbidden knowledge handed to mankind, and a world that drowned for what it became.\n\nThis is a cinematic recreation of the oldest catastrophe in scripture — drawn from Genesis 6, the Book of Enoch, and the Book of the Watchers.\n\nWho do you believe they were — the sons of God who came down? Angels who fell? The line of Seth, gone astray? Or only men who reached too high? Three thousand years, and no one has agreed. Tell me in the comments.\n\nChapters:\nThe giants in the valley\nThe descent — the oath on the mountain\nThe forbidden knowledge — the blade, the mask, the stars\nThe Nephilim — the giants and the house at the edge of the valley\nThe cry and the verdict\nThe waters\nWhat survived the Flood\n\nSources: Genesis 6; the Book of Enoch (the Book of the Watchers).\n\nNew cinematic recreations regularly. Subscribe, and walk back with us to the beginning of the world.\n\n#Nephilim #TheWatchers #BookOfEnoch #BeforeTheFlood #Giants #Genesis #BiblicalDocumentary #SacredDawn"
+        }
+      },
+      "contentDetails": {
+        "duration": "PT17M40S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "280",
+        "likeCount": "9",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/yTWSyeDYOws\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "Before the Flood: The True Story of the Nephilim and the Watchers",
+          "description": "Before the Flood, the Book of Genesis says the sons of God came down to the daughters of men, and their children were the Nephilim — the giants, the mighty men of old, men of renown. The Book of Enoch tells the rest: two hundred Watchers, an oath sworn on a mountain, forbidden knowledge handed to mankind, and a world that drowned for what it became.\n\nThis is a cinematic recreation of the oldest catastrophe in scripture — drawn from Genesis 6, the Book of Enoch, and the Book of the Watchers.\n\nWho do you believe they were — the sons of God who came down? Angels who fell? The line of Seth, gone astray? Or only men who reached too high? Three thousand years, and no one has agreed. Tell me in the comments.\n\nChapters:\nThe giants in the valley\nThe descent — the oath on the mountain\nThe forbidden knowledge — the blade, the mask, the stars\nThe Nephilim — the giants and the house at the edge of the valley\nThe cry and the verdict\nThe waters\nWhat survived the Flood\n\nSources: Genesis 6; the Book of Enoch (the Book of the Watchers).\n\nNew cinematic recreations regularly. Subscribe, and walk back with us to the beginning of the world.\n\n#Nephilim #TheWatchers #BookOfEnoch #BeforeTheFlood #Giants #Genesis #BiblicalDocumentary #SacredDawn"
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    }
+  ]
+}
