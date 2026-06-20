@@ -19,6 +19,13 @@ place, same scopes (force-ssl already grants read). No new consent.
 success-coach is EXCLUDED from --all (dead channel, dead topic). It can still be
 dumped explicitly via --channel success-coach if ever needed.
 
+SCHEDULE DISPLAY: the --scheduled-only-summary prints publishAt in LOCAL time
+(Europe/Amsterdam, i.e. CET/CEST) to match what Studio shows you, with UTC in
+parens. A 23:00Z slot is 01:00 the NEXT DAY local - reading raw UTC against
+Studio's local view invents phantom day-collisions. Local is ground truth here.
+[PAST] flags a publishAt already elapsed; a non-private status is flagged too -
+either means the row is not a clean pending schedule.
+
 WHAT THIS CANNOT SEE (API does not expose - stays manual in Studio):
   - the "Altered/AI content" disclosure flag
   - Content ID copyright claims (needs partner youtubePartner scope)
@@ -36,6 +43,7 @@ import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 # Reuse the canonical credential loader from the upload step - do NOT reinvent it.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -43,6 +51,10 @@ from upload_episode import get_credentials, log, die  # noqa: E402
 
 # Channels skipped by --all (still dumpable explicitly via --channel).
 EXCLUDE = {"success-coach"}  # dead channel, dead topic - never auto-dump
+
+# Local timezone for the schedule summary - must match the timezone Studio shows
+# you (your account/browser locale). The Hague -> Europe/Amsterdam (CET/CEST).
+LOCAL_TZ_NAME = "Europe/Amsterdam"
 
 # Every readable part videos.list exposes. Raw capture - grab it all.
 VIDEO_PARTS = [
@@ -134,6 +146,19 @@ def fetch_videos(youtube, video_ids):
     return out
 
 
+def parse_publish_at(pub):
+    """Parse an RFC3339 publishAt string to an aware UTC datetime, or None."""
+    if not pub:
+        return None
+    try:
+        return datetime.strptime(pub, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except ValueError:
+        try:
+            return datetime.fromisoformat(pub.replace("Z", "+00:00")).astimezone(timezone.utc)
+        except ValueError:
+            return None
+
+
 def dump_one(channel_dir, dry_run):
     youtube = get_youtube(channel_dir)
     if youtube is None:
@@ -164,6 +189,7 @@ def dump_one(channel_dir, dry_run):
                 "Content ID copyright claims (needs partner scope)",
                 "end screens / cards / editor state",
                 "statistics.* is a snapshot at dump time, not live",
+                "publishAt is UTC; convert to local to compare with Studio",
             ],
         },
         "videos": videos,
@@ -178,6 +204,40 @@ def dump_one(channel_dir, dry_run):
     return payload
 
 
+def print_schedule_summary(payloads):
+    """Forward schedule in LOCAL time (matches Studio), UTC in parens, soonest first."""
+    local_tz = ZoneInfo(LOCAL_TZ_NAME)
+    now_utc = datetime.now(timezone.utc)
+    log("")
+    log(f"SCHEDULED (private + publishAt). Local time = {LOCAL_TZ_NAME} (matches Studio); UTC in parens.")
+    log("  [PAST] = publishAt already elapsed (published or stale).  [<status>] = not private.")
+    for p in payloads:
+        rows = []
+        for v in p["videos"]:
+            st = v.get("status", {})
+            dt_utc = parse_publish_at(st.get("publishAt"))
+            if dt_utc is None:
+                continue
+            rows.append((dt_utc, st.get("privacyStatus", "?"),
+                         v.get("snippet", {}).get("title", "?"), v["id"]))
+        rows.sort(key=lambda r: r[0])
+        log(f"  {p['_meta']['channel_title']}:")
+        if not rows:
+            log("    (none scheduled)")
+            continue
+        for dt_utc, priv, ttl, vid in rows:
+            dt_local = dt_utc.astimezone(local_tz)
+            flags = []
+            if dt_utc < now_utc:
+                flags.append("PAST")
+            if priv != "private":
+                flags.append(priv.upper())
+            flag_str = ("  [" + ",".join(flags) + "]") if flags else ""
+            local_s = dt_local.strftime("%a %Y-%m-%d %H:%M %Z")
+            utc_s = dt_utc.strftime("%H:%MZ")
+            log(f"    {local_s} ({utc_s})  {ttl[:50]}  https://youtu.be/{vid}{flag_str}")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Read-only YouTube metadata mirror (raw capture).")
     g = ap.add_mutually_exclusive_group(required=True)
@@ -185,7 +245,7 @@ def main():
     g.add_argument("--all", action="store_true", help="Every channel dir with a token.json, minus EXCLUDE")
     ap.add_argument("--dry-run", action="store_true", help="Resolve + count, no fetch, no write.")
     ap.add_argument("--scheduled-only-summary", action="store_true",
-                    help="After dumping, print the forward schedule (publishAt) per channel.")
+                    help="After dumping, print the forward schedule (publishAt) per channel, in local time.")
     args = ap.parse_args()
 
     channel_dirs = find_channel_dirs(None if args.all else args.channel)
@@ -203,20 +263,7 @@ def main():
             payloads.append(p)
 
     if args.scheduled_only_summary and not args.dry_run:
-        log("")
-        log("SCHEDULED (private + publishAt), soonest first:")
-        for p in payloads:
-            rows = []
-            for v in p["videos"]:
-                st = v.get("status", {})
-                if st.get("privacyStatus") == "private" and st.get("publishAt"):
-                    rows.append((st["publishAt"], v.get("snippet", {}).get("title", "?"), v["id"]))
-            rows.sort()
-            log(f"  {p['_meta']['channel_title']}:")
-            if not rows:
-                log("    (none scheduled)")
-            for when, ttl, vid in rows:
-                log(f"    {when}  {ttl[:60]}  https://youtu.be/{vid}")
+        print_schedule_summary(payloads)
 
     log("")
     log("done.")
