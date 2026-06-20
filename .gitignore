@@ -94,3 +94,7 @@ inbox-test/
 # Inbox queues — transient staging the runner consumes; authored .md lives elsewhere
 **/batch_inbox/
 **/inbox/
+
+# committed metadata mirrors - force them in even if *.json is ignored elsewhere
+!*/channel_dump.json
+success-coach/channel_dump.json
