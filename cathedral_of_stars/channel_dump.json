@@ -1,0 +1,975 @@
+{
+  "_meta": {
+    "channel_dir": "cathedral_of_stars",
+    "channel_title": "Cathedral of Stars",
+    "uploads_playlist": "UUiTdDWcPSTKOMkZVB8aDAAQ",
+    "dumped_at_utc": "2026-06-20T19:37:29Z",
+    "video_count": 10,
+    "parts_captured": [
+      "snippet",
+      "status",
+      "contentDetails",
+      "statistics",
+      "topicDetails",
+      "recordingDetails",
+      "localizations",
+      "liveStreamingDetails",
+      "player",
+      "paidProductPlacementDetails"
+    ],
+    "blind_spots": [
+      "AI-content disclosure flag (not in API)",
+      "Content ID copyright claims (needs partner scope)",
+      "end screens / cards / editor state",
+      "statistics.* is a snapshot at dump time, not live"
+    ]
+  },
+  "videos": [
+    {
+      "kind": "youtube#video",
+      "etag": "btcAOWOLa8t6knGyCoOeDi9jBfs",
+      "id": "MlOqgMy5DCI",
+      "snippet": {
+        "publishedAt": "2026-06-19T23:00:24Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "TON 618: The Largest Black Hole in the Universe",
+        "description": "Ten billion light-years away burns a darkness so vast it defies belief. Its name is TON 618, the largest black hole humanity has ever found — a single object so immense that our entire solar system would vanish inside it without a ripple, and yet it blazes brighter than a hundred galaxies. This is a cinematic journey up the ladder of black holes, from the collapsed heart of a dying star to the monster at the edge of the visible universe. A reverent recreation, drawn from what astronomy has measured of the most massive black holes known.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/MlOqgMy5DCI/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/MlOqgMy5DCI/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/MlOqgMy5DCI/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/MlOqgMy5DCI/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/MlOqgMy5DCI/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "Sagittarius A star",
+          "TON 618",
+          "astronomy",
+          "biggest black hole in the universe",
+          "cosmos",
+          "event horizon",
+          "largest black hole",
+          "quasar",
+          "scale of the universe",
+          "space documentary",
+          "supermassive black hole"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "TON 618: The Largest Black Hole in the Universe",
+          "description": "Ten billion light-years away burns a darkness so vast it defies belief. Its name is TON 618, the largest black hole humanity has ever found — a single object so immense that our entire solar system would vanish inside it without a ripple, and yet it blazes brighter than a hundred galaxies. This is a cinematic journey up the ladder of black holes, from the collapsed heart of a dying star to the monster at the edge of the visible universe. A reverent recreation, drawn from what astronomy has measured of the most massive black holes known."
+        },
+        "defaultAudioLanguage": "ar"
+      },
+      "contentDetails": {
+        "duration": "PT8M14S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "2",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/MlOqgMy5DCI\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "TON 618: The Largest Black Hole in the Universe",
+          "description": "Ten billion light-years away burns a darkness so vast it defies belief. Its name is TON 618, the largest black hole humanity has ever found — a single object so immense that our entire solar system would vanish inside it without a ripple, and yet it blazes brighter than a hundred galaxies. This is a cinematic journey up the ladder of black holes, from the collapsed heart of a dying star to the monster at the edge of the visible universe. A reverent recreation, drawn from what astronomy has measured of the most massive black holes known."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "jLJvPhaFntvGqXNDJVwfLC4_c0Y",
+      "id": "oj5ADWGqhYE",
+      "snippet": {
+        "publishedAt": "2026-06-19T12:45:37Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "The Largest Structure in the Universe",
+        "description": "Zoom out far enough — past planets, past stars, past galaxies — and a hidden pattern appears: the cosmic web, the largest structure in all creation. Galaxies are not scattered randomly through the dark. They are strung along vast luminous filaments and gathered into walls so immense that light itself would take billions of years to cross them. This is a cinematic journey to the grandest architecture in existence, the scaffolding on which the entire universe is built. A reverent recreation, drawn from what astronomy has mapped of the largest structures in the cosmos.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/oj5ADWGqhYE/default.jpg?sqp=COTW29EG&rs=AOn4CLCbf4X9O1Hxi4RHw0gYIBF3WUSocA",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/oj5ADWGqhYE/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDgRwbJUIMHDgBZvKDT6zKeyelUew",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/oj5ADWGqhYE/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLBo9AF2PQXA97pYnFQrYiJObhC7iQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/oj5ADWGqhYE/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLCW8UasUt9AsyG_d8Mtd9hlUrGT9g",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/oj5ADWGqhYE/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLAb90g2Am6Sn1kXZLHR5LyAq7LE3A",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "Great Wall",
+          "Laniakea",
+          "astronomy",
+          "cosmic web",
+          "cosmos",
+          "galaxy filaments",
+          "how big is the universe",
+          "largest structure in the universe",
+          "scale of the universe",
+          "space documentary",
+          "supercluster"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Largest Structure in the Universe",
+          "description": "Zoom out far enough — past planets, past stars, past galaxies — and a hidden pattern appears: the cosmic web, the largest structure in all creation. Galaxies are not scattered randomly through the dark. They are strung along vast luminous filaments and gathered into walls so immense that light itself would take billions of years to cross them. This is a cinematic journey to the grandest architecture in existence, the scaffolding on which the entire universe is built. A reverent recreation, drawn from what astronomy has mapped of the largest structures in the cosmos."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT8M43S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-27T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/oj5ADWGqhYE\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "RjL8ruq-SyGcDi5c5jegtgTjHII",
+      "id": "e49I25AkjKE",
+      "snippet": {
+        "publishedAt": "2026-06-19T12:29:29Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "The Cosmic Dawn: The Furthest We Have Ever Seen",
+        "description": "To look far out into space is to look far back in time. And the further we look, the closer we come to the very beginning — to the first stars and galaxies igniting in the darkness after the birth of the universe. This is a cinematic journey to the edge of sight itself, across more than thirteen billion years, to the cosmic dawn: the moment the first light broke a universe of darkness. A reverent recreation, drawn from what astronomy has revealed of the most distant and ancient light we have ever seen.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/e49I25AkjKE/default.jpg?sqp=COTW29EG&rs=AOn4CLBS2N971nkMJott4FPpPLWCxo31wA",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/e49I25AkjKE/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCeUIBrE6xbxUTQZ6YBd9wGlb8Tbg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/e49I25AkjKE/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLASDBJxfoyCdWWOYKHVVaIeaFLHkw",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/e49I25AkjKE/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLA5DE966h7LikWHKbcMgtHd5-Klaw",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/e49I25AkjKE/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDaAr1-h6Aa42N337DOmnoFgQpMRQ",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "James Webb deep field",
+          "astronomy",
+          "cosmic dawn",
+          "cosmos",
+          "early universe",
+          "edge of the observable universe",
+          "first galaxies",
+          "first stars",
+          "looking back in time",
+          "scale of the universe",
+          "space documentary"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Cosmic Dawn: The Furthest We Have Ever Seen",
+          "description": "To look far out into space is to look far back in time. And the further we look, the closer we come to the very beginning — to the first stars and galaxies igniting in the darkness after the birth of the universe. This is a cinematic journey to the edge of sight itself, across more than thirteen billion years, to the cosmic dawn: the moment the first light broke a universe of darkness. A reverent recreation, drawn from what astronomy has revealed of the most distant and ancient light we have ever seen."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT8M34S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-26T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/e49I25AkjKE\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "FVI79rT87bHcIyX1KLvrW2shax8",
+      "id": "dLIZf-byMvg",
+      "snippet": {
+        "publishedAt": "2026-06-19T12:13:32Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "Betelgeuse: The Giant in Orion That Could Die Tomorrow",
+        "description": "Look up at the constellation Orion on a winter night and find the red star at the hunter's shoulder. Its name is Betelgeuse — a red supergiant so vast it would swallow our entire inner solar system, and a star so near the end of its life that it could explode tomorrow, or a hundred thousand years from now. When it does, it will blaze as bright as the Moon and be visible in daylight. This is a cinematic journey to a dying giant you can see with your own eyes tonight. A reverent recreation, drawn from what astronomy has measured of the great red supergiant Betelgeuse.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/dLIZf-byMvg/default.jpg?sqp=COTW29EG&rs=AOn4CLDE4bZLJstoT8j5RXuusyF-PQhC9A",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/dLIZf-byMvg/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLC0a9li_f537YHU2lABMDoCyIavhg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/dLIZf-byMvg/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCCIc_BHtNVndQ5Tap94ZM8tqdeYQ",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/dLIZf-byMvg/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLBjhOP9n0tXyIYnMkCajUDj0J_6kQ",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/dLIZf-byMvg/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDeZ7-_GYQnZp5SOOaq9Fkmnlh1PA",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "Betelgeuse",
+          "Betelgeuse explosion",
+          "Orion",
+          "astronomy",
+          "brightest star",
+          "cosmos",
+          "dying star",
+          "red supergiant",
+          "scale of the universe",
+          "space documentary",
+          "supernova"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Betelgeuse: The Giant in Orion That Could Die Tomorrow",
+          "description": "Look up at the constellation Orion on a winter night and find the red star at the hunter's shoulder. Its name is Betelgeuse — a red supergiant so vast it would swallow our entire inner solar system, and a star so near the end of its life that it could explode tomorrow, or a hundred thousand years from now. When it does, it will blaze as bright as the Moon and be visible in daylight. This is a cinematic journey to a dying giant you can see with your own eyes tonight. A reverent recreation, drawn from what astronomy has measured of the great red supergiant Betelgeuse."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT11M29S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-25T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/dLIZf-byMvg\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "kwHXljhk_0JTtVFtRmJzEqFn4oY",
+      "id": "BQlPK98Sd08",
+      "snippet": {
+        "publishedAt": "2026-06-19T11:53:23Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "Sagittarius A*: The Monster at the Heart of Our Galaxy",
+        "description": "At the very center of the Milky Way, twenty-six thousand light-years from Earth, sits a darkness four million times the mass of our Sun. Its name is Sagittarius A*, the supermassive black hole around which our entire galaxy, every star you have ever seen, quietly turns. This is a cinematic journey to the still center of our own galaxy — to the giant we cannot see, yet whose pull holds four hundred billion stars in their slow and ancient dance. A reverent recreation, drawn from what astronomy has measured of the heart of the Milky Way.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/BQlPK98Sd08/default.jpg?sqp=COTW29EG&rs=AOn4CLCIS-QsfVwj-v3oGkEU-0ZLtmzbaw",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/BQlPK98Sd08/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLD0kDrhYYZNwtlXhIYQTrZDv5W2rQ",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/BQlPK98Sd08/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLB8-Uiv17pUi_shxWOful6CbBx3Pw",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/BQlPK98Sd08/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLBCyhqVsgABcQCEstCstDwz-E-vGA",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/BQlPK98Sd08/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLDhDz1p1lkKIs47e04COk236WhYJQ",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "Event Horizon Telescope",
+          "Milky Way black hole",
+          "Sagittarius A star",
+          "astronomy",
+          "center of the galaxy",
+          "cosmos",
+          "galactic center",
+          "scale of the universe",
+          "space documentary",
+          "supermassive black hole"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Sagittarius A*: The Monster at the Heart of Our Galaxy",
+          "description": "At the very center of the Milky Way, twenty-six thousand light-years from Earth, sits a darkness four million times the mass of our Sun. Its name is Sagittarius A*, the supermassive black hole around which our entire galaxy, every star you have ever seen, quietly turns. This is a cinematic journey to the still center of our own galaxy — to the giant we cannot see, yet whose pull holds four hundred billion stars in their slow and ancient dance. A reverent recreation, drawn from what astronomy has measured of the heart of the Milky Way."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT8M36S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-24T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/BQlPK98Sd08\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "NHMprYk4I8If-83IKe8ObXNSVrA",
+      "id": "P3y-4eBTtBw",
+      "snippet": {
+        "publishedAt": "2026-06-19T11:37:17Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "The Death of the Sun: How Our Star Becomes a Cathedral of Light",
+        "description": "One day, far in the future, our Sun will die. But its ending is not a thing to mourn — it is one of the most beautiful transformations the universe will ever stage. The star that gave us everything will swell into a vast red giant, then gently breathe its outer layers into space, becoming a glowing cathedral of light that will seed new worlds and new stars. This is the story of our Sun's death, told not as an ending, but as a becoming. A reverent recreation, drawn from what astronomy tells us of the life cycle of stars like our own.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/P3y-4eBTtBw/default.jpg?sqp=COTW29EG&rs=AOn4CLDWdkoIBEKh7V6HKevDDVquEf6X7w",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/P3y-4eBTtBw/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLC3-_w8K78ZqdpYohtppuLNbMA6DA",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/P3y-4eBTtBw/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLAUP7dPZ2hyKRLhWo3C-_A2ALKzrg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/P3y-4eBTtBw/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLCWfNl8iv2loXBFNZezIZZHC4ujGw",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/P3y-4eBTtBw/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLAnFktXYJlh5g8Y-l4ljHk6k3X2Hw",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "astronomy",
+          "cosmos",
+          "death of the sun",
+          "end of the solar system",
+          "future of the sun",
+          "life cycle of a star",
+          "planetary nebula",
+          "red giant",
+          "scale of the universe",
+          "space documentary",
+          "sun dies",
+          "white dwarf"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Death of the Sun: How Our Star Becomes a Cathedral of Light",
+          "description": "One day, far in the future, our Sun will die. But its ending is not a thing to mourn — it is one of the most beautiful transformations the universe will ever stage. The star that gave us everything will swell into a vast red giant, then gently breathe its outer layers into space, becoming a glowing cathedral of light that will seed new worlds and new stars. This is the story of our Sun's death, told not as an ending, but as a becoming. A reverent recreation, drawn from what astronomy tells us of the life cycle of stars like our own."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT8M39S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-23T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/P3y-4eBTtBw\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "tn7aScR141uvfELh8Wc8LIzZlpg",
+      "id": "__u9uW5mnfI",
+      "snippet": {
+        "publishedAt": "2026-06-19T11:20:37Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "IC 1101: The Largest Galaxy in the Universe",
+        "description": "Our Milky Way holds four hundred billion stars and spans a hundred thousand light-years — and beside the largest galaxy ever found, it is barely a speck. Its name is IC 1101, a single galaxy so vast it may hold a hundred trillion stars and stretch across millions of light-years. This is a cinematic journey to the grandest island of stars we have ever seen, and a meditation on a universe almost too large to believe. A reverent recreation, drawn from what astronomy has measured of the largest known galaxies.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/__u9uW5mnfI/default.jpg?sqp=COTW29EG&rs=AOn4CLBsa99bMKwDzPJh_2rNhtmDb3dkew",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/__u9uW5mnfI/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDn8NKLwm9EOsH805TVvyJ3IuE1Rw",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/__u9uW5mnfI/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLBaOmXQL8o4AWZlVsgKVPia32o9NA",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/__u9uW5mnfI/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLDtwVvEScMqcS4v9uBl2DxU-tvKaQ",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/__u9uW5mnfI/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLB4xu3s2EHEWwe-GEj-tW6arpwVew",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "IC 1101",
+          "Milky Way",
+          "astronomy",
+          "biggest galaxy in the universe",
+          "cosmos",
+          "galaxy size comparison",
+          "how big is the universe",
+          "largest galaxy",
+          "scale of the universe",
+          "space documentary",
+          "supergiant galaxy"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "IC 1101: The Largest Galaxy in the Universe",
+          "description": "Our Milky Way holds four hundred billion stars and spans a hundred thousand light-years — and beside the largest galaxy ever found, it is barely a speck. Its name is IC 1101, a single galaxy so vast it may hold a hundred trillion stars and stretch across millions of light-years. This is a cinematic journey to the grandest island of stars we have ever seen, and a meditation on a universe almost too large to believe. A reverent recreation, drawn from what astronomy has measured of the largest known galaxies."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT9M9S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-22T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/__u9uW5mnfI\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "zLJ8WjM8KA5pfT4jv7KouTWROLk",
+      "id": "DbaVEecfjy8",
+      "snippet": {
+        "publishedAt": "2026-06-19T11:04:13Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "What You Would See Falling Into a Black Hole",
+        "description": "What would you witness if you fell past the edge of a black hole — beyond the point from which nothing returns? The truth is stranger and more beautiful than fear allows. Time itself would bend, the entire universe would gather into a ring of light above you, and you would glimpse a future no one else will ever see. This is a cinematic journey to the threshold of forever, and across it. A reverent recreation, drawn from what physics tells us of the strange realm beyond the event horizon.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/DbaVEecfjy8/default.jpg?sqp=COTW29EG&rs=AOn4CLB4EbW0UhjE5swFu84IdxLwzg16hw",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/DbaVEecfjy8/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLCW_UQbEutHk821YbtHXia-YTumSQ",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/DbaVEecfjy8/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLA-Di5GINR5KWLasMDhMQsjQryzJw",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/DbaVEecfjy8/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLDQ2-44gJZiyD5-VB8p7Z3msqKEnw",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/DbaVEecfjy8/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLClSumzRPaW0Jf87cAb_Z37w9I22w",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "astronomy",
+          "black hole physics",
+          "cosmos",
+          "event horizon",
+          "falling into a black hole",
+          "inside a black hole",
+          "scale of the universe",
+          "space documentary",
+          "spaghettification",
+          "time dilation",
+          "what happens in a black hole"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "What You Would See Falling Into a Black Hole",
+          "description": "What would you witness if you fell past the edge of a black hole — beyond the point from which nothing returns? The truth is stranger and more beautiful than fear allows. Time itself would bend, the entire universe would gather into a ring of light above you, and you would glimpse a future no one else will ever see. This is a cinematic journey to the threshold of forever, and across it. A reverent recreation, drawn from what physics tells us of the strange realm beyond the event horizon."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT9M10S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-21T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/DbaVEecfjy8\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "ymP2z9inmnqu6j1tvbfl4BgzXwQ",
+      "id": "MQk18pH2Vwg",
+      "snippet": {
+        "publishedAt": "2026-06-19T10:47:35Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "The Night Andromeda Collides With Our Galaxy",
+        "description": "Four billion years from now, the night sky will catch fire. The great Andromeda galaxy, two and a half million light-years away, is falling toward us — and one day it will arrive. This is the story of the most magnificent collision in the cosmos, not as destruction, but as a slow and beautiful dance: two galaxies, a trillion stars, becoming one. A reverent cinematic recreation, drawn from what astronomers have measured of the coming merger of the Milky Way and Andromeda.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i9.ytimg.com/vi/MQk18pH2Vwg/default.jpg?sqp=COTW29EG&rs=AOn4CLAPQ9OEGnRhMxKBuhPRlXF9Pkwt2g",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i9.ytimg.com/vi/MQk18pH2Vwg/mqdefault.jpg?sqp=COTW29EG&rs=AOn4CLDI3daqP7-gS3shRMcIaatP7refrQ",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i9.ytimg.com/vi/MQk18pH2Vwg/hqdefault.jpg?sqp=COTW29EG&rs=AOn4CLA_C5pU9udhnEcMQ0GP3RWFzOP4zw",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i9.ytimg.com/vi/MQk18pH2Vwg/sddefault.jpg?sqp=COTW29EG&rs=AOn4CLDcphLO2WMnyycggvHFJ6aMIc5MBA",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i9.ytimg.com/vi/MQk18pH2Vwg/maxresdefault.jpg?sqp=COTW29EG&rs=AOn4CLB1s_SRsC-SRXga7mBwy8mJ5P1Qzg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "Andromeda collision",
+          "Andromeda galaxy",
+          "Milkdromeda",
+          "Milky Way Andromeda",
+          "astronomy",
+          "cosmos",
+          "future of the Milky Way",
+          "galaxy collision",
+          "night sky future",
+          "scale of the universe",
+          "space documentary"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "The Night Andromeda Collides With Our Galaxy",
+          "description": "Four billion years from now, the night sky will catch fire. The great Andromeda galaxy, two and a half million light-years away, is falling toward us — and one day it will arrive. This is the story of the most magnificent collision in the cosmos, not as destruction, but as a slow and beautiful dance: two galaxies, a trillion stars, becoming one. A reverent cinematic recreation, drawn from what astronomers have measured of the coming merger of the Milky Way and Andromeda."
+        }
+      },
+      "contentDetails": {
+        "duration": "PT9M16S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "private",
+        "publishAt": "2026-06-20T23:00:00Z",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/MQk18pH2Vwg\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "recordingDetails": {},
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "NcAOr9PXU0ON-pncV4s82yY_cII",
+      "id": "I0CBT-o0i1k",
+      "snippet": {
+        "publishedAt": "2026-06-19T04:26:50Z",
+        "channelId": "UCiTdDWcPSTKOMkZVB8aDAAQ",
+        "title": "Stephenson 2-18: The Star So Large It Shouldn't Exist",
+        "description": "There is a star so vast that astronomers argue whether it can be real at all. Its name is Stephenson 2-18, a red hypergiant nineteen thousand light-years away, so immense that if it took the Sun's place its surface would swallow the orbit of Saturn. This is a cinematic journey up the ladder of giant stars — from our own Sun, past Betelgeuse and VY Canis Majoris, to the largest star humanity has ever found — and a meditation on the scale of a universe almost too magnificent to believe. A reverent recreation, drawn from what astronomy has measured of the largest known stars.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/I0CBT-o0i1k/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/I0CBT-o0i1k/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/I0CBT-o0i1k/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/I0CBT-o0i1k/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/I0CBT-o0i1k/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        },
+        "channelTitle": "Cathedral of Stars",
+        "tags": [
+          "Betelgeuse",
+          "Stephenson 2-18",
+          "UY Scuti",
+          "VY Canis Majoris",
+          "astronomy",
+          "biggest star in the universe",
+          "cosmos",
+          "how big is the universe",
+          "hypergiant",
+          "largest star",
+          "red supergiant",
+          "scale of the universe",
+          "space documentary"
+        ],
+        "categoryId": "24",
+        "liveBroadcastContent": "none",
+        "defaultLanguage": "en",
+        "localized": {
+          "title": "Stephenson 2-18: The Star So Large It Shouldn't Exist",
+          "description": "There is a star so vast that astronomers argue whether it can be real at all. Its name is Stephenson 2-18, a red hypergiant nineteen thousand light-years away, so immense that if it took the Sun's place its surface would swallow the orbit of Saturn. This is a cinematic journey up the ladder of giant stars — from our own Sun, past Betelgeuse and VY Canis Majoris, to the largest star humanity has ever found — and a meditation on the scale of a universe almost too magnificent to believe. A reverent recreation, drawn from what astronomy has measured of the largest known stars."
+        },
+        "defaultAudioLanguage": "en"
+      },
+      "contentDetails": {
+        "duration": "PT11M15S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "false",
+        "licensedContent": false,
+        "contentRating": {},
+        "projection": "rectangular",
+        "hasCustomThumbnail": true
+      },
+      "status": {
+        "uploadStatus": "processed",
+        "privacyStatus": "public",
+        "license": "youtube",
+        "embeddable": true,
+        "publicStatsViewable": true,
+        "madeForKids": false,
+        "selfDeclaredMadeForKids": false
+      },
+      "statistics": {
+        "viewCount": "0",
+        "likeCount": "0",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "0"
+      },
+      "player": {
+        "embedHtml": "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/I0CBT-o0i1k\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      },
+      "topicDetails": {
+        "topicCategories": [
+          "https://en.wikipedia.org/wiki/Religion"
+        ]
+      },
+      "recordingDetails": {},
+      "localizations": {
+        "en": {
+          "title": "Stephenson 2-18: The Star So Large It Shouldn't Exist",
+          "description": "There is a star so vast that astronomers argue whether it can be real at all. Its name is Stephenson 2-18, a red hypergiant nineteen thousand light-years away, so immense that if it took the Sun's place its surface would swallow the orbit of Saturn. This is a cinematic journey up the ladder of giant stars — from our own Sun, past Betelgeuse and VY Canis Majoris, to the largest star humanity has ever found — and a meditation on the scale of a universe almost too magnificent to believe. A reverent recreation, drawn from what astronomy has measured of the largest known stars."
+        }
+      },
+      "paidProductPlacementDetails": {
+        "hasPaidProductPlacement": false
+      }
+    }
+  ]
+}
