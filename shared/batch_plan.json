@@ -1,11 +1,52 @@
 {
   "_comment": "Edit inbox paths + publish_start times to match your setup. kling_count 0 = Ken-Burns lane (~$3); 40 = cinematic. publish_start is ISO-8601 WITH timezone offset; omit it for private-immediate (no schedule). Stagger publish_start across channels so releases don't collide. Set skip:true to hold a channel out of a run.",
   "channels": [
-    {"channel": "prehistoric-disasters", "inbox": "~/batch_inbox/prehistoric-disasters", "kling_count": 0,  "publish_start": "2026-06-20T18:00:00-04:00", "publish_interval_hours": 12},
-    {"channel": "scripture-on-screen",   "inbox": "~/batch_inbox/scripture-on-screen",   "kling_count": 0,  "publish_start": "2026-06-21T18:00:00-04:00", "publish_interval_hours": 12},
-    {"channel": "you-had-to-be-there",   "inbox": "~/batch_inbox/you-had-to-be-there",   "kling_count": 0,  "publish_start": "2026-06-22T18:00:00-04:00", "publish_interval_hours": 12},
-    {"channel": "final-hours",           "inbox": "~/batch_inbox/final-hours",           "kling_count": 40, "publish_start": "2026-06-23T18:00:00-04:00", "publish_interval_hours": 12},
-    {"channel": "sacred-dawn",           "inbox": "~/batch_inbox/sacred-dawn",           "kling_count": 40, "publish_start": "2026-06-24T18:00:00-04:00", "publish_interval_hours": 12},
-    {"channel": "synthetic",             "inbox": "~/batch_inbox/synthetic",             "kling_count": 40, "publish_start": "2026-06-25T18:00:00-04:00", "publish_interval_hours": 12}
+    {
+      "channel": "prehistoric-disasters",
+      "inbox": "~/batch_inbox/prehistoric-disasters",
+      "kling_count": 0,
+      "publish_start": "2026-06-20T18:00:00-04:00",
+      "publish_interval_hours": 12,
+      "skip": true
+    },
+    {
+      "channel": "scripture-on-screen",
+      "inbox": "~/batch_inbox/scripture-on-screen",
+      "kling_count": 0,
+      "publish_start": "2026-06-21T18:00:00-04:00",
+      "publish_interval_hours": 12,
+      "skip": true
+    },
+    {
+      "channel": "you-had-to-be-there",
+      "inbox": "~/batch_inbox/you-had-to-be-there",
+      "kling_count": 0,
+      "publish_start": "2026-06-22T18:00:00-04:00",
+      "publish_interval_hours": 12,
+      "skip": true
+    },
+    {
+      "channel": "final-hours",
+      "inbox": "~/batch_inbox/final-hours",
+      "kling_count": 40,
+      "publish_start": "2026-06-23T18:00:00-04:00",
+      "publish_interval_hours": 12,
+      "skip": true
+    },
+    {
+      "channel": "sacred-dawn",
+      "inbox": "sacred-dawn/batch_inbox",
+      "kling_count": 45,
+      "publish_start": "2026-06-21T20:00:00+02:00",
+      "publish_interval_hours": 12
+    },
+    {
+      "channel": "synthetic",
+      "inbox": "~/batch_inbox/synthetic",
+      "kling_count": 40,
+      "publish_start": "2026-06-25T18:00:00-04:00",
+      "publish_interval_hours": 12,
+      "skip": true
+    }
   ]
 }
