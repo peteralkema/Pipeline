@@ -10,8 +10,6 @@ raw videos.list response for every video (published AND scheduled) to
 
 Raw capture, never pre-filtered: we grab every readable part the API exposes and
 store it whole, so future questions are a local read instead of a new API trip.
-Views on top (Artlist URL worklist, missing-chapters audit, schedule calendar)
-read this file; they are NOT baked into the dump.
 
 Reuses upload_episode.get_credentials() verbatim - same token, same refresh-in-
 place, same scopes (force-ssl already grants read). No new consent.
@@ -19,16 +17,14 @@ place, same scopes (force-ssl already grants read). No new consent.
 success-coach is EXCLUDED from --all (dead channel, dead topic). It can still be
 dumped explicitly via --channel success-coach if ever needed.
 
-SCHEDULE DISPLAY: --scheduled-only-summary prints publishAt in a LOCAL timezone
+SCHEDULE DISPLAY (--scheduled-only-summary): prints publishAt in a LOCAL timezone
 (default Europe/Amsterdam) with UTC in parens, so it matches what Studio shows.
-Override with --tz when you are scheduling from another zone, e.g. on the road:
-  --tz Asia/Kolkata     (Bangalore, IST = UTC+5:30)
-  --tz America/New_York
-A 23:00Z slot is 01:00 the NEXT DAY in Amsterdam - reading raw UTC against
-Studio's local view invents phantom day-collisions. Match --tz to wherever you
-ACTUALLY are / where Studio is showing you times. [PAST] flags an elapsed
-publishAt; a non-private status is flagged too - either means the row is not a
-clean pending schedule.
+Override with --tz (e.g. Asia/Kolkata) when scheduling from another zone.
+
+CADENCE CHECK (--cadence): the post-batch verifier for "post every day, forever".
+Per channel, buckets scheduled videos by LOCAL date and reports any missing day
+inside the scheduled span - i.e. the holes a batch run left behind. A same-day
+double counts as ONE covered day (doubling up does not fill the next hole).
 
 WHAT THIS CANNOT SEE (API does not expose - stays manual in Studio):
   - the "Altered/AI content" disclosure flag
@@ -38,14 +34,14 @@ WHAT THIS CANNOT SEE (API does not expose - stays manual in Studio):
 
 Usage:
   python dump_channel.py --channel final-hours
-  python dump_channel.py --channel final-hours --dry-run
   python dump_channel.py --all --scheduled-only-summary
-  python dump_channel.py --all --scheduled-only-summary --tz Asia/Kolkata
+  python dump_channel.py --all --cadence
+  python dump_channel.py --all --scheduled-only-summary --cadence --tz Asia/Kolkata
 """
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
@@ -56,7 +52,7 @@ from upload_episode import get_credentials, log, die  # noqa: E402
 # Channels skipped by --all (still dumpable explicitly via --channel).
 EXCLUDE = {"success-coach"}  # dead channel, dead topic - never auto-dump
 
-# Default timezone for the schedule summary - home/Studio locale. Override with --tz.
+# Default timezone for schedule/cadence - home/Studio locale. Override with --tz.
 DEFAULT_TZ_NAME = "Europe/Amsterdam"
 
 # Every readable part videos.list exposes. Raw capture - grab it all.
@@ -171,6 +167,21 @@ def resolve_tz(tz_name):
             f"Europe/Amsterdam, Asia/Kolkata, America/New_York.")
 
 
+def scheduled_local_dates(payload, local_tz):
+    """Map private+publishAt videos to a {local_date: count} dict for one channel."""
+    counts = {}
+    for v in payload["videos"]:
+        st = v.get("status", {})
+        if st.get("privacyStatus") != "private":
+            continue
+        dt_utc = parse_publish_at(st.get("publishAt"))
+        if dt_utc is None:
+            continue
+        d = dt_utc.astimezone(local_tz).date()
+        counts[d] = counts.get(d, 0) + 1
+    return counts
+
+
 def dump_one(channel_dir, dry_run):
     youtube = get_youtube(channel_dir)
     if youtube is None:
@@ -221,7 +232,7 @@ def print_schedule_summary(payloads, tz_name):
     local_tz = resolve_tz(tz_name)
     now_utc = datetime.now(timezone.utc)
     log("")
-    log(f"SCHEDULED (private + publishAt). Local time = {tz_name} (match this to where Studio shows you); UTC in parens.")
+    log(f"SCHEDULED (private + publishAt). Local time = {tz_name} (match to where Studio shows you); UTC in parens.")
     log("  [PAST] = publishAt already elapsed (published or stale).  [<status>] = not private.")
     for p in payloads:
         rows = []
@@ -250,6 +261,47 @@ def print_schedule_summary(payloads, tz_name):
             log(f"    {local_s} ({utc_s})  {ttl[:50]}  https://youtu.be/{vid}{flag_str}")
 
 
+def print_cadence(payloads, tz_name):
+    """Post-batch verifier for 'post every day, forever': any missing day inside
+    each channel's scheduled span is a gap. Same-day double = one covered day."""
+    local_tz = resolve_tz(tz_name)
+    log("")
+    log(f"CADENCE CHECK (rule: post every day). Dates bucketed in {tz_name}.")
+    log("  A gap = a calendar day with no scheduled video inside the span.")
+    any_gap = False
+    for p in payloads:
+        name = p["_meta"]["channel_title"]
+        counts = scheduled_local_dates(p, local_tz)
+        if not counts:
+            log(f"  {name}: (none scheduled)")
+            continue
+        covered = sorted(counts)
+        first, last = covered[0], covered[-1]
+        span_days = (last - first).days + 1
+        gaps = []
+        d = first
+        while d <= last:
+            if d not in counts:
+                gaps.append(d)
+            d += timedelta(days=1)
+        doubles = sorted(d for d, c in counts.items() if c > 1)
+        span_str = f"{first.strftime('%a %m-%d')}..{last.strftime('%a %m-%d')}"
+        head = f"  {name}: {len(covered)} day(s) covered, span {span_str} ({span_days}d)"
+        if gaps:
+            any_gap = True
+            gap_str = ", ".join(g.strftime("%a %m-%d") for g in gaps)
+            head += f"  -> GAP: {gap_str}"
+        else:
+            head += "  -> continuous"
+        if doubles:
+            dbl_str = ", ".join(g.strftime("%a %m-%d") for g in doubles)
+            head += f"  | doubles: {dbl_str}"
+        log(head)
+    log("")
+    log("  RESULT: GAPS FOUND - fill them in Studio." if any_gap
+        else "  RESULT: all channels continuous across their spans.")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Read-only YouTube metadata mirror (raw capture).")
     g = ap.add_mutually_exclusive_group(required=True)
@@ -258,13 +310,14 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="Resolve + count, no fetch, no write.")
     ap.add_argument("--scheduled-only-summary", action="store_true",
                     help="After dumping, print the forward schedule (publishAt) per channel.")
+    ap.add_argument("--cadence", action="store_true",
+                    help="After dumping, check each channel for missing days in its scheduled span.")
     ap.add_argument("--tz", default=DEFAULT_TZ_NAME,
-                    help=f"IANA timezone for the schedule summary (default {DEFAULT_TZ_NAME}). "
-                         f"Set to where you ARE / where Studio shows you, e.g. Asia/Kolkata.")
+                    help=f"IANA timezone for summary/cadence (default {DEFAULT_TZ_NAME}), e.g. Asia/Kolkata.")
     args = ap.parse_args()
 
     # Validate --tz early so a typo fails before we spend any quota.
-    if args.scheduled_only_summary:
+    if args.scheduled_only_summary or args.cadence:
         resolve_tz(args.tz)
 
     channel_dirs = find_channel_dirs(None if args.all else args.channel)
@@ -281,8 +334,11 @@ def main():
         if p:
             payloads.append(p)
 
-    if args.scheduled_only_summary and not args.dry_run:
-        print_schedule_summary(payloads, args.tz)
+    if not args.dry_run:
+        if args.scheduled_only_summary:
+            print_schedule_summary(payloads, args.tz)
+        if args.cadence:
+            print_cadence(payloads, args.tz)
 
     log("")
     log("done.")
