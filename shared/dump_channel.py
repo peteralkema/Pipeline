@@ -19,12 +19,16 @@ place, same scopes (force-ssl already grants read). No new consent.
 success-coach is EXCLUDED from --all (dead channel, dead topic). It can still be
 dumped explicitly via --channel success-coach if ever needed.
 
-SCHEDULE DISPLAY: the --scheduled-only-summary prints publishAt in LOCAL time
-(Europe/Amsterdam, i.e. CET/CEST) to match what Studio shows you, with UTC in
-parens. A 23:00Z slot is 01:00 the NEXT DAY local - reading raw UTC against
-Studio's local view invents phantom day-collisions. Local is ground truth here.
-[PAST] flags a publishAt already elapsed; a non-private status is flagged too -
-either means the row is not a clean pending schedule.
+SCHEDULE DISPLAY: --scheduled-only-summary prints publishAt in a LOCAL timezone
+(default Europe/Amsterdam) with UTC in parens, so it matches what Studio shows.
+Override with --tz when you are scheduling from another zone, e.g. on the road:
+  --tz Asia/Kolkata     (Bangalore, IST = UTC+5:30)
+  --tz America/New_York
+A 23:00Z slot is 01:00 the NEXT DAY in Amsterdam - reading raw UTC against
+Studio's local view invents phantom day-collisions. Match --tz to wherever you
+ACTUALLY are / where Studio is showing you times. [PAST] flags an elapsed
+publishAt; a non-private status is flagged too - either means the row is not a
+clean pending schedule.
 
 WHAT THIS CANNOT SEE (API does not expose - stays manual in Studio):
   - the "Altered/AI content" disclosure flag
@@ -35,15 +39,15 @@ WHAT THIS CANNOT SEE (API does not expose - stays manual in Studio):
 Usage:
   python dump_channel.py --channel final-hours
   python dump_channel.py --channel final-hours --dry-run
-  python dump_channel.py --all            # every channel dir with token.json, minus excludes
   python dump_channel.py --all --scheduled-only-summary
+  python dump_channel.py --all --scheduled-only-summary --tz Asia/Kolkata
 """
 import argparse
 import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 # Reuse the canonical credential loader from the upload step - do NOT reinvent it.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -52,9 +56,8 @@ from upload_episode import get_credentials, log, die  # noqa: E402
 # Channels skipped by --all (still dumpable explicitly via --channel).
 EXCLUDE = {"success-coach"}  # dead channel, dead topic - never auto-dump
 
-# Local timezone for the schedule summary - must match the timezone Studio shows
-# you (your account/browser locale). The Hague -> Europe/Amsterdam (CET/CEST).
-LOCAL_TZ_NAME = "Europe/Amsterdam"
+# Default timezone for the schedule summary - home/Studio locale. Override with --tz.
+DEFAULT_TZ_NAME = "Europe/Amsterdam"
 
 # Every readable part videos.list exposes. Raw capture - grab it all.
 VIDEO_PARTS = [
@@ -159,6 +162,15 @@ def parse_publish_at(pub):
             return None
 
 
+def resolve_tz(tz_name):
+    """Return a ZoneInfo or die loudly on a bad zone name (no silent mis-render)."""
+    try:
+        return ZoneInfo(tz_name)
+    except (ZoneInfoNotFoundError, KeyError, ValueError):
+        die(f"unknown timezone '{tz_name}'. Use an IANA name, e.g. "
+            f"Europe/Amsterdam, Asia/Kolkata, America/New_York.")
+
+
 def dump_one(channel_dir, dry_run):
     youtube = get_youtube(channel_dir)
     if youtube is None:
@@ -204,12 +216,12 @@ def dump_one(channel_dir, dry_run):
     return payload
 
 
-def print_schedule_summary(payloads):
-    """Forward schedule in LOCAL time (matches Studio), UTC in parens, soonest first."""
-    local_tz = ZoneInfo(LOCAL_TZ_NAME)
+def print_schedule_summary(payloads, tz_name):
+    """Forward schedule in the chosen timezone (matches Studio), UTC in parens, soonest first."""
+    local_tz = resolve_tz(tz_name)
     now_utc = datetime.now(timezone.utc)
     log("")
-    log(f"SCHEDULED (private + publishAt). Local time = {LOCAL_TZ_NAME} (matches Studio); UTC in parens.")
+    log(f"SCHEDULED (private + publishAt). Local time = {tz_name} (match this to where Studio shows you); UTC in parens.")
     log("  [PAST] = publishAt already elapsed (published or stale).  [<status>] = not private.")
     for p in payloads:
         rows = []
@@ -245,8 +257,15 @@ def main():
     g.add_argument("--all", action="store_true", help="Every channel dir with a token.json, minus EXCLUDE")
     ap.add_argument("--dry-run", action="store_true", help="Resolve + count, no fetch, no write.")
     ap.add_argument("--scheduled-only-summary", action="store_true",
-                    help="After dumping, print the forward schedule (publishAt) per channel, in local time.")
+                    help="After dumping, print the forward schedule (publishAt) per channel.")
+    ap.add_argument("--tz", default=DEFAULT_TZ_NAME,
+                    help=f"IANA timezone for the schedule summary (default {DEFAULT_TZ_NAME}). "
+                         f"Set to where you ARE / where Studio shows you, e.g. Asia/Kolkata.")
     args = ap.parse_args()
+
+    # Validate --tz early so a typo fails before we spend any quota.
+    if args.scheduled_only_summary:
+        resolve_tz(args.tz)
 
     channel_dirs = find_channel_dirs(None if args.all else args.channel)
     if not channel_dirs:
@@ -263,7 +282,7 @@ def main():
             payloads.append(p)
 
     if args.scheduled_only_summary and not args.dry_run:
-        print_schedule_summary(payloads)
+        print_schedule_summary(payloads, args.tz)
 
     log("")
     log("done.")
