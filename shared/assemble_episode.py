@@ -58,7 +58,7 @@ A_COLOR = "0x222222"   # grey placeholder for recreated (Mode A) beats
 B_COLOR = "0x0a1628"   # Synthetic navy placeholder for graphic (Mode B) beats
 COLDOPEN_COLOR = "0x000000"
 VOICE_LEVEL = 1.15   # VO full (calibrated)
-MUSIC_LEVEL = 0.07   # music bed sits low under narration (Jamendo-calibrated)
+MUSIC_LEVEL = 0.040  # patched 2026-06-20: -28dB, ~17 LU under voice (was 0.07/-23dB/~14 LU)   # music bed sits low under narration (Jamendo-calibrated)
 
 
 def run(cmd, desc, quiet=True):
