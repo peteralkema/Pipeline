@@ -32,7 +32,7 @@ from pathlib import Path
 SRC_URL = "https://ccel.org/c/charles/otpseudepig/enoch.htm"
 OUT_DIR = Path(__file__).resolve().parent.parent / "sacred-soak" / "source" / "enoch"
 
-CHAPTER_RE = re.compile(r"^\[Chapter\s+(\d+)\]\s*$", re.MULTILINE)
+CHAPTER_RE = re.compile(r"\[Chapter\s+(\d+)\]")
 
 
 def fetch(url: str) -> str:
