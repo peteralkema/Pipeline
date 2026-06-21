@@ -57,5 +57,12 @@
       "skip": false,
       "publish_start": "2026-06-22T01:00:00+02:00"
     }
-  ]
+  ],
+  "sacred-soak": {
+    "channel": "sacred-soak",
+    "inbox": "sacred-soak/batch_inbox",
+    "kling_count": 0,
+    "publish_interval_hours": 12,
+    "skip": false
+  }
 }
