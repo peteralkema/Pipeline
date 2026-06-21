@@ -1,0 +1,80 @@
+{
+  "name": "sacred_soak",
+  "voice_id": "Elliot",
+  "style_suffix": "cinematic biblical sacred soak, painterly oil-painting light, soft volumetric god-rays, warm gold and amber deepening to deep indigo and storm-grey, weathered antiquity, fine atmospheric haze, reverent contemplative and still, deep soft shadow, faceless figures, no text, no modern elements, photoreal-painterly, 16:9",
+  "default_music_prompt": "Slow, reverent sacred choral underscore for a contemplative scripture reading meant for rest and sleep. Sustained wordless choir, soft ethereal pads, a deep gentle ambient drone, distant sparse piano. Calm, majestic, prayerful, weightless. No percussion, no rhythmic pulse, no build, no swell, nothing that resolves sharply or could wake a resting listener. Even, seamless, and still throughout.",
+  "base_canon": {},
+  "upload": {
+    "category_id": "24",
+    "privacy_status": "private"
+  },
+  "default_motion": "very slow gentle drift, a slow steady pan and almost imperceptible zoom, calm and contemplative, no fast movement",
+  "thumbnail": {
+    "composition": "centered_subject",
+    "candidates": 2,
+    "candidate_prompt_suffix": "YouTube thumbnail composition, cinematic biblical sacred epic, painterly oil-painting light, soft volumetric god-rays; ONE dominant faceless silhouette or colossal radiant form massed in the RIGHT TWO-THIRDS of the frame, lit against a vast dramatic sky; the LEFT THIRD deliberately dark, shadowed, low-detail negative space reserved for a headline; warm gold and amber deepening to deep indigo and storm-grey; high contrast, deep soft shadow, reverent and majestic, weathered antiquity; single subject only, no clutter, faceless, no text, no letters, no modern elements",
+    "selection_rules": [
+      "ONE reverent, awe-striking biblical subject that reads instantly at phone-thumbnail size",
+      "maximum cinematic chiaroscuro drama so it stands out in a dim feed",
+      "faceless figures only - no resolved faces, no garbled features",
+      "clean darker uncluttered negative space in the BOTTOM-LEFT where the headline lands",
+      "no accidental letterforms, no duplicated or broken figures, one subject only"
+    ],
+    "font": "shared/fonts/Anton-Regular.ttf",
+    "font_fallbacks": [
+      "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+      "Impact",
+      "Arial Black"
+    ],
+    "title_color": [
+      245,
+      240,
+      235
+    ],
+    "subtitle_color": [
+      255,
+      200,
+      90
+    ],
+    "stroke_width": 12,
+    "stroke_color": [
+      0,
+      0,
+      0
+    ],
+    "shadow": true,
+    "shadow_offset": [
+      5,
+      6
+    ],
+    "shadow_blur": 6,
+    "darken_factor": 1.0,
+    "vignette_strength": 0.0,
+    "scrim": {
+      "side": "left",
+      "width": 0.42,
+      "opacity": 0.55,
+      "feather": 0.7
+    },
+    "text_anchor": "top-left",
+    "text_align": "left",
+    "title_area_pct": 0.52,
+    "title_max_height_pct": 0.34,
+    "title_start_size": 150,
+    "subtitle_area_pct": 0.55,
+    "subtitle_max_height_pct": 0.14,
+    "subtitle_start_size": 90,
+    "margin": 20,
+    "margin_x": 40,
+    "margin_y": 20,
+    "uppercase": true,
+    "segment_foreground": false
+  },
+  "music": {
+    "dir": "music",
+    "tracks": 3,
+    "crossfade_seconds": 4,
+    "level": 0.07
+  },
+  "kling_count": 0
+}
