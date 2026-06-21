@@ -279,6 +279,22 @@ The recognition half secures the search/suggest floor; the em-dash clause sells 
 
 ---
 
+### 7c. THE THUMBNAIL ANCHOR DOCTRINE — top-left default, both variants, vision-chosen (banked 21 June, the repeatable spec)
+
+§7's bottom-left material established *that* bottom-left carries flagship authority and resolves the high-subject collision. This makes it a **repeatable engine rule** instead of a per-video hand-judgement, after the Sacred Soak launch forced the question "how do we get the right anchor every time, with no human reviewing thumbnails before upload?"
+
+**The principle (Peter's words, locked):** *"ALWAYS top-left by default; ALWAYS drop to bottom-left when we inspect and see the text has collided."* Top-left is the default and the aesthetic house anchor. Bottom-left is the **exception, triggered by the image** — not a channel setting. The same channel will have some videos top-left and some bottom-left depending on each image's composition. Bottom-left still doubles as the flagship signal (the rationed authority placement), but the **trigger is always the image, never the channel identity.**
+
+**The engine spec (the "every time" mechanism):**
+1. **Always render BOTH variants** — headline top-left AND bottom-left — for every video. Cheap (text composite only, no re-render of the still).
+2. **Sonnet vision call judges both** on two axes: (a) **collision** — does the headline overlap/crowd the focal subject; (b) **legibility/contrast** — does the text read cleanly against what's behind it (bright text on a bright region fails even with no hard collision). Returns the stronger variant.
+3. **Tiebreak: legibility wins.** When the axes disagree (top-left clear of the subject but poor contrast vs. bottom-left slightly crowded but reads better), choose the more legible — an unreadable headline is worthless even if perfectly clear; mild crowding still communicates.
+4. **Fail to top-left, always.** If the vision call errors, times out, or is uncertain, **ship top-left** — never thumbnail-less (the actual Sacred Soak failure: the auto-thumbnail step errored and the run shipped with NO thumbnail). Top-left is the default in two senses: aesthetic and failure-mode. The step must **fail loud** if even top-left can't render.
+
+**No human reviews thumbnails before upload** (Peter's constraint) — fixing in Studio after is fine. So the choice must be fully automatic: the dual-axis vision call + deterministic top-left fallback never blocks, never ships nothing, degrades safely.
+
+**Status:** this is the SPEC. Interim reality (Sacred Soak Vol. 1) was the one-off `make_thumb_bottomleft.py` run by hand (now with a `--title2` two-line-headline option + Anton). Folding "render both → vision-choose → fail-to-top-left" into the engine thumbnail step is the next engine patch (worklog Tier 2.5, promoted). It also fixes the silent-empty-thumbnail bug that bit this launch.
+
 ## 7b. Description & chapters doctrine — the professional video page (banked 20 June)
 
 Manual uploads (which flagships are, until the upload step lands) are the chance to ship a **professional description with hyperlinked chapters** — and it's worth doing, because the description is read semantically by the algorithm and the chapters lift watch-time navigation.
@@ -393,6 +409,47 @@ A strategic grounding, not a craft rule: **this audience has been served by spec
 
 ---
 
+
+---
+
+## 12. Sacred Soak — the contemplative-scripture spin-off (and the "Sacred ___" family)
+
+*Banked 21 June 2026. Sacred Soak is a second channel built on the same machine and the same canon as Sacred Dawn, close enough that its doctrine lives here as a section rather than a separate file. This section holds the **family** doctrine: future "Sacred ___" channels (Sacred Hours, Sacred Word, etc.) inherit from here and add only their own sub-section. One doc, many sibling channels.*
+
+### 12.0 What it is
+**Sacred Soak** (`@SacredSoak`) is a long-form, contemplative **scripture-soak** channel — extended reverent readings of public-domain sacred text (the Book of Enoch first), rendered with the same cinematic Mode-A pipeline as Sacred Dawn but tuned for **rest and lean-back listening**, not the hook-and-hold documentary loop. Vol. 1 ("The Watchers, the Fall & the Throne of Fire" — the complete Book of the Watchers, 1 Enoch 1–36) launched 21 June: 119 beats, **33:28** runtime, Elliot voice at Sacred Dawn's normal pace, public-domain R.H. Charles 1917 translation with original commentary at the section seams.
+
+### 12.1 Why it's on-moat
+Uses the **whole existing machine** — same `channel.json` schema, same parse→orchestrate→audio→modeA→convergence path, same Elliot voice, same canon (Enoch is already a Sacred Dawn topic). A new channel cost one config file + content (the §0 thesis). Public-domain source = zero authenticity-from-outside problem (the reason the Quran-sleep idea was rejected: tajwid/authenticity stakes, no moat, abandons the machine). Enoch read reverently from the 1917 Charles translation has none of that exposure.
+
+### 12.2 The format inversion — a soak is NOT a documentary (core doctrine)
+Sacred Soak inverts almost every Sacred Dawn retention rule:
+- **No hook.** Lean-back; the viewer is settling toward rest, not deciding whether to stay gripped. No cold-open kill-zone. The §6 two-lever model does NOT transfer.
+- **Different success metric.** Judge on **watch-time / completion / RPM-per-watch-hour**, NOT CTR-then-AVD-cliff. A high-CTR-then-bounce is failure here even though it'd read as success on Sacred Dawn.
+- **Calm motion only.** `default_motion` is gentle drift; imagery must never jolt a resting listener.
+- **Music sits even and seamless** — no build, no swell, no sharp resolution. Background-style beds (calmer register than Sacred Dawn's cinematic cues), longer crossfades (4s vs 2s).
+- **Commentary is the value-add.** Original reflective prose at the section seams separates Sacred Soak from bare-reading channels — and carries zero copyright weight (our own words around public-domain text).
+
+### 12.3 The Kling-for-a-soak law (banked)
+A soak's open wants *very slow gentle drift* — which is **exactly what the free Ken-Burns pan/zoom already does.** Instructing Kling to produce "slow gentle drift" pays fal ~$0.84 to imitate the free path. **Kling earns its money ONLY when the motion it produces is something Ken-Burns cannot fake.** For a calm open, **Ken-Burns is the correct tool, not a downgrade** — `kling_count: 0` is right for a soak. Front-Kling is a hook-genre technique; a soak is not a hook genre. (Vol. 1 shipped 2 Kling after a late "feel alive at discovery" flip, but Vol. 2 should default to 0 unless a beat genuinely needs in-scene motion.)
+
+### 12.4 The discovery-vs-consumption split
+A soak is **lean-back once playing, but found in a feed like any other video.** So the *thumbnail and title* still do full discovery work (win the click, signal "this is the calm thing you want"), even though the *content* deliberately doesn't grip. Don't let "it's a soak, it doesn't need a hook" leak into the packaging — the packaging still competes. Vol. 1's flagship bottom-left "THRONE OF FIRE / the book of enoch" thumbnail sells the soak at discovery, then the content rests.
+
+### 12.5 The 10-volume slate (re-cut by measured word count — PENDING)
+Vol. 1 = complete Book of the Watchers (1 Enoch 1–36). The full 10-volume slate must be **re-derived by real section word counts (~5,000–6,500 words/volume ≈ 35–45 min), NOT by neat chapter groupings** — Enoch's chapters are wildly uneven (Watchers ch.1–36 ≈ 7–8k words total; ch.1–11 alone ≈ 1,700). Open action item.
+
+### 12.6 Runtime-vs-pace decision (banked)
+Vol. 1 kept **Elliot at Sacred Dawn's normal pace** (no `speaking_rate` override) for portfolio voice-consistency. Consequence, correctly predicted: ~5,640 words → **33:28**, not the ~45–50 min a slow-soak pace would give. Deliberate trade. For Vol. 2+: slow Elliot's pace for a longer sleep-suited runtime, or write longer volumes — a Vol. 2 decision off Vol. 1 watch-time data, not blind.
+
+### 12.7 Channel config facts
+- **Handle:** `@SacredSoak`. **`channel:` header:** `sacred_soak` → `sacred-soak/`. Account **verified** (15-min cap lifted for the 33-min runtime; also unlocks custom thumbnails).
+- **`channel.json`:** modelled on `sacred-dawn/channel.json`. `voice_id: Elliot`; `style_suffix` softened contemplative/still; `default_music_prompt` choral-reverent; `default_motion` currently the Sacred Dawn dramatic value (late Kling flip — revert to gentle-drift if Vol. 2 goes `kling_count: 0`); `music.crossfade_seconds: 4`; `music.level: 0.07` (INERT, hardcoded `MUSIC_LEVEL`). `kling_count` lives in `batch_plan.json` per-run (Vol. 1 ran 2).
+- **Music:** 9 background-style choral/ambient beds in `sacred-soak/music/` (8 short + 1 ~8.7-min outlier kept). scp'd, not git.
+- **OAuth identity:** `sacred-soak/token.json` + `sacred-soak/client_secret.json` (shared OAuth-app secret copied from another channel; token minted by authorizing the SacredSoak account via `--auth-only` on the laptop → rsync to box). Each channel folder IS its upload identity.
+
+### 12.8 The "Sacred ___" family rule (forward-looking)
+Future contemplative/scripture spin-offs (Sacred Hours, Sacred Word, …) are **sections under this doc, not new files** — they share Sacred Dawn's canon, voice family, look family, and pipeline, differing only in consumption-mode and tuning. Each new sibling adds a §12.x sub-section here.
 ## 11. Appendix — the packaging test (durable vs. shock-bait, as a feed)
 
 The reframe titles read *coherent* under "Sacred Dawn"; the shock titles *jar*. Run the eye-test before publishing any title.
