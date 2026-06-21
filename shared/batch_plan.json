@@ -38,7 +38,8 @@
       "inbox": "sacred-dawn/batch_inbox",
       "kling_count": 45,
       "publish_start": "2026-06-21T20:00:00+02:00",
-      "publish_interval_hours": 12
+      "publish_interval_hours": 12,
+      "skip": true
     },
     {
       "channel": "synthetic",
@@ -47,6 +48,13 @@
       "publish_start": "2026-06-25T18:00:00-04:00",
       "publish_interval_hours": 12,
       "skip": true
+    },
+    {
+      "channel": "sacred-soak",
+      "inbox": "sacred-soak/batch_inbox",
+      "kling_count": 0,
+      "publish_interval_hours": 12,
+      "skip": false
     }
   ]
 }
