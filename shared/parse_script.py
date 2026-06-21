@@ -133,12 +133,27 @@ def parse_script(path: str):
 
     header, _hdr_end = parse_header(lines)
 
-    # Parse only the body: from the first COLD OPEN / PART heading...
-    start = 0
+    # Parse only the body: from the first COLD OPEN / PART / ACT heading...
+    # FAIL LOUD (guard, 21 Jun): a valid script body MUST begin with a recognized
+    # section header. A non-standard marker (e.g. "## OPENING") otherwise causes
+    # parse_header to slurp the body into the last key AND this scan to default
+    # start=0, folding the key:value header into beat-one narration -> the
+    # narrator reads the metadata aloud. Halt instead of producing bad beats.
+    start = None
     for i, ln in enumerate(lines):
-        if re.match(r"^\s*##\s+(COLD OPEN|PART )", ln, re.IGNORECASE):
+        if re.match(r"^\s*##\s+(COLD OPEN|PART |ACT)", ln, re.IGNORECASE):
             start = i
             break
+    if start is None:
+        found = [ln.strip() for ln in lines if re.match(r"^\s*##\s+\S", ln)]
+        sys.stderr.write(
+            "\nPARSE HALTED: no recognized section header found.\n"
+            "  A script body must begin with '## COLD OPEN' (or '## PART ...' / '## ACT ...').\n"
+            "  Headings found instead: " + (str(found) if found else "(none)") + "\n"
+            "  Rename the section marker to a recognized one. The key:value header\n"
+            "  block was about to be parsed as narration and read aloud by the TTS.\n\n"
+        )
+        raise SystemExit(2)
     # ...to before the trailing spec/ledger/verification sections.
     end = len(lines)
     for i in range(start, len(lines)):
