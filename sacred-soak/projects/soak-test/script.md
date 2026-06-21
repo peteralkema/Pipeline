@@ -3,7 +3,7 @@ title: Before the First Morning — A Sacred Soak (Pipeline Test)
 description: A short contemplative test reading. Private — delete after pipeline confirmation.
 tags: sacred soak, pipeline test
 
-## OPENING
+## COLD OPEN
 
 [A] Be still. Let the noise of the day fall away. We are going back to the oldest words there are — the words spoken over the deep before the first morning, when the earth was without form, and darkness lay upon the face of the waters.
 VISUAL: A vast still dark ocean beneath a faint pre-dawn sky, slow mist drifting low over the motionless water, no land and no figures, deep blue-grey deepening to black at the horizon.
