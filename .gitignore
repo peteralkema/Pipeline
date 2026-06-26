@@ -98,3 +98,5 @@ inbox-test/
 # committed metadata mirrors - force them in even if *.json is ignored elsewhere
 !*/channel_dump.json
 success-coach/channel_dump.json
+*token*.json
+dumps/
