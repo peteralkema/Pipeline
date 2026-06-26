@@ -85,6 +85,7 @@ class Pair:
     def __init__(self, stem):
         self.orig_stem = stem
         self.slug = stem
+        self.src_zip = None          # which zip this pair came from
         self.md = None
         self.thumb = None
         self.channel = None          # resolved folder name
@@ -100,47 +101,92 @@ class Pair:
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Stage a zip of script/thumb pairs into batch inboxes.")
-    ap.add_argument("--zip", required=True, help="path to the .zip of <name>.md + <name>.thumb.json pairs")
+    ap = argparse.ArgumentParser(description="Stage zip(s) of script/thumb pairs into batch inboxes.")
+    ap.add_argument("--zip", nargs="+", default=None,
+                    help="one or more .zip files of <name>.md + <name>.thumb.json pairs (one per channel is fine)")
+    ap.add_argument("--zip-dir", default=None,
+                    help="a directory; every *.zip inside it is processed together")
     ap.add_argument("--commit", action="store_true",
                     help="actually route clean pairs into <channel>/batch_inbox/ (default: report only)")
     ap.add_argument("--plan-out", default=None,
                     help="optional: write a run_all_batches plan file skeleton for the staged channels")
     args = ap.parse_args()
 
-    zip_path = Path(args.zip).expanduser()
-    if not zip_path.is_file():
-        sys.stderr.write(f"FATAL: zip not found: {zip_path}\n")
+    # resolve the set of zips from --zip and/or --zip-dir
+    zip_paths = []
+    if args.zip:
+        zip_paths += [Path(z).expanduser() for z in args.zip]
+    if args.zip_dir:
+        d = Path(args.zip_dir).expanduser()
+        if not d.is_dir():
+            sys.stderr.write(f"FATAL: --zip-dir not a directory: {d}\n")
+            sys.exit(2)
+        zip_paths += sorted(d.glob("*.zip"))
+    if not zip_paths:
+        sys.stderr.write("FATAL: give --zip <file...> and/or --zip-dir <dir>\n")
         sys.exit(2)
+    # dedupe, preserve order
+    seen = set()
+    zip_paths = [z for z in zip_paths if not (z in seen or seen.add(z))]
+    for z in zip_paths:
+        if not z.is_file():
+            sys.stderr.write(f"FATAL: zip not found: {z}\n")
+            sys.exit(2)
 
     work = Path(tempfile.mkdtemp(prefix="stage_batch_"))
-    try:
-        with zipfile.ZipFile(zip_path) as z:
-            z.extractall(work)
-    except zipfile.BadZipFile:
-        sys.stderr.write(f"FATAL: not a valid zip: {zip_path}\n")
-        sys.exit(2)
+    # extract every zip into its OWN subdir of work, so we can track provenance
+    # and so identical stems in different zips don't clobber each other on disk.
+    extracted = []  # list of (zip_name, extract_root)
+    for z in zip_paths:
+        sub = work / f"_z{len(extracted)}_{z.stem}"
+        sub.mkdir(parents=True, exist_ok=True)
+        try:
+            with zipfile.ZipFile(z) as zf:
+                zf.extractall(sub)
+        except zipfile.BadZipFile:
+            sys.stderr.write(f"FATAL: not a valid zip: {z}\n")
+            shutil.rmtree(work, ignore_errors=True)
+            sys.exit(2)
+        extracted.append((z.name, sub))
 
-    # gather all .md and .thumb.json anywhere in the extracted tree, keyed by stem
-    mds, thumbs = {}, {}
-    for p in work.rglob("*"):
-        if p.is_file():
-            n = p.name
-            if n.endswith(".thumb.json"):
-                thumbs[n[:-len(".thumb.json")]] = p
-            elif n.endswith(".md"):
-                mds[n[:-len(".md")]] = p
+    # gather all .md and .thumb.json across all zips, keyed by stem.
+    # track which zip each came from (provenance) and flag cross-zip stem clashes.
+    mds, thumbs, src = {}, {}, {}
+    stem_zips = {}  # stem -> set of zip names it appeared in
+    for zip_name, root in extracted:
+        for p in root.rglob("*"):
+            if p.is_file():
+                n = p.name
+                if n.endswith(".thumb.json"):
+                    stem = n[:-len(".thumb.json")]
+                elif n.endswith(".md"):
+                    stem = n[:-len(".md")]
+                else:
+                    continue
+                stem_zips.setdefault(stem, set()).add(zip_name)
+                if n.endswith(".thumb.json"):
+                    thumbs[stem] = p
+                else:
+                    mds[stem] = p
+                src[stem] = zip_name
 
     stems = sorted(set(mds) | set(thumbs))
     if not stems:
-        sys.stderr.write("FATAL: zip contains no .md or .thumb.json files\n")
+        sys.stderr.write("FATAL: no .md or .thumb.json files found in the zip(s)\n")
+        shutil.rmtree(work, ignore_errors=True)
         sys.exit(2)
 
     pairs = []
     for stem in stems:
         pr = Pair(stem)
+        pr.src_zip = src.get(stem)
         pr.md = mds.get(stem)
         pr.thumb = thumbs.get(stem)
+
+        # cross-zip clash: the same stem appeared in more than one zip
+        if len(stem_zips.get(stem, ())) > 1:
+            pr.errors.append("same name appears in more than one zip - rename one")
+            pairs.append(pr); continue
 
         # GATE: pairing
         if pr.md is None:
@@ -256,7 +302,9 @@ def main():
     fixes = [p for p in clean if p.notes]
 
     print("=" * 64)
-    print(f"STAGE BATCH  -  {zip_path.name}  -  {'COMMITTED' if args.commit else 'REPORT ONLY (nothing staged)'}")
+    src_label = (f"{len(zip_paths)} zips" if len(zip_paths) > 1
+                 else zip_paths[0].name)
+    print(f"STAGE BATCH  -  {src_label}  -  {'COMMITTED' if args.commit else 'REPORT ONLY (nothing staged)'}")
     print("=" * 64)
 
     if fixes:
@@ -282,8 +330,7 @@ def main():
     if bad:
         print(f"\nREJECTED ({len(bad)}) - fix at source and re-run (nothing from these staged):")
         for p in bad:
-            label = p.orig_stem
-            print(f"  {label}")
+            print(f"  {p.orig_stem}")
             for e in p.errors:
                 print(f"       - {e}")
 
@@ -302,7 +349,7 @@ def main():
 
     # optional plan skeleton
     if args.plan_out and staged_by_channel:
-        plan = {"_comment": f"auto-generated by stage_batch from {zip_path.name} - SET publish_start/kling_count per channel",
+        plan = {"_comment": f"auto-generated by stage_batch from {src_label} - SET publish_start/kling_count per channel",
                 "channels": [
                     {"channel": ch, "inbox": f"{ch}/batch_inbox",
                      "kling_count": 2, "publish_start": "REPLACE_ME+02:00",
