@@ -50,7 +50,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from upload_episode import get_credentials, log, die  # noqa: E402
 
 # Channels skipped by --all (still dumpable explicitly via --channel).
-EXCLUDE = {"success-coach"}  # dead channel, dead topic - never auto-dump
+EXCLUDE = set()
 
 # Default timezone for schedule/cadence - home/Studio locale. Override with --tz.
 DEFAULT_TZ_NAME = "Europe/Amsterdam"
