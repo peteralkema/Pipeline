@@ -1,0 +1,80 @@
+{
+  "name": "woodworking",
+  "voice_id": "Reed",
+  "speaking_rate": 0.95,
+  "style_suffix": "clean instructional visualization, bright even studio lighting, honest educational diagram aesthetic, warm natural wood tones, clear neutral background, photoreal but uncluttered, shallow depth of field on the subject, no people, no faces, no hands, no text, no logos, no modern clutter, 16:9",
+  "base_canon": {},
+  "upload": {
+    "category_id": "26",
+    "privacy_status": "private"
+  },
+  "default_motion": "slow, steady, instructional motion; gentle pan and slow push-in to reveal detail; calm and clear, no dramatic camera moves",
+  "thumbnail": {
+    "composition": "centered_subject",
+    "candidates": 2,
+    "candidate_prompt_suffix": "YouTube thumbnail composition, clean educational woodworking visualization, bright even lighting, warm natural wood tones; ONE clear dominant woodworking subject (a wood sample, joint, tool, or finished piece) massed in the RIGHT TWO-THIRDS of the frame against a clean uncluttered background; the LEFT THIRD deliberately darker, low-detail negative space reserved for a headline; high contrast, crisp focus, instantly readable at phone size; single subject only, no clutter, no people, no faces, no hands, no text, no letters, no logos",
+    "selection_rules": [
+      "ONE clear woodworking subject that reads instantly at phone-thumbnail size",
+      "maximum clarity and contrast so it stands out in a busy DIY feed",
+      "no people, no faces, no hands - honest object/diagram subject only",
+      "clean darker uncluttered negative space in the TOP-LEFT where the headline lands",
+      "no accidental letterforms, no garbled detail, one subject only"
+    ],
+    "font": "shared/fonts/Anton-Regular.ttf",
+    "font_fallbacks": [
+      "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+      "Impact",
+      "Arial Black"
+    ],
+    "title_color": [
+      250,
+      248,
+      244
+    ],
+    "subtitle_color": [
+      255,
+      196,
+      82
+    ],
+    "stroke_width": 12,
+    "stroke_color": [
+      0,
+      0,
+      0
+    ],
+    "shadow": true,
+    "shadow_offset": [
+      5,
+      6
+    ],
+    "shadow_blur": 6,
+    "darken_factor": 1.0,
+    "vignette_strength": 0.0,
+    "scrim": {
+      "side": "left",
+      "width": 0.42,
+      "opacity": 0.55,
+      "feather": 0.7
+    },
+    "text_anchor": "top-left",
+    "text_align": "left",
+    "title_area_pct": 0.52,
+    "title_max_height_pct": 0.34,
+    "title_start_size": 150,
+    "subtitle_area_pct": 0.55,
+    "subtitle_max_height_pct": 0.14,
+    "subtitle_start_size": 90,
+    "margin": 20,
+    "margin_x": 40,
+    "margin_y": 20,
+    "uppercase": true,
+    "segment_foreground": false
+  },
+  "music": {
+    "dir": "music",
+    "tracks": 0,
+    "crossfade_seconds": 2,
+    "level": 0.07
+  },
+  "kling_count": 0
+}
