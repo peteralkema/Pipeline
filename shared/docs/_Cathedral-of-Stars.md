@@ -209,6 +209,12 @@ Renders ~4h sequential (nine × ~25 min), uploads private with `publishAt` stamp
 
 The full-twenty target's remaining ten topics, to write **after the first wave's first-48h CTR/AVD land** (cold-start discipline — read the curve, then author informed by data): Voyager (proven — Cosmic Lens 629K, Quiet Observatory 179K), the nearest star, beyond the observable universe, VY Canis Majoris, the first stars, neutron stars, a solar-system-sized black hole, how many galaxies, the last star / heat death, the death of the Milky Way. (Andromeda already covers the Milky Way's merger — sequence to avoid overlap.)
 
+### The 26 June levelling top-up — shipped (1 video)
+
+*One Cathedral video staged via `stage_batch.py` and run through the batch-of-batches to bring the channel to the common 09 July levelling tail. Published 09 July 01:00 CEST. SHIPPED — do not re-author.*
+
+- **`21-milky-way`** — the Milky Way (the home-galaxy portrait / its place in the cosmic order). Fills one of the data-gated slots 11–20 above. Slug carries the `21-` numeric-hyphen prefix (auto-normalised from `21_milky-way` by `stage_batch.py`). Watch overlap with the planned "death of the Milky Way" and Andromeda's merger coverage when sequencing future Milky Way topics.
+
 ---
 
 ## 9. Channel config & facts

@@ -212,6 +212,15 @@ Launch title **"10 Things '70s Parents Did That Would Be Illegal Today"** is the
 
 **Sequencing:** lead with the list format (proven, searchable) to lock the audience and let the algorithm categorize tightly, *then* widen into immersive and Gen-Alpha.
 
+### The 26 June levelling top-up — shipped (2 videos)
+
+*Two YHTBT videos staged via `stage_batch.py` and run through the batch-of-batches to bring the channel to the common 09 July levelling tail. Published 08–09 July at 01:00 CEST, `kling_count 0` (all-Ken-Burns, the channel default). SHIPPED — do not re-author.*
+
+- **`gen-alpha-1979`** — the Gen-Alpha-vs-boomer-kid bridge (category C; a today-kid dropped into 1979). The two-audience pillar in production.
+- **`growing-up-60s`** — the decade-immersive "Growing Up in the 1960s / the last analog childhood" register (category B).
+
+*These draw from the immersive (B) and Gen-Alpha (C) lanes rather than the list format (A) — consistent with the widen-after-the-list-locks sequencing once batch one's list slots were live.*
+
 ---
 
 ## 8. Live state & next-session backlog

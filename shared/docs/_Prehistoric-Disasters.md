@@ -202,6 +202,22 @@ The channel's authoring queue. The governing discipline normally is **ship ep1 +
 
 **Authoring discipline for each row:** keep the catastrophe-and-scale register (flexing to elegiac where the topic earns it); refuse creature/predator spectacle-bait; author the `.thumb.json` alongside the script; swap the thumbnail scale-anchor for ⚠️ pre-human rows; run the rich-beat + insert-top-up method (§5b) to ~120–130 beats; run the validation harness; verify the parse before spending; title and thumbnail complement, not echo.
 
+### The 26 June levelling batch — shipped (7 videos)
+
+*Staged via `stage_batch.py` and run through the batch-of-batches for portfolio runway-levelling (all channels levelled to a common 09 July tail). Published 03–09 July at 01:00 CEST. SHIPPED — do not re-author. Several are new topics beyond the §8 numbered slate; logged here so the slate and the shipped record stay reconciled.*
+
+| Slug | Note / slate row |
+|---|---|
+| `black-sea-deluge` | the Black Sea flood hypothesis (rapid Mediterranean inflow) — new topic, deluge register |
+| `carboniferous-collapse` | the Carboniferous rainforest collapse — new topic, ⚠️ pre-human |
+| `ice-age` | the last glacial maximum — ✅ human-era reach |
+| `late-devonian` | the Late Devonian extinction — new topic, ⚠️ pre-human |
+| `petm` | the Paleocene–Eocene Thermal Maximum (hyperthermal) — new topic, ⚠️ pre-human |
+| `theia-impact` | the Theia collision that formed the Moon — deep-time origin, ⚠️ pre-human |
+| `younger-dryas` | the Younger Dryas cold snap — ✅ human-era, pairs with the Drowned-Worlds vein |
+
+*Note: this batch did NOT ship the slate's queued Messinian/Siberian/Australian/Deccan/End-Triassic (#10,15,16,18,19) — those remain genuinely queued. The levelling batch drew a fresh set of deep-time topics rather than draining the numbered queue.*
+
 **Why the slate, not a fresh NexLev pull each time:** the slate was built against the lane's demand floor (perennially-searched deep-time catastrophes) and the un-filmable filter. NexLev stays the *lagging/detail* signal — pull it to validate a specific title's framing, check a competitor's treatment, or (now that the channel is connected) read our own retention once it exists. Lane strategy over spike-chasing.
 
 ---

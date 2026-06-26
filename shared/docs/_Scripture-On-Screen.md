@@ -215,6 +215,14 @@ Apocrypha stripped out (that's Sacred Dawn). Canonical only, ordered by a blend 
 20. **The Fiery Furnace** — Shadrach, Meshach, Abednego; the fourth man in the fire. *(Split out from the Daniel entry — its own set-piece.)*
 21. **The Revelation / end-times cluster** *(canonical — stays here; the devotional audience cares deeply about prophecy)* — its own sub-lane once the channel has trust.
 
+### The 26 June levelling gap-fill — shipped (1 video)
+
+*One Scripture video staged via `stage_batch.py` and run through the batch-of-batches as part of portfolio runway-levelling. Unlike the other channels' tail-extensions, Scripture was already scheduled solid through 09 July — this single video fills the one internal hole on **Sat 04 July** (left when the `jacob-esau` render failed at the stills leg). Published 04 July 01:00 CEST. SHIPPED — do not re-author.*
+
+- **`jericho`** — the fall of Jericho (the march, the trumpets, the walls). New topic, not from the numbered backlog above; chosen to fill the 04 July gap. A clean spectacle set-piece in the channel's lane.
+
+*Status note on `jacob-esau` (#17): the half-built `jacob-esau` project (voiceover banked, failed at stills) is **abandoned** as of this session — `jericho` fills the 04 July slot it would have taken. #17 remains in the backlog as an unbuilt topic if you want to author it fresh later; the old broken project is not being resumed.*
+
 **The craft spine (banked from authoring all ten — the reusable script skeleton).** Every batch script was built on the same structure, and it should be the template for future authoring: **cold open *mid-action*** (the disaster/threat already happening — Sodom opens on the fire and the salt pillar, Jezebel at the window facing her killer, Joseph already in the pit), then "to understand… you have to go back," then the story; a **recurring spine object/phrase planted early and paid off at the climax** (the spines listed per-item above); **face tiers folded into the VISUAL lines** (FACELESS default / identity-by-costume carrier / rationed single hero-face at peaks); a **moralised close** that turns the story to the viewer; a **comment-bait question**; and a **sequel hook chaining to the next video** (Job → Sodom → Jezebel → Ruth…). Numbers spelled out, no beat over ~55 words, one VISUAL per beat.
 
 *Sequence logic: open on Esther (highest proven + female lead), then alternate a recognition draw with a proven mega-drama so you never publish two "quiet" topics back to back. **As executed, the batch publishes in inbox filename-sort order, NOT curated best-first order** (daniel → david-goliath → jezebel → joseph → leah → noahs-flood → red-sea → ruth → samson-delilah → sodom-gomorrah). For evergreen content this doesn't matter; if publish sequence ever matters, control it via slug naming or separate staggered runs. Every topic is evergreen — no timing pressure.*

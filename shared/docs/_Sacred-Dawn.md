@@ -352,12 +352,28 @@ Each script is paired with a verified `.thumb.json`, lands faceless and reverent
 
 The channel's first **flagship rebuild** (§2b, §6b): *War in Heaven* — worst retainer (15.7%) but best-clicked topic — rebuilt as an 89-beat open-loop betrayal epic. Six acts, in-medias-res cold open at the fall, the Morning-Star-name spine paid off across the full runtime, `--kling-count 45` armoring the kill zone. Music at the corrected 0.040 (§5b). Professional description + seven auto-hyperlinked chapters (§7b). Scheduled 21 June 20:00 CEST, private until publish. **The audience verdict (NexLev retention vs the original's 15.7%) is the open question — diarised ~mid-July (§10).** Drawn from Isaiah, Ezekiel, Luke, Jude, Revelation, with the apocryphal refusal-to-bow (Life of Adam and Eve) named as tradition.
 
+### The 26 June levelling batch — shipped (apocrypha/cosmic deep-cuts, 9 videos)
+
+*Staged via `stage_batch.py` and run through the batch-of-batches as part of the portfolio runway-levelling (every channel levelled to a common 09 July tail). Published 01–09 July at 01:00 CEST. These are now SHIPPED — do not re-author.*
+
+| Slug | Lane note |
+|---|---|
+| `azazel` | the Watchers' chief teacher — the forbidden-knowledge deep-dive (was named in the held backlog) |
+| `behemoth` | the land-chaos-beast counterpart to Leviathan |
+| `bloodline-after-flood` | Anakim → Rephaim → Goliath, the giants' line that survived (was named in the held backlog) |
+| `gardens-other-tree` | the Tree of Life / flaming sword (was named in the held backlog) |
+| `nephilim-after-flood` | how the Nephilim line persisted past the Flood |
+| `throne-of-fire` | the apocryphal throne-vision register (shares the Sacred Soak Enoch vein) |
+| `tower-of-babel` | NOTE: distinct treatment from the 19-June `babel` — confirm no cannibalization when both are live |
+| `war-in-heaven-michael` | Michael's-side telling — DISTINCT from the `satan-morning-star` flagship rebuild (Lucifer's-side). Two angles on the same war; watch they don't split each other's traffic. |
+| `watchers-oath-hermon` | the oath on Hermon — the descent's origin beat |
+
 ### Prior films (already live / rendered)
 - **The Watchers / "Before the Flood: The True Story of the Nephilim and the Watchers"** — *launched 10 June.* 52 beats, ~17.7 min, Elliot. Thumbnail "ANGELS OR GIANTS?". The headwater.
 - **The Book of Giants: "The Lost Story of the Nephilim — and the Demons They Became"** — rendered (`sacred-dawn/projects/book-of-giants1/final_video.mp4`).
 
 ### Deeper backlog (held; mine per-video outliers before sequencing)
-**The War in Heaven / Lucifer's fall — REBUILT 20 June as the `satan-morning-star` flagship (§2b/§6b/§8); the original is retired.** The Book of Enoch (the scribe who walked with God — strong sequel to `watchers`), The Bloodline That Survived the Flood (Anakim → Rephaim → Goliath), The Garden's Other Tree (Tree of Life / flaming sword), The Watchers' Teachers One by One (Azazel deep-dive — only if the forbidden-knowledge beats spike), the Red Sea (hooked by `ten_plagues`), the still small voice (hooked by `elijah_carmel`).
+**The War in Heaven / Lucifer's fall — REBUILT 20 June as the `satan-morning-star` flagship (§2b/§6b/§8); the original is retired.** *Shipped in the 26 June levelling batch (above): the Book of Enoch theme via `throne-of-fire`, the Bloodline (`bloodline-after-flood`), the Garden's Other Tree (`gardens-other-tree`), and the Azazel deep-dive (`azazel`) — all now live, do not re-author.* Still held: the Book of Enoch as a full scribe's-walk feature (distinct from the throne-vision cut — strong sequel to `watchers`), the Watchers' Teachers one by one beyond Azazel (only if the forbidden-knowledge beats spike), the Red Sea (hooked by `ten_plagues`), the still small voice (hooked by `elijah_carmel`).
 
 ---
 
