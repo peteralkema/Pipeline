@@ -16,8 +16,8 @@
     "vignette": 0,
     "scrim": {
       "side": "left",
-      "width": 0.42,
-      "opacity": 0.6,
+      "width": 0.46,
+      "opacity": 0.68,
       "feather": 0.7
     },
     "text_anchor": "top-left",
@@ -28,7 +28,7 @@
     "subtitle_area_pct": 0.52,
     "subtitle_max_height_pct": 0.16,
     "subtitle_start_size": 64,
-    "stroke_width": 14,
+    "stroke_width": 8,
     "shadow": true,
     "margin_x": 40,
     "margin_y": 48,
