@@ -9,7 +9,7 @@
   },
   "thumbnail": {
     "composition": "low_silhouette",
-    "candidates": 2,
+    "candidates": 3,
     "segment_foreground": false,
     "font": "shared/fonts/Anton-Regular.ttf",
     "darken_factor": 1.0,
@@ -17,7 +17,7 @@
     "scrim": {
       "side": "left",
       "width": 0.42,
-      "opacity": 0.55,
+      "opacity": 0.6,
       "feather": 0.7
     },
     "text_anchor": "top-left",
@@ -28,22 +28,22 @@
     "subtitle_area_pct": 0.52,
     "subtitle_max_height_pct": 0.16,
     "subtitle_start_size": 64,
-    "stroke_width": 12,
+    "stroke_width": 14,
     "shadow": true,
     "margin_x": 40,
     "margin_y": 48,
     "title_color": [
-      245,
-      243,
-      238
+      250,
+      250,
+      252
     ],
     "subtitle_color": [
-      240,
-      185,
-      90
+      255,
+      200,
+      60
     ],
-    "candidate_prompt_suffix": "one strong cinematic focal subject in the right two-thirds (a lone faceless silhouette seen from behind, an empty modern office at dusk, or a single symbolic object), moody dramatic lighting, restrained desaturated palette with one warm accent light, the left third kept dark and low-detail for the headline, no visible faces, no text, photoreal, sixteen by nine",
-    "selection_rules": "Pick the candidate with the cleanest dark left-third negative space where the headline lands, the single strongest readable subject at a glance, no garbled faces or text artifacts, nothing bleeding into the headline column. Premium and intriguing, never cheap stock-slop, pointing fingers, or shock-face."
+    "candidate_prompt_suffix": "a single real human face and upper body massed in the right two-thirds, a composed serious professional with a thoughtful or mildly concerned expression (never distressed, never exaggerated), looking toward camera, bright high-key professional lighting, clean modern setting, crisp vivid but tasteful color, photoreal and natural skin (not waxy or uncanny), the left third kept a simple uncluttered backdrop for the headline, no text, sixteen by nine",
+    "selection_rules": "Pick the candidate with the most natural, believable, non-uncanny human face: reject distorted features, malformed hands, dead eyes, or waxy plastic skin. Want bright clean professional lighting, a clear readable expression that fits the topic, and the cleanest uncluttered left third where the headline lands. Premium and relatable, never cheap stock, never exaggerated shock-face. If no candidate has a clean face, pick the least distorted."
   },
   "music": {
     "dir": "music",
