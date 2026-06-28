@@ -251,12 +251,17 @@ def main():
                     help="folder of tracks: pick N random, crossfade, loop to fill (overrides --music)")
     ap.add_argument("--music-tracks", type=int, default=3, help="how many random tracks to cycle (default 3)")
     ap.add_argument("--music-crossfade", type=float, default=2.0, help="crossfade seconds between tracks (default 2)")
+    ap.add_argument("--music-level", type=float, default=None, help="music bed gain (linear; default = MUSIC_LEVEL constant). Higher = louder under the voice.")  # patched: --music-level flag
     ap.add_argument("--out", default=None, help="output mp4 (default: pacing_cut.mp4 or final_video.mp4)")
     ap.add_argument("--placeholders", action="store_true",
                     help="force colour-block placeholders for ALL beats (free pacing cut)")
     ap.add_argument("--width", type=int, default=1920)
     ap.add_argument("--height", type=int, default=1080)
     args = ap.parse_args()
+    global MUSIC_LEVEL
+    if args.music_level is not None:
+        MUSIC_LEVEL = args.music_level
+        print(f'  music-level override: MUSIC {MUSIC_LEVEL}')
 
     durations = Path(args.durations); index = Path(args.index)
     voiceover = Path(args.voiceover); project = Path(args.project)
