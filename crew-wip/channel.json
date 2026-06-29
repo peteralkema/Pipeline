@@ -18,10 +18,8 @@
     "darken_factor": 1.0,
     "vignette": 0,
     "scrim": {
-      "side": "left",
-      "width": 0.46,
-      "opacity": 0.68,
-      "feather": 0.7
+      "width": 0.0,
+      "opacity": 0.0
     },
     "text_anchor": "top-left",
     "text_align": "left",
