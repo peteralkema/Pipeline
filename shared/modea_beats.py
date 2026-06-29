@@ -62,7 +62,14 @@ def translate(beats):
             "narration": narration,
             "image_prompt": visual,
         }
-        if b.get("face_hold"):
+        # Precedence: authored MOTION: line > face-hold default > blank (inherit
+        # channel default_motion). An authored motion is a deliberate per-beat
+        # override (TIGHTEN/HOLD/SWING); only when absent do we fall back to the
+        # face-hold default or leave it blank for the channel default to win.
+        authored_motion = (b.get("motion") or "").strip()
+        if authored_motion:
+            shot["motion_prompt"] = authored_motion
+        elif b.get("face_hold"):
             shot["motion_prompt"] = FACEHOLD_MOTION
         shot_beats.append(shot)
         index_map[engine_idx] = b["index"]
