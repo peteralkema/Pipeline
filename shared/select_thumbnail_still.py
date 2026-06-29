@@ -112,6 +112,25 @@ def _text_region_description(thumb_cfg: dict) -> str:
             f"text needs clean, darker negative space there.")
 
 
+def _resolve_subject_canon(subject: str, channel_cfg: dict) -> str:
+    """Expand {tag} references in the thumbnail subject against the channel's
+    base_canon, so a subject can reference recurring characters (e.g. {driver}) and
+    inherit the locked tokens -- the same canon the video stills use. Unknown tags
+    are left as-is (never halt an unattended thumbnail run)."""
+    import re as _re
+    canon = (channel_cfg.get("base_canon") or {})
+    if not canon:
+        return subject
+    pattern = _re.compile(r"\{([a-zA-Z_][a-zA-Z0-9_]*)\}")
+    def _sub(m):
+        key = m.group(1)
+        return canon.get(key, m.group(0))
+    resolved = pattern.sub(_sub, subject)
+    if resolved != subject:
+        print("   thumbnail subject: canon tags resolved")
+    return resolved
+
+
 def _build_prompt(channel_cfg: dict, subject: str) -> str:
     """Flux prompt = subject + channel style_suffix + the channel's thumbnail composition suffix."""
     style = channel_cfg.get("style_suffix", "").strip()
@@ -186,7 +205,7 @@ def select_best(candidates: list[Path], rules: list[str], text_region: str,
         )
 
         content = [{"type": "text", "text": instructions}]
-        for i, path in enumerate(candidates[:2], start=1):
+        for i, path in enumerate(candidates, start=1):
             content.append({"type": "text", "text": f"Candidate {i}:"})
             content.append(_img_block(path))
 
@@ -199,7 +218,7 @@ def select_best(candidates: list[Path], rules: list[str], text_region: str,
         clean = raw.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
         verdict = json.loads(clean)
         winner = int(verdict.get("winner", 1))
-        if winner not in (1, 2):
+        if not (1 <= winner <= len(candidates)):
             return 1, f"fallback: winner out of range ({winner})"
         return winner, str(verdict.get("reason", "")).strip() or "no reason given"
     except Exception as e:
@@ -224,7 +243,8 @@ def main():
     n = args.candidates or int(thumb_cfg.get("candidates", 2))
     rules = thumb_cfg.get("selection_rules") or DEFAULT_SELECTION_RULES
     text_region = _text_region_description(thumb_cfg)
-    prompt = _build_prompt(channel_cfg, args.subject)
+    resolved_subject = _resolve_subject_canon(args.subject, channel_cfg)
+    prompt = _build_prompt(channel_cfg, resolved_subject)
     print(f"   flux prompt: {prompt[:140]}{'...' if len(prompt) > 140 else ''}")
 
     cand_dir = project / "thumb_candidates"
