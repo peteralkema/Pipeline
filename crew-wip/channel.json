@@ -44,6 +44,7 @@
       60
     ],
     "candidate_prompt_suffix": "a single appealing flat cel-shaded illustrated young man, clean-shaven with a smooth bare face, no beard, no stubble, no facial hair, big expressive cartoon face and upper body pushed to the RIGHT side of the frame, the character and both hands kept within the right portion, the entire LEFT HALF of the frame a clean simple uncluttered background for a headline with no figure and no hands in it, bright warm high-key lighting, vivid saturated punchy color that pops in a feed, bold rim lighting on the character, confident dark linework, smooth animated-feature style, NOT photorealistic, NOT 3d render, NOT realistic skin, no text, no letters, sixteen by nine",
-    "selection_rules": "Pick the candidate with the most appealing, on-model flat cel-shaded face: reject photoreal drift, malformed hands, extra fingers, dead eyes, or any 3d / realistic-skin look. Want bright warm lighting, a clear readable curious or wry expression, confident clean linework, and the cleanest uncluttered left third where the headline lands. Bright and inviting, never morbid, never photoreal. If no candidate is cleanly on-model, pick the most consistent with the channel style."
+    "selection_rules": "Pick the candidate with the most appealing, on-model flat cel-shaded face: reject photoreal drift, malformed hands, extra fingers, dead eyes, or any 3d / realistic-skin look. Want bright warm lighting, a clear readable curious or wry expression, confident clean linework, and the cleanest uncluttered left third where the headline lands. Bright and inviting, never morbid, never photoreal. If no candidate is cleanly on-model, pick the most consistent with the channel style.",
+    "vignette_strength": 0.0
   }
 }
