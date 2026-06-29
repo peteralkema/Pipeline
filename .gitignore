@@ -100,3 +100,10 @@ inbox-test/
 success-coach/channel_dump.json
 *token*.json
 dumps/
+
+# runtime artifacts — regenerable, should never have been tracked-noise
+shared/all_batches_manifest_*.json
+**/channel_dump.json
+shared/batch_plan.json
+plan_*.json
+shared/plan_*.json
