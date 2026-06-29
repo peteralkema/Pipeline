@@ -1,0 +1,81 @@
+{
+  "name": "lazarus",
+  "voice_id": "Rosalind",
+  "speaking_rate": 0.85,
+  "style_suffix": "cinematic psychological realism, present-day contemporary setting, modern domestic life, fully and evenly lit, bright but cold clinical daylight, cool desaturated colour grade, drained warmth, slightly sickly green-grey cast, clean ordinary modern interiors, banal everyday detail, high detail edge to edge, photoreal, fine cinematic grain, the uncanny emerging from bright everyday normality, quiet dread, no warmth, no cosy, no period, no Victorian, no candles, no darkness, no text, 16:9",
+  "default_music_prompt": "sparse dark ambient drone, sustained low strings, a single decaying piano note, unresolved tension, no melody, the held breath that never exhales, psychological dread",
+  "base_canon": {},
+  "upload": {
+    "category_id": "24",
+    "privacy_status": "private"
+  },
+  "default_motion": "slow, controlled push-in toward the subject; emphasis and interplay on living elements — a blinking eye, a trembling hand, a faint movement of light, psychological dread in motion, drifting dust, a faint breath of air; no pans, no whips, no shake, no fast motion; the camera advances with quiet, patient dread and never resolves",
+  "thumbnail": {
+    "composition": "low_silhouette",
+    "candidates": 2,
+    "candidate_prompt_suffix": "YouTube thumbnail composition, strongly asymmetric: ONE arresting subject massed in the RIGHT TWO-THIRDS — a worn, exhausted, ordinary present-day person's face in cold clinical daylight with suppressed anguish, or a single unsettling modern domestic detail; the LEFT THIRD kept clean and uncluttered as negative space for a headline; present-day modern clothing and setting, fully and evenly lit, cold desaturated grade, drained warmth, sickly green-grey cast; high detail; the wrongness inside an ordinary bright frame; real and depleted, shot like a gritty modern crime drama, no glamour; single subject only, no clutter, no text, no letters, no period, no Victorian, no candles, no darkness",
+    "selection_rules": [
+      "ONE real, worn, ordinary present-day face or dread-detail that reads instantly at phone size — suppressed anguish, not performed",
+      "fully lit, cold and desaturated — it must unsettle by being bright-but-wrong, never dark or gothic",
+      "present-day modern setting and clothing — REJECT anything period, Victorian, candlelit, or costume",
+      "REJECT anything pretty, glamorous, soft-lit, tasteful, or stock-photo — the subject must be real and depleted, gritty realism not a model",
+      "clean, uncluttered negative space in the LEFT THIRD where the headline lands",
+      "no garbled detail, no accidental letterforms, no duplicated or broken figures, one subject only"
+    ],
+    "font": "shared/fonts/Anton-Regular.ttf",
+    "font_fallbacks": [
+      "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+      "Impact",
+      "Arial Black"
+    ],
+    "title_color": [
+      240,
+      238,
+      235
+    ],
+    "subtitle_color": [
+      210,
+      150,
+      60
+    ],
+    "stroke_width": 12,
+    "stroke_color": [
+      0,
+      0,
+      0
+    ],
+    "shadow": true,
+    "shadow_offset": [
+      5,
+      6
+    ],
+    "shadow_blur": 6,
+    "darken_factor": 1.0,
+    "vignette_strength": 0.0,
+    "scrim": {
+      "side": "left",
+      "width": 0.42,
+      "opacity": 0.55,
+      "feather": 0.7
+    },
+    "text_anchor": "top-left",
+    "text_align": "left",
+    "title_area_pct": 0.52,
+    "title_max_height_pct": 0.34,
+    "title_start_size": 150,
+    "subtitle_area_pct": 0.55,
+    "subtitle_max_height_pct": 0.14,
+    "subtitle_start_size": 90,
+    "margin": 20,
+    "margin_x": 40,
+    "margin_y": 20,
+    "uppercase": true,
+    "segment_foreground": false
+  },
+  "music": {
+    "dir": "music",
+    "tracks": 3,
+    "crossfade_seconds": 2,
+    "level": 0.07
+  }
+}
