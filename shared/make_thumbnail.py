@@ -349,6 +349,49 @@ def _segment_foreground(img: Image.Image):
 
 # ── Main compositor ───────────────────────────────────────────────────────────
 
+
+def _composite_prop(bg, project, cfg):  # __PROP_LAYER__
+    """Composite <project>/thumbnail_prop.png (transparent RGBA) into the configured
+    corner. No-op unless the file exists AND cfg['prop'] is enabled. Position + scale
+    are channel constants; the prop CONTENT is per-video (rendered by make_prop.py)."""
+    prop_cfg = (cfg.get("prop") or {})
+    if not prop_cfg.get("enabled"):
+        return bg
+    prop_path = Path(project) / "thumbnail_prop.png"
+    if not prop_path.exists():
+        return bg
+    try:
+        prop = Image.open(prop_path).convert("RGBA")
+    except OSError as e:
+        print("   (prop layer: could not open " + str(prop_path) + ": " + str(e) + ")")
+        return bg
+
+    frame_w, frame_h = bg.size
+    scale = float(prop_cfg.get("scale", 0.32))
+    margin = int(prop_cfg.get("margin", 40))
+    target_h = max(1, int(frame_h * scale))
+    ratio = target_h / prop.height
+    target_w = max(1, int(prop.width * ratio))
+    prop = prop.resize((target_w, target_h), Image.LANCZOS)
+
+    position = prop_cfg.get("position", "bottom-left")
+    if position == "bottom-left":
+        x, y = margin, frame_h - target_h - margin
+    elif position == "bottom-right":
+        x, y = frame_w - target_w - margin, frame_h - target_h - margin
+    elif position == "top-left":
+        x, y = margin, margin
+    elif position == "top-right":
+        x, y = frame_w - target_w - margin, margin
+    else:
+        x, y = margin, frame_h - target_h - margin
+
+    out = bg.convert("RGBA")
+    out.alpha_composite(prop, (x, y))
+    print("   prop layer composited (" + position + ", scale " + str(scale) + ")")
+    return out.convert("RGB")
+
+
 def make_thumbnail(still_path: Path, title: str, subtitle: str,
                    output_path: Path, cfg: dict | None = None) -> Path:
     """
@@ -368,6 +411,9 @@ def make_thumbnail(still_path: Path, title: str, subtitle: str,
     # Layer 1b — directional scrim on the text side only (keeps the image bright
     # everywhere else; the real fix for global-darkening washing out the picture).
     bg = _apply_scrim(bg, cfg)
+
+    # Layer 1c -- prop (one hero object in the negative space, UNDER the text)
+    bg = _composite_prop(bg, still_path.parent, cfg)  # __PROP_LAYER__
 
     # Layer 2/3 — headline (+ optional subtitle)
     if cfg.get("uppercase", True):
