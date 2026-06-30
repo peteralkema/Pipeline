@@ -1,3 +1,22 @@
+# ⚰️ RETIRED — `ante-machinam.md` (30 June 2026)
+
+> **THIS DOCUMENT IS NO LONGER LIVE. DO NOT AUTHOR FROM IT. DO NOT ADD TO IT.**
+>
+> `ante-machinam.md` was the single biggest structural flaw in the doc set: it was **Final-Hours / Sacred-Dawn craft wearing a `__` "channel-agnostic" label**, and it pulled every other channel's prompting toward the wrong register (dread-slow-faceless-photoreal). The @Q-Qrew build made the bias undeniable — a deliberately-opposite channel (bright, fast-cut, character-driven, flat-cel, **static**) had to fight this document at every turn.
+>
+> **Where its content went (30 June de-bias):**
+> - **CRAFT** (the retention canon Part IV, the VISUAL-line patterns Part III, beat-granularity, animatable-foreground, the channel briefs Part V) → **`_Final-Hours.md §11`** (Final Hours' own craft canon — it was always FH craft). Each channel's craft lives in its own **`_ChannelName.md`**.
+> - **MECHANICS** (the real Constitution: every-beat-has-words / silence-reconciliation, header-is-metadata, numbers-spelled-out, one-VISUAL-per-beat, lock-the-script; the two-mode promotion rule; the script-format contract; the author pre-flight; the runtime/wpm calibration) → **canonical reference §8** (`__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`).
+>
+> **Two items were relabelled on the way out:** beat granularity and animatable-foreground were filed here under "the Constitution / the physics of the pipeline." They are **not** physics — they are FH craft. QQrew runs static at ~5-word beats with no foreground motion and the pipeline does not care. They are now `[CRAFT: FH-derived]` in `_Final-Hours.md §11.1–11.2`.
+>
+> **Status:** the file is left in place as a historical record and as the source for the deferred footer-scrub (≈13 live docs still carry stale "craft in ante-machinam" pointers — tracked as a follow-up; see the worklog). It is NOT to be loaded in a session, edited, or cited as authority. The body below (v3.0) is preserved verbatim **for reference only.**
+>
+> **The meta-lesson (enshrined in canonical §2B):** *BUILD ORDER ENCODES BIAS.* The first instance of anything silently becomes the "neutral" default. When building the first of a kind, ask "is this universal, or just this one's flavour?" — and tag at creation.
+
+---
+---
+
 # Ante Machinam — v3.0
 *Before the Machine. The single a priori reference for authoring a script and its beats, so that what enters the channel-agnostic pipeline orchestrator is already shaped to run clean and land well.*
 
