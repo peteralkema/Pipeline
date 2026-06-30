@@ -142,10 +142,42 @@ def knockout(raw_path: Path, dest: Path) -> Path:
     if not isinstance(cut, Image.Image):
         cut = Image.open(io.BytesIO(cut))
     cut = cut.convert("RGBA")
+    _pcfg = {}
+    try:
+        import json as _json
+        for _p in [dest.parent, *dest.parent.parents]:
+            _cj = _p / "channel.json"
+            if _cj.exists():
+                _pcfg = (_json.loads(_cj.read_text()).get("thumbnail", {}) or {}).get("prop", {}) or {}
+                break
+    except Exception:
+        _pcfg = {}
+    _bpx = int(_pcfg.get("border_px", 14))
+    _brgb = tuple(_pcfg.get("border_rgb", [255, 255, 255]))
+    cut = _add_white_border(cut, _bpx, _brgb)  # __PROP_BORDER__
     dest.parent.mkdir(parents=True, exist_ok=True)
     cut.save(dest, "PNG")
     print("   knocked out -> " + str(dest))
     return dest
+
+
+
+def _add_white_border(rgba, border_px=14, border_rgb=(255, 255, 255)):  # __PROP_BORDER__
+    """Add a solid sticker-border around the alpha silhouette of a cutout RGBA image."""
+    from PIL import Image, ImageFilter
+    if border_px <= 0:
+        return rgba
+    pad = border_px + 4
+    w, h = rgba.size
+    canvas = Image.new("RGBA", (w + pad * 2, h + pad * 2), (0, 0, 0, 0))
+    canvas.paste(rgba, (pad, pad), rgba)
+    alpha = canvas.split()[3]
+    grown = alpha.filter(ImageFilter.MaxFilter(border_px * 2 + 1))
+    border_layer = Image.new("RGBA", canvas.size, border_rgb + (0,))
+    solid = Image.new("RGBA", canvas.size, border_rgb + (255,))
+    border_layer = Image.composite(solid, border_layer, grown)
+    out = Image.alpha_composite(border_layer, canvas)
+    return out
 
 
 def main():
