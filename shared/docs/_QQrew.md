@@ -89,6 +89,21 @@ The channel has **two distinct, deliberate still classes**, and the interplay be
 
 (Object/detail close-ups — the strigil, the clay tablet, the microscope, the empty ward — are a sub-mode of carrying the dense middle without the character; see §5 character-placement.)
 
+### ★ 6a. PROMPT CONSTRUCTION — canon is an IDENTITY TAG, not a portrait (banked 30 Jun, the Ep3 stills regression)
+
+**The failure (Ep3/pregnancy1, 213 stills):** the rendered set came back as ~20 near-identical beauty-portrait headshots of one blonde woman, most of them PHOTOREAL — the opposite of the bright flat-cel curiosity-explainer the channel is. The script was NOT at fault (the VISUAL lines had real variety — "crouched beside a faint glowing pelvis diagram on the floor, tapping the bone ring," "air-quoting with both hands"). The **prompt construction** was at fault, in two compounding ways:
+
+1. **The channel `style_suffix` was NOT appended to the prompts.** Confirmed: storyboard prompts ended in a thin author-written "animated flat illustration" (3 words), NOT the channel's full suffix ("clean flat 2D cel-shaded illustration … NOT photorealistic, NOT 3d render, NOT realistic skin texture"). Without "NOT photorealistic" in the prompt, flux-pro defaults to its photo prior → the photoreal drift. *(Fix in §11 P0.)*
+2. **The canon string ATE the prompt.** Each prompt opened with **~120 words of Skeptic canon** — full face/hair/skin/wardrobe/expression ("softly feminine, smooth skin, soft delicate features, slim build, relaxed confident posture…") — and the actual scene/posture arrived as a starved tail. flux-pro weights the front of the prompt heaviest, so the model spent its attention rendering *a supermodel portrait* and never reached "crouched at the pelvis diagram." Worse, the canon's own words ("smooth skin, soft delicate features, warm friendly face") actively pull toward photoreal, fighting the (missing) cel-shaded suffix.
+
+**THE DOCTRINE (durable, channel-defining):** **on a character channel, canon must be a SHORT identity tag, not a full portrait.** The recurring-character canon-merge mechanism was inherited from Final Hours, where canon describes *places* ("the lamp room") that you WANT dominating every frame — for a character channel, merging a 120-word person-description into all 213 prompts drowns the scene every single time. This is another Final-Hours bias artifact (place-canon logic mis-applied to a character channel). The fix is structural, not per-prompt:
+
+- **Canon = a short tag** carrying ONLY what must stay constant for glance-level recognition: *"Skeptic: late-20s woman, blonde shoulder-length bob, tan camel jacket over white tee, layered gold necklaces, dry deadpan."* (~20 words, not 120.) Drop the photoreal-coded beauty words entirely — "smooth skin / soft delicate features / warm friendly oval face" are both portrait-bait AND realism-bait.
+- **Prompt ORDER must be: [STYLE] + [SCENE/POSTURE/ACTION — the beat] + [short canon tag].** The beat leads so the model renders the *action*; canon trails as a consistency anchor; the full flat-cel style suffix is present and weighted. NOT canon-first.
+- **The negation lives in the style suffix, not the canon.** "NOT photorealistic, NOT 3d render" must be in every prompt (it's the channel's decisive lever — §4).
+
+**This is what separated Ep1 (good) from Ep3 (bad):** Ep1 was Driver-solo, and Driver's canon is shorter and less photoreal-coded than the Skeptic's lush portrait string — so it drowned the scene less. The Skeptic's beauty-portrait canon is what tipped a latent fault into a visible disaster. The fault was always there; the richer canon exposed it.
+
 ---
 
 ## 7. THE CREW (durable IP — full spec in `crew_character_bible.md`)
@@ -153,7 +168,30 @@ The thumbnail is the single most important packaging surface. The system is now 
 
 ## 11. KNOWN ISSUES & THE BUILD QUEUE (channel-relevant)
 
-1. **P1 — AUDIO SEESAW (the continuous-voice fix).** Per-beat TTS → prosody re-attack every beat. Fix: synthesise beat-RUNS (sentence-group, then maybe section) as one Inworld call; Whisper-align to cut stills to word-timestamps. Decouples audio-unit from visual-beat. Portfolio-wide. HIGHEST priority. (Peter's "multiple stills per beat" = right goal, the mechanism is fewer-longer-audio-segments.)
+0. **★★ P0 — THE PROMPT-CONSTRUCTION FIX (highest; blocks all quality; banked 30 Jun from the Ep3 stills regression — full doctrine §6a).** Ep3's 213 stills rendered as near-identical photoreal beauty-portraits, NOT bright flat-cel curiosity-explainer. Two compounding faults, both in how the prompt string is built — the script's VISUAL lines were good. **This must be fixed and re-rendered before Ep3 ships, and before any further QQrew render.**
+
+   **FAULT 1 — the channel `style_suffix` is not reaching the prompt.** Storyboard prompts ended in a 3-word author hint ("animated flat illustration"), not the channel's full suffix. So "NOT photorealistic, NOT 3d render, NOT realistic skin texture" — the channel's decisive lever — was absent, and flux-pro defaulted to photoreal.
+   - **Localise (LAPTOP/BOX, read-only — DO NOT guess the file):** find where prompts are assembled for the Synthetic-Mode-A path and whether `style_suffix` is read there:
+     ```
+     grep -rn "style_suffix\|image_prompt\|canon" shared/modea_beats.py shared/recreation_pipeline.py | grep -iE "suffix|append|prompt ?=|\+ ?style|format\("
+     ```
+     Determine whether the suffix is appended in `modea_beats.py translate()` (the Synthetic→engine path QQrew uses) or only in the engine's CLI stills path (which QQrew may bypass). The symptom says QQrew's path never appends it.
+   - **Required end-state:** every rendered `image_prompt` carries the FULL `channel.json style_suffix` (the cel-shaded + NOT-photorealistic block), appended by the pipeline, not hand-written per VISUAL line.
+   - **Fix shape:** patch the prompt-assembly step (idempotent `patch_*.py`, laptop→git→box) to append `channel["style_suffix"]` to each prompt after the scene+canon. Verify in a fresh storyboard: `grep -c "cel-shaded" modea/storyboard.json` should equal the beat count.
+
+   **FAULT 2 — canon eats the prompt (the structural one — §6a doctrine).** ~120 words of beauty-portrait Skeptic canon led every prompt; the beat (scene/posture) arrived starved at the tail; flux rendered the portrait, never the action. Plus the canon's own words pull photoreal.
+   - **Fix A (canon string):** rewrite the Skeptic (and Driver, and future Brain) canon in `base_canon` from a ~120-word portrait to a **~20-word identity tag** — only what must stay constant for glance recognition (build, hair, wardrobe, signature expression), and STRIP the photoreal-coded beauty words ("smooth skin / soft delicate features / warm friendly oval face"). Example Skeptic tag: *"late-20s woman, blonde shoulder-length bob, tan camel jacket over white tee, layered gold necklaces, dry deadpan expression."*
+   - **Fix B (prompt order):** the assembled prompt must read **[style suffix lead OR scene-first] → [SCENE/POSTURE/ACTION = the beat] → [short canon tag]**, so the beat gets flux's front-loaded attention. Confirm the order `modea_beats.py` produces and reorder if canon currently leads. (If the order is fixed in code, this is a one-line reorder in the prompt template.)
+
+   **VERIFY BEFORE SPENDING THE FULL 213 (the new-lead probe, mandatory):** after the fix, render a **6-beat probe set** (cold-open / a crouch-at-diagram / a gesture/air-quote / a crew-absent wide / an in-world-number beat / arms-crossed punchline) at ~$0.18 total. Eyeball against the bar: **flat-cel (not photoreal), posture varied (not all headshots), in-world text/diagrams present, reads like Ep1.** Only if the probe clears does the full re-render fire. *(This also finally tests the §6 establishing-wides and in-world-number beats that Ep3 never rendered.)*
+
+   **DIAGNOSTIC TO CONFIRM THE EP1-VS-EP3 THEORY (do first, free):** pull the soap (Ep1) and iceage (Ep2) storyboards and check (a) was `style_suffix` present in THEIR prompts? (b) how long was Driver's canon vs the Skeptic's 120 words?
+   ```
+   for p in soap iceage1; do echo "=== $p ==="; python3 -c "import json;s=json.load(open('qqrew/projects/$p/modea/storyboard.json'));print('suffix present:', 'cel-shaded' in s[0]['image_prompt'].lower());print('prompt0 len:', len(s[0]['image_prompt']))"; done
+   ```
+   If Ep1 HAD the suffix and Ep3 doesn't → a regression introduced between them (find what changed). If Ep1 also lacked it but looked okay → confirms Driver's shorter canon was the only thing saving it, and Fix A (short canon tag) is the load-bearing fix.
+
+1. **P1 — AUDIO SEESAW (the continuous-voice fix).** Per-beat TTS → prosody re-attack every beat. Fix: synthesise beat-RUNS (sentence-group, then maybe section) as one Inworld call; Whisper-align to cut stills to word-timestamps. Decouples audio-unit from visual-beat. Portfolio-wide. (Peter's "multiple stills per beat" = right goal, the mechanism is fewer-longer-audio-segments.)
 2. **P2 — Patch B: true-static native** in `_still_to_held_clip` (seeded by `reassemble_static.py`).
 3. **P3 — Patch A: canon + render_policy auto-write at create** (removes manual injection).
 4. **P4 — vision-judge JSONDecodeError** (silent candidate-1 fallback, portfolio-wide).
