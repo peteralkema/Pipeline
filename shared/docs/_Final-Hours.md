@@ -1,6 +1,7 @@
 # Final Hours — Channel Doctrine
 *The single consolidated channel reference for Final Hours (@FinalHours_history). Load this — with the `_`/`__` system docs — on any Final Hours session.*
 *Consolidated 11 June 2026; **updated 18 June 2026** (the 10-video maritime/disaster batch session: real retention data pulled, the two-cliff diagnosis confirmed, the cold-open architecture rebuilt around it, the channel thumbnail block added, the batch shipped through `run_batch.py`).*
+***Updated 30 June 2026 — THE ANTE-MACHINAM ABSORPTION (the de-bias).** `ante-machinam.md` was Final-Hours/Sacred-Dawn craft wearing a `__` "channel-agnostic" label — the single biggest structural flaw in the doc set: it kept pulling every other channel's prompting toward dread-slow-faceless-photoreal. It is now **RETIRED.** Its genuine pipeline MECHANICS graduate up into the canonical reference (the Constitution proper, the two modes, the pre-flight); its CRAFT — which is FH craft — is absorbed here as **§11 (The Craft Canon)**. Two ante-machinam "Constitution" items (beat granularity, animatable-foreground) are relabeled on the way in: they were never pipeline physics, they are FH craft, and QQrew (static, no foreground motion, 5-word beats) is the proof. This doc is now self-contained; nothing here points at ante-machinam any more.*
 *[Current-reality flags: the channel runs **long-form 10–16 min** (city-catastrophe 20–32 min); Peter is in **The Hague**; the **Hetzner box is live**; the **face-never-resolved / absence-as-subject register won the retention test** and is confirmed by the Mary Celeste data; **Success Coach is out of scope** for this doc. The 31 May "live state" table in §7 is now historical — current live state is §7A.]*
 
 ---
@@ -23,9 +24,9 @@ Three things make it defensible against trivial format-cloners:
 
 **The rulebook.** An accumulating per-channel list of caught spell-breakers — anatomy, gravity, location/instrument drift, character-consistency failures. Every spell-breaker caught in stills review becomes a permanent negative rule. ~31 Final Hours rules over ~21 universal. Universal rules prevent universal failures; channel rules enforce period discipline (Edwardian uniforms render unreliably → plain black; one ship per frame; engravings illegible → frame obliquely).
 
-**The canon mechanism.** A per-video block of named descriptors (`{hartley}`, `{band_deck}`) for anything recurring in 3+ shots. **[CLARIFIED 18 June] This is a channel-level `base_canon` + rulebook mechanism, NOT a per-script block in the `.md` file.** The script-file contract (per ante-machinam Part VI) is *header + beats, full stop* — there is no `## CANON` section syntax the parser reads. Cross-shot consistency in authoring is carried by **scene-canon discipline written into the VISUAL lines** ("the lamp room," "the iron spiral stair," repeated with the same concrete descriptors), faceless framing, and **object-substitution** for recurring people (the coats on their pegs, three chairs, the trimmed lamp). This is why the absence-as-subject topics render cleanest — the people are mostly out of frame, so empty rooms and objects carry the continuity. (Confirmed on the Flannan Isles build; the Yellowstone/Prehistoric template — no canon block — runs clean through the same batch path.)
+**The canon mechanism.** A per-video block of named descriptors (`{hartley}`, `{band_deck}`) for anything recurring in 3+ shots. **[CLARIFIED 18 June] This is a channel-level `base_canon` + rulebook mechanism, NOT a per-script block in the `.md` file.** The script-file contract (the header + beats format, now in the canonical reference and restated in §11.5) is *header + beats, full stop* — there is no `## CANON` section syntax the parser reads. Cross-shot consistency in authoring is carried by **scene-canon discipline written into the VISUAL lines** ("the lamp room," "the iron spiral stair," repeated with the same concrete descriptors), faceless framing, and **object-substitution** for recurring people (the coats on their pegs, three chairs, the trimmed lamp). This is why the absence-as-subject topics render cleanest — the people are mostly out of frame, so empty rooms and objects carry the continuity. (Confirmed on the Flannan Isles build; the Yellowstone/Prehistoric template — no canon block — runs clean through the same batch path.)
 
-**The beat architecture.** Authored against the **ante-machinam Constitution** (beat granularity ~5–12s spoken, ~15–35 words, hard ceiling ~55; one VISUAL per beat; spell out numbers in narration; lock the script first; every beat carries an animatable foreground subject). Beats sized to narration; assembly holds each clip to audio-measured duration.
+**The beat architecture.** Authored against the **Constitution** (genuine pipeline mechanics, now in the canonical reference: every beat carries words; header is metadata and `channel` matches the folder; spell out numbers in narration; one VISUAL per Mode A beat; lock the script first) **and the FH craft-grain rules in §11** (beat granularity ~5–12s spoken, ~15–35 words, hard ceiling ~55; every beat carries an animatable foreground subject — *FH craft, not pipeline physics; see §11.1–11.2*). Beats sized to narration; assembly holds each clip to audio-measured duration.
 
 Tools (fal Flux + Kling, Inworld, Whisper, ffmpeg, rembg) are commodity. The moat is the three layers above + accumulated production judgment.
 
@@ -159,7 +160,7 @@ Ten matched `<name>.md` + `<name>.thumb.json` pairs, `--channel final-hours --kl
 
 Every batch script is built to this shape — the direct counter to the §6/§7A cliffs:
 
-- **Cold open = ~8 beats of escalating *wrongness*, ~30–40s.** Hook line → straight into the scene, present-tense, the subject already in motion. **NO date/place/biographical throat-clearing in the first ~30s** — identity and context braid in around beats 4–5, *after* the scene has its hook in. (The doctrine's IV.1 already named this: "a context block over ~45–90s without renewing tension causes drop-off.")
+- **Cold open = ~8 beats of escalating *wrongness*, ~30–40s.** Hook line → straight into the scene, present-tense, the subject already in motion. **NO date/place/biographical throat-clearing in the first ~30s** — identity and context braid in around beats 4–5, *after* the scene has its hook in. (The Craft Canon's §11.4 IV.1 already named this: "a context block over ~45–90s without renewing tension causes drop-off.")
 - **Kling on beats 1–2 only** (the N=2 budget) — spent on the two most arresting, faceless, motion-rich, drift-safe spectacle shots in the script (the night wave, the dark tower, the eruption column), landing exactly on the 2–3% kill zone.
 - **The body holds the human thread** — recurring spine object planted early and harvested at the climax (Flannan's coat on the peg; Lady Be Good's diary; the Deering's set sails); clock-anchored dread; one human (or one named absence) present *through* the explanation, never a separate forensics act that abandons them (the mid-cliff fix).
 - **Close:** end on the image → moralised closer aimed at the present-day viewer → comment-bait question → sequel hook into the cluster.
@@ -188,4 +189,121 @@ Every batch script is built to this shape — the direct counter to the §6/§7A
 
 ---
 
-*Maintained by Peter + Claude. Operational how-to lives in `__machina`/canonical; craft in `__ante-machinam.md`; the wider operation in `__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`. This doc carries Final Hours strategy, the retention data, the batch, the thumbnail specifics, and the forward queue.*
+## 11. The Craft Canon (absorbed from the retired `ante-machinam.md`, 30 June 2026)
+
+*This is the authoring craft — what makes a Final Hours script LAND, as opposed to the mechanics (now in the canonical) that make it RUN. It was the bulk of `ante-machinam.md`, mislabeled "channel-agnostic"; it is Final Hours / Sacred Dawn craft, and it lives here now. Every principle below was pressure-tested in a shipped FH video (Pudding Lane, Hindenburg, Pompeii, Mary Celeste). Sacred Dawn's overlapping lessons (the Watchers) live in `_Sacred-Dawn.md`; where a principle is genuinely portable, the canonical's craft-menu may offer it as an option — but here it is FH doctrine, not universal law.*
+
+**Spine in one sentence:** *win the click with the package, hook the first sixty seconds, hold the body with recognition and a recurring beat, land a close that converts a viewer into a subscriber.*
+
+### 11.0 — The de-bias note (why two of these were NOT mechanics)
+`ante-machinam.md` put **beat granularity** and **animatable-foreground** in *the Constitution* — "the physics of the pipeline," "a physics constraint, not a style preference." That was the bias in its purest form: FH craft dressed as a universal law, and it pulled every other channel's authoring toward FH's grain. They are **not** physics. QQrew runs true-static (no foreground motion ever needs to animate) at 5–6 words/beat and breaks both without the pipeline caring. So §11.1 and §11.2 are **FH craft** — load-bearing *for this channel's photoreal-Kling-cinematic look*, irrelevant to a flat-cel static channel. Author to them for Final Hours; do not export them as law.
+
+### 11.1 — Beat granularity (FH craft — was Constitution §6)
+One beat → one still → one ~5-second animated clip, slow-filled to the beat's measured spoken duration. Stretch up to ~2–3× is invisible; past ~4× it reads as dead, stretched video (the Sacred Dawn launch confirmed it — a 52-beat / 17.7-min cut averaged ~4× and read as slow motion). The fix is never in the assembler — **it is authored, by writing shorter beats.** Author each beat so its spoken words run ~**5–12 seconds**, hard ceiling ~**15s (~55 words)**. Punchy single-sentence lines earn their own short beat. The pipeline measures true duration with Whisper at the audio gate; these numbers plan the *grain*, not the sync.
+
+| Spoken words | ≈ sec @150 wpm | Stretch over ~5s clip | Verdict |
+|---|---|---|---|
+| 8–18 | ~3–7 s | ~1–1.5× | Ideal motion |
+| 18–35 | ~7–14 s | ~1.5–3× | Good; the workable default |
+| 35–55 | ~14–22 s | ~3–4× | Acceptable only for a deliberately still, weighty beat |
+| 55+ | 22 s+ | >4× | **Split it.** Two beats, two visuals. |
+
+A 25–31 min episode at this grain ≈ 110–160 beats. *(Caveat banked 17 June: runtime is beat-floored, not words-only — the Ken-Burns minimum hold stretches short beats, so real runtime ≈ beat count × ~14s; a words-only estimate undershoots. Toba: 88 beats → 20.7 min. And the wpm floor itself is wrong at length — see §11.4 IV.6.)*
+
+### 11.2 — Author for motion: the animatable foreground (FH craft — was Constitution §7)
+Kling can only move what is in the frame. A wide hills-and-valley shot has no foreground subject, so it animates as a slow zoom across a postcard — technically motion, emotionally dead. A beat whose still carries a **foreground subject in mid-action** converts into real movement: the blade turns and catches the light, the hand drives the hammer, the wave crests. You cannot fix an inert clip at the animation gate — there is nothing to move; the fix is authored, upstream, in the VISUAL line, *before the still renders*.
+
+The one-line test before lock: **"What in this frame moves, and is it close enough to see it move?"** If the honest answer is "a slow drift across scenery," rewrite it. Wide establishing shots stay allowed but become the **minority**, kept short (a ~5s wide stretched ~2× is a fine breath; stretched ~4× it's the dead postcard).
+
+**The two goals (clean stills vs. motion) only fight if you reach for the wrong subject.** A clear-faced figure walking at camera is full of motion *and* full of drift. Choose foreground subjects that are inherently animatable *and* inherently drift-safe — three classes, author the bulk of every episode from these:
+1. **The body, without the face.** A figure from behind, low-angle at the legs, or as a silhouette is faceless (no drift) yet a huge moving subject: the giant's foot into wet clay, a massive hand closing, a robed back turning.
+2. **Objects and hands.** Highest motion-conversion, lowest drift. Flux renders a single object or a pair of hands cleanly; Kling animates them vividly: the hammer striking sparks, the blade quenched and hissing, fingers tracing stars, a cup trembling as footsteps approach.
+3. **The environment as an active force.** Catastrophe-as-environment as *motion in progress*: not "a flooded valley" but "the water surges across the threshold and climbs the loom's legs."
+
+**The drift dial, not switch:** foreground-action up, face-resolution down, both at once — faces resolved-away, one figure not three, objects and partial bodies over full clear figures. **Embed the motion in the VISUAL line** as a verb the animator can perform in ~5s. *(On an all-Ken-Burns FH lane this is moot — but it stays correct whenever Kling is on.)*
+
+### 11.3 — Writing the VISUAL line (so stills come out clean on the first pass)
+Production patterns that make Flux render reliably for the FH photoreal look. *(Several of these also appear operationally in §5; this is the craft statement.)*
+- **Faceless by default; resolve a face only when you must.** When identity is unknown/marginal/anonymous, never resolve the face — frame from behind, in profile, silhouetted, in deep shadow, soft focus, turned away. Mirrors the dignity register **and** eliminates Flux's hardest drift problem. Foreground a face only when the audience must bond with one specific, named, documented person.
+- **Build canon around places, not people.** A scene canon ("the lamp room," "the citadel at golden hour") renders consistently across twenty shots; a character canon drifts. Get variety from angle and detail within a locked location.
+- **Substitute objects for groups.** Flux fails on three-plus figures. A family becomes an empty table, four settings, one chair pushed back; a crowd becomes a single abandoned object.
+- **Empty rooms carry meaning and render perfectly** — the empty landing after the people ran, the wall after the death.
+- **Fire (and any catastrophe) is environment, not subject.** Write what the fire *does* ("orange glow pulsing on the wall," "smoke rolling across the ceiling"), never a close-up of flames consuming a person. Same for serpents, eruptions, drownings — at distance.
+- **Period accuracy is the watermark.** Write the explicit guard into the VISUAL ("the medieval pre-Wren cathedral, NOT the modern dome").
+- **Image models cannot render legible text.** Frame engravings, signs, document text obliquely, in shadow, or out of focus. If specific text must be legible, that is a Mode B card's job, not a still's.
+- **Distribute sensory detail across locations.** Six details stacked in one room → twenty near-identical shots and breathless pacing. Spread the richness across kitchen, lane, river, rooftops.
+- **Aspect:** ask for `landscape_16_9` explicitly (the model defaults narrower); flag 4:3 output.
+
+### 11.4 — The retention canon (what makes the writing land)
+
+**IV.0 — The two truths everything serves.**
+- **CTR is won by the package; distribution is won by retention.** Title + thumbnail win the click; AVD and the first-48h curve decide whether the algorithm pushes the video cold.
+- **Recognition is the retention mechanic.** Studio lean-in spikes land at *personal recognition* — a named, specific, physically-precise thing the viewer holds in their body. Vague beats get no spike; named vivid specifics do. The most transferable lesson; it reappears below.
+
+**IV.1 — The first sixty-to-ninety seconds (the gate).** Run every cold open through this.
+- **Drop the viewer inside a scene, present-tense and sensory — never brief them.** "Feel it before you see it. The water trembling in the cup." Never "in this video we'll look at…"
+- **Three concrete anchors in the first ten seconds** — date, place, person, amount, object, number; falsifiable, front-loaded. (Year-only acceptable for deep antiquity.) If you can't find three, the topic may be wrong for the channel.
+- **A named anchor within fifteen seconds** — the specific human or named place the viewer commits to following.
+- **Announce the dramatic arc in the first minute** — [date/place locked] + [scale in concrete numbers] + [stakes promise explicit] + [tease of the worst still to come]. The single biggest separator between a 1.1M and a 600K video. The tour-guide open is the failure mode.
+- **Deliver the title's contract by ~20s — then keep delivering tension through two minutes.** A context block over ~45–90s without renewing tension causes drop-off (Hindenburg → 11.3%; Pompeii interleaved → 51%). Audit 0:20–2:00; gaps over ~45s get a tension beat woven in or cut.
+- **Front-load the payload — compress the runway.** Reach a visceral, concrete payload fast; don't throat-clear with meta.
+- **Plant the recurring spine and the emotional thesis in the open** — name the recurring payoff beat, seed the thesis you'll harvest at the close.
+- **Foreshadow pivot at ~40–55s; cliffhanger at ~60s, cut mid-thought.**
+
+**IV.2 — Through the body.**
+- **Sensation, not description** — supply the senses the image can't: smell, texture, sound, weight, temperature. Never "she felt afraid." Makes AI visuals feel lived rather than illustrated.
+- **Pace-aware sensory density — distribute across locations.** If more than three details land in one location, redistribute. (Confined-location stories where the confinement *is* the weight are the deliberate exception.)
+- **Recognition as the retention mechanic** — land beats on one universal, physically-precise, vivid specific. Engineer those moments; don't let the recognisable thing pass as a flat mention.
+- **A recurring payoff beat as spine** — a repeated resolution the viewer learns to anticipate turns disconnected beats into one running bit. Anticipation is retention.
+- **Clock-anchor the dread** — specific times before specific events; tighten intervals as the catastrophe nears. (Time-passing-with-nothing-happening is a short weighty line now, not a wordless hold — see the canonical Constitution.)
+- **Name the surrounding humans — and name the absence when the record lost it.** Named reads as documented; anonymous reads as generic. When the record kept no name, never invent one — name the absence as a refrain, three times. This is the dignity register and it unlocks the face-never-resolved production win.
+- **Narrator-to-viewer irony at act transitions** — once, the narrator steps outside the frame to name what the viewer knows that the characters don't. A scalpel, not a tic.
+- **Plant seeds early, harvest late** — specific facts dropped as incidental early, returned to with weight at the close. Plant only facts that gain weight when revisited.
+
+**IV.3 — The close (where a view becomes a subscriber).**
+- **End on the image, then reflect — sequential, not contradictory.** The final beat is one image held by a weighty line (a ring, a clock, ash, the ark on grey water). Then the most-missed move: a **moralised closer that reflects the event back at the present-day viewer** (the 1.1M London 1300: "we're still living in the world they created… cities survive"). The viewer leaves holding something they didn't have at the start — that converts a watcher into a commenter/subscriber.
+- **The over-deliver must accelerate, not decelerate.** Exceed the promise only with your *strongest* material — one killer bonus, then stop. For a film, accelerate into the sequel hook.
+
+**IV.4 — Packaging is craft (title + thumbnail + comment).**
+- **Lead the package with tension, not warmth — the then-vs-now / transgression hook.** "London 1300: The Apocalypse Happened in 1348" beats "Pompeii: Before the Disaster." Lead with the tension, stakes, or question.
+- **Title and thumbnail complement, not echo.** Image carries the *what*; title carries the *why-click*; never the same nouns. (FH winning grammar: the two-sentence mystery/absence hook — see §4.)
+- **Comment-bait built into the subject, not bolted on.** A recognition-rich topic writes its own pinned comment. Thumbnail-asks → video-stages → comment-harvests is one loop.
+- **The act structure is a retention scaffold** — clear acts with forward-pulling act-turn hooks; the viewer always knows there's a destination.
+
+**IV.5 — The narrator is a retention device.** A characterful, intimate narrator is itself a reason to stay, and a differentiator in a niche full of flat AI TTS. FH register: Victor's mournful dread. Write *to* the voice; direct address ("you know them, even if no one ever told you this part") creates presence — deploy at the open, the act seams, the close.
+
+**IV.6 — Production realities that shape the writing.**
+- **Acknowledge the recreation once, early, single line** — a museum-placard sentence naming real sources ("recreated from the household accounts, the British Library letter, and the parliamentary investigation"). Specific, never apologetic, never a tech disclaimer. For attribution-sensitive material it doubles as the fidelity guard (see §5).
+- **Inworld renders faster than you plan — write long.** Measured ~165–178 wpm at the reverent channels (NOT the old 120 wpm floor, which overshot the two features by ~30 min). Author a long piece TO a target at ~165–178 wpm — a 90-min feature ≈ 15,000 words, not ~11,000. Doesn't affect sync (Whisper measures real audio); does affect runtime. **But runtime is also beat-floored** (the ~14s/beat Ken-Burns hold), so a words-only estimate undershoots short scripts. Verify completeness by `final_video.mp4` duration == `voiceover.mp3` duration, NEVER against the estimate.
+
+**IV.7 — The pre-lock audit table.** Before any FH script is locked, fill this; any "weak/missing" → revise.
+
+| # | Principle | Status |
+|---|---|---|
+| 1 | Dropped inside a scene, present-tense + sensory open (not "in this video") | |
+| 2 | Three concrete anchors in 10s; named anchor by 15s | |
+| 3 | Dramatic arc announced in the first minute (scale + stakes + tease) | |
+| 4 | Title contract delivered by ~20s AND tension sustained through 2:00 | |
+| 5 | Payload front-loaded; recurring spine + thesis planted in the open | |
+| 6 | Foreshadow pivot ~40–55s; cliffhanger ~60s cut mid-thought | |
+| 7 | Sensation not description, distributed across locations | |
+| 8 | Recognition beats — one vivid universal/famous specific per key moment | |
+| 9 | A recurring payoff beat as spine | |
+| 10 | Clock-anchored dread, tightening intervals | |
+| 11 | Surrounding humans named; absence named as refrain when applicable | |
+| 12 | Narrator-to-viewer irony at ≥1 act transition | |
+| 13 | Seeds planted early, harvested late | |
+| 14 | End on the image, then moralised closer reflecting at the present-day viewer | |
+| 15 | Over-deliver accelerates (or ends clean) — no trailing leftovers | |
+| 16 | Package: tension/transgression hook; title & thumbnail complement not echo | |
+| 17 | Comment-bait built into the subject (planted → asked → pinnable) | |
+| 18 | Recreation acknowledged once, early, single line | |
+| 19 | Written to target at ~165–178 wpm (not the old 120 floor) | |
+| 20 | Constitution check (canonical): no wordless beats; numbers spelled out; ≤~55 words/beat; animatable foreground per beat | |
+
+### 11.5 — The FH positioning brief (was ante-machinam Part V.1)
+Most of this already lives in §2 (thesis) and §4 (topic principles); held here for completeness. **Premise:** the last hours of one human story inside a larger catastrophe; the camera stays with one named (or deliberately unnamed) human while history happens around them. **Mode A only. Register:** dread-and-dignity, mournful, present-tense third-person witness; never action/mystery/conspiracy. **Runtime:** long-form 10–16 min; city-catastrophe sub-series 20–32 min (the 7-min grid is superseded). **City sub-series grammar:** title `[Place] [Year]: [doom hook] (AI Reconstruction)`; the six-beat hook; callback frame (open on the catastrophe image = thumbnail, return near the end); recreation acknowledgment woven as "what's in the ground." **Anonymity-as-refrain** and **the moralised closer** are the most-missed beats. **Channel header trap:** `channel: final_hours` → resolves to `final-hours/`; `run_batch.py --channel` needs the literal `final-hours`.
+
+---
+
+*Maintained by Peter + Claude. Operational how-to lives in the canonical reference (`__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`); the wider operation lives there too. **Craft now lives HERE (§11) — `ante-machinam.md` is retired.** This doc carries Final Hours strategy, the retention data, the batch, the thumbnail specifics, the full craft canon, and the forward queue.*
