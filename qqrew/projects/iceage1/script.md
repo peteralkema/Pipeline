@@ -1,4 +1,4 @@
-channel: crew-wip
+channel: qqrew
 title: You Wouldn't Survive One Ice Age Winter. Here's What Humans Actually Did.
 description: Drop into the Ice Age tonight and you would not last a month. For most of human history, winter was not cold - it was a death machine. This is the strange, dark, and weirdly relatable story of what ancient humans actually did to survive the cold - the food, the fire, the things they did when there was nothing left - and why your brain (and your DNA) still carry the Ice Age right now. Bright, fast, and a little disturbing. (AI recreation.)
 tags: ice age, ancient humans, survival, prehistoric, how did humans survive, history explained, did you know, cold, neanderthals, neanderthal dna, human evolution, weird history, dark history, curious, explainer, ice age survival

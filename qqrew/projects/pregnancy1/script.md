@@ -1,4 +1,4 @@
-channel: crew-wip
+channel: qqrew
 title: Being Born Almost Killed You. Here's Why Humans Are So Bad At It.
 description: You survived the most dangerous trip of your life on day one - about ten centimeters long - and you don't remember a second of it. This is the strange, slightly disturbing true story of why humans are uniquely bad at being born: a head too big, a door too small, a baby shipped out a year early, and a final fact about what your mother is still carrying that genuinely got me. Bright, fast, and a little unsettling. (AI recreation.)
 tags: being born, childbirth, human evolution, obstetric dilemma, why humans give birth, pregnancy facts, secondary altriciality, microchimerism, biology explained, did you know, weird biology, human body, anthropology, evolution, curious, explainer

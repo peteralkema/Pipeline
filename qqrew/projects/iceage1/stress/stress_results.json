@@ -1,0 +1,82 @@
+[
+  {
+    "n": 1,
+    "slug": "mammoth",
+    "shape": "square",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_01_mammoth.png"
+  },
+  {
+    "n": 2,
+    "slug": "skull",
+    "shape": "square",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_02_skull.png"
+  },
+  {
+    "n": 3,
+    "slug": "longship",
+    "shape": "wide",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_03_longship.png"
+  },
+  {
+    "n": 4,
+    "slug": "lighthouse",
+    "shape": "tall",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_04_lighthouse.png"
+  },
+  {
+    "n": 5,
+    "slug": "snake",
+    "shape": "square",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_05_snake.png"
+  },
+  {
+    "n": 6,
+    "slug": "pyramid",
+    "shape": "square",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_06_pyramid.png"
+  },
+  {
+    "n": 7,
+    "slug": "sword",
+    "shape": "tall_thin",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_07_sword.png"
+  },
+  {
+    "n": 8,
+    "slug": "galleon",
+    "shape": "mixed",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_08_galleon.png"
+  },
+  {
+    "n": 9,
+    "slug": "volcano",
+    "shape": "square",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_09_volcano.png"
+  },
+  {
+    "n": 10,
+    "slug": "croc",
+    "shape": "very_wide",
+    "prop_ok": true,
+    "thumb_ok": true,
+    "out": "thumb_10_croc.png"
+  }
+]

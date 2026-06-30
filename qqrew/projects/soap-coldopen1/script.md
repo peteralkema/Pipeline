@@ -1,4 +1,4 @@
-channel: crew-wip
+channel: qqrew
 title: 200,000 Years Without Soap. How Did Humans Survive?
 description: Right now you smell fine. Probably. But humans went 200,000 years without soap - and the story of how we finally figured out to wash our hands is stranger, and far more recent, than you think. From Babylon to the Roman baths to the doctor who was mocked for saying "wash your hands" and proven right only after he died in disgrace. A bright, fast investigation into one of the newest things about being human. (AI recreation.)
 tags: history, explainer, soap history, hygiene history, ancient humans, did you know, history facts, semmelweis, when did humans, wash your hands, history of cleanliness, curious
