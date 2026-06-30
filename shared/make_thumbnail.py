@@ -366,17 +366,27 @@ def _composite_prop(bg, project, cfg):  # __PROP_LAYER__
         print("   (prop layer: could not open " + str(prop_path) + ": " + str(e) + ")")
         return bg
 
-    frame_w, frame_h = bg.size
+    frame_w, frame_h = bg.size  # __PROP_GEOMETRY__
     scale = float(prop_cfg.get("scale", 0.32))
     margin = int(prop_cfg.get("margin", 40))
+    max_w_frac = float(prop_cfg.get("max_w_frac", 1.0))
     target_h = max(1, int(frame_h * scale))
     ratio = target_h / prop.height
     target_w = max(1, int(prop.width * ratio))
+    max_w = int(frame_w * max_w_frac)
+    if target_w > max_w:
+        target_w = max_w
+        ratio = target_w / prop.width
+        target_h = max(1, int(prop.height * ratio))
     prop = prop.resize((target_w, target_h), Image.LANCZOS)
 
     position = prop_cfg.get("position", "bottom-left")
+    top_frac = prop_cfg.get("prop_top_frac")  # __PROP_GEOMETRY__
     if position == "bottom-left":
-        x, y = margin, frame_h - target_h - margin
+        if top_frac is not None:
+            x, y = margin, int(frame_h * float(top_frac))
+        else:
+            x, y = margin, frame_h - target_h - margin
     elif position == "bottom-right":
         x, y = frame_w - target_w - margin, frame_h - target_h - margin
     elif position == "top-left":

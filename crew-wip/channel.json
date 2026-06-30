@@ -49,8 +49,16 @@
     "prop": {
       "enabled": true,
       "position": "bottom-left",
-      "scale": 0.32,
-      "margin": 40
+      "scale": 0.5,
+      "margin": 40,
+      "max_w_frac": 0.4,
+      "prop_top_frac": 0.47,
+      "border_px": 14,
+      "border_rgb": [
+        255,
+        255,
+        255
+      ]
     }
   }
 }
