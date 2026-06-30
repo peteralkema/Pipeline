@@ -538,12 +538,16 @@ def generate_still(image_prompt: str, out_path: Path) -> Path:
     people = rb.get("people_directive", "")
     full_prompt = f"{style_suffix}. {image_prompt}, {people}" if people else f"{style_suffix}. {image_prompt}"
     negative = ", ".join(rb["negative"])
-    endpoint = IMAGE_ENDPOINTS[IMAGE_MODEL]
+    # Per-channel image model: channel.json may set "image_model"
+    # (e.g. "nano_banana" for flat-cel channels). Falls back to the module
+    # IMAGE_MODEL default ("flux") for cinematic channels that omit it.
+    model = config.get("image_model", IMAGE_MODEL)
+    endpoint = IMAGE_ENDPOINTS[model]
     args = {"prompt": full_prompt, "image_size": ASPECT}
     if negative:
         # Most fal image models accept negative_prompt; harmless if ignored.
         args["negative_prompt"] = negative
-    if IMAGE_MODEL == "flux":
+    if model == "flux":
         # flux-pro/v1.1 silently returns black ~7KB PNGs when its safety
         # filter trips (default tolerance ~2). "5" is the loosest practical
         # setting that stops the silent rejects. Gated to flux — seedream/
