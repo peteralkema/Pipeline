@@ -536,7 +536,7 @@ def generate_still(image_prompt: str, out_path: Path) -> Path:
     from look_resolver import resolve_look
     style_suffix = resolve_look(out_path, config)["style_suffix"]
     people = rb.get("people_directive", "")
-    full_prompt = f"{image_prompt}, {people}, {style_suffix}" if people else f"{image_prompt}, {style_suffix}"
+    full_prompt = f"{style_suffix}. {image_prompt}, {people}" if people else f"{style_suffix}. {image_prompt}"
     negative = ", ".join(rb["negative"])
     endpoint = IMAGE_ENDPOINTS[IMAGE_MODEL]
     args = {"prompt": full_prompt, "image_size": ASPECT}
