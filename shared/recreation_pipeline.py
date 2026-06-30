@@ -532,7 +532,7 @@ Rules:
 
 def generate_still(image_prompt: str, out_path: Path) -> Path:
     rb = load_rulebook()
-    config = load_channel_config(strict=False)
+    config = load_channel_config(strict=True, anchor=out_path)
     from look_resolver import resolve_look
     style_suffix = resolve_look(out_path, config)["style_suffix"]
     people = rb.get("people_directive", "")
@@ -1201,7 +1201,7 @@ def _load_beats_with_canon(beats_path: Path) -> tuple[list, dict]:
         )
 
     # Layer channel base_canon underneath beat-script canon (beat-script wins on key collision).
-    channel_config = load_channel_config(strict=False)
+    channel_config = load_channel_config(strict=True, anchor=beats_path)
     base_canon = channel_config.get("base_canon", {})
     if base_canon:
         merged = dict(base_canon)
@@ -1256,7 +1256,7 @@ def cmd_stills(args):
         if canon:
             print(f"Canon block loaded with {len(canon)} tag(s): {sorted(canon.keys())}")
         # Normalise: ensure sequential indices, required fields, and canon-expansion.
-        _default_motion = (load_channel_config(strict=False).get("default_motion")
+        _default_motion = (load_channel_config(strict=True, anchor=Path(args.project)).get("default_motion")
                            or CHANNEL_DEFAULTS["default_motion"])
         shots = []
         for i, b in enumerate(beats, 1):
