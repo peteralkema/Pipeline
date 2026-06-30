@@ -60,13 +60,11 @@ METRICS = ",".join([
     "videoThumbnailImpressions",
     "videoThumbnailImpressionsClickRate",
     "views",
-    "estimatedMinutesWatched",
-    "averageViewPercentage",
 ])
 
 # video dimension reports REQUIRE sort + maxResults to be set explicitly.
-SORT = "-videoThumbnailImpressions"
-PAGE = 200
+SORT = "day"
+PAGE = 25
 
 
 def load_credentials(token_path, client_secret_path):
@@ -109,7 +107,7 @@ def fetch_reach(creds, start_date, end_date):
                 startDate=start_date,
                 endDate=end_date,
                 metrics=METRICS,
-                dimensions="video",
+                dimensions="day",
                 sort=SORT,
                 maxResults=PAGE,
                 startIndex=start_index,
@@ -123,7 +121,7 @@ def fetch_reach(creds, start_date, end_date):
             break
         for row in rows:
             rec = dict(zip(headers, row))   # map by header name, never by position
-            vid = rec.pop("video", None)
+            vid = rec.pop("day", None)
             if vid:
                 rows_by_video[vid] = rec
         if len(rows) < PAGE:
