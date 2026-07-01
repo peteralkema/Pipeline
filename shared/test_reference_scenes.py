@@ -91,11 +91,11 @@ def data_uri(p: Path):
     return "data:image/png;base64," + base64.b64encode(p.read_bytes()).decode("ascii")
 
 
-def call(args, tries=3):
+def call(args, _ENDPOINT, tries=3):
     last = None
     for i in range(tries):
         try:
-            return fal_client.subscribe(ENDPOINT, arguments=args, with_logs=False)
+            return fal_client.subscribe(_ENDPOINT, arguments=args, with_logs=False)
         except Exception as e:  # noqa: BLE001
             last = e; w = 2 ** i
             print(f"      ! attempt {i+1}/{tries}: {e} -- retry {w}s"); time.sleep(w)
@@ -108,7 +108,12 @@ def main():
     ap.add_argument("--out", default="qqrew/characters/_scenetest")
     ap.add_argument("--resolution", default="1K")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--endpoint", default=ENDPOINT,
+                    help="fal edit endpoint (e.g. fal-ai/nano-banana-pro/edit)")
+    ap.add_argument("--price", type=float, default=PRICE_1K,
+                    help="per-image price at 1K for the cost estimate")
     a = ap.parse_args()
+    endpoint, price = a.endpoint, a.price
 
     ref = Path(a.ref)
     if not ref.exists():
@@ -116,8 +121,8 @@ def main():
     out = Path(a.out)
 
     print("=" * 70)
-    print(f"SKEPTIC CUSTOM SCENES  ref={ref}  model={ENDPOINT}  res={a.resolution}")
-    print(f"cost: {len(SCENES)} x ${PRICE_1K:.3f} = ${len(SCENES)*PRICE_1K:.2f}")
+    print(f"SKEPTIC CUSTOM SCENES  ref={ref}  model={endpoint}  res={a.resolution}")
+    print(f"cost: {len(SCENES)} x ${price:.3f} = ${len(SCENES)*price:.2f}")
     print("=" * 70)
     for slug, scene, allow in SCENES:
         tail = TAIL_TEXT if allow else TAIL_NOTEXT
@@ -141,7 +146,7 @@ def main():
                 "resolution": a.resolution}
         t0 = time.time(); print(f"  - {slug} ...", end=" ", flush=True)
         try:
-            res = call(args)
+            res = call(args, endpoint)
             url = res["images"][0]["url"]
             dest = out / f"{slug}.png"
             with urllib.request.urlopen(url, timeout=120) as r:
