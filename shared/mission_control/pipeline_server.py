@@ -1062,6 +1062,17 @@ async function renderDonePanel(ch, pr) {
       'background:#1c1c26;padding:8px 10px;margin-bottom:8px;white-space:pre-wrap;">' + esc(meta.description) + '</div>' +
     '<label>Tags</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
       'background:#1c1c26;padding:8px 10px;margin-bottom:14px;">' + esc(meta.tags) + '</div>' +
+    '<label>Thumbnail</label>' +
+    '<div style="border:1px solid #32323e;border-radius:8px;background:#161620;padding:10px;margin-bottom:14px;">' +
+      '<div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center;">' +
+        '<input id="thumbtitle" placeholder="Headline (e.g. 200,000 WENT SILENT)" style="flex:2;min-width:170px;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:8px;font-size:13px;">' +
+        '<input id="thumbsub" placeholder="Subtitle (optional)" style="flex:1;min-width:110px;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:8px;font-size:13px;">' +
+        '<input id="thumbshot" type="number" min="1" placeholder="still #" style="width:78px;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:8px;font-size:13px;">' +
+        '<button id="thumbgen" style="background:#d4a017;margin-top:0;padding:8px 14px;font-size:13px;font-weight:600;">Generate</button>' +
+      '</div>' +
+      '<span id="thumbmsg" style="color:#8a8a99;font-size:12px;"></span>' +
+      '<img id="thumbimg" style="display:none;width:100%;border-radius:6px;margin-top:8px;background:#000;">' +
+    '</div>' +
     '<button id="uploadbtn" ' +
       'style="background:#ff0000;">Upload to YouTube Studio (private)</button>' +
     '<span id="uploadmsg" style="color:#8a8a99;font-size:12px;margin-left:10px;"></span>' +
@@ -1073,7 +1084,29 @@ async function renderDonePanel(ch, pr) {
   const rb = document.getElementById("reassemblebtn");
   if (rb) rb.onclick = function() { reassemble(ch, pr); };
   const ub = document.getElementById("uploadbtn");
-  if (ub) ub.onclick = function() { uploadVideo(ch, pr); };
+  if (ub) ub.onclick = function() { uploadVideo(ch, pr); };  const tg = document.getElementById("thumbgen");
+  if (tg) tg.onclick = async function() {
+    const t = (document.getElementById("thumbtitle").value || "").trim();
+    const s = (document.getElementById("thumbsub").value || "").trim();
+    const n = parseInt(document.getElementById("thumbshot").value, 10);
+    const tmsg = document.getElementById("thumbmsg");
+    const timg = document.getElementById("thumbimg");
+    if (!t) { tmsg.style.color = "#d46a6a"; tmsg.textContent = "enter a headline"; return; }
+    if (isNaN(n)) { tmsg.style.color = "#d46a6a"; tmsg.textContent = "enter a still number"; return; }
+    tmsg.style.color = "#8a8a99"; tmsg.textContent = "generating\u2026";
+    try {
+      const r = await api("/api/thumbnail", {method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({channel: ch, project: pr, shot: n, title: t, subtitle: s})});
+      if (r && r.ok) {
+        tmsg.style.color = "#14a3b8"; tmsg.textContent = "thumbnail set (still " + r.shot + ")";
+        timg.src = "/video/thumbnail.png" + q + "&_t=" + Date.now();
+        timg.style.display = "block";
+      } else {
+        tmsg.style.color = "#d46a6a"; tmsg.textContent = "error: " + ((r && r.error) || "failed");
+      }
+    } catch (e) { tmsg.style.color = "#d46a6a"; tmsg.textContent = "error: " + e; }
+  };
 }
 
 async function uploadVideo(ch, pr) {
@@ -2112,6 +2145,50 @@ class Handler(BaseHTTPRequestHandler):
         self._json(500, {"ok": False,
             "error": "channel-model generation failed after diagnosis", "diagnosis": diagnosis})
 
+    def _handle_thumbnail(self, body):
+        """Composite a thumbnail from a chosen still + headline/subtitle, using the
+        channel's locked thumbnail block (make_thumbnail.py). --project points at
+        modea (so --shot finds modea/stills/shot_NNN.png); --out writes thumbnail.png
+        at the PROJECT ROOT where upload_episode.py looks. Free PIL re-composite:
+        iterate still-number + text as often as you like. (PATCH_THUMBNAIL_PANEL_APPLIED)"""
+        shot = body.get("shot")
+        title = (body.get("title") or "").strip()
+        subtitle = (body.get("subtitle") or "").strip()
+        try:
+            shot = int(shot)
+        except Exception:
+            self._json(400, {"ok": False, "error": "shot must be an integer"}); return
+        if not title:
+            self._json(400, {"ok": False, "error": "headline (title) is required"}); return
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        paths = resolve_paths(ch, pr, _REPO)
+        modea = Path(paths["modea"])
+        root = Path(paths["project"])
+        still = modea / "stills" / f"shot_{shot:03d}.png"
+        if not still.exists():
+            self._json(404, {"ok": False,
+                "error": f"still not found: shot_{shot:03d}.png (check the number)"}); return
+        out = root / "thumbnail.png"
+        import subprocess as _sp
+        cmd = [sys.executable, str(Path(_SHARED) / "make_thumbnail.py"),
+               "--project", str(modea),
+               "--shot", str(shot),
+               "--channel", ch,
+               "--title", title,
+               "--out", str(out)]
+        if subtitle:
+            cmd += ["--subtitle", subtitle]
+        try:
+            r = _sp.run(cmd, cwd=str(_REPO), capture_output=True, text=True)
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"thumbnail failed: {e}"}); return
+        if r.returncode != 0 or not out.exists():
+            tail = (r.stderr or r.stdout or "").strip().splitlines()[-3:]
+            self._json(500, {"ok": False, "error": " / ".join(tail) or "make_thumbnail failed"}); return
+        self._json(200, {"ok": True, "shot": shot}); return
+
     def do_POST(self):
         if not _key_ok(self):
             self.send_response(403); self.end_headers(); return
@@ -2162,6 +2239,8 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_assemble(body); return
         if path == "/api/upload":
             self._handle_upload(body); return
+        if path == "/api/thumbnail":
+            self._handle_thumbnail(body); return
         if path == "/api/reset":
             self._handle_reset(); return
 
