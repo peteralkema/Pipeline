@@ -742,16 +742,26 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) ->
     # still zoomed. z=1 unconditionally removes the zoom. Revert via .bak if a
     # cinematic channel needs the slow zoom-in restored.
     _z = "1"
-    # Upscale to 4x the target first (smoothness), cover-crop to the 4x frame, then a
-    # slow zoom-in (cap 1.25x) OR a static hold (z=1), output at channel aspect.
-    up_w, up_h = W * 4, H * 4
-    vf = (
-        f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
-        f"crop={up_w}:{up_h},"
-        f"zoompan=z='{_z}':d={total_frames}:"
-        f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
-        f"s={W}x{H}:fps={fps},setsar=1"
-    )
+    if _z == "1":
+        # TRUE STATIC (01 Jul): zoompan micro-pans even at z=1 (the x/y viewport
+        # math drifts per-frame on the 4x-upscaled input). Bypass zoompan
+        # entirely -- scale-to-fit + pad to the frame, a single held image, ZERO
+        # motion. Proven via frame-diff (frame0 == frame100).
+        vf = (
+            f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+            f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2,"
+            f"setsar=1,fps={fps}"
+        )
+    else:
+        # Cinematic slow zoom-in (unchanged): upscale 4x for smoothness, then zoompan.
+        up_w, up_h = W * 4, H * 4
+        vf = (
+            f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
+            f"crop={up_w}:{up_h},"
+            f"zoompan=z='{_z}':d={total_frames}:"
+            f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
+            f"s={W}x{H}:fps={fps},setsar=1"
+        )
     cmd = [
         "ffmpeg", "-y", "-i", str(still_path),
         "-vf", vf,
