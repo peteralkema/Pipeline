@@ -34,16 +34,19 @@ Born 29 Jun 2026 from frustration with **Final Hours** (a channel fighting distr
 
 ---
 
-## 4. STYLE (kid-validated, 4 independent signals)
+## 4. STYLE (REVERSED 01 Jul 2026 — flat-cel was the bug)
 
-**PRODUCED FLAT CEL-SHADED ILLUSTRATION.** Clean dark linework, simplified flat color planes, appealing stylized faces, rich illustrated backgrounds, warm lighting. Firmly on the illustrated side — the production polish is the differentiation.
+**PRODUCED SEMI-REALISTIC BRIGHT ANIMATED-FEATURE ILLUSTRATION.** Appealing realistic detailed faces, rich detailed illustrated backgrounds, real depth, high detail, polished animated-feature quality — the fidelity of the approved trio references (`02_egyptian_tomb.png`, `08_mughal_india_palace.png`). This is the tier the audience will actually click.
 
-**EXPLICITLY NOT photorealistic, NOT 3D, NOT realistic-skin.** Photoreal drift is the failure mode: it reads "Final Hours," invites AI-realism artifacts (warped straps, stubble), and is wrong for the register. The style suffix must steer DECISIVELY flat-cel and negative the realism.
+**Semi-realistic in FIDELITY, bright/funky in REGISTER.** The look is REAL (real faces, real depth, rich backgrounds) but the register is bright, funky, fun, choppy, dynamic, high-key, vibrant, energetic, lots of light. **Explicitly ANTI-dark, ANTI-candlelight, ANTI-Victorian, ANTI-painterly, ANTI-moody-cinematic.** Register words like "painterly / atmospheric / cinematic color grade / soft shading" leak the Final-Hours dread register in through the back door — they drag the whole channel moody, INCLUDING facial expression (a moody-lit Skeptic reads as sullen/pouty, not wry). Keep the fidelity words, ban the register words.
 
-**Backgrounds are a first-class element** — half the appeal (kid-confirmed twice). Rich, warm, detailed, inviting. Never bare. The crew always stands somewhere worth visiting.
+**Backgrounds are a first-class element** — half the appeal. Rich, warm, detailed, inviting, bright. Never bare. The crew always stands somewhere worth visiting.
 
-**channel.json style_suffix (current, proven):**
-> "clean flat 2D cel-shaded illustration, confident dark linework, simplified flat color planes, smooth animated-feature style, appealing stylized characters, rich illustrated background, warm lighting, vibrant color, NOT photorealistic, NOT 3d render, NOT realistic skin texture, bright and inviting, no text, no letters, 16:9"
+**channel.json style_suffix (CURRENT — bright, ep4+):**
+> "semi-realistic modern animated-feature illustration, appealing realistic detailed faces, rich detailed illustrated backgrounds, bright high-key lighting, vibrant saturated color, crisp clean and dynamic, lots of light and energy, polished animated-feature quality, high detail, inviting and fun, no text, no letters, 16:9"
+
+**⚰ TOMBSTONE — the flat-cel suffix (v1.0, WRONG, cost a full day 01 Jul):**
+> ~~"clean flat 2D cel-shaded illustration … NOT photorealistic, NOT 3d render, NOT realistic skin texture …"~~ — a NEGATIVE suffix that hard-banned "painterly, semi-realistic, rendered, 3d" and forced a flat 2D webcomic cartoon on every text-to-image beat (the Bambi fawns, the flat skies). Read as a cheap kids' show; would have tanked CTR. The interim over-correction ("semi-realistic cinematic painterly … warm cinematic color grade, atmospheric depth") fixed the cartoon but leaked the FH moody register → the pouty-Skeptic tell. The MERCATOR1 render (01 Jul, Ep3) shipped on that interim painterly suffix — good enough, not re-rendered; ep4+ uses the bright suffix above. **See §6a for the full misdiagnosis chain.**
 
 ---
 
@@ -101,6 +104,13 @@ The channel has **two distinct, deliberate still classes**, and the interplay be
 - **Canon = a short tag** carrying ONLY what must stay constant for glance-level recognition: *"Skeptic: late-20s woman, blonde shoulder-length bob, tan camel jacket over white tee, layered gold necklaces, dry deadpan."* (~20 words, not 120.) Drop the photoreal-coded beauty words entirely — "smooth skin / soft delicate features / warm friendly oval face" are both portrait-bait AND realism-bait.
 - **Prompt ORDER must be: [STYLE] + [SCENE/POSTURE/ACTION — the beat] + [short canon tag].** The beat leads so the model renders the *action*; canon trails as a consistency anchor; the full flat-cel style suffix is present and weighted. NOT canon-first.
 - **The negation lives in the style suffix, not the canon.** "NOT photorealistic, NOT 3d render" must be in every prompt (it's the channel's decisive lever — §4).
+
+**★ CORRECTION (01 Jul 2026 — the misdiagnosis, banked after a full day lost).** The two-fault theory above was HALF WRONG on the primary cause. What actually happened, proven by reading the live code + config:
+- **The `style_suffix` WAS reaching the prompts** (`recreation_pipeline.py` lines 608-609 / 645 build `full_prompt = f"{style_suffix}. {image_prompt}"`). Fault 1 ("suffix not appended") was NOT the live fault.
+- **The real disaster was the CONTENT of the suffix:** it was a flat-cel / webcomic string that HARD-BANNED "painterly, semi-realistic, rendered, 3d" — so it FORCED a cheap 2D kids-cartoon on every text-to-image beat (the Bambi fawns, the flat skies). The model was never failing; the suffix was vetoing its best output.
+- **The canon-tag cut (89w → 18w) was correct but MINOR.** Skeptic beats route through the reference `/edit` path + `skeptic_ref.png` and BYPASS the channel canon entirely; the canon only bites if a `{skeptic}` beat falls to the flux fallback. So Fault 2 ("canon eats the prompt") barely applies on a reference-render channel.
+- **THE FIX:** replace the suffix (flat-cel → semi-realistic bright — see §4). Immediately produced the approved trio-tier look. **Second trap found same day:** the first replacement over-corrected into "painterly / atmospheric / cinematic color grade" and leaked the Final-Hours moody register → sullen/pouty Skeptic faces; corrected to bright/high-key (§4).
+- **THE DURABLE LESSON (graduated to canonical):** the `style_suffix` is the single highest-leverage lever on channel look. **When renders look wrong, READ THE ACTUAL SUFFIX FIRST — before canon, script, or references.** A negative suffix that bans qualities silently vetoes the model; register words (painterly/atmospheric/cinematic) drag the whole channel — including facial expression — toward that register.
 
 **This is what separated Ep1 (good) from Ep3 (bad):** Ep1 was Driver-solo, and Driver's canon is shorter and less photoreal-coded than the Skeptic's lush portrait string — so it drowned the scene less. The Skeptic's beauty-portrait canon is what tipped a latent fault into a visible disaster. The fault was always there; the richer canon exposed it.
 
@@ -168,7 +178,7 @@ The thumbnail is the single most important packaging surface. The system is now 
 
 ## 11. KNOWN ISSUES & THE BUILD QUEUE (channel-relevant)
 
-0. **★★ P0 — THE PROMPT-CONSTRUCTION FIX (highest; blocks all quality; banked 30 Jun from the Ep3 stills regression — full doctrine §6a).** Ep3's 213 stills rendered as near-identical photoreal beauty-portraits, NOT bright flat-cel curiosity-explainer. Two compounding faults, both in how the prompt string is built — the script's VISUAL lines were good. **This must be fixed and re-rendered before Ep3 ships, and before any further QQrew render.**
+0. **✅ RESOLVED 01 Jul 2026 — P0 was a MISDIAGNOSIS; real fix was the style_suffix content (flat-cel → semi-realistic bright, §4/§6a). The canon-tag cut shipped too but was minor. Ep3 (MERCATOR) then rendered trio-tier. Left below for the diagnostic trail.** ★★ P0 — THE PROMPT-CONSTRUCTION FIX (highest; blocks all quality; banked 30 Jun from the Ep3 stills regression — full doctrine §6a).** Ep3's 213 stills rendered as near-identical photoreal beauty-portraits, NOT bright flat-cel curiosity-explainer. Two compounding faults, both in how the prompt string is built — the script's VISUAL lines were good. **This must be fixed and re-rendered before Ep3 ships, and before any further QQrew render.**
 
    **FAULT 1 — the channel `style_suffix` is not reaching the prompt.** Storyboard prompts ended in a 3-word author hint ("animated flat illustration"), not the channel's full suffix. So "NOT photorealistic, NOT 3d render, NOT realistic skin texture" — the channel's decisive lever — was absent, and flux-pro defaulted to photoreal.
    - **Localise (LAPTOP/BOX, read-only — DO NOT guess the file):** find where prompts are assembled for the Synthetic-Mode-A path and whether `style_suffix` is read there:
@@ -209,7 +219,7 @@ The canonical craft that this channel breaks from was the Final-Hours/Sacred-Daw
 2. **Animatable foreground** (§7) → **no animation; stills are composed pictures, not frames to move.**
 3. **Faceless default** (Part III) → **a visible recurring character.**
 4. **Slow-dread register** (Part IV) → **bright, wry, propulsive.**
-5. **Photoreal cinematic style** → **flat-cel illustration.**
+5. **Photoreal cinematic style** → ~~flat-cel illustration~~ **NO LONGER A BREAK (reversed 01 Jul, §4).** QQrew SHARES semi-realistic cinematic FIDELITY with Final Hours; it differs on REGISTER (bright/funky/high-key vs dread/candlelit) and CAST (recurring crew vs faceless). The moat is register + cast, never the art style. Flat-cel was an over-correction that read as a kids' webcomic.
 6. **Ken-Burns floor** → **pure static, one notch leaner.**
 
 KEEP (genuinely universal): header format, channel-matches-folder, numbers-spelled-out, one-VISUAL-per-beat, script-is-king, no-legible-text-in-stills, parse-verify-before-spend, safety_tolerance 5, base_canon auto-merge, positive-prompt-is-the-lever, recognition-is-the-retention-mechanic, nothing-publishes-unreviewed.

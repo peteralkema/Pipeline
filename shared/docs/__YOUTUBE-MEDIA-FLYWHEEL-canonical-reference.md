@@ -293,6 +293,19 @@ The same channel-agnostic machine that ships 8-min Ken-Burns shorts rendered two
 
 ## 8. Authoring craft (before the machine)
 
+### ★ STYLE_SUFFIX IS THE HIGHEST-LEVERAGE LEVER ON LOOK (banked 01 Jul 2026, QQrew — cost a full day)
+
+The channel.json `style_suffix` is prepended to every text-to-image prompt (`recreation_pipeline.py` ~608-609/645: `full_prompt = f"{style_suffix}. {image_prompt}"`). It is the single strongest control over how a channel LOOKS — stronger than the per-beat VISUAL line, because it leads the prompt and the image model weights the front heaviest.
+
+**The debugging rule (this is the graduated lesson):** when a channel's renders look wrong — wrong style, wrong tier, wrong mood — **READ THE ACTUAL `style_suffix` FIRST**, before touching canon, script, or reference images. A full day was lost on QQrew Ep3 patching canon strings, references, palace-anchors and flux-fallbacks while the real culprit was one config line: a flat-cel/webcomic suffix that hard-banned "painterly, semi-realistic, rendered, 3d" and forced a cheap kids-cartoon on every beat.
+
+**Two failure modes of a bad suffix:**
+1. **A NEGATIVE suffix silently vetoes the model.** "NOT photorealistic, NOT rendered, NOT painterly" doesn't just nudge — it bans the model's best output. The model was never failing; the suffix forbade quality.
+2. **Register words leak a whole register — including faces.** Words like "painterly / atmospheric depth / warm cinematic color grade / soft shading" drag the entire channel toward a moody-cinematic register, and a moody-lit character reads as sullen. On QQrew this produced a pouty, bored Skeptic — the opposite of her wry character — purely from suffix wording. **Separate FIDELITY words (semi-realistic, detailed faces, rich backgrounds, depth) from REGISTER words (bright/high-key vs moody/painterly); tune them independently.**
+
+**Corollary — reference-render channels bypass the suffix for character beats.** When `render_mode:"reference"`, `{tag}` beats route through `/edit` + the character PNG and do NOT receive the style_suffix (by design — the PNG carries the look). So the suffix governs the CREW-ABSENT/text-to-image beats; the reference PNG governs the character beats. A channel's look is set in TWO places, not one — check both.
+
+
 **Craft now lives in the per-channel `_ChannelName.md` docs, not here.** `ante-machinam.md` is RETIRED (its Final-Hours craft was absorbed into `_Final-Hours.md §11`; its genuine mechanics are below). This section holds only what is *universal* — the Constitution proper, the script-format contract, the two-mode authoring rule, and the runtime mechanics. Anything about *how a script should land* (register, pacing-for-effect, what to put in a cold open, the retention canon) is CRAFT and lives in the channel doc.
 
 **The Constitution — five machine-enforced MECHANICS (universal; the pipeline halts without them):**
