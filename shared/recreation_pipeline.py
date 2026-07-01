@@ -1353,8 +1353,8 @@ def cmd_stills(args):
                         _entry = _ref_map[_t]
                         for _f in (_entry if isinstance(_entry, list) else [_entry]):
                             _refs.append(str(_ref_chdir / _f))
-                if not _refs and _ref_anchor:
-                    _refs.append(str(_ref_chdir / _ref_anchor))
+                # crew-absent beats intentionally get NO reference: they
+                # render via text-to-image + style_suffix, not the /edit path
             shots.append({
                 "index": i,
                 "narration": b.get("narration", "").strip(),
