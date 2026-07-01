@@ -530,9 +530,72 @@ Rules:
 
 # ── Step 2: generate a still per shot ──────────────────────────────────────────
 
-def generate_still(image_prompt: str, out_path: Path) -> Path:
+
+def _ref_data_uri(path) -> str:
+    """Read a local image file and return it as a base64 data URI for fal image_urls."""
+    import base64 as _b64
+    from pathlib import Path as _P
+    return "data:image/png;base64," + _b64.b64encode(_P(path).read_bytes()).decode("ascii")
+
+
+# Identity + style lock for REFERENCE rendering. Conditioning on the cinematic
+# reference makes the model preserve BOTH the character(s) and the art style, so we
+# deliberately do NOT send the text-path style_suffix or negatives here.
+REFERENCE_PROMPT_LOCK = (
+    "Use the reference image(s) as the exact visual template. Preserve their art "
+    "style precisely -- semi-realistic cinematic illustration, soft warm lighting, "
+    "painterly rendered skin, clean rich illustrated backgrounds. If a reference shows "
+    "a person, keep that EXACT character: same face, same hair, same wardrobe, same "
+    "personality; do not change their identity. Do not change the art style. "
+    "Render this new scene: "
+)
+REFERENCE_PROMPT_TAIL = (
+    " Rich illustrated background, warm cinematic lighting, 16:9 wide composition, "
+    "no on-image text, no letters, no captions."
+)
+
+
+def _generate_still_reference(scene_prompt, out_path, reference_images, config) -> Path:
+    """Render one still via a fal /edit endpoint, conditioned on character reference
+    image(s). Reuses the module download() + on_update(). Endpoint/resolution/aspect
+    come from channel.json (reference_endpoint / reference_resolution / reference_aspect)."""
+    endpoint = config.get("reference_endpoint", "fal-ai/nano-banana-2/edit")
+    resolution = config.get("reference_resolution", "1K")
+    aspect = config.get("reference_aspect", "16:9")
+    lock = config.get("reference_prompt_lock", REFERENCE_PROMPT_LOCK)
+    tail = config.get("reference_prompt_tail", REFERENCE_PROMPT_TAIL)
+    urls = [_ref_data_uri(p) for p in reference_images]
+    prompt = f"{lock}{scene_prompt}{tail}"
+    args = {
+        "prompt": prompt,
+        "image_urls": urls,
+        "num_images": 1,
+        "aspect_ratio": aspect,
+        "output_format": "png",
+        "safety_tolerance": "5",
+        "limit_generations": True,
+    }
+    if "nano-banana-2" in endpoint or "nano-banana-pro" in endpoint:
+        args["resolution"] = resolution
+    result = fal_client.subscribe(
+        endpoint, arguments=args, with_logs=True, on_queue_update=on_update,
+    )
+    images = result.get("images", [])
+    if not images:
+        raise RuntimeError(f"No image returned (reference mode). Result: {result}")
+    download(images[0]["url"], out_path)
+    return out_path
+
+
+def generate_still(image_prompt: str, out_path: Path, reference_images=None) -> Path:
     rb = load_rulebook()
     config = load_channel_config(strict=True, anchor=out_path)
+    # --- REFERENCE render mode (per-channel, non-breaking) -------------------
+    # channel.json sets "render_mode":"reference"; a beat that resolved to one or
+    # more character refs renders via the fal /edit endpoint. Everything else
+    # (no render_mode, or no refs for this beat) falls through to text-to-image.
+    if config.get("render_mode") == "reference" and reference_images:
+        return _generate_still_reference(image_prompt, out_path, reference_images, config)
     from look_resolver import resolve_look
     style_suffix = resolve_look(out_path, config)["style_suffix"]
     people = rb.get("people_directive", "")
@@ -1260,20 +1323,44 @@ def cmd_stills(args):
         if canon:
             print(f"Canon block loaded with {len(canon)} tag(s): {sorted(canon.keys())}")
         # Normalise: ensure sequential indices, required fields, and canon-expansion.
-        _default_motion = (load_channel_config(strict=True, anchor=Path(args.project)).get("default_motion")
+        _cfg_stills = load_channel_config(strict=True, anchor=Path(args.project))
+        _default_motion = (_cfg_stills.get("default_motion")
                            or CHANNEL_DEFAULTS["default_motion"])
+        # REFERENCE render mode: resolve per-beat character reference images from the
+        # RAW {tag} canon references (BEFORE expansion). No-op for other channels.
+        import re as _re_ref
+        _ref_mode = _cfg_stills.get("render_mode") == "reference"
+        _ref_map = _cfg_stills.get("reference_map", {}) if _ref_mode else {}
+        _ref_anchor = _cfg_stills.get("reference_style_anchor") if _ref_mode else None
+        _ref_chdir = Path(_cfg_stills.get("_channel_dir", "."))
+        if _ref_mode:
+            print(f"Reference render mode ON. Character refs: {sorted(_ref_map.keys())}"
+                  + (f"  style-anchor: {_ref_anchor}" if _ref_anchor else ""))
         shots = []
         for i, b in enumerate(beats, 1):
-            image_prompt = _expand_canon(b["image_prompt"].strip(), canon)
+            _raw_ip = b["image_prompt"].strip()
+            image_prompt = _expand_canon(_raw_ip, canon)
             motion_prompt = _expand_canon(
                 (b.get("motion_prompt") or _default_motion).strip(),
                 canon,
             )
+            _refs = []
+            if _ref_mode:
+                _seen = set()
+                for _t in _re_ref.findall(r"\{([a-zA-Z_][a-zA-Z0-9_]*)\}", _raw_ip):
+                    if _t in _ref_map and _t not in _seen:
+                        _seen.add(_t)
+                        _entry = _ref_map[_t]
+                        for _f in (_entry if isinstance(_entry, list) else [_entry]):
+                            _refs.append(str(_ref_chdir / _f))
+                if not _refs and _ref_anchor:
+                    _refs.append(str(_ref_chdir / _ref_anchor))
             shots.append({
                 "index": i,
                 "narration": b.get("narration", "").strip(),
                 "image_prompt": image_prompt,
                 "motion_prompt": motion_prompt,
+                "_reference_images": _refs,
             })
         # Save the concatenated narration as the script (used later for metadata).
         p["script"].write_text(" ".join(s["narration"] for s in shots))
@@ -1297,8 +1384,12 @@ def cmd_stills(args):
         if out.exists() and not force:  # resume-safe: skip stills already on disk
             print(f"  [{s['index']}/{len(shots)}] already done, skipping")
             continue
-        print(f"  [{s['index']}/{len(shots)}] {s['image_prompt'][:60]}...")
-        generate_still(s["image_prompt"], out)
+        _rfs = s.get("_reference_images") or None
+        if _rfs:
+            print(f"  [{s['index']}/{len(shots)}] [ref:{len(_rfs)}] {s['image_prompt'][:52]}...")
+        else:
+            print(f"  [{s['index']}/{len(shots)}] {s['image_prompt'][:60]}...")
+        generate_still(s["image_prompt"], out, reference_images=_rfs)
     print(f"\nOK Stills done -> {p['stills']}")
     print("\nNEXT: open the stills folder and review every frame.")
     print("Fix a bad one with:  restill --project <dir> --shot N")
@@ -1322,7 +1413,7 @@ def cmd_restill(args):
         p["storyboard"].write_text(json.dumps(shots, indent=2))
 
     print(f"Regenerating shot {args.shot}...")
-    generate_still(prompt, out)
+    generate_still(prompt, out, reference_images=(shot.get("_reference_images") or None))
     print(f"OK -> {out}")
 
 
