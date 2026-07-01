@@ -651,7 +651,15 @@ def generate_still(image_prompt: str, out_path: Path, reference_images=None) -> 
     # IMAGE_MODEL default ("flux") for cinematic channels that omit it.
     model = config.get("image_model", IMAGE_MODEL)
     endpoint = IMAGE_ENDPOINTS[model]
-    args = {"prompt": full_prompt, "image_size": ASPECT}
+    # Size param differs by model: flux honors the image_size {w,h} dict; NB2
+    # text-to-image (nano_banana) / seedream ignore the dict and default to
+    # 1024x1024 square -- they need the aspect_ratio STRING (banked 01 Jul,
+    # the all-NB2 standardisation). Match the /edit path's "16:9".
+    if model == "flux":
+        args = {"prompt": full_prompt, "image_size": ASPECT}
+    else:
+        _asp = config.get("reference_aspect", "16:9")
+        args = {"prompt": full_prompt, "aspect_ratio": _asp}
     if negative:
         # Most fal image models accept negative_prompt; harmless if ignored.
         args["negative_prompt"] = negative
