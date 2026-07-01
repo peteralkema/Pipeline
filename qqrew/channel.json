@@ -29,7 +29,7 @@
     "title_start_size": 150,
     "subtitle_area_pct": 0.52,
     "subtitle_max_height_pct": 0.16,
-    "subtitle_start_size": 64,
+    "subtitle_start_size": 115,
     "stroke_width": 8,
     "shadow": true,
     "margin_x": 40,
@@ -62,5 +62,13 @@
       ]
     }
   },
-  "image_model": "nano_banana"
+  "image_model": "nano_banana",
+  "render_mode": "reference",
+  "reference_endpoint": "fal-ai/nano-banana-2/edit",
+  "reference_resolution": "1K",
+  "reference_aspect": "16:9",
+  "reference_map": {
+    "skeptic": "characters/skeptic_ref.png",
+    "driver": "characters/driver_ref.png"
+  }
 }
