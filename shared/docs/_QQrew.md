@@ -1,7 +1,7 @@
 # _QQrew.md — CHANNEL DOCTRINE (@Q-Qrew)
 *The comprehensive, durable craft + config + strategy brief for @Q-Qrew. Single-underscore = channel doctrine (load per channel); the double-underscore canonical reference is the system. Where this doc and any Final-Hours-derived craft disagree, **THIS DOC WINS for this channel** — see §12 the break-list. (NB: `ante-machinam.md` was RETIRED 30 June — that FH craft now lives in `_Final-Hours.md §11`; the genuinely-universal mechanics are in canonical §8. This channel reads the canonical mechanics and ignores FH craft by design.)*
 
-*v1.0 — POST-RENDER, POST-SHIP. Supersedes `_Crew.md` (which was v0.1 pre-render design). Every section below is now proven by the soap pilot (238-beat full episode, shipped 29 Jun 2026), not speculative. Bump when a render banks a new lesson.*
+*v1.1 — STRATEGY DOCTRINE ADDED 02 Jul 2026. §3a (THE DEMAND DOCTRINE & OUTLIER PLAYBOOK) is now the topic-selection engine and the strategic README — read it first each session. v1.0 was POST-RENDER, POST-SHIP: proven by the soap pilot (238-beat full episode, shipped 29 Jun 2026), not speculative. Bump when a render banks a new craft lesson OR a session banks a new strategy lesson.*
 
 ---
 
@@ -30,7 +30,88 @@ Born 29 Jun 2026 from frustration with **Final Hours** (a channel fighting distr
 - **The lane:** bright fast-cut curiosity-explainers (the Ink/Mack rhythm — 1-3s cuts, second-person hook, "stranger than you think" payload). A served, evergreen lane with proven demand for the FORMAT (not yet proven for THIS channel — that's the open bet).
 - **The differentiation:** QQrew sits **one production tier above** the flat-stick-figure incumbents. The polish IS the moat — produced flat cel-shaded illustration with rich backgrounds and a recurring named cast, vs. the incumbents' disposable stick figures and faceless VO. Same rhythm, higher craft, a face you recognise.
 - **The anti-flood logic:** a topic-lane competitor can clone "history of X" in a weekend. They cannot clone a recurring crew with a register and a visual signature that compounds recognition over a catalogue. The cast is the durable IP (see §7, and `crew_character_bible.md`).
-- **Why evergreen-not-spike:** the edge is best-execution in served, evergreen lanes — NOT spike-chasing. NexLev / Trends are lagging/detail signals, not topic-pickers. The idea-gate (§5) is the topic filter, not trend data.
+- **Why validated-evergreen, not spike-chasing OR blind-evergreen (refined 02 Jul — see §3a):** the edge is best-execution in served, evergreen lanes — but WHICH evergreen sub-lane is now chosen by **demand-validation**, not gut. NexLev is not a spike-picker and not a lagging detail-only signal; it is the **demand-validator + incumbent-weakness finder** (§3a.1). Evergreen topic + a proven-hot formula + weak incumbent execution = the target. The idea-gate (§5) still gates CRAFT-fit; §3a gates DEMAND. Both must pass.
+
+---
+
+## ★ 3a. THE DEMAND DOCTRINE & THE OUTLIER PLAYBOOK (banked 02 Jul 2026 — the topic-selection engine)
+
+*This is the strategic core of the channel: the repeatable method for pointing a go-anywhere format at a topic that can actually win, and the reverse-engineered formula proven by two independent outliers. Read this every session before choosing a topic. §1-3 say what the channel IS; §3a says what to POINT it at and WHY that wins.*
+
+**The one-line thesis:** the incumbents prove the DEMAND; QQrew supplies the EXECUTION they can't. Don't hunt empty rooms — hunt proven demand with weak incumbents, and out-produce them.
+
+### 3a.1 — THE DEMAND-VALIDATION METHOD (the four gates a topic must clear BEFORE it earns a slot)
+
+The sweep (NexLev): browse the **views-sorted small-channel viral collection** — `search_viral_videos_small_channels` with `maxChannelSubCount` ~100k, `minViews` ~150k, recent 90-day window. **IGNORE the outlier-score-sorted feed** — it's inflated to noise by zero-sub music/movie/sports/AI-slop; the score is a ratio that explodes on tiny denominators. Views-from-small-channels is the clean demand signal.
+
+A candidate topic ships ONLY if it clears all four gates:
+
+1. **Proven demand.** A sub-100k channel hit six-figure views on it inside 90 days. Not "seems interesting" — a real recent number.
+2. **Cross-validated.** The SAME pattern broke out on **≥2 independent channels**. One hit is a fluke; two independent hits in the same window is a vein. (Dogs AND Animals, two channels, June 2026 → vein.)
+3. **Clean keyword neighborhood.** Search the topic's keywords — if the space is polluted by unrelated content (ASMR, kids' games, product tips), the algorithm can't tell who to show a QQrew video on it to, and the signal is confused. A clean neighborhood is part of the demand.
+4. **Weak incumbent execution.** The proven outliers are one-hit wonders with mediocre catalogues (§3a.4). Their execution gap IS the opening. A lane already owned by a high-craft operator is NOT the target; a lane with proven demand and disposable-quality incumbents is the bullseye.
+
+**⚰ TOMBSTONE — the teeth miss (02 Jul):** "toothache survival-history" was recommended on gut logic (universal, visceral) and would have burned a slot. It FAILED the gates: zero hits in the viral set for "teeth"/"tooth," and the "dentist" neighborhood was pure pollution (ASMR roleplay, Roblox dentist games, whitening tips). **Durable rule: validate the specific topic against the four gates BEFORE committing a slot. Never extrapolate from a working sibling ("soap worked → teeth will") without running the check. The gut generates the candidate; the gates decide.**
+
+### 3a.2 — THE WINNING FORMULA (the death-stakes counterfactual — proven twice)
+
+**Title skeleton:** *"Why [Ancient/Early] Humans Would've Died Without [X]?"* — and more generally, the **mortality-counterfactual**: a familiar thing, reframed as the reason you're not dead.
+
+**The lever is DEATH STAKES, not the topic.** Proven WITHIN a single channel, same subject, ~150× swing:
+- Goshu: "Why Early Humans Would've **Died Without** Animals" = **343K.** Same subject softened: "How Animals **Kept** Ancient Humans **Alive**" = 2.3K. "Why Did Animals Start Following Humans" = 743.
+- Primal Glitch: "Why Ancient Humans Would've **Died Without** Dogs" = **241K.** Softer: "Why Wolves **Chose** Humans" = 77K.
+The title must **threaten death**, not describe a relationship. "Would've died without" >> "how X helped."
+
+**The 3-leg confluence (all three legs must max, or it dies):**
+1. **Universally familiar subject** — everyone knows dogs/fire/salt. (Drop this leg: "horses" is less universal → 862 views.)
+2. **Death stakes** — the mortality counterfactual (the lever above).
+3. **Counterfactual surprise** — "you never realized this was keeping you alive."
+
+**Runtime: 8-10 minutes. Padding is death.** Both outliers' hits were tight (8:49, 9:50). Both channels then drifted to 13-24 min on their flops and retention collapsed. This is independent confirmation of §5's length doctrine — the fast-cut tight cut is not just style, it's the amplification precondition.
+
+### 3a.3 — THE TWO OUTLIERS (the proof — the templates)
+
+**Goshu** (@Gosshuu) — ~3.6k subs, born 29 Apr 2026, 16 videos, avg ~29.5k views.
+- HIT: "Why Early Humans Would've Died Without Animals?" — **343K** (9:50). #2: "Why Ancient Humans Developed Different Blood Types?" — 80K. Everything else: 2-7K.
+
+**The Primal Glitch** (@theprimalglitch) — ~3k subs, 11 videos, evolutionary-mismatch niche.
+- HIT: "Why Ancient Humans Would've Died Without Dogs?" — **241K** (8:49). #2/#3: "Why Wolves Chose Ancient Humans" 77K / "How Cats Domesticated Ancient Humans" 72K. Everything else: 2-16K.
+
+Two independent creators, same window, near-identical title, both broke out. **Demand: cross-validated. Not a fluke.**
+
+### 3a.4 — WHY THEY WERE ONE-OFFS (the mechanism — the most important lesson in this doc)
+
+Both channels have ONE monster and a long tail of 2-7K mediocrity. Neither can reproduce their own hit. **This is not a warning against the vein — it is the entire opportunity.** The topic pulls; their structure can't convert it. Why:
+
+1. **The algorithm judges per-VIDEO, not per-channel — until you give it a retained audience.** A breakout clears the browse/suggested test on its own CTR+early-retention, gets pushed wider, snowballs. But that decision is made FRESH for the next upload. With no retained audience there is no floor — every video re-enters the same lottery from near-zero.
+2. **They got strangers and banked none of them.** 340K views on a 3k-sub channel = **sub-1% conversion.** The wave brought hundreds of thousands and almost none subscribed or returned. They monetized the traffic and let the actual asset — a returning audience that reliably clicks video 5 and sends the early signal — evaporate.
+3. **The hit was a fragile 3-way confluence in a tight cut.** Drop one leg and it collapses (horses less universal → 862; 24-min runtime → retention dies → 2K). The formula only fires when all three legs (§3a.2) max AND runtime stays tight. Neither channel could pick topics that hit all three reliably.
+4. **Topic spray broke the audience-match.** They sprayed unrelated topics (cancer, privacy, blood types, violence). That tells the algorithm "I don't know who this channel is for," which breaks the cluster-match that amplification depends on.
+5. **Variance is real.** Fire enough near-identical shots and one jackpots regardless of skill. Any single video is partly a coin toss. **The answer to variance is VOLUME ON A COHERENT CLUSTER — not betting the channel on one video reproducing 340K.**
+
+**Honest limit on this diagnosis:** it's inferred from catalogue SHAPE — view distribution, sub counts, runtime drift, topic spray. Their actual retention curves, CTR, and traffic sources are only visible for OUR OWN channels (`get_my_audience_retention` etc.). The pattern strongly supports the reading, but it's outside-in diagnosis, not their dashboard.
+
+### 3a.5 — THE APPLIED RECIPE (how QQrew converts what they couldn't)
+
+Their failure was **structural, not creative** — and it maps exactly onto the three things this channel already builds:
+
+- **RETENTION → the amplification precondition.** They padded to 20 min; that kills the push before it starts. QQrew's fast-cut + Skeptic holds attention → clears the browse test → gets amplified. (§5 length doctrine + §5 narration architecture.)
+- **CONVERSION + RETURN → the floor they never built.** They had no character, no reason to subscribe. **The recurring cast IS the reason someone comes back for video 5** — which is how you build a floor and stop re-entering the lottery. (§7 recognition-is-retention. This is the moat's business function, stated plainly.)
+- **COHERENCE + VOLUME → more-frequent hits, not isolated jackpots.** A tight cluster keeps the algorithm confidently matching → the format's at-bats convert more often. Answer to variance = volume on a coherent cluster (§3a.4 #5).
+
+**The Skeptic is the unfair advantage.** Neither incumbent has a character. Open cold on the Skeptic scoffing *"we'd have been fine without [fire]"* and spend the episode dismantling him — a retention spine AND a brand signature they **structurally cannot copy** in a weekend clone. Wire the mortality-counterfactual THROUGH the Skeptic: his doubt is the "you'd assume X — but no" pivot (§5).
+
+**COHERENCE-FIRST, BREADTH-LATER (this refines §5/§13 "spread across the scope").** At the cold-start phase (first ~5-8 uploads) the algorithm is learning who the channel is for; a coherent cluster trains a findable audience, a scattered set trains nobody (this is literally mechanism #4 above — topic spray is what SANK the incumbents). So: **lock the proven hook and stay in-cluster until the audience is trained, THEN widen the aperture (video ~8+).** The §1 breadth thesis ("the topic is the infinite variable") and §3 anti-flood breadth remain the LONG-game moat — breadth is earned after coherence, not deployed during cold-start. Do not read §13's "not another history piece / go future or unreachable" as license to scatter now; that was pre-this-analysis. Sequence: **coherence buys the audience, then breadth spends it.**
+
+### 3a.6 — THE REVERSE-ENGINEERING DRILL (run on any outlier before cloning its lane)
+
+1. Pull the outlier channel's full catalogue (`youtube_channel_videos`, sort popular).
+2. Find the **within-channel lever**: compare the hit against the channel's OWN misses on the same subject — the delta (here: death-stakes framing, tight runtime) is the transferable lesson, isolated from confounds.
+3. Confirm **one-hit-wonder shape** (§3a.4) — mediocre tail = execution gap = your opening.
+4. Read runtime drift and topic spray as the failure fingerprints.
+5. Only THEN clone the FORMULA (not the exact topic), extending it to a subject that still maxes the 3 legs while differentiating from the incumbent (fire/salt vs their dogs/animals).
+
+**Current application — video 4:** *"Why Early Humans Would've Died Without Fire"* (top pick — apex universal dependency, non-animal so it dodges both incumbents, fire→death is the most literal mortality stake available). Alt: *"Why Your Ancestors Would've Died Without Salt"* (the surprise swing). **Honest caveat: both proven hits are ANIMALS — fire/salt extend the FORMULA to non-animal dependencies. High confidence on the frame, one notch less on the subject than another animal would be; taken deliberately for differentiation.**
 
 ---
 
@@ -86,7 +167,7 @@ Fast-cut and long-form are NOT in tension. **You write MANY fast beats, not FEW.
 5. Ring-close back to "you, right now."
 6. ONE thesis, bright-not-morbid, second-person held throughout, no sprawl.
 
-**The idea-gate (score before authoring):** universal behaviour everyone shares + an invertible buried assumption + a present-day reframe + bright-not-morbid. Spread topics across the scope (past / future / unreachable) so the algorithm learns the channel goes anywhere.
+**The idea-gate (score before authoring — this is the CRAFT gate; §3a.1 is the DEMAND gate, run both):** universal behaviour everyone shares + an invertible buried assumption + a present-day reframe + bright-not-morbid. **On "spread topics across the scope":** this is the LONG-game breadth moat, NOT a cold-start tactic — see §3a.5 COHERENCE-FIRST, BREADTH-LATER. Until the audience is trained (~video 8), stay in the proven cluster; scatter is what sank the incumbents (§3a.4 #4). Then widen so the algorithm learns the channel goes anywhere.
 
 **Render-safety at authoring stage:** human-distress verbs (dragged, restrained, screaming) risk classifier rejection. Render dark material via ENVIRONMENT/objects — empty beds, a folded blanket, a single candle, a covered table with no people. (soap's Semmelweis deaths rendered entirely environmentally — under the classifier, and avoids the uncanny-valley face problem.) Assess at authoring, not at render time.
 
@@ -247,4 +328,4 @@ KEEP (genuinely universal): header format, channel-matches-folder, numbers-spell
 
 ## 13. STATUS
 
-**SHIPPED 29 Jun 2026** — soap pilot live (static 7:22), @Q-Qrew branded + claimed. Channel #12 placed as a bet. **Next:** read 48h CTR+AVD → crank or park. Then P1 (audio) is the headline build before episode #2. Episode #2 should: deploy more wide-angle establishing shots (§6), keep the static default, reuse the locked thumbnail config, and spread the topic across the scope (not another history piece — go future or unreachable to teach the algorithm the channel's breadth).
+**SHIPPED 29 Jun 2026** — soap pilot live (static 7:22), @Q-Qrew branded + claimed. Channel #12 placed as a bet. **Next:** read 48h CTR+AVD → crank or park. Then P1 (audio) is the headline build before episode #2. Episode #2 should: deploy more wide-angle establishing shots (§6), keep the static default, reuse the locked thumbnail config, and ~~spread the topic across the scope~~ **STAY IN THE PROVEN CLUSTER until the audience is trained (coherence-first; superseded by §3a.5 — breadth is the video-8+ move, not the cold-start move).** *(NB: this STATUS block is v1.0/pre-ep2 and now stale — ep2 Ice Age, ep3 Greenland/Mercator shipped; ep4 = the death-stakes-counterfactual per §3a.6. Topic strategy now lives in §3a.)*
