@@ -62,7 +62,6 @@
       ]
     }
   },
-  "image_model": "nano_banana",
   "render_mode": "reference",
   "reference_endpoint": "fal-ai/nano-banana-2/edit",
   "reference_resolution": "1K",
