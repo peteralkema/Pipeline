@@ -950,6 +950,10 @@ function updateGatebar(state) {
         '<input id="klingn" type="number" min="0" step="1" value="40" style="width:80px;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:6px 8px;">' +
         '<span style="color:#8a8a99;margin-left:8px;">beats — the rest render free (Ken Burns zoom). <span id="klingmsg" style="color:#14a3b8;"></span></span>' +
       '</div>' +
+      '<div class="row" style="margin:0 0 8px;align-items:center;">' +
+        '<button class="secondary" id="allstaticbtn">All static stills (no motion)</button>' +
+        '<span id="staticmsg" style="color:#8a8a99;margin-left:8px;"></span>' +
+      '</div>' +
       '<div class="row">' +
         '<button onclick="gate(' + _SQ + 'go' + _SQ + ')">Generate Clips (approve stills)</button>' +
         '<button class="secondary" onclick="gate(' + _SQ + 'skip' + _SQ + ')">Stop here (keep stills, no clips)</button>' +
@@ -973,6 +977,19 @@ function updateGatebar(state) {
             body: JSON.stringify({channel: ch, project: pr, kling_count: v})});
           if (msg) msg.textContent = (rr && rr.ok) ? ("saved N=" + rr.kling_count) : "save failed";
         } catch (e) { if (msg) msg.textContent = "save failed"; }
+      });
+      const sb = document.getElementById("allstaticbtn");
+      if (sb) sb.addEventListener("click", async function() {
+        inp.value = 0;
+        const smsg = document.getElementById("staticmsg");
+        const kmsg = document.getElementById("klingmsg");
+        try {
+          const rr = await api("/api/render_policy", {method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({channel: ch, project: pr, kling_count: 0, static: true})});
+          if (smsg) smsg.textContent = (rr && rr.ok) ? "set: all static, no Kling" : "save failed";
+          if (kmsg) kmsg.textContent = "saved N=0";
+        } catch (e) { if (smsg) smsg.textContent = "save failed"; }
       });
     })();
   } else {
@@ -1805,15 +1822,21 @@ class Handler(BaseHTTPRequestHandler):
         paths = resolve_paths(ch, pr, _REPO)
         rp = paths["project"] / "render_policy.json"
         n = 40
+        static = False
         if rp.is_file():
             try:
-                n = int(_json.loads(rp.read_text()).get("kling_count", 40))
+                _rpj = _json.loads(rp.read_text())
+                n = int(_rpj.get("kling_count", 40))
+                static = bool(_rpj.get("static", False))
             except Exception:
-                n = 40
-        self._json(200, {"ok": True, "kling_count": n, "default": 40}); return
+                n = 40; static = False
+        self._json(200, {"ok": True, "kling_count": n, "static": static, "default": 40}); return
 
     def _handle_render_policy_post(self, body):
-        """Write TIERED RENDER N to render_policy.json at the project root (next to durations.json)."""
+        """Write TIERED RENDER policy to render_policy.json at the project root.
+        MERGES with any existing file: kling_count and static are each updated
+        only when present in the body, so a plain N-change never clobbers static
+        and setting static never clobbers N. (PATCH_STATIC_BUTTON_APPLIED)"""
         import json as _json
         try:
             kc = max(0, int(body.get("kling_count")))
@@ -1824,11 +1847,22 @@ class Handler(BaseHTTPRequestHandler):
             self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
         paths = resolve_paths(ch, pr, _REPO)
         rp = paths["project"] / "render_policy.json"
+        existing = {}
+        if rp.is_file():
+            try:
+                existing = _json.loads(rp.read_text()) or {}
+            except Exception:
+                existing = {}
+        policy = dict(existing)
+        policy["kling_count"] = kc
+        if "static" in (body or {}):
+            policy["static"] = bool(body.get("static"))
         try:
-            rp.write_text(_json.dumps({"kling_count": kc}, indent=2))
+            rp.write_text(_json.dumps(policy, indent=2))
         except Exception as e:
             self._json(500, {"ok": False, "error": f"write failed: {e}"}); return
-        self._json(200, {"ok": True, "kling_count": kc}); return
+        self._json(200, {"ok": True, "kling_count": kc,
+                         "static": bool(policy.get("static", False))}); return
 
     def _handle_reset(self):
         """Clear the active job record (+log) so the page returns to idle base.
