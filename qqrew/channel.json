@@ -70,5 +70,6 @@
     "skeptic": "characters/skeptic_ref.png",
     "driver": "characters/driver_ref.png"
   },
-  "image_model": "nano_banana"
+  "image_model": "nano_banana",
+  "ken_burns": false
 }

@@ -732,13 +732,23 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) ->
     fps = 24
     total_frames = max(1, int(round(dur * fps)))
     W, H = ASPECT["width"], ASPECT["height"]
+    # Per-channel ken_burns flag (banked 01 Jul): true-static channels (QQrew)
+    # set "ken_burns": false -> zoompan z=1 (constant, no zoom) = a motionless
+    # held frame, same clips/shot_NNN.mp4 artifact, assembly unchanged. Reads the
+    # same way _channel_aspect does (walks up from CWD, cached). Defaults True so
+    # every cinematic channel keeps the slow zoom-in.
+    try:
+        _kb = load_channel_config(strict=False).get("ken_burns", True)
+    except Exception:
+        _kb = True
+    _z = "min(zoom+0.0024,1.50)" if _kb else "1"
     # Upscale to 4x the target first (smoothness), cover-crop to the 4x frame, then a
-    # slow zoom-in (cap 1.25x), output at channel aspect.
+    # slow zoom-in (cap 1.25x) OR a static hold (z=1), output at channel aspect.
     up_w, up_h = W * 4, H * 4
     vf = (
         f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
         f"crop={up_w}:{up_h},"
-        f"zoompan=z='min(zoom+0.0024,1.50)':d={total_frames}:"
+        f"zoompan=z='{_z}':d={total_frames}:"
         f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
         f"s={W}x{H}:fps={fps},setsar=1"
     )
