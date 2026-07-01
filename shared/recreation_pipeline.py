@@ -577,13 +577,56 @@ def _generate_still_reference(scene_prompt, out_path, reference_images, config) 
     }
     if "nano-banana-2" in endpoint or "nano-banana-pro" in endpoint:
         args["resolution"] = resolution
-    result = fal_client.subscribe(
-        endpoint, arguments=args, with_logs=True, on_queue_update=on_update,
-    )
-    images = result.get("images", [])
+    try:
+        result = fal_client.subscribe(
+            endpoint, arguments=args, with_logs=True, on_queue_update=on_update,
+        )
+        images = result.get("images", [])
+    except Exception as _e:  # NB2 content refusal / no_media_generated / transport
+        print(f"  reference refusal on {out_path.name} ({type(_e).__name__}); "
+              f"falling back to flux.")
+        return _flux_fallback_still(scene_prompt, out_path, config)
     if not images:
-        raise RuntimeError(f"No image returned (reference mode). Result: {result}")
+        print(f"  reference returned no media on {out_path.name}; falling back to flux.")
+        return _flux_fallback_still(scene_prompt, out_path, config)
     download(images[0]["url"], out_path)
+    return out_path
+
+
+def _flux_fallback_still(image_prompt, out_path, config) -> Path:
+    """# STILLS-FLUX-FALLBACK applied
+    Last-resort still render through flux. flux-pro/v1.1 with safety_tolerance='5'
+    either renders the beat or silently downshifts to a safe (softened) version
+    that clears its filter -- unlike nano_banana, which hard-refuses. Used when a
+    reference /edit or nano_banana still comes back refused / no-media. Returns the
+    written path, or None if flux ALSO refuses (rare -> manual reworded restill).
+    """
+    from look_resolver import resolve_look
+    rb = load_rulebook()
+    style_suffix = resolve_look(out_path, config)["style_suffix"]
+    people = rb.get("people_directive", "")
+    full_prompt = (f"{style_suffix}. {image_prompt}, {people}" if people
+                   else f"{style_suffix}. {image_prompt}")
+    negative = ", ".join(rb["negative"])
+    endpoint = IMAGE_ENDPOINTS["flux"]
+    args = {"prompt": full_prompt, "image_size": ASPECT, "safety_tolerance": "5"}
+    if negative:
+        args["negative_prompt"] = negative
+    try:
+        result = fal_client.subscribe(
+            endpoint, arguments=args, with_logs=True, on_queue_update=on_update,
+        )
+        images = result.get("images", [])
+    except Exception as _e:
+        print(f"  SKIP (flux fallback also refused): {out_path.name} -- "
+              f"{type(_e).__name__}. restill with a reworded prompt.")
+        return None
+    if not images:
+        print(f"  SKIP (flux fallback, no media): {out_path.name}. "
+              f"restill with a reworded prompt.")
+        return None
+    download(images[0]["url"], out_path)
+    print(f"  flux-fallback rendered: {out_path.name} (softened; eyeball this beat)")
     return out_path
 
 
@@ -616,15 +659,28 @@ def generate_still(image_prompt: str, out_path: Path, reference_images=None) -> 
         # setting that stops the silent rejects. Gated to flux — seedream/
         # nano_banana do not take this arg and should not be handed it.
         args["safety_tolerance"] = "5"
-    result = fal_client.subscribe(
-        endpoint,
-        arguments=args,
-        with_logs=True,
-        on_queue_update=on_update,
-    )
-    images = result.get("images", [])
+    try:
+        result = fal_client.subscribe(
+            endpoint,
+            arguments=args,
+            with_logs=True,
+            on_queue_update=on_update,
+        )
+        images = result.get("images", [])
+    except Exception as _e:  # content refusal / no_media_generated / transport
+        if model != "flux":
+            print(f"  {model} refusal on {out_path.name} ({type(_e).__name__}); "
+                  f"falling back to flux.")
+            return _flux_fallback_still(image_prompt, out_path, config)
+        print(f"  SKIP (flux refused): {out_path.name} -- {type(_e).__name__}. "
+              f"restill with a reworded prompt.")
+        return None
     if not images:
-        raise RuntimeError(f"No image returned for shot. Result: {result}")
+        if model != "flux":
+            print(f"  {model} returned no media on {out_path.name}; falling back to flux.")
+            return _flux_fallback_still(image_prompt, out_path, config)
+        print(f"  SKIP (flux no media): {out_path.name}. restill with a reworded prompt.")
+        return None
     download(images[0]["url"], out_path)
     return out_path
 
