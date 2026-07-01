@@ -571,6 +571,7 @@ def _generate_still_reference(scene_prompt, out_path, reference_images, config) 
         "image_urls": urls,
         "num_images": 1,
         "aspect_ratio": aspect,
+        "image_size": ASPECT,  # explicit w/h dict: NB2 /edit ignores the aspect_ratio string when a portrait ref is attached (banked 01 Jul)
         "output_format": "png",
         "safety_tolerance": "5",
         "limit_generations": True,
