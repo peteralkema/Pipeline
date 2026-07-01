@@ -242,7 +242,13 @@ _VISION_MODEL = "claude-sonnet-4-6"
 _AIFIX_SYSTEM_PROMPT = (
     "You are a strict art director reviewing an AI-generated still against its "
     "intended prompt and brand rules (faceless where required, no spell-breakers, "
-    "period-accurate, drift-safe). Respond with STRICT JSON only, no preamble, no "
+    "period-accurate, drift-safe). Look FIRST for generative defects: warped or "
+    "extra hands, extra or missing fingers, extra or fused limbs, melted or "
+    "asymmetric faces, duplicated or merged objects, floating body parts, and "
+    "garbled text. When you find one, verdict is \"fix\" and the corrected_prompt "
+    "must restate the full intended scene AND explicitly demand correct structure "
+    "(e.g. 'exactly two hands, five fingers each, natural anatomy, no extra limbs, "
+    "no duplicated objects'). Respond with STRICT JSON only, no preamble, no "
     "markdown:\n"
     '{"verdict": "fine" | "fix", "diagnosis": "<one short sentence naming what is '
     'wrong, or why it is fine>", "corrected_prompt": "<the full corrected prompt '
@@ -2026,17 +2032,22 @@ class Handler(BaseHTTPRequestHandler):
                          "diagnosis": diagnosis})
 
     def _handle_nbfix(self, body):
-        """Re-render one beat through the engine's CHANNEL-AWARE generate_still
-        (recreation_pipeline), reading the shot's _reference_images from
-        storyboard.json -- the same path cmd_stills/cmd_restill use. On QQrew this
-        renders {skeptic} beats via NB2 /edit (reference) and crew-absent beats via
-        NB2 text-to-image; flux only on refusal. (PATCH_NBFIX_BUTTON_APPLIED)"""
+        """Nano-Banana Fix: Claude Sonnet vision INSPECTS the still and names the
+        flaw (warped/extra hands, extra fingers, melted or duplicated features, ...),
+        then re-renders the CORRECTED prompt through the engine's channel-aware
+        generate_still with the shot's _reference_images from storyboard.json -- NB2
+        /edit (reference) for {skeptic} beats on QQrew, NB2 text for wides, flux only
+        on refusal. Not a blind re-roll: the diagnosis targets the warp.
+        (PATCH_NBFIX_BUTTON_APPLIED) (PATCH_NBFIX_VISION_APPLIED)"""
         if not _ANIMATE_OK:
             self._json(503, {"ok": False,
                 "error": f"nano-banana fix unavailable: {_ANIMATE_IMPORT_ERR}"}); return
         if not _RESTILL_OK:
             self._json(503, {"ok": False,
                 "error": f"restill helpers unavailable: {_RESTILL_IMPORT_ERR}"}); return
+        if _ANTHROPIC_CLIENT is None:
+            self._json(503, {"ok": False, "error":
+                "nano-banana fix needs vision: anthropic not installed or ANTHROPIC_API_KEY not set"}); return
         shot_idx = body.get("shot")
         if not isinstance(shot_idx, int):
             self._json(400, {"ok": False, "error": "shot must be an integer"}); return
@@ -2048,23 +2059,58 @@ class Handler(BaseHTTPRequestHandler):
         if shot_idx not in beats_by_idx:
             self._json(404, {"ok": False, "error": f"shot {shot_idx} not in beats"}); return
         beat = beats_by_idx[shot_idx]
-        prompt = (beat.get("image_prompt") or "").strip()
-        if not prompt:
-            self._json(404, {"ok": False, "error": f"shot {shot_idx} has no image_prompt"}); return
-        refs = beat.get("_reference_images") or None
         out = ctx["stills_dir"] / f"shot_{shot_idx:03d}.png"
+        if not out.exists():
+            self._json(404, {"ok": False, "error": f"still not found: {out.name}"}); return
+        intended = (beat.get("image_prompt") or "").strip()
+        refs = beat.get("_reference_images") or None
+
+        # 1. VISION DIAGNOSIS (same art-director pass as AI Fix)
+        sys.stderr.write(f"[NB fix] shot {shot_idx:03d} diagnosing...\n")
+        try:
+            img = out.read_bytes()
+            mtype = _sniff_media_type(img[:16])
+            b64 = _base64.standard_b64encode(img).decode("ascii")
+            resp = _ANTHROPIC_CLIENT.messages.create(
+                model=_VISION_MODEL, max_tokens=1024,
+                system=_AIFIX_SYSTEM_PROMPT,
+                messages=[{"role": "user", "content": [
+                    {"type": "image", "source": {"type": "base64",
+                        "media_type": mtype, "data": b64}},
+                    {"type": "text", "text":
+                        f"Intended prompt for this shot:\n\n{intended}\n\n"
+                        f"Judge the image against the brand rules and respond with the JSON object."},
+                ]}],
+            )
+            raw = resp.content[0].text.strip()
+            if raw.startswith("```"):
+                raw = raw.strip("`"); raw = raw[raw.find("{"):raw.rfind("}") + 1]
+            import json as _json
+            verdict = _json.loads(raw)
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"vision diagnosis failed: {e}"}); return
+
+        diagnosis = (verdict.get("diagnosis") or "").strip()
+        corrected = (verdict.get("corrected_prompt") or "").strip()
+        if not (verdict.get("verdict") == "fix" and corrected):
+            self._json(200, {"ok": True, "shot": shot_idx, "changed": False,
+                "diagnosis": diagnosis or "Image looks consistent with the brand rules."}); return
+
+        # 2. RE-RENDER the corrected prompt on the CHANNEL model, reference-aware
         sys.stderr.write(f"[NB fix] shot {shot_idx:03d} re-render on channel model "
-                         f"(refs={len(refs) if refs else 0})\n")
+                         f"(refs={len(refs) if refs else 0}) -> {diagnosis[:60]}\n")
         backup_existing_still(ctx["stills_dir"], shot_idx)
         try:
-            res = _recp_generate_still(prompt, out, reference_images=refs)
+            res = _recp_generate_still(corrected, out, reference_images=refs)
         except Exception as e:
             self._json(500, {"ok": False,
-                "error": f"channel-model render failed: {e}"}); return
+                "error": f"channel-model render failed: {e}", "diagnosis": diagnosis}); return
         if res:
-            self._json(200, {"ok": True, "shot": shot_idx,
+            self._json(200, {"ok": True, "shot": shot_idx, "changed": True,
+                "diagnosis": diagnosis,
                 "mode": ("NB2 /edit" if refs else "NB2 text")}); return
-        self._json(500, {"ok": False, "error": "channel-model generation failed"})
+        self._json(500, {"ok": False,
+            "error": "channel-model generation failed after diagnosis", "diagnosis": diagnosis})
 
     def do_POST(self):
         if not _key_ok(self):
