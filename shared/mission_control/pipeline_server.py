@@ -96,6 +96,7 @@ try:
     from recreation_pipeline import (
         animate_still as _animate_still,
         ken_burns_still as _ken_burns_still,
+        generate_still as _recp_generate_still,
         _tiered_kling_count, _tiered_beat_index, _tiered_duration,
     )
     _ANIMATE_OK = True
@@ -1315,6 +1316,8 @@ function beatRow(b, ch, pr) {
           'border:0;border-radius:6px;padding:9px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:600;">AI Fix</button>' +
         '<button class="regen" style="width:100%;margin-top:8px;background:#3b5bdb;color:#fff;' +
           'border:0;border-radius:6px;padding:9px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:600;">Regenerate</button>' +
+        '<button class="nbfix" style="width:100%;margin-top:8px;background:#c98a1a;color:#fff;' +
+          'border:0;border-radius:6px;padding:9px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:600;">Nano-Banana Fix</button>' +
         '<textarea class="note" rows="2" placeholder="Notes — appended to prompt as regeneration feedback" ' +
           'style="width:100%;box-sizing:border-box;margin-top:8px;background:#1c1c26;color:#e8e6e3;' +
           'border:1px solid #32323e;border-radius:6px;padding:8px;font:12px/1.4 ui-monospace,monospace;resize:vertical;"></textarea>' +
@@ -1419,6 +1422,7 @@ function bindStillControls(wrap) {
     const rej = ctl.querySelector("button.rej");
     const aifix = ctl.querySelector("button.aifix");
     const regen = ctl.querySelector("button.regen");
+    const nbfix = ctl.querySelector("button.nbfix");
 
     acc.addEventListener("click", function() {
       window.__JUDGED[jkey] = "accept";
@@ -1459,6 +1463,9 @@ function bindStillControls(wrap) {
     regen.addEventListener("click", function() {
       post("/api/restill", {shot: shot, note: note.value, override: override.value},
            override.value.trim() ? "Regenerating (override)" : "Regenerating");
+    });
+    if (nbfix) nbfix.addEventListener("click", function() {
+      post("/api/nbfix", {shot: shot}, "Nano-Banana re-render");
     });
   });
   bindAnimateButtons(wrap);
@@ -2018,6 +2025,47 @@ class Handler(BaseHTTPRequestHandler):
         self._json(500, {"ok": False, "error": "fal generation failed after diagnosis",
                          "diagnosis": diagnosis})
 
+    def _handle_nbfix(self, body):
+        """Re-render one beat through the engine's CHANNEL-AWARE generate_still
+        (recreation_pipeline), reading the shot's _reference_images from
+        storyboard.json -- the same path cmd_stills/cmd_restill use. On QQrew this
+        renders {skeptic} beats via NB2 /edit (reference) and crew-absent beats via
+        NB2 text-to-image; flux only on refusal. (PATCH_NBFIX_BUTTON_APPLIED)"""
+        if not _ANIMATE_OK:
+            self._json(503, {"ok": False,
+                "error": f"nano-banana fix unavailable: {_ANIMATE_IMPORT_ERR}"}); return
+        if not _RESTILL_OK:
+            self._json(503, {"ok": False,
+                "error": f"restill helpers unavailable: {_RESTILL_IMPORT_ERR}"}); return
+        shot_idx = body.get("shot")
+        if not isinstance(shot_idx, int):
+            self._json(400, {"ok": False, "error": "shot must be an integer"}); return
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        ctx = _stills_ctx(ch, pr)
+        beats_by_idx = ctx["beats_by_idx"]
+        if shot_idx not in beats_by_idx:
+            self._json(404, {"ok": False, "error": f"shot {shot_idx} not in beats"}); return
+        beat = beats_by_idx[shot_idx]
+        prompt = (beat.get("image_prompt") or "").strip()
+        if not prompt:
+            self._json(404, {"ok": False, "error": f"shot {shot_idx} has no image_prompt"}); return
+        refs = beat.get("_reference_images") or None
+        out = ctx["stills_dir"] / f"shot_{shot_idx:03d}.png"
+        sys.stderr.write(f"[NB fix] shot {shot_idx:03d} re-render on channel model "
+                         f"(refs={len(refs) if refs else 0})\n")
+        backup_existing_still(ctx["stills_dir"], shot_idx)
+        try:
+            res = _recp_generate_still(prompt, out, reference_images=refs)
+        except Exception as e:
+            self._json(500, {"ok": False,
+                "error": f"channel-model render failed: {e}"}); return
+        if res:
+            self._json(200, {"ok": True, "shot": shot_idx,
+                "mode": ("NB2 /edit" if refs else "NB2 text")}); return
+        self._json(500, {"ok": False, "error": "channel-model generation failed"})
+
     def do_POST(self):
         if not _key_ok(self):
             self.send_response(403); self.end_headers(); return
@@ -2058,6 +2106,8 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_restill(body); return
         if path == "/api/aifix":
             self._handle_aifix(body); return
+        if path == "/api/nbfix":
+            self._handle_nbfix(body); return
         if path == "/api/motion":
             self._handle_motion(body); return
         if path == "/api/animate":
