@@ -542,16 +542,17 @@ def _ref_data_uri(path) -> str:
 # reference makes the model preserve BOTH the character(s) and the art style, so we
 # deliberately do NOT send the text-path style_suffix or negatives here.
 REFERENCE_PROMPT_LOCK = (
-    "Use the reference image(s) as the exact visual template. Preserve their art "
-    "style precisely -- semi-realistic cinematic illustration, soft warm lighting, "
-    "painterly rendered skin, clean rich illustrated backgrounds. If a reference shows "
-    "a person, keep that EXACT character: same face, same hair, same wardrobe, same "
-    "personality; do not change their identity. Do not change the art style. "
-    "Render this new scene: "
+    "Use the reference image(s) as the exact visual template for the CHARACTER: "
+    "keep that EXACT person -- same face, same hair, same wardrobe; do not change "
+    "their identity. Render in a semi-realistic modern animated-feature illustration "
+    "style: bright high-key lighting, vibrant saturated color, crisp clean detail, "
+    "rich detailed backgrounds, lots of light and energy, lively and appealing. The "
+    "character is bright, engaged and lively with a warm easy half-smile -- never "
+    "bored, never pouty, never flat. Render this new scene: "
 )
 REFERENCE_PROMPT_TAIL = (
-    " Rich illustrated background, warm cinematic lighting, 16:9 wide composition, "
-    "no on-image text, no letters, no captions."
+    " Rich detailed background, bright high-key lighting, vibrant color, 16:9 wide "
+    "composition, no on-image text, no letters, no captions."
 )
 
 
