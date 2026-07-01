@@ -737,11 +737,11 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) ->
     # held frame, same clips/shot_NNN.mp4 artifact, assembly unchanged. Reads the
     # same way _channel_aspect does (walks up from CWD, cached). Defaults True so
     # every cinematic channel keeps the slow zoom-in.
-    try:
-        _kb = load_channel_config(strict=False).get("ken_burns", True)
-    except Exception:
-        _kb = True
-    _z = "min(zoom+0.0024,1.50)" if _kb else "1"
+    # HARDCODED static (01 Jul): the ken_burns config flag did not take at render
+    # time (load_channel_config cached inside finish), frame-diff proved clips
+    # still zoomed. z=1 unconditionally removes the zoom. Revert via .bak if a
+    # cinematic channel needs the slow zoom-in restored.
+    _z = "1"
     # Upscale to 4x the target first (smoothness), cover-crop to the 4x frame, then a
     # slow zoom-in (cap 1.25x) OR a static hold (z=1), output at channel aspect.
     up_w, up_h = W * 4, H * 4
