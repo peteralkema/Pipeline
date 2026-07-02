@@ -468,12 +468,22 @@ def make_thumbnail(still_path: Path, title: str, subtitle: str,
         cut = _segment_foreground(base)   # rembg RGBA of the character
         if cut is not None:
             # scale the cutout to subject_scale of canvas height, keep aspect
-            sh = int(target_h * float(cfg.get("subject_scale", 0.92)))
+            # PATCH_SOLIDMODE_POS: scale to subject_scale of height, then anchor the
+            # cutout's RIGHT edge inside a right margin (so the BODY sits in the
+            # right third and never runs off-canvas -- the old left-edge frac at
+            # 0.52 pushed a waist-up figure off the right edge, leaving only a hand).
+            sh = int(target_h * float(cfg.get("subject_scale", 1.02)))
             ratio = sh / cut.height
             sw = int(cut.width * ratio)
             cut = cut.resize((sw, sh), Image.LANCZOS)
-            px = int(target_w * float(cfg.get("subject_x_frac", 0.52)))
-            py = target_h - sh   # sit on the bottom edge
+            _rmargin = int(target_w * float(cfg.get("subject_right_margin_frac", 0.02)))
+            px = target_w - sw - _rmargin       # right-edge anchored
+            # if the cutout is very wide, don't let its left edge cross the mid-line
+            # (keeps the left half clear for the headline)
+            _min_px = int(target_w * float(cfg.get("subject_min_left_frac", 0.46)))
+            if px < _min_px:
+                px = _min_px
+            py = target_h - sh                  # sit on the bottom edge
             flat = flat.convert("RGBA")
             if cfg.get("subject_shadow", True):
                 sox, soy = cfg.get("subject_shadow_offset", [18, 18])
