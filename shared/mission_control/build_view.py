@@ -159,6 +159,9 @@ def build_beats_view(channel: str, slug: str, repo_root: Path | None = None) -> 
     shot_by_engine = {int(s["index"]): s for s in storyboard if "index" in s}
 
     look_resolved = _resolve_look(paths)
+    # PATCH_FIXBTN_APPLIED: channel text-to-image model name for the render-path label.
+    _channel_model = (_load_json(paths["project"].parent.parent / "channel.json")
+                      or {}).get("image_model", "flux")
 
     # ---- First pass: turn each script beat into a row record (by beat index) ----
     rows: dict[int, dict] = {}
@@ -181,6 +184,13 @@ def build_beats_view(channel: str, slug: str, repo_root: Path | None = None) -> 
         shot = shot_by_engine.get(engine_shot) if engine_shot is not None else None
         rendered_prompt = (shot or {}).get("image_prompt")
         motion_prompt = (shot or {}).get("motion_prompt")
+
+        # PATCH_FIXBTN_APPLIED: truthful per-beat render-path label for the MC UI.
+        # States the PATH the beat takes (reference /edit vs channel text model),
+        # not runtime fallbacks (those aren't recorded anywhere yet).
+        _refs = (shot or {}).get("_reference_images") or []
+        render_path = (f"NB2 /edit \u00b7 {len(_refs)} ref" if _refs
+                       else f"{_channel_model} \u00b7 text")
 
         # stage: best-effort from what's on disk
         if clip_exists:
@@ -205,6 +215,7 @@ def build_beats_view(channel: str, slug: str, repo_root: Path | None = None) -> 
             "audio_start": dur.get("audio_start"),
             "duration_source": dur.get("source"),
             "look_resolved": look_resolved,
+            "render_path": render_path,
             "payload": b.get("payload", {}),
             "warnings": list(b.get("warnings", [])),
             "overlays": [],                    # filled in pass 2 for Mode B children

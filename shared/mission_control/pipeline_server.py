@@ -951,7 +951,7 @@ function updateGatebar(state) {
     const n = (g.payload && g.payload.stills_count) || "";
     bar.innerHTML = '<div class="panel gate">' +
       '<label>Stills gate — review before clips</label>' +
-      '<div>' + n + ' stills rendered. Review the body below (AI Fix / Regenerate any that break), then decide.</div>' +
+      '<div>' + n + ' stills rendered. Review the body below (Fix this image on any that break), then decide.</div>' +
       '<div class="row" style="margin:10px 0;align-items:center;">' +
         '<label style="margin:0 8px 0 0;text-transform:none;letter-spacing:0;color:#e8e6e3;">Kling clips: first</label>' +
         '<input id="klingn" type="number" min="0" step="1" value="40" style="width:80px;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:6px 8px;">' +
@@ -1351,12 +1351,10 @@ function beatRow(b, ch, pr) {
           '<button class="jbtn rej" style="flex:1;background:#2a2a36;' + rejSel +
             'color:#e8e6e3;border:0;border-radius:6px;padding:8px;cursor:pointer;font:13px ui-monospace,monospace;">Reject</button>' +
         '</div>' +
-        '<button class="aifix" style="width:100%;margin-top:8px;background:#14a3b8;color:#fff;' +
-          'border:0;border-radius:6px;padding:9px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:600;">AI Fix</button>' +
+        '<button class="nbfix" style="width:100%;margin-top:8px;background:#c98a1a;color:#fff;' +
+          'border:0;border-radius:6px;padding:11px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:700;">&#128295; Fix this image</button>' +
         '<button class="regen" style="width:100%;margin-top:8px;background:#3b5bdb;color:#fff;' +
           'border:0;border-radius:6px;padding:9px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:600;">Regenerate</button>' +
-        '<button class="nbfix" style="width:100%;margin-top:8px;background:#c98a1a;color:#fff;' +
-          'border:0;border-radius:6px;padding:9px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:600;">Nano-Banana Fix</button>' +
         '<textarea class="note" rows="2" placeholder="Notes — appended to prompt as regeneration feedback" ' +
           'style="width:100%;box-sizing:border-box;margin-top:8px;background:#1c1c26;color:#e8e6e3;' +
           'border:1px solid #32323e;border-radius:6px;padding:8px;font:12px/1.4 ui-monospace,monospace;resize:vertical;"></textarea>' +
@@ -1374,7 +1372,7 @@ function beatRow(b, ch, pr) {
     '<div style="display:grid;gap:14px;align-items:start;' +
     'grid-template-columns:minmax(180px,0.7fr) minmax(360px,2.6fr) minmax(190px,0.85fr) minmax(160px,0.7fr) minmax(360px,2.6fr);">' +
       '<div>' + textCell + '</div>' +
-      '<div>' + stillCell + '<div style="color:#55556a;font-size:11px;margin-top:4px;">Flux still</div></div>' +
+      '<div>' + stillCell + '<div style="color:#55556a;font-size:11px;margin-top:4px;">' + ((b && b.render_path) || "still") + '</div></div>' +
       '<div>' + controlsCell + '</div>' +
       '<div>' + motionCell + '</div>' +
       '<div>' + clipCell + '<div style="color:#55556a;font-size:11px;margin-top:4px;">Kling motion</div></div>' +
@@ -1459,7 +1457,6 @@ function bindStillControls(wrap) {
     const override = ctl.querySelector("textarea.override");
     const acc = ctl.querySelector("button.acc");
     const rej = ctl.querySelector("button.rej");
-    const aifix = ctl.querySelector("button.aifix");
     const regen = ctl.querySelector("button.regen");
     const nbfix = ctl.querySelector("button.nbfix");
 
@@ -1496,15 +1493,12 @@ function bindStillControls(wrap) {
       }
     }
 
-    aifix.addEventListener("click", function() {
-      post("/api/aifix", {shot: shot}, "AI Fix diagnosing");
-    });
     regen.addEventListener("click", function() {
       post("/api/restill", {shot: shot, note: note.value, override: override.value},
            override.value.trim() ? "Regenerating (override)" : "Regenerating");
     });
     if (nbfix) nbfix.addEventListener("click", function() {
-      post("/api/nbfix", {shot: shot}, "Nano-Banana re-render");
+      post("/api/nbfix", {shot: shot}, "Inspecting &amp; fixing");
     });
   });
   bindAnimateButtons(wrap);
@@ -1985,19 +1979,28 @@ class Handler(BaseHTTPRequestHandler):
         if shot_idx not in beats_by_idx:
             self._json(404, {"ok": False, "error": f"shot {shot_idx} not in beats"}); return
 
+        beat = beats_by_idx[shot_idx]
+        refs = beat.get("_reference_images") or None
         if override:
-            final_prompt = override; mode = "OVERRIDE"; negs = []
+            final_prompt = override; mode = "OVERRIDE"
         else:
-            beat = beats_by_idx[shot_idx]
             resolved = resolve_canon_tokens(beat.get("image_prompt", ""), ctx["canon"])
             final_prompt = (f"{resolved.rstrip(' .')}. REGENERATION FEEDBACK: {note}"
                             if note else resolved)
-            mode = "NORMAL"; negs = ctx["negatives"]
-
-        sys.stderr.write(f"[Regenerate] shot {shot_idx:03d} [{mode}]\n")
+            mode = "NORMAL"
+        # PATCH_FIXBTN_APPLIED: channel-aware re-render. Routes through
+        # recreation_pipeline.generate_still so reference beats keep their ref
+        # sheet(s) and every channel renders on its own model (flux only as the
+        # engine's own refusal fallback). The old path was flux-hardwired and
+        # silently stripped reference identity on {skeptic}/{driver}/{brain} beats.
+        sys.stderr.write(f"[Regenerate] shot {shot_idx:03d} [{mode}] "
+                         f"(refs={len(refs) if refs else 0})\n")
         backup_existing_still(ctx["stills_dir"], shot_idx)
         out = ctx["stills_dir"] / f"shot_{shot_idx:03d}.png"
-        ok = generate_still(final_prompt, negs, out, ctx["model"])
+        try:
+            ok = bool(_recp_generate_still(final_prompt, out, reference_images=refs))
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"channel-model render failed: {e}"}); return
         if ok:
             self._json(200, {"ok": True, "shot": shot_idx, "mode": mode})
         else:
