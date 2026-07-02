@@ -524,6 +524,11 @@ def main():
     ap.add_argument("--title", required=True, help='headline, e.g. "ALMOST EXTINCT"')
     ap.add_argument("--subtitle", default="", help='optional second line, e.g. "74,000 YEARS AGO"')
     ap.add_argument("--out", default=None, help="output path (default: <project>/thumbnail.png)")
+    ap.add_argument("--composition", default=None,  # PATCH_COMPFLAG
+                    help="override the channel's composition mode for this render "
+                         "(e.g. solid_color_character). Omit to use channel.json.")
+    ap.add_argument("--bg-color", default=None,  # PATCH_COMPFLAG
+                    help="override bg_color as 'R,G,B' (solid_color_character mode).")
     args = ap.parse_args()
 
     project = Path(args.project).expanduser()
@@ -539,6 +544,13 @@ def main():
         raise SystemExit(f"Still not found: {still}")
 
     out = Path(args.out) if args.out else project / "thumbnail.png"
+    if args.composition:            # PATCH_COMPFLAG
+        cfg["composition"] = args.composition
+    if args.bg_color:               # PATCH_COMPFLAG
+        try:
+            cfg["bg_color"] = [int(x) for x in args.bg_color.split(",")][:3]
+        except Exception:
+            print(f"   (ignoring bad --bg-color {args.bg_color!r})")
     result = make_thumbnail(still, args.title, args.subtitle, out, cfg)
     print(f"OK Thumbnail -> {result}")
 
