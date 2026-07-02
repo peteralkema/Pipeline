@@ -208,9 +208,10 @@ IMAGE_MODEL = "flux"   # "seedream" | "nano_banana" | "flux"
 # (image_size dict + prompt + negative_prompt) so it's a drop-in swap.
 
 IMAGE_ENDPOINTS = {
-    "seedream":     "fal-ai/bytedance/seedream/v3/text-to-image",
-    "nano_banana":  "fal-ai/nano-banana",
-    "flux":         "fal-ai/flux-pro/v1.1",
+    "seedream":      "fal-ai/bytedance/seedream/v3/text-to-image",
+    "nano_banana":   "fal-ai/nano-banana",
+    "nano_banana_2": "fal-ai/nano-banana-2",   # PATCH_NB2_TEXT_APPLIED: NB2 text-to-image -- same family as the /edit path; reasoning-guided (kills the teaching-graphic=cartoon-presenter genre prior); ~$0.08/img
+    "flux":          "fal-ai/flux-pro/v1.1",
 }
 
 # O3 Standard: ~3x faster + cheaper than Pro. Good default for the channel.
@@ -607,6 +608,9 @@ def _flux_fallback_still(image_prompt, out_path, config) -> Path:
     rb = load_rulebook()
     style_suffix = resolve_look(out_path, config)["style_suffix"]
     people = rb.get("people_directive", "")
+    _lp = image_prompt.lower()  # PATCH_NB2_TEXT: same no-people guard as generate_still
+    if people and any(t in _lp for t in ("no people", "no figures", "no crew", "no person")):
+        people = ""
     full_prompt = (f"{style_suffix}. {image_prompt}, {people}" if people
                    else f"{style_suffix}. {image_prompt}")
     negative = ", ".join(rb["negative"])
@@ -644,6 +648,13 @@ def generate_still(image_prompt: str, out_path: Path, reference_images=None) -> 
     from look_resolver import resolve_look
     style_suffix = resolve_look(out_path, config)["style_suffix"]
     people = rb.get("people_directive", "")
+    # PATCH_NB2_TEXT: the people_directive is a face/people enhancer appended to
+    # EVERY text prompt -- on beats that declare themselves people-free ("no
+    # people/figures/crew") it actively summons humans onto clean plates
+    # (graphics, maps, empty wides). Skip it on those beats.
+    _lp = image_prompt.lower()
+    if people and any(t in _lp for t in ("no people", "no figures", "no crew", "no person")):
+        people = ""
     full_prompt = f"{style_suffix}. {image_prompt}, {people}" if people else f"{style_suffix}. {image_prompt}"
     negative = ", ".join(rb["negative"])
     # Per-channel image model: channel.json may set "image_model"
@@ -660,6 +671,9 @@ def generate_still(image_prompt: str, out_path: Path, reference_images=None) -> 
     else:
         _asp = config.get("reference_aspect", "16:9")
         args = {"prompt": full_prompt, "aspect_ratio": _asp}
+        if "nano-banana-2" in endpoint or "nano-banana-pro" in endpoint:
+            # NB2 family: resolution param, mirroring the /edit path (banked 01 Jul)
+            args["resolution"] = config.get("reference_resolution", "1K")
     if negative:
         # Most fal image models accept negative_prompt; harmless if ignored.
         args["negative_prompt"] = negative

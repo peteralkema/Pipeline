@@ -72,7 +72,7 @@
     "driver": "characters/driver_ref.png",
     "brain": "characters/brain_ref.png"
   },
-  "image_model": "nano_banana",
+  "image_model": "nano_banana_2",
   "ken_burns": false,
   "reference_prompt_lock": "Use the reference image(s) as the exact visual template for the CHARACTER: keep that EXACT person -- same face, same hair, same wardrobe; do not change their identity. Render photorealistic and cinematic: natural realistic skin, real photographic detail, bright high-key lighting, vibrant saturated color, crisp clean detail, rich detailed realistic backgrounds, lots of light and energy, lively and appealing. The character is bright, engaged and lively with a warm easy half-smile -- never bored, never pouty, never flat. Render this new scene: ",
   "reference_prompt_tail": " Rich detailed realistic background, photorealistic and cinematic, natural skin, bright high-key lighting, vibrant color, 16:9 wide composition, no on-image text, no letters, no captions."
