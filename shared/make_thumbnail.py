@@ -62,6 +62,14 @@ DEFAULTS = {
     "shadow_offset":        [6, 6],
     "shadow_blur":          4,
     "shadow_color":         [0, 0, 0, 220],
+    # PATCH_SOLIDMODE: solid_color_character mode (B-variant thumbnails)
+    "bg_color":             [237, 106, 34],   # flat fill when no per-render colour given
+    "subject_shadow":       True,             # soft drop-shadow behind the cutout (ICE-AGE lift)
+    "subject_shadow_offset":[18, 18],
+    "subject_shadow_blur":  22,
+    "subject_shadow_color": [0, 0, 0, 150],
+    "subject_scale":        0.92,             # cutout height as frac of canvas height
+    "subject_x_frac":       0.52,             # left edge of cutout as frac of width (pushes right)
     "darken_factor":        0.55,                  # 1.0 = no change, lower = darker
     "vignette_strength":    0.45,                  # 0 = none, 1 = heavy
     "text_anchor":          "top-center",          # top-left | top-right | top-center
@@ -450,6 +458,38 @@ def make_thumbnail(still_path: Path, title: str, subtitle: str,
         sub_y = title_y + title_block_h + cfg["title_subtitle_gap"]
         bg = _draw_block(bg, sub_lines, sub_font, cfg["subtitle_color"],
                          x_anchor, sub_y, align, cfg)
+
+    # PATCH_SOLIDMODE: solid_color_character mode -- flat colour + shadowed cutout.
+    # Rebuilds `bg` from scratch (ignores the darkened-still base above) so the
+    # character render (already on a solid bg) becomes a clean cutout on a flat fill.
+    if cfg["composition"] == "solid_color_character":
+        _bgc = tuple(cfg.get("bg_color", [237, 106, 34]))[:3]
+        flat = Image.new("RGB", (target_w, target_h), _bgc)
+        cut = _segment_foreground(base)   # rembg RGBA of the character
+        if cut is not None:
+            # scale the cutout to subject_scale of canvas height, keep aspect
+            sh = int(target_h * float(cfg.get("subject_scale", 0.92)))
+            ratio = sh / cut.height
+            sw = int(cut.width * ratio)
+            cut = cut.resize((sw, sh), Image.LANCZOS)
+            px = int(target_w * float(cfg.get("subject_x_frac", 0.52)))
+            py = target_h - sh   # sit on the bottom edge
+            flat = flat.convert("RGBA")
+            if cfg.get("subject_shadow", True):
+                sox, soy = cfg.get("subject_shadow_offset", [18, 18])
+                scol = tuple(cfg.get("subject_shadow_color", [0, 0, 0, 150]))
+                # shadow = the cutout's alpha, filled dark, blurred, offset
+                shadow = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
+                sil = Image.new("RGBA", (sw, sh), scol)
+                shadow.paste(sil, (px + sox, py + soy), cut)
+                shadow = shadow.filter(ImageFilter.GaussianBlur(
+                    radius=cfg.get("subject_shadow_blur", 22)))
+                flat = Image.alpha_composite(flat, shadow)
+            flat.alpha_composite(cut, (px, py))
+            bg = flat.convert("RGB")
+        else:
+            bg = flat  # no rembg -> flat colour, headline still lands
+        # the shared text block below renders as normal (uses the same cfg keys)
 
     # Layer 4 — poke-through subject (centered_subject mode only)
     if cfg["composition"] == "centered_subject" and cfg.get("segment_foreground", True):

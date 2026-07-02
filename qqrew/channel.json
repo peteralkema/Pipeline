@@ -61,7 +61,37 @@
         255,
         255
       ]
-    }
+    },
+    "bg_palette": [
+      [
+        237,
+        106,
+        34
+      ],
+      [
+        22,
+        163,
+        184
+      ],
+      [
+        245,
+        197,
+        24
+      ],
+      [
+        201,
+        74,
+        74
+      ],
+      [
+        79,
+        122,
+        189
+      ]
+    ],
+    "character_ref": "brain",
+    "pose_prompt_suffix": "the character from the reference image, waist-up, pushed to the RIGHT side of the frame, a big clear readable facial expression, both hands kept within the right portion, the entire LEFT HALF of the frame the solid flat background colour with no figure and no hands in it for a headline, bright even high-key studio lighting, crisp photographic detail, natural realistic skin, vivid and punchy, photorealistic, NOT illustrated, NOT cel-shaded, no text, no letters, sixteen by nine",
+    "_pose_picker_v1": true
   },
   "render_mode": "reference",
   "reference_endpoint": "fal-ai/nano-banana-2/edit",
