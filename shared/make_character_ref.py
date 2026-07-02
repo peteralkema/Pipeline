@@ -23,6 +23,17 @@ Usage:
 
   # match the worlds' model instead of flux:
   python make_character_ref.py --model nano_banana --out ... --prompt "..."
+
+  # GROUP / CONSISTENT shots: condition on existing ref sheets via NB2 /edit
+  # (clones the people in the refs instead of re-imagining them from words —
+  #  the same mechanism that keeps characters consistent in episodes):
+  python make_character_ref.py \
+    --ref qqrew/characters/driver_ref.png \
+    --ref qqrew/characters/skeptic_ref.png \
+    --ref qqrew/characters/brain_ref.png \
+    --aspect 16:9 \
+    --out qqrew/characters/crew_group_waistup.png \
+    --prompt "the same three people standing together as a group, waist-up ..."
 """
 
 from __future__ import annotations
@@ -35,6 +46,13 @@ MODELS = {
     "flux":        "fal-ai/flux-pro/v1.1",
     "nano_banana": "fal-ai/nano-banana",
 }
+EDIT_ENDPOINT = "fal-ai/nano-banana-2/edit"   # used automatically when --ref is given
+
+
+def _data_uri(path: Path) -> str:
+    """Local PNG -> base64 data URI for fal image_urls (same as the pipeline)."""
+    import base64
+    return "data:image/png;base64," + base64.standard_b64encode(path.read_bytes()).decode("ascii")
 
 
 def main() -> int:
@@ -44,7 +62,10 @@ def main() -> int:
     ap.add_argument("--model", default="flux", choices=sorted(MODELS),
                     help="flux (default, reliable photoreal) or nano_banana (match worlds)")
     ap.add_argument("--aspect", default="3:4",
-                    help="aspect ratio string for nano_banana (e.g. 3:4, 1:1, 16:9)")
+                    help="aspect ratio string (e.g. 3:4, 1:1, 16:9)")
+    ap.add_argument("--ref", action="append", default=[],
+                    help="reference image(s); repeatable. If given, renders via NB2 /edit "
+                         "conditioned on these refs (clones the people) instead of text-to-image.")
     args = ap.parse_args()
 
     if not os.environ.get("FAL_KEY"):
@@ -60,6 +81,35 @@ def main() -> int:
 
     out = Path(args.out).expanduser()
     out.parent.mkdir(parents=True, exist_ok=True)
+
+    if args.ref:
+        refs = [Path(r).expanduser() for r in args.ref]
+        missing = [str(r) for r in refs if not r.is_file()]
+        if missing:
+            print(f"ERROR: reference image(s) not found: {', '.join(missing)}", file=sys.stderr)
+            return 2
+        endpoint = EDIT_ENDPOINT
+        w, h = (1280, 720) if args.aspect == "16:9" else (768, 1024)
+        arg = {"prompt": args.prompt,
+               "image_urls": [_data_uri(r) for r in refs],
+               "num_images": 1,
+               "aspect_ratio": args.aspect,
+               "image_size": {"width": w, "height": h},  # belt+braces: /edit ignores the string with portrait refs (banked 01 Jul)
+               "output_format": "png",
+               "safety_tolerance": "5",
+               "limit_generations": True,
+               "resolution": "1K"}
+        print(f"rendering via {endpoint} conditioned on {len(refs)} ref(s) -> {out}")
+        result = __import__("fal_client").subscribe(endpoint, arguments=arg, with_logs=False)
+        images = result.get("images", [])
+        if not images:
+            print("ERROR: no image returned (content refusal?) — reword the prompt.", file=sys.stderr)
+            return 1
+        import urllib.request
+        urllib.request.urlretrieve(images[0]["url"], str(out))
+        print(f"OK  ref-conditioned render -> {out}  ({out.stat().st_size // 1024} KB)")
+        return 0
+
     endpoint = MODELS[args.model]
 
     if args.model == "flux":
