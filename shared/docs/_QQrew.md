@@ -214,6 +214,25 @@ The channel has **two distinct, deliberate still classes**, and the interplay be
 
 ---
 
+### ★ 6b. THE VISUAL GRAMMAR — the anonymous-human gate + diegetic teaching (banked 02 Jul 2026 — Fire/ep5, the cartoon-render day)
+
+*Ep5 (Fire, Brain solo) first-rendered with ~25 stills coming back as MODERN CARTOON PEOPLE (a beanie kid with a phone, cafe strangers, teens at a firepit) with zero relationship to the prompt — one beat even shoved the real scene into a thought-bubble beside a cartoon character. This section is the doctrine that closed the class. It is the character-channel sibling of §6a: §6a is about not letting canon drown the scene; §6b is about not asking the text path for a human it cannot anchor.*
+
+**THE ROOT LAW — a human in frame is a CREW MEMBER or does not exist.** There is no anonymous person on this channel. NB2 text-to-image, handed an unanchored human ("a lone figure / silhouette / someone / early-human / a huddle / people / beyond her"), renders a **modern smiling cartoon character** every time and discards the scene. Enforced on BOTH layers now:
+- **Engine (permanent):** on `render_mode:"reference"`, any beat that reaches the TEXT path has no `{tag}` → no reference → it is person-free BY DEFINITION, so the rulebook `people_directive` is stripped unconditionally (`patch_nopeople_default`, live 02 Jul). A text beat can no longer summon a human no matter how it is worded. (The earlier narrow phrase-guard — strip only on "no people/figures/crew" — missed beats worded "no face"/"no clear animal"; the architectural default replaces it.)
+- **Authoring (the gate — do this at write time):** BANNED in any crew-absent VISUAL — "figure, silhouette, someone, a person, early-human, huddle, figures, a lone X", depicted "people". If the beat needs a specific person → it is a crew member with their `{tag}` (routes `/edit`). If it needs no specific person → the beat is person-free (the fire, the torch, the fleeing animals, the empty plain); **narration carries the humans.** Pre-render check: grep every crew-absent VISUAL for the banned words. (Person-free landscapes and `/edit` crew beats rendered flawlessly all through Fire; only unanchored-human text beats failed.)
+
+**TEACHING IS DIEGETIC BY DEFAULT (the creative upgrade — proven gorgeous).** Abstract flat teaching-graphics (vector clocks, neon guts, stick-figure chains) render fine but JAR — a foreign vector-art universe cutting against a crew member in a real place. Default teaching mode is now IN-SCENE, via the crew's body and props:
+- Fingers (count / scale), ground-writing (numbers/diagrams scratched in sand, dirt, ash, snow), found objects (twigs to count, stones for a proportion), and ★ **Brain's FIELD NOTEBOOK** — she jots a finding and holds it to camera. Her signature mechanic.
+- Why the notebook wins: it is discovery-epistemology made visual (same character-logic as contact beats); hand-drawn field-notes are MEANT to be loose, so NB2's text-garble reads as authentic rather than as a bug (**the failure mode becomes the aesthetic** — proven this session, the hand-vs-paw notebook render was a highlight); period-neutral (a phone drags a modern object in AND re-triggers the modern-person prior — NOTEBOOK over phone always for deep-time).
+- Abstract data-graphics are now the RARE deliberate exception, never the workhorse.
+
+**CONTACT BEATS (Brain's immersion signature).** A discovery-learner reaches INTO the scene — crouches, touches the evidence (fingers in cold river, palm to cave wall, sand through the hand, hand toward flame). Same family as diegetic teaching: teaching and feeling THROUGH the body, in the world. Routes `/edit`, holds identity across novel postures (proven across 100+ Fire beats).
+
+**Render-path map (audit via the MC still-label):** crew `{tag}` → `/edit` (strong, holds identity); person-free world/object/landscape → text (clean); diegetic teaching → it is a crew beat → `/edit`; NEVER an anonymous human on text. The label "NB2 /edit · N ref" vs "nano_banana_2 · text" tells you the routing at a glance — any human beat reading `text` is a bug.
+
+---
+
 ## 7. THE CREW (durable IP — full spec in `crew_character_bible.md`)
 
 Core of THREE, never more (guests are per-episode, never core):
@@ -246,6 +265,14 @@ The thumbnail is the single most important packaging surface. The system is now 
 
 **Title (metadata) vs thumbnail headline are DIFFERENT strings** — full SEO title in the header, short punchy headline on the thumbnail.
 
+**★ THE DIRECT-RENDER FLAT-COLOUR METHOD (PROVEN 02 Jul 2026 — the pose-picker).** For a reference-crew channel, the scroll-stopping "character on a flat POP colour, pushed right, shocked, headline top-left" thumbnail (the ICE-AGE / NO-SOAP look) is made in ONE render, not by cut-and-composite:
+- **Render the pose ON the colour:** `make_character_ref.py --ref <char>_ref.png --prompt "...large and close, [shocked/alarmed expression], on a solid flat [palette-colour] background, high-key studio lighting, photorealistic, no text"`. The image model places the character correctly on the flat colour in a single shot — no rembg, no compositing.
+- **Then draw text with the EXISTING path** (`low_silhouette` composition; this channel's block already has darken 1.0 / vignette 0 / scrim 0, so it overlays text without dimming the bright render). Confirms the §8 locked config directly.
+- `bg_palette` (5 on-brand colours) lives in the channel.json thumbnail block; pick one per pose. `character_ref` names the reference_map key to clone.
+- **A/B lane for every video:** ship the upload with an IN-SCENE still thumbnail (character in the world the video is about — often stronger, more specific); add the flat-colour-pose variant in Studio's Test & Compare as B. (Upload API takes ONE thumbnail; Test & Compare is set in Studio post-upload — likely not API-exposed. CONFIRM when wiring.)
+- **DEAD CODE (do not build on):** a `solid_color_character` cut-and-composite mode + its positioning patch were built then abandoned when direct-render proved simpler and cleaner. Retire them. The `--composition` / `--bg-color` CLI flags on `make_thumbnail.py` are useful — keep.
+- **OPEN (next session):** the MC "Generate 5 poses" button (5 `make_character_ref` renders on random palette colours, no text → grid → pick 1-5 → existing `/api/thumbnail` draws the headline). Build on the DIRECT-RENDER path.
+
 ---
 
 ## 9. PRODUCTION CONFIG (the leanest lane in the portfolio)
@@ -254,6 +281,7 @@ The thumbnail is the single most important packaging surface. The system is now 
 - **Animation:** **NONE — TRUE STATIC** (the motion doctrine, proven). Static holds per beat. NO Kling, NO Ken-Burns. The cut IS the motion; pan/zoom is noise at a 1-3s cut rate. (Until Patch B lands natively, render kling_count:0 then post-process with `reassemble_static.py` to strip the Ken-Burns zoompan.)
 - **Audio:** Inworld **Evan @1.05** (the dry-humour smirk; record exact settings — voice consistency is brand). **KNOWN ISSUE → P1 fix:** per-beat synthesis causes the "seesaw" voice reset; the fix is continuous section/sentence-group synthesis + Whisper-mapped still cuts (see §11 / session notes P1).
 - **Mode:** all Mode A. No Mode B (yet). No music (yet).
+- **NB2 text endpoint (implemented 02 Jul):** the "all-NB2" decision banked 01 Jul (§4b) was DOCTRINE only — `image_model` was still `nano_banana` (v1) in config until tonight. `patch_nb2_text` added `nano_banana_2` → `fal-ai/nano-banana-2` and flipped the config; crew-absent/text beats now render on NB2 text, matching the `/edit` family. (banked 02 Jul 2026 — Fire/ep5)
 - **Character determinism:** **the whole recurring crew lives in `base_canon`, not the per-project `canon.json`** (Driver AND Skeptic both, locked there; auto-merges every beat) + `people_directive` in the rulebook. Specificity kills drift. **WHY base_canon, not the project file (banked 30 June — the canon-precedence bug):** the engine's stills path loaded `base_canon` and *ignored* the project `canon.json`, so a Skeptic-solo episode whose canon sat only in the project file died with `Unknown canon tag(s): ['skeptic']`. The crew are permanent cast, so `base_canon` is their correct home anyway; the per-project `canon.json` is for **per-episode guests / wardrobe overrides only**. (The deeper fix — make the engine *merge* base_canon + project canon, project-wins-on-conflict — is on the canonical code-leakage list, §2B item 3.)
 - **Category (metadata):** **Education (ID 27)** — NOT Entertainment (24). Education routes to the right suggested-video pool AND a higher-RPM ad bucket. (channel.json `category_id` should be "27" for the auto-upload step; the `qqrew` channel.json still carries "24" inherited from success-coach — **OPEN: fix to 27**.)
 

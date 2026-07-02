@@ -305,6 +305,18 @@ The channel.json `style_suffix` is prepended to every text-to-image prompt (`rec
 
 **Corollary — reference-render channels bypass the suffix for character beats.** When `render_mode:"reference"`, `{tag}` beats route through `/edit` + the character PNG and do NOT receive the style_suffix (by design — the PNG carries the look). So the suffix governs the CREW-ABSENT/text-to-image beats; the reference PNG governs the character beats. A channel's look is set in TWO places, not one — check both. **And on a reference channel the character's MOOD/EXPRESSION lives in the reference prompt-lock too** — a lock carrying moody-register words ("painterly, warm cinematic lighting") renders the character dreary/sullen no matter how bright the suffix is. Fix the lock, not just the suffix. (QQrew 01 Jul: the pouty-Skeptic tell traced to the lock, not the canon tag.)
 
+### ★ THE ANONYMOUS-HUMAN GATE + THE BOTH-LAYERS FIX PATTERN (banked 02 Jul 2026, QQrew Fire/ep5)
+
+A reference-render channel's look/content is governed in a THIRD place beyond the style_suffix and the reference prompt-lock: the rulebook **`people_directive`**, appended to every text-to-image prompt. On a `render_mode:"reference"` channel this actively harms person-free beats — a text-to-image model handed an UNANCHORED human ("a lone figure / silhouette / someone / a huddle / people") renders a **modern smiling cartoon character** and discards the scene, and the people_directive was summoning humans onto clean plates (empty wides, object close-ups, predator-eyes) whose wording missed a narrow no-people phrase-guard. Fire/ep5 first-rendered ~25 stills this way.
+
+**The fix — and the pattern worth repeating (the moat compounding):** a failure class is closed PROPERLY only when fixed on BOTH layers:
+- **ENGINE (so it cannot recur regardless of input):** on `render_mode:"reference"`, a beat reaching the text path has no `{tag}` → no reference → it is person-free by definition, so strip the people_directive unconditionally. (`patch_nopeople_default`; supersedes the narrow phrase-guard that missed "no face"/"no clear animal".)
+- **AUTHORING (so it is never written in the first place):** a human in frame is a crew member (a `{tag}` → `/edit`) or does not exist; person-free beats carry the humans in narration. Banned words at write time: figure, silhouette, someone, early-human, huddle, a lone X, depicted people.
+
+Neither layer alone is sufficient; both together make the failure structurally impossible. This is the moat thesis in action — **bank a failure as a tool-agnostic principle AND enforce it in the engine.** (Full channel-side doctrine: `_QQrew.md §6b`.)
+
+**Corollary — teaching/human content on a reference channel is DIEGETIC:** put the explainer and the people IN the scene via a crew member's body and props (fingers, ground-writing, a field notebook held to camera), not as abstract graphics or anonymous figures. Hand-drawn in-world text is garble-tolerant by design.
+
 
 **Craft now lives in the per-channel `_ChannelName.md` docs, not here.** `ante-machinam.md` is RETIRED (its Final-Hours craft was absorbed into `_Final-Hours.md §11`; its genuine mechanics are below). This section holds only what is *universal* — the Constitution proper, the script-format contract, the two-mode authoring rule, and the runtime mechanics. Anything about *how a script should land* (register, pacing-for-effect, what to put in a cold open, the retention canon) is CRAFT and lives in the channel doc.
 
