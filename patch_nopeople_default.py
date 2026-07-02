@@ -1,33 +1,30 @@
 #!/usr/bin/env python3
 """
-patch_nopeople_default.py -- stop the people_directive summoning cartoon humans
-onto person-free beats (QQrew Fire, 02 Jul).
+patch_nopeople_default.py (v2, anchored to live box code with the NB2 guard present)
 
-ROOT CAUSE: every text-path beat gets the rulebook people_directive appended
-("...appealing realistic detailed faces where people are present..."). On the
-reference-mode channel (QQrew) the earlier phrase-guard only stripped it when the
-beat literally said "no people/figures/crew". Person-free beats worded "no face"
-(a hand lifting a branch) or "no clear animal" (predator eyes in grass) slipped
-the guard, kept the directive, and NB2-text rendered a smiling cartoon human onto
-a plate that never asked for one. Beats 9, 26, 45, 52 in Fire.
+Widens the existing NB2 phrase-guard into an architectural default. The phrase-list
+("no people/figures/crew/person") missed person-free beats worded "no face" (a hand
+lifting a burning branch) or "no clear animal" (predator eyes in grass), so the
+people_directive was appended and NB2-text summoned a cartoon human onto a clean
+plate. QQrew Fire beats 9, 26, 45, 52.
 
-THE FIX (architectural, not a bigger denylist): on a reference-mode channel a beat
-that reaches the TEXT path has NO reference images, which -- by Rule 1 (a human in
-frame is a crew member carrying a {token}->ref->/edit, or does not exist) -- means
-it is person-free BY DEFINITION. So strip the people_directive unconditionally when
-render_mode == "reference" and there are no reference_images. Cannot be defeated by
-wording. Non-reference channels (Final Hours etc.) are untouched -- they still get
-the directive, because they legitimately want anonymous crowds.
+FIX: on a reference-mode channel, a beat reaching the TEXT path has NO reference
+images, so by Rule 1 (a human in frame is a crew member carrying a {token} -> ref
+-> the /edit path, or does not exist) it is person-free BY DEFINITION. Strip the
+people_directive unconditionally in that case. Keeps the existing phrase-guard for
+non-reference channels (Final Hours etc. legitimately want crowds). Cannot be beaten
+by wording.
 
-TWO EDITS in shared/recreation_pipeline.py:
-  1. generate_still(): strip people when render_mode==reference and not reference_images.
+Two edits in shared/recreation_pipeline.py:
+  1. generate_still(): after the phrase-guard, add
+     `if render_mode=="reference" and not reference_images: people=""`.
   2. _flux_fallback_still(): mirror it (no reference_images param there; strip on any
-     reference-mode channel, since the fallback fires after the primary path failed).
+     reference-mode channel).
 
-Idempotent (sentinel PATCH_NOPEOPLE_DEFAULT), anchor-verified, backup .pre_nopeople,
-py_compiles before writing. Relaunch renders after pulling (running batch holds the
-old module). No storyboard rebuild needed -- this changes prompt assembly at render
-time, so re-rendering the affected text beats picks it up.
+Idempotent (sentinel PATCH_NOPEOPLE_DEFAULT), anchor-verified against the LIVE code
+(which already carries PATCH_NB2_TEXT), backup .pre_nopeople, py_compiles first.
+Relaunch/Regenerate renders after pulling. No storyboard rebuild -- this is render-time
+prompt assembly, so Regenerating the affected text beats picks it up.
 
     python3 patch_nopeople_default.py --file shared/recreation_pipeline.py
 """
@@ -36,7 +33,7 @@ import argparse, py_compile, shutil, sys, tempfile
 from pathlib import Path
 
 SENTINEL = "PATCH_NOPEOPLE_DEFAULT"
-EDITS = [['generate_still no-people default', '    from look_resolver import resolve_look\n    style_suffix = resolve_look(out_path, config)["style_suffix"]\n    people = rb.get("people_directive", "")\n    full_prompt = f"{style_suffix}. {image_prompt}, {people}" if people else f"{style_suffix}. {image_prompt}"\n    negative = ", ".join(rb["negative"])\n    # Per-channel image model: channel.json may set "image_model"', '    from look_resolver import resolve_look\n    style_suffix = resolve_look(out_path, config)["style_suffix"]\n    people = rb.get("people_directive", "")\n    # PATCH_NOPEOPLE_DEFAULT: on a reference-mode channel (QQrew), a beat that\n    # arrives here on the TEXT path (no reference_images) is a person-free beat\n    # BY DEFINITION -- Rule 1: a human in frame is a crew member (which would have\n    # carried a {token} -> a ref -> the /edit path) or does not exist. The\n    # people_directive ("...detailed faces where people are present...") was\n    # summoning cartoon humans onto person-free plates (predator eyes, a hand, an\n    # empty wide) whenever their wording missed the old phrase-guard ("no face",\n    # "no clear animal" didn\'t match "no people"). Invert the default: no ref +\n    # reference channel = strip the directive unconditionally.\n    if config.get("render_mode") == "reference" and not reference_images:\n        people = ""\n    full_prompt = f"{style_suffix}. {image_prompt}, {people}" if people else f"{style_suffix}. {image_prompt}"\n    negative = ", ".join(rb["negative"])\n    # Per-channel image model: channel.json may set "image_model"'], ['flux fallback no-people default', '    rb = load_rulebook()\n    style_suffix = resolve_look(out_path, config)["style_suffix"]\n    people = rb.get("people_directive", "")\n    full_prompt = (f"{style_suffix}. {image_prompt}, {people}" if people\n                   else f"{style_suffix}. {image_prompt}")', '    rb = load_rulebook()\n    style_suffix = resolve_look(out_path, config)["style_suffix"]\n    people = rb.get("people_directive", "")\n    # PATCH_NOPEOPLE_DEFAULT: mirror generate_still. On a reference-mode channel the\n    # flux fallback should not inject anonymous people either.\n    if config.get("render_mode") == "reference":\n        people = ""\n    full_prompt = (f"{style_suffix}. {image_prompt}, {people}" if people\n                   else f"{style_suffix}. {image_prompt}")']]
+EDITS = [['generate_still no-people default', '    people = rb.get("people_directive", "")\n    # PATCH_NB2_TEXT: the people_directive is a face/people enhancer appended to\n    # EVERY text prompt -- on beats that declare themselves people-free ("no\n    # people/figures/crew") it actively summons humans onto clean plates\n    # (graphics, maps, empty wides). Skip it on those beats.\n    _lp = image_prompt.lower()\n    if people and any(t in _lp for t in ("no people", "no figures", "no crew", "no person")):\n        people = ""\n    full_prompt = f"{style_suffix}. {image_prompt}, {people}" if people else f"{style_suffix}. {image_prompt}"', '    people = rb.get("people_directive", "")\n    # PATCH_NB2_TEXT: the people_directive is a face/people enhancer appended to\n    # EVERY text prompt -- on beats that declare themselves people-free ("no\n    # people/figures/crew") it actively summons humans onto clean plates\n    # (graphics, maps, empty wides). Skip it on those beats.\n    _lp = image_prompt.lower()\n    if people and any(t in _lp for t in ("no people", "no figures", "no crew", "no person")):\n        people = ""\n    # PATCH_NOPEOPLE_DEFAULT: the phrase-list above missed person-free beats worded\n    # "no face" / "no clear animal" (a hand lifting a branch, predator eyes) -> a\n    # cartoon human got summoned onto a clean plate. On a reference-mode channel a\n    # beat reaching the TEXT path has NO refs, so by Rule 1 (human = crew {token}\n    # -> /edit, or nobody) it is person-free BY DEFINITION. Strip unconditionally.\n    if config.get("render_mode") == "reference" and not reference_images:\n        people = ""\n    full_prompt = f"{style_suffix}. {image_prompt}, {people}" if people else f"{style_suffix}. {image_prompt}"'], ['flux fallback no-people default', '    people = rb.get("people_directive", "")\n    _lp = image_prompt.lower()  # PATCH_NB2_TEXT: same no-people guard as generate_still\n    if people and any(t in _lp for t in ("no people", "no figures", "no crew", "no person")):\n        people = ""\n    full_prompt = (f"{style_suffix}. {image_prompt}, {people}" if people\n                   else f"{style_suffix}. {image_prompt}")', '    people = rb.get("people_directive", "")\n    _lp = image_prompt.lower()  # PATCH_NB2_TEXT: same no-people guard as generate_still\n    if people and any(t in _lp for t in ("no people", "no figures", "no crew", "no person")):\n        people = ""\n    # PATCH_NOPEOPLE_DEFAULT: mirror generate_still. On a reference-mode channel the\n    # flux fallback should never inject anonymous people either.\n    if config.get("render_mode") == "reference":\n        people = ""\n    full_prompt = (f"{style_suffix}. {image_prompt}, {people}" if people\n                   else f"{style_suffix}. {image_prompt}")']]
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -63,8 +60,7 @@ def main() -> int:
         print(f"ERROR: result does not compile:\n{e}", file=sys.stderr); tmp.unlink(missing_ok=True); return 4
     tmp.unlink(missing_ok=True)
     b = t.with_suffix(t.suffix + ".pre_nopeople")
-    shutil.copy2(t, b)
-    t.write_text(out, encoding="utf-8")
+    shutil.copy2(t, b); t.write_text(out, encoding="utf-8")
     print(f"OK patched {t} (backup {b.name}, {len(EDITS)} edits)")
     return 0
 

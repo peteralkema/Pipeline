@@ -611,6 +611,10 @@ def _flux_fallback_still(image_prompt, out_path, config) -> Path:
     _lp = image_prompt.lower()  # PATCH_NB2_TEXT: same no-people guard as generate_still
     if people and any(t in _lp for t in ("no people", "no figures", "no crew", "no person")):
         people = ""
+    # PATCH_NOPEOPLE_DEFAULT: mirror generate_still. On a reference-mode channel the
+    # flux fallback should never inject anonymous people either.
+    if config.get("render_mode") == "reference":
+        people = ""
     full_prompt = (f"{style_suffix}. {image_prompt}, {people}" if people
                    else f"{style_suffix}. {image_prompt}")
     negative = ", ".join(rb["negative"])
@@ -654,6 +658,13 @@ def generate_still(image_prompt: str, out_path: Path, reference_images=None) -> 
     # (graphics, maps, empty wides). Skip it on those beats.
     _lp = image_prompt.lower()
     if people and any(t in _lp for t in ("no people", "no figures", "no crew", "no person")):
+        people = ""
+    # PATCH_NOPEOPLE_DEFAULT: the phrase-list above missed person-free beats worded
+    # "no face" / "no clear animal" (a hand lifting a branch, predator eyes) -> a
+    # cartoon human got summoned onto a clean plate. On a reference-mode channel a
+    # beat reaching the TEXT path has NO refs, so by Rule 1 (human = crew {token}
+    # -> /edit, or nobody) it is person-free BY DEFINITION. Strip unconditionally.
+    if config.get("render_mode") == "reference" and not reference_images:
         people = ""
     full_prompt = f"{style_suffix}. {image_prompt}, {people}" if people else f"{style_suffix}. {image_prompt}"
     negative = ", ".join(rb["negative"])
