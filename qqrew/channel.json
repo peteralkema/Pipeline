@@ -5,7 +5,8 @@
   "style_suffix": "photorealistic cinematic still, appealing realistic detailed faces, rich detailed realistic backgrounds, natural realistic skin and materials, sharp photographic detail, bright high-key lighting, vibrant saturated color, crisp clean and dynamic, lots of light and energy, polished cinematic quality, inviting and fun, no text, no letters, 16:9",
   "base_canon": {
     "driver": "a young adult man, early twenties, warm light-tan skin, short tousled brown hair, dark-framed glasses, friendly open face, slim build, wearing a blue denim jacket over a grey crew-neck t-shirt, dark jeans, a brown leather watch, and a tan canvas backpack worn evenly on both shoulders; curious and expressive, a touch wry",
-    "skeptic": "late-twenties woman, blonde tousled shoulder-length hair, tan camel jacket over white tee, layered gold necklaces, bright engaged expression with a warm easy half-smile, sharp and lively"
+    "skeptic": "late-twenties woman, blonde tousled shoulder-length hair, tan camel jacket over white tee, layered gold necklaces, bright engaged expression with a warm easy half-smile, sharp and lively",
+    "brain": "late-twenties woman, warm light-brown skin, dark brown hair in a messy high bun with loose face-framing strands, round black-framed glasses, thoughtful observant expression; wearing a soft sage-green jacket with light grey sleeves over a white tee, with a black backpack; quietly sharp, composed, always looking up and thinking"
   },
   "upload": {
     "category_id": "27",
@@ -68,7 +69,8 @@
   "reference_aspect": "16:9",
   "reference_map": {
     "skeptic": "characters/skeptic_ref.png",
-    "driver": "characters/driver_ref.png"
+    "driver": "characters/driver_ref.png",
+    "brain": "characters/brain_ref.png"
   },
   "image_model": "nano_banana",
   "ken_burns": false,
