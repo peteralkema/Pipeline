@@ -18,5 +18,66 @@
     "style": 0.25,
     "speed": 1.1
   },
-  "default_motion": "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere"
+  "default_motion": "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere",
+  "thumbnail": {
+    "composition": "low_silhouette",
+    "candidates": 2,
+    "candidate_prompt_suffix": "YouTube thumbnail composition, strongly asymmetric: the single atmospheric subject (a dark lighthouse, an empty ship, a frozen wreck, an eruption across a bay) is massed in the RIGHT TWO-THIRDS of the frame; the LEFT THIRD is deliberately dark, shadowed, low-detail negative space reserved for a headline; mournful cinematic dread, deep shadow, cold muted palette, the subject lit against the dark left; faceless, no people in detail, no text, no letters",
+    "selection_rules": [
+      "ONE clear atmospheric subject that reads instantly at phone-thumbnail size",
+      "mournful, high-contrast cinematic dread \u2014 it must stand out in a dim feed without being loud",
+      "faceless: no resolved human faces, no figures in detail",
+      "clean, darker, uncluttered negative space in the TOP-LEFT where the headline lands",
+      "no garbled detail, no accidental letterforms, no duplicated or broken figures, one subject only"
+    ],
+    "font": "shared/fonts/Anton-Regular.ttf",
+    "font_fallbacks": [
+      "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+      "Impact",
+      "Arial Black"
+    ],
+    "title_color": [
+      245,
+      240,
+      235
+    ],
+    "subtitle_color": [
+      150,
+      180,
+      205
+    ],
+    "stroke_width": 12,
+    "stroke_color": [
+      0,
+      0,
+      0
+    ],
+    "shadow": true,
+    "shadow_offset": [
+      5,
+      6
+    ],
+    "shadow_blur": 6,
+    "darken_factor": 1.0,
+    "vignette_strength": 0.0,
+    "scrim": {
+      "side": "left",
+      "width": 0.42,
+      "opacity": 0.55,
+      "feather": 0.7
+    },
+    "text_anchor": "top-left",
+    "text_align": "left",
+    "title_area_pct": 0.52,
+    "title_max_height_pct": 0.34,
+    "title_start_size": 150,
+    "subtitle_area_pct": 0.55,
+    "subtitle_max_height_pct": 0.14,
+    "subtitle_start_size": 90,
+    "margin": 20,
+    "margin_x": 40,
+    "margin_y": 20,
+    "uppercase": true,
+    "segment_foreground": false
+  }
 }
