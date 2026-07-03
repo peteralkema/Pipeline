@@ -59,6 +59,7 @@ B_COLOR = "0x0a1628"   # Synthetic navy placeholder for graphic (Mode B) beats
 COLDOPEN_COLOR = "0x000000"
 VOICE_LEVEL = 1.15   # VO full (calibrated)
 MUSIC_LEVEL = 0.040  # patched 2026-06-20: -28dB, ~17 LU under voice (was 0.07/-23dB/~14 LU)   # music bed sits low under narration (Jamendo-calibrated)
+KB_TAIL = False  # --kb-tail: NEVER-STRETCH — Mode A short clips play native + Ken-Burns tail
 
 
 def run(cmd, desc, quiet=True):
@@ -160,8 +161,46 @@ def make_video_segment(beat, src, is_ph, dur, W, H, work, i):
             # Avoid by good script design (keep promoted phrases within component capacity).
             vf = f"{scale_pad},tpad=stop_mode=clone:stop_duration={dur - native:.3f}"
             label = "freeze-tail(B)"
+        elif KB_TAIL and (dur - native) >= 0.5:
+            # NEVER-STRETCH LAW: play the clip at native speed in full, then
+            # continue the motion with a Ken-Burns zoom on the clip's LAST FRAME
+            # for the remainder. No setpts, no freeze — motion hands to motion.
+            remainder = dur - native
+            part1 = work / f"v_{i:03d}_native.mp4"
+            run(["ffmpeg", "-y", "-i", str(src),
+                 "-vf", scale_pad, "-c:v", "libx264", "-preset", "medium",
+                 "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(part1)],
+                f"kb-tail native part beat {beat['index']}")
+            frame = work / f"v_{i:03d}_last.png"
+            run(["ffmpeg", "-y", "-sseof", "-0.25", "-i", str(part1),
+                 "-frames:v", "1", "-update", "1", str(frame)],
+                f"kb-tail last frame beat {beat['index']}")
+            tail_frames = max(1, int(round(remainder * FPS)))
+            part2 = work / f"v_{i:03d}_tail.mp4"
+            # banked craft: upscale first, then zoompan, for smoothness
+            zp = (f"scale={W*2}:{H*2},"
+                  f"zoompan=z='min(zoom+0.0008,1.10)':d={tail_frames}:"
+                  f"s={W}x{H}:fps={FPS}")
+            run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame),
+                 "-vf", zp, "-t", f"{remainder:.3f}",
+                 "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+                 "-pix_fmt", "yuv420p", "-an", str(part2)],
+                f"kb-tail zoom part beat {beat['index']}")
+            lf = work / f"v_{i:03d}_list.txt"
+            lf.write_text(f"file '{part1.resolve()}'\nfile '{part2.resolve()}'\n")
+            run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(lf),
+                 "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
+                 "-crf", "18", "-pix_fmt", "yuv420p", str(dst)],
+                f"kb-tail concat beat {beat['index']}")
+            print(f"     beat {beat['index']}: kb-tail {native:.1f}s native + "
+                  f"{remainder:.1f}s ken-burns (never-stretch)")
+            return dst
+        elif KB_TAIL:
+            # remainder < 0.5s: invisible clone-pad instead of a zoom stub
+            vf = f"{scale_pad},tpad=stop_mode=clone:stop_duration={dur - native:.3f}"
+            label = "clone-pad(A,<0.5s)"
         else:
-            # Mode A: slow-to-fill (cinematic). setpts factor > 1 slows; fps resamples.
+            # Mode A legacy: slow-to-fill (cinematic). setpts factor > 1 slows; fps resamples.
             factor = dur / native
             if factor > 2.5:
                 print(f"     beat {beat['index']}: slow-fill {native:.1f}s -> {dur:.1f}s "
@@ -253,15 +292,22 @@ def main():
     ap.add_argument("--music-crossfade", type=float, default=2.0, help="crossfade seconds between tracks (default 2)")
     ap.add_argument("--music-level", type=float, default=None, help="music bed gain (linear; default = MUSIC_LEVEL constant). Higher = louder under the voice.")  # patched: --music-level flag
     ap.add_argument("--out", default=None, help="output mp4 (default: pacing_cut.mp4 or final_video.mp4)")
+    ap.add_argument("--kb-tail", action="store_true",
+                    help="NEVER-STRETCH: Mode A clips shorter than their beat play at native "
+                         "speed, then Ken-Burns-zoom their last frame for the remainder "
+                         "(no slow-fill). Mode B freeze-tail unchanged.")
     ap.add_argument("--placeholders", action="store_true",
                     help="force colour-block placeholders for ALL beats (free pacing cut)")
     ap.add_argument("--width", type=int, default=1920)
     ap.add_argument("--height", type=int, default=1080)
     args = ap.parse_args()
-    global MUSIC_LEVEL
+    global MUSIC_LEVEL, KB_TAIL
     if args.music_level is not None:
         MUSIC_LEVEL = args.music_level
         print(f'  music-level override: MUSIC {MUSIC_LEVEL}')
+    if args.kb_tail:
+        KB_TAIL = True
+        print("  kb-tail: NEVER-STRETCH mode — native playback + Ken-Burns tails on short Mode A clips")
 
     durations = Path(args.durations); index = Path(args.index)
     voiceover = Path(args.voiceover); project = Path(args.project)
