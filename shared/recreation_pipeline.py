@@ -214,9 +214,22 @@ IMAGE_ENDPOINTS = {
     "flux":          "fal-ai/flux-pro/v1.1",
 }
 
-# O3 Standard: ~3x faster + cheaper than Pro. Good default for the channel.
+# Animate model (fast layer, swappable). Default: Kling 2.5 Turbo Pro —
+# $0.07/s ($0.35 per 5s clip) vs O3 Standard's $0.084/s ($0.42), newer motion.
+# Per-channel override: channel.json "animate_model" = full fal endpoint, e.g.
+#   "fal-ai/kling-video/o3/standard/image-to-video"   (the old default)
+#   "fal-ai/kling-video/v3/pro/image-to-video"        (hero-shot trials)
 # Uses image_url (NOT start_image_url — that's the v3 endpoints).
-VIDEO_ENDPOINT = "fal-ai/kling-video/o3/standard/image-to-video"
+DEFAULT_VIDEO_ENDPOINT = "fal-ai/kling-video/v2.5-turbo/pro/image-to-video"
+
+def _video_endpoint():
+    """Resolve the animate endpoint: channel.json animate_model, else default."""
+    try:
+        cfg = load_channel_config(strict=False)
+        ep = str(cfg.get("animate_model", "") or "").strip()
+        return ep or DEFAULT_VIDEO_ENDPOINT
+    except Exception:
+        return DEFAULT_VIDEO_ENDPOINT
 
 SHOT_DURATION = "5"        # seconds per clip
 def _channel_aspect():
@@ -232,6 +245,7 @@ def _channel_aspect():
         return {"width": 1280, "height": 720}
 
 ASPECT = _channel_aspect()   # 16:9; per-channel via channel.json width/height
+VIDEO_ENDPOINT = _video_endpoint()  # animate model, resolved like ASPECT
 
 # House visual style appended to every image prompt for consistency.
 # This IS the channel's look — keep it identical across every video.
@@ -813,14 +827,17 @@ def animate_still(still_path: Path, motion_prompt: str, out_path: Path) -> Path:
     # Kling needs a public URL — upload the local still to fal storage first.
     try:
         image_url = fal_client.upload_file(str(still_path))
+        _args = {
+            "image_url": image_url,
+            "prompt": motion_prompt,
+            "duration": SHOT_DURATION,
+        }
+        if "v2.5-turbo" not in VIDEO_ENDPOINT:
+            # 2.5 Turbo Pro has no audio track — the flag isn't in its schema.
+            _args["generate_audio"] = False
         result = fal_client.subscribe(
             VIDEO_ENDPOINT,
-            arguments={
-                "image_url": image_url,
-                "prompt": motion_prompt,
-                "duration": SHOT_DURATION,
-                "generate_audio": False,
-            },
+            arguments=_args,
             with_logs=True,
             on_queue_update=on_update,
         )
@@ -1647,7 +1664,8 @@ def cmd_finish(args):
         plan.append((s, bi, engine))
     n_kling = sum(1 for _, _, e in plan if e == "kling")
     n_kb = len(plan) - n_kling
-    print(f"TIERED RENDER: N={kling_count}  ->  {n_kling} Kling (~${n_kling * 0.42:.2f}) "
+    _clip_cost = 0.35 if "v2.5-turbo" in VIDEO_ENDPOINT else 0.42
+    print(f"TIERED RENDER: N={kling_count}  ->  {n_kling} Kling (~${n_kling * _clip_cost:.2f}) "
           f"+ {n_kb} Ken Burns (free)")
     if getattr(args, "plan", False):
         for s, bi, engine in plan:
