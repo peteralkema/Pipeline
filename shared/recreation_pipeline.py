@@ -894,6 +894,25 @@ def generate_voiceover(script: str, out_path: Path) -> Path:
     Narrate the full script. If it fits in one request, one call. If it's long
     (full 15-min video), chunk at sentence boundaries and concatenate the MP3s.
     """
+    # ── TTS provider seam (patch_tts_provider): ElevenLabs delegation ────────
+    # Nearest channel.json (walking up from the project dir) decides the
+    # provider. tts_provider == "elevenlabs" -> delegate and return; anything
+    # else (or no channel.json) -> the Inworld path below runs untouched.
+    # Fail-loudly: if the provider IS elevenlabs, any failure raises — never
+    # a silent fallback to the wrong voice.
+    import json as _json
+    _seam_dir = Path(out_path).parent.resolve()
+    for _cand in (_seam_dir, *_seam_dir.parents):
+        _cj = _cand / "channel.json"
+        if _cj.is_file():
+            _cfg = _json.loads(_cj.read_text(encoding="utf-8"))
+            if str(_cfg.get("tts_provider", "")).strip().lower() == "elevenlabs":
+                print(f"   TTS provider: elevenlabs ({_cj})")
+                from elevenlabs_tts import generate_voiceover_elevenlabs
+                generate_voiceover_elevenlabs(script, out_path, _cfg)
+                return out_path
+            break
+
     chunks = _chunk_text(script)
     if len(chunks) == 1:
         out_path.write_bytes(_synthesize_chunk(chunks[0], anchor=out_path.parent))
