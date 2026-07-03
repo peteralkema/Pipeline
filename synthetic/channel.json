@@ -41,7 +41,11 @@
       240,
       235
     ],
-    "subtitle_color": "#FF8C1A",
+    "subtitle_color": [
+      255,
+      140,
+      26
+    ],
     "stroke_width": 12,
     "stroke_color": [
       0,
