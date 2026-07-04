@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.0"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.1"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1351,18 +1351,8 @@ function beatRow(b, ch, pr) {
   // Only meaningful when a still exists and we know the engine shot number.
   let controlsCell;
   if (hasStill && shot != null) {
-    const jkey = motionKey(ch, pr, b.index);  // reuse the channel/project/beat key
-    const judged = window.__JUDGED && window.__JUDGED[jkey];
-    const accSel = judged === "accept" ? "background:#1c7c4a;" : "";
-    const rejSel = judged === "reject" ? "background:#7c1c1c;" : "";
     controlsCell =
-      '<div class="stillctl" data-shot="' + shot + '" data-jkey="' + jkey + '">' +
-        '<div style="display:flex;gap:8px;">' +
-          '<button class="jbtn acc" style="flex:1;background:#2a2a36;' + accSel +
-            'color:#e8e6e3;border:0;border-radius:6px;padding:8px;cursor:pointer;font:13px ui-monospace,monospace;">Accept</button>' +
-          '<button class="jbtn rej" style="flex:1;background:#2a2a36;' + rejSel +
-            'color:#e8e6e3;border:0;border-radius:6px;padding:8px;cursor:pointer;font:13px ui-monospace,monospace;">Reject</button>' +
-        '</div>' +
+      '<div class="stillctl" data-shot="' + shot + '">' +
         '<button class="nbfix" style="width:100%;margin-top:8px;background:#c98a1a;color:#fff;' +
           'border:0;border-radius:6px;padding:11px;cursor:pointer;font:13px ui-monospace,monospace;font-weight:700;">&#128295; Fix this image</button>' +
         '<button class="regen" style="width:100%;margin-top:8px;background:#3b5bdb;color:#fff;' +
@@ -1446,7 +1436,6 @@ function bindMotionBoxes(wrap) {
   bindStillControls(wrap);
 }
 function bindStillControls(wrap) {
-  window.__JUDGED = window.__JUDGED || {};
   const CH = (window.__SEL_VIEW || "/").split("/")[0];
   const PR = (window.__SEL_VIEW || "/").split("/").slice(1).join("/");
   function reloadStill(ctl) {
@@ -1463,23 +1452,11 @@ function bindStillControls(wrap) {
   }
   wrap.querySelectorAll(".stillctl").forEach(function(ctl) {
     const shot = parseInt(ctl.getAttribute("data-shot"), 10);
-    const jkey = ctl.getAttribute("data-jkey");
     const msg = ctl.querySelector(".ctlmsg");
     const note = ctl.querySelector("textarea.note");
     const override = ctl.querySelector("textarea.override");
-    const acc = ctl.querySelector("button.acc");
-    const rej = ctl.querySelector("button.rej");
     const regen = ctl.querySelector("button.regen");
     const nbfix = ctl.querySelector("button.nbfix");
-
-    acc.addEventListener("click", function() {
-      window.__JUDGED[jkey] = "accept";
-      acc.style.background = "#1c7c4a"; rej.style.background = "#2a2a36";
-    });
-    rej.addEventListener("click", function() {
-      window.__JUDGED[jkey] = "reject";
-      rej.style.background = "#7c1c1c"; acc.style.background = "#2a2a36";
-    });
 
     async function post(endpoint, payload, label) {
       msg.style.color = "#8a8a99"; msg.textContent = label + "...";
