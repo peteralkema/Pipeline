@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.4"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.5"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1527,6 +1527,43 @@ function paintInherit(cell, on) {
   }
   _applyBeatDisable(cell);
 }
+function paintInhSums(wrap) {
+  // mirrors the inherit render pass: walk each beat back through inherited
+  // predecessors to its source atom; red when the source is Ken-Burns or the
+  // chain falls off the front; otherwise green/amber by 5s-atom fit.
+  const arr = [];
+  wrap.querySelectorAll(".motioncell").forEach(function(c) { arr.push(c); });
+  for (var i = 0; i < arr.length; i++) {
+    const el = arr[i].querySelector(".inhsum");
+    if (!el) continue;
+    const d = parseFloat(arr[i].getAttribute("data-dur"));
+    if (i === 0 || isNaN(d)) { el.textContent = ""; continue; }
+    var j = i - 1;
+    while (j >= 0 && arr[j].dataset.inhon === "1") j--;
+    if (j < 0) {
+      el.textContent = "no source atom - inherit chain reaches beat 0 (falls back free)";
+      el.style.color = "#c0392b"; continue;
+    }
+    if (arr[j].dataset.kbon === "1") {
+      el.textContent = "previous renders Ken-Burns - no atom to inherit (falls back free)";
+      el.style.color = "#c0392b"; continue;
+    }
+    var total = d, bad = false;
+    for (var k = j; k < i; k++) {
+      const dk = parseFloat(arr[k].getAttribute("data-dur"));
+      if (isNaN(dk)) { bad = true; break; }
+      total += dk;
+    }
+    if (bad) { el.textContent = ""; continue; }
+    const fits = total <= 5.0;
+    const label = (j === i - 1)
+      ? "This beat plus previous beat = "
+      : "Chain of " + (i - j + 1) + " beats on one atom = ";
+    el.textContent = label + total.toFixed(2) + "s " +
+                     (fits ? "(fits the 5s atom)" : "(exceeds the 5s atom - tail falls back)");
+    el.style.color = fits ? "#1c7c4a" : "#c98a1a";
+  }
+}
 function bindAnimateButtons(wrap) {
   const CH = (window.__SEL_VIEW || "/").split("/")[0];
   const PR = (window.__SEL_VIEW || "/").split("/").slice(1).join("/");
@@ -1549,21 +1586,8 @@ function bindAnimateButtons(wrap) {
           if (ib) { ib.disabled = true; ib.style.opacity = "0.45"; ib.title = "beat 0 has no predecessor"; }
         }
       });
+      paintInhSums(wrap);
     }).catch(function() {});
-  // inherit decision support: this beat + previous vs the 5s Kling atom.
-  var _prevDur = null;
-  wrap.querySelectorAll(".motioncell").forEach(function(cell) {
-    const d = parseFloat(cell.getAttribute("data-dur"));
-    const el = cell.querySelector(".inhsum");
-    if (el && !isNaN(d) && _prevDur != null) {
-      const sum = d + _prevDur;
-      const fits = sum <= 5.0;
-      el.textContent = "This beat plus previous beat = " + sum.toFixed(2) + "s " +
-                       (fits ? "(fits the 5s atom)" : "(exceeds the 5s atom - tail falls back)");
-      el.style.color = fits ? "#1c7c4a" : "#c98a1a";
-    }
-    _prevDur = isNaN(d) ? null : d;
-  });
   wrap.querySelectorAll(".motioncell").forEach(function(cell) {
     const btn = cell.querySelector("button.animbtn");
     const shot = parseInt(cell.getAttribute("data-shot"), 10);
@@ -1578,7 +1602,7 @@ function bindAnimateButtons(wrap) {
           const r = await api("/api/kb_toggle", {method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({channel: CH, project: PR, beat: kbeat})});
-          if (r && r.ok) { paintKB(cell, r.on); if (r.on) paintInherit(cell, false); }
+          if (r && r.ok) { paintKB(cell, r.on); if (r.on) paintInherit(cell, false); paintInhSums(wrap); }
         } catch (e) { /* leave painted state; next storyboard render re-reads the file */ }
       });
     }
@@ -1592,7 +1616,7 @@ function bindAnimateButtons(wrap) {
           const r = await api("/api/inherit_toggle", {method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({channel: CH, project: PR, beat: ibeat})});
-          if (r && r.ok) { paintInherit(cell, r.on); if (r.on) paintKB(cell, false); }
+          if (r && r.ok) { paintInherit(cell, r.on); if (r.on) paintKB(cell, false); paintInhSums(wrap); }
         } catch (e) { /* next storyboard render re-reads the file */ }
       });
     }
