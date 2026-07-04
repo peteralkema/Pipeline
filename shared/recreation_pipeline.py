@@ -1579,6 +1579,21 @@ def _tiered_kling_count(project_root, override=None):
     return 40
 
 
+def _kb_override_set(project_root):
+    """Per-beat Ken-Burns overrides: render_policy.json {"kb_override": [beat,...]}.
+    A beat listed here renders on the free Ken-Burns floor even inside the
+    Kling front-N (per-beat craft control from the MC review page). The freed
+    Kling slot is SAVED, not slid to the next beat. Empty set when absent."""
+    import json as _json
+    rp = project_root / "render_policy.json"
+    if rp.is_file():
+        try:
+            return {int(x) for x in _json.loads(rp.read_text()).get("kb_override", [])}
+        except Exception:
+            return set()
+    return set()
+
+
 def _tiered_beat_index(engine_shot, project_root):
     """Map a 1-based engine shot to its 0-based timeline beat index via _index.json.
     Falls back to engine_shot-1 (pure Mode A) when the map is absent."""
@@ -1657,21 +1672,27 @@ def cmd_finish(args):
 
     project_root = p["root"].parent  # durations.json / _index.json / render_policy.json live one level up
     kling_count = _tiered_kling_count(project_root, getattr(args, "kling_count", None))
+    kb_over = _kb_override_set(project_root)
     plan = []
     for s in shots:
         bi = _tiered_beat_index(s["index"], project_root)
-        engine = "kling" if bi < kling_count else "kenburns"
+        engine = "kling" if (bi < kling_count and bi not in kb_over) else "kenburns"
         plan.append((s, bi, engine))
     n_kling = sum(1 for _, _, e in plan if e == "kling")
     n_kb = len(plan) - n_kling
     _clip_cost = 0.35 if "v2.5-turbo" in VIDEO_ENDPOINT else 0.42
     print(f"TIERED RENDER: N={kling_count}  ->  {n_kling} Kling (~${n_kling * _clip_cost:.2f}) "
           f"+ {n_kb} Ken Burns (free)")
+    _kb_applied = sorted(b for b in kb_over if b < kling_count)
+    if _kb_applied:
+        print(f"  kb-override: {len(_kb_applied)} front-N beat(s) flipped to Ken Burns "
+              f"(slot saved, not slid): {_kb_applied}")
     if getattr(args, "plan", False):
         for s, bi, engine in plan:
             dur = _tiered_duration(bi, project_root)
             durtxt = (f"{dur:.2f}s" if dur is not None else "?")
-            print(f"  shot {s['index']:03d}  beat {bi:>3}  {durtxt:>7}  -> {engine}")
+            _mark = "  (kb-override)" if (bi in kb_over and bi < kling_count) else ""
+            print(f"  shot {s['index']:03d}  beat {bi:>3}  {durtxt:>7}  -> {engine}{_mark}")
         print("(--plan: routing only, nothing rendered, no cost)")
         return
     clip_paths = []
