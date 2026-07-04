@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v1.9"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.0"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1317,6 +1317,14 @@ function beatRow(b, ch, pr) {
     'font:13px/1.45 ui-monospace,monospace;resize:vertical;">' +
     escapeHtml(stored) + '</textarea>' +
     '<div style="color:#55556a;font-size:11px;margin-top:4px;">motion direction</div>' +
+    '<div style="display:flex;gap:6px;margin-top:6px;">' +
+    '<button class="mpreset" data-preset="dynamic" title="dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere" ' +
+    'style="flex:1;background:#2a2a36;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;' +
+    'padding:7px 4px;cursor:pointer;font:12px ui-monospace,monospace;">Dynamic</button>' +
+    '<button class="mpreset" data-preset="slowcrane" title="slow cinematic camera movement, crane-up to wide angle powerful momentum, natural realistic motion, dramatic atmosphere" ' +
+    'style="flex:1;background:#2a2a36;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;' +
+    'padding:7px 4px;cursor:pointer;font:12px ui-monospace,monospace;">Slow crane-up</button>' +
+    '</div>' +
     '<button class="kbbtn" title="Flip this beat to the free Ken-Burns floor (kb_override; slot saved, not slid)" ' +
     'style="width:100%;margin-top:8px;background:#2a2a36;color:#e8e6e3;' +
     'border:1px solid #32323e;border-radius:6px;padding:8px;cursor:pointer;' +
@@ -1519,6 +1527,9 @@ function paintKB(cell, on) {
   }
   if (box) { box.disabled = on; box.style.opacity = on ? "0.45" : "1"; }
   if (anim) { anim.disabled = on; anim.style.opacity = on ? "0.45" : "1"; }
+  cell.querySelectorAll("button.mpreset").forEach(function(pb) {
+    pb.disabled = on; pb.style.opacity = on ? "0.45" : "1";
+  });
 }
 function bindAnimateButtons(wrap) {
   const CH = (window.__SEL_VIEW || "/").split("/")[0];
@@ -1554,6 +1565,22 @@ function bindAnimateButtons(wrap) {
         } catch (e) { /* leave painted state; next storyboard render re-reads the file */ }
       });
     }
+    // motion presets: stamp an exact proven direction into the box, then persist
+    // through the same seam as typing (edit map + saveMotion -> storyboard.json).
+    const MPRESETS = {
+      dynamic: "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere",
+      slowcrane: "slow cinematic camera movement, crane-up to wide angle powerful momentum, natural realistic motion, dramatic atmosphere"
+    };
+    cell.querySelectorAll("button.mpreset").forEach(function(pb) {
+      pb.addEventListener("click", function() {
+        if (!box || box.disabled) return;
+        const t = MPRESETS[pb.getAttribute("data-preset")];
+        if (!t) return;
+        box.value = t;
+        window.__MOTION_EDITS[box.getAttribute("data-mkey")] = t;
+        saveMotion();
+      });
+    });
     // motion-persist: write the typed direction to storyboard.json so it survives
     // a body re-render AND drives the batch animate (both read motion_prompt).
     async function saveMotion() {
