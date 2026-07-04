@@ -824,6 +824,36 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) ->
     return out_path
 
 
+def inherit_prev_clip(src_clip: Path, out_path: Path, offset: float) -> Path:
+    """CLIP-MERGE derivation — write out_path as src_clip seeked from `offset`
+    onward (the unused tail of an already-paid atom). The assembler then treats
+    it as an ordinary clip: trims to the beat's frozen duration, or fills if the
+    tail runs short. Raises when the source is missing or (checked via ffprobe)
+    the offset leaves under 0.3s, so the caller can fall back to the free
+    Ken-Burns floor instead of shipping a near-empty clip."""
+    import subprocess
+    src_clip = Path(src_clip)
+    if not src_clip.exists():
+        raise RuntimeError(f"source clip missing: {src_clip.name}")
+    pr = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                         "-of", "default=noprint_wrappers=1:nokey=1", str(src_clip)],
+                        capture_output=True, text=True)
+    try:
+        native = float(pr.stdout.strip())
+    except ValueError:
+        native = 0.0
+    if native - offset < 0.30:
+        raise RuntimeError(f"nothing left in the atom (native {native:.2f}s, offset {offset:.2f}s)")
+    cmd = ["ffmpeg", "-y", "-ss", f"{offset:.3f}", "-i", str(src_clip),
+           "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+           "-pix_fmt", "yuv420p", "-an", str(out_path)]
+    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if res.returncode != 0:
+        tail = " | ".join(res.stderr.strip().splitlines()[-4:])
+        raise RuntimeError(f"inherit ffmpeg failed: {tail}")
+    return out_path
+
+
 def _is_content_policy_error(exc) -> bool:
     """Detect Kling's content-policy refusal across the ways it can surface."""
     s = str(exc).lower()
@@ -1602,6 +1632,21 @@ def _kb_override_set(project_root):
     return set()
 
 
+def _inherit_prev_set(project_root):
+    """Per-beat clip-merge: render_policy.json {"inherit_prev": [beat,...]}.
+    A beat listed here renders NO clip of its own — it plays the unused tail
+    of its predecessor's atom (derived in the inherit pass of cmd_finish).
+    Precedence above kb_override. Empty set when absent."""
+    import json as _json
+    rp = project_root / "render_policy.json"
+    if rp.is_file():
+        try:
+            return {int(x) for x in _json.loads(rp.read_text()).get("inherit_prev", [])}
+        except Exception:
+            return set()
+    return set()
+
+
 def _tiered_beat_index(engine_shot, project_root):
     """Map a 1-based engine shot to its 0-based timeline beat index via _index.json.
     Falls back to engine_shot-1 (pure Mode A) when the map is absent."""
@@ -1681,16 +1726,26 @@ def cmd_finish(args):
     project_root = p["root"].parent  # durations.json / _index.json / render_policy.json live one level up
     kling_count = _tiered_kling_count(project_root, getattr(args, "kling_count", None))
     kb_over = _kb_override_set(project_root)
+    inherit_prev = _inherit_prev_set(project_root)
     plan = []
     for s in shots:
         bi = _tiered_beat_index(s["index"], project_root)
-        engine = "kling" if (bi < kling_count and bi not in kb_over) else "kenburns"
+        if bi in inherit_prev:
+            engine = "inherit"
+        elif bi < kling_count and bi not in kb_over:
+            engine = "kling"
+        else:
+            engine = "kenburns"
         plan.append((s, bi, engine))
     n_kling = sum(1 for _, _, e in plan if e == "kling")
-    n_kb = len(plan) - n_kling
+    n_inherit = sum(1 for _, _, e in plan if e == "inherit")
+    n_kb = len(plan) - n_kling - n_inherit
     _clip_cost = 0.35 if "v2.5-turbo" in VIDEO_ENDPOINT else 0.42
     print(f"TIERED RENDER: N={kling_count}  ->  {n_kling} Kling (~${n_kling * _clip_cost:.2f}) "
           f"+ {n_kb} Ken Burns (free)")
+    if n_inherit:
+        print(f"  inherit-prev: {n_inherit} beat(s) ride their predecessor's atom "
+              f"(free; recovered footage)")
     _kb_applied = sorted(b for b in kb_over if b < kling_count)
     if _kb_applied:
         print(f"  kb-override: {len(_kb_applied)} front-N beat(s) flipped to Ken Burns "
@@ -1709,6 +1764,8 @@ def cmd_finish(args):
         clip  = p["clips"] / f"shot_{s['index']:03d}.mp4"
         if clip.exists() and not args.force:
             print(f"  [{s['index']}/{len(shots)}] already done, skipping")
+        elif engine == "inherit":
+            print(f"  [{s['index']}/{len(shots)}] inherit — deferred to the inherit pass (free)")
         elif engine == "kling":
             print(f"  [{s['index']}/{len(shots)}] Kling animating...")
             animate_still(still, s["motion_prompt"], clip)
@@ -1717,6 +1774,39 @@ def cmd_finish(args):
             print(f"  [{s['index']}/{len(shots)}] Ken Burns ({dur:.2f}s, free)...")
             ken_burns_still(still, clip, dur)
         clip_paths.append(clip)
+
+    # ── inherit pass: derive clip-merge beats from their source atoms ──────────
+    # Runs AFTER the main loop so every source clip exists. Walks chains back to
+    # the nearest non-inherited ancestor, summing consumed span from the frozen
+    # durations.json. All failures fall back to the free Ken-Burns floor on the
+    # beat's OWN still — the cut always assembles, timing is never touched.
+    _inh_beats = [(s, bi) for s, bi, e in plan if e == "inherit"]
+    if _inh_beats:
+        _b2s = {b: s["index"] for s, b, _e in plan}
+        for s, bi in _inh_beats:
+            clip = p["clips"] / f"shot_{s['index']:03d}.mp4"
+            if clip.exists() and not args.force:
+                print(f"  [inherit] shot {s['index']:03d} already done, skipping")
+                continue
+            still = p["stills"] / f"shot_{s['index']:03d}.png"
+            dur_b = _tiered_duration(bi, project_root) or float(SHOT_DURATION)
+            j = bi - 1
+            offset = 0.0
+            while j >= 0 and j in inherit_prev:
+                offset += _tiered_duration(j, project_root) or float(SHOT_DURATION)
+                j -= 1
+            if j < 0:
+                print(f"  [inherit] beat {bi}: no predecessor — Ken Burns fallback (free)")
+                ken_burns_still(still, clip, dur_b)
+                continue
+            offset += _tiered_duration(j, project_root) or float(SHOT_DURATION)
+            src = p["clips"] / f"shot_{_b2s.get(j, j + 1):03d}.mp4"
+            try:
+                inherit_prev_clip(src, clip, offset)
+                print(f"  [inherit] shot {s['index']:03d} <- beat {j}'s atom @ {offset:.2f}s (free)")
+            except Exception as e:
+                print(f"  [inherit] beat {bi}: {e} — Ken Burns fallback (free)")
+                ken_burns_still(still, clip, dur_b)
 
     if getattr(args, "animate_only", False):
         print(f"\nAnimate-only: {len(clip_paths)} clips in {p['clips']}, "
