@@ -1317,6 +1317,10 @@ function beatRow(b, ch, pr) {
     'font:13px/1.45 ui-monospace,monospace;resize:vertical;">' +
     escapeHtml(stored) + '</textarea>' +
     '<div style="color:#55556a;font-size:11px;margin-top:4px;">motion direction</div>' +
+    '<button class="kbbtn" title="Flip this beat to the free Ken-Burns floor (kb_override; slot saved, not slid)" ' +
+    'style="width:100%;margin-top:8px;background:#2a2a36;color:#e8e6e3;' +
+    'border:1px solid #32323e;border-radius:6px;padding:8px;cursor:pointer;' +
+    'font:13px ui-monospace,monospace;">Ken-Burns: off</button>' +
     (_canAnimate ?
       ('<button class="animbtn" style="width:100%;margin-top:8px;background:#7a4ddb;' +
        'color:#fff;border:0;border-radius:6px;padding:9px;cursor:pointer;' +
@@ -1503,13 +1507,53 @@ function bindStillControls(wrap) {
   });
   bindAnimateButtons(wrap);
 }
+function paintKB(cell, on) {
+  // per-beat Ken-Burns override state: green button; motion box + Render-this-clip
+  // disabled while ON (that button fires Kling directly — don't contradict the flag).
+  const btn = cell.querySelector("button.kbbtn");
+  const box = cell.querySelector("textarea.motionbox");
+  const anim = cell.querySelector("button.animbtn");
+  if (btn) {
+    btn.textContent = on ? "Ken-Burns: ON (free)" : "Ken-Burns: off";
+    btn.style.background = on ? "#1c7c4a" : "#2a2a36";
+  }
+  if (box) { box.disabled = on; box.style.opacity = on ? "0.45" : "1"; }
+  if (anim) { anim.disabled = on; anim.style.opacity = on ? "0.45" : "1"; }
+}
 function bindAnimateButtons(wrap) {
   const CH = (window.__SEL_VIEW || "/").split("/")[0];
   const PR = (window.__SEL_VIEW || "/").split("/").slice(1).join("/");
+  // paint KB state from the policy file (the truth) on every storyboard render
+  api("/api/render_policy?channel=" + encodeURIComponent(CH) +
+      "&project=" + encodeURIComponent(PR))
+    .then(function(r) {
+      const on = {};
+      ((r && r.kb_override) || []).forEach(function(b) { on[b] = 1; });
+      wrap.querySelectorAll(".motioncell").forEach(function(cell) {
+        const bx = cell.querySelector("textarea.motionbox");
+        if (!bx) return;
+        const bt = parseInt((bx.getAttribute("data-mkey") || "").split("/").pop(), 10);
+        if (!isNaN(bt)) paintKB(cell, !!on[bt]);
+      });
+    }).catch(function() {});
   wrap.querySelectorAll(".motioncell").forEach(function(cell) {
     const btn = cell.querySelector("button.animbtn");
     const shot = parseInt(cell.getAttribute("data-shot"), 10);
     const box = cell.querySelector("textarea.motionbox");
+    // KB toggle: flip this beat's kb_override in render_policy.json (server merges).
+    const kbbtn = cell.querySelector("button.kbbtn");
+    if (kbbtn && box) {
+      const kbeat = parseInt((box.getAttribute("data-mkey") || "").split("/").pop(), 10);
+      kbbtn.addEventListener("click", async function() {
+        if (isNaN(kbeat)) return;
+        try {
+          const r = await api("/api/kb_toggle", {method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({channel: CH, project: PR, beat: kbeat})});
+          if (r && r.ok) paintKB(cell, r.on);
+        } catch (e) { /* leave painted state; next storyboard render re-reads the file */ }
+      });
+    }
     // motion-persist: write the typed direction to storyboard.json so it survives
     // a body re-render AND drives the batch animate (both read motion_prompt).
     async function saveMotion() {
@@ -1863,14 +1907,60 @@ class Handler(BaseHTTPRequestHandler):
         rp = paths["project"] / "render_policy.json"
         n = 40
         static = False
+        kb = []
         if rp.is_file():
             try:
                 _rpj = _json.loads(rp.read_text())
                 n = int(_rpj.get("kling_count", 40))
                 static = bool(_rpj.get("static", False))
+                kb = sorted({int(x) for x in _rpj.get("kb_override", [])})
             except Exception:
-                n = 40; static = False
-        self._json(200, {"ok": True, "kling_count": n, "static": static, "default": 40}); return
+                n = 40; static = False; kb = []
+        self._json(200, {"ok": True, "kling_count": n, "static": static,
+                         "kb_override": kb, "default": 40}); return
+
+    def _handle_kb_toggle(self, body):
+        """Toggle a beat in render_policy.json "kb_override" — the per-beat
+        Ken-Burns override (beat renders on the free floor even inside the
+        Kling front-N; the freed slot is SAVED, not slid). MERGES with the
+        existing file, same discipline as _handle_render_policy_post: no
+        sibling key is ever clobbered. Returns the new state."""
+        import json as _json
+        try:
+            beat = int(body.get("beat"))
+        except Exception:
+            self._json(400, {"ok": False, "error": "beat must be an integer"}); return
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        paths = resolve_paths(ch, pr, _REPO)
+        rp = paths["project"] / "render_policy.json"
+        existing = {}
+        if rp.is_file():
+            try:
+                existing = _json.loads(rp.read_text()) or {}
+            except Exception:
+                existing = {}
+        try:
+            kb = sorted({int(x) for x in existing.get("kb_override", [])})
+        except Exception:
+            kb = []
+        if beat in kb:
+            kb = [b for b in kb if b != beat]
+            on = False
+        else:
+            kb = sorted(kb + [beat])
+            on = True
+        policy = dict(existing)
+        if kb:
+            policy["kb_override"] = kb
+        else:
+            policy.pop("kb_override", None)
+        try:
+            rp.write_text(_json.dumps(policy, indent=2))
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"write failed: {e}"}); return
+        self._json(200, {"ok": True, "on": on, "beat": beat, "kb_override": kb}); return
 
     def _handle_render_policy_post(self, body):
         """Write TIERED RENDER policy to render_policy.json at the project root.
@@ -2228,6 +2318,8 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/api/render_policy":
             self._handle_render_policy_post(body); return
+        if path == "/api/kb_toggle":
+            self._handle_kb_toggle(body); return
         if path == "/api/restill":
             self._handle_restill(body); return
         if path == "/api/aifix":
