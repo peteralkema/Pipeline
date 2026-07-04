@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.1"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.2"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1329,6 +1329,10 @@ function beatRow(b, ch, pr) {
     'style="width:100%;margin-top:8px;background:#2a2a36;color:#e8e6e3;' +
     'border:1px solid #32323e;border-radius:6px;padding:8px;cursor:pointer;' +
     'font:13px ui-monospace,monospace;">Ken-Burns: off</button>' +
+    '<button class="inhbtn" title="Beat plays the unused tail of the previous beat\'s atom (free; same-scene continuation; derived at render, falls back to Ken Burns if nothing is left)" ' +
+    'style="width:100%;margin-top:8px;background:#2a2a36;color:#e8e6e3;' +
+    'border:1px solid #32323e;border-radius:6px;padding:8px;cursor:pointer;' +
+    'font:13px ui-monospace,monospace;">Inherit previous clip: off</button>' +
     (_canAnimate ?
       ('<button class="animbtn" style="width:100%;margin-top:8px;background:#7a4ddb;' +
        'color:#fff;border:0;border-radius:6px;padding:9px;cursor:pointer;' +
@@ -1492,21 +1496,35 @@ function bindStillControls(wrap) {
   });
   bindAnimateButtons(wrap);
 }
-function paintKB(cell, on) {
-  // per-beat Ken-Burns override state: green button; motion box + Render-this-clip
-  // disabled while ON (that button fires Kling directly — don't contradict the flag).
-  const btn = cell.querySelector("button.kbbtn");
+function _applyBeatDisable(cell) {
+  // a beat that renders nothing of its own (KB or inherit) takes no motion
+  // direction and must not fire a manual Kling render.
+  const dis = cell.dataset.kbon === "1" || cell.dataset.inhon === "1";
   const box = cell.querySelector("textarea.motionbox");
   const anim = cell.querySelector("button.animbtn");
+  if (box) { box.disabled = dis; box.style.opacity = dis ? "0.45" : "1"; }
+  if (anim) { anim.disabled = dis; anim.style.opacity = dis ? "0.45" : "1"; }
+  cell.querySelectorAll("button.mpreset").forEach(function(pb) {
+    pb.disabled = dis; pb.style.opacity = dis ? "0.45" : "1";
+  });
+}
+function paintKB(cell, on) {
+  cell.dataset.kbon = on ? "1" : "0";
+  const btn = cell.querySelector("button.kbbtn");
   if (btn) {
     btn.textContent = on ? "Ken-Burns: ON (free)" : "Ken-Burns: off";
     btn.style.background = on ? "#1c7c4a" : "#2a2a36";
   }
-  if (box) { box.disabled = on; box.style.opacity = on ? "0.45" : "1"; }
-  if (anim) { anim.disabled = on; anim.style.opacity = on ? "0.45" : "1"; }
-  cell.querySelectorAll("button.mpreset").forEach(function(pb) {
-    pb.disabled = on; pb.style.opacity = on ? "0.45" : "1";
-  });
+  _applyBeatDisable(cell);
+}
+function paintInherit(cell, on) {
+  cell.dataset.inhon = on ? "1" : "0";
+  const btn = cell.querySelector("button.inhbtn");
+  if (btn) {
+    btn.textContent = on ? "Inherit previous clip: ON (free)" : "Inherit previous clip: off";
+    btn.style.background = on ? "#1c7c4a" : "#2a2a36";
+  }
+  _applyBeatDisable(cell);
 }
 function bindAnimateButtons(wrap) {
   const CH = (window.__SEL_VIEW || "/").split("/")[0];
@@ -1515,13 +1533,20 @@ function bindAnimateButtons(wrap) {
   api("/api/render_policy?channel=" + encodeURIComponent(CH) +
       "&project=" + encodeURIComponent(PR))
     .then(function(r) {
-      const on = {};
-      ((r && r.kb_override) || []).forEach(function(b) { on[b] = 1; });
+      const kbOn = {}, inhOn = {};
+      ((r && r.kb_override) || []).forEach(function(b) { kbOn[b] = 1; });
+      ((r && r.inherit_prev) || []).forEach(function(b) { inhOn[b] = 1; });
       wrap.querySelectorAll(".motioncell").forEach(function(cell) {
         const bx = cell.querySelector("textarea.motionbox");
         if (!bx) return;
         const bt = parseInt((bx.getAttribute("data-mkey") || "").split("/").pop(), 10);
-        if (!isNaN(bt)) paintKB(cell, !!on[bt]);
+        if (isNaN(bt)) return;
+        paintKB(cell, !!kbOn[bt]);
+        paintInherit(cell, !!inhOn[bt]);
+        if (bt === 0) {
+          const ib = cell.querySelector("button.inhbtn");
+          if (ib) { ib.disabled = true; ib.style.opacity = "0.45"; ib.title = "beat 0 has no predecessor"; }
+        }
       });
     }).catch(function() {});
   wrap.querySelectorAll(".motioncell").forEach(function(cell) {
@@ -1538,8 +1563,22 @@ function bindAnimateButtons(wrap) {
           const r = await api("/api/kb_toggle", {method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({channel: CH, project: PR, beat: kbeat})});
-          if (r && r.ok) paintKB(cell, r.on);
+          if (r && r.ok) { paintKB(cell, r.on); if (r.on) paintInherit(cell, false); }
         } catch (e) { /* leave painted state; next storyboard render re-reads the file */ }
+      });
+    }
+    // inherit-prev toggle: clip-merge — beat rides its predecessor's atom.
+    const inhbtn = cell.querySelector("button.inhbtn");
+    if (inhbtn && box) {
+      const ibeat = parseInt((box.getAttribute("data-mkey") || "").split("/").pop(), 10);
+      inhbtn.addEventListener("click", async function() {
+        if (isNaN(ibeat) || ibeat === 0) return;
+        try {
+          const r = await api("/api/inherit_toggle", {method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({channel: CH, project: PR, beat: ibeat})});
+          if (r && r.ok) { paintInherit(cell, r.on); if (r.on) paintKB(cell, false); }
+        } catch (e) { /* next storyboard render re-reads the file */ }
       });
     }
     // motion presets: stamp an exact proven direction into the box, then persist
@@ -1912,16 +1951,18 @@ class Handler(BaseHTTPRequestHandler):
         n = 40
         static = False
         kb = []
+        inh = []
         if rp.is_file():
             try:
                 _rpj = _json.loads(rp.read_text())
                 n = int(_rpj.get("kling_count", 40))
                 static = bool(_rpj.get("static", False))
                 kb = sorted({int(x) for x in _rpj.get("kb_override", [])})
+                inh = sorted({int(x) for x in _rpj.get("inherit_prev", [])})
             except Exception:
-                n = 40; static = False; kb = []
+                n = 40; static = False; kb = []; inh = []
         self._json(200, {"ok": True, "kling_count": n, "static": static,
-                         "kb_override": kb, "default": 40}); return
+                         "kb_override": kb, "inherit_prev": inh, "default": 40}); return
 
     def _handle_kb_toggle(self, body):
         """Toggle a beat in render_policy.json "kb_override" — the per-beat
@@ -1956,6 +1997,15 @@ class Handler(BaseHTTPRequestHandler):
             kb = sorted(kb + [beat])
             on = True
         policy = dict(existing)
+        if on:
+            try:
+                _inh = sorted({int(x) for x in existing.get("inherit_prev", [])} - {beat})
+            except Exception:
+                _inh = []
+            if _inh:
+                policy["inherit_prev"] = _inh
+            else:
+                policy.pop("inherit_prev", None)
         if kb:
             policy["kb_override"] = kb
         else:
@@ -1965,6 +2015,59 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e:
             self._json(500, {"ok": False, "error": f"write failed: {e}"}); return
         self._json(200, {"ok": True, "on": on, "beat": beat, "kb_override": kb}); return
+
+    def _handle_inherit_toggle(self, body):
+        """Toggle a beat in render_policy.json "inherit_prev" — clip-merge: the
+        beat plays the unused tail of its predecessor's atom (derived in the
+        inherit pass; free). MERGE-style, siblings never clobbered. Mutual
+        exclusion: turning inherit ON removes the beat from kb_override."""
+        import json as _json
+        try:
+            beat = int(body.get("beat"))
+        except Exception:
+            self._json(400, {"ok": False, "error": "beat must be an integer"}); return
+        if beat == 0:
+            self._json(400, {"ok": False, "error": "beat 0 has no predecessor"}); return
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        paths = resolve_paths(ch, pr, _REPO)
+        rp = paths["project"] / "render_policy.json"
+        existing = {}
+        if rp.is_file():
+            try:
+                existing = _json.loads(rp.read_text()) or {}
+            except Exception:
+                existing = {}
+        try:
+            inh = sorted({int(x) for x in existing.get("inherit_prev", [])})
+        except Exception:
+            inh = []
+        if beat in inh:
+            inh = [b for b in inh if b != beat]
+            on = False
+        else:
+            inh = sorted(inh + [beat])
+            on = True
+        policy = dict(existing)
+        if on:
+            try:
+                _kb = sorted({int(x) for x in existing.get("kb_override", [])} - {beat})
+            except Exception:
+                _kb = []
+            if _kb:
+                policy["kb_override"] = _kb
+            else:
+                policy.pop("kb_override", None)
+        if inh:
+            policy["inherit_prev"] = inh
+        else:
+            policy.pop("inherit_prev", None)
+        try:
+            rp.write_text(_json.dumps(policy, indent=2))
+        except Exception as e:
+            self._json(500, {"ok": False, "error": f"write failed: {e}"}); return
+        self._json(200, {"ok": True, "on": on, "beat": beat, "inherit_prev": inh}); return
 
     def _handle_render_policy_post(self, body):
         """Write TIERED RENDER policy to render_policy.json at the project root.
@@ -2324,6 +2427,8 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_render_policy_post(body); return
         if path == "/api/kb_toggle":
             self._handle_kb_toggle(body); return
+        if path == "/api/inherit_toggle":
+            self._handle_inherit_toggle(body); return
         if path == "/api/restill":
             self._handle_restill(body); return
         if path == "/api/aifix":
