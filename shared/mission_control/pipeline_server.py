@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.8"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.9"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1107,6 +1107,44 @@ async function renderDonePanel(ch, pr) {
         tmsg.style.color = "#d46a6a"; tmsg.textContent = "error: " + ((r && r.error) || "failed");
       }
     } catch (e) { tmsg.style.color = "#d46a6a"; tmsg.textContent = "error: " + e; }
+  };
+
+  // v2.9: thumbnail upload path — external edit round-trip.
+  const tmsgEl = document.getElementById("thumbmsg");
+  if (tmsgEl && !document.getElementById("thumbup")) {
+    const upwrap = document.createElement("div");
+    upwrap.style.cssText = "margin-top:8px;display:flex;gap:8px;align-items:center;";
+    upwrap.innerHTML =
+      '<input type="file" id="thumbfile" accept="image/png,image/jpeg" ' +
+      'style="font:12px ui-monospace,monospace;color:#8a8a99;max-width:220px;">' +
+      '<button id="thumbup" style="background:#3b5bdb;color:#fff;border:0;border-radius:6px;' +
+      'padding:8px 10px;cursor:pointer;font:13px ui-monospace,monospace;">Upload thumbnail</button>';
+    tmsgEl.parentElement.insertBefore(upwrap, tmsgEl);
+  }
+  const tup = document.getElementById("thumbup");
+  const tfile = document.getElementById("thumbfile");
+  if (tup && tfile) tup.onclick = function() {
+    const f = tfile.files && tfile.files[0];
+    const tmsg2 = document.getElementById("thumbmsg");
+    const timg2 = document.getElementById("thumbimg");
+    if (!f) { tmsg2.style.color = "#d46a6a"; tmsg2.textContent = "choose an image first"; return; }
+    tmsg2.style.color = "#8a8a99"; tmsg2.textContent = "uploading\u2026";
+    const reader = new FileReader();
+    reader.onload = async function() {
+      try {
+        const r = await api("/api/thumbnail_upload", {method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({channel: ch, project: pr, data: reader.result})});
+        if (r && r.ok) {
+          tmsg2.style.color = "#14a3b8"; tmsg2.textContent = "thumbnail uploaded (" + (r.bytes || 0) + " bytes)";
+          timg2.src = "/video/thumbnail.png" + q + "&_t=" + Date.now();
+          timg2.style.display = "block";
+        } else {
+          tmsg2.style.color = "#d46a6a"; tmsg2.textContent = "error: " + ((r && r.error) || "failed");
+        }
+      } catch (e) { tmsg2.style.color = "#d46a6a"; tmsg2.textContent = "error: " + e; }
+    };
+    reader.readAsDataURL(f);
   };
 }
 
@@ -2466,6 +2504,37 @@ class Handler(BaseHTTPRequestHandler):
             self._json(500, {"ok": False, "error": " / ".join(tail) or "make_thumbnail failed"}); return
         self._json(200, {"ok": True, "shot": shot}); return
 
+    def _handle_thumbnail_upload(self, body):
+        """Accept an externally edited thumbnail: base64 image in the JSON body
+        (dataURL or bare base64), validate by DECODING WITH PIL, re-save as PNG
+        to <project-root>/thumbnail.png — the same artifact the generate path
+        writes and upload_episode.py reads. JPEG uploads normalize to PNG."""
+        import base64 as _b64
+        from io import BytesIO as _BytesIO
+        data = body.get("data") or ""
+        if "," in data[:80]:
+            data = data.split(",", 1)[1]  # strip dataURL prefix
+        ch, pr = _resolve_request_project(body)
+        if not ch or not pr:
+            self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
+        paths = resolve_paths(ch, pr, _REPO)
+        root = Path(paths["project"])
+        try:
+            raw = _b64.b64decode(data, validate=True)
+        except Exception:
+            self._json(400, {"ok": False, "error": "body.data is not valid base64"}); return
+        if len(raw) < 1024:
+            self._json(400, {"ok": False, "error": "image too small to be a thumbnail"}); return
+        out = root / "thumbnail.png"
+        try:
+            from PIL import Image as _Image
+            img = _Image.open(_BytesIO(raw))
+            img = img.convert("RGB")
+            img.save(out, "PNG")
+        except Exception as e:
+            self._json(400, {"ok": False, "error": f"not a decodable image: {e}"}); return
+        self._json(200, {"ok": True, "bytes": out.stat().st_size}); return
+
     def do_POST(self):
         if not _key_ok(self):
             self.send_response(403); self.end_headers(); return
@@ -2522,6 +2591,8 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_upload(body); return
         if path == "/api/thumbnail":
             self._handle_thumbnail(body); return
+        if path == "/api/thumbnail_upload":
+            self._handle_thumbnail_upload(body); return
         if path == "/api/reset":
             self._handle_reset(); return
 
