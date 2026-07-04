@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.2"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.3"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1329,7 +1329,7 @@ function beatRow(b, ch, pr) {
     'style="width:100%;margin-top:8px;background:#2a2a36;color:#e8e6e3;' +
     'border:1px solid #32323e;border-radius:6px;padding:8px;cursor:pointer;' +
     'font:13px ui-monospace,monospace;">Ken-Burns: off</button>' +
-    '<button class="inhbtn" title="Beat plays the unused tail of the previous beat\'s atom (free; same-scene continuation; derived at render, falls back to Ken Burns if nothing is left)" ' +
+    '<button class="inhbtn" title="Beat plays the unused tail of the previous clip (free; same-scene continuation; derived at render, falls back to Ken Burns if nothing is left)" ' +
     'style="width:100%;margin-top:8px;background:#2a2a36;color:#e8e6e3;' +
     'border:1px solid #32323e;border-radius:6px;padding:8px;cursor:pointer;' +
     'font:13px ui-monospace,monospace;">Inherit previous clip: off</button>' +
