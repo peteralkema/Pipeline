@@ -771,17 +771,25 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) ->
     fps = 24
     total_frames = max(1, int(round(dur * fps)))
     W, H = ASPECT["width"], ASPECT["height"]
-    # Per-channel ken_burns flag (banked 01 Jul): true-static channels (QQrew)
-    # set "ken_burns": false -> zoompan z=1 (constant, no zoom) = a motionless
-    # held frame, same clips/shot_NNN.mp4 artifact, assembly unchanged. Reads the
-    # same way _channel_aspect does (walks up from CWD, cached). Defaults True so
-    # every cinematic channel keeps the slow zoom-in.
-    # HARDCODED static (01 Jul): the ken_burns config flag did not take at render
-    # time (load_channel_config cached inside finish), frame-diff proved clips
-    # still zoomed. z=1 unconditionally removes the zoom. Revert via .bak if a
-    # cinematic channel needs the slow zoom-in restored.
-    _z = "1"
-    if _z == "1":
+    # Per-channel ken_burns flag (FIXED 04 Jul): resolved from the STILL's own
+    # path. The 01 Jul hardcode existed because the CWD-walk-up + cached config
+    # read did not take at render time; walking the artifact's parents to the
+    # first channel.json is deterministic regardless of CWD, per-call, uncached
+    # (one tiny JSON read per clip — negligible next to the encode).
+    # "ken_burns": false -> true-static held frame (QQrew keeps its floor);
+    # absent/true -> cinematic slow zoom-in, capped (banked craft).
+    _kb_zoom = True
+    try:
+        import json as _json
+        for _p in Path(still_path).resolve().parents:
+            _cj = _p / "channel.json"
+            if _cj.is_file():
+                _kb_zoom = bool(_json.loads(_cj.read_text()).get("ken_burns", True))
+                break
+    except Exception:
+        _kb_zoom = True
+    _z = "min(zoom+0.0008,1.10)"  # slow zoom-in, capped — same craft as the assembler's kb-tail
+    if not _kb_zoom:
         # TRUE STATIC (01 Jul): zoompan micro-pans even at z=1 (the x/y viewport
         # math drifts per-frame on the 4x-upscaled input). Bypass zoompan
         # entirely -- scale-to-fit + pad to the frame, a single held image, ZERO
