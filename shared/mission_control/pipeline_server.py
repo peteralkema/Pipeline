@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.3"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.4"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1309,7 +1309,7 @@ function beatRow(b, ch, pr) {
                  : (b.motion_prompt || "");
   const _canAnimate = (hasStill && shot != null);
   const motionCell =
-    '<div class="motioncell" data-shot="' + (shot==null?'':shot) + '">' +
+    '<div class="motioncell" data-shot="' + (shot==null?'':shot) + '" data-dur="' + (b.duration_s != null ? b.duration_s : '') + '">' +
     '<textarea data-mkey="' + mkey + '" class="motionbox" rows="5" ' +
     'placeholder="motion direction (blank = engine default)…" ' +
     'style="width:100%;box-sizing:border-box;background:#1c1c26;color:#e8e6e3;' +
@@ -1333,6 +1333,7 @@ function beatRow(b, ch, pr) {
     'style="width:100%;margin-top:8px;background:#2a2a36;color:#e8e6e3;' +
     'border:1px solid #32323e;border-radius:6px;padding:8px;cursor:pointer;' +
     'font:13px ui-monospace,monospace;">Inherit previous clip: off</button>' +
+    '<div class="inhsum" style="font-size:11px;margin-top:4px;min-height:13px;color:#55556a;"></div>' +
     (_canAnimate ?
       ('<button class="animbtn" style="width:100%;margin-top:8px;background:#7a4ddb;' +
        'color:#fff;border:0;border-radius:6px;padding:9px;cursor:pointer;' +
@@ -1549,6 +1550,20 @@ function bindAnimateButtons(wrap) {
         }
       });
     }).catch(function() {});
+  // inherit decision support: this beat + previous vs the 5s Kling atom.
+  var _prevDur = null;
+  wrap.querySelectorAll(".motioncell").forEach(function(cell) {
+    const d = parseFloat(cell.getAttribute("data-dur"));
+    const el = cell.querySelector(".inhsum");
+    if (el && !isNaN(d) && _prevDur != null) {
+      const sum = d + _prevDur;
+      const fits = sum <= 5.0;
+      el.textContent = "This beat plus previous beat = " + sum.toFixed(2) + "s " +
+                       (fits ? "(fits the 5s atom)" : "(exceeds the 5s atom - tail falls back)");
+      el.style.color = fits ? "#1c7c4a" : "#c98a1a";
+    }
+    _prevDur = isNaN(d) ? null : d;
+  });
   wrap.querySelectorAll(".motioncell").forEach(function(cell) {
     const btn = cell.querySelector("button.animbtn");
     const shot = parseInt(cell.getAttribute("data-shot"), 10);
