@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.6"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.7"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1517,7 +1517,9 @@ function _applyBeatDisable(cell) {
   }
   if (anim) { anim.disabled = dis; anim.style.opacity = dis ? "0.45" : "1"; }
   cell.querySelectorAll("button.mpreset").forEach(function(pb) {
-    pb.disabled = dis; pb.style.opacity = dis ? "0.45" : "1";
+    // mode buttons: always clickable — clicking one while KB or inherit is ON
+    // switches the beat back to Kling with that exact direction.
+    pb.disabled = false; pb.style.opacity = "1";
     const match = !dis && box && box.value.trim() === MPRESETS[pb.getAttribute("data-preset")];
     pb.style.background = match ? "#1c7c4a" : "#2a2a36";
   });
@@ -1645,14 +1647,30 @@ function bindAnimateButtons(wrap) {
     // motion presets: stamp an exact proven direction into the box, then persist
     // through the same seam as typing (edit map + saveMotion -> storyboard.json).
     cell.querySelectorAll("button.mpreset").forEach(function(pb) {
-      pb.addEventListener("click", function() {
-        if (!box || box.disabled) return;
+      pb.addEventListener("click", async function() {
+        if (!box) return;
         const t = MPRESETS[pb.getAttribute("data-preset")];
         if (!t) return;
+        const pbeat = parseInt((box.getAttribute("data-mkey") || "").split("/").pop(), 10);
+        try {
+          if (cell.dataset.kbon === "1" && !isNaN(pbeat)) {
+            const r = await api("/api/kb_toggle", {method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({channel: CH, project: PR, beat: pbeat})});
+            if (r && r.ok) paintKB(cell, r.on);
+          }
+          if (cell.dataset.inhon === "1" && !isNaN(pbeat)) {
+            const r2 = await api("/api/inherit_toggle", {method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify({channel: CH, project: PR, beat: pbeat})});
+            if (r2 && r2.ok) paintInherit(cell, r2.on);
+          }
+        } catch (e) { /* policy file re-read on next storyboard render */ }
         box.value = t;
         window.__MOTION_EDITS[box.getAttribute("data-mkey")] = t;
         saveMotion();
         _applyBeatDisable(cell);
+        paintInhSums(wrap);
       });
     });
     // motion-persist: write the typed direction to storyboard.json so it survives
