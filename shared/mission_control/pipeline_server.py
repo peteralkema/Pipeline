@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.5"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.6"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1436,6 +1436,8 @@ function bindMotionBoxes(wrap) {
   wrap.querySelectorAll("textarea.motionbox").forEach(function(t) {
     t.addEventListener("input", function() {
       window.__MOTION_EDITS[t.getAttribute("data-mkey")] = t.value;
+      const mc = t.closest(".motioncell");
+      if (mc) _applyBeatDisable(mc);
     });
   });
   bindStillControls(wrap);
@@ -1497,16 +1499,27 @@ function bindStillControls(wrap) {
   });
   bindAnimateButtons(wrap);
 }
+const MPRESETS = {
+  dynamic: "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere",
+  slowcrane: "slow cinematic camera movement, crane-up to wide angle powerful momentum, natural realistic motion, dramatic atmosphere"
+};
 function _applyBeatDisable(cell) {
-  // a beat that renders nothing of its own (KB or inherit) takes no motion
-  // direction and must not fire a manual Kling render.
+  // mode invariant: exactly one mode visibly active per beat — Kling (green
+  // box border + matching preset green), Ken-Burns (green button), or
+  // inherit (green button). KB/inherit beats take no motion direction and
+  // must not fire a manual Kling render.
   const dis = cell.dataset.kbon === "1" || cell.dataset.inhon === "1";
   const box = cell.querySelector("textarea.motionbox");
   const anim = cell.querySelector("button.animbtn");
-  if (box) { box.disabled = dis; box.style.opacity = dis ? "0.45" : "1"; }
+  if (box) {
+    box.disabled = dis; box.style.opacity = dis ? "0.45" : "1";
+    box.style.border = dis ? "1px solid #32323e" : "1px solid #1c7c4a";
+  }
   if (anim) { anim.disabled = dis; anim.style.opacity = dis ? "0.45" : "1"; }
   cell.querySelectorAll("button.mpreset").forEach(function(pb) {
     pb.disabled = dis; pb.style.opacity = dis ? "0.45" : "1";
+    const match = !dis && box && box.value.trim() === MPRESETS[pb.getAttribute("data-preset")];
+    pb.style.background = match ? "#1c7c4a" : "#2a2a36";
   });
 }
 function paintKB(cell, on) {
@@ -1528,40 +1541,49 @@ function paintInherit(cell, on) {
   _applyBeatDisable(cell);
 }
 function paintInhSums(wrap) {
-  // mirrors the inherit render pass: walk each beat back through inherited
-  // predecessors to its source atom; red when the source is Ken-Burns or the
-  // chain falls off the front; otherwise green/amber by 5s-atom fit.
+  // per-mode status line, mirroring the render pass exactly.
   const arr = [];
   wrap.querySelectorAll(".motioncell").forEach(function(c) { arr.push(c); });
+  function beatOf(cell) {
+    const bx = cell.querySelector("textarea.motionbox");
+    return bx ? parseInt((bx.getAttribute("data-mkey") || "").split("/").pop(), 10) : NaN;
+  }
   for (var i = 0; i < arr.length; i++) {
     const el = arr[i].querySelector(".inhsum");
     if (!el) continue;
-    const d = parseFloat(arr[i].getAttribute("data-dur"));
-    if (i === 0 || isNaN(d)) { el.textContent = ""; continue; }
-    var j = i - 1;
-    while (j >= 0 && arr[j].dataset.inhon === "1") j--;
-    if (j < 0) {
-      el.textContent = "no source atom - inherit chain reaches beat 0 (falls back free)";
-      el.style.color = "#c0392b"; continue;
+    if (arr[i].dataset.inhon === "1") {
+      var j = i - 1;
+      while (j >= 0 && arr[j].dataset.inhon === "1") j--;
+      if (j < 0) {
+        el.textContent = "no source atom - inherit chain reaches beat 0 (falls back free)";
+        el.style.color = "#c0392b"; continue;
+      }
+      if (arr[j].dataset.kbon === "1") {
+        el.textContent = "source beat " + beatOf(arr[j]) + " renders Ken-Burns - no atom to inherit (falls back free)";
+        el.style.color = "#c0392b"; continue;
+      }
+      var d = parseFloat(arr[i].getAttribute("data-dur"));
+      var total = d, bad = isNaN(d);
+      for (var k = j; k < i && !bad; k++) {
+        const dk = parseFloat(arr[k].getAttribute("data-dur"));
+        if (isNaN(dk)) bad = true; else total += dk;
+      }
+      if (bad) {
+        el.textContent = "Inheriting beat " + beatOf(arr[j]) + " (durations pending)";
+        el.style.color = "#8a8a99"; continue;
+      }
+      const fits = total <= 5.0;
+      el.textContent = "Inheriting beat " + beatOf(arr[j]) + " - chain of " + (i - j + 1) +
+                       " beats on one atom = " + total.toFixed(2) + "s " +
+                       (fits ? "(fits the 5s atom)" : "(exceeds the 5s atom - tail falls back)");
+      el.style.color = fits ? "#1c7c4a" : "#c98a1a";
+    } else if (arr[i].dataset.kbon === "1") {
+      el.textContent = "free Ken-Burns push on its own still - no atom, nothing to inherit from";
+      el.style.color = "#8a8a99";
+    } else {
+      el.textContent = "renders its own 5s Kling atom - source for inherit chains";
+      el.style.color = "#8a8a99";
     }
-    if (arr[j].dataset.kbon === "1") {
-      el.textContent = "previous renders Ken-Burns - no atom to inherit (falls back free)";
-      el.style.color = "#c0392b"; continue;
-    }
-    var total = d, bad = false;
-    for (var k = j; k < i; k++) {
-      const dk = parseFloat(arr[k].getAttribute("data-dur"));
-      if (isNaN(dk)) { bad = true; break; }
-      total += dk;
-    }
-    if (bad) { el.textContent = ""; continue; }
-    const fits = total <= 5.0;
-    const label = (j === i - 1)
-      ? "This beat plus previous beat = "
-      : "Chain of " + (i - j + 1) + " beats on one atom = ";
-    el.textContent = label + total.toFixed(2) + "s " +
-                     (fits ? "(fits the 5s atom)" : "(exceeds the 5s atom - tail falls back)");
-    el.style.color = fits ? "#1c7c4a" : "#c98a1a";
   }
 }
 function bindAnimateButtons(wrap) {
@@ -1622,10 +1644,6 @@ function bindAnimateButtons(wrap) {
     }
     // motion presets: stamp an exact proven direction into the box, then persist
     // through the same seam as typing (edit map + saveMotion -> storyboard.json).
-    const MPRESETS = {
-      dynamic: "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere",
-      slowcrane: "slow cinematic camera movement, crane-up to wide angle powerful momentum, natural realistic motion, dramatic atmosphere"
-    };
     cell.querySelectorAll("button.mpreset").forEach(function(pb) {
       pb.addEventListener("click", function() {
         if (!box || box.disabled) return;
@@ -1634,6 +1652,7 @@ function bindAnimateButtons(wrap) {
         box.value = t;
         window.__MOTION_EDITS[box.getAttribute("data-mkey")] = t;
         saveMotion();
+        _applyBeatDisable(cell);
       });
     });
     // motion-persist: write the typed direction to storyboard.json so it survives
