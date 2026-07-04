@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.7"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v2.8"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -667,6 +667,7 @@ def render_page(key: str | None) -> str:
   code { background:#1c1c26; padding:1px 6px; border-radius:4px; font-size:13px; }
 </style></head><body>
 <h1>AI FILM DIRECTOR STORYBOARD AND CONTROL PANEL <span style="font-size:12px;font-weight:400;color:#8a8a99;letter-spacing:0;">@@VERSTAMP@@</span></h1>
+<button id="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" style="position:fixed;bottom:24px;right:24px;z-index:9999;background:#2a2a36;color:#e8e6e3;border:1px solid #32323e;border-radius:8px;padding:10px 14px;cursor:pointer;font:13px ui-monospace,monospace;">&#8679; Top</button>
 <div id="app"><div class="panel"><span class="spin">loading…</span></div></div>
 <script>
 const KEY = new URLSearchParams(location.search).get("key") || "";
