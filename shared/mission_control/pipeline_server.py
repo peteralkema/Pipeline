@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.5"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.6"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1067,7 +1067,7 @@ async function renderDonePanel(ch, pr) {
   const panel = document.createElement("div");
   panel.id = "donepanel";
   panel.className = "panel";
-  panel.style.cssText = "border:1px solid #d4a017;";
+  panel.style.cssText = "border:1px solid #d4a017;max-width:none;";
   panel.innerHTML =
     '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">' +
       '<span style="width:8px;height:8px;border-radius:50%;background:#ff0000;display:inline-block;"></span>' +
