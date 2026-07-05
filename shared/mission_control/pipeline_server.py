@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.6"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.7"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1678,6 +1678,46 @@ function paintInherit(cell, on) {
   }
   _applyBeatDisable(cell);
 }
+function paintCostWidget(wrap) {
+  // persistent spend estimate: sums CURRENT per-beat modes exactly as the
+  // tiered render routes them (kling only if beat < N and not kb/inherit).
+  const CLIP_COST = 0.35;  // Kling v2.5-turbo per 5s atom
+  const arr = [];
+  wrap.querySelectorAll(".motioncell").forEach(function(c) { arr.push(c); });
+  let w = document.getElementById("costwidget");
+  if (!arr.length) { if (w) w.style.display = "none"; return; }
+  if (!w) {
+    w = document.createElement("div");
+    w.id = "costwidget";
+    w.style.cssText = "position:fixed;bottom:24px;left:24px;z-index:9999;" +
+      "background:#16161e;border:1px solid #d4a017;border-radius:8px;" +
+      "padding:10px 14px;font:12px/1.5 ui-monospace,monospace;color:#e8e6e3;" +
+      "box-shadow:0 4px 20px rgba(0,0,0,.5);";
+    document.body.appendChild(w);
+  }
+  const N = (window.__KLING_N != null) ? window.__KLING_N : 40;
+  let kling = 0, kb = 0, inh = 0, done = 0;
+  for (var i = 0; i < arr.length; i++) {
+    const cell = arr[i];
+    const bx = cell.querySelector("textarea.motionbox");
+    let bt = bx ? parseInt((bx.getAttribute("data-mkey") || "").split("/").pop(), 10) : i;
+    if (isNaN(bt)) bt = i;
+    if (cell.dataset.inhon === "1") { inh++; continue; }
+    if (cell.dataset.kbon === "1" || !(bt < N)) { kb++; continue; }
+    kling++;
+    const grid = cell.parentElement.parentElement;
+    if (grid && grid.querySelector("video")) done++;
+  }
+  const total = kling * CLIP_COST;
+  const remaining = (kling - done) * CLIP_COST;
+  w.style.display = "block";
+  w.innerHTML =
+    '<div style="color:#d4a017;letter-spacing:.06em;margin-bottom:4px;">ESTIMATED SPEND</div>' +
+    '<div><b>' + kling + '</b> Kling &times; $' + CLIP_COST.toFixed(2) + ' = <b>$' + total.toFixed(2) + '</b></div>' +
+    '<div style="color:#8a8a99;">' + kb + ' Ken-Burns + ' + inh + ' inherit = free</div>' +
+    (done ? '<div style="color:#8a8a99;">' + done + ' already rendered &rarr; remaining ~<b style="color:#e8e6e3;">$' +
+            remaining.toFixed(2) + '</b></div>' : '');
+}
 function paintInhSums(wrap) {
   // per-mode status line, mirroring the render pass exactly.
   const arr = [];
@@ -1723,6 +1763,7 @@ function paintInhSums(wrap) {
       el.style.color = "#8a8a99";
     }
   }
+  paintCostWidget(wrap);
 }
 function bindAnimateButtons(wrap) {
   const CH = (window.__SEL_VIEW || "/").split("/")[0];
@@ -1731,6 +1772,7 @@ function bindAnimateButtons(wrap) {
   api("/api/render_policy?channel=" + encodeURIComponent(CH) +
       "&project=" + encodeURIComponent(PR))
     .then(function(r) {
+      window.__KLING_N = (r && r.kling_count != null) ? r.kling_count : 40;
       const kbOn = {}, inhOn = {};
       ((r && r.kb_override) || []).forEach(function(b) { kbOn[b] = 1; });
       ((r && r.inherit_prev) || []).forEach(function(b) { inhOn[b] = 1; });
