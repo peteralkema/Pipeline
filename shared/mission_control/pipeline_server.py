@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.3"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.4"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -754,7 +754,7 @@ function ensureShell(state) {
   // v0.8: two-column top -- controls left, FINAL VIDEO panel right (the U layout).
   const topgrid = el(`<div id="topgrid" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;max-width:1500px;">
     <div id="topleft" style="flex:0 1 420px;min-width:300px;"></div>
-    <div id="toppanel" style="flex:1 1 560px;min-width:320px;max-width:760px;"></div>
+    <div id="toppanel" style="flex:1 1 560px;min-width:320px;"></div>
   </div>`);
   shell.appendChild(topgrid);
   renderTopPlaceholder();
@@ -1067,28 +1067,27 @@ async function renderDonePanel(ch, pr) {
   const panel = document.createElement("div");
   panel.id = "donepanel";
   panel.className = "panel";
-  panel.style.cssText = "max-width:720px;border:1px solid #d4a017;";
+  panel.style.cssText = "border:1px solid #d4a017;";
   panel.innerHTML =
     '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">' +
       '<span style="width:8px;height:8px;border-radius:50%;background:#ff0000;display:inline-block;"></span>' +
       '<b style="letter-spacing:.04em;">FINAL VIDEO &mdash; UPLOAD TO STUDIO</b></div>' +
-    '<video src="' + vsrc + '" autoplay muted loop playsinline ' +
-      'style="width:100%;border-radius:8px;background:#000;display:block;margin-bottom:8px;"></video>' +
-    '<div style="margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">' +
-      '<a href="' + vsrc + '" download style="display:inline-block;background:#2a2a36;color:#e8e6e3;' +
-        'text-decoration:none;border-radius:6px;padding:8px 14px;font-weight:600;font-size:13px;">' +
-        '&#8595; Download final video</a>' +
-      '<button id="reassemblebtn" style="background:#2a2a36;margin-top:0;padding:8px 14px;font-size:13px;">' +
-        '&#8635; Re-assemble (latest clips)</button>' +
-      '<span id="reassemblemsg" style="color:#8a8a99;font-size:12px;"></span></div>' +
-    '<label>Title</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-      'background:#1c1c26;padding:8px 10px;margin-bottom:8px;">' + esc(meta.title) + '</div>' +
-    '<label>Description</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-      'background:#1c1c26;padding:8px 10px;margin-bottom:8px;white-space:pre-wrap;">' + esc(meta.description) + '</div>' +
-    '<label>Tags</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-      'background:#1c1c26;padding:8px 10px;margin-bottom:14px;">' + esc(meta.tags) + '</div>' +
-    '<label>Thumbnail</label>' +
-    '<div style="border:1px solid #32323e;border-radius:8px;background:#161620;padding:10px;margin-bottom:14px;">' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;margin-bottom:14px;">' +
+    '<div id="contentbox" style="border:1px solid #32323e;border-radius:8px;background:#161620;padding:12px;">' +
+      '<div style="color:#d4a017;font-size:12px;letter-spacing:.08em;margin-bottom:8px;">CONTENT</div>' +
+      '<video src="' + vsrc + '" autoplay muted loop playsinline ' +
+        'style="width:100%;border-radius:8px;background:#000;display:block;margin-bottom:8px;"></video>' +
+      '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">' +
+        '<a href="' + vsrc + '" download style="display:inline-block;background:#2a2a36;color:#e8e6e3;' +
+          'text-decoration:none;border-radius:6px;padding:8px 14px;font-weight:600;font-size:13px;">' +
+          '&#8595; Download final video</a>' +
+        '<button id="reassemblebtn" style="background:#2a2a36;margin-top:0;padding:8px 14px;font-size:13px;">' +
+          '&#8635; Re-assemble (latest clips)</button>' +
+        '<span id="reassemblemsg" style="color:#8a8a99;font-size:12px;"></span></div>' +
+    '</div>' +
+    '<div id="packagingbox" style="border:1px solid #32323e;border-radius:8px;background:#161620;padding:12px;">' +
+      '<div style="color:#d4a017;font-size:12px;letter-spacing:.08em;margin-bottom:8px;">PACKAGING</div>' +
+      '<img id="thumbimg" style="display:none;width:100%;border-radius:6px;margin-bottom:8px;background:#000;">' +
       '<div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center;">' +
         '<input id="thumbtitle" placeholder="Headline (e.g. 200,000 WENT SILENT)" style="flex:2;min-width:170px;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:8px;font-size:13px;">' +
         '<input id="thumbsub" placeholder="Subtitle (optional)" style="flex:1;min-width:110px;background:#1c1c26;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;padding:8px;font-size:13px;">' +
@@ -1096,10 +1095,18 @@ async function renderDonePanel(ch, pr) {
         '<button id="thumbgen" style="background:#d4a017;margin-top:0;padding:8px 14px;font-size:13px;font-weight:600;">Generate</button>' +
       '</div>' +
       '<span id="thumbmsg" style="color:#8a8a99;font-size:12px;"></span>' +
-      '<img id="thumbimg" style="display:none;width:100%;border-radius:6px;margin-top:8px;background:#000;">' +
+      '<div style="margin-top:10px;">' +
+      '<label>Title</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;">' + esc(meta.title) + '</div>' +
+      '<label>Description</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;white-space:pre-wrap;">' + esc(meta.description) + '</div>' +
+      '<label>Tags</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;">' + esc(meta.tags) + '</div>' +
+      '</div>' +
+    '</div>' +
     '</div>' +
     '<button id="uploadbtn" ' +
-      'style="background:#ff0000;">Upload to YouTube Studio (private)</button>' +
+      'style="background:#ff0000;width:100%;">Upload to YouTube Studio (private)</button>' +
     '<span id="uploadmsg" style="color:#8a8a99;font-size:12px;margin-left:10px;"></span>' +
     '<div style="color:#8a8a99;font-size:11px;margin-top:6px;">Uploads as <b>private</b> '+
       '(review + set Altered-content = Yes in Studio before publishing).</div>';
