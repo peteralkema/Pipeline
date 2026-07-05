@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.4"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.5"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -752,7 +752,7 @@ function ensureShell(state) {
   if (resetbtn) resetbtn.onclick = resetAll;
 
   // v0.8: two-column top -- controls left, FINAL VIDEO panel right (the U layout).
-  const topgrid = el(`<div id="topgrid" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;max-width:1500px;">
+  const topgrid = el(`<div id="topgrid" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;">
     <div id="topleft" style="flex:0 1 420px;min-width:300px;"></div>
     <div id="toppanel" style="flex:1 1 560px;min-width:320px;"></div>
   </div>`);
@@ -1084,6 +1084,14 @@ async function renderDonePanel(ch, pr) {
         '<button id="reassemblebtn" style="background:#2a2a36;margin-top:0;padding:8px 14px;font-size:13px;">' +
           '&#8635; Re-assemble (latest clips)</button>' +
         '<span id="reassemblemsg" style="color:#8a8a99;font-size:12px;"></span></div>' +
+      '<div style="margin-top:10px;">' +
+      '<label>Title</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;">' + esc(meta.title) + '</div>' +
+      '<label>Description</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;white-space:pre-wrap;">' + esc(meta.description) + '</div>' +
+      '<label>Tags</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;">' + esc(meta.tags) + '</div>' +
+      '</div>' +
     '</div>' +
     '<div id="packagingbox" style="border:1px solid #32323e;border-radius:8px;background:#161620;padding:12px;">' +
       '<div style="color:#d4a017;font-size:12px;letter-spacing:.08em;margin-bottom:8px;">PACKAGING</div>' +
@@ -1095,14 +1103,6 @@ async function renderDonePanel(ch, pr) {
         '<button id="thumbgen" style="background:#d4a017;margin-top:0;padding:8px 14px;font-size:13px;font-weight:600;">Generate</button>' +
       '</div>' +
       '<span id="thumbmsg" style="color:#8a8a99;font-size:12px;"></span>' +
-      '<div style="margin-top:10px;">' +
-      '<label>Title</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;">' + esc(meta.title) + '</div>' +
-      '<label>Description</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;white-space:pre-wrap;">' + esc(meta.description) + '</div>' +
-      '<label>Tags</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-        'background:#1c1c26;padding:8px 10px;">' + esc(meta.tags) + '</div>' +
-      '</div>' +
     '</div>' +
     '</div>' +
     '<button id="uploadbtn" ' +
