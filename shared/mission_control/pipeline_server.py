@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.1"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.2"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1108,6 +1108,41 @@ async function renderDonePanel(ch, pr) {
   if (slot) { slot.innerHTML = ""; slot.appendChild(panel); }
   const rb = document.getElementById("reassemblebtn");
   if (rb) rb.onclick = function() { reassemble(ch, pr); };
+
+  // v3.2: retro letterbox fix on completed projects — same endpoint as the
+  // stills-gate button, distinct id (both can render at once).
+  if (rb && !document.getElementById("fixbarsbtn2")) {
+    const fwrap = document.createElement("div");
+    fwrap.style.cssText = "margin-top:8px;display:flex;gap:8px;align-items:center;";
+    fwrap.innerHTML =
+      '<button id="fixbarsbtn2" title="Detect and crop baked-in black letterbox bars across all stills (originals backed up)" ' +
+      'style="background:#2a2a36;color:#e8e6e3;border:1px solid #32323e;border-radius:6px;' +
+      'padding:8px 10px;cursor:pointer;font:13px ui-monospace,monospace;">Analyse + fix stills</button>' +
+      '<span id="fixbarsmsg" style="color:#8a8a99;font:12px ui-monospace,monospace;"></span>';
+    rb.parentElement.appendChild(fwrap);
+  }
+  const fb2 = document.getElementById("fixbarsbtn2");
+  if (fb2) fb2.onclick = async function() {
+    const fm = document.getElementById("fixbarsmsg");
+    fb2.disabled = true; fb2.textContent = "Analysing stills\u2026";
+    try {
+      const r = await api("/api/fix_letterbox", {method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({channel: ch, project: pr})});
+      if (r && r.ok) {
+        let t = "scanned " + r.scanned + ", fixed " + r.fixed.length +
+                (r.fixed.length ? ": " + r.fixed.join(", ") : "");
+        if (r.have_clips && r.have_clips.length) {
+          t += "  \u26a0 re-render these clips, then Re-assemble: " + r.have_clips.join(", ");
+        }
+        if (fm) fm.textContent = t;
+      } else if (fm) {
+        fm.textContent = "fix failed: " + ((r && r.error) || "error");
+      }
+    } catch (e) { if (fm) fm.textContent = "fix failed: " + e; }
+    fb2.disabled = false; fb2.textContent = "Analyse + fix stills";
+  };
+
   const ub = document.getElementById("uploadbtn");
   if (ub) ub.onclick = function() { uploadVideo(ch, pr); };  const tg = document.getElementById("thumbgen");
   if (tg) tg.onclick = async function() {
