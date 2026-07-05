@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.2"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.3"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -2645,6 +2645,7 @@ class Handler(BaseHTTPRequestHandler):
         Returns {"fixed": [...], "have_clips": [...], "scanned": N}."""
         from PIL import Image as _Image, ImageStat as _Stat
         import math as _math
+        import shutil as _shutil
         ch, pr = _resolve_request_project(body)
         if not ch or not pr:
             self._json(400, {"ok": False, "error": "no project (pass channel+project)"}); return
@@ -2704,7 +2705,7 @@ class Handler(BaseHTTPRequestHandler):
             backup_dir.mkdir(exist_ok=True)
             bak = backup_dir / still.name
             if not bak.exists():
-                shutil.copy2(still, bak)
+                _shutil.copy2(still, bak)
             out.save(still, "PNG")
             fixed.append(still.name)
             if (clips_dir / (still.stem + ".mp4")).exists():
