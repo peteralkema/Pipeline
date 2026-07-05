@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.7"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.8"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1561,9 +1561,55 @@ async function renderStoryboard(ch, pr) {
   } catch (e) { wrap.innerHTML = "view error: " + e; return; }
   if (view.error) { wrap.innerHTML = "view error: " + view.error; return; }
   const beats = view.beats || [];
+  window.__SB_BEATS = beats;
+  window.__SB_CTX = {ch: ch, pr: pr, has_mode_b: view.has_mode_b};
+  // stage order = first-appearance order; empty stage folds into "—".
+  const sections = [];
+  beats.forEach(function(b) {
+    const s = (b.stage && String(b.stage).trim()) || "\u2014";
+    if (sections.indexOf(s) === -1) sections.push(s);
+  });
+  // default section: ALL for small projects, the first section for large ones.
+  if (window.__SB_SECTION == null || (window.__SB_SECTION !== "__ALL__" &&
+      sections.indexOf(window.__SB_SECTION) === -1)) {
+    window.__SB_SECTION = (beats.length <= 200 || sections.length <= 1)
+      ? "__ALL__" : sections[0];
+  }
+  renderStoryboardSection(wrap, sections);
+}
+
+function renderStoryboardSection(wrap, sections) {
+  const beats = window.__SB_BEATS || [];
+  const ctx = window.__SB_CTX || {};
+  const ch = ctx.ch, pr = ctx.pr;
+  const sel = window.__SB_SECTION;
+  function sectionOf(b) { return (b.stage && String(b.stage).trim()) || "\u2014"; }
+  const shown = (sel === "__ALL__") ? beats : beats.filter(function(b){ return sectionOf(b) === sel; });
+  const btn = function(label, key, count) {
+    const on = (sel === key);
+    return '<button class="sbtab" data-key="' + key + '" style="margin:0 6px 6px 0;' +
+      'background:' + (on ? "#1c7c4a" : "#2a2a36") + ';color:#e8e6e3;border:1px solid #32323e;' +
+      'border-radius:6px;padding:6px 10px;cursor:pointer;font:12px ui-monospace,monospace;">' +
+      label + ' <span style="color:#8a8a99;">(' + count + ')</span></button>';
+  };
+  let bar = '<div id="sectionbar" style="position:sticky;top:0;z-index:50;background:#12121a;' +
+    'padding:8px 0 2px;margin-bottom:8px;border-bottom:1px solid #1e1e28;display:flex;flex-wrap:wrap;">';
+  bar += btn("ALL", "__ALL__", beats.length);
+  sections.forEach(function(s) {
+    const c = beats.filter(function(b){ return sectionOf(b) === s; }).length;
+    bar += btn(s, s, c);
+  });
+  bar += '</div>';
   const head = '<label>Storyboard — ' + pr + ' · ' + beats.length + ' beats · ' +
-               (view.has_mode_b ? "dual-mode" : "Mode A") + '</label>';
-  wrap.innerHTML = head + beats.map(b => beatRow(b, ch, pr)).join("");
+               (ctx.has_mode_b ? "dual-mode" : "Mode A") +
+               (sel === "__ALL__" ? "" : ' · showing ' + sel + ' (' + shown.length + ')') + '</label>';
+  wrap.innerHTML = head + bar + shown.map(function(b){ return beatRow(b, ch, pr); }).join("");
+  wrap.querySelectorAll("button.sbtab").forEach(function(t) {
+    t.addEventListener("click", function() {
+      window.__SB_SECTION = t.getAttribute("data-key");
+      renderStoryboardSection(wrap, sections);
+    });
+  });
   bindMotionBoxes(wrap);
 }
 function bindMotionBoxes(wrap) {
@@ -1710,11 +1756,33 @@ function paintCostWidget(wrap) {
   }
   const total = kling * CLIP_COST;
   const remaining = (kling - done) * CLIP_COST;
+  // project total across ALL beats (independent of the visible section filter):
+  // beats not currently mounted are counted from the full beat list by mode
+  // absence -> treated as Kling-eligible under N unless in the policy lists.
+  let projTotal = null;
+  try {
+    const allBeats = window.__SB_BEATS || [];
+    const N = (window.__KLING_N != null) ? window.__KLING_N : 40;
+    const kbSet = window.__KB_SET || {}, inhSet = window.__INH_SET || {};
+    if (allBeats.length && window.__SB_SECTION !== "__ALL__") {
+      let pk = 0;
+      allBeats.forEach(function(b, idx) {
+        const bi = (b.index != null) ? b.index : idx;
+        if (inhSet[bi]) return;
+        if (kbSet[bi] || !(bi < N)) return;
+        pk++;
+      });
+      projTotal = pk * CLIP_COST;
+    }
+  } catch (e) { projTotal = null; }
   w.style.display = "block";
   w.innerHTML =
     '<div style="color:#d4a017;letter-spacing:.06em;margin-bottom:4px;">ESTIMATED SPEND</div>' +
-    '<div><b>' + kling + '</b> Kling &times; $' + CLIP_COST.toFixed(2) + ' = <b>$' + total.toFixed(2) + '</b></div>' +
-    '<div style="color:#8a8a99;">' + kb + ' Ken-Burns + ' + inh + ' inherit = free</div>' +
+    '<div><b>' + kling + '</b> Kling &times; $' + CLIP_COST.toFixed(2) + ' = <b>$' + total.toFixed(2) + '</b>' +
+      (projTotal != null ? ' <span style="color:#8a8a99;">(section)</span>' : '') + '</div>' +
+    (projTotal != null ? '<div style="color:#8a8a99;">project total ~<b style="color:#e8e6e3;">$' +
+      projTotal.toFixed(2) + '</b></div>' : '') +
+    '<div style="color:#8a8a99;">' + kb + ' Ken-Burns + ' + inh + ' inherit = free (section)</div>' +
     (done ? '<div style="color:#8a8a99;">' + done + ' already rendered &rarr; remaining ~<b style="color:#e8e6e3;">$' +
             remaining.toFixed(2) + '</b></div>' : '');
 }
@@ -1776,6 +1844,7 @@ function bindAnimateButtons(wrap) {
       const kbOn = {}, inhOn = {};
       ((r && r.kb_override) || []).forEach(function(b) { kbOn[b] = 1; });
       ((r && r.inherit_prev) || []).forEach(function(b) { inhOn[b] = 1; });
+      window.__KB_SET = kbOn; window.__INH_SET = inhOn;
       wrap.querySelectorAll(".motioncell").forEach(function(cell) {
         const bx = cell.querySelector("textarea.motionbox");
         if (!bx) return;
