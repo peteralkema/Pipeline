@@ -484,7 +484,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v2.9"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.0"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1092,15 +1092,18 @@ async function renderDonePanel(ch, pr) {
     const n = parseInt(document.getElementById("thumbshot").value, 10);
     const tmsg = document.getElementById("thumbmsg");
     const timg = document.getElementById("thumbimg");
+    const useUp = (window.__THUMB_SRC === "upload");
     if (!t) { tmsg.style.color = "#d46a6a"; tmsg.textContent = "enter a headline"; return; }
-    if (isNaN(n)) { tmsg.style.color = "#d46a6a"; tmsg.textContent = "enter a still number"; return; }
+    if (!useUp && isNaN(n)) { tmsg.style.color = "#d46a6a"; tmsg.textContent = "enter a still number (or switch source to Uploaded image)"; return; }
     tmsg.style.color = "#8a8a99"; tmsg.textContent = "generating\u2026";
     try {
       const r = await api("/api/thumbnail", {method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({channel: ch, project: pr, shot: n, title: t, subtitle: s})});
+        body: JSON.stringify({channel: ch, project: pr, shot: (useUp ? null : n),
+                              use_upload: useUp, title: t, subtitle: s})});
       if (r && r.ok) {
-        tmsg.style.color = "#14a3b8"; tmsg.textContent = "thumbnail set (still " + r.shot + ")";
+        tmsg.style.color = "#14a3b8";
+        tmsg.textContent = "thumbnail set (" + (r.shot === "upload" ? "uploaded source" : "still " + r.shot) + ")";
         timg.src = "/video/thumbnail.png" + q + "&_t=" + Date.now();
         timg.style.display = "block";
       } else {
@@ -1109,18 +1112,44 @@ async function renderDonePanel(ch, pr) {
     } catch (e) { tmsg.style.color = "#d46a6a"; tmsg.textContent = "error: " + e; }
   };
 
-  // v2.9: thumbnail upload path — external edit round-trip.
+  // v3.0: thumbnail SOURCE modes — still # vs uploaded image. The uploaded
+  // file persists as <root>/thumbnail_source.png; thumbnail.png is always the
+  // derived composite. Bounce between sources and texts freely.
+  window.__THUMB_SRC = window.__THUMB_SRC || "still";
+  function paintThumbSrc() {
+    const bs = document.getElementById("thumbsrc_still");
+    const bu = document.getElementById("thumbsrc_up");
+    const shotIn = document.getElementById("thumbshot");
+    const up = (window.__THUMB_SRC === "upload");
+    if (bs) bs.style.background = up ? "#2a2a36" : "#1c7c4a";
+    if (bu) bu.style.background = up ? "#1c7c4a" : "#2a2a36";
+    if (shotIn) { shotIn.disabled = up; shotIn.style.opacity = up ? "0.45" : "1"; }
+  }
   const tmsgEl = document.getElementById("thumbmsg");
   if (tmsgEl && !document.getElementById("thumbup")) {
+    const srcrow = document.createElement("div");
+    srcrow.style.cssText = "margin-top:8px;display:flex;gap:8px;align-items:center;";
+    srcrow.innerHTML =
+      '<span style="color:#8a8a99;font:12px ui-monospace,monospace;">source:</span>' +
+      '<button id="thumbsrc_still" style="background:#1c7c4a;color:#e8e6e3;border:1px solid #32323e;' +
+      'border-radius:6px;padding:7px 10px;cursor:pointer;font:12px ui-monospace,monospace;">Still #</button>' +
+      '<button id="thumbsrc_up" style="background:#2a2a36;color:#e8e6e3;border:1px solid #32323e;' +
+      'border-radius:6px;padding:7px 10px;cursor:pointer;font:12px ui-monospace,monospace;">Uploaded image</button>';
+    tmsgEl.parentElement.insertBefore(srcrow, tmsgEl);
     const upwrap = document.createElement("div");
     upwrap.style.cssText = "margin-top:8px;display:flex;gap:8px;align-items:center;";
     upwrap.innerHTML =
       '<input type="file" id="thumbfile" accept="image/png,image/jpeg" ' +
       'style="font:12px ui-monospace,monospace;color:#8a8a99;max-width:220px;">' +
       '<button id="thumbup" style="background:#3b5bdb;color:#fff;border:0;border-radius:6px;' +
-      'padding:8px 10px;cursor:pointer;font:13px ui-monospace,monospace;">Upload thumbnail</button>';
+      'padding:8px 10px;cursor:pointer;font:13px ui-monospace,monospace;">Upload source image</button>';
     tmsgEl.parentElement.insertBefore(upwrap, tmsgEl);
   }
+  const bsrc = document.getElementById("thumbsrc_still");
+  const busrc = document.getElementById("thumbsrc_up");
+  if (bsrc) bsrc.onclick = function() { window.__THUMB_SRC = "still"; paintThumbSrc(); };
+  if (busrc) busrc.onclick = function() { window.__THUMB_SRC = "upload"; paintThumbSrc(); };
+  paintThumbSrc();
   const tup = document.getElementById("thumbup");
   const tfile = document.getElementById("thumbfile");
   if (tup && tfile) tup.onclick = function() {
@@ -1136,8 +1165,10 @@ async function renderDonePanel(ch, pr) {
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({channel: ch, project: pr, data: reader.result})});
         if (r && r.ok) {
-          tmsg2.style.color = "#14a3b8"; tmsg2.textContent = "thumbnail uploaded (" + (r.bytes || 0) + " bytes)";
-          timg2.src = "/video/thumbnail.png" + q + "&_t=" + Date.now();
+          window.__THUMB_SRC = "upload"; paintThumbSrc();
+          tmsg2.style.color = "#14a3b8";
+          tmsg2.textContent = "source uploaded - add headline and Generate";
+          timg2.src = "/video/thumbnail_source.png" + q + "&_t=" + Date.now();
           timg2.style.display = "block";
         } else {
           tmsg2.style.color = "#d46a6a"; tmsg2.textContent = "error: " + ((r && r.error) || "failed");
@@ -2467,12 +2498,15 @@ class Handler(BaseHTTPRequestHandler):
         at the PROJECT ROOT where upload_episode.py looks. Free PIL re-composite:
         iterate still-number + text as often as you like. (PATCH_THUMBNAIL_PANEL_APPLIED)"""
         shot = body.get("shot")
+        use_upload = bool(body.get("use_upload"))
         title = (body.get("title") or "").strip()
         subtitle = (body.get("subtitle") or "").strip()
-        try:
-            shot = int(shot)
-        except Exception:
-            self._json(400, {"ok": False, "error": "shot must be an integer"}); return
+        if not use_upload:
+            try:
+                shot = int(shot)
+            except Exception:
+                self._json(400, {"ok": False,
+                    "error": "shot must be an integer (or switch source to Uploaded image)"}); return
         if not title:
             self._json(400, {"ok": False, "error": "headline (title) is required"}); return
         ch, pr = _resolve_request_project(body)
@@ -2481,18 +2515,27 @@ class Handler(BaseHTTPRequestHandler):
         paths = resolve_paths(ch, pr, _REPO)
         modea = Path(paths["modea"])
         root = Path(paths["project"])
-        still = modea / "stills" / f"shot_{shot:03d}.png"
-        if not still.exists():
-            self._json(404, {"ok": False,
-                "error": f"still not found: shot_{shot:03d}.png (check the number)"}); return
+        if use_upload:
+            still = root / "thumbnail_source.png"
+            if not still.exists():
+                self._json(404, {"ok": False,
+                    "error": "no uploaded source - upload an image first"}); return
+        else:
+            still = modea / "stills" / f"shot_{shot:03d}.png"
+            if not still.exists():
+                self._json(404, {"ok": False,
+                    "error": f"still not found: shot_{shot:03d}.png (check the number)"}); return
         out = root / "thumbnail.png"
         import subprocess as _sp
         cmd = [sys.executable, str(Path(_SHARED) / "make_thumbnail.py"),
                "--project", str(modea),
-               "--shot", str(shot),
                "--channel", ch,
                "--title", title,
                "--out", str(out)]
+        if use_upload:
+            cmd += ["--still", str(still)]
+        else:
+            cmd += ["--shot", str(shot)]
         if subtitle:
             cmd += ["--subtitle", subtitle]
         try:
@@ -2502,7 +2545,7 @@ class Handler(BaseHTTPRequestHandler):
         if r.returncode != 0 or not out.exists():
             tail = (r.stderr or r.stdout or "").strip().splitlines()[-3:]
             self._json(500, {"ok": False, "error": " / ".join(tail) or "make_thumbnail failed"}); return
-        self._json(200, {"ok": True, "shot": shot}); return
+        self._json(200, {"ok": True, "shot": ("upload" if use_upload else shot)}); return
 
     def _handle_thumbnail_upload(self, body):
         """Accept an externally edited thumbnail: base64 image in the JSON body
@@ -2525,7 +2568,7 @@ class Handler(BaseHTTPRequestHandler):
             self._json(400, {"ok": False, "error": "body.data is not valid base64"}); return
         if len(raw) < 1024:
             self._json(400, {"ok": False, "error": "image too small to be a thumbnail"}); return
-        out = root / "thumbnail.png"
+        out = root / "thumbnail_source.png"
         try:
             from PIL import Image as _Image
             img = _Image.open(_BytesIO(raw))
