@@ -2,15 +2,15 @@
 """
 patch_mc_content_packaging.py — v3.4: the FINAL VIDEO panel becomes two equal
 boxes — CONTENT (video, Download, Re-assemble, Analyse + fix stills) and
-PACKAGING (thumbnail preview promoted to the top, generate/source/upload
-controls, Title, Description, Tags) — with Upload to YouTube Studio spanning
+PACKAGING (pure thumbnail: preview promoted to the top,
+generate/source/upload controls; Title/Description/Tags live with the video) — with Upload to YouTube Studio spanning
 full width beneath both. Equal size, equal focus: CTR lives in the right box.
 
 Every element id is unchanged, so all existing wiring lands in the right box
 untouched: fixbars appends to the reassemble row (CONTENT); the v3.0
 source-mode rows insert before thumbmsg (PACKAGING).
 
-4 anchored edits in shared/mission_control/pipeline_server.py (post-v3.3):
+5 anchored edits in shared/mission_control/pipeline_server.py (post-v3.3):
   1. #toppanel slot: 760px cap lifted (the black space, cause one)
   2. donepanel: 720px cap lifted (cause two)
   3. panel innerHTML rebuilt as the CONTENT | PACKAGING grid
@@ -83,6 +83,14 @@ NEW_HTML = """  panel.innerHTML =
         '<button id="reassemblebtn" style="background:#2a2a36;margin-top:0;padding:8px 14px;font-size:13px;">' +
           '&#8635; Re-assemble (latest clips)</button>' +
         '<span id="reassemblemsg" style="color:#8a8a99;font-size:12px;"></span></div>' +
+      '<div style="margin-top:10px;">' +
+      '<label>Title</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;">' + esc(meta.title) + '</div>' +
+      '<label>Description</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;white-space:pre-wrap;">' + esc(meta.description) + '</div>' +
+      '<label>Tags</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
+        'background:#1c1c26;padding:8px 10px;">' + esc(meta.tags) + '</div>' +
+      '</div>' +
     '</div>' +
     '<div id="packagingbox" style="border:1px solid #32323e;border-radius:8px;background:#161620;padding:12px;">' +
       '<div style="color:#d4a017;font-size:12px;letter-spacing:.08em;margin-bottom:8px;">PACKAGING</div>' +
@@ -94,14 +102,6 @@ NEW_HTML = """  panel.innerHTML =
         '<button id="thumbgen" style="background:#d4a017;margin-top:0;padding:8px 14px;font-size:13px;font-weight:600;">Generate</button>' +
       '</div>' +
       '<span id="thumbmsg" style="color:#8a8a99;font-size:12px;"></span>' +
-      '<div style="margin-top:10px;">' +
-      '<label>Title</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;">' + esc(meta.title) + '</div>' +
-      '<label>Description</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-        'background:#1c1c26;padding:8px 10px;margin-bottom:8px;white-space:pre-wrap;">' + esc(meta.description) + '</div>' +
-      '<label>Tags</label><div class="field" style="border:1px solid #32323e;border-radius:6px;' +
-        'background:#1c1c26;padding:8px 10px;">' + esc(meta.tags) + '</div>' +
-      '</div>' +
     '</div>' +
     '</div>' +
     '<button id="uploadbtn" ' +
@@ -111,6 +111,11 @@ NEW_HTML = """  panel.innerHTML =
       '(review + set Altered-content = Yes in Studio before publishing).</div>';"""
 
 EDITS = [
+    # 0. lift the grid cap (black-space cause zero — the outermost bottleneck)
+    (
+        '''<div id="topgrid" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;max-width:1500px;">''',
+        '''<div id="topgrid" style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;">''',
+    ),
     # 1. lift the slot cap (black-space cause one)
     (
         '''<div id="toppanel" style="flex:1 1 560px;min-width:320px;max-width:760px;"></div>''',
@@ -170,8 +175,8 @@ def main():
     shutil.copy2(TARGET, BACKUP)
     TARGET.write_text(patched, encoding="utf-8")
     print(f"patched {TARGET.name} (backup: {BACKUP.name})")
-    print("  CONTENT | PACKAGING equal boxes; thumb preview promoted; upload full-width")
-    print("  width caps lifted (toppanel 760px, panel 720px)")
+    print("  CONTENT (video + T/D/T) | PACKAGING (pure thumbnail); upload full-width")
+    print("  width caps lifted (topgrid 1500px, toppanel 760px, panel 720px)")
     print("  APP_VERSION v3.3 -> v3.4")
 
 
