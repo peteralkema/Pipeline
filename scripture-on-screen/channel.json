@@ -1,14 +1,14 @@
 {
   "name": "scripture_on_screen",
   "voice_id": "Ren",
-  "style_suffix": "cinematic biblical epic, richly saturated jewel tones, vivid technicolor-painterly palette, deep oil-painting colour, luminous golden-hour light, lush fabrics and gold and lapis ornament, warm dramatic chiaroscuro, period-accurate ancient Near East, Egypt and Persia, painterly photorealism, expressive single figures, no text, no modern elements, 16:9",
-  "default_music_prompt": "Warm orchestral storytelling score for a cinematic biblical drama. Emotive strings and woodwinds, hopeful and humane, swelling brass on moments of triumph, harp and gentle choir on tender beats, restrained low percussion only on deliverance and action beats. Melodic but never competing with a narrator. Intimate and grand by turns. No modern instruments.",
+  "style_suffix": "cinematic biblical blockbuster film still, photorealistic, richly saturated jewel tones, desert gold and lapis and crimson, bright vivid exposure with rich detail in shadows, high dynamic range, blazing golden-hour and firelit light, lush fabrics and gold and lapis ornament, intense dramatic lighting, lots of light and energy, crisp and dynamic, high production value, period-accurate ancient Near East Egypt and Persia, gritty realistic texture, expressive detailed faces, sharp focus, no text, no letters, no modern elements, 16:9",
+  "default_music_prompt": "Warm orchestral storytelling score for a cinematic biblical drama. Emotive strings and woodwinds, hopeful and humane, swelling brass on moments of triumph, harp and gentle choir on tender beats, and full epic scale (brass, choir, percussion) on spectacle beats. Melodic but never competing with a narrator. Intimate and grand by turns. No modern instruments.",
   "base_canon": {},
   "upload": {
     "category_id": "24",
     "privacy_status": "private"
   },
-  "default_motion": "dramatic cinematic motion, lively pan and zoom interplay, expressive movement across the scene, warm dramatic lighting, intimate slow push-in by default with dramatic reveals",
+  "default_motion": "dynamic cinematic camera movement, powerful momentum, energetic movement across the scene, dramatic push-ins and pulls, natural realistic motion, dramatic atmosphere",
   "thumbnail": {
     "composition": "figure_right",
     "candidates": 2,
