@@ -37,6 +37,11 @@ def parse_args():
     ap.add_argument("--unattended", action="store_true",
                     help="fully unattended: forces gate-mode=auto + live + normal "
                          "verbosity, so no gate or kickoff prompt ever blocks (batch runs)")
+    ap.add_argument("--stop-after-clips", action="store_true",
+                    help="STOP_AFTER_CLIPS_APPLIED: render Mode A clips then exit "
+                         "cleanly WITHOUT convergence (no assemble). Leaves an "
+                         "assemble-ready project; MC assembles on the Re-assemble "
+                         "button. The floor-first / manual-cut entry point.")
     ap.add_argument("--job-id", default=None,
                     help="job record id (Mission Control passes this; manual runs mint one)")
     return ap.parse_args()
@@ -315,6 +320,19 @@ def main():
             sys.exit(0)
     else:
         ma = None
+
+    # ── 3c-stop: STOP_AFTER_CLIPS_APPLIED — end after clips, no convergence ──
+    # Mirrors the stills-gate STOP one leg later. When set, the Mode A clips are
+    # on disk and the project is assemble-ready; end cleanly so the operator
+    # floors/crafts and assembles on the MC Re-assemble button (aligned
+    # assemble_episode.py). ma is the Mode A result (None only if modeA didn't run).
+    if getattr(args, "stop_after_clips", False) and ma is not None:
+        t.info("stop-after-clips — clips are on disk; ending the run cleanly "
+               "without convergence. Assemble on the MC Re-assemble button.")
+        if ctx["gate_mode"] == "job":
+            set_phase(_job_id, "clips_ready", ctx["repo_root"])
+        t.ok("run stopped after clips — assemble-ready, nothing assembled.")
+        sys.exit(0)
 
     # ── 3d: CONVERGENCE LEG (pool clips → assemble → final_video) — convergence_leg.py ──
     if "convergence" in legs:
