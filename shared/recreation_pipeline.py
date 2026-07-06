@@ -1632,6 +1632,21 @@ def _kb_override_set(project_root):
     return set()
 
 
+def _kling_override_set(project_root):
+    """FLOOR-FIRST additive Kling: render_policy.json {"kling_override": [beat,...]}.
+    KB_FLOOR_APPLIED. A beat listed here renders a Kling atom regardless of
+    kling_count (floor-first runs kling_count:0, so ONLY these turn Kling on).
+    Empty set when absent -> routing identical to pre-floor behaviour."""
+    import json as _json
+    rp = project_root / "render_policy.json"
+    if rp.is_file():
+        try:
+            return {int(x) for x in _json.loads(rp.read_text()).get("kling_override", [])}
+        except Exception:
+            return set()
+    return set()
+
+
 def _inherit_prev_set(project_root):
     """Per-beat clip-merge: render_policy.json {"inherit_prev": [beat,...]}.
     A beat listed here renders NO clip of its own — it plays the unused tail
@@ -1727,12 +1742,13 @@ def cmd_finish(args):
     kling_count = _tiered_kling_count(project_root, getattr(args, "kling_count", None))
     kb_over = _kb_override_set(project_root)
     inherit_prev = _inherit_prev_set(project_root)
+    kling_over = _kling_override_set(project_root)  # KB_FLOOR_APPLIED (additive)
     plan = []
     for s in shots:
         bi = _tiered_beat_index(s["index"], project_root)
         if bi in inherit_prev:
             engine = "inherit"
-        elif bi < kling_count and bi not in kb_over:
+        elif (bi in kling_over) or (bi < kling_count and bi not in kb_over):
             engine = "kling"
         else:
             engine = "kenburns"
@@ -1762,6 +1778,15 @@ def cmd_finish(args):
     for s, bi, engine in plan:
         still = p["stills"] / f"shot_{s['index']:03d}.png"
         clip  = p["clips"] / f"shot_{s['index']:03d}.mp4"
+        _kbmark = p["clips"] / f"shot_{s['index']:03d}.kbfloor"  # KB_FLOOR_APPLIED
+        # delete-on-upgrade: a beat now routed to Kling whose existing clip is a
+        # MARKED free floor gets discarded so it re-renders as a paid atom.
+        # KB->Kling deletes a free clip; a paid Kling clip carries no marker, so
+        # Kling->KB never deletes (the beat simply leaves kling_override).
+        if engine == "kling" and clip.exists() and _kbmark.exists() and not args.force:
+            print(f"  [{s['index']}/{len(shots)}] upgrade KB->Kling: dropping free floor clip")
+            clip.unlink(missing_ok=True)
+            _kbmark.unlink(missing_ok=True)
         if clip.exists() and not args.force:
             print(f"  [{s['index']}/{len(shots)}] already done, skipping")
         elif engine == "inherit":
@@ -1769,10 +1794,12 @@ def cmd_finish(args):
         elif engine == "kling":
             print(f"  [{s['index']}/{len(shots)}] Kling animating...")
             animate_still(still, s["motion_prompt"], clip)
+            _kbmark.unlink(missing_ok=True)  # paid atom carries no floor marker
         else:
             dur = _tiered_duration(bi, project_root) or float(SHOT_DURATION)
             print(f"  [{s['index']}/{len(shots)}] Ken Burns ({dur:.2f}s, free)...")
             ken_burns_still(still, clip, dur)
+            _kbmark.write_text("kbfloor")  # mark as a free, regenerable floor clip
         clip_paths.append(clip)
 
     # ── inherit pass: derive clip-merge beats from their source atoms ──────────
