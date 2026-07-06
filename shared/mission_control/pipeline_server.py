@@ -487,7 +487,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.9"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.9.1"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1064,7 +1064,10 @@ async function renderDonePanel(ch, pr) {
   let meta = {};
   try { meta = await api("/api/meta?channel=" + encodeURIComponent(ch) + "&project=" + encodeURIComponent(pr)); }
   catch (e) { meta = {}; }
-  if (!meta || !meta.has_video) { renderTopPlaceholder(); return; }   // no video -> placeholder
+  if (!meta || !meta.has_video) {   // ASSEMBLE_AT_CLIPS_APPLIED
+    if (meta && meta.has_clips) { renderAssemblePanel(ch, pr); return; }  // clips_ready -> offer Assemble
+    renderTopPlaceholder(); return;   // truly nothing yet -> placeholder
+  }
   const vsrc = "/video/" + encodeURIComponent(meta.video_name || "final_video.mp4") + q;
   const esc = function(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); };
   const panel = document.createElement("div");
@@ -1331,6 +1334,26 @@ async function reassemble(ch, pr) {
       if (btn) btn.disabled = false;
     }
   }, 2000);
+}
+
+function renderAssemblePanel(ch, pr) {
+  // ASSEMBLE_AT_CLIPS_APPLIED: clips are on disk but no final_video yet. Offer the
+  // deliberate assemble press (reuses the reassemble handler + aligned assembler).
+  const slot = document.getElementById("toppanel");
+  if (!slot) return;
+  const panel = document.createElement("div");
+  panel.id = "donepanel";
+  panel.className = "panel";
+  panel.style.cssText = "border:1px solid #32323e;border-radius:8px;background:#161620;padding:18px;text-align:center;";
+  panel.innerHTML =
+    "<div style=\"color:#d4a017;font-size:12px;letter-spacing:.08em;margin-bottom:8px;\">CLIPS READY</div>" +
+    "<div style=\"color:#c8c8d0;font-size:13px;margin-bottom:12px;\">Clips are on disk. Assemble to build the final video.</div>" +
+    "<button id=\"reassemblebtn\" style=\"background:#d4a017;color:#161620;font-weight:600;padding:9px 16px;font-size:13px;border:none;border-radius:6px;cursor:pointer;\">Assemble from clips</button>" +
+    " <span id=\"reassemblemsg\" style=\"color:#8a8a99;font-size:12px;margin-left:8px;\"></span>";
+  slot.innerHTML = "";
+  slot.appendChild(panel);
+  const rb = document.getElementById("reassemblebtn");
+  if (rb) rb.onclick = function() { reassemble(ch, pr); };
 }
 
 function renderTopPlaceholder() {
@@ -2256,12 +2279,17 @@ class Handler(BaseHTTPRequestHandler):
             if isinstance(tags, list):
                 tags = ", ".join(str(t) for t in tags)
             video = Path(paths["project"]) / "final_video.mp4"
+            # ASSEMBLE_AT_CLIPS_APPLIED: report clip presence so the UI can offer
+            # Assemble in the clips_ready state (no video yet).
+            _clips_dir = Path(paths["project"]) / "modea" / "clips"
+            _has_clips = _clips_dir.is_dir() and any(_clips_dir.glob("shot_*.mp4"))
             self._json(200, {
                 "ok": True,
                 "title": header.get("title", ""),
                 "description": header.get("description", ""),
                 "tags": tags,
                 "has_video": video.exists(),
+                "has_clips": bool(_has_clips),
                 "video_name": "final_video.mp4",
             })
         except Exception as e:
