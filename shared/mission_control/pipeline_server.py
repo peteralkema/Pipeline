@@ -438,6 +438,9 @@ def launch_job(channel_folder: str, project: str, dry_run: bool, log: str) -> di
         "--gate-mode", "job",
         "--job-id", job_id,
     ]
+    # LAUNCH_STOPAFTERCLIPS_APPLIED: every render stops after Mode A clips (no
+    # convergence). Assemble is a deliberate press on the MC Re-assemble button.
+    cmd.append("--stop-after-clips")
     if dry_run:
         cmd.append("--dry-run")
     else:
@@ -484,7 +487,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.8"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.9"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
