@@ -373,7 +373,7 @@ def _channel_header_name(channel_folder: str) -> str:
 # --------------------------------------------------------------------------
 
 # Phases that mean the run is over (terminal). Everything else is a live run.
-_TERMINAL_PHASES = ("done", "stopped", "error", "stale", "dead")
+_TERMINAL_PHASES = ("done", "stopped", "error", "stale", "dead", "clips_ready")  # CLIPS_READY_TERMINAL_APPLIED: --stop-after-clips clean stop, not a crash
 
 def active_job_id() -> str | None:
     """Return the freshest LIVE run, not merely the most-recently-touched file.
