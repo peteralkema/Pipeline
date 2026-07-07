@@ -487,7 +487,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.9.3"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.9.4"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -1930,6 +1930,7 @@ function bindAnimateButtons(wrap) {
       window.__KLING_N = (r && r.kling_count != null) ? r.kling_count : 40;
       const kbOn = {}, inhOn = {};
       ((r && r.kb_override) || []).forEach(function(b) { kbOn[b] = 1; });
+      ((r && r.floored) || []).forEach(function(b) { kbOn[b] = 1; });  // PAINT_FLOORED_KB_APPLIED
       ((r && r.inherit_prev) || []).forEach(function(b) { inhOn[b] = 1; });
       window.__KB_SET = kbOn; window.__INH_SET = inhOn;
       wrap.querySelectorAll(".motioncell").forEach(function(cell) {
@@ -2384,8 +2385,30 @@ class Handler(BaseHTTPRequestHandler):
                 inh = sorted({int(x) for x in _rpj.get("inherit_prev", [])})
             except Exception:
                 n = 40; static = False; kb = []; inh = []
+        # PAINT_FLOORED_KB_APPLIED: beats whose free .kbfloor clip exists on disk
+        # (rendered Ken-Burns floor). Map shot_NNN.kbfloor back to beat via _index.json
+        # (shot->beat); default identity (beat = shot-1) if no map.
+        floored = []
+        try:
+            _clips = paths["project"] / "modea" / "clips"
+            _idx = paths["project"] / "_index.json"
+            _s2b = {}
+            if _idx.is_file():
+                for _k, _v in (_json.loads(_idx.read_text()) or {}).items():
+                    _s2b[int(_k)] = int(_v)
+            if _clips.is_dir():
+                for _m in _clips.glob("shot_*.kbfloor"):
+                    try:
+                        _sh = int(_m.stem.split("_")[1])
+                    except Exception:
+                        continue
+                    floored.append(_s2b.get(_sh, _sh - 1))
+            floored = sorted(set(floored))
+        except Exception:
+            floored = []
         self._json(200, {"ok": True, "kling_count": n, "static": static,
-                         "kb_override": kb, "inherit_prev": inh, "default": 40}); return
+                         "kb_override": kb, "inherit_prev": inh, "floored": floored,
+                         "default": 40}); return
 
     def _handle_kb_toggle(self, body):
         """Toggle a beat in render_policy.json "kb_override" — the per-beat
