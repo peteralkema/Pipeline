@@ -46,7 +46,8 @@ def _run(cmd, t, label, cwd=None, dry_run=False):
         return True
     import time, threading
     proc = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE,
-                            stderr=subprocess.STDOUT, text=True, bufsize=1)
+                            stderr=subprocess.STDOUT, text=True, bufsize=1,
+                            env=os.environ.copy())
     start = time.time()
     last = [start]
     stop = threading.Event()
