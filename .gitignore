@@ -107,3 +107,4 @@ shared/all_batches_manifest_*.json
 shared/batch_plan.json
 plan_*.json
 shared/plan_*.json
+secrets/
