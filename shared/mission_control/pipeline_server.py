@@ -487,7 +487,7 @@ def decide_gate(job_id: str, decision: str) -> dict:
 # The /api/state payload — the single source the page renders from
 # --------------------------------------------------------------------------
 
-APP_VERSION = "v3.9.2"  # hand-bumped each shipped page change; pairs with the auto git SHA
+APP_VERSION = "v3.9.3"  # hand-bumped each shipped page change; pairs with the auto git SHA
 STALE_SECONDS = 300  # A1: a gate run with no heartbeat for this long is treated as dead
 
 
@@ -2654,7 +2654,20 @@ class Handler(BaseHTTPRequestHandler):
         project_root = stills_dir.parent.parent  # <project>/ — render_policy/durations/_index live here
         kling_count = _tiered_kling_count(project_root)
         beat_index = _tiered_beat_index(shot_idx, project_root)
-        engine = "kling" if beat_index < kling_count else "kenburns"
+        # PERBEAT_KLING_OVERRIDE_APPLIED: additive routing, same rule as the batch
+        # engine (cmd_finish). Under floor-first (kling_count:0) a beat renders Kling
+        # ONLY if it is in kling_override; positional N still applies when >0.
+        import json as _j
+        _rp = project_root / "render_policy.json"
+        _klo, _kbo = set(), set()
+        if _rp.is_file():
+            try:
+                _pol = _j.loads(_rp.read_text()) or {}
+                _klo = {int(x) for x in _pol.get("kling_override", [])}
+                _kbo = {int(x) for x in _pol.get("kb_override", [])}
+            except Exception:
+                _klo, _kbo = set(), set()
+        engine = "kling" if (beat_index in _klo) or (beat_index < kling_count and beat_index not in _kbo) else "kenburns"
         duration = _tiered_duration(beat_index, project_root)
         sys.stderr.write(f"[Animate] shot {shot_idx:03d} -> {engine} (beat {beat_index}, N={kling_count})\n")
         key = _animate_key(ch, pr, shot_idx)
