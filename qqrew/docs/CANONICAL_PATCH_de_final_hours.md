@@ -1,5 +1,5 @@
 # CANONICAL_PATCH_de_final_hours.md
-*An INSERTABLE section for `__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`. Do NOT apply the full rewrite now — that's a large piece of work for a dedicated session. This document (a) is the drop-in section that flags the problem inside the canonical itself, and (b) specs how the rest of the rewrite must proceed. Banked 29 Jun 2026 from the @Q-Qrew build — the day the bias became undeniable because a deliberately-opposite channel had to fight it at every turn.*
+*An INSERTABLE section for `_PIPELINE-CANONICAL.md`. Do NOT apply the full rewrite now — that's a large piece of work for a dedicated session. This document (a) is the drop-in section that flags the problem inside the canonical itself, and (b) specs how the rest of the rewrite must proceed. Banked 29 Jun 2026 from the @Q-Qrew build — the day the bias became undeniable because a deliberately-opposite channel had to fight it at every turn.*
 
 ---
 

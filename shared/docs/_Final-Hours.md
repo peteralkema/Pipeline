@@ -306,4 +306,4 @@ Most of this already lives in §2 (thesis) and §4 (topic principles); held here
 
 ---
 
-*Maintained by Peter + Claude. Operational how-to lives in the canonical reference (`__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`); the wider operation lives there too. **Craft now lives HERE (§11) — `ante-machinam.md` is retired.** This doc carries Final Hours strategy, the retention data, the batch, the thumbnail specifics, the full craft canon, and the forward queue.*
+*Maintained by Peter + Claude. Operational how-to lives in the canonical reference (`_PIPELINE-CANONICAL.md`); the wider operation lives there too. **Craft now lives HERE (§11) — `ante-machinam.md` is retired.** This doc carries Final Hours strategy, the retention data, the batch, the thumbnail specifics, the full craft canon, and the forward queue.*

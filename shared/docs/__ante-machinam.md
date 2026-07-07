@@ -6,7 +6,7 @@
 >
 > **Where its content went (30 June de-bias):**
 > - **CRAFT** (the retention canon Part IV, the VISUAL-line patterns Part III, beat-granularity, animatable-foreground, the channel briefs Part V) → **`_Final-Hours.md §11`** (Final Hours' own craft canon — it was always FH craft). Each channel's craft lives in its own **`_ChannelName.md`**.
-> - **MECHANICS** (the real Constitution: every-beat-has-words / silence-reconciliation, header-is-metadata, numbers-spelled-out, one-VISUAL-per-beat, lock-the-script; the two-mode promotion rule; the script-format contract; the author pre-flight; the runtime/wpm calibration) → **canonical reference §8** (`__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`).
+> - **MECHANICS** (the real Constitution: every-beat-has-words / silence-reconciliation, header-is-metadata, numbers-spelled-out, one-VISUAL-per-beat, lock-the-script; the two-mode promotion rule; the script-format contract; the author pre-flight; the runtime/wpm calibration) → **canonical reference §8** (`_PIPELINE-CANONICAL.md`).
 >
 > **Two items were relabelled on the way out:** beat granularity and animatable-foreground were filed here under "the Constitution / the physics of the pipeline." They are **not** physics — they are FH craft. QQrew runs static at ~5-word beats with no foreground motion and the pipeline does not care. They are now `[CRAFT: FH-derived]` in `_Final-Hours.md §11.1–11.2`.
 >

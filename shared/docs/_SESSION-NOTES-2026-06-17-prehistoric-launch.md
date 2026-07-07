@@ -13,7 +13,7 @@
 
 ## Where the durable lessons graduated (don't duplicate them here)
 
-- **Canonical reference** (`__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`): roster (+Prehistoric Disasters); §5.8 the unattended batch path; §6 the automated thumbnail pipeline + the curated-music decision; §9 the packaging principles (Ken-Burns-lanes-win-on-packaging corollary, thumbnail doctrine); §10 current state; §12/§13 the 15-min cap, the env-source rule, the script-format spec, the runtime calibration, the batch/thumbnail/music command references.
+- **Canonical reference** (`_PIPELINE-CANONICAL.md`): roster (+Prehistoric Disasters); §5.8 the unattended batch path; §6 the automated thumbnail pipeline + the curated-music decision; §9 the packaging principles (Ken-Burns-lanes-win-on-packaging corollary, thumbnail doctrine); §10 current state; §12/§13 the 15-min cap, the env-source rule, the script-format spec, the runtime calibration, the batch/thumbnail/music command references.
 - **Ante-machinam** (`__ante-machinam.md`): §IV.6 runtime calibration (beat-floored, ~14s/beat); Part VI script-format-from-exemplar.
 - **Worklog** (`__MASTER-WORKLOG.md`): 17 June RECORD block + reshuffled backlog (account-verification Tier-1, Mission Control thumbnail integration Tier-3 #11, faster-encode Tier-4 #18, per-project scheduling).
 - **Channel doctrine** (`_Prehistoric-Disasters.md`): the full channel brief + the 19-topic launch backlog (§8).

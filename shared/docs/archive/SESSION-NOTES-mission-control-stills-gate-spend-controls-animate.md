@@ -1,6 +1,6 @@
 # SESSION NOTES — Mission Control: Stills-Gate Review Surface + Spend Controls + Once-Off Animate
 *Sacred Dawn `figures-test-2` live test · 13 June 2026 (afternoon, continuation)*
-*Sibling docs: `_YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md` (umbrella), `_SPEC-browser-pipeline-control-panel.md` (the Mission Control spec v2), `_ante-machinam.md` (craft), `_machina.md` (operations). Prior session transcripts: `2026-06-13-10-33-07-mission-control-build-session.txt`, `2026-06-13-11-27-11-mission-control-storyboard-build.txt`.*
+*Sibling docs: `__PIPELINE-CANONICAL.md` (umbrella), `_SPEC-browser-pipeline-control-panel.md` (the Mission Control spec v2), `_ante-machinam.md` (craft), `_machina.md` (operations). Prior session transcripts: `2026-06-13-10-33-07-mission-control-build-session.txt`, `2026-06-13-11-27-11-mission-control-storyboard-build.txt`.*
 
 ---
 

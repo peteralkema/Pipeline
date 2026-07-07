@@ -189,4 +189,4 @@ Within-family wallpaper drift across beats reads as the unreliable narrator's de
 
 
 
-*Maintained by Peter + Claude. This file was rebuilt the day the first render was rejected and the whole look corrected — the supply-first/period-gothic original is retired. The visual system (§6) and the craft-execution doctrine (§12) are LOCKED. Sibling docs: `__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md` (the system), `ante-machinam.md` (the universal craft Constitution, inherited by reference).*
+*Maintained by Peter + Claude. This file was rebuilt the day the first render was rejected and the whole look corrected — the supply-first/period-gothic original is retired. The visual system (§6) and the craft-execution doctrine (§12) are LOCKED. Sibling docs: `_PIPELINE-CANONICAL.md` (the system), `ante-machinam.md` (the universal craft Constitution, inherited by reference).*

@@ -246,4 +246,4 @@ The channel's authoring queue. The governing discipline normally is **ship ep1 +
 
 ---
 
-*Maintained by Peter + Claude. Strategic framing, topic principles, the slate, and banked production/distribution lessons live here. Operational how-to lives in `_machina.md` / the canonical reference §5; craft in `_ante-machinam.md`; the wider operation in `_YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`. As the channel accrues real first-48h data, replace the inherited/pending distribution notes in §6–§7 with this channel's own validated retention curves.*
+*Maintained by Peter + Claude. Strategic framing, topic principles, the slate, and banked production/distribution lessons live here. Operational how-to lives in `_machina.md` / the canonical reference §5; craft in `_ante-machinam.md`; the wider operation in `__PIPELINE-CANONICAL.md`. As the channel accrues real first-48h data, replace the inherited/pending distribution notes in §6–§7 with this channel's own validated retention curves.*

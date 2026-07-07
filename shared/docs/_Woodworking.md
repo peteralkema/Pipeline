@@ -162,7 +162,7 @@ Scope deliberately **faceless only** — we do NOT study the on-camera shop crea
 
 ---
 
-*Maintained by Peter + Claude. Operational how-to lives in `__machina`/canonical; craft in `__ante-machinam.md`; the wider operation in `__YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md`. This doc carries Woodworking strategy, the honesty spine, the angle system + 100-title backlog reference, the niche analysis, the packaging specifics, the config/auth setup, and the forward queue. It is a pre-launch hypothesis (v0.1) with no own-channel retention data yet — unlike the battle-tested Final Hours doctrine it is modeled on.*
+*Maintained by Peter + Claude. Operational how-to lives in `__machina`/canonical; craft in `__ante-machinam.md`; the wider operation in `_PIPELINE-CANONICAL.md`. This doc carries Woodworking strategy, the honesty spine, the angle system + 100-title backlog reference, the niche analysis, the packaging specifics, the config/auth setup, and the forward queue. It is a pre-launch hypothesis (v0.1) with no own-channel retention data yet — unlike the battle-tested Final Hours doctrine it is modeled on.*
 
 ---
 

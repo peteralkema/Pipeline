@@ -1,5 +1,5 @@
 # The Sacred Dawn Creed
-*The canonical channel reference for Sacred Dawn. Sits beneath YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md. Captures the philosophy, the creation logic, the competitive analysis, the craft, and the backlog. Written the night the channel launched (10 June 2026), alongside the first video, "The Watchers."*
+*The canonical channel reference for Sacred Dawn. Sits beneath _PIPELINE-CANONICAL.md. Captures the philosophy, the creation logic, the competitive analysis, the craft, and the backlog. Written the night the channel launched (10 June 2026), alongside the first video, "The Watchers."*
 
 ---
 

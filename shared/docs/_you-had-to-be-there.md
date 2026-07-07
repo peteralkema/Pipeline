@@ -259,4 +259,4 @@ Launch title **"10 Things '70s Parents Did That Would Be Illegal Today"** is the
 
 ---
 
-*Maintained by Peter + Claude. Bump and note the change whenever a run banks a lesson that changes how this channel is written or configured. Sibling docs: `_YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md` (umbrella), `_ante-machinam.md` (craft), `_machina.md` (operations).*
+*Maintained by Peter + Claude. Bump and note the change whenever a run banks a lesson that changes how this channel is written or configured. Sibling docs: `__PIPELINE-CANONICAL.md` (umbrella), `_ante-machinam.md` (craft), `_machina.md` (operations).*

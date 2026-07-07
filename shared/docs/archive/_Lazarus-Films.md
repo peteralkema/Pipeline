@@ -165,4 +165,4 @@ Four of Pamela Samuelson's eight public-domain values map to Lazarus and give it
 
 ---
 
-*Maintained by Peter + Claude. This is the channel that proves the apprenticeship thesis — every adaptation simultaneously ships content and sharpens the craft that powers the whole operation. Build is gated on Phase 2 + the dialogue/lip-sync legs. Sibling docs: `_YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md` (umbrella), `_ante-machinam.md` (craft), `_machina.md` (operations).*
+*Maintained by Peter + Claude. This is the channel that proves the apprenticeship thesis — every adaptation simultaneously ships content and sharpens the craft that powers the whole operation. Build is gated on Phase 2 + the dialogue/lip-sync legs. Sibling docs: `__PIPELINE-CANONICAL.md` (umbrella), `_ante-machinam.md` (craft), `_machina.md` (operations).*

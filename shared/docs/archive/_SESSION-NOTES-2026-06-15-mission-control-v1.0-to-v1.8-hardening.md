@@ -123,7 +123,7 @@ Then built A (page would have shown `...8201` automatically), B (the duplicate c
 ## PART 4 — Doc consolidation (executed this session)
 
 Four docs → two living + two stubs. Test for survival: *does Mission Control do this for me now?* yes → dead; no (craft) → keep.
-- **`_YOUTUBE-MEDIA-FLYWHEEL-canonical-reference.md` = the system** (kept, extended): absorbed machina's architecture into §5 (channel.json identity contract, adding-a-channel, per-film look override, resolve-identity-explicitly-fail-loudly); §5.6 root-vs-modea principle; §13 surviving box commands; Scripture on Screen added.
+- **`__PIPELINE-CANONICAL.md` = the system** (kept, extended): absorbed machina's architecture into §5 (channel.json identity contract, adding-a-channel, per-film look override, resolve-identity-explicitly-fail-loudly); §5.6 root-vs-modea principle; §13 surviving box commands; Scripture on Screen added.
 - **`_ante-machinam.md` v3.0 = the craft** (slimmed): Part VI terminal mechanics → a paste-and-Launch bridge; Parts I/III/IV/V (Constitution, VISUAL writing, retention canon + IV.7 audit, channel briefs) intact.
 - **`_machina.md` / `_README.md` → stubs** pointing at the two.
 - (NOTE: this notes file post-dates that consolidation; the canonical should get a v1.8 + A/B/C update next session — see below.)
