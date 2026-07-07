@@ -1,6 +1,6 @@
 {
   "name": "scripture_on_screen",
-  "voice_id": "Ren",
+  "voice_id": "elliot",
   "style_suffix": "cinematic biblical blockbuster film still, photorealistic, richly saturated jewel tones, desert gold and lapis and crimson, bright vivid exposure with rich detail in shadows, high dynamic range, blazing golden-hour and firelit light, lush fabrics and gold and lapis ornament, intense dramatic lighting, lots of light and energy, crisp and dynamic, high production value, period-accurate ancient Near East Egypt and Persia, gritty realistic texture, expressive detailed faces, sharp focus, no text, no letters, no modern elements, 16:9",
   "default_music_prompt": "Warm orchestral storytelling score for a cinematic biblical drama. Emotive strings and woodwinds, hopeful and humane, swelling brass on moments of triumph, harp and gentle choir on tender beats, and full epic scale (brass, choir, percussion) on spectacle beats. Melodic but never competing with a narrator. Intimate and grand by turns. No modern instruments.",
   "base_canon": {},
@@ -76,13 +76,5 @@
     "crossfade_seconds": 2,
     "level": 0.07
   },
-  "tts_provider": "elevenlabs",
-  "elevenlabs": {
-    "voice_id": "Gubgw9l4dtIoQA9YZHgx",
-    "model_id": "eleven_multilingual_v2",
-    "stability": 0.45,
-    "similarity_boost": 0.75,
-    "style": 0.25,
-    "speed": 1.1
-  }
+  "speaking_rate": 1.1
 }
