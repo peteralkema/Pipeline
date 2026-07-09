@@ -109,25 +109,41 @@ def _ffprobe_duration(path: Path) -> float:
 def extract_vo(beat: dict):
     """Return (speaker, text) or (None, None) if this beat is silent.
 
-    Silence is legal on this path. Two accepted shapes:
-      explicit:  {"vo_speaker": "...", "vo_text": "..."}
-      tagged:    {"vo": "[speaker] text"}
+    Silence is legal on this path. Three accepted shapes, checked in order:
+      explicit:   {"vo_speaker": "...", "vo_text": "..."}
+      tagged vo:  {"vo": "[speaker] text"}
+      narration:  {"narration": "[speaker] text"}   <- what parse_script.py writes
+                  from a script line like:  [A] [bentley] The humans are fools.
+
+    The narration shape is the one that makes an MC-uploaded script.md work end to end:
+    parse_script.py folds the line into beat["narration"]; a silent beat simply has an
+    empty narration (parse_script tolerates this — its `if b.narration:` is conditional;
+    the no-silence doctrine lives downstream in build_audio_script.py, which this path
+    never calls).
     """
     spk = (beat.get("vo_speaker") or "").strip()
     txt = (beat.get("vo_text") or "").strip()
     if spk and txt:
         return spk.lower(), txt
 
-    raw = (beat.get("vo") or "").strip()
-    if not raw:
+    for field in ("vo", "narration"):
+        raw = (beat.get(field) or "").strip()
+        if not raw:
+            continue
+        m = TAG_RE.match(raw)
+        if m:
+            return m.group(1).lower(), m.group(2).strip()
+        if field == "vo":
+            # An explicit vo line MUST be tagged — an untagged one is an authoring error.
+            raise TwoVoiceError(
+                f"beat {beat.get('index')}: VO line is not speaker-tagged. "
+                f"Expected '[speaker] text', got: {raw[:60]!r}"
+            )
+        # Untagged narration on a wordless channel = an unvoiced visual line. Treat as
+        # silent rather than guessing a speaker (resolve identity explicitly, never assume).
         return None, None
-    m = TAG_RE.match(raw)
-    if not m:
-        raise TwoVoiceError(
-            f"beat {beat.get('index')}: VO line is not speaker-tagged. "
-            f"Expected '[speaker] text', got: {raw[:60]!r}"
-        )
-    return m.group(1).lower(), m.group(2).strip()
+
+    return None, None
 
 
 def resolve_speaker_config(speaker: str, channel_config: dict) -> dict:
