@@ -32,7 +32,16 @@
   },
 
   "render_mode": "reference",
+  "reference_endpoint": "fal-ai/nano-banana-2/edit",
+  "reference_resolution": "1K",
   "reference_aspect": "16:9",
+  "image_model": "nano_banana_2",
+
+  "style_suffix": "photorealistic cinematic still, real photograph, natural realistic fur with individual visible hairs, shallow depth of field, warm high-key lighting, vibrant natural colour, rich detailed realistic background, bright and inviting",
+
+  "reference_prompt_lock": "Use the reference image(s) as the exact visual template for the DOG: keep that EXACT dog -- same coat colour and markings, same nose colour, same eye colour, same ear shape and body proportions; do not change its identity. Render photorealistic and cinematic: a real photograph of a real dog, real photographic detail, natural realistic fur with individual visible hairs, true canine anatomy, shallow depth of field, soft natural light, warm high-key lighting, vibrant natural colour, rich detailed realistic backgrounds. Not an illustration, not a 3D render, not a cartoon, not animated. Render this new scene: ",
+
+  "reference_prompt_tail": " Rich detailed realistic background, photorealistic and cinematic, real photograph, natural fur texture with individual hairs, shallow depth of field, warm high-key lighting, vibrant natural colour, 16:9 wide composition, no on-image text, no letters, no captions.",
 
   "reference_map": {
     "bentley": ["characters/bentley_ref_clean.png", "characters/bentley_body_clean.png"],
@@ -49,9 +58,11 @@
   "default_motion": "Gentle natural movement. Soft warm light. No camera shake, no fast motion.",
 
   "_notes": {
-    "render_mode": "reference = beats whose image_prompt carries a {token} found in reference_map render via the fal /edit endpoint, conditioned on those refs. Token-free beats fall through to text-to-image AND have the people-directive stripped (Rule 1: person-free by definition).",
-    "canon": "Every {token} used in any VISUAL must have a canon entry — _expand_canon raises SystemExit on unknown tags. Tokens do double duty: attach the reference image AND expand into the prompt text.",
-    "timing_source": "beatsheet = no narration-timed audio leg. Timing declared per beat; VO is a sparse removable layer. See wordless-vo-wiring-spec.md.",
+    "reference_prompt_lock": "MUST be set. The module default REFERENCE_PROMPT_LOCK says 'Render in a semi-realistic modern animated-feature illustration style' — inheriting it makes every dog a cartoon. Refs control IDENTITY; the lock/tail text controls FIDELITY. Banked 09 Jul after shot_003 came back Pixar-glossy with a perfect liver nose.",
+    "negations": "'not an illustration / not a cartoon' is safe here: NB2 is reasoning-guided, and qqrew's working lock uses 'never bored, never pouty'. The Flux-negation trap (naming a thing summons it) applies to the diffusion text path, not this endpoint.",
+    "render_mode": "reference = beats whose image_prompt carries a {token} in reference_map render via fal /edit conditioned on those refs. Token-free beats fall through to text-to-image AND have the people-directive stripped (Rule 1: person-free by definition).",
+    "canon": "Every {token} used in any VISUAL must have a canon entry — _expand_canon raises SystemExit on unknown tags. Tokens do double duty: attach the reference images AND expand into the prompt text.",
+    "timing_source": "beatsheet = no narration-timed audio leg. Timing declared per beat; VO is a sparse removable layer.",
     "default_beat_hold": "Deliberate v1 baseline. Flat pacing is a diagnostic, not a target. Tune at the stills gate once the channel has traction.",
     "size_word": "No size adjective in the canon on purpose — 'miniature' was a canon error. The reference images carry the correct medium build."
   }
