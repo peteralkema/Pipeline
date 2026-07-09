@@ -85,6 +85,11 @@ from pathlib import Path
 
 TAG_RE = re.compile(r"^\s*\[([A-Za-z0-9_\-]+)\]\s*(.+?)\s*$", re.DOTALL)
 
+# A single spoken line can legitimately be under a second ("Beautiful." ~= 0.9s), so the
+# provider's full-episode 1.0s floor is wrong at this scale. We keep a real floor — well
+# above the per-chunk dead-air threshold (0.2s) — so genuine API garbage still hard-fails.
+MIN_LINE_DURATION = 0.35
+
 
 class TwoVoiceError(Exception):
     pass
@@ -221,7 +226,11 @@ def main() -> int:
                 print(f"  beat {idx:3d}  {speaker:<10} (cached)")
             else:
                 print(f"  beat {idx:3d}  {speaker:<10} rendering: {text[:48]!r}")
-                generate_voiceover_elevenlabs(text, out, cfg)
+                # A single VO line is legitimately short — "Beautiful." is ~0.9s. The
+                # provider's default 1.0s floor exists to catch a garbage FULL-EPISODE
+                # read; at line scale it would hard-fail on healthy audio. The per-chunk
+                # dead-air guard (<=0.2s) still protects us and is untouched.
+                generate_voiceover_elevenlabs(text, out, cfg, min_total_duration=MIN_LINE_DURATION)
 
             dur = _ffprobe_duration(out)   # verify at artifact, always
             vo_map[str(idx)] = {
