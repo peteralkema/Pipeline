@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-patch_elevenlabs_min_duration.py — let the concat guard know how long an utterance
-is *supposed* to be.
+patch_elevenlabs_min_duration.py — let the concat guard know how long an utterance is
+*supposed* to be.
 
 THE BUG
 -------
-generate_voiceover_elevenlabs() ends with:
+_concat_chunks() ends with:
 
     total_dur = _ffprobe_duration(out_path)
     if total_dur <= 1.0:
@@ -19,20 +19,30 @@ But a wordless-spine channel renders ONE LINE AT A TIME. "Beautiful." is 0.91s o
 perfectly good audio, and the guard hard-fails on it. The assumption ("this is always a
 whole episode") is invisible in the signature, so it collides with a legitimate new use.
 
-THE FIX
--------
-Parameterize the floor. `generate_voiceover_elevenlabs(..., min_total_duration=1.0)`
-keeps today's behaviour byte-for-byte for every existing caller; the per-line renderer
-passes a smaller floor because a single spoken line legitimately runs under a second.
+THE FIX — FOUR EDITS, NOT TWO
+-----------------------------
+The guard does NOT live in generate_voiceover_elevenlabs(). It lives in the private
+_concat_chunks(), which the public function calls on its last line. The floor must be
+threaded through the whole call chain:
 
-The guard keeps doing its real job — catching dead air and API garbage — it simply stops
-assuming it is always looking at a full episode.
+  1. _concat_chunks(chunk_paths, out_path, min_total_duration=1.0)
+  2. the guard inside it uses the parameter
+  3. generate_voiceover_elevenlabs(..., min_total_duration=1.0) accepts it
+  4. ...and passes it down at the _concat_chunks call site
+
+Defaulting to 1.0 everywhere keeps today's behaviour byte-for-byte for every existing
+narration caller. Only the per-line VO renderer lowers it.
 
 NOT TOUCHED: _validate_chunk's per-chunk `dur <= 0.2` dead-air check. A real utterance
 always clears 0.2s; that guard is correct at every scale and stays exactly as it is.
 
-Discipline: verifies its anchors, py_compiles the result before writing, keeps a .pre_*
-backup, idempotent.
+(An earlier version of this patch changed the public signature and the guard but not the
+call between them — the parameter was out of scope where the guard ran, and every render
+died with NameError. Read the whole call chain before patching: a signature is not a
+scope.)
+
+Discipline: verifies all four anchors, py_compiles the result before writing, keeps a
+.pre_* backup, idempotent.
 
 Run on the BOX from ~/Pipeline (after git pull):
     python shared/patch_elevenlabs_min_duration.py --dry-run
@@ -52,12 +62,12 @@ from pathlib import Path
 TARGET = Path("shared/elevenlabs_tts.py")
 MARKER = "min_total_duration"
 
-# ── 1. signature: add the parameter, defaulted to today's value ───────────
-ANCHOR_SIG = 'def generate_voiceover_elevenlabs(text: str, out_path, channel_config: dict) -> str:'
-NEW_SIG = ('def generate_voiceover_elevenlabs(text: str, out_path, channel_config: dict,\n'
-           '                                  min_total_duration: float = 1.0) -> str:')
+# ── 1. _concat_chunks signature ───────────────────────────────────────────
+ANCHOR_CONCAT_SIG = "def _concat_chunks(chunk_paths: list, out_path: Path) -> None:"
+NEW_CONCAT_SIG = ("def _concat_chunks(chunk_paths: list, out_path: Path,\n"
+                  "                   min_total_duration: float = 1.0) -> None:")
 
-# ── 2. the guard: use the parameter instead of the hardcoded 1.0 ──────────
+# ── 2. the guard, which lives INSIDE _concat_chunks ───────────────────────
 ANCHOR_GUARD = '''    total_dur = _ffprobe_duration(out_path)
     if total_dur <= 1.0:
         raise ElevenLabsTTSError(
@@ -74,6 +84,15 @@ NEW_GUARD = '''    total_dur = _ffprobe_duration(out_path)
             f"Concatenated voiceover is {total_dur:.2f}s "
             f"(floor {min_total_duration:.2f}s) — something is wrong, hard fail."
         )'''
+
+# ── 3. public signature ───────────────────────────────────────────────────
+ANCHOR_PUB_SIG = "def generate_voiceover_elevenlabs(text: str, out_path, channel_config: dict) -> str:"
+NEW_PUB_SIG = ("def generate_voiceover_elevenlabs(text: str, out_path, channel_config: dict,\n"
+               "                                  min_total_duration: float = 1.0) -> str:")
+
+# ── 4. the call site — the edit the first version of this patch missed ────
+ANCHOR_CALL = "    _concat_chunks(chunk_paths, out_path)"
+NEW_CALL = "    _concat_chunks(chunk_paths, out_path, min_total_duration=min_total_duration)"
 
 
 def fail(msg: str) -> int:
@@ -98,19 +117,23 @@ def main() -> int:
         return 0
 
     problems = []
-    if ANCHOR_SIG not in src:
-        problems.append("generate_voiceover_elevenlabs signature anchor not found")
-    if ANCHOR_GUARD not in src:
-        problems.append("concat-duration guard anchor not found (the `total_dur <= 1.0` block)")
+    for label, anchor in (("_concat_chunks signature", ANCHOR_CONCAT_SIG),
+                          ("concat-duration guard", ANCHOR_GUARD),
+                          ("generate_voiceover_elevenlabs signature", ANCHOR_PUB_SIG),
+                          ("_concat_chunks call site", ANCHOR_CALL)):
+        if anchor not in src:
+            problems.append(f"{label} anchor not found")
     if problems:
         for p in problems:
             print(f"!! {p}", file=sys.stderr)
         return fail("anchors did not verify — elevenlabs_tts.py has moved. "
                     "Re-read it and update this patch. Nothing was written.")
-    print("anchors verified: signature, concat guard")
+    print("anchors verified: _concat_chunks sig, guard, public sig, call site")
 
-    out = src.replace(ANCHOR_SIG, NEW_SIG, 1)
+    out = src.replace(ANCHOR_CONCAT_SIG, NEW_CONCAT_SIG, 1)
     out = out.replace(ANCHOR_GUARD, NEW_GUARD, 1)
+    out = out.replace(ANCHOR_PUB_SIG, NEW_PUB_SIG, 1)
+    out = out.replace(ANCHOR_CALL, NEW_CALL, 1)
 
     if out == src:
         return fail("no change produced — refusing to write.")
@@ -137,10 +160,9 @@ def main() -> int:
 
     print(f"backup -> {backup}")
     print(f"PATCHED -> {target}")
-    print("\nVERIFY:")
-    print("  grep -n 'min_total_duration' shared/elevenlabs_tts.py")
-    print("\nExisting narration callers pass no floor and keep the 1.0s guard exactly. "
-          "Only the per-line VO renderer lowers it.")
+    print("\nVERIFY — all four sites, and the guard must sit INSIDE _concat_chunks:")
+    print("  grep -n 'min_total_duration\\|def _concat_chunks\\|_concat_chunks(chunk_paths' shared/elevenlabs_tts.py")
+    print("\nExisting narration callers pass no floor and keep the 1.0s guard exactly.")
     return 0
 
 
