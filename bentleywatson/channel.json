@@ -1,0 +1,53 @@
+{
+  "channel": "bentley_and_watson",
+  "display_name": "Bentley & Watson",
+  "handle": "@BentleyandWatson",
+
+  "width": 1920,
+  "height": 1080,
+
+  "tts_provider": "elevenlabs",
+
+  "timing_source": "beatsheet",
+  "default_beat_hold": 6.0,
+  "vo_tail": 0.4,
+
+  "elevenlabs_voices": {
+    "bentley": {
+      "voice_id": "3XOBzXhnDY98yeWQ3GdM",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.5,
+      "similarity_boost": 0.75,
+      "style": 0.5,
+      "speed": 1.0
+    },
+    "watson": {
+      "voice_id": "douDhHvfoViWmZth0cUX",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.5,
+      "similarity_boost": 0.75,
+      "style": 0.5,
+      "speed": 0.9
+    }
+  },
+
+  "characters": {
+    "bentley": {
+      "ref": "characters/bentley_ref_clean.png",
+      "body_ref": "characters/bentley_body_clean.png",
+      "tag": "chocolate-and-tan long-haired dachshund, liver-brown nose, warm amber eyes, tan eyebrow pips and muzzle, silky feathered chocolate ears and tail"
+    },
+    "watson": {
+      "ref": "characters/watson_ref.png",
+      "body_ref": "characters/watson_body_clean.png",
+      "tag": "English-cream long-haired dachshund, glossy black nose, dark soulful eyes, honey coat shading darker along ears and spine, heavy silky feathering and plumed tail"
+    },
+    "_pair_ref": "characters/pair_body.png"
+  },
+
+  "_notes": {
+    "timing_source": "beatsheet = this channel does NOT run the narration-timed audio leg. Timing is declared per beat; VO is a sparse removable layer. See wordless-vo-wiring-spec.md.",
+    "default_beat_hold": "Deliberate v1 baseline. Flat pacing is a diagnostic, not a target. Tune at the stills gate once the channel has traction.",
+    "size_word": "No size adjective in the character tags on purpose — 'miniature' was a canon error. The reference images carry the correct medium build."
+  }
+}
