@@ -2,16 +2,12 @@
   "channel": "bentley_and_watson",
   "display_name": "Bentley & Watson",
   "handle": "@BentleyandWatson",
-
   "width": 1920,
   "height": 1080,
-
   "tts_provider": "elevenlabs",
-
   "timing_source": "beatsheet",
   "default_beat_hold": 6.0,
   "vo_tail": 0.4,
-
   "elevenlabs_voices": {
     "bentley": {
       "voice_id": "3XOBzXhnDY98yeWQ3GdM",
@@ -30,33 +26,25 @@
       "speed": 0.9
     }
   },
-
   "render_mode": "reference",
   "reference_endpoint": "fal-ai/nano-banana-2/edit",
   "reference_resolution": "1K",
   "reference_aspect": "16:9",
   "image_model": "nano_banana_2",
-
   "style_suffix": "photorealistic cinematic still, real photograph, natural realistic fur with individual visible hairs, shallow depth of field, warm high-key lighting, vibrant natural colour, rich detailed realistic background, bright and inviting",
-
   "reference_prompt_lock": "Use the reference image(s) as the exact visual template for the DOG: keep that EXACT dog -- same coat colour and markings, same nose colour, same eye colour, same ear shape and body proportions; do not change its identity. Render photorealistic and cinematic: a real photograph of a real dog, real photographic detail, natural realistic fur with individual visible hairs, true canine anatomy, shallow depth of field, soft natural light, warm high-key lighting, vibrant natural colour, rich detailed realistic backgrounds. Not an illustration, not a 3D render, not a cartoon, not animated. Render this new scene: ",
-
   "reference_prompt_tail": " Rich detailed realistic background, photorealistic and cinematic, real photograph, natural fur texture with individual hairs, shallow depth of field, warm high-key lighting, vibrant natural colour, 16:9 wide composition, no on-image text, no letters, no captions.",
-
   "reference_map": {
-    "bentley": ["characters/bentley_ref_clean.png", "characters/bentley_body_clean.png"],
-    "watson": ["characters/watson_ref.png", "characters/watson_body_clean.png"],
-    "both_dogs": ["characters/pair_body.png", "characters/bentley_ref_clean.png", "characters/watson_ref.png"]
+    "bentley": "characters/bentley_ref_clean.png",
+    "watson": "characters/watson_ref.png",
+    "both_dogs": "characters/pair_body.png"
   },
-
   "canon": {
     "bentley": "a chocolate-and-tan long-haired dachshund with a liver-brown nose, warm amber eyes, tan eyebrow pips and tan muzzle, silky feathered chocolate ears and plumed tail",
     "watson": "an English-cream long-haired dachshund with a glossy black nose, dark soulful eyes, honey-cream coat shading darker along the ears and spine, heavy silky feathering and plumed tail",
     "both_dogs": "two long-haired dachshunds of the same height standing together, one chocolate-and-tan with a liver-brown nose and warm amber eyes, one English-cream with a glossy black nose and dark eyes"
   },
-
   "default_motion": "Gentle natural movement. Soft warm light. No camera shake, no fast motion.",
-
   "_notes": {
     "reference_prompt_lock": "MUST be set. The module default REFERENCE_PROMPT_LOCK says 'Render in a semi-realistic modern animated-feature illustration style' — inheriting it makes every dog a cartoon. Refs control IDENTITY; the lock/tail text controls FIDELITY. Banked 09 Jul after shot_003 came back Pixar-glossy with a perfect liver nose.",
     "negations": "'not an illustration / not a cartoon' is safe here: NB2 is reasoning-guided, and qqrew's working lock uses 'never bored, never pouty'. The Flux-negation trap (naming a thing summons it) applies to the diffusion text path, not this endpoint.",
@@ -64,6 +52,8 @@
     "canon": "Every {token} used in any VISUAL must have a canon entry — _expand_canon raises SystemExit on unknown tags. Tokens do double duty: attach the reference images AND expand into the prompt text.",
     "timing_source": "beatsheet = no narration-timed audio leg. Timing declared per beat; VO is a sparse removable layer.",
     "default_beat_hold": "Deliberate v1 baseline. Flat pacing is a diagnostic, not a target. Tune at the stills gate once the channel has traction.",
-    "size_word": "No size adjective in the canon on purpose — 'miniature' was a canon error. The reference images carry the correct medium build."
+    "size_word": "No size adjective in the canon on purpose — 'miniature' was a canon error. The reference images carry the correct medium build.",
+    "reference_map": "ONE ref per token — a plain string, not a list. Proven 09 Jul: the same prompt, lock, tail and endpoint rendered a glossy illustration with TWO refs (face+body) and a clean photograph with ONE. Handing NB2 /edit multiple portrait refs pushes it to synthesise rather than photograph, and it falls back to its illustration prior. qqrew has always used single-string refs and has always been photoreal. The code accepts a list (recreation_pipeline ~1540) but the model does not reward it. Body proportions are carried by the canon text and, for two-handers, by pair_body.png.",
+    "both_dogs": "Conditions on pair_body.png alone. That single frame must carry BOTH identities at scene distance. Unproven — watch shots 6, 8, 24, 28, 30 at the stills gate for face softening or coat bleed."
   }
 }
