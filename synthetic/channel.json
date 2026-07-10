@@ -5,7 +5,7 @@
   "register": "third-person documentary narration, restrained and authoritative; people are seen, not heard",
   "width": 1280,
   "height": 720,
-  "style_suffix": "epic cinematic blockbuster film still, photorealistic, dramatic teal and orange color grade, vivid saturated color, intense dramatic lighting, bright vivid exposure with rich detail in shadows, high dynamic range, anamorphic lens flare, crisp and dynamic, lots of light and energy, high production value, sharp focus, crisp detail, full-frame 16:9 composition, no letterboxing, no black bars, no text, no letters",
+  "style_suffix": "cinematic film still, photorealistic, restrained documentary realism, muted desaturated color grade, ash grey and pale amber, cold steel blues in interiors, natural available light, soft directional light with rich detail in shadows, high dynamic range, sombre and still, high production value, sharp focus, crisp detail, full-frame 16:9 composition, no letterboxing, no black bars, no text, no letters",
   "default_music_prompt": "Restrained, tense cinematic underscore for a prestige documentary about technology, ambition and power. A low sustained synth drone, sparse piano, faint pulse of unease. Modern and controlled \u2014 not orchestral-melodramatic. Builds quiet tension under a narrator without ever competing with the voice. Cool, intelligent, foreboding.",
   "base_canon": {},
   "notes": "Synthetic Press flagship. AI-documentary, 'AI-drama not AI-doom'. Palette: navy #0a1628, amber #d4a017, bone #f4f1ea, rust #8b3a1e. Two-mode visuals: Mode A cinematic recreation (this engine) + Mode B Remotion graphics. Voice Victor as placeholder; real human-voice swap via finish --assemble-only true-up. Renders 1920x1080 to match Mode B. Created June 2026, OpenAI series launch.",
@@ -18,7 +18,7 @@
     "style": 0.25,
     "speed": 1.1
   },
-  "default_motion": "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere",
+  "default_motion": "slow deliberate camera movement, restrained and steady, natural realistic motion, quiet atmosphere",
   "thumbnail": {
     "composition": "low_silhouette",
     "candidates": 2,
@@ -79,5 +79,7 @@
     "margin_y": 20,
     "uppercase": true,
     "segment_foreground": false
-  }
+  },
+  "_style_suffix_gettysburg": "epic cinematic blockbuster film still, photorealistic, dramatic teal and orange color grade, vivid saturated color, intense dramatic lighting, bright vivid exposure with rich detail in shadows, high dynamic range, anamorphic lens flare, crisp and dynamic, lots of light and energy, high production value, sharp focus, crisp detail, full-frame 16:9 composition, no letterboxing, no black bars, no text, no letters",
+  "_default_motion_gettysburg": "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere"
 }
