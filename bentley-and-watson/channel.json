@@ -42,7 +42,9 @@
   "canon": {
     "bentley": "a chocolate-and-tan long-haired dachshund with a liver-brown nose, warm amber eyes, tan eyebrow pips and tan muzzle, silky feathered chocolate ears and plumed tail",
     "watson": "an English-cream long-haired dachshund with a glossy black nose, dark soulful eyes, honey-cream coat shading darker along the ears and spine, heavy silky feathering and plumed tail",
-    "both_dogs": "two long-haired dachshunds of the same height standing together, one chocolate-and-tan with a liver-brown nose and warm amber eyes, one English-cream with a glossy black nose and dark eyes"
+    "both_dogs": "two long-haired dachshunds of the same height standing together, one chocolate-and-tan with a liver-brown nose and warm amber eyes, one English-cream with a glossy black nose and dark eyes",
+    "stadium": "a vast floodlit World Cup stadium at night, four white floodlight towers, tiered stands packed with a roaring crowd of dachshunds waving flags, bright green pitch, cool white key light and warm crowd glow",
+    "team": "a mixed team of dachshunds of every colour and coat in matching football shirts, smooth and long-haired, red, cream, chocolate, dapple and black-and-tan"
   },
   "default_motion": "Gentle natural movement. Soft warm light. No camera shake, no fast motion.",
   "_notes": {
@@ -57,6 +59,9 @@
     "both_dogs": "Conditions on pair_body.png alone. That single frame must carry BOTH identities at scene distance. Unproven — watch shots 6, 8, 24, 28, 30 at the stills gate for face softening or coat bleed.",
     "wordless_experiment": "The wordless-spine hypothesis (Koko/Kiki transcribe to nothing) FAILED on this channel. Those are ambient/eating loops with attached audiences. A CAPER has plot — a plan, a lookout, a betrayal, a punchline — and plot lives in Bentley's head. Silence killed it. The timing_source=beatsheet path stays: declared holds beat Whisper-measured ones for physical comedy, because the pause is the joke. What changed is that every beat now speaks. Bentley narrates as BOTH the in-shot character and the abstract narrator, including shots he is not in.",
     "bentley_voice": "Recast 10 Jul: 3XOBzXhnDY98yeWQ3GdM @1.0 -> PzuBz8h2SxBvQ7lnUC44 @1.15. The first voice was chosen for short smug interjections; the format is now continuous narration across ~39 beats, and a voice that lands in bursts can grate at length. 1.15 keeps the schemer's forward drive over a long read.",
-    "watson_voice": "Watson is SILENT in the World Cup format — Bentley reports him ('I know exactly what that face means'). The voice entry stays in the map: it is inert (no [watson] tag in the script) and costs nothing, and an episode may one day earn him a single line again."
+    "watson_voice": "Watson is SILENT in the World Cup format — Bentley reports him ('I know exactly what that face means'). The voice entry stays in the map: it is inert (no [watson] tag in the script) and costs nothing, and an episode may one day earn him a single line again.",
+    "canon_stadium": "stadium and team are CANON-ONLY tokens: they expand into the prompt but have no reference_map entry, so no image is attached (the resolver's regex only fires on tokens present in reference_map; _expand_canon covers all canon keys, and patch_modea_beats_canon only requires reference_map ⊆ canon). One string, repeated verbatim, holds a world far better than forty individually-described stadiums.",
+    "mixed_team_shield": "A pitch of MIXED dachshunds is a canon-drift shield: only Bentley and Watson are ref-locked, so variation in the surrounding dogs is by design rather than artifact. Banked 10 Jul.",
+    "frozen_peak_action": "Ken-Burns beats must be captured at the instant of MAXIMUM energy — paw on ball, dog inverted mid-kick, jaw open in disbelief. A frozen peak-action frame cannot hallucinate; Kling can. Motion is implied by the frame, not generated. Kling is reserved for the cold open and the final goal."
   }
 }
