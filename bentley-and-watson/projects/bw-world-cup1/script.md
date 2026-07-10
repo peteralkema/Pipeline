@@ -135,7 +135,7 @@ VISUAL: {watson} fast asleep beside a football on the penalty spot of a floodlit
 VISUAL: a vast stand of dachshunds frozen with paws over their eyes, agonised, floodlit night, wide cinematic crowd shot, no people
 
 [A] [bentley] I walked the whole length of that pitch. I stood over him. And I said his name — once, quietly, the way I have said it every morning of his life. And Watson opened one eye and looked at me.
-VISUAL: close-up of {watson} lying on the grass cracking one dark eye open, {bentley} leaning over him urgently, floodlit night, cinematic
+VISUAL: close-up of {both_dogs}, the cream one lying on the grass cracking one dark eye open, the chocolate one leaning over him urgently and speaking quietly, floodlit night, cinematic
 
 [A] [bentley] He stood up. He struck it into the top corner without, as far as I could tell, ever actually looking at the goal. He watched it go in with mild interest. Then he walked back, lay down in the same spot, and went straight to sleep.
 VISUAL: {watson} frozen at the instant of striking a penalty, ball rocketing into the top corner, the keeper diving hopelessly the wrong way, {stadium}, peak action frozen, cinematic
