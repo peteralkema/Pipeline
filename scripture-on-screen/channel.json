@@ -84,5 +84,10 @@
     "elijah": "refs/elijah.png",
     "elisha": "refs/elisha.png",
     "widow": "refs/widow.png"
+  },
+  "canon": {
+    "elijah": "Elijah, a weathered ancient Hebrew prophet with a grey-streaked dark beard in a rough camel-hair cloak",
+    "elisha": "Elisha, a young ancient Hebrew man with a short dark beard in a plain homespun robe",
+    "widow": "the widow, a careworn older Phoenician woman in a worn headscarf and plain robes"
   }
 }
