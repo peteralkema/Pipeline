@@ -76,5 +76,13 @@
     "crossfade_seconds": 2,
     "level": 0.07
   },
-  "speaking_rate": 1.1
+  "speaking_rate": 1.1,
+  "render_mode": "reference",
+  "reference_prompt_lock": "Use the reference image(s) as the exact visual template for the CHARACTER: keep that exact person - same face, same bone structure, same hair, same beard, same wardrobe; do not change their identity, age, or clothing. Render as a cinematic biblical blockbuster film still, photorealistic, richly saturated jewel tones of desert gold and lapis and crimson, bright vivid exposure with rich detail, high dynamic range, blazing golden-hour and firelit light, gritty realistic ancient Near East texture, an expressive detailed face showing true emotion, sharp focus, dramatic and heroic - never a cartoon, never an illustration, never flat, never dark or murky or washed out. The character expression fits the scene - reverent, grieving, resolute, or awed as the moment demands, never a forced smile. Render this new scene: ",
+  "reference_prompt_tail": " Rich detailed ancient-world background, bright cinematic lighting, richly saturated color, photorealistic, 16:9 wide composition, no on-image text, no letters, no captions.",
+  "reference_map": {
+    "elijah": "refs/elijah.png",
+    "elisha": "refs/elisha.png",
+    "widow": "refs/widow.png"
+  }
 }
