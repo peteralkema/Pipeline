@@ -260,6 +260,19 @@ def main():
             ok, detail = False, f"exception: {type(e).__name__}: {e}"
         manifest.append({"name": name, "status": "done" if ok else "failed", "detail": detail})
         _log(f"{'DONE' if ok else 'FAILED'} '{name}': {detail}")
+        # [archive-on-ship] #11n: move the shipped pair out of the inbox so a
+        # re-run cannot re-render/re-upload it. Only on ok=True; never in --plan
+        # (plan continues earlier). Failed/skipped pairs stay put for a retry.
+        if ok:
+            try:
+                _shipped = inbox / "_shipped"
+                _shipped.mkdir(exist_ok=True)
+                for _pf in (md, thumb):
+                    if _pf.exists():
+                        _pf.rename(_shipped / _pf.name)
+                _log(f"  archived -> {_shipped}/ ({md.name} + {thumb.name})")
+            except Exception as _e:
+                _log(f"  archive skipped for '{name}': {type(_e).__name__}: {_e}")
 
     # write the manifest
     out = inbox / f"_batch_manifest_{int(time.time())}.json"
