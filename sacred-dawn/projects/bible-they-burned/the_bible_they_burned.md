@@ -1,4 +1,4 @@
-channel: sacred-dawn
+channel: sacred_dawn
 title: The Bible They BURNED | THE FORBIDDEN BOOKS | Full Bible Movie 4K
 description: They tried to erase them from scripture. The Book of Enoch, the Book of Giants, the Book of Jubilees, the buried gospels — the forbidden books the early church condemned and burned, and the single kingdom that kept them alive. The complete story of the Bible they burned, and everything it says.
 tags: forbidden books, book of enoch, book of giants, book of jubilees, the watchers, nephilim, banned bible, ethiopian bible, apocrypha, nag hammadi, dead sea scrolls, bible documentary
