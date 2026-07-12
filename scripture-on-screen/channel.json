@@ -1,7 +1,7 @@
 {
   "name": "scripture_on_screen",
   "voice_id": "Elliot",
-  "style_suffix": "cinematic biblical film still, photorealistic, natural true-to-life colour, balanced natural exposure with detail held in the shadows, high dynamic range, naturalistic directional daylight, grounded restrained lighting, gritty realistic ancient Near East texture, period-accurate ancient Near East Egypt and Persia, high production value, expressive detailed faces, sharp focus, no text, no letters, no modern elements, 16:9",
+  "style_suffix": "cinematic biblical blockbuster film still, photorealistic and grounded, richly saturated but clean colour -- desert gold, deep lapis blue, crimson -- bright vivid exposure, high contrast, high dynamic range with crisp detail held in the shadows, intense clean directional light, chromatic Bay-Woo trailer-grade energy, sharp crisp focus, high production value, period-accurate ancient Near East Egypt and Persia, expressive detailed faces, no soft painterly haze, no murk, no muddy shadows, no washed-out wash, no dull flat lighting, no text, no letters, no modern elements, 16:9",
   "default_music_prompt": "Warm orchestral storytelling score for a cinematic biblical drama. Emotive strings and woodwinds, hopeful and humane, swelling brass on moments of triumph, harp and gentle choir on tender beats, and full epic scale (brass, choir, percussion) on spectacle beats. Melodic but never competing with a narrator. Intimate and grand by turns. No modern instruments.",
   "base_canon": {
     "elijah": "Elijah, a weathered ancient Hebrew prophet with a grey-streaked dark beard in a rough camel-hair cloak",
