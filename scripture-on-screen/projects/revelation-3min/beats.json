@@ -1,0 +1,804 @@
+{
+  "beats": [
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The entire sky splitting and rolling back like a scroll, blinding white light pouring through the tear, clouds curling away, dominating and filling the frame; a lone robed figure on a rocky ridge, arms falling, staring up, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A lone robed figure on a rocky ridge, arms falling, staring up, larger in the lower frame; the entire sky splitting and rolling back like a scroll, blinding white light pouring through the tear, clouds curling away, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a lone robed figure on a rocky ridge, arms falling, staring up, close enough to read awe and terror on the face; the entire sky splitting and rolling back like a scroll, blinding white light pouring through the tear, clouds curling away, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low hero angle from directly beneath the tearing sky, the split light forming a blazing wound across the heavens, silhouetted hills along the bottom edge. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal throne wreathed in blinding light and an emerald rainbow, a crystal sea of glass spreading before it, radiant beyond form, dominating and filling the frame; tiny prostrate elders in a ring, faces to the ground, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny prostrate elders in a ring, faces to the ground, larger in the lower frame; a colossal throne wreathed in blinding light and an emerald rainbow, a crystal sea of glass spreading before it, radiant beyond form, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny prostrate elders in a ring, faces to the ground, close enough to read awe and terror on the face; a colossal throne wreathed in blinding light and an emerald rainbow, a crystal sea of glass spreading before it, radiant beyond form, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Symmetrical straight-on composition, the throne's light blooming outward, ranks of faceless figures bowed in perfect radial symmetry. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A radiant scroll bound with seven glowing seals held aloft in a shaft of divine light, the hall vast and gold, dominating and filling the frame; a small kneeling figure reaching up toward the light, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A small kneeling figure reaching up toward the light, larger in the lower frame; a radiant scroll bound with seven glowing seals held aloft in a shaft of divine light, the hall vast and gold, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a small kneeling figure reaching up toward the light, close enough to read awe and terror on the face; a radiant scroll bound with seven glowing seals held aloft in a shaft of divine light, the hall vast and gold, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme close on the seven wax seals glowing hot, the vast hall thrown out of focus behind. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A white horse thundering forward, its crowned rider drawing a great bow, dust exploding beneath the hooves, pale sky, dominating and filling the frame; distant tiny figures scattering from its path, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Distant tiny figures scattering from its path, larger in the lower frame; a white horse thundering forward, its crowned rider drawing a great bow, dust exploding beneath the hooves, pale sky, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on distant tiny figures scattering from its path, close enough to read awe and terror on the face; a white horse thundering forward, its crowned rider drawing a great bow, dust exploding beneath the hooves, pale sky, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low ground-level shot as the white horse bears down, hooves and dust filling the foreground, rider crowned against bright sky. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A blood-red horse rearing amid a burning battlefield, its rider raising a great sword, walls of fire and black smoke behind, dominating and filling the frame; tiny soldiers fleeing and falling in the smoke below, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny soldiers fleeing and falling in the smoke below, larger in the lower frame; a blood-red horse rearing amid a burning battlefield, its rider raising a great sword, walls of fire and black smoke behind, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny soldiers fleeing and falling in the smoke below, close enough to read awe and terror on the face; a blood-red horse rearing amid a burning battlefield, its rider raising a great sword, walls of fire and black smoke behind, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Silhouette of the rearing red horse and sword against a wall of orange fire, everything else black. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A black horse standing in a cracked, dead land under a hard sky, its rider holding a pair of balance scales aloft, dominating and filling the frame; a gaunt tiny figure collapsed in the dust nearby, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A gaunt tiny figure collapsed in the dust nearby, larger in the lower frame; a black horse standing in a cracked, dead land under a hard sky, its rider holding a pair of balance scales aloft, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a gaunt tiny figure collapsed in the dust nearby, close enough to read awe and terror on the face; a black horse standing in a cracked, dead land under a hard sky, its rider holding a pair of balance scales aloft, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Overhead high-angle of the black horse alone on the cracked earth, long shadow, scales glinting. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A sickly pale horse advancing through grey ash, its hooded skeletal rider, a vast shadow of Hades looming behind like smoke, dominating and filling the frame; tiny still figures fallen across the ashen ground, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny still figures fallen across the ashen ground, larger in the lower frame; a sickly pale horse advancing through grey ash, its hooded skeletal rider, a vast shadow of Hades looming behind like smoke, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny still figures fallen across the ashen ground, close enough to read awe and terror on the face; a sickly pale horse advancing through grey ash, its hooded skeletal rider, a vast shadow of Hades looming behind like smoke, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Backlit silhouette of the pale horse and its trailing shadow-figure, cold desaturated haze, a single shaft of grey light. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. All four horsemen thundering abreast across a ruined plain, storm sky above, a great dust wall rising behind them, dominating and filling the frame; a mass of tiny people fleeing toward the camera in the foreground, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A mass of tiny people fleeing toward the camera in the foreground, larger in the lower frame; all four horsemen thundering abreast across a ruined plain, storm sky above, a great dust wall rising behind them, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a mass of tiny people fleeing toward the camera in the foreground, close enough to read awe and terror on the face; all four horsemen thundering abreast across a ruined plain, storm sky above, a great dust wall rising behind them, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide low panorama, the four riders strung across the horizon under a bruised sky, dust and distance between them and the fleeing crowd. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great stone altar glowing from beneath, white-robed souls rising translucent around it in a dark sanctuary, dominating and filling the frame; one robed soul reaching upward, luminous, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. One robed soul reaching upward, luminous, larger in the lower frame; a great stone altar glowing from beneath, white-robed souls rising translucent around it in a dark sanctuary, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on one robed soul reaching upward, luminous, close enough to read awe and terror on the face; a great stone altar glowing from beneath, white-robed souls rising translucent around it in a dark sanctuary, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Close low angle up the side of the altar, translucent robed souls stacking into the darkness above. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A blackened sun in a darkened sky beside a huge blood-red moon, the light gone strange and coppery over a wide land, dominating and filling the frame; a terrified crowd of tiny figures on a hillside staring up, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A terrified crowd of tiny figures on a hillside staring up, larger in the lower frame; a blackened sun in a darkened sky beside a huge blood-red moon, the light gone strange and coppery over a wide land, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a terrified crowd of tiny figures on a hillside staring up, close enough to read awe and terror on the face; a blackened sun in a darkened sky beside a huge blood-red moon, the light gone strange and coppery over a wide land, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The black sun and blood moon dominating the top of the frame, a thin band of shocked upturned faces along the bottom. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Countless stars falling from the heavens as streaks of fire, the whole sky raining light down toward the earth, dominating and filling the frame; tiny figures scattering across an open plain beneath the falling fire, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures scattering across an open plain beneath the falling fire, larger in the lower frame; countless stars falling from the heavens as streaks of fire, the whole sky raining light down toward the earth, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures scattering across an open plain beneath the falling fire, close enough to read awe and terror on the face; countless stars falling from the heavens as streaks of fire, the whole sky raining light down toward the earth, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Long-exposure streaks of falling stars filling the frame top to bottom, a low dark horizon with tiny running silhouettes. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A mighty earthquake tearing a great city apart, towers toppling, a chasm splitting the ground, dust erupting skyward, dominating and filling the frame; tiny figures fleeing across a collapsing bridge in the foreground, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures fleeing across a collapsing bridge in the foreground, larger in the lower frame; a mighty earthquake tearing a great city apart, towers toppling, a chasm splitting the ground, dust erupting skyward, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures fleeing across a collapsing bridge in the foreground, close enough to read awe and terror on the face; a mighty earthquake tearing a great city apart, towers toppling, a chasm splitting the ground, dust erupting skyward, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "High angle looking down into the opening chasm as buildings slide into it, dust billowing up toward the lens. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A towering radiant angel pressing a glowing seal onto foreheads, endless ranks of the marked stretching to the horizon, dominating and filling the frame; one upturned face receiving the seal, lit gold, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. One upturned face receiving the seal, lit gold, larger in the lower frame; a towering radiant angel pressing a glowing seal onto foreheads, endless ranks of the marked stretching to the horizon, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on one upturned face receiving the seal, lit gold, close enough to read awe and terror on the face; a towering radiant angel pressing a glowing seal onto foreheads, endless ranks of the marked stretching to the horizon, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Overhead of the vast ranks forming ordered lines across a bright plain, the angel a point of light among them. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Seven towering angels standing in a row against a blazing sky, each lifting a great trumpet to the light, dominating and filling the frame; a tiny lone watcher on the rocks far below, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny lone watcher on the rocks far below, larger in the lower frame; seven towering angels standing in a row against a blazing sky, each lifting a great trumpet to the light, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny lone watcher on the rocks far below, close enough to read awe and terror on the face; seven towering angels standing in a row against a blazing sky, each lifting a great trumpet to the light, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Silhouetted row of seven trumpet-raising angels against a bright cloud-break, sun-shafts between them. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Hail and fire mixed with blood raining from a black sky onto a burning forest, a third of the trees ablaze, dominating and filling the frame; a tiny figure shielding its head, running through the burning wood, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure shielding its head, running through the burning wood, larger in the lower frame; hail and fire mixed with blood raining from a black sky onto a burning forest, a third of the trees ablaze, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure shielding its head, running through the burning wood, close enough to read awe and terror on the face; hail and fire mixed with blood raining from a black sky onto a burning forest, a third of the trees ablaze, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Ground-level through burning trees, fire-hail streaking down, embers filling the air toward the lens. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An enormous burning mountain hurled down into the sea, a colossal steam-and-fire impact, the water turning blood-red outward, dominating and filling the frame; tiny ships tossed and burning near the base of the impact, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny ships tossed and burning near the base of the impact, larger in the lower frame; an enormous burning mountain hurled down into the sea, a colossal steam-and-fire impact, the water turning blood-red outward, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny ships tossed and burning near the base of the impact, close enough to read awe and terror on the face; an enormous burning mountain hurled down into the sea, a colossal steam-and-fire impact, the water turning blood-red outward, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Aerial wide of the blazing mountain striking the red sea, shockwave ring spreading, tiny ships as specks. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A single vast burning star plunging toward the earth's rivers, a trail of fire across the sky, waters glowing bitter below, dominating and filling the frame; a tiny figure at a poisoned riverbank recoiling, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure at a poisoned riverbank recoiling, larger in the lower frame; a single vast burning star plunging toward the earth's rivers, a trail of fire across the sky, waters glowing bitter below, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure at a poisoned riverbank recoiling, close enough to read awe and terror on the face; a single vast burning star plunging toward the earth's rivers, a trail of fire across the sky, waters glowing bitter below, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The falling star's fiery trail cutting diagonally across the whole frame, a thin dark landscape at the bottom. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A bottomless pit torn in the earth, smoke rising from it like the smoke of a great furnace, blotting out the sun into an eerie brown gloom, dominating and filling the frame; a tiny figure at the smoking edge of the pit, dwarfed, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure at the smoking edge of the pit, dwarfed, larger in the lower frame; a bottomless pit torn in the earth, smoke rising from it like the smoke of a great furnace, blotting out the sun into an eerie brown gloom, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure at the smoking edge of the pit, dwarfed, close enough to read awe and terror on the face; a bottomless pit torn in the earth, smoke rising from it like the smoke of a great furnace, blotting out the sun into an eerie brown gloom, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Straight down into the smoking abyss, spiralling smoke and faint fire far below, the rim of tiny figures around the top edge. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A monstrous swarm rising from the smoke, locust-things with human-like faces and scorpion tails, darkening the whole sky, dominating and filling the frame; tiny people running and cowering beneath the descending swarm, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny people running and cowering beneath the descending swarm, larger in the lower frame; a monstrous swarm rising from the smoke, locust-things with human-like faces and scorpion tails, darkening the whole sky, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny people running and cowering beneath the descending swarm, close enough to read awe and terror on the face; a monstrous swarm rising from the smoke, locust-things with human-like faces and scorpion tails, darkening the whole sky, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Menacing close of one human-faced locust in sharp foreground, the swarm blurred vast behind it. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An endless army of fearsome horsemen stretching beyond the horizon, fire and smoke and sulphur belching from the ranks, a sky of ash, dominating and filling the frame; tiny fleeing villagers in the foreground dust, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny fleeing villagers in the foreground dust, larger in the lower frame; an endless army of fearsome horsemen stretching beyond the horizon, fire and smoke and sulphur belching from the ranks, a sky of ash, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny fleeing villagers in the foreground dust, close enough to read awe and terror on the face; an endless army of fearsome horsemen stretching beyond the horizon, fire and smoke and sulphur belching from the ranks, a sky of ash, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Ultra-wide horizon completely filled edge to edge with the advancing army under a burning ash sky. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal angel with a face like the sun and legs like pillars of fire, one foot on the sea one on the land, wrapped in cloud and rainbow, holding a tiny open scroll, dominating and filling the frame; a minute ship on the sea between the fiery legs, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A minute ship on the sea between the fiery legs, larger in the lower frame; a colossal angel with a face like the sun and legs like pillars of fire, one foot on the sea one on the land, wrapped in cloud and rainbow, holding a tiny open scroll, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a minute ship on the sea between the fiery legs, close enough to read awe and terror on the face; a colossal angel with a face like the sun and legs like pillars of fire, one foot on the sea one on the land, wrapped in cloud and rainbow, holding a tiny open scroll, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low worm's-eye up between the two pillar-of-fire legs, the sun-face blazing far above, the tiny ship framed between. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Two prophets standing back to back in a burning ancient street, fire pouring from their mouths against attackers, smoke rolling, dominating and filling the frame; tiny assailants thrown back and fleeing down the street, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny assailants thrown back and fleeing down the street, larger in the lower frame; two prophets standing back to back in a burning ancient street, fire pouring from their mouths against attackers, smoke rolling, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny assailants thrown back and fleeing down the street, close enough to read awe and terror on the face; two prophets standing back to back in a burning ancient street, fire pouring from their mouths against attackers, smoke rolling, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle between the two prophets as the twin jets of fire spread outward, burning colonnade receding behind. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A radiant woman standing in the heavens clothed in the blazing sun, the moon beneath her feet, a crown of twelve stars, light streaming outward, dominating and filling the frame; tiny upturned figures on the dark earth far below gazing up, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny upturned figures on the dark earth far below gazing up, larger in the lower frame; a radiant woman standing in the heavens clothed in the blazing sun, the moon beneath her feet, a crown of twelve stars, light streaming outward, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny upturned figures on the dark earth far below gazing up, close enough to read awe and terror on the face; a radiant woman standing in the heavens clothed in the blazing sun, the moon beneath her feet, a crown of twelve stars, light streaming outward, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Straight-on symmetrical, the sun-clothed woman haloed in blinding light, twelve stars ringing her crown, cloud parting around her. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An immense seven-headed red dragon coiling across the sky, its tail sweeping a third of the stars down like falling embers, dominating and filling the frame; tiny figures on a ridge below fleeing the falling stars, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures on a ridge below fleeing the falling stars, larger in the lower frame; an immense seven-headed red dragon coiling across the sky, its tail sweeping a third of the stars down like falling embers, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures on a ridge below fleeing the falling stars, close enough to read awe and terror on the face; an immense seven-headed red dragon coiling across the sky, its tail sweeping a third of the stars down like falling embers, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The dragon's seven heads filling the upper frame, its star-sweeping tail arcing down to a small dark horizon. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The archangel Michael and radiant armies clashing with the dragon and its host amid the clouds, blazing weapons, cosmic scale, dominating and filling the frame; a tiny lone witness on a mountaintop staring up at the battle, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny lone witness on a mountaintop staring up at the battle, larger in the lower frame; the archangel Michael and radiant armies clashing with the dragon and its host amid the clouds, blazing weapons, cosmic scale, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny lone witness on a mountaintop staring up at the battle, close enough to read awe and terror on the face; the archangel Michael and radiant armies clashing with the dragon and its host amid the clouds, blazing weapons, cosmic scale, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Backlit silhouettes of winged combatants against a blinding celestial burst, the dragon's coil dark across the light. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal seven-headed, ten-horned beast surging up out of a storming ocean, water cascading off its vast body, black sky, dominating and filling the frame; a tiny crowd on the distant shore watching it rise, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny crowd on the distant shore watching it rise, larger in the lower frame; a colossal seven-headed, ten-horned beast surging up out of a storming ocean, water cascading off its vast body, black sky, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny crowd on the distant shore watching it rise, close enough to read awe and terror on the face; a colossal seven-headed, ten-horned beast surging up out of a storming ocean, water cascading off its vast body, black sky, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "From sea level looking up the beast's streaming flank, one head craning down toward the lens, spray everywhere. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A second beast before an idol calling false fire down from the sky to deceive, a mesmerised throng kneeling, a glowing mark, dominating and filling the frame; a single small figure standing upright refusing amid the kneeling crowd, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A single small figure standing upright refusing amid the kneeling crowd, larger in the lower frame; a second beast before an idol calling false fire down from the sky to deceive, a mesmerised throng kneeling, a glowing mark, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a single small figure standing upright refusing amid the kneeling crowd, close enough to read awe and terror on the face; a second beast before an idol calling false fire down from the sky to deceive, a mesmerised throng kneeling, a glowing mark, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Over-the-shoulder from behind the standing refuser, the whole kneeling throng and the false fire beyond. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great sickle sweeping over a golden harvest-earth, the winepress of wrath overflowing crimson across a vast valley, dominating and filling the frame; tiny reapers dwarfed at the edge of the crimson flood, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny reapers dwarfed at the edge of the crimson flood, larger in the lower frame; a great sickle sweeping over a golden harvest-earth, the winepress of wrath overflowing crimson across a vast valley, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny reapers dwarfed at the edge of the crimson flood, close enough to read awe and terror on the face; a great sickle sweeping over a golden harvest-earth, the winepress of wrath overflowing crimson across a vast valley, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "High wide of the crimson river of the winepress winding to the horizon, the great sickle arcing across the sky above. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An entire ocean turned thick red to the horizon under a lurid sky, dead things surfacing, red foam on a black shore, dominating and filling the frame; a lone tiny figure standing at the edge of the blood-red sea, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A lone tiny figure standing at the edge of the blood-red sea, larger in the lower frame; an entire ocean turned thick red to the horizon under a lurid sky, dead things surfacing, red foam on a black shore, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a lone tiny figure standing at the edge of the blood-red sea, close enough to read awe and terror on the face; an entire ocean turned thick red to the horizon under a lurid sky, dead things surfacing, red foam on a black shore, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Minimal wide: the red sea meeting a bruised sky, one small dark figure at the bottom third for scale. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The sun swollen and blazing white-hot in a searing sky, the land beneath cracked and smoking, air rippling with heat, dominating and filling the frame; a tiny figure staggering, shielding its face, across the scorched ground, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure staggering, shielding its face, across the scorched ground, larger in the lower frame; the sun swollen and blazing white-hot in a searing sky, the land beneath cracked and smoking, air rippling with heat, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure staggering, shielding its face, across the scorched ground, close enough to read awe and terror on the face; the sun swollen and blazing white-hot in a searing sky, the land beneath cracked and smoking, air rippling with heat, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The vast blazing sun filling the upper frame, a thin scorched horizon with one heat-warped silhouette below. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An unnatural total darkness swallowing the beast's kingdom, a black-shrouded ruined city, one weak firelight in the gloom, dominating and filling the frame; a tiny figure clutching a single failing torch in the dark, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure clutching a single failing torch in the dark, larger in the lower frame; an unnatural total darkness swallowing the beast's kingdom, a black-shrouded ruined city, one weak firelight in the gloom, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure clutching a single failing torch in the dark, close enough to read awe and terror on the face; an unnatural total darkness swallowing the beast's kingdom, a black-shrouded ruined city, one weak firelight in the gloom, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Near-black frame, one small pool of torchlight low and off-centre revealing a sliver of ruined street, deep clean shadow. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great river dried to a vast cracked bed, kings' armies streaming across it toward the horizon under a stormlit sky, dominating and filling the frame; tiny ranks of soldiers crossing the cracked riverbed in the distance, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny ranks of soldiers crossing the cracked riverbed in the distance, larger in the lower frame; a great river dried to a vast cracked bed, kings' armies streaming across it toward the horizon under a stormlit sky, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny ranks of soldiers crossing the cracked riverbed in the distance, close enough to read awe and terror on the face; a great river dried to a vast cracked bed, kings' armies streaming across it toward the horizon under a stormlit sky, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low along the cracked riverbed leading the eye to the distant crossing armies, storm light raking the mud. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Immense armies massing across a vast plain to the horizon under a bruised violet sky, banners and dust, poised for war, dominating and filling the frame; tiny front-rank soldiers dwarfed at the bottom of the frame, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny front-rank soldiers dwarfed at the bottom of the frame, larger in the lower frame; immense armies massing across a vast plain to the horizon under a bruised violet sky, banners and dust, poised for war, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny front-rank soldiers dwarfed at the bottom of the frame, close enough to read awe and terror on the face; immense armies massing across a vast plain to the horizon under a bruised violet sky, banners and dust, poised for war, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Ultra-wide overhead of the two armies as dark masses converging across the plain, a thin no-man's-land between. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An opulent decadent city glittering by night, a queenly figure enthroned on a scarlet seven-headed beast amid gold and jewels, dominating and filling the frame; tiny revellers thronging the lamplit streets below the throne, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny revellers thronging the lamplit streets below the throne, larger in the lower frame; an opulent decadent city glittering by night, a queenly figure enthroned on a scarlet seven-headed beast amid gold and jewels, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny revellers thronging the lamplit streets below the throne, close enough to read awe and terror on the face; an opulent decadent city glittering by night, a queenly figure enthroned on a scarlet seven-headed beast amid gold and jewels, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Rich close on the scarlet-beast throne and jewelled figure, the glittering city bokeh'd behind. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The great city engulfed in towering flames and collapsing, columns of smoke rising black into a red sky, its glory consuming, dominating and filling the frame; tiny merchants on distant ships weeping, watching the smoke, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny merchants on distant ships weeping, watching the smoke, larger in the lower frame; the great city engulfed in towering flames and collapsing, columns of smoke rising black into a red sky, its glory consuming, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny merchants on distant ships weeping, watching the smoke, close enough to read awe and terror on the face; the great city engulfed in towering flames and collapsing, columns of smoke rising black into a red sky, its glory consuming, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "From the sea, tiny silhouetted ships in the foreground, the whole burning city filling the background horizon. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Vast ranks of white horses and radiant riders massing in the clouds, blazing standards, a sky splitting with light behind them, dominating and filling the frame; tiny earthbound watchers on a ridge staring up at the gathering host, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny earthbound watchers on a ridge staring up at the gathering host, larger in the lower frame; vast ranks of white horses and radiant riders massing in the clouds, blazing standards, a sky splitting with light behind them, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny earthbound watchers on a ridge staring up at the gathering host, close enough to read awe and terror on the face; vast ranks of white horses and radiant riders massing in the clouds, blazing standards, a sky splitting with light behind them, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low hero angle up at the front rank of white-horse riders emerging from the cloud-break, light streaming past them. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The King on a white horse, eyes like fire, many crowns, a sword from his mouth, robe dipped in crimson, the armies of heaven streaming behind on white horses, dominating and filling the frame; tiny defeated figures scattered on the ground before the advance, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny defeated figures scattered on the ground before the advance, larger in the lower frame; the King on a white horse, eyes like fire, many crowns, a sword from his mouth, robe dipped in crimson, the armies of heaven streaming behind on white horses, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny defeated figures scattered on the ground before the advance, close enough to read awe and terror on the face; the King on a white horse, eyes like fire, many crowns, a sword from his mouth, robe dipped in crimson, the armies of heaven streaming behind on white horses, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low centred hero shot of the crowned rider bearing down, sword-light blazing, the vast white-horse army fanned behind under a torn radiant sky. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The beast and the false prophet hurled down into a vast churning lake of fire, molten light, walls of flame rising, cast into the abyss, dominating and filling the frame; tiny angelic figures at the fiery brink above, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny angelic figures at the fiery brink above, larger in the lower frame; the beast and the false prophet hurled down into a vast churning lake of fire, molten light, walls of flame rising, cast into the abyss, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny angelic figures at the fiery brink above, close enough to read awe and terror on the face; the beast and the false prophet hurled down into a vast churning lake of fire, molten light, walls of flame rising, cast into the abyss, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Looking down into the churning lake of fire, dark falling shapes silhouetted against the molten glow, the rim in shadow. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A blinding white throne floating in a void of pure light, the books of judgment opened, heaven and earth fled away, absolute stillness, dominating and filling the frame; a single small figure standing alone before the immense throne, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A single small figure standing alone before the immense throne, larger in the lower frame; a blinding white throne floating in a void of pure light, the books of judgment opened, heaven and earth fled away, absolute stillness, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a single small figure standing alone before the immense throne, close enough to read awe and terror on the face; a blinding white throne floating in a void of pure light, the books of judgment opened, heaven and earth fled away, absolute stillness, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Vast negative space of white light, the throne small-but-central at top, one tiny lone figure at the bottom, immense emptiness between. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A radiant jewelled city descending out of heaven on shafts of light, gates of pearl and walls of gold gleaming, a new dawn breaking, no more sea, dominating and filling the frame; tiny figures on a green hillside below gazing up with arms open, tiny and low in the frame, utterly dwarfed by the scale. Deep three-plane depth, atmospheric scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures on a green hillside below gazing up with arms open, larger in the lower frame; a radiant jewelled city descending out of heaven on shafts of light, gates of pearl and walls of gold gleaming, a new dawn breaking, no more sea, looming huge above and behind them. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures on a green hillside below gazing up with arms open, close enough to read awe and terror on the face; a radiant jewelled city descending out of heaven on shafts of light, gates of pearl and walls of gold gleaming, a new dawn breaking, no more sea, filling the background and the edge of the frame behind. Shallow depth, the human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide low angle of the luminous descending city filling the sky, light rays fanning down onto tiny upturned figures and fresh green land. Poster-grade hero composition.",
+      "motion_prompt": ""
+    }
+  ]
+}
