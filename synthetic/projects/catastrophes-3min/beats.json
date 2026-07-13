@@ -1,0 +1,804 @@
+{
+  "beats": [
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal asteroid blazing down through the sky trailing fire, the moment before impact, prehistoric coastline and distant volcanoes, dominating and filling the frame; a tiny fleeing dinosaur silhouette on the shore far below, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny fleeing dinosaur silhouette on the shore far below, larger in the lower frame; a colossal asteroid blazing down through the sky trailing fire, the moment before impact, prehistoric coastline and distant volcanoes, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny fleeing dinosaur silhouette on the shore far below, close enough to read the awe and grief; a colossal asteroid blazing down through the sky trailing fire, the moment before impact, prehistoric coastline and distant volcanoes, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low horizon, the fireball filling three-quarters of the sky, its light casting long shadows across a primeval plain. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Mount Vesuvius erupting in a towering column of ash and lightning, pyroclastic cloud rolling down toward a Roman town, dominating and filling the frame; tiny townsfolk fleeing through a colonnaded street below the ash wall, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny townsfolk fleeing through a colonnaded street below the ash wall, larger in the lower frame; Mount Vesuvius erupting in a towering column of ash and lightning, pyroclastic cloud rolling down toward a Roman town, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny townsfolk fleeing through a colonnaded street below the ash wall, close enough to read the awe and grief; Mount Vesuvius erupting in a towering column of ash and lightning, pyroclastic cloud rolling down toward a Roman town, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Down a Pompeii street framed by columns, the black eruption column boiling up at the far end, ash beginning to fall. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An endless deluge drowning the world, mountainous grey waves under a black storm, the last high peaks vanishing, dominating and filling the frame; a tiny distant ark riding the vast swell, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny distant ark riding the vast swell, larger in the lower frame; an endless deluge drowning the world, mountainous grey waves under a black storm, the last high peaks vanishing, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny distant ark riding the vast swell, close enough to read the awe and grief; an endless deluge drowning the world, mountainous grey waves under a black storm, the last high peaks vanishing, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Aerial over an infinite storm-ocean, a single speck of an ark in a trough between mountainous waves. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An immense war cemetery, endless rows of white crosses stretching to the horizon under a still pale sky, dominating and filling the frame; one small lone figure standing among the rows, head bowed, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. One small lone figure standing among the rows, head bowed, larger in the lower frame; an immense war cemetery, endless rows of white crosses stretching to the horizon under a still pale sky, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on one small lone figure standing among the rows, head bowed, close enough to read the awe and grief; an immense war cemetery, endless rows of white crosses stretching to the horizon under a still pale sky, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low along a single row of crosses receding to a vanishing point, soft dawn light, one distant bowed figure. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Krakatoa exploding, an island detonating into the sky, a wall of ash and fire, the sea recoiling outward, dominating and filling the frame; tiny boats flung on the recoiling sea in the foreground, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny boats flung on the recoiling sea in the foreground, larger in the lower frame; Krakatoa exploding, an island detonating into the sky, a wall of ash and fire, the sea recoiling outward, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny boats flung on the recoiling sea in the foreground, close enough to read the awe and grief; Krakatoa exploding, an island detonating into the sky, a wall of ash and fire, the sea recoiling outward, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Silhouette of the exploding island against a lurid orange-black sky, shockwave ring flattening the sea. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A deserted medieval city under a sickly grey sky, empty crooked streets, shuttered houses, a thin smoke of pyres, dominating and filling the frame; a lone plague-doctor silhouette with a beaked mask at the end of an empty lane, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A lone plague-doctor silhouette with a beaked mask at the end of an empty lane, larger in the lower frame; a deserted medieval city under a sickly grey sky, empty crooked streets, shuttered houses, a thin smoke of pyres, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a lone plague-doctor silhouette with a beaked mask at the end of an empty lane, close enough to read the awe and grief; a deserted medieval city under a sickly grey sky, empty crooked streets, shuttered houses, a thin smoke of pyres, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Deep one-point perspective down an abandoned plague street, the beaked silhouette tiny at the vanishing point. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The Permian world dying — a scorched supercontinent, seas gone stagnant and rust-red, vast volcanic fissures glowing to the horizon, dominating and filling the frame; a tiny lone reptilian form on cracked ground dwarfed by the burning land, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny lone reptilian form on cracked ground dwarfed by the burning land, larger in the lower frame; the Permian world dying — a scorched supercontinent, seas gone stagnant and rust-red, vast volcanic fissures glowing to the horizon, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny lone reptilian form on cracked ground dwarfed by the burning land, close enough to read the awe and grief; the Permian world dying — a scorched supercontinent, seas gone stagnant and rust-red, vast volcanic fissures glowing to the horizon, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "High wide of endless glowing lava-fissures webbing a dead continent under a brown toxic sky. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A broken army trudging through an endless frozen waste, a blizzard swallowing a column of ragged soldiers, abandoned cannon in the snow, dominating and filling the frame; a single soldier fallen in the foreground snow, others trudging past, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A single soldier fallen in the foreground snow, others trudging past, larger in the lower frame; a broken army trudging through an endless frozen waste, a blizzard swallowing a column of ragged soldiers, abandoned cannon in the snow, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a single soldier fallen in the foreground snow, others trudging past, close enough to read the awe and grief; a broken army trudging through an endless frozen waste, a blizzard swallowing a column of ragged soldiers, abandoned cannon in the snow, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Overhead of a thin dark column of men strung across a blank white expanse, snow erasing their tracks. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great earthquake splitting a baroque city as a towering tsunami rears over the harbour, churches toppling, dust and water, dominating and filling the frame; tiny crowds fleeing up a plaza away from the wave, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny crowds fleeing up a plaza away from the wave, larger in the lower frame; a great earthquake splitting a baroque city as a towering tsunami rears over the harbour, churches toppling, dust and water, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny crowds fleeing up a plaza away from the wave, close enough to read the awe and grief; a great earthquake splitting a baroque city as a towering tsunami rears over the harbour, churches toppling, dust and water, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "From the harbour looking back at the city, the tsunami wall rising in the foreground over tiny rooftops. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A monstrous black dust storm rolling across flat farmland like a mountain of dirt, swallowing a lone farmhouse and windmill, dominating and filling the frame; a tiny figure running for the farmhouse ahead of the dust wall, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure running for the farmhouse ahead of the dust wall, larger in the lower frame; a monstrous black dust storm rolling across flat farmland like a mountain of dirt, swallowing a lone farmhouse and windmill, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure running for the farmhouse ahead of the dust wall, close enough to read the awe and grief; a monstrous black dust storm rolling across flat farmland like a mountain of dirt, swallowing a lone farmhouse and windmill, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Ground level, the wall of dust filling the entire frame bearing down, a fencepost line leading into it. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An immense volcanic eruption at night, a fountain of lava and ash miles high, the 'year without a summer' sky glowing blood-orange, dominating and filling the frame; tiny villagers silhouetted on a far ridge watching the eruption, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny villagers silhouetted on a far ridge watching the eruption, larger in the lower frame; an immense volcanic eruption at night, a fountain of lava and ash miles high, the 'year without a summer' sky glowing blood-orange, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny villagers silhouetted on a far ridge watching the eruption, close enough to read the awe and grief; an immense volcanic eruption at night, a fountain of lava and ash miles high, the 'year without a summer' sky glowing blood-orange, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The eruption column reflected in a black lake, tiny watchers on the near shore between fire and reflection. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An empty city avenue under flat grey light, rows of shuttered shops, a masked figure alone, an abandoned tram, dominating and filling the frame; one small masked figure standing motionless mid-street, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. One small masked figure standing motionless mid-street, larger in the lower frame; an empty city avenue under flat grey light, rows of shuttered shops, a masked figure alone, an abandoned tram, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on one small masked figure standing motionless mid-street, close enough to read the awe and grief; an empty city avenue under flat grey light, rows of shuttered shops, a masked figure alone, an abandoned tram, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Symmetrical empty boulevard vanishing to the horizon, one tiny masked silhouette dead-centre, utterly still. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A wall of glacial ice grinding across a frozen continent, blue crevasses, a white sun, mammoths in the distance, dominating and filling the frame; a tiny band of fur-clad figures crossing the ice below the glacier wall, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny band of fur-clad figures crossing the ice below the glacier wall, larger in the lower frame; a wall of glacial ice grinding across a frozen continent, blue crevasses, a white sun, mammoths in the distance, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny band of fur-clad figures crossing the ice below the glacier wall, close enough to read the awe and grief; a wall of glacial ice grinding across a frozen continent, blue crevasses, a white sun, mammoths in the distance, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Worm's-eye up the towering blue glacier face, tiny fur-clad figures at its base for scale. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Old London ablaze at night, timber houses collapsing into a river of fire, sparks storming over the Thames, St Paul's silhouetted burning, dominating and filling the frame; tiny figures in boats on the Thames fleeing the burning shore, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures in boats on the Thames fleeing the burning shore, larger in the lower frame; old London ablaze at night, timber houses collapsing into a river of fire, sparks storming over the Thames, St Paul's silhouetted burning, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures in boats on the Thames fleeing the burning shore, close enough to read the awe and grief; old London ablaze at night, timber houses collapsing into a river of fire, sparks storming over the Thames, St Paul's silhouetted burning, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "From the river, the whole burning skyline reflected in the water, tiny escape boats between fire and reflection. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast ocean liner at night dwarfed beneath a colossal moonlit iceberg, calm black sea, a field of stars, one funnel smoking, dominating and filling the frame; the great ship tiny against the towering ice, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The great ship tiny against the towering ice, larger in the lower frame; a vast ocean liner at night dwarfed beneath a colossal moonlit iceberg, calm black sea, a field of stars, one funnel smoking, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on the great ship tiny against the towering ice, close enough to read the awe and grief; a vast ocean liner at night dwarfed beneath a colossal moonlit iceberg, calm black sea, a field of stars, one funnel smoking, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The iceberg looming enormous in foreground, the lit ship small and serene beyond it, before the moment. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vanished sea — rusting ships beached on a cracked desert seabed stretching to a dry horizon, the water gone, dominating and filling the frame; a tiny lone figure walking between the marooned hulks, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny lone figure walking between the marooned hulks, larger in the lower frame; a vanished sea — rusting ships beached on a cracked desert seabed stretching to a dry horizon, the water gone, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny lone figure walking between the marooned hulks, close enough to read the awe and grief; a vanished sea — rusting ships beached on a cracked desert seabed stretching to a dry horizon, the water gone, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of ship hulls scattered across cracked seabed like carcasses, one small walking figure for scale. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A supervolcano erupting, a continent-wide ash cloud blotting the sun into a dim red disc, the world going dark at noon, dominating and filling the frame; tiny early-human silhouettes on a ridge beneath the dimming sun, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny early-human silhouettes on a ridge beneath the dimming sun, larger in the lower frame; a supervolcano erupting, a continent-wide ash cloud blotting the sun into a dim red disc, the world going dark at noon, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny early-human silhouettes on a ridge beneath the dimming sun, close enough to read the awe and grief; a supervolcano erupting, a continent-wide ash cloud blotting the sun into a dim red disc, the world going dark at noon, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The red dimmed sun barely visible through ash filling the whole sky, a thin dark ridge of tiny figures below. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A grey emigrant harbour, a tall ship boarding the desperate, empty blighted potato fields stretching behind under low cloud, dominating and filling the frame; a small family clutching bundles at the foot of the gangway, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A small family clutching bundles at the foot of the gangway, larger in the lower frame; a grey emigrant harbour, a tall ship boarding the desperate, empty blighted potato fields stretching behind under low cloud, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a small family clutching bundles at the foot of the gangway, close enough to read the awe and grief; a grey emigrant harbour, a tall ship boarding the desperate, empty blighted potato fields stretching behind under low cloud, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "From the ship's rail looking down at the tiny crowd on the quay, the blighted green land beyond. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A forest firestorm exploding through the night, a tornado of flame, whole treelines igniting at once, embers storming the sky, dominating and filling the frame; tiny figures wading into a river as the firestorm crowns the far bank, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures wading into a river as the firestorm crowns the far bank, larger in the lower frame; a forest firestorm exploding through the night, a tornado of flame, whole treelines igniting at once, embers storming the sky, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures wading into a river as the firestorm crowns the far bank, close enough to read the awe and grief; a forest firestorm exploding through the night, a tornado of flame, whole treelines igniting at once, embers storming the sky, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The fire-tornado towering over black forest, its light reflected in the river where tiny figures shelter. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast churned no-man's-land at dawn, endless mud, shattered trees, coils of wire, a scarred silent landscape under a grey sky, dominating and filling the frame; a single silhouetted soldier standing in a trench looking out, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A single silhouetted soldier standing in a trench looking out, larger in the lower frame; a vast churned no-man's-land at dawn, endless mud, shattered trees, coils of wire, a scarred silent landscape under a grey sky, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a single silhouetted soldier standing in a trench looking out, close enough to read the awe and grief; a vast churned no-man's-land at dawn, endless mud, shattered trees, coils of wire, a scarred silent landscape under a grey sky, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Long low pan across the cratered wasteland, splintered trees as lone verticals, one distant helmeted silhouette. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A monstrous hurricane surge smashing a coastal city, houses lifted on the flood, palm trees bent flat, black wall of rain, dominating and filling the frame; tiny figures clinging to a rooftop above the rising water, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures clinging to a rooftop above the rising water, larger in the lower frame; a monstrous hurricane surge smashing a coastal city, houses lifted on the flood, palm trees bent flat, black wall of rain, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures clinging to a rooftop above the rising water, close enough to read the awe and grief; a monstrous hurricane surge smashing a coastal city, houses lifted on the flood, palm trees bent flat, black wall of rain, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Above the flooded streets, rooftops as islands in a churning brown sea, tiny clinging figures on one. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An emptied late-Roman city at dusk, grand marble avenues deserted, a single cart abandoned, smoke of distant pyres, dominating and filling the frame; one small hooded figure alone on the vast marble steps, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. One small hooded figure alone on the vast marble steps, larger in the lower frame; an emptied late-Roman city at dusk, grand marble avenues deserted, a single cart abandoned, smoke of distant pyres, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on one small hooded figure alone on the vast marble steps, close enough to read the awe and grief; an emptied late-Roman city at dusk, grand marble avenues deserted, a single cart abandoned, smoke of distant pyres, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Grand empty forum in deep perspective, one tiny hooded figure on the steps, long shadows, no other soul. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The night sky ablaze with impossible auroras of red and green light rippling to the horizon, a sleeping 19th-century town below, dominating and filling the frame; tiny figures in a street gazing up at the burning sky, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures in a street gazing up at the burning sky, larger in the lower frame; the night sky ablaze with impossible auroras of red and green light rippling to the horizon, a sleeping 19th-century town below, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures in a street gazing up at the burning sky, close enough to read the awe and grief; the night sky ablaze with impossible auroras of red and green light rippling to the horizon, a sleeping 19th-century town below, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The whole sky a curtain of aurora, a small dark rooftops silhouette along the bottom, upturned tiny faces. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A 19th-century city consumed by firestorm, whole blocks ablaze, a burning skyline against black smoke, sparks like snow, dominating and filling the frame; tiny crowds streaming across a bridge away from the burning city, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny crowds streaming across a bridge away from the burning city, larger in the lower frame; a 19th-century city consumed by firestorm, whole blocks ablaze, a burning skyline against black smoke, sparks like snow, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny crowds streaming across a bridge away from the burning city, close enough to read the awe and grief; a 19th-century city consumed by firestorm, whole blocks ablaze, a burning skyline against black smoke, sparks like snow, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The burning city across the river, a packed bridge of tiny fleeing silhouettes in the foreground. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient walled city sacked and burning, temples collapsing in flame, smoke columns rising over the harbour, ships ablaze, dominating and filling the frame; tiny figures fleeing down the great steps below the burning acropolis, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures fleeing down the great steps below the burning acropolis, larger in the lower frame; an ancient walled city sacked and burning, temples collapsing in flame, smoke columns rising over the harbour, ships ablaze, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures fleeing down the great steps below the burning acropolis, close enough to read the awe and grief; an ancient walled city sacked and burning, temples collapsing in flame, smoke columns rising over the harbour, ships ablaze, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The burning acropolis towering over tiny fleeing crowds, harbour of burning ships beyond. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A dam-burst wall of water and debris roaring down a narrow valley, sweeping houses and trees, a churning brown deluge, dominating and filling the frame; tiny figures scrambling up the valley side above the flood, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures scrambling up the valley side above the flood, larger in the lower frame; a dam-burst wall of water and debris roaring down a narrow valley, sweeping houses and trees, a churning brown deluge, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures scrambling up the valley side above the flood, close enough to read the awe and grief; a dam-burst wall of water and debris roaring down a narrow valley, sweeping houses and trees, a churning brown deluge, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Down the valley at the oncoming debris-wall of water, a doomed town small in its path. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An abandoned Soviet city reclaimed by nature — a rusting ferris wheel, empty tower blocks, moss and birch trees pushing through concrete, dominating and filling the frame; a tiny lone figure standing beneath the silent ferris wheel, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny lone figure standing beneath the silent ferris wheel, larger in the lower frame; an abandoned Soviet city reclaimed by nature — a rusting ferris wheel, empty tower blocks, moss and birch trees pushing through concrete, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny lone figure standing beneath the silent ferris wheel, close enough to read the awe and grief; an abandoned Soviet city reclaimed by nature — a rusting ferris wheel, empty tower blocks, moss and birch trees pushing through concrete, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The rusting ferris wheel framed against pale sky, birch trees reclaiming the square, one small figure below. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An immense airburst flattening a Siberian forest, millions of trees blown down in a vast radial starburst pattern to the horizon, dominating and filling the frame; a tiny figure standing at the centre where the trees splay outward, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure standing at the centre where the trees splay outward, larger in the lower frame; an immense airburst flattening a Siberian forest, millions of trees blown down in a vast radial starburst pattern to the horizon, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure standing at the centre where the trees splay outward, close enough to read the awe and grief; an immense airburst flattening a Siberian forest, millions of trees blown down in a vast radial starburst pattern to the horizon, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Overhead of the radial blast pattern, every tree pointing outward from a single point, a speck of a figure at centre. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An endless parched land under a merciless white sky, cracked earth, a dead tree, a long line of the displaced walking to the horizon, dominating and filling the frame; a small figure at the head of the walking line, dwarfed by the empty land, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A small figure at the head of the walking line, dwarfed by the empty land, larger in the lower frame; an endless parched land under a merciless white sky, cracked earth, a dead tree, a long line of the displaced walking to the horizon, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a small figure at the head of the walking line, dwarfed by the empty land, close enough to read the awe and grief; an endless parched land under a merciless white sky, cracked earth, a dead tree, a long line of the displaced walking to the horizon, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The line of displaced tiny figures snaking across cracked earth to a shimmering horizon, one dead tree. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great airship engulfed in a fireball at its mooring mast at dusk, flame blooming along its length, mooring crew scattering, dominating and filling the frame; tiny ground crew running from beneath the falling burning airship, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny ground crew running from beneath the falling burning airship, larger in the lower frame; a great airship engulfed in a fireball at its mooring mast at dusk, flame blooming along its length, mooring crew scattering, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny ground crew running from beneath the falling burning airship, close enough to read the awe and grief; a great airship engulfed in a fireball at its mooring mast at dusk, flame blooming along its length, mooring crew scattering, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low beneath the burning airship as it sinks, tiny crew silhouettes scattering across the field. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great earthquake tearing a city street, cable-car tracks buckling, facades collapsing, fires starting across the skyline, dominating and filling the frame; tiny residents fleeing down a cracking street away from a toppling facade, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny residents fleeing down a cracking street away from a toppling facade, larger in the lower frame; a great earthquake tearing a city street, cable-car tracks buckling, facades collapsing, fires starting across the skyline, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny residents fleeing down a cracking street away from a toppling facade, close enough to read the awe and grief; a great earthquake tearing a city street, cable-car tracks buckling, facades collapsing, fires starting across the skyline, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "A street split by the quake in the foreground, the fissure leading to a skyline beginning to smoke. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colliery at dusk, the great pithead wheel still, a silent gathered crowd at the gates, lamps in the gloom, smoke over the valley, dominating and filling the frame; a small cluster of waiting figures at the pit gates, heads bowed, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A small cluster of waiting figures at the pit gates, heads bowed, larger in the lower frame; a colliery at dusk, the great pithead wheel still, a silent gathered crowd at the gates, lamps in the gloom, smoke over the valley, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a small cluster of waiting figures at the pit gates, heads bowed, close enough to read the awe and grief; a colliery at dusk, the great pithead wheel still, a silent gathered crowd at the gates, lamps in the gloom, smoke over the valley, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The black pithead wheel silhouetted against a dim sky, a tiny waiting crowd below, one lamp burning. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great fleet driven onto a storm coast at night, galleons breaking on black rocks, mountainous surf, lightning, dominating and filling the frame; tiny survivors struggling ashore from the wreckage, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny survivors struggling ashore from the wreckage, larger in the lower frame; a great fleet driven onto a storm coast at night, galleons breaking on black rocks, mountainous surf, lightning, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny survivors struggling ashore from the wreckage, close enough to read the awe and grief; a great fleet driven onto a storm coast at night, galleons breaking on black rocks, mountainous surf, lightning, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "From the cliffs looking down at galleons foundering on the rocks, tiny figures in the white surf. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A bombed 20th-century city reduced to rubble as far as the eye can see, hollow facades, a single standing church spire, dust light, dominating and filling the frame; a tiny figure walking a cleared path through the endless rubble, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure walking a cleared path through the endless rubble, larger in the lower frame; a bombed 20th-century city reduced to rubble as far as the eye can see, hollow facades, a single standing church spire, dust light, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure walking a cleared path through the endless rubble, close enough to read the awe and grief; a bombed 20th-century city reduced to rubble as far as the eye can see, hollow facades, a single standing church spire, dust light, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The gutted skyline of hollow buildings receding to the horizon, one small figure on a rubble path, no bodies. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A winter storm surge overwhelming a low coast at night, a sea wall breached, black water flooding fields and villages, driving rain, dominating and filling the frame; tiny figures on a dyke above the flooding polder, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures on a dyke above the flooding polder, larger in the lower frame; a winter storm surge overwhelming a low coast at night, a sea wall breached, black water flooding fields and villages, driving rain, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures on a dyke above the flooding polder, close enough to read the awe and grief; a winter storm surge overwhelming a low coast at night, a sea wall breached, black water flooding fields and villages, driving rain, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Aerial of the breached sea wall, black flood spreading across a patchwork of drowning fields, tiny dyke figures. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great concrete dam bursting, a vast white torrent exploding through the breach into the valley below, spray towering, dominating and filling the frame; tiny figures on the valley road fleeing ahead of the flood front, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures on the valley road fleeing ahead of the flood front, larger in the lower frame; a great concrete dam bursting, a vast white torrent exploding through the breach into the valley below, spray towering, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny figures on the valley road fleeing ahead of the flood front, close enough to read the awe and grief; a great concrete dam bursting, a vast white torrent exploding through the breach into the valley below, spray towering, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "From below the dam looking up at the torrent bursting through, the wall dwarfing tiny fleeing figures. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A city long lost beneath a still lake, submerged rooftops and a church spire breaking the calm surface, clear reflective water, dominating and filling the frame; a tiny boat drifting over the submerged streets, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny boat drifting over the submerged streets, larger in the lower frame; a city long lost beneath a still lake, submerged rooftops and a church spire breaking the calm surface, clear reflective water, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny boat drifting over the submerged streets, close enough to read the awe and grief; a city long lost beneath a still lake, submerged rooftops and a church spire breaking the calm surface, clear reflective water, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Glassy water with a single spire breaking the surface, a small drifting boat casting a long reflection. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Vast ancient ruins swallowed by forest — temple stones wrapped in tree roots, vines and green light, the works of a lost people, dominating and filling the frame; a tiny explorer figure dwarfed at the foot of the root-wrapped ruins, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny explorer figure dwarfed at the foot of the root-wrapped ruins, larger in the lower frame; vast ancient ruins swallowed by forest — temple stones wrapped in tree roots, vines and green light, the works of a lost people, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny explorer figure dwarfed at the foot of the root-wrapped ruins, close enough to read the awe and grief; vast ancient ruins swallowed by forest — temple stones wrapped in tree roots, vines and green light, the works of a lost people, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "A great root-bound doorway towering in green forest light, one small figure at its base for scale. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast stratified cliff face of deep time, layers of rock holding fossil bones, an immense empty landscape under a huge sky, dominating and filling the frame; a tiny figure standing at the base of the towering strata, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure standing at the base of the towering strata, larger in the lower frame; a vast stratified cliff face of deep time, layers of rock holding fossil bones, an immense empty landscape under a huge sky, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on a tiny figure standing at the base of the towering strata, close enough to read the awe and grief; a vast stratified cliff face of deep time, layers of rock holding fossil bones, an immense empty landscape under a huge sky, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "The layered cliff filling the frame, geological time made visible, one speck of a figure at the bottom. Poster-grade hero composition.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Warm first light breaking over a ruined but quieting landscape, smoke thinning, green shoots in the rubble, a wide hopeful sky, dominating and filling the frame; tiny survivors beginning to rebuild, carrying timber across the foreground, tiny and low, utterly dwarfed by the scale. Deep three-plane depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny survivors beginning to rebuild, carrying timber across the foreground, larger in the lower frame; warm first light breaking over a ruined but quieting landscape, smoke thinning, green shoots in the rubble, a wide hopeful sky, looming huge above and behind. Strong foreground-to-background depth.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tighter shot on tiny survivors beginning to rebuild, carrying timber across the foreground, close enough to read the awe and grief; warm first light breaking over a ruined but quieting landscape, smoke thinning, green shoots in the rubble, a wide hopeful sky, filling the background and frame edge behind. The human the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low golden dawn light raking across ruins softened by new green, tiny rebuilding figures warm-lit, sky opening. Poster-grade hero composition.",
+      "motion_prompt": ""
+    }
+  ]
+}
