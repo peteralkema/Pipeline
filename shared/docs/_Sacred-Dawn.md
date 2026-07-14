@@ -11,6 +11,58 @@
 
 ---
 
+## ★ PACKAGING PIVOT — 12 July 2026 (GOVERNING SECTION — supersedes all prior packaging doctrine)
+
+**This section overrides §1's "never sensational" register line, §4's "durable vs. shock-bait" framing, §7's "avoid all-caps shock words," and §11's packaging test. Where anything below conflicts with this section, this section wins.** The content thesis (§0, §2, §2b), the pipeline/config facts, the retention craft (§6), and the audio doctrine (§5b) are all UNCHANGED and still correct. Only the **storefront** — titles and thumbnails — changes.
+
+### Why we pivoted
+Sacred Dawn launched reverent-and-restrained and, at three weeks old, is underperforming in a niche where the winning formula is proven and visible. The reference channel is **Forgotten Bible Stories** (@TheForgottenBibleStories) — same exact niche (Enoch, Watchers, Nephilim, Genesis 6, Jubilees, Azazel), **11.5k subs, 24 videos, MONETIZED**. Its own per-video data settles the argument: its **dry** titles die and its **bold** titles print, on the same channel, same audience, same weeks:
+
+| Their title | VPH | Outlier |
+|---|---|---|
+| "Hidden Story Behind ENOCH…" | 20 | 0.3x |
+| "THE BOOK OF ENOCH… COMPLETE Story…" | 50 | 0.8x |
+| "The Most **MIND-BLOWING** Book Left Out of Bible \| JUBILEES" | **292** | **3.1x** |
+| "The **DARKEST** Days Before Noah's Flood \| Genesis 6" | **295** | **3.1x** |
+| "The Most **TERRIFYING** Story About A Fallen Angel \| AZAZEL" | **134** | **1.4x** |
+
+Same-channel A/B: the superlative-shock register outperforms the dry register **~10x**. This is not a guess; it is the competitor proving it against itself. **The old doctrine's central packaging fear was empirically wrong for this niche.**
+
+### The monetization fear was wrong (correcting §4)
+§4 claimed the shock register carries demonetization risk. The reference channel uses TERRIFYING / DARKEST / MIND-BLOWING throughout **and carries the Monetized badge.** Superlative curiosity hooks do not trip YouTube's advertiser-friendliness triggers — graphic violence, hate, and dangerous content do, and we do none of those. **The biblical-drama shock register is monetization-safe.** Retire the §4 burnout/demonetization argument.
+
+### The one guardrail we keep (craft, not restraint): punchy AND true
+The reference channel's best performers are bold *and* accurate — "The Day 200 Angels Rebelled" is literally true; "AZAZEL, the Most Feared Watcher" is defensible from the text. Keep titles curiosity-maximal but anchored to something the script actually delivers. This is not reverence talking — it is **free CTR insurance**: comments don't turn on you for a hook you pay off, and the winning competitor already works this way. Bold framing of a true claim beats fabrication every time it's tested. Our accurate-inside scripts are an asset here, not a constraint.
+
+### THE NEW THUMBNAIL FORMULA (the Forgotten Bible Stories register — this is now the house style)
+Bright, loud, high-contrast, cinematic-poster. The OPPOSITE of the old dark-painterly-faceless-left-third-empty schema.
+
+- **Palette:** bright, high-contrast — **fire, lightning, molten gold, blown-out divine light.** NOT muted, NOT dark-painterly, NOT sepia. The image should feel like a summer-blockbuster poster, not a museum oil painting.
+- **A dramatic PHOTOREAL HERO, right side of frame, mid-action** — reaching hand, roaring, arms raised, lightning/fire behind. **Faces are IN now** (of Enoch, a Watcher, Azazel, an archangel — human/angelic subjects). *God is still never depicted* — the facelessness rule survives only for God, not for the human/angelic hero of the thumbnail. This is the single biggest break from the old schema.
+- **Huge 3D-extruded GOLD ALL-CAPS text, left ~half of frame**, in three registers:
+  - **Top eyebrow tag** (small banner): THE DAY / THE BOOK OF / HIDDEN STORY / THE FORGOTTEN STORY OF / THE FORGOTTEN TRAGEDY OF
+  - **Center subject name** (biggest element): ENOCH / AZAZEL / GENESIS 6 / JUBILEES / THE WATCHERS / MASTEMA
+  - **Bottom descriptor banner:** THE MAN WHO NEVER DIED / FULL BIBLE MOVIE / EXPLAINED LIKE NEVER BEFORE / GOD'S FINAL PROMISE
+- **"4K MOVIE" badge, bottom-left corner** — the genre's quality-signal; adopt it.
+- **Squint-test at ~120px:** the subject name must dominate; the hero must read as dramatic even tiny.
+
+*This replaces the `{subject, title, subtitle}` "no faces / no text / left-third-dark / painterly" schema entirely. The old bottom-left-authority / top-left-house-anchor material (§7, §7c) is retired for Sacred Dawn — that was discipline for a restrained brand we no longer are. New thumb generation is a bold-hero-plus-gold-text composite (Nano Banana 2 hero render + gold-text overlay), not the faceless-Flux left-scrim composite.*
+
+### THE NEW TITLE FORMULA
+`[Superlative curiosity hook] | [SUBJECT IN CAPS] | Full Bible Movie 4K`
+
+- **Lead with a superlative frame:** The Most TERRIFYING / MIND-BLOWING / DARKEST / BEAUTIFUL / FEARED / Heartbreaking [thing] in the Bible — OR — The Day [dramatic event] — OR — The Forgotten [Story/Tragedy] of [X].
+- **One ALL-CAPS emphasis word** for the scroll-stopping beat (TERRIFYING, DARKEST, MIND-BLOWING).
+- **Pipe `|` separator**, then the **subject in caps** (the recognition noun — AZAZEL, JUBILEES, GENESIS 6).
+- **Consistent suffix: `Full Bible Movie 4K`** (optionally a 🎬). This suffix is a genre-recognition cue; adopt it as house.
+- **Front-load the hook under ~60 characters** so it survives YouTube's browse/search truncation. The subject + suffix can run past 60; the hook cannot.
+- Anchor every hook to something the script pays off (the guardrail above).
+
+### What this means for the existing 40-video queue
+The queue's **scripts are done and stay as-is** (accurate, reverent-honest inside — that's the product). Only their **titles and thumbnails get reworked** to this formula before/at publish. The authored `title:` headers were the *old* register (long, dash-clause, restrained); they are now **input to be rewritten**, not final. The `.thumb.json` files are the *old* schema and will be regenerated to the new formula. This is the programmatic title+thumbnail update job (read-modify-write via the YouTube Data API), tracked separately.
+
+---
+
 ## 0. What this is, in one paragraph
 
 **Sacred Dawn** is a faceless, fully-AI cinematic channel that renders the Bible's cosmic and primeval drama — Creation, the Fall, the Watchers and the Nephilim, the Flood, Babel, Sodom, Leviathan, the plagues, the long day, the fire on Carmel — as ~16–25 minute documentary-films. The pitch in one line: *the Bible's origin story, told as a film series.* Reverent, majestic, never shock-bait. It runs on the same channel-agnostic pipeline as Final Hours and You Had To Be There — one config file (`sacred-dawn/channel.json`) and content, no new code. It is the highest-fit use of the machine found to date, for a reason this document exists to make explicit: it is the lane where AI's weakness becomes the genre's requirement. As of 19 June the channel has its launch film live ("The Watchers / Before the Flood"), the Book of Giants film rendered, and a **ten-video cosmic/primeval batch authored, gate-clean, and pipeline-prepped** (§8) — held for an unattended batch-of-batches run.
@@ -20,7 +72,7 @@
 ## 1. Positioning
 
 - **Premise:** the cosmic/primeval drama of scripture, rendered cinematically — the Bible's origin story as a film series.
-- **Register:** reverent, grand, liturgical, mournful-and-awed. Dread-and-dignity transposed from Final Hours to the sacred-primeval. Present-tense witness. Never sensational, never "BANNED / TERRIFYING / what they're hiding."
+- **Register:** *[SUPERSEDED 12 July by the PACKAGING PIVOT — split into two registers.]* **Content register (inside the video):** reverent, grand, liturgical, mournful-and-awed; present-tense witness; accurate and attributed. **Packaging register (title + thumbnail):** bold, bright, superlative, cinematic-poster — the Forgotten Bible Stories formula (see pivot section). The old "never sensational, never TERRIFYING" rule applied to *packaging* is retired; it still guides the *script interior*. The product is reverent; the storefront is loud.
 - **Handle:** `@sacredawn` · **Display name:** Sacred Dawn · **Tagline (banner):** "The Bible's origin story, retold" (NOT "awaken the divine within" — that's new-age and off-genre).
 - **Audience:** the faith + biblical-mystery audience — large, high-RPM, and crucially **AI-indifferent** (embraces rendered imagery; does not forensically fact-check it). It is **not** reverence- or quality-indifferent — see §4.
 
@@ -104,9 +156,11 @@ Track these monthly for what's breaking and what's saturating — **Scripture Or
 
 ---
 
-## 4. The moat — durable vs. shock-bait packaging
+## 4. The moat — durable vs. shock-bait packaging  *[PACKAGING CLAIMS SUPERSEDED 12 July — see pivot section]*
 
-The money-leaders print on a **packaging treadmill**: "BANNED," "TERRIFYING truth," "what the Church won't teach," "Noah Was NOT Human." That demand is durable; those *framings* are not — you burn shock-hooks faster than you can write them and you swim in the clone swarm on every one. There is also real **YPP / demonetization risk** in that register ("AI slop / reused content"); several cohort channels show monetization not-yet-enabled despite real views.
+> **⚠ SUPERSEDED (12 July 2026):** This section's core claim — that the shock/superlative register is a burnout and demonetization risk to be avoided — was **empirically disproven** by the Forgotten Bible Stories channel (same niche, uses TERRIFYING/DARKEST/MIND-BLOWING, is MONETIZED, ~10x VPH over its own dry titles). We have pivoted **to** that register for packaging. The paragraph below is kept as the record of the old reasoning, NOT as governing doctrine. **What survives from §4:** the *attribution discipline* (every supernatural claim tagged to canon vs. apocrypha) and the *anchor-on-real-questions* principle — those now serve the "punchy AND true" guardrail in the pivot section, protecting the *content*, not restraining the *packaging*.
+
+The money-leaders print on a **packaging treadmill**: "BANNED," "TERRIFYING truth," "what the Church won't teach," "Noah Was NOT Human." That demand is durable; those *framings* are not — you burn shock-hooks faster than you can write them and you swim in the clone swarm on every one. There is also real **YPP / demonetization risk** in that register ("AI slop / reused content"); several cohort channels show monetization not-yet-enabled despite real views. *[↑ The demonetization claim here is the specific thing the 12 July pivot corrects: the reference channel proves the biblical-drama shock register is monetization-safe. Retire this fear.]*
 
 Sacred Dawn keeps the **curiosity** and drops the **fabrication**:
 
@@ -274,7 +328,7 @@ The recognition half secures the search/suggest floor; the em-dash clause sells 
 - The generator makes **2 candidates**, **Sonnet selects** the best, text is composited as a layer (models can't render legible type).
 - `channel.json thumbnail` block (live, 19 June): `composition: "centered_subject"` (confirmed a valid mode in `make_thumbnail.py`), `candidates: 2`, a faceless-biblical `candidate_prompt_suffix` (right-two-thirds subject, left-third negative space, no faces, no text), Anton font (DejaVu fallback), left scrim, `segment_foreground: false`. **`segment_foreground: false` is deliberate** — it composites title-over-scrim and skips segmentation, so **rembg is not required** (and rembg tends to cut silhouettes badly against dark skies anyway).
 - **Pairing discipline (bit us this session):** the batch runner pairs by slug — `md.with_suffix(".thumb.json")` — so `<slug>.md` and `<slug>.thumb.json` must share the **exact** base name, dot-named. Mismatched names (e.g. `cain_and_abel_script_draft.md` ↔ `cain.thumb.json`) are **silently skipped**. The inbox must contain only the current batch's matched pairs.
-- **Avoid:** stock reaction-faces / pointing fingers (the faceless-channel slop tell), sepia "biblical-mystery" wash, all-caps shock words. **Brand:** the gold "Sacred Dawn" wordmark carries across banner and thumbnails. Squint-test at ~120px.
+- **Avoid:** *[SUPERSEDED 12 July.]* The old avoid-list (all-caps shock words, dramatic hero faces, bright treatment) IS the new house style — see pivot section. What still holds: avoid the *low-effort* slop tell (generic stock reaction-faces, cheap sepia wash) — but a **hand-composed dramatic photoreal hero with 3D gold text is the target now, not the thing to avoid.** **Brand:** the gold "Sacred Dawn" wordmark still carries across banner/thumbnails; the "4K MOVIE" badge is added bottom-left. Squint-test at ~120px — the subject name must dominate.
 
 
 ---
@@ -466,15 +520,15 @@ Vol. 1 kept **Elliot at Sacred Dawn's normal pace** (no `speaking_rate` override
 
 ### 12.8 The "Sacred ___" family rule (forward-looking)
 Future contemplative/scripture spin-offs (Sacred Hours, Sacred Word, …) are **sections under this doc, not new files** — they share Sacred Dawn's canon, voice family, look family, and pipeline, differing only in consumption-mode and tuning. Each new sibling adds a §12.x sub-section here.
-## 11. Appendix — the packaging test (durable vs. shock-bait, as a feed)
+## 11. Appendix — the packaging test  *[INVERTED 12 July 2026]*
 
-The reframe titles read *coherent* under "Sacred Dawn"; the shock titles *jar*. Run the eye-test before publishing any title.
+> **⚠ INVERTED (12 July 2026):** This test previously told us to run restrained titles and NEVER run shock titles. **The verdict flipped.** The "never run" column is now closer to the model (bold, superlative, all-caps emphasis), and the old "run these" column is the register that underperformed. The governing rule is the pivot section's title formula. The *one* thing that survives: **anchor the hook to something the script pays off** — bold-but-true, never fabricated. Kept below as the record of the reversal.
 
-**Run these (durable — the live batch passes):** "Noah's Flood: The Day the World Drowned — and the Door God Shut Himself" · "Sodom and Gomorrah: The Day Fire Fell from the Sky — and the Woman Who Looked Back" · "The Day the Sun Stood Still: The Battle Where God Stopped the Sky" · "Elijah and the Fire from Heaven" · "The Watchers: The Night Two Hundred Angels Fell."
+**Old "run these" (restrained — the register that UNDERPERFORMED at launch):** "Noah's Flood: The Day the World Drowned — and the Door God Shut Himself" · "The Watchers: The Night Two Hundred Angels Fell." *(Coherent, dignified — and low-CTR. This is what we moved away from.)*
 
-**Never run these (shock-bait — they print for others but burn out and risk monetization):** "The TERRIFYING Truth About the Nephilim" · "Noah Was NOT Human" · "The Bible's DARKEST Chapter the Church Won't Teach" · "What They're HIDING About the Giants."
+**Old "never run these" (now CLOSE TO THE MODEL — bold, and where TRUE, run them):** "The TERRIFYING Truth About the Nephilim" · "The Bible's DARKEST Chapter" · variants on "What They're HIDING." *(The reference channel runs exactly these and prints ~10x. Run the bold frame — anchored to a true payoff.)* **Still don't run:** flatly false claims like "Noah Was NOT Human" — that's the fabrication line, and it's the only line left. Bold framing of a true claim: yes. A false claim: no.
 
-*The line: keep the curiosity, drop the fabrication. The canon is the asset; reverent best-execution is the moat.*
+*The new line: keep the curiosity AND turn it up loud; anchor it to a true payoff. The canon is the asset; bold best-execution — packaged like Forgotten Bible Stories, kept accurate inside — is the moat.*
 
 ---
 
