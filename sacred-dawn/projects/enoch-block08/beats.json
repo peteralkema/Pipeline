@@ -1,0 +1,804 @@
+{
+  "beats": [
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal bright moon shown as a vast physical structure, not a light but a made thing, immense; a tiny figure before the immense moon-structure (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the immense moon-structure (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a colossal bright moon shown as a vast physical structure, not a light but a made thing, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a colossal bright moon shown as a vast physical structure, not a light but a made thing, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the towering bright moon-structure, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The moon riding a vast bright chariot of wind across the heavens, immense and physical; a tiny witness beholding the moon-chariot (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness beholding the moon-chariot (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the moon riding a vast bright chariot of wind across the heavens, immense and physical, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the moon riding a vast bright chariot of wind across the heavens, immense and physical, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright moon-chariot crossing the sky, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The moon-structure borne on bright rushing winds through a starlit sky, immense; tiny world far below the moving moon (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny world far below the moving moon (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the moon-structure borne on bright rushing winds through a starlit sky, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the moon-structure borne on bright rushing winds through a starlit sky, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright moon borne on wind, tiny world below. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Brilliant light being poured into the moon-structure through bright gates, immense; a tiny figure watching the light poured in (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure watching the light poured in (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; brilliant light being poured into the moon-structure through bright gates, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; brilliant light being poured into the moon-structure through bright gates, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight on bright light pouring through the moon's gates, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The moon filling with bright light in measured portions, immense and ordered; a tiny witness before the filling moon (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness before the filling moon (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the moon filling with bright light in measured portions, immense and ordered, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the moon filling with bright light in measured portions, immense and ordered, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the moon filling with measured bright light, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Vast bright gates through which the moon emerges, immense and radiant; a tiny figure before the bright rising-gates (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the bright rising-gates (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; vast bright gates through which the moon emerges, immense and radiant, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; vast bright gates through which the moon emerges, immense and radiant, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the bright moon-rising gates, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Vast bright gates through which the moon departs, immense; a tiny figure before the bright setting-gates (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the bright setting-gates (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; vast bright gates through which the moon departs, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; vast bright gates through which the moon departs, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright moon-setting gates, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Six vast bright celestial gates ranged across the eastern sky, immense and ordered; a tiny witness beneath the six bright gates (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness beneath the six bright gates (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; six vast bright celestial gates ranged across the eastern sky, immense and ordered, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; six vast bright celestial gates ranged across the eastern sky, immense and ordered, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Ultra-wide of the six bright eastern gates, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Six vast bright gates ranged across the western sky, immense; tiny world beneath the six bright western gates (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny world beneath the six bright western gates (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; six vast bright gates ranged across the western sky, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; six vast bright gates ranged across the western sky, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the six bright western gates, tiny world below. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The moon-structure taking on a strange humanlike bright aspect by night, immense and uncanny; a tiny figure beholding the uncanny moon (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure beholding the uncanny moon (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the moon-structure taking on a strange humanlike bright aspect by night, immense and uncanny, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the moon-structure taking on a strange humanlike bright aspect by night, immense and uncanny, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the uncanny bright moonlike-a-face, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The moon shown radiant and vast by bright day, immense and glorious; a tiny figure beneath the bright day-moon (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure beneath the bright day-moon (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the moon shown radiant and vast by bright day, immense and glorious, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the moon shown radiant and vast by bright day, immense and glorious, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright glorious day-moon, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Brilliant glowing sigils naming the moon in four secret names, immense; a tiny figure before the four bright names (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the four bright names (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; brilliant glowing sigils naming the moon in four secret names, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; brilliant glowing sigils naming the moon in four secret names, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Close on the four bright glowing names, tiny silhouette before them. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Brilliant measured light dividing across the moon-structure, ordered and immense; a tiny witness before the measured light (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness before the measured light (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; brilliant measured light dividing across the moon-structure, ordered and immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; brilliant measured light dividing across the moon-structure, ordered and immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright measured light across the moon, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The moon-structure bright and filling across successive nights, immense and ordered; tiny world beneath the waxing bright moon (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny world beneath the waxing bright moon (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the moon-structure bright and filling across successive nights, immense and ordered, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the moon-structure bright and filling across successive nights, immense and ordered, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the waxing bright moon over the world, tiny below. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The moon-structure dimming in bright measured portions, immense; tiny world beneath the waning moon (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny world beneath the waning moon (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the moon-structure dimming in bright measured portions, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the moon-structure dimming in bright measured portions, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the waning moon over the sunlit-by-day world, tiny below. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Vast bright vaults where the moon's light is kept, immense; a tiny figure before the bright light-vaults (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the bright light-vaults (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; vast bright vaults where the moon's light is kept, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; vast bright vaults where the moon's light is kept, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the bright light-storehouses, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Bright celestial winds shown driving the moon-structure, immense and physical; a tiny witness before the driving winds (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness before the driving winds (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; bright celestial winds shown driving the moon-structure, immense and physical, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; bright celestial winds shown driving the moon-structure, immense and physical, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright winds driving the moon, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast bright diagram of the moon's whole course laid out in light, immense; a tiny figure beholding the bright diagram (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure beholding the bright diagram (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vast bright diagram of the moon's whole course laid out in light, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a vast bright diagram of the moon's whole course laid out in light, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright celestial diagram of the moon, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Countless bright star-chariots crossing the heavens with the moon, immense; a tiny witness beneath the star-chariots (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness beneath the star-chariots (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; countless bright star-chariots crossing the heavens with the moon, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; countless bright star-chariots crossing the heavens with the moon, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Ultra-wide of the bright star-chariots, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal bright sun-chariot beside the moon's, immense and radiant; a tiny figure before the bright sun-chariot (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the bright sun-chariot (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a colossal bright sun-chariot beside the moon's, immense and radiant, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a colossal bright sun-chariot beside the moon's, immense and radiant, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the colossal bright sun-chariot, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The sun and moon shown together as vast bright made structures, immense; tiny world beneath the two great bright lights (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny world beneath the two great bright lights (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the sun and moon shown together as vast bright made structures, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the sun and moon shown together as vast bright made structures, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the two great bright lights together, tiny world below. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A bright celestial mechanism ordering days and months in light, immense; a tiny figure before the bright reckoning (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the bright reckoning (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a bright celestial mechanism ordering days and months in light, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a bright celestial mechanism ordering days and months in light, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright day-reckoning mechanism, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The inner bright workings of the moon-structure revealed, immense and physical; a tiny figure within the bright mechanics (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure within the bright mechanics (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the inner bright workings of the moon-structure revealed, immense and physical, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; the inner bright workings of the moon-structure revealed, immense and physical, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright inner workings of the moon, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A bright composition emphasizing the moon as a made, governed thing, immense; a tiny witness grasping the made moon (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness grasping the made moon (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a bright composition emphasizing the moon as a made, governed thing, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a bright composition emphasizing the moon as a made, governed thing, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide hero of the bright made moon, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Colossal bright angelic figures governing the moon-structure, immense and physical; a tiny figure before the governing beings (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the governing beings (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; colossal bright angelic figures governing the moon-structure, immense and physical, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; colossal bright angelic figures governing the moon-structure, immense and physical, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the great bright governing figures at the moon, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A single colossal bright figure overseeing the moon's course, immense; a tiny witness before the moon's angel (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness before the moon's angel (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a single colossal bright figure overseeing the moon's course, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a single colossal bright figure overseeing the moon's course, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the great bright moon-angel, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast bright ordered clockwork of the heavens, immense and exact; a tiny figure within the bright clockwork (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure within the bright clockwork (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vast bright ordered clockwork of the heavens, immense and exact, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a vast bright ordered clockwork of the heavens, immense and exact, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright celestial clockwork, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A bright composition of total cosmic order around the moon, immense; a tiny witness beholding the order (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness beholding the order (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a bright composition of total cosmic order around the moon, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a bright composition of total cosmic order around the moon, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright total order, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast bright vision of the edges of the world where the moon's gates stand, immense; a tiny figure at the bright ends of the earth (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure at the bright ends of the earth (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vast bright vision of the edges of the world where the moon's gates stand, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a vast bright vision of the edges of the world where the moon's gates stand, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Ultra-wide of the bright ends of the earth, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Vast bright structures kept at the far edge of the world, immense and secret; a tiny figure before the bright hidden structures (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the bright hidden structures (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; vast bright structures kept at the far edge of the world, immense and secret, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; vast bright structures kept at the far edge of the world, immense and secret, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright structures at the world's edge, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Bright celestial storehouses at the extremity of the world, immense; a tiny witness before the far bright storehouses (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness before the far bright storehouses (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; bright celestial storehouses at the extremity of the world, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; bright celestial storehouses at the extremity of the world, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the far bright storehouses, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Bright crystalline vaults of cold and snow at the world's edge, immense; a tiny figure before the bright cold-vaults (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the bright cold-vaults (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; bright crystalline vaults of cold and snow at the world's edge, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; bright crystalline vaults of cold and snow at the world's edge, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the bright cold-vaults, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Bright winds issuing from vaults at the ends of the earth, immense; a tiny witness before the issuing winds (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness before the issuing winds (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; bright winds issuing from vaults at the ends of the earth, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; bright winds issuing from vaults at the ends of the earth, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright winds issuing from the edge-vaults, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast bright blueprint of the whole ordered cosmos revealed, immense; a tiny figure beholding the blueprint of light (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure beholding the blueprint of light (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vast bright blueprint of the whole ordered cosmos revealed, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a vast bright blueprint of the whole ordered cosmos revealed, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Ultra-wide of the bright cosmic blueprint, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A single tiny figure entrusted with the whole bright cosmic order, immense; the tiny entrusted figure before the cosmos (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The tiny entrusted figure before the cosmos (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a single tiny figure entrusted with the whole bright cosmic order, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a single tiny figure entrusted with the whole bright cosmic order, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the tiny figure before the bright cosmos. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient hand recording the moon's secrets by warm light, glowing words; the scribe-prophet's hand writing the moon's secrets (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The scribe-prophet's hand writing the moon's secrets (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient hand recording the moon's secrets by warm light, glowing words, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; an ancient hand recording the moon's secrets by warm light, glowing words, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Macro of the glowing recorded words, warm light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A bright sealed record of the cosmos waiting across the ages, immense; a tiny figure sealing the bright record (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure sealing the bright record (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a bright sealed record of the cosmos waiting across the ages, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a bright sealed record of the cosmos waiting across the ages, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright sealed cosmic record, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A bright grounded composition anchoring the wonder in the real text, immense; a tiny witness holding the true account (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness holding the true account (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a bright grounded composition anchoring the wonder in the real text, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a bright grounded composition anchoring the wonder in the real text, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide hero of the bright true account, tiny witness. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A brilliant composition of the moon-structure that needs no exaggeration, immense; a tiny figure before the astonishing true moon (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the astonishing true moon (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a brilliant composition of the moon-structure that needs no exaggeration, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a brilliant composition of the moon-structure that needs no exaggeration, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the astonishing bright true moon, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A bright threshold opening toward the final revelations, immense; a tiny figure at the bright threshold of what remains (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure at the bright threshold of what remains (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a bright threshold opening toward the final revelations, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a bright threshold opening toward the final revelations, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the bright threshold of what remains, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    }
+  ]
+}
