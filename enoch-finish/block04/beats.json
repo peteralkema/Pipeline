@@ -1,0 +1,364 @@
+{
+  "beats": [
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady crane up. The camera rises with the vertical force, weighted and eased, never abrupt. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "CRANE-UP",
+      "beat_title": "The offspring",
+      "source_shot": 2,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady crane up. The camera rises with the vertical force, weighted and eased, never abrupt. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "CRANE-UP",
+      "beat_title": "Giants upon the earth",
+      "source_shot": 5,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady crane up. The camera rises with the vertical force, weighted and eased, never abrupt. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "CRANE-UP",
+      "beat_title": "Taller than the towers",
+      "source_shot": 12,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "The great hunger",
+      "source_shot": 16,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "They devoured the labor of men",
+      "source_shot": 18,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "Nothing was enough",
+      "source_shot": 23,
+      "variant": "c"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "They turned on the beasts",
+      "source_shot": 25,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "Then upon each other",
+      "source_shot": 32,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "The earth could not feed them",
+      "source_shot": 34,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "Their shadow over the land",
+      "source_shot": 39,
+      "variant": "c"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady crane up. The camera rises with the vertical force, weighted and eased, never abrupt. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "CRANE-UP",
+      "beat_title": "A child's fear",
+      "source_shot": 44,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady crane up. The camera rises with the vertical force, weighted and eased, never abrupt. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "CRANE-UP",
+      "beat_title": "The strength of the fallen",
+      "source_shot": 45,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "Beautiful and terrible",
+      "source_shot": 49,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "Neither man nor angel",
+      "source_shot": 53,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "They knew no law",
+      "source_shot": 58,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Very slow downward drift and settle, near-locked. A visual exhale. The camera barely moves; only ambient dust, smoke and water drift. One motion only, no push.",
+      "motion": "SETTLE",
+      "beat_title": "The cities emptied",
+      "source_shot": 63,
+      "variant": "c"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "They ruled by fear",
+      "source_shot": 68,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "The wise men despaired",
+      "source_shot": 69,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "A world out of balance",
+      "source_shot": 75,
+      "variant": "c"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "The blood of the earth",
+      "source_shot": 80,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "They multiplied",
+      "source_shot": 84,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "The old order broken",
+      "source_shot": 86,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "Even the strong fell",
+      "source_shot": 90,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Very slow downward drift and settle, near-locked. A visual exhale. The camera barely moves; only ambient dust, smoke and water drift. One motion only, no push.",
+      "motion": "SETTLE",
+      "beat_title": "The mothers wept",
+      "source_shot": 95,
+      "variant": "c"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "They sought the heavens",
+      "source_shot": 97,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "The creatures fled",
+      "source_shot": 102,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "A land consumed",
+      "source_shot": 108,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "The giants at rest",
+      "source_shot": 109,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady crane up. The camera rises with the vertical force, weighted and eased, never abrupt. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "CRANE-UP",
+      "beat_title": "The earth cried out",
+      "source_shot": 113,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady crane up. The camera rises with the vertical force, weighted and eased, never abrupt. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "CRANE-UP",
+      "beat_title": "Heaven began to listen",
+      "source_shot": 118,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "The measure filled",
+      "source_shot": 123,
+      "variant": "c"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "A giant against the sky",
+      "source_shot": 126,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "The reach of a giant",
+      "source_shot": 131,
+      "variant": "c"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "They feared nothing",
+      "source_shot": 134,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "The world held its breath",
+      "source_shot": 140,
+      "variant": "d"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "Beauty in the monstrous",
+      "source_shot": 141,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "The scale of the fall",
+      "source_shot": 146,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "Named in the oldest texts",
+      "source_shot": 149,
+      "variant": "a"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PUSH-IN",
+      "beat_title": "Almost everyone has heard",
+      "source_shot": 154,
+      "variant": "b"
+    },
+    {
+      "narration": "",
+      "image_prompt": "",
+      "motion_prompt": "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+      "motion": "PULL-BACK",
+      "beat_title": "Where it came from",
+      "source_shot": 157,
+      "variant": "a"
+    }
+  ]
+}

@@ -1,97 +1,184 @@
 #!/usr/bin/env python3
-"""Assemble a Kling finish-project from picked stills. RUN ON THE BOX from ~/Pipeline.
+"""ENOCH FINISH-PROJECT ASSEMBLER
 
-For each montage: copies the 40 chosen shot_NNN.png out of the 160-render stills
-folder into a fresh finish project, renamed shot_001..040 in beat order; writes a
-40-entry storyboard.json with PER-BEAT motion prompts (assigned by shot type); and
-sets render_policy.json {"kling_count": 40}. Then: finish --kling-count 40.
+Turns the 400 picked winners into 10 Kling-ready finish projects.
 
-No re-rendering. Image-to-video off the exact frames you picked.
+Motion is DERIVED (Motion Doctrine), never invented:
+  grief/aftermath  -> SETTLE      (never push; VO re-read of "never push on silence")
+  vertical force   -> CRANE-UP    (overrides variant)
+  c tight face     -> PUSH-IN     (a face is the single overwhelming subject)
+  a wide/scale     -> PULL-BACK   (that framing's meaning IS scale)
+  b mid            -> PUSH-IN
+  d wildcard       -> read off beat text (scale->pull, vertical->crane, else push)
 
-Usage:
-  python3 build_finish.py revelation
-  python3 build_finish.py catastrophes
+NEAR-LOCKED is deliberately unused: under continuous VO a locked frame reads as a
+stalled slideshow, not a held breath. SETTLE carries the quiet work.
+
+TWO MODES (no 600MB upload -- the stills already live on the box):
+
+  LAPTOP:  python3 build_finish.py emit
+     reads ~/Downloads/enoch-stills/blockNN/stills/Winners/
+     writes enoch-finish/blockNN/{beats.json,picks.json} + _MOTION-VETO.md
+
+  BOX:     python build_finish.py place
+     reads picks.json, copies picked stills out of enoch-blockNN-v2/stills/
+     into enoch-blockNN-finish/stills/ renamed shot_001..040 in BEAT order.
 """
-import json, sys, shutil, pathlib
+import json, os, re, shutil, sys, pathlib
 
-# ---- motion vocabulary ----
-PUSH   = "slow deliberate push-in, camera easing forward, natural realistic motion, subtle momentum, stable and steady, dramatic atmosphere"
-PULL   = "slow pull-back revealing scale, camera easing outward, natural realistic motion, subtle momentum, stable and steady, epic atmosphere"
-CRANE  = "slow crane-up, camera rising, natural realistic motion, subtle momentum, stable and steady, towering scale, dramatic atmosphere"
-SETTLE = "very slow gentle drift downward and settle, near-locked camera, minimal movement, natural realistic motion, quiet still atmosphere"
-LOCKED = "near-locked static camera, almost no camera movement, only ambient motion of smoke dust or water, minimal movement, stable, quiet still atmosphere"
-ORBIT  = "very slow subtle orbit, gentle arc, natural realistic motion, minimal movement, stable and steady, dramatic atmosphere"
+HERE = pathlib.Path(__file__).resolve().parent
+WINNERS_ROOT = pathlib.Path(os.environ.get("ENOCH_WINNERS", os.path.expanduser("~/Downloads/enoch-stills")))
+OUT_ROOT = HERE / "enoch-finish"
+BOX_PROJECTS = HERE / "sacred-dawn" / "projects"
 
-CONFIG = {
- "revelation": {
-   "src": "scripture-on-screen/projects/revelation-3min",
-   "dst": "scripture-on-screen/projects/revelation-3min-finish",
-   "picks": {1:3,2:8,3:11,4:15,5:18,6:22,7:25,8:31,9:33,10:40,11:43,12:48,13:52,14:53,15:60,
-             16:64,17:65,18:69,19:74,20:79,21:84,22:86,23:89,24:93,25:98,26:104,27:105,28:109,
-             29:114,30:118,31:123,32:126,33:130,34:133,35:140,36:141,37:148,38:149,39:153,40:157},
-   # motion per beat (1..40), by scene type
-   "motion": {1:CRANE,2:PUSH,3:PUSH,4:PUSH,5:PUSH,6:PUSH,7:PUSH,8:PULL,9:PUSH,10:PUSH,
-              11:PULL,12:PUSH,13:PULL,14:CRANE,15:PUSH,16:PUSH,17:PUSH,18:PUSH,19:CRANE,20:PUSH,
-              21:PULL,22:CRANE,23:PUSH,24:CRANE,25:CRANE,26:CRANE,27:PUSH,28:PUSH,29:PUSH,30:PUSH,
-              31:PULL,32:PUSH,33:PUSH,34:PULL,35:PUSH,36:PULL,37:PULL,38:PUSH,39:PUSH,40:CRANE},
- },
- "catastrophes": {
-   "src": "synthetic/projects/catastrophes-3min",
-   "dst": "synthetic/projects/catastrophes-3min-finish",
-   "picks": {1:3,2:5,3:10,4:15,5:18,6:22,7:25,8:29,9:34,10:37,11:42,12:46,13:49,14:54,15:58,
-             16:63,17:66,18:72,19:75,20:77,21:81,22:87,23:89,24:94,25:99,26:104,27:106,28:112,
-             29:114,30:117,31:122,32:127,33:131,34:134,35:137,36:142,37:146,38:151,39:154,40:157},
-   # sequence: 1 asteroid,2 Pompeii,3 flood,4 cemetery,5 Krakatoa,6 BlackDeath,7 Permian,8 Napoleon,
-   # 9 Lisbon,10 DustBowl,11 Tambora,12 1918flu,13 IceAge,14 GtFireLondon,15 Titanic,16 AralSea,
-   # 17 Toba,18 IrishFamine,19 Peshtigo,20 trenches,21 Galveston,22 Justinian,23 Carrington,
-   # 24 ChicagoFire,25 Carthage,26 Johnstown,27 Pripyat,28 Tunguska,29 famine,30 Hindenburg,
-   # 31 SF1906,32 mine,33 Armada,34 cityRuins,35 NorthSea,36 damFail,37 drownedCity,
-   # 38 reclaimed,39 longSilence,40 dawnRecovery
-   "motion": {1:PUSH,2:PUSH,3:PULL,4:PULL,5:PUSH,6:LOCKED,7:PULL,8:SETTLE,9:PUSH,10:PUSH,
-              11:CRANE,12:LOCKED,13:CRANE,14:PUSH,15:PUSH,16:LOCKED,17:PUSH,18:SETTLE,19:CRANE,20:PULL,
-              21:PUSH,22:LOCKED,23:CRANE,24:PUSH,25:PUSH,26:PUSH,27:LOCKED,28:PULL,29:SETTLE,30:PUSH,
-              31:PUSH,32:LOCKED,33:PUSH,34:PULL,35:PULL,36:PUSH,37:SETTLE,38:SETTLE,39:PULL,40:SETTLE},
- },
+MOVES = {
+ "CRANE-UP":    "Slow, steady crane up. The camera rises with the vertical force, weighted and eased, never abrupt. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+ "PUSH-IN":     "Slow, steady push in. The camera eases forward into the subject, weighted and gradual, increasing pressure. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+ "PULL-BACK":   "Slow, steady pull back. The camera eases outward to reveal the full scale, weighted and gradual. Subject locked; only ambient dust, smoke and cloth drift. One motion only.",
+ "SETTLE":      "Very slow downward drift and settle, near-locked. A visual exhale. The camera barely moves; only ambient dust, smoke and water drift. One motion only, no push.",
+ "NEAR-LOCKED": "Static locked camera. No camera movement at all. Only ambient drift of dust, smoke, cloth or water within the frame. Absolutely no push, no pull.",
 }
 
-def main():
-    which = sys.argv[1] if len(sys.argv) > 1 else ""
-    if which not in CONFIG:
-        sys.exit("usage: build_finish.py [revelation|catastrophes]")
-    c = CONFIG[which]
-    src = pathlib.Path(c["src"]); dst = pathlib.Path(c["dst"])
-    src_stills = src / "stills"
-    src_sb = json.loads((src / "storyboard.json").read_text())
-    by_index = {s["index"]: s for s in src_sb}
+VERTICAL = ("descend","descending","descends","tower","towering","towers","rise","rises","rising","ascend",
+            "ascending","ascends","column","pillar","fall from","falling from","cast down","cast into",
+            "down from","from the sky","from above","upward","overhead","looming above","vortex","plunge",
+            "shaft","staircase","stairs","climb","climbing","above the","high above","spire")
+SCALE = ("horizon","endless","countless","vast","spreads","spreading","across the","stretching","whole",
+         "entire","every","thousands","multitude","as far as","all the land","the world","world-wide",
+         "wide valley","panorama","expanse","legion","host of","armies","crowd","gathering","procession")
 
-    (dst / "stills").mkdir(parents=True, exist_ok=True)
-    new_sb = []
-    for beat in range(1, 41):
-        shot = c["picks"][beat]
-        srcpng = src_stills / f"shot_{shot:03d}.png"
-        if not srcpng.exists():
-            sys.exit(f"MISSING still: {srcpng} (beat {beat})")
-        shutil.copy(srcpng, dst / "stills" / f"shot_{beat:03d}.png")
-        entry = by_index[shot]
-        new_sb.append({
-            "index": beat,
-            "narration": "",
-            "image_prompt": entry["image_prompt"],
-            "motion_prompt": c["motion"][beat],
-            "_reference_images": [],
-        })
-    (dst / "storyboard.json").write_text(json.dumps(new_sb, indent=2, ensure_ascii=False) + "\n")
-    (dst / "script.md").write_text("# " + which + " montage (finish)\n")
-    (dst.parent / "render_policy.json").write_text(json.dumps({"kling_count": 40}) + "\n")
-    print(f"[{which}] built {dst}")
-    print(f"  40 stills copied + renamed shot_001..040")
-    print(f"  storyboard.json written with per-beat motion")
-    print(f"  render_policy.json -> kling_count: 40  (at {dst.parent}/render_policy.json)")
-    print(f"  motion mix: push={sum(1 for v in c['motion'].values() if v==PUSH)} "
-          f"pull={sum(1 for v in c['motion'].values() if v==PULL)} "
-          f"crane={sum(1 for v in c['motion'].values() if v==CRANE)} "
-          f"settle={sum(1 for v in c['motion'].values() if v==SETTLE)} "
-          f"locked={sum(1 for v in c['motion'].values() if v==LOCKED)}")
+
+def derive(beat_title, phenom, wild, variant, emotion):
+    txt = (beat_title + " " + phenom + " " + (wild or "")).lower()
+    vertical = any(k in txt for k in VERTICAL)
+    scale = any(k in txt for k in SCALE)
+    if emotion == "grief":
+        return "SETTLE", "grief/aftermath beat -> settle (never push)"
+    if vertical:
+        return "CRANE-UP", "vertical force in frame -> crane rises with it"
+    if variant == "c":
+        return "PUSH-IN", "tight face = single overwhelming subject -> push"
+    if variant == "a":
+        return "PULL-BACK", "wide/phenomenon-dominant: framing's meaning is scale -> pull"
+    if variant == "b":
+        return "PUSH-IN", "mid, phenomenon looming behind -> push"
+    if scale:
+        return "PULL-BACK", "wildcard, beat is about scale/number -> pull"
+    return "PUSH-IN", "wildcard, single subject / default -> push"
+
+
+def load_blocks():
+    cands = [HERE / "build_enoch_all.py",
+             pathlib.Path(os.path.expanduser("~/Downloads/build_enoch_all.py")),
+             HERE / "sacred-dawn" / "build_enoch_all.py"]
+    for cand in cands:
+        if cand.exists():
+            src = cand.read_text()
+            src = src[:src.index("arg = sys.argv[1]")]
+            ns = {}
+            exec(compile(src, str(cand), "exec"), ns)
+            return ns["BLOCKS"], ns["emotion_for"]
+    sys.exit("ERROR: build_enoch_all.py not found (looked in ., ~/Downloads, ./sacred-dawn)")
+
+
+def shot_to_beat_variant(n):
+    return (n + 3) // 4, "abcd"[(n - 1) % 4]
+
+
+def emit():
+    BLOCKS, emotion_for = load_blocks()
+    OUT_ROOT.mkdir(exist_ok=True)
+    veto = ["# ENOCH MOTION VETO TABLE",
+            "Derived by the Motion Doctrine from beat x variant x register. Review before Kling ($168).",
+            "Flip any row by editing motion_prompt in that block's beats.json.",
+            "Moves: CRANE-UP / PUSH-IN / PULL-BACK / SETTLE / NEAR-LOCKED"]
+    grand = {}
+    for n in sorted(BLOCKS):
+        slug, title, beats = BLOCKS[n]
+        wdir = WINNERS_ROOT / ("block%02d" % n) / "stills" / "Winners"
+        if not wdir.exists():
+            sys.exit("ERROR: %s not found" % wdir)
+        shots = []
+        for f in wdir.glob("*.png"):
+            m = re.search(r"(\d+)", f.name)
+            if m:
+                shots.append(int(m.group(1)))
+        if len(shots) != 40:
+            sys.exit("ERROR: block%02d has %d winners, expected 40" % (n, len(shots)))
+        picked = {}
+        for s in shots:
+            b, v = shot_to_beat_variant(s)
+            if b in picked:
+                sys.exit("ERROR: block%02d beat %d picked twice (shots %d and %d)" % (n, b, picked[b][0], s))
+            picked[b] = (s, v)
+        missing = [b for b in range(1, 41) if b not in picked]
+        if missing:
+            sys.exit("ERROR: block%02d missing beats %s" % (n, missing))
+
+        bj = {"beats": []}
+        picks = {"block": n, "slug": slug, "picks": []}
+        veto.append("")
+        veto.append("## BLOCK %d - %s" % (n, title))
+        veto.append("")
+        veto.append("| beat | shot | var | move | why |")
+        veto.append("|------|------|-----|------|-----|")
+        counts = {}
+        for b in range(1, 41):
+            s, v = picked[b]
+            t, p, a, w = beats[b - 1]
+            emo = emotion_for(t, p, w)
+            move, why = derive(t, p, w, v, emo)
+            counts[move] = counts.get(move, 0) + 1
+            bj["beats"].append({"narration": "", "image_prompt": "",
+                                "motion_prompt": MOVES[move], "motion": move,
+                                "beat_title": t, "source_shot": s, "variant": v})
+            picks["picks"].append({"beat": b, "src_shot": s, "variant": v,
+                                   "dst": "shot_%03d.png" % b, "move": move})
+            veto.append("| %d | %03d | %s | **%s** | %s |" % (b, s, v, move, why))
+        veto.append("")
+        veto.append("*spread: " + "  ".join("%s=%d" % kv for kv in sorted(counts.items())) + "*")
+        grand[n] = counts
+        d = OUT_ROOT / ("block%02d" % n)
+        d.mkdir(exist_ok=True)
+        (d / "beats.json").write_text(json.dumps(bj, indent=2, ensure_ascii=False) + "\n")
+        (d / "picks.json").write_text(json.dumps(picks, indent=2) + "\n")
+
+    tot = {}
+    for c in grand.values():
+        for k, v in c.items():
+            tot[k] = tot.get(k, 0) + v
+    veto.insert(4, "**PORTFOLIO SPREAD (400 clips):** " + "  ".join("%s=%d" % kv for kv in sorted(tot.items())))
+    (OUT_ROOT / "_MOTION-VETO.md").write_text("\n".join(veto) + "\n")
+    print("wrote enoch-finish/blockNN/{beats.json,picks.json} + _MOTION-VETO.md")
+    print("portfolio spread:", tot)
+
+
+def place():
+    for n in range(1, 11):
+        pj = OUT_ROOT / ("block%02d" % n) / "picks.json"
+        if not pj.exists():
+            sys.exit("ERROR: %s not found -- run `emit` on laptop and push first" % pj)
+        picks = json.loads(pj.read_text())
+        src_dir = BOX_PROJECTS / ("enoch-block%02d-v2" % n) / "stills"
+        proj = BOX_PROJECTS / ("enoch-block%02d-finish" % n)
+        dst_dir = proj / "stills"
+        dst_dir.mkdir(parents=True, exist_ok=True)
+        for p in picks["picks"]:
+            src = src_dir / ("shot_%03d.png" % p["src_shot"])
+            if not src.exists():
+                sys.exit("ERROR: %s missing" % src)
+            shutil.copy2(src, dst_dir / p["dst"])
+        shutil.copy2(OUT_ROOT / ("block%02d" % n) / "beats.json", proj / "beats.json")
+        print("block%02d-finish: 40 stills placed in beat order" % n)
+    print("")
+    print("all 10 finish projects ready. set kling_count: 40 before animating.")
+
 
 if __name__ == "__main__":
-    main()
+    mode = sys.argv[1] if len(sys.argv) > 1 else ""
+    if mode == "emit":
+        emit()
+    elif mode == "place":
+        place()
+    else:
+        sys.exit("usage: build_finish.py emit   (laptop)\n       build_finish.py place  (box)")
