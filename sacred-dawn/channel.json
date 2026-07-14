@@ -1,7 +1,7 @@
 {
   "name": "sacred_dawn",
   "voice_id": "Elliot",
-  "style_suffix": "cinematic biblical epic, painterly oil-painting light, dramatic chiaroscuro, volumetric god-rays, warm gold and amber deepening to storm-grey and ash, weathered antiquity, fine atmospheric haze, reverent and majestic, deep shadow, faceless figures, no text, no modern elements, photoreal-painterly, 16:9",
+  "style_suffix": "cinematic biblical epic film still, photorealistic and grounded, epic mythic scale, ancient burnished bronze and weathered aged stone, the impossible rendered physically real and massive with weight and shadow, bright vivid exposure, high contrast, high dynamic range with crisp clean detail held in the shadows, sharp crisp focus, heavy atmospheric air with dust and drifting light, expressive faces, high production value, period-accurate ancient world, no modern architecture, no soft painterly haze, no murk, no muddy shadows, no washed-out wash, no glowing cartoon fantasy, no text, no modern elements, 16:9",
   "default_music_prompt": "Slow, reverent cinematic underscore for a sacred historical epic about creation, fall, and flood. Low sustained strings, a deep ambient drone, sparse distant choir and piano, occasional low brass swell. Majestic, mournful, awe-filled, restrained. No percussion, no melody that competes with a narrator. Builds grandeur and dread very slowly. Solemn and vast.",
   "base_canon": {},
   "upload": {
@@ -76,5 +76,6 @@
     "crossfade_seconds": 2,
     "level": 0.07
   },
-  "kling_count": 2
+  "kling_count": 2,
+  "image_model": "nano_banana_2"
 }
