@@ -1,0 +1,804 @@
+{
+  "beats": [
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient leather-bound book resting on a stone altar in a shaft of warm light inside a vast old chamber, dust drifting; a robed figure's hands reaching toward it (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A robed figure's hands reaching toward it (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient leather-bound book resting on a stone altar in a shaft of warm light inside a vast old chamber, dust drifting, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; an ancient leather-bound book resting on a stone altar in a shaft of warm light inside a vast old chamber, dust drifting, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme close on the book's cracked cover and metal clasps, warm light across it. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient stone monastery on a green Ethiopian mountainside in bright warm daylight, blue sky, sunlit peaks; a tiny robed monk on a ledge below the summit (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny robed monk on a ledge below the summit (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient stone monastery on a green Ethiopian mountainside in bright warm daylight, blue sky, sunlit peaks, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; an ancient stone monastery on a green Ethiopian mountainside in bright warm daylight, blue sky, sunlit peaks, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide aerial of the sunlit monastery on the green mountain, blue sky, warm light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Yellowed ancient pages of strange Ge'ez script warmly lit on a wooden table, a candle; an old scribe's hand on the open page (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. An old scribe's hand on the open page (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; yellowed ancient pages of strange Ge'ez script warmly lit on a wooden table, a candle, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; yellowed ancient pages of strange Ge'ez script warmly lit on a wooden table, a candle, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme macro of the ancient script, warm candlelight raking the ink. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great old Bible on a lectern in warm chamber light, a page being drawn away; a robed figure's hand pulling a page free (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A robed figure's hand pulling a page free (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a great old Bible on a lectern in warm chamber light, a page being drawn away, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a great old Bible on a lectern in warm chamber light, a page being drawn away, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "A single page drifting through warm light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A lone patriarch on a green sunlit ridge dissolving into a column of bright light rising to the sky; the small figure stepping into the light (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The small figure stepping into the light (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a lone patriarch on a green sunlit ridge dissolving into a column of bright light rising to the sky, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a lone patriarch on a green sunlit ridge dissolving into a column of bright light rising to the sky, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the pillar of bright light, green land below. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Vast Ethiopian highlands in bright warm daylight, green ridges, blue sky, mist in the valleys; a tiny caravan crossing a high green pass (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny caravan crossing a high green pass (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; vast Ethiopian highlands in bright warm daylight, green ridges, blue sky, mist in the valleys, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, stricken with grief and sorrow, reacting to the moment; vast Ethiopian highlands in bright warm daylight, green ridges, blue sky, mist in the valleys, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Sweeping wide of the sunlit green range under a huge blue sky. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. One ancient book in an iron chest inside a warmly lit monastery vault, a beam of light; a monk's hands unlocking the chest (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A monk's hands unlocking the chest (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; one ancient book in an iron chest inside a warmly lit monastery vault, a beam of light, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; one ancient book in an iron chest inside a warmly lit monastery vault, a beam of light, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight on the iron lock and chains, warm light glinting. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A traveler holding an ancient book aloft in a sunlit monastery doorway, bright daylight behind; the traveler small in the great doorway (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The traveler small in the great doorway (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a traveler holding an ancient book aloft in a sunlit monastery doorway, bright daylight behind, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a traveler holding an ancient book aloft in a sunlit monastery doorway, bright daylight behind, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Silhouette of the traveler in the bright doorway, the book raised. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Colossal winged figures descending through bright parting cloud onto a green mountain, blazing light behind, immense and physical; tiny figures on the green slope looking up (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny figures on the green slope looking up (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; colossal winged figures descending through bright parting cloud onto a green mountain, blazing light behind, immense and physical, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; colossal winged figures descending through bright parting cloud onto a green mountain, blazing light behind, immense and physical, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up at the enormous descending figures breaking bright cloud, real and massive. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient forge lit by warm fire, strange symbols on the walls, sparks; a robed figure receiving a glowing object (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A robed figure receiving a glowing object (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient forge lit by warm fire, strange symbols on the walls, sparks, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; an ancient forge lit by warm fire, strange symbols on the walls, sparks, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Close on hands exchanging a glowing object, warm firelight. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Enormous towering giants striding across a green sunlit plain, dust rising, blue sky; tiny villagers fleeing between the giants' feet (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny villagers fleeing between the giants' feet (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; enormous towering giants striding across a green sunlit plain, dust rising, blue sky, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; enormous towering giants striding across a green sunlit plain, dust rising, blue sky, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low ground angle up a colossal giant against blue sky, real and massive. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast green landscape with a great fissure of light splitting the ground toward the sky; a lone figure kneeling at the glowing rift (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A lone figure kneeling at the glowing rift (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vast green landscape with a great fissure of light splitting the ground toward the sky, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a vast green landscape with a great fissure of light splitting the ground toward the sky, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Overhead of the glowing fissure across the green land, tiny figure. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Four colossal radiant figures descending from a bright break in the sky over a green world; tiny people below looking up (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny people below looking up (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; four colossal radiant figures descending from a bright break in the sky over a green world, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; four colossal radiant figures descending from a bright break in the sky over a green world, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the four towering figures against a bright sky, light fanning down. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A lone figure carried upward through bright clouds into rings of light, the green earth shrinking below; the small silhouette rising through the light (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The small silhouette rising through the light (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a lone figure carried upward through bright clouds into rings of light, the green earth shrinking below, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a lone figure carried upward through bright clouds into rings of light, the green earth shrinking below, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Vertical composition up the ascending column of bright cloud and light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast celestial architecture of glowing chambers and gates in a starlit cosmic sky; a tiny witness at the threshold of the chambers (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness at the threshold of the chambers (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vast celestial architecture of glowing chambers and gates in a starlit cosmic sky, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a vast celestial architecture of glowing chambers and gates in a starlit cosmic sky, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the cosmic vaults receding into starlit depth, small figure at the gate. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal moon as a vast physical structure with gates and channels of pouring light, cool and bright; a tiny figure before the immense moon-structure (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the immense moon-structure (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a colossal moon as a vast physical structure with gates and channels of pouring light, cool and bright, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a colossal moon as a vast physical structure with gates and channels of pouring light, cool and bright, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the towering moon-structure, light pouring through its gates. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast hall of dim chambers stretching into shadow, one shaft of pale light; a lone robed figure walking into the hall (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A lone robed figure walking into the hall (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vast hall of dim chambers stretching into shadow, one shaft of pale light, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, stricken with grief and sorrow, reacting to the moment; a vast hall of dim chambers stretching into shadow, one shaft of pale light, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Deep perspective down the endless hall, pale light at the vanishing point. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vision of the last days - a bright burning horizon under a vast sky, ancient and cosmic; a tiny figure on a ridge witnessing it (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure on a ridge witnessing it (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vision of the last days - a bright burning horizon under a vast sky, ancient and cosmic, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a vision of the last days - a bright burning horizon under a vast sky, ancient and cosmic, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the burning horizon, one small silhouette against it. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient scroll of Genesis in warm light, a few glowing lines about a man who walked with God; a scribe's hand pointing to the lines (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A scribe's hand pointing to the lines (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient scroll of Genesis in warm light, a few glowing lines about a man who walked with God, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; an ancient scroll of Genesis in warm light, a few glowing lines about a man who walked with God, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Macro of the glowing lines on the scroll, warm light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A lone figure walking a green sunlit mountain path into a bright dawn sky, vast landscape; the small figure walking toward the light (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The small figure walking toward the light (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a lone figure walking a green sunlit mountain path into a bright dawn sky, vast landscape, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a lone figure walking a green sunlit mountain path into a bright dawn sky, vast landscape, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the figure tiny on the vast green path under a bright sky. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An empty green sunlit ridge where a figure once stood, a lingering column of fading light; the empty ground, footprints ending (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The empty ground, footprints ending (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an empty green sunlit ridge where a figure once stood, a lingering column of fading light, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, stricken with grief and sorrow, reacting to the moment; an empty green sunlit ridge where a figure once stood, a lingering column of fading light, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight on footprints ending in the grass, a fading shaft of light above. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient codex open in warm light, one passage glowing; a robed reader's hands on the codex (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A robed reader's hands on the codex (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient codex open in warm light, one passage glowing, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; an ancient codex open in warm light, one passage glowing, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Close on the single glowing passage, warm light, parchment. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A great sunlit library of ancient scrolls, one book carried into shadow; a hooded figure carrying the book away (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A hooded figure carrying the book away (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a great sunlit library of ancient scrolls, one book carried into shadow, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, stricken with grief and sorrow, reacting to the moment; a great sunlit library of ancient scrolls, one book carried into shadow, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the vast library in warm light, one small figure among the shelves. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A council of robed authorities around a great stone table in warm chamber light, one book at the centre; hooded figures gesturing over the book (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Hooded figures gesturing over the book (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a council of robed authorities around a great stone table in warm chamber light, one book at the centre, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a council of robed authorities around a great stone table in warm chamber light, one book at the centre, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle across the table at the ring of authorities, warm light on the book. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Rows of old Bibles on ancient shelves in warm light, one gap where a book is missing; a hand reaching into the empty gap (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A hand reaching into the empty gap (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; rows of old Bibles on ancient shelves in warm light, one gap where a book is missing, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; rows of old Bibles on ancient shelves in warm light, one gap where a book is missing, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight on the single gap between the volumes, dust in warm light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A remote Ethiopian cliff-church glowing warmly at golden hour, green mountains; a tiny monk at the church window (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny monk at the church window (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a remote Ethiopian cliff-church glowing warmly at golden hour, green mountains, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a remote Ethiopian cliff-church glowing warmly at golden hour, green mountains, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the lone cliff-church in golden light, green mountains, blue sky. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Ancient Ge'ez pages in warm candlelight, intricate script; an aged monk bent over the script (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. An aged monk bent over the script (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; ancient Ge'ez pages in warm candlelight, intricate script, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; ancient Ge'ez pages in warm candlelight, intricate script, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Macro of the flowing letters, warm candle glow. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A lone traveler descending a vast green mountain trail in bright dawn carrying a wrapped book; the small figure descending with the book (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The small figure descending with the book (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a lone traveler descending a vast green mountain trail in bright dawn carrying a wrapped book, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a lone traveler descending a vast green mountain trail in bright dawn carrying a wrapped book, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the tiny traveler on the green trail, bright dawn light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient book opened in a shaft of warm light, pages glowing as if waking; hands opening the book into the light (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Hands opening the book into the light (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient book opened in a shaft of warm light, pages glowing as if waking, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; an ancient book opened in a shaft of warm light, pages glowing as if waking, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Close on the opening pages catching warm light, glow spreading. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Colossal figures gathered on a green sunlit peak swearing an oath, bright light; tiny witnesses on the slope below (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny witnesses on the slope below (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; colossal figures gathered on a green sunlit peak swearing an oath, bright light, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; colossal figures gathered on a green sunlit peak swearing an oath, bright light, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the ring of colossal figures on the peak against bright sky. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Forbidden weapons and glowing star-charts on stone in warm firelight; a robed figure studying the symbols (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A robed figure studying the symbols (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; forbidden weapons and glowing star-charts on stone in warm firelight, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; forbidden weapons and glowing star-charts on stone in warm firelight, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Close on a glowing star-chart in firelight. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal giant looming over a tiny village at golden hour, warm light, immense; tiny villagers beneath the giant's shadow (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. Tiny villagers beneath the giant's shadow (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a colossal giant looming over a tiny village at golden hour, warm light, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a colossal giant looming over a tiny village at golden hour, warm light, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Silhouette of the towering giant against a golden sky, village below. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A vast ancient city under a warm hazy sky, sprawling, one shaft of judging light; a lone figure apart on a rooftop (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A lone figure apart on a rooftop (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a vast ancient city under a warm hazy sky, sprawling, one shaft of judging light, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a vast ancient city under a warm hazy sky, sprawling, one shaft of judging light, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the sunlit ancient city to the horizon, one shaft of light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A colossal wall of water rising over a green land under a bright dramatic sky, immense and physical; a tiny ark riding the swell (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny ark riding the swell (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a colossal wall of water rising over a green land under a bright dramatic sky, immense and physical, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; a colossal wall of water rising over a green land under a bright dramatic sky, immense and physical, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Aerial of the mountainous flood swallowing green land, a speck of an ark. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A lone figure at the edge of the earth where the sky meets a bright cosmic threshold of gates; the small figure at the luminous threshold (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The small figure at the luminous threshold (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a lone figure at the edge of the earth where the sky meets a bright cosmic threshold of gates, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a lone figure at the edge of the earth where the sky meets a bright cosmic threshold of gates, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the figure tiny at the cosmic edge, bright gates beyond. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. Vast celestial vaults where winds and storms are kept behind gates of light; a tiny witness before the wind-chambers (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny witness before the wind-chambers (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; vast celestial vaults where winds and storms are kept behind gates of light, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; vast celestial vaults where winds and storms are kept behind gates of light, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Low angle up the towering gates, light and cloud pouring through. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. A cosmic vision of a great throne of light over a bright burning world, immense; a tiny figure before the distant throne (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A tiny figure before the distant throne (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; a cosmic vision of a great throne of light over a bright burning world, immense, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, awestruck and wonderstruck, eyes wide with wonder, reacting to the moment; a cosmic vision of a great throne of light over a bright burning world, immense, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the blazing throne over the world, one small silhouette. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient hand writing by warm light on a great scroll, glowing words forming; the scribe-prophet's hand writing (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. The scribe-prophet's hand writing (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient hand writing by warm light on a great scroll, glowing words forming, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; an ancient hand writing by warm light on a great scroll, glowing words forming, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Macro of the glowing letters forming under the pen, warm light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. An ancient sealed scroll resting in warm light, dust of centuries; a hand reaching toward the sealed scroll (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A hand reaching toward the sealed scroll (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; an ancient sealed scroll resting in warm light, dust of centuries, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; an ancient sealed scroll resting in warm light, dust of centuries, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Close on the wax seal and cord, one beam of warm light. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Extreme wide shot. The ancient book closed on a stone altar in a fading shaft of warm light, vast chamber; a lone figure before the closed book (a lone anonymous figure, turned away or distant, no fixed identity), tiny and low, utterly dwarfed by the scale. Deep three-plane depth, epic mythic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide-medium shot. A lone figure before the closed book (an anonymous figure in three-quarter or profile, face partly seen, not a recurring character), larger in the lower frame; the ancient book closed on a stone altar in a fading shaft of warm light, vast chamber, looming huge above and behind. Strong depth, epic scale.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Tight reaction shot: an anonymous human face, gripped by fear and dread, wide-eyed with terror, reacting to the moment; the ancient book closed on a stone altar in a fading shaft of warm light, vast chamber, filling the background behind. A face we do not see again, not a fixed character. Emotion is the focal point.",
+      "motion_prompt": ""
+    },
+    {
+      "narration": "",
+      "image_prompt": "Wide of the small figure and the book in the vast warm chamber. Poster-grade hero composition, epic scale.",
+      "motion_prompt": ""
+    }
+  ]
+}
