@@ -18,7 +18,6 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 CANON = json.loads((HERE / "canon.json").read_text())["canon"]
-SUFFIX_HINT = "16:9"   # style_suffix is appended by the engine from channel.json -- never here
 
 
 # ---------------------------------------------------------------- probe slots
@@ -54,14 +53,12 @@ PROBE = [
 ]
 
 
-def expand(text: str) -> str:
-    """Expand {token} -> locked phrase, verbatim. Raise on unknown -- never render a guess."""
-    def sub(m):
-        k = m.group(1)
+def check_tokens(text: str, where: str) -> None:
+    """The engine expands. We only GATE -- every token must resolve, before spend.
+    _expand_canon raises at render time; this raises at authoring time, for free."""
+    for k in re.findall(r"\{(\w+)\}", text):
         if k not in CANON:
-            raise SystemExit(f"unknown setting token {{{k}}} -- add it to canon.json or fix the CSV")
-        return CANON[k]
-    return re.sub(r"\{(\w+)\}", sub, text)
+            raise SystemExit(f"{where}: unknown setting token {{{k}}} -- add it to canon.json")
 
 
 def load(block: int):
@@ -72,18 +69,25 @@ def load(block: int):
 
 
 def to_beat(row, index: int) -> dict:
+    """The schema `stills --beats` reads. Verified against cmd_stills, not inferred.
+
+      b["image_prompt"]          REQUIRED -- no .get(), a missing key is a KeyError
+      b.get("motion_prompt")     optional -> falls back to channel.json default_motion
+      b.get("narration", "")     optional
+
+    NOT the parse leg's schema (visual/mode/component/found_line) -- that is a different
+    artifact that happens to share the filename beats.json. Read the consumer, not a neighbour.
+
+    motion_prompt is deliberately OMITTED: motion is derived at PHASE 6 from
+    beat x variant x register, after the pick. Never authored here.
+
+    Tokens stay UNEXPANDED. _expand_canon runs inside cmd_stills on both prompts and
+    writes the expanded text into storyboard.json, so nothing downstream knows about canon.
+    One string, one place, verbatim by construction.
+    """
     return {
-        "index": index,
-        "mode": "A",
-        "component": None,
-        "payload": {},
         "narration": row["narration"],
-        "found_line": "",
-        "visual": expand(row["phenomenon"]),
-        "motion": "",              # derived at PHASE 6 from beat x variant x register -- never authored
-        "face_hold": False,
-        "silence_after": False,
-        "warnings": [],
+        "image_prompt": row["phenomenon"],
     }
 
 
@@ -101,6 +105,7 @@ def gate(rows, block):
             errs.append(f"b{block} beat {r['clip_index']}: empty visual")
         if re.search(r"\{(\w+)\}", r["narration"]):
             errs.append(f"b{block} beat {r['clip_index']}: TOKEN IN NARRATION -- that column is measured")
+        check_tokens(r["phenomenon"], f"b{block} beat {r['clip_index']}")
         if wc(r["narration"]) > 11:
             errs.append(f"b{block} beat {r['clip_index']}: {wc(r['narration'])} words > 11 ceiling")
     # sentence-span gate: words <= span * 11.9   (the REAL gate; the block total is a measurement)
@@ -125,7 +130,8 @@ def cmd_blocks():
         beats = [to_beat(r, i) for i, r in enumerate(rows)]
         out = HERE.parent / f"moon-b{block:02d}-finish"
         out.mkdir(exist_ok=True)
-        (out / "beats.json").write_text(json.dumps(beats, indent=2, ensure_ascii=False))
+        doc = {"canon": CANON, "beats": beats}
+        (out / "beats.json").write_text(json.dumps(doc, indent=2, ensure_ascii=False))
         wc = lambda s: len([t for t in s.split() if re.search(r"[A-Za-z0-9]", t)])
         w = sum(wc(r["narration"]) for r in rows)
         st = sum(int(r["variants"]) for r in rows)
@@ -141,11 +147,13 @@ def cmd_probe():
         row = next((r for r in rows if int(r["clip_index"]) == clip), None)
         if row is None:
             raise SystemExit(f"probe: block {block} has no beat {clip}")
+        check_tokens(row["phenomenon"], f"probe b{block}/{clip}")
         picked.append(to_beat(row, i))
         card.append(f"| {i:2d} | b{block}/{clip:02d} | {rule:14s} | {question} | |")
     out = HERE.parent / "moon-probe-finish"
     out.mkdir(exist_ok=True)
-    (out / "beats.json").write_text(json.dumps(picked, indent=2, ensure_ascii=False))
+    doc = {"canon": CANON, "beats": picked}
+    (out / "beats.json").write_text(json.dumps(doc, indent=2, ensure_ascii=False))
 
     from collections import Counter
     c = Counter(r for _, _, r, _ in PROBE)
