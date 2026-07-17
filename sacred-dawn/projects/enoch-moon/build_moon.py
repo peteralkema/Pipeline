@@ -34,6 +34,7 @@ BANNED_VISUAL = [
     "galaxy", "nebula",          # modern astronomy in a third-century text
     "luminous", "glowing", "faceless", "half-seen", "soft movement",   # the Final Hours pull
     "dusty library", "dust-filled",
+    "hieroglyph", "egyptian", "sun disk", "pharaoh", "obelisk",   # well #5, 17 Jul
 ]
 
 
@@ -200,18 +201,18 @@ def cmd_probe():
 
 
 REPROBE = [
-    # ROUND 2 -- the earth-drift fix. Round 1 killed the steampunk (8/8 clean) but
-    # "cut stone architecture" pulled ARCHAEOLOGICAL RUIN: blue sky, clouds, ground, horizon.
-    # ROOT CAUSE: the {heavens} token defined itself by NEGATION ("vast open air, no ground,
-    # no architecture") -- "open air" invites clouds, and "no architecture" contradicted every
-    # prompt written into it. A canon token must name what the place IS.
-    # THE RULE: the structure must always BE the moon. Curved limb, lunar rock, black airless
-    # space. Never free-floating architecture -- the moon is what makes the scale automatic.
-    (1, 18, "earth-drift", "Lunar surface to a BLACK horizon -- or a floating city in blue sky? (v2: floating city)"),
-    (2, 13, "earth-drift", "The whole curve of the moon, gateways limb to limb. (v2: a ruin colonnade)"),
-    (2, 29, "earth-drift", "Rank behind rank sunk in grey rock. (v2: a cliff of blocks under clouds)"),
-    (2, 32, "earth-drift", "A CRESCENT OF THE MOON GONE -- black space where rock should be. (v2: a collapsing building)"),
-    (2, 36, "earth-drift", "Torn out. Black emptiness between broken edges. (v2: two people at Palmyra)"),
+    # ROUND 3 -- humans out of {heavens}.
+    # FOUND 17 Jul: 4 of 5 wide shots WITH a man came back door-sized. The one WITHOUT was
+    # instantly planetary. The model sizes the object to the person -> diorama.
+    # THE CEILING ON THE HUMAN-SCALE RULE: "scale needs a human at the bottom of the frame"
+    # works mountain-to-city. At PLANETARY scale the witness destroys scale instead of setting it.
+    # The moon's own limb is the only reference that survives. TIGHT faces are exempt --
+    # a close-up has no scale reference to corrupt.
+    (1,  5, "no-human", "Gateway wider than the crater field -- or a door? (v3: man at the threshold)"),
+    (1,  6, "no-human", "Figure the size of a mountain range, BOTH dwarfed by the limb."),
+    (1, 16, "no-human", "Ranked openings running over the curve to a black horizon."),
+    (2, 27, "no-human", "Scale from CRATER FIELDS, not a witness."),
+    (2, 34, "no-human", "A crescent torn out. Black where rock should be. (best frame so far had no man)"),
 ]
 
 def cmd_reprobe():

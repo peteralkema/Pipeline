@@ -7,11 +7,11 @@ A literal-metaphor violation (3A.2) on the film's own central word.
 
 | # | beat | question | PASS/FAIL |
 |---|---|---|---|
-|  1 | b1/18 | Lunar surface to a BLACK horizon -- or a floating city in blue sky? (v2: floating city) | |
-|  2 | b2/13 | The whole curve of the moon, gateways limb to limb. (v2: a ruin colonnade) | |
-|  3 | b2/29 | Rank behind rank sunk in grey rock. (v2: a cliff of blocks under clouds) | |
-|  4 | b2/32 | A CRESCENT OF THE MOON GONE -- black space where rock should be. (v2: a collapsing building) | |
-|  5 | b2/36 | Torn out. Black emptiness between broken edges. (v2: two people at Palmyra) | |
+|  1 | b1/05 | Gateway wider than the crater field -- or a door? (v3: man at the threshold) | |
+|  2 | b1/06 | Figure the size of a mountain range, BOTH dwarfed by the limb. | |
+|  3 | b1/16 | Ranked openings running over the curve to a black horizon. | |
+|  4 | b2/27 | Scale from CRATER FIELDS, not a witness. | |
+|  5 | b2/34 | A crescent torn out. Black where rock should be. (best frame so far had no man) | |
 
 - [ ] zero gears, cogs, chains, rivets anywhere
 - [ ] mass and shadow held (Balrog)
