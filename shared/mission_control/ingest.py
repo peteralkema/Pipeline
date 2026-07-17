@@ -72,8 +72,32 @@ def validate_slug(slug: str) -> str | None:
 # Verify — the same checks the ante-machinam threshold one-liner runs
 # --------------------------------------------------------------------------
 
-def verify_beats(beats_path: Path) -> dict:
-    """Return {ok, beats, modes, wordless, no_visual}. ok=False on hard errors."""
+def _wordless_is_legal(channel_dir) -> bool:
+    """# [wordless] silence is legal when the channel declares timing_source=beatsheet
+
+    A wordless-spine channel (picture + score carry the story; VO is a sparse, removable
+    layer) has silent beats BY DESIGN. Its timing is declared in the beat-sheet, not
+    measured from narration, so it never enters build_audio_script's continuous-narration
+    doctrine. Absent that declaration, a wordless beat remains an authoring error.
+    """
+    if not channel_dir:
+        return False
+    try:
+        cfg_path = Path(channel_dir) / "channel.json"
+        if not cfg_path.is_file():
+            return False
+        return json.loads(cfg_path.read_text(encoding="utf-8")).get("timing_source") == "beatsheet"
+    except Exception:
+        return False   # unreadable config -> strict. Never relax a gate on an error.
+
+
+def verify_beats(beats_path: Path, channel_dir=None) -> dict:
+    """Return {ok, beats, modes, wordless, no_visual, wordless_ok}. ok=False on hard errors.
+
+    wordless beats are a hard error EXCEPT on a timing_source=beatsheet channel, where
+    they are legal and merely reported (the silent-beat inventory is craft information).
+    A Mode A beat with no VISUAL is a hard error on every channel.
+    """
     b = json.loads(beats_path.read_text())
     wordless = [x["index"] for x in b if not (x.get("narration") or "").strip()]
     no_visual = [x["index"] for x in b
@@ -81,11 +105,13 @@ def verify_beats(beats_path: Path) -> dict:
     modes = {}
     for x in b:
         modes[x.get("mode")] = modes.get(x.get("mode"), 0) + 1
+    wordless_ok = _wordless_is_legal(channel_dir)
     return {
-        "ok": not wordless and not no_visual,
+        "ok": (wordless_ok or not wordless) and not no_visual,
         "beats": len(b),
         "modes": modes,
         "wordless": wordless,
+        "wordless_ok": wordless_ok,
         "no_visual": no_visual,
     }
 
@@ -167,8 +193,9 @@ def create_project(script_text: str, slug: str, do_git: bool = True) -> dict:
         return {"ok": False, "stage": "parse",
                 "error": (parse.stdout + parse.stderr)[-600:] or "parse failed"}
 
-    # 4. verify — REFUSE on hard errors (wordless / missing VISUAL)
-    v = verify_beats(beats)
+    # 4. verify — REFUSE on hard errors (missing VISUAL always; wordless unless the
+    #    channel declares timing_source=beatsheet, where silence is by design)
+    v = verify_beats(beats, channel_dir=folder)
     if not v["ok"]:
         _safe_rmtree(project_dir)
         return {"ok": False, "stage": "verify",

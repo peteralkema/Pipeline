@@ -113,6 +113,13 @@ def _translate(ctx, engine_beats, index_json):
     t = ctx["t"]; py = ctx.get("py", sys.executable)
     cmd = [py, str(Path(ctx["shared"]) / "modea_beats.py"), ctx["beats_list_json"],
            "--out", engine_beats, "--map", index_json]
+    # [canon] hand the translator the channel config
+    # A reference-mode channel's VISUAL lines carry {tokens} that must expand via the
+    # channel's canon block; modea_beats.py emits it when handed the config. No config
+    # (or no canon in it) -> identical output to before, for every other channel.
+    _chcfg = Path(ctx.get("channel_dir") or ".") / "channel.json"
+    if _chcfg.is_file():
+        cmd += ["--channel-config", str(_chcfg)]
     if ctx["dry_run"]:
         t.info("[dry-run] would translate Synthetic beats → engine format + write index")
         t.detail(f"$ {' '.join(cmd)}")

@@ -80,10 +80,35 @@ def main():
     ap.add_argument("beats_json")
     ap.add_argument("--out", default="synthetic_modeA_beats.json")
     ap.add_argument("--map", default=None, help="index map output (default: <out stem>_index.json)")
+    ap.add_argument("--channel-config", default=None,
+                    help="channel.json; if it has a `canon` block it is emitted alongside "
+                         "the beats so the engine can expand {tokens}. Optional: without "
+                         "it the output is exactly as before.")
     args = ap.parse_args()
 
     beats = json.load(open(args.beats_json, encoding="utf-8"))
     beat_script, index_map = translate(beats)
+
+    # [canon] reference-mode channels carry their canon block through to the engine
+    # A {token} in a VISUAL attaches the character's reference images AND expands into
+    # the prompt. _expand_canon raises on an unknown tag, so a reference-mode channel
+    # MUST ship its canon. Absent a config (or a canon block) this is a no-op.
+    if args.channel_config:
+        try:
+            _cfg = json.load(open(args.channel_config, encoding="utf-8"))
+        except Exception as _e:
+            raise SystemExit(f"--channel-config could not be read ({args.channel_config}): {_e}")
+        _canon = _cfg.get("canon") or {}
+        if _canon:
+            _refmap = _cfg.get("reference_map") or {}
+            _missing = sorted(set(_refmap) - set(_canon))
+            if _missing:
+                raise SystemExit(
+                    f"reference_map token(s) with no canon entry: {_missing}. "
+                    "Every ref token must expand, or the engine halts at _expand_canon."
+                )
+            beat_script = {"canon": _canon, "beats": beat_script["beats"]}
+            print(f"canon block attached: {sorted(_canon.keys())}")
 
     map_path = args.map or (os.path.splitext(args.out)[0] + "_index.json")
     json.dump(beat_script, open(args.out, "w", encoding="utf-8"), indent=2, ensure_ascii=False)

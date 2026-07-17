@@ -204,7 +204,8 @@ def _render_chunk(chunk: str, prev_text: str, next_text: str,
           f"({len(chunk)} chars, {out_path.stat().st_size} bytes)", flush=True)
 
 
-def _concat_chunks(chunk_paths: list, out_path: Path) -> None:
+def _concat_chunks(chunk_paths: list, out_path: Path,
+                   min_total_duration: float = 1.0) -> None:
     with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
         for p in chunk_paths:
             f.write(f"file '{p.resolve()}'\n")
@@ -220,9 +221,14 @@ def _concat_chunks(chunk_paths: list, out_path: Path) -> None:
     finally:
         os.unlink(list_path)
     total_dur = _ffprobe_duration(out_path)
-    if total_dur <= 1.0:
+    # Dead air never ships. The FLOOR is caller-supplied because it depends on what is
+    # being rendered: a full-episode narration under 1s means the API returned garbage;
+    # a single VO line ("Beautiful.") is legitimately shorter than that. Default 1.0
+    # preserves the original behaviour for every narration caller.
+    if total_dur <= min_total_duration:
         raise ElevenLabsTTSError(
-            f"Concatenated voiceover is {total_dur:.2f}s — something is wrong, hard fail."
+            f"Concatenated voiceover is {total_dur:.2f}s "
+            f"(floor {min_total_duration:.2f}s) — something is wrong, hard fail."
         )
     print(f"  [elevenlabs] voiceover assembled: {out_path} ({total_dur:.1f}s)", flush=True)
 
@@ -251,7 +257,8 @@ def resolve_elevenlabs_config(channel_config: dict) -> dict:
     }
 
 
-def generate_voiceover_elevenlabs(text: str, out_path, channel_config: dict) -> str:
+def generate_voiceover_elevenlabs(text: str, out_path, channel_config: dict,
+                                  min_total_duration: float = 1.0) -> str:
     """
     The provider entry point the engine delegates to.
 
@@ -279,7 +286,7 @@ def generate_voiceover_elevenlabs(text: str, out_path, channel_config: dict) -> 
                       cpath, i + 1, total)
         chunk_paths.append(cpath)
 
-    _concat_chunks(chunk_paths, out_path)
+    _concat_chunks(chunk_paths, out_path, min_total_duration=min_total_duration)
     return str(out_path)
 
 

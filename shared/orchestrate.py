@@ -20,6 +20,7 @@ import audio_leg
 import modeb_leg
 import modea_leg
 import convergence_leg
+import wordless_leg
 
 
 def parse_args():
@@ -160,15 +161,26 @@ def load_resolved_config(channel, project, t):
     return cfg, channel_dir
 
 
-def decide_legs(beats, t):
+def decide_legs(beats, t, cfg=None):
     """Scan composition → which legs fire. Pure logic; logs each decision (teaching lines)."""
     modes = [b.get("mode") for b in beats if isinstance(b, dict) and "mode" in b]
     has_a = "A" in modes
     has_b = "B" in modes
     has_lock = any(b.get("lock") or b.get("lipsync") for b in beats if isinstance(b, dict))
 
-    legs = ["audio"]  # always — timing source
-    t.decision("audio leg WILL run (always — it is the timing source)")
+    # [timing_source] wordless-spine channels skip the audio leg
+    # "narration" (or absent) -> the audio leg is the timing source, as always.
+    # "beatsheet"             -> timing is declared per beat; the wordless legs write
+    #                            durations.json + voiceover.mp3. See wordless-vo-wiring-spec.md.
+    timing_source = (cfg or {}).get("timing_source", "narration")
+    if timing_source == "beatsheet":
+        # [wordless] the wordless leg replaces the audio leg as the timing source
+        legs = ["wordless"]
+        t.decision("timing_source=beatsheet → audio leg SKIPPED; WORDLESS leg WILL run "
+                   "(timing is declared in the beat-sheet; VO is a sparse layer)")
+    else:
+        legs = ["audio"]  # always — timing source
+        t.decision("audio leg WILL run (always — it is the timing source)")
 
     if has_b:
         legs.append("modeB")
@@ -240,7 +252,7 @@ def main():
         t.info(f"channel folder → {channel_dir}/  (legs will run here; you stay in repo root)")
 
     t.phase("DECIDE LEGS (composition scan)")
-    legs, modes = decide_legs(beats, t)
+    legs, modes = decide_legs(beats, t, cfg)
 
     t.phase("PLAN")
     t.info(f"legs to run, in order: {' → '.join(legs)}")
@@ -281,6 +293,17 @@ def main():
         from gate_protocol import init_job, set_phase
         init_job(_job_id, channel, args.project, ctx["repo_root"])
         t.info(f"gate-mode=job · job_id={_job_id}")
+
+    # ── 3a-w: WORDLESS LEG (wired) — audio leg's sibling for beatsheet channels ──
+    if "wordless" in legs:
+        if proj_dir is None:
+            t.halt("cannot run wordless leg — channel/project unresolved "
+                   "(need channel.json + --project).")
+            sys.exit(1)
+        wl = wordless_leg.run_wordless_leg(ctx)
+        if wl is None:
+            t.halt("wordless leg halted. Fix the reported issue and re-run.")
+            sys.exit(1)
 
     # ── 3a: AUDIO LEG (wired) ─────────────────────────────────────────────
     if "audio" in legs:
@@ -344,7 +367,7 @@ def main():
             sys.exit(1)
 
     # ── legs not yet wired (step 5) ───────────────────────────────────────
-    pending = [l for l in legs if l not in ("audio", "modeB", "modeA", "convergence")]
+    pending = [l for l in legs if l not in ("audio", "wordless", "modeB", "modeA", "convergence")]
     if pending:
         t.phase("LEGS NOT YET WIRED")
         for l in pending:

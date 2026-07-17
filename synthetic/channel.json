@@ -5,8 +5,8 @@
   "register": "third-person documentary narration, restrained and authoritative; people are seen, not heard",
   "width": 1280,
   "height": 720,
-  "style_suffix": "cinematic film still, photorealistic, restrained documentary realism, muted desaturated color grade, ash grey and pale amber, cold steel blues in interiors, natural available light, soft directional light with rich detail in shadows, high dynamic range, sombre and still, high production value, sharp focus, crisp detail, full-frame 16:9 composition, no letterboxing, no black bars, no text, no letters",
-  "default_music_prompt": "Restrained, tense cinematic underscore for a prestige documentary about technology, ambition and power. A low sustained synth drone, sparse piano, faint pulse of unease. Modern and controlled \u2014 not orchestral-melodramatic. Builds quiet tension under a narrator without ever competing with the voice. Cool, intelligent, foreboding.",
+  "style_suffix": "cinematic catastrophe blockbuster film still, photorealistic and grounded, rich chromatic teal-and-orange colour grade, deep steel blues and warm firelight, bright vivid exposure, high contrast, high dynamic range with crisp detail held in the shadows, clean directional light, epic Bay-Woo trailer-grade energy and scale, sharp crisp focus, gritty realistic texture, high production value, no soft muted haze, no desaturated wash, no murk, no muddy shadows, no dull flat lighting, no text, no letters, 16:9",
+  "default_music_prompt": "Restrained, tense cinematic underscore for a prestige documentary about technology, ambition and power. A low sustained synth drone, sparse piano, faint pulse of unease. Modern and controlled — not orchestral-melodramatic. Builds quiet tension under a narrator without ever competing with the voice. Cool, intelligent, foreboding.",
   "base_canon": {},
   "notes": "Synthetic Press flagship. AI-documentary, 'AI-drama not AI-doom'. Palette: navy #0a1628, amber #d4a017, bone #f4f1ea, rust #8b3a1e. Two-mode visuals: Mode A cinematic recreation (this engine) + Mode B Remotion graphics. Voice Victor as placeholder; real human-voice swap via finish --assemble-only true-up. Renders 1920x1080 to match Mode B. Created June 2026, OpenAI series launch.",
   "tts_provider": "elevenlabs",
@@ -25,7 +25,7 @@
     "candidate_prompt_suffix": "YouTube thumbnail composition, strongly asymmetric: the single atmospheric subject (a dark lighthouse, an empty ship, a frozen wreck, an eruption across a bay) is massed in the RIGHT TWO-THIRDS of the frame; the LEFT THIRD is deliberately dark, shadowed, low-detail negative space reserved for a headline; mournful cinematic dread, deep shadow, cold muted palette, the subject lit against the dark left; faceless, no people in detail, no text, no letters",
     "selection_rules": [
       "ONE clear atmospheric subject that reads instantly at phone-thumbnail size",
-      "mournful, high-contrast cinematic dread \u2014 it must stand out in a dim feed without being loud",
+      "mournful, high-contrast cinematic dread — it must stand out in a dim feed without being loud",
       "faceless: no resolved human faces, no figures in detail",
       "clean, darker, uncluttered negative space in the TOP-LEFT where the headline lands",
       "no garbled detail, no accidental letterforms, no duplicated or broken figures, one subject only"
@@ -81,5 +81,6 @@
     "segment_foreground": false
   },
   "_style_suffix_gettysburg": "epic cinematic blockbuster film still, photorealistic, dramatic teal and orange color grade, vivid saturated color, intense dramatic lighting, bright vivid exposure with rich detail in shadows, high dynamic range, anamorphic lens flare, crisp and dynamic, lots of light and energy, high production value, sharp focus, crisp detail, full-frame 16:9 composition, no letterboxing, no black bars, no text, no letters",
-  "_default_motion_gettysburg": "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere"
+  "_default_motion_gettysburg": "dynamic cinematic camera movement, powerful momentum, natural realistic motion, dramatic atmosphere",
+  "image_model": "nano_banana_2"
 }
