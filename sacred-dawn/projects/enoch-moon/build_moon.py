@@ -19,6 +19,23 @@ from pathlib import Path
 HERE = Path(__file__).parent
 CANON = json.loads((HERE / "canon.json").read_text())["canon"]
 
+# BANNED IN image_prompt -- gravity wells found by probe, 17 Jul.
+#
+# "machine" is this film's METAPHOR. _LEGO.md 3A.2: "No literal-metaphor beats. Models
+# render metaphors as corny props." The model rendered `mechanism` as VICTORIAN CLOCKWORK --
+# gears, chains, rivets, an orrery. Magnificent mass, wrong millennium.
+#
+# THE RESOLUTION: the NARRATION says machine. The IMAGE never renders one.
+# Enoch describes gates, portions, storehouses -- ARCHITECTURE. Render cyclopean cut stone,
+# ranked megalithic openings, nothing moving. The viewer supplies the word.
+BANNED_VISUAL = [
+    "machine", "machinery", "mechanism", "mechanical", "machined",
+    "gear", "cog", "clockwork", "brass", "rivet", "chain", "orrery", "piston", "industrial",
+    "galaxy", "nebula",          # modern astronomy in a third-century text
+    "luminous", "glowing", "faceless", "half-seen", "soft movement",   # the Final Hours pull
+    "dusty library", "dust-filled",
+]
+
 
 # ---------------------------------------------------------------- probe slots
 # PHASE 3 selection procedure -- run per slot, first rule that fires claims it.
@@ -106,6 +123,9 @@ def gate(rows, block):
         if re.search(r"\{(\w+)\}", r["narration"]):
             errs.append(f"b{block} beat {r['clip_index']}: TOKEN IN NARRATION -- that column is measured")
         check_tokens(r["phenomenon"], f"b{block} beat {r['clip_index']}")
+        for w in BANNED_VISUAL:
+            if re.search(rf"\b{w}", r["phenomenon"], re.I):
+                errs.append(f"b{block} beat {r['clip_index']}: BANNED VISUAL '{w}' -- see BANNED_VISUAL")
         if wc(r["narration"]) > 11:
             errs.append(f"b{block} beat {r['clip_index']}: {wc(r['narration'])} words > 11 ceiling")
     # sentence-span gate: words <= span * 11.9   (the REAL gate; the block total is a measurement)
@@ -179,8 +199,40 @@ def cmd_probe():
     print(f"  verdict card -> {verdict}")
 
 
+REPROBE = [
+    (1,  1, "novel",   "Gates HEWN INTO the moon, or ornate doors glued on? (v1: collage)"),
+    (1, 18, "novel",   "Cyclopean cut stone -- or clockwork again? (v1: steampunk gears)"),
+    (1, 20, "novel",   "Figures the size of TOWERS, mountain dwarfed? (v1: geese in a V)"),
+    (2, 13, "novel",   "World-sized masonry, nothing moving? (v1: gears + a galaxy)"),
+    (2, 21, "novel",   "THE KILLER SHOT -- gates on the LIMB, not windows on the disc. (v1: hotel windows)"),
+    (2, 29, "novel",   "Rank behind rank receding -- more than has been seen? (v1: steampunk)"),
+    (2, 32, "novel",   "SHEARED AWAY -- absence, or just an aperture? (v1: a doorway)"),
+    (2, 36, "novel",   "Torn out. Emptiness in the middle. (v1: read as an opening)"),
+]
+
+def cmd_reprobe():
+    picked, card = [], []
+    for i,(block,clip,rule,q) in enumerate(REPROBE):
+        row = next(r for r in load(block) if int(r["clip_index"])==clip)
+        check_tokens(row["phenomenon"], f"reprobe b{block}/{clip}")
+        picked.append(to_beat(row, i)); card.append(f"| {i+1:2d} | b{block}/{clip:02d} | {q} | |")
+    out = HERE.parent / "moon-reprobe-finish"; out.mkdir(exist_ok=True)
+    (out / "beats.json").write_text(json.dumps({"canon": CANON, "beats": picked}, indent=2, ensure_ascii=False))
+    (HERE / "REPROBE-CARD.md").write_text(
+        "# Re-probe — the steampunk fix\n\n"
+        "**FOUND 17 Jul:** `mechanism` in an image_prompt renders as Victorian clockwork.\n"
+        "A literal-metaphor violation (3A.2) on the film's own central word.\n\n"
+        "**THE FIX:** narration says machine; the image renders cyclopean cut stone, nothing moving.\n\n"
+        "| # | beat | question | PASS/FAIL |\n|---|---|---|---|\n" + "\n".join(card) +
+        "\n\n- [ ] zero gears, cogs, chains, rivets anywhere\n- [ ] mass and shadow held (Balrog)\n"
+        "- [ ] the descending host reads COLOSSAL\n- [ ] the gap reads as ABSENCE, not an aperture\n")
+    print(f"  {len(picked)} stills -> {out}/beats.json | ${len(picked)*0.08:.2f}")
+    print(f"  card -> {HERE}/REPROBE-CARD.md")
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
     if cmd == "blocks": cmd_blocks()
     elif cmd == "probe": cmd_probe()
+    elif cmd == "reprobe": cmd_reprobe()
     else: raise SystemExit(__doc__)
