@@ -7,14 +7,11 @@ A literal-metaphor violation (3A.2) on the film's own central word.
 
 | # | beat | question | PASS/FAIL |
 |---|---|---|---|
-|  1 | b1/01 | Gates HEWN INTO the moon, or ornate doors glued on? (v1: collage) | |
-|  2 | b1/18 | Cyclopean cut stone -- or clockwork again? (v1: steampunk gears) | |
-|  3 | b1/20 | Figures the size of TOWERS, mountain dwarfed? (v1: geese in a V) | |
-|  4 | b2/13 | World-sized masonry, nothing moving? (v1: gears + a galaxy) | |
-|  5 | b2/21 | THE KILLER SHOT -- gates on the LIMB, not windows on the disc. (v1: hotel windows) | |
-|  6 | b2/29 | Rank behind rank receding -- more than has been seen? (v1: steampunk) | |
-|  7 | b2/32 | SHEARED AWAY -- absence, or just an aperture? (v1: a doorway) | |
-|  8 | b2/36 | Torn out. Emptiness in the middle. (v1: read as an opening) | |
+|  1 | b1/18 | Lunar surface to a BLACK horizon -- or a floating city in blue sky? (v2: floating city) | |
+|  2 | b2/13 | The whole curve of the moon, gateways limb to limb. (v2: a ruin colonnade) | |
+|  3 | b2/29 | Rank behind rank sunk in grey rock. (v2: a cliff of blocks under clouds) | |
+|  4 | b2/32 | A CRESCENT OF THE MOON GONE -- black space where rock should be. (v2: a collapsing building) | |
+|  5 | b2/36 | Torn out. Black emptiness between broken edges. (v2: two people at Palmyra) | |
 
 - [ ] zero gears, cogs, chains, rivets anywhere
 - [ ] mass and shadow held (Balrog)
