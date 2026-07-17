@@ -1,9 +1,9 @@
 # _LEGO.md
 ### The single pathway for cinematic feature films — Sacred Dawn · Scripture On Screen · Synthetic Press
 
-**Supersedes:** `_LEGO-FEATURE-FILM.md`, `_MOTION-DOCTRINE.md`, `_MOTION-VETO.md`, `_SCRIPT-CONTRACT.md`.
+**Supersedes:** `_LEGO-FEATURE-FILM.md`, `_MOTION-DOCTRINE.md`, `_MOTION-VETO.md`, `_SCRIPT-CONTRACT.md` (§5 narrative + §6 visual absorbed into §3A, 17 Jul — **with its genre overlays scrubbed; they were pre-pivot and carried the Final Hours register**).
 **Does NOT supersede:** `<channel>/DOCTRINE.md` — grade, register, banned words, slate. Those are **config**. This is **code**.
-**Status:** proven end-to-end on Sacred Dawn / *The Book of Enoch* (30 min, 10 blocks, 15 Jul 2026). Timing model rebuilt and measured 17 Jul 2026.
+**Status:** proven end-to-end on Sacred Dawn / *The Book of Enoch* (30 min, 10 blocks, 15 Jul 2026). Timing model rebuilt and measured 17 Jul 2026. Authoring contract folded in 17 Jul 2026.
 
 > **This pathway is channel-agnostic.** Everything here is true of all three movie channels. Channels differ by `channel.json` only — never by code path.
 
@@ -110,6 +110,97 @@ One row per clip. Flat, ordered, and the single source of sequence.
 - **Symmetry lives in the table, not the filesystem.** `variants: 2` means two files exist. **Never write blank placeholder stills** — a blank collapses "never requested" and "generation failed" into one artifact, and you cannot tell which by looking. With no blanks the invariant is checkable: table says 4, three files exist → gate fails loudly.
 - **Log the seed.** Free today, impossible retroactively. Without beat → variant → seed → clip → timestamp, repairing block 5 after assembly means re-picking, and the table's authority leaks.
 - **The table is the bill of materials.** Rows × variants = still calls. It gives an exact pre-spend cost, not an estimate — and it makes the two dials (hero/connective split, Ken Burns fraction) visible while it's still text. *Caveat: pick hours are not in it, and they are the scarce resource. And it's a floor — a failed gate doubles a block.*
+
+---
+
+## 3A. AUTHORING THE COLUMNS
+
+*Recovered from `_SCRIPT-CONTRACT.md` 17 Jul. §3 defines the columns; this governs what goes in them. `motion` is §7. Prescriptive — there is no interpretation.*
+
+### 3A.1 · `narration`
+
+> **★ THE OPENING LAW — the highest-leverage rule in the contract.**
+> The title makes a promise. The thumbnail amplifies it. **The opening fulfils it in the first frame.** Never delay, never explain first.
+> **Open on impact, never on history.** "The Day Jerusalem Fell" → open on Jerusalem burning. A disaster film → open on the sky already on fire, the hand already on the lever — **not** two men writing a letter. Maximum intensity from frame one. No warm-up, no "today we're going to," no throat-clearing. **Drop the viewer into Act III of an epic already in motion.**
+> Structure is free to flash back *after* the peak.
+
+> **Reconciling the Opening Law with the block structure (§8).** They look contradictory — "impact frame one" against "block 1 is the object, payload at minute six" — and they are not. **The COLD OPEN is the impact opening.** It carries the Opening Law entire: 45–90s, maximum intensity, cut from the best shot of every block, planting the film's biggest loop. Block 1 then opens on the object, block 2 builds authority, the payload lands at block 3. **The cold open buys the right to be patient.** Without it, block 1 must carry the Opening Law itself — and an object-open with no cold open in front of it is the 2–3% cliff.
+
+**THE CURIOSITY ENGINE.** Never answer a question without opening a larger one. **Curiosity never reaches zero.** Run the loop: question → hint → partial answer → twist → larger question → higher stakes → reward → repeat. **Keep an open-loop stack** — several unanswered questions live at once; as one closes, another opens. **Reveal less, imply more** — information reduces curiosity, discovery increases it. Reveal a fact only when it creates *more* questions. **Never dump facts.** End every section on a lean-forward. **Every 30 seconds is its own trailer** — nothing exists purely to explain.
+
+**ESCALATION — every 20–40 seconds.** The audience must FEEL something every 20–40s. **At 5.000s per beat that is every 4–8 rows — countable in the table.** Rotate states: wonder, fear, hope, shock, awe, relief, disbelief, tension, triumph, reflection. **Every section increases at least one of** scale, danger, mystery, consequence, emotion, urgency, human cost. **If none increase — rewrite.**
+Rhythm and contrast: large → small intimate → reflection → escalation → silence → explosion. **Never hold one tempo. Constant loudness goes invisible.** Pair opposites — big/small, hope/despair, silence/chaos, order/collapse.
+
+> **Pace is WORD DENSITY, not clip length.** The contract's shot-length texture (2–4s escalation · 3–6s emotional · 6–10s awe) **cannot survive the fixed 5.000s grid — and does not need to.** A hero beat takes 6 words and a second of air; a rapid sequence carries 13. **The bounded word budget (§4) IS the pace instrument.** Equal words per beat would flatten it — which is why the budget is bounded, never equal.
+
+**THE HUMAN LENS.** People move people, not statistics. **Anchor every epic event through one individual.** Scale-shift constantly: individual → family → city → nation → civilisation. **Disaster is never a number** — show consequence: families, empty streets, ash, the silence afterward.
+
+**THE SENTENCE.** **Visual narration only** — not "many people died" but "a city where even the birds had stopped singing." **One unforgettable trailer line every few paragraphs.** Immersion is sensory: sight, sound, smell, temperature, dust, wind, silence. **Narrate like a witness, not an encyclopedia** — conviction, not hedging.
+
+> **★ PROSODY — NON-NEGOTIABLE, AND LOAD-BEARING FOR §4.**
+> *The narration is not read — it is spoken. Punctuation is prosody control. It decides whether the voice sounds broadcast or robotic — and it decides what whisper measures.*
+> - **Kill the see-saw. Dampen full stops.** Consecutive periods make the voice fall to a terminal pitch again and again — the read pumps up-and-down. **Replace most periods with em-dashes and commas** so the voice holds a continuation contour. **Reserve the full stop for a deliberate, weighted landing — then it means something.**
+>   - *See-saw:* "The sky went black. The men advanced. Nobody moved. It was too late." → four terminal falls.
+>   - *Flowing:* "The sky went black as the men advanced — and nobody moved, because it was already too late." → one contour, one landing.
+> - **Spell every number out.** "Twelve thousand," never "12,000." Digits get mangled by the voice. *(Digits are fine in a VISUAL line — that's for the image, not the voice.)*
+> - **Write for the breath.** Read each line aloud in your head. If you stumble, the voice will. **Punctuation is where the voice breathes; place it on purpose.**
+>
+> **Why this belongs to the timing model, not just the craft.** §4's delta pass measures the *rendered* audio. Prosody decides how it renders — a see-saw script produces terminal falls where you budgeted flow, and the deltas fight you. **The em-dash and the `<break>` are the same instrument at two scales:** the dash shapes the contour inside a sentence, the break buys silence between them. **A prosody-clean script converges in two passes. A see-saw script doesn't converge.**
+
+**TRUTH.** Prove extraordinary claims immediately. **Never exaggerate** — reality is already extraordinary. **Alternate story and fact** — story → fact → story → reveal → emotion. Never long explanatory blocks. *(Attribution discipline: `_CHANNELS.md §0.4`. It binds absolutely and it is what makes the aggression safe.)*
+
+**THE FINAL TEST.** Every paragraph must increase at least one of: curiosity, emotion, danger, mystery, consequence, beauty, awe, scale, urgency. **If it does none — cut it.**
+> **Promise · Prove · Escalate · Reveal · Complicate · Reward · Escalate again. Never coast. Never plateau.**
+
+### 3A.2 · `phenomenon` (the VISUAL)
+
+> **★ THE VARIETY LAW — the top visual rule; everything below serves it.**
+> **No two consecutive beats may share framing, angle, scale, or pace.** Every beat differs from the one before on **at least one axis**: high/low, close/far, wide/tight, warm/cold, loud/still, subject/environment. **Repetition is invisibility — the eye stops seeing what stops changing.**
+> Rotate every axis across the film: extreme-wide → wide → medium → close → extreme-close and back; eye-level → low → high; warm → cold. **Never settle into a groove.**
+> **The guardrail: variety is motivated, never mechanical.** Cut wide because the narration *widened*, low because the moment gained *power*. **Timer-driven variety is the metronome problem in a different costume.** *(Same law as §7's motion derivation — and this is why: shot variety IS motion variety, because the move is read off the shot.)*
+
+> ### ★★ EVERY BEAT NAMES ITS OWN LIGHT — THE MISSING HALF OF THE PALETTE-ONLY GATE
+> **The model defaults dark and murky when light is left unspecified. An unlit prompt renders muddy.**
+> PHASE 1 strips light from the `style_suffix` because a welded light source is a blanket (§0). **That removal is only half the fix.** Light does not disappear — it **moves to the beat**, where content earns it. Every beat names its scene light: *clear gold dawn · blazing clean afterglow · vivid twilight · bright parting cloud · firelit interior.*
+> **Strip the blanket and skip this rule and the murk comes back by a different road.** The suffix carries palette; the beat carries light. Both, always.
+> *(Live risk on Sacred Dawn as of 17 Jul: the god-ray clause is correctly gone from the suffix, and there is now NO light instruction anywhere unless the beats supply it. **Gate the beat table on it.**)*
+
+**NEGATIONS GROW FROM EVIDENCE, NEVER SPECULATION.** Add a negative ("no murk," "no modern objects") only for a failure class **you have actually seen render wrong.** Speculative negation vetoes the model's best output. Do not pre-emptively ban what hasn't gone wrong.
+
+**COMPOSITION.** **Depth always** — foreground, midground, background. Never one flat plane. **A hero shot every 20–30s** — one composition that could be a poster; the viewer should remember individual frames. **Strong silhouettes.** **Faces retain** — eyes create emotion; when emotion matters, move closer. **Angle with intent:** eye-level = honesty (use most) · low = power (kings, giants, angels, walls of fire) · high = vulnerability (victims, ruins, isolation).
+
+> **⭐ SCALE NEEDS A HUMAN FACE AT THE BOTTOM OF THE FRAME — the signature move, all three channels.**
+> Spectacle reads as *majestic* rather than merely big when one small human witnesses it: the vast event filling the frame above and behind, one weathered face or lone silhouette dwarfed beneath. **Never render the fireball, the flood, the collapsing city alone.** The awe lives in the size difference. This is the visual form of the Human Lens — **and the one move the spray-and-pray incumbents skip.**
+>
+> **🔴 THIS RULE IS FOR FILM FRAMES. IT IS FALSE FOR THUMBNAILS.**
+> At 120px the dwarfed human vanishes and the frame reads as texture. Sacred Dawn's doctrine applied it to thumbnails and produced **1.9%**; Scripture had already proven the dwarfed hero loses at feed size. **Dwarf in the wide. Never in the thumbnail.** See `_CHANNELS.md §0.2`.
+
+> **⭐ A SPECTACLE IS A SEQUENCE OF HERO SHOTS, NEVER ONE COMPOSITE FRAME.**
+> The instinct is to cram the whole miracle — the fire, the altar, the prophet, the crowd — into one image. **It always fails:** the phenomenon shrinks to a prop (fire on an altar reads as a campfire) and nothing is a hero shot.
+> **Stage the moment across several beats, each a distinct hero frame:** the phenomenon gets its **own** beat with nothing else in it (the column of fire tearing down from a hole in black cloud — no altar, no man), then the strike, then the human reaction, then the aftermath.
+> *Render-proven on the Mount Carmel cold open: the composite read as a campfire; the six-beat sequence read as a scene.*
+
+> **★ SETTING CONTINUITY — the locked place-phrase.**
+> The `canon` block locks WHO. **This locks WHERE.** Place drifts exactly like an unlocked character and it is just as visible. A scene rendered as independent stills will invent several locations — a canyon in one beat, a bare plateau in the next — each internally fine, none agreeing on where we are. **It is the single most common way a multi-shot scene falls apart, and the fix is pure authoring.**
+> - **Write the setting once as a locked phrase** — terrain, material, defining features, explicit negatives. *"the bare rocky summit of Mount Carmel — pale weathered stone, dry scrub, scattered grey boulders, open wilderness, no buildings, no city, no structures."*
+> - **Paste that exact phrase into every beat in the scene. VERBATIM REPETITION IS THE MECHANISM** — the same way an identical `{token}` re-attaches an identical face. **Do not paraphrase beat to beat.**
+> - **Add explicit negatives for what the model wrongly adds.** "Biblical" pulls toward "ancient city," so a wilderness scene must say *no buildings, no city.* **The model omits nothing unless told.**
+> - **Let framing vary; keep the identity fixed.** A looking-up shot shows sky, a wide shows the valley — that detail changes per beat; the locked phrase stays word-for-word.
+> - **A new setting = a new locked phrase.** One phrase per location, held for the length of the scene.
+>
+> **Honest limit (render-learned):** the phrase is a real **reduction, not a cure** — a canyon still crept into one shot of a locked-summit scene. The true fix is a locked setting **image**: a `reference_style_anchor` plate attached to every beat, so place is reference-anchored the way a face is. **Same $0.08 edit-path mechanism the character refs already use, currently read-but-unwired in the engine. A priority build, not a someday.**
+
+**DRIFT CONTROL — non-negotiable.** One primary motion per beat plus subtle ambient. **Never everything moving equally — simultaneous complex motion is the #1 hallucination cause.** **Lock the subject, move the camera.** **The subject moves *less*** — large exaggerated body movement increases errors; let cloth, smoke and dust carry it. **Consistency:** same clothing, age, facial structure, hair, direction of travel across a character's beats. **Simple beats complex** — one elegant move looks more expensive than five competing ones.
+
+> **★ CUT BEFORE FAILURE. Clips are strongest in their opening moments. End early — the audience remembers quality.**
+> **This is the craft reason for §4's trim.** `-frames:v 120` drops the *tail* frame, never the head. Arithmetic wanted a uniform grid; craft wanted the tail gone. **They agree, and the trim is free.** *(It is also why trim-never-pad: a freeze-frame is the failure the rule exists to prevent.)*
+
+**PROMPTS CARRY ZERO GRADE WORDS.** The look lives in `channel.json`'s `style_suffix`. **Per-beat light is CONTENT and belongs in the beat** (see above) — grade is not. **No literal-metaphor beats:** no keys, globes, hearts, scales. Models render metaphors as corny props and anachronisms. **Render the consequence, not the metaphor.**
+
+**Write phenomena with real verbs** — descends, towers, spreads, waits. The beat text drives the register classifier and the motion derivation (§7); a verbless beat derives nothing.
+
+**THE CINEMATIC TEST.** Pause on any frame. **Could it be mistaken for a still from a $200M feature?** If not — fix composition, light, depth, colour, silhouette, placement, negative space.
+> **The audience should think "I feel like I'm there," never "look at the animation." The camera is not the hero. The story is.**
 
 ---
 
@@ -443,14 +534,19 @@ From the best clip of each block. No new renders.
 **Before stills (~$8/block):**
 - [ ] packaging done — title + thumbnail exist
 - [ ] `style_suffix` = palette only, no welded light/shafts/shadow
+- [ ] **every beat names its own scene light** (§3A.2 — the other half of the palette-only gate; an unlit prompt renders muddy)
+- [ ] **locked place-phrase written per setting, pasted VERBATIM into every beat in the scene**
 - [ ] `image_model: nano_banana_2` verified **on the box**
 - [ ] verify screens **every** known-bad grade
 - [ ] register probe passed (spread across the axis)
 - [ ] any material change since last probe → **new probe**
 - [ ] beat table gate: ≤10 words/beat · ~380 words/block · sentences contiguous · hero/connective assigned
+- [ ] **narration prosody: em-dashes over full stops · every number spelled out · read aloud** (§3A.1 — a see-saw script will not converge in §4's delta pass)
+- [ ] **variety law: no two consecutive beats share framing, angle or scale**
+- [ ] **escalation countable: something changes every 4–8 rows**
 - [ ] fresh `-vN` folders
 - [ ] `--storyboard-only` sweep clean on all blocks
-- [ ] prompts: 0 empty · **0 grade-leak** · 100% ASCII · counts match `variants`
+- [ ] prompts: 0 empty · **0 grade-leak** · **0 literal metaphors** · 100% ASCII · counts match `variants`
 
 **Before Kling (~$17/block):**
 - [ ] carousel integrity: 40 picks · **no dupes · no missing** — every block
@@ -487,6 +583,10 @@ From the best clip of each block. No new renders.
 | Clips are 5s | **Clips are 5.041667s → trimmed to 5.000** | Measured. Kling ships 121 frames, non-deterministically. |
 | Compute chapters from `durations.json`, never estimate | **Chapters are arithmetic** | The drift is gone, so the estimate is now exact. |
 | Script is king | **Container king · table emperor · script a column** | The clip won; audio renders last. |
+| **Shot length 2–4s escalation / 3–6s emotional / 6–10s awe** | **pace is WORD DENSITY, bounded 6–13** | The 5.000s grid is fixed. The bounded word budget is the pace instrument — which is why it is bounded, never equal. |
+| **Genre overlay (apocryphal):** half-seen figures, soft movement, let imagination do part of the work | **the Balrog principle — render it physically real and massive** | The register cleanse hit three `channel.json` files and three channel docs and **never touched the shared authoring contract.** "Half-seen" is darkness-hides-model-weakness stated as craft. |
+| **Genre overlay (divine):** "reverence over spectacle" · "never reduce a miracle to spectacle" | **wonder and spectacle — "holy cow, look at THAT"** | Pre-pivot. `reverent` is a banned word on Sacred Dawn. Wonder is a magnet; doom is a downer. |
+| **Opening Law vs the block structure** — apparent contradiction | **the COLD OPEN carries the Opening Law; block 1 opens on the object** | The cold open buys the right to be patient. Both rules survive intact. |
 
 ---
 

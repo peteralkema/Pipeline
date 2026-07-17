@@ -18,7 +18,16 @@
 
 | | banned on sight | the vocabulary |
 |---|---|---|
-| **all three** | dread · reverent · solemn · grave · mournful · murk · painterly · golden-hour-wash · sepia · chiaroscuro · oil-painting · desaturated · muted · sombre | awe · wonder · spectacle · scale · thrill · adventure · epic · discovery · energy · bright · vivid · crisp |
+| **all three** | dread · reverent · solemn · grave · mournful · murk · painterly · golden-hour-wash · sepia · chiaroscuro · oil-painting · desaturated · muted · sombre · **half-seen · soft movement · "let imagination do part of the work"** | awe · wonder · spectacle · scale · thrill · adventure · epic · discovery · energy · bright · vivid · crisp |
+
+> ### 🔴 THE CLEANSE NEVER REACHED THE SHARED AUTHORING CONTRACT (found 17 Jul)
+> The de-Final-Hours scrub hit **three `channel.json` files and three channel docs** — and skipped `_SCRIPT-CONTRACT.md`, the channel-agnostic authoring doc that governed **all three**. Sweep of that file: **dread ×5 · reverence ×4 · murk ×4 · painterly ×2.**
+> Two clauses were live bugs, both in the genre overlays:
+> - **Apocryphal** *(i.e. Sacred Dawn)*: *"half-seen figures... soft movement. Let imagination do part of the work."* That is **darkness-hides-model-weakness stated as craft**, and it directly contradicts the Balrog principle. The doctrine said render it massive; the contract said keep it half-seen.
+> - **Divine**: *"reverence over spectacle"* · *"never reduce a miracle to spectacle."* Pre-pivot. `reverent` is a banned word and the register is "holy cow, look at THAT."
+>
+> **Both are scrubbed in `_LEGO.md §3A` and the overlays are retired.** This closes the 12 Jul one-pager's highest-priority unchecked item — *"confirm no remaining channel silently inherits it."* **The answer was: the shared contract did, for all three, invisibly, because no channel owned it.**
+> **The lesson generalises: a cleanse that sweeps configs and channel docs and skips the shared layer has not happened.** Check what is *upstream* of the thing you fixed.
 
 **Drama is earned by content, not stamped by grade.** The same sentence is true of faces, emotion, and the camera.
 
@@ -425,6 +434,7 @@ The film is a **quarry**. Each high-impact beat is an independent lottery ticket
 | **Synthetic:** muted/ash/sombre documentary grade | **teal-orange Bay-Woo blockbuster** | The 13 Jul de-fork. Recovered from the box 17 Jul. |
 | **Synthetic thumb:** mournful dread, deep shadow, faceless | **— NOT YET FIXED —** | §3. The murk register still governs packaging on a bright channel. |
 | **SD v1:** lean into Flux's painterly fakeness as sacred | **bright-crisp-real, nano_banana_2, render it massive** | Proven 13 Jul. Open water stays; the conclusion inverts. |
+| **`_SCRIPT-CONTRACT.md`** genre overlays: apocryphal = "half-seen, soft movement, let imagination do part of the work"; divine = "reverence over spectacle" | **scrubbed and absorbed into `_LEGO.md §3A`; overlays retired** | The cleanse hit three configs and three channel docs and **skipped the shared authoring layer**, which governed all three invisibly. **A cleanse that skips the shared layer has not happened.** |
 | **`_Synthetic.md`** as Synthetic's doctrine | **dead — it is a different channel** | AI-interior concept, superseded by catastrophe blockbuster. Extract Mode B first. |
 | **`sacred-dawn-creed.md`** alongside `_Sacred-Dawn.md` | **dead — folded here** | Two files, one truth. |
 
@@ -441,7 +451,7 @@ The film is a **quarry**. Each high-impact beat is an independent lottery ticket
 
 **Portfolio hygiene**
 4. 🔴 **Synthetic's thumbnail block + music prompt still carry the Final Hours register.** §3. **It is the 1.9% composition, mandated as policy, on a channel that renders bright.** Not this week — but it is a one-line config change and it is the highest-value fix outside Sacred Dawn.
-5. 🟡 **The register cleanse has never been written as a standalone spec.** It lived inside three channel configs. **§0.1 is the first portable statement of it — confirm no other channel silently inherits the dread defaults.** *(The highest-priority unchecked item on the 12 Jul consolidation one-pager.)*
+5. ✅ **The register cleanse now exists as a standalone spec — and the shared layer is scrubbed.** §0.1. It had lived inside three channel configs; the 17 Jul sweep found `_SCRIPT-CONTRACT.md` — the doc *upstream* of all three — still carrying dread ×5, reverence ×4, murk ×4, painterly ×2, and two live overlay bugs. Absorbed and scrubbed into `_LEGO.md §3A`. **This closes the 12 Jul one-pager's highest-priority item.** *Remaining: confirm the maintenance channels' own configs (`final-hours`, `cathedral_of_stars`, `prehistoric-disasters`, `lazarus`) — they are Kill/Park, so this is hygiene, not urgency.*
 6. 🟡 **ElevenLabs timing model** — break syntax, cap, measured WPM. **`_LEGO.md` assumes Inworld throughout**, so the timing model does not port to Synthetic as written. Blocks LEGO on Synthetic; blocks nothing on Sacred Dawn.
 7. 🟢 **`shared/docs/` has 70+ files**, including five now-dead channel docs, `_MOTION-VETO.md`, `_SCRIPT-CONTRACT.md`, `_LEGO-FEATURE-FILM.md` and a pile of session notes. **Bin what this doc and `_LEGO.md` supersede — but skim `_MOTION-VETO.md` and `_SCRIPT-CONTRACT.md` against both ledgers first; rules not surfaced in the cross-references will be lost on delete.** Extract `_Synthetic.md` §6–§9 (the only ground-truth Mode B reference) before binning it — Mode B is still live in `orchestrate.py`.
 8. 🟢 **`_default_motion_gettysburg` was removed from `synthetic/channel.json` with no replacement** in the recovered diff. Confirm intentional.
