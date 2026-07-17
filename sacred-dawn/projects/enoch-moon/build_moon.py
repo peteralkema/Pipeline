@@ -200,14 +200,18 @@ def cmd_probe():
 
 
 REPROBE = [
-    (1,  1, "novel",   "Gates HEWN INTO the moon, or ornate doors glued on? (v1: collage)"),
-    (1, 18, "novel",   "Cyclopean cut stone -- or clockwork again? (v1: steampunk gears)"),
-    (1, 20, "novel",   "Figures the size of TOWERS, mountain dwarfed? (v1: geese in a V)"),
-    (2, 13, "novel",   "World-sized masonry, nothing moving? (v1: gears + a galaxy)"),
-    (2, 21, "novel",   "THE KILLER SHOT -- gates on the LIMB, not windows on the disc. (v1: hotel windows)"),
-    (2, 29, "novel",   "Rank behind rank receding -- more than has been seen? (v1: steampunk)"),
-    (2, 32, "novel",   "SHEARED AWAY -- absence, or just an aperture? (v1: a doorway)"),
-    (2, 36, "novel",   "Torn out. Emptiness in the middle. (v1: read as an opening)"),
+    # ROUND 2 -- the earth-drift fix. Round 1 killed the steampunk (8/8 clean) but
+    # "cut stone architecture" pulled ARCHAEOLOGICAL RUIN: blue sky, clouds, ground, horizon.
+    # ROOT CAUSE: the {heavens} token defined itself by NEGATION ("vast open air, no ground,
+    # no architecture") -- "open air" invites clouds, and "no architecture" contradicted every
+    # prompt written into it. A canon token must name what the place IS.
+    # THE RULE: the structure must always BE the moon. Curved limb, lunar rock, black airless
+    # space. Never free-floating architecture -- the moon is what makes the scale automatic.
+    (1, 18, "earth-drift", "Lunar surface to a BLACK horizon -- or a floating city in blue sky? (v2: floating city)"),
+    (2, 13, "earth-drift", "The whole curve of the moon, gateways limb to limb. (v2: a ruin colonnade)"),
+    (2, 29, "earth-drift", "Rank behind rank sunk in grey rock. (v2: a cliff of blocks under clouds)"),
+    (2, 32, "earth-drift", "A CRESCENT OF THE MOON GONE -- black space where rock should be. (v2: a collapsing building)"),
+    (2, 36, "earth-drift", "Torn out. Black emptiness between broken edges. (v2: two people at Palmyra)"),
 ]
 
 def cmd_reprobe():
