@@ -1,0 +1,23 @@
+{
+  "negative": [
+    "door leaf",
+    "hinged door",
+    "wooden door",
+    "panelled door",
+    "door hinge",
+    "backlit glowing doorway",
+    "freestanding archway",
+    "ornate gate frame",
+    "sci-fi portal",
+    "gear",
+    "cog",
+    "clockwork",
+    "brass fittings",
+    "visible machinery",
+    "spiral galaxy",
+    "galaxy",
+    "nebula"
+  ],
+  "motion_rules": [],
+  "people_directive": ""
+}
