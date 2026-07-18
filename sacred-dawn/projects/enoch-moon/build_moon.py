@@ -6,7 +6,7 @@ build_moon.py -- beat table CSV -> engine beats.json, and the register probe.
   python3 build_moon.py normalise       # $0 -- recompute derived columns in the master, in place
   python3 build_moon.py sweep           # $0 -- setting mix, object-led ratio, banned words. RUN FIRST.
   python3 build_moon.py blocks [N ...]  # -> moon-bNN-finish/beats.json (default: every CSV present)
-  python3 build_moon.py audio [N ...]   # $0 -- narration_N.ssml + boundary_sheet.csv per block
+  python3 build_moon.py audio           # $0 -- one narration.txt for the whole film\n  python3 build_moon.py calibrate J    # measure whisper.json vs the 5s grid, print per-beat fix
   python3 build_moon.py probe           # -> moon-probe-finish/beats.json  (16 stills, $1.28)
   python3 build_moon.py reprobe         # -> moon-reprobe-finish/beats.json (5 stills, $0.40)
   python3 build_moon.py probe3          # -> moon-probe3-finish/beats.json (10 stills, $0.80)
@@ -529,84 +529,116 @@ def cmd_sweep(argv):
               + ("   <-- an unlit prompt renders muddy" if unlit else ""))
 
 
+SEAM_PAUSE = "------"   # 2-3s held silence at a block seam, for the music swell. Authored,
+                       # not a pipeline feature: it lives in the beat's narration as plain text.
+
+
 def cmd_audio(argv):
-    """$0. Emit the film's TTS payload as ONE continuous stream, chunked into Inworld requests.
+    """$0. Emit ONE plain-text narration for the whole film -> narration.txt.
 
-    THE BLOCK IS NOT AN AUDIO UNIT. The master is one 320-beat film; the block was only ever a
-    render/pick/200s unit. So chunk the WHOLE film into requests that (a) carry <=20 breaks
-    (Inworld's cap), (b) END ON A LANDING -- a full stop -- so the terminal fall lands where a
-    fall is wanted, (c) never split a sentence. When the next beat would breach 20 breaks, the
-    request closes at the LAST LANDING seen, not the last beat. No per-block seam, no block-forced
-    call: every seam is where the prose already wanted one.
+    THE MODEL (Peter, 18 Jul): the VO sits ABOVE the clips. One continuous track, one Inworld
+    call, sentences flow across the 5s clip boundaries. No SSML, no breaks, no per-block calls,
+    no 20-cap -- Inworld takes plain text and dashes carry the prosody. A block seam is just a
+    beat ending in '------' (SEAM_PAUSE) to hold ~2-3s for the music swell.
 
-    Silence model unchanged (LEGO 4 delta loop): each beat's last word lands on its 5.000s
-    boundary, so each beat carries a break of 5.000 - speech. The film's final beat's remainder
-    is the ffmpeg tail pad. Per-BEAT audio timing is untouched; only the CALL grouping changed.
+    Beats join with a single space; the punctuation already in each beat does all the work.
+    Sentences that span beats (71 of them) join mid-phrase, exactly as Elliot should read them.
+
+    This is a HYPOTHESIS: this sequence of words will fill this sequence of 5s clips. You render
+    it (cents), whisper it, and `calibrate` measures the truth. Then adjust words/dashes and
+    repeat. Nothing here is assumed -- the rate comes out of the measurement, not into it.
     """
-    rows = load_master()  # already sorted (block_id, clip_index)
-    land = lambda t: t.rstrip().endswith((".", "!", "?"))
+    rows = load_master()
+    text = " ".join(r["narration"].strip() for r in rows)
+    out = HERE / "narration.txt"
+    out.write_text(text + "\n")
+    words = sum(wc(r["narration"]) for r in rows)
+    seams = sum(1 for r in rows if SEAM_PAUSE in r["narration"])
+    print(f"  {len(rows)} beats -> {out}")
+    print(f"  {words} words | {len(text)} chars | {seams} seam pauses (------)")
+    print(f"  ONE Inworld call. Paste narration.txt, render, whisper, then: build_moon.py calibrate <whisper.json>")
 
-    beats = []
-    for i, r in enumerate(rows):
-        sp = wc(r["narration"]) * 60.0 / WPM_S
-        beats.append({"idx": i, "block": r["block_id"], "clip": r["clip_index"],
-                      "sid": r["sentence_id"], "text": r["narration"], "speech": sp,
-                      "brk": None if i == len(rows) - 1 else round(5.0 - sp, 3)})
-    over = [b for b in beats if b["brk"] and b["brk"] > 10.0]
-    if over:
-        print(f"  FAIL: breaks over Inworld's 10s ceiling: {[(b['block'], b['clip'], b['brk']) for b in over]}")
-        raise SystemExit(1)
 
-    # chunk at landings, <=20 breaks
-    reqs, cur = [], []
-    for i, b in enumerate(beats):
-        cur.append(b)
-        if i == len(beats) - 1:
-            reqs.append(cur); break
-        if len(cur) >= 20:
-            cut = next((j for j in range(len(cur) - 1, -1, -1) if land(cur[j]["text"])), None)
-            if cut is None:
-                print(f"  FAIL: 20 breaks with no landing near beat {b['block']}/{b['clip']}")
-                raise SystemExit(1)
-            reqs.append(cur[:cut + 1]); cur = cur[cut + 1:]
+def _dash_seconds(rows, per_word):
+    """What a trailing dash-run is worth, MEASURED later. Until calibrate has run once we don't
+    know; this returns None and calibrate fills it from actuals. Placeholder for the estimate path."""
+    return None
 
-    out = HERE.parent / "moon-audio"
-    out.mkdir(exist_ok=True)
-    for f in out.glob("narration_*.ssml"):
-        f.unlink()
 
-    for i, rq in enumerate(reqs, 1):
-        ssml = ""
-        for b in rq:
-            ssml += b["text"]
-            if b["brk"]:
-                ssml += f' <break time="{int(round(b["brk"]*1000))}ms" /> '
-        (out / f"narration_{i:02d}.ssml").write_text(ssml.strip() + "\n")
+def cmd_calibrate(argv):
+    """The measurement half of the loop. Eats whisper JSON + the master, prints per-beat over/under
+    and the WORDS to add/cut to close each gap -- at the rate MEASURED from this very render, so it
+    self-calibrates. Flags cumulative drift at every 40-beat seam (block boundary must land on the
+    200.000s grid or the video assembly de-syncs from the animation).
 
-    # one film-wide boundary sheet -- global expected boundary, for whisper
-    with (out / "boundary_sheet.csv").open("w", newline="") as f:
-        w = csv.writer(f)
-        w.writerow(["global_beat", "block", "clip", "sentence_id", "request",
-                    "expected_boundary_s", "words", "speech_s", "break_s",
-                    "last_word", "measured_s", "delta_s"])
-        req_of = {}
-        for ri, rq in enumerate(reqs, 1):
-            for b in rq:
-                req_of[b["idx"]] = ri
-        for b in beats:
-            w.writerow([b["idx"] + 1, b["block"], b["clip"], b["sid"], req_of[b["idx"]],
-                        f"{(b['idx']+1)*5.0:.3f}", wc(b["text"]), f"{b['speech']:.3f}",
-                        "" if b["brk"] is None else f"{b['brk']:.3f}",
-                        b["text"].split()[-1].strip(".,-\u2014"), "", ""])
+      build_moon.py calibrate voiceover.json
 
-    br = sum(b["brk"] for b in beats if b["brk"])
-    sp = sum(b["speech"] for b in beats)
-    print(f"  {len(rows)} beats -> {len(reqs)} Inworld calls "
-          f"({[len(q) if q[-1] is not beats[-1] else len(q)-1 for q in reqs]} breaks)")
-    print(f"  {sp/60:.0f}:{sp%60:04.1f} speech + {br/60:.0f}:{br%60:04.1f} breaks | "
-          f"film {len(rows)*5.0/60:.0f}:{(len(rows)*5.0)%60:02.0f} total")
-    print(f"  -> {out}/narration_01..{len(reqs):02d}.ssml + boundary_sheet.csv")
-    print(f"  every request ends on a landing; none exceeds 20 breaks; no sentence split.")
+    whisper JSON: {"segments":[{"words":[{"word":"...","start":s,"end":s}, ...]}, ...]}
+    """
+    import json
+    if not argv:
+        raise SystemExit("usage: build_moon.py calibrate <whisper.json>")
+    wj = json.loads(Path(argv[0]).read_text())
+    words = [w for seg in wj.get("segments", []) for w in seg.get("words", [])]
+    if not words:
+        raise SystemExit("no word timestamps in whisper JSON -- render with --word_timestamps True")
+    norm = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())
+    stream = [(norm(w["word"]), w.get("start"), w.get("end")) for w in words if norm(w["word"])]
+
+    rows = load_master()
+    # walk the whisper stream, consuming each beat's word count; the beat's end = last word's end.
+    si = 0
+    measured = []
+    ok = True
+    for r in rows:
+        n = wc(r["narration"])
+        if si + n > len(stream):
+            ok = False; measured.append((r, None, None)); continue
+        start = stream[si][1]
+        end = stream[si + n - 1][2]
+        si += n
+        measured.append((r, start, end))
+    if not ok:
+        print("  WARN: whisper stream ran out before the last beat -- word-match drifted. "
+              "Check the render matches narration.txt exactly.")
+
+    # measured global rate
+    spoken_words = sum(wc(r["narration"]) for r, s, e in measured if s is not None)
+    span = next((e for r, s, e in reversed(measured) if e is not None), None)
+    first = next((s for r, s, e in measured if s is not None), 0.0)
+    if span:
+        wpm = spoken_words / ((span - first) / 60.0)
+        per_word = (span - first) / spoken_words
+        print(f"  MEASURED: {spoken_words} words in {span-first:.1f}s = {wpm:.0f} WPM "
+              f"| 1 word ~= {per_word:.2f}s")
+    else:
+        per_word = 60.0 / 184.0
+        print("  (no span; using 184 WPM fallback)")
+
+    print(f"\n  {'beat':>7} {'words':>5} {'measured':>9} {'target':>7} {'over/under':>11} {'fix':>14}")
+    cum_seam = 0.0
+    for i, (r, start, end) in enumerate(measured):
+        if start is None:
+            print(f"  {r['block_id']}/{r['clip_index']:>2}   -- unmeasured --"); continue
+        dur = end - start
+        seam = SEAM_PAUSE in r["narration"]
+        target = 5.0  # every clip is 5s; a seam beat is deliberately longer, flagged not fixed
+        delta = dur - target
+        if seam:
+            fix = "SEAM (hold)"
+        elif abs(delta) < 0.25:
+            fix = "ok"
+        else:
+            dw = round(delta / per_word)
+            fix = f"{'cut' if dw>0 else 'add'} {abs(dw)}w"
+        print(f"  {r['block_id']}/{r['clip_index']:>2} {wc(r['narration']):>5} "
+              f"{dur:>7.2f}s {target:>6.1f}s {delta:>+9.2f}s {fix:>14}")
+        # seam drift: cumulative error since last 40-beat boundary
+        cum_seam += delta
+        if (i + 1) % 40 == 0:
+            print(f"  ----- block {(i+1)//40} seam: cumulative drift {cum_seam:+.2f}s "
+                  f"(block should end on {(i+1)*5.0:.0f}.0s grid) -----")
+            cum_seam = 0.0
 
 
 def cmd_probe(slots=PROBE, out_name="moon-probe-finish", card_name="PROBE-CARD.md"):
@@ -733,6 +765,7 @@ if __name__ == "__main__":
     elif cmd == "sweep": cmd_sweep(rest)
     elif cmd == "audio": cmd_audio(rest)
     elif cmd == "normalise": cmd_normalise(rest)
+    elif cmd == "calibrate": cmd_calibrate(rest)
     elif cmd == "film": cmd_film(rest)
     elif cmd == "probe": cmd_probe()
     elif cmd == "reprobe": cmd_reprobe()
