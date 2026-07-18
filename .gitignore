@@ -108,3 +108,8 @@ shared/batch_plan.json
 plan_*.json
 shared/plan_*.json
 secrets/
+*/projects/*/clips/
+*/projects/*/stills/
+*/projects/*/modea/
+*/projects/*/thumb_candidates/
+sacred-dawn/projects/enoch-moon/narration.txt
