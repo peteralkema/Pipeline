@@ -667,6 +667,41 @@ def cmd_calibrate(argv):
             cum_seam = 0.0
 
 
+def cmd_grid(argv):
+    """$0. Emit the whole film as ONE beats.json for the variant grid, plus a
+    review index. Each beat carries its `variants` count (4 hero / 2 connective);
+    render_grid.py renders that many real re-rolls and _skip.png-fills to 4.
+    Beat number is the 1-based row position (001..N), matching GRID-INDEX.csv."""
+    ce = gate_canon()
+    if ce:
+        print("\n".join("  CANON FAIL: " + e for e in ce)); raise SystemExit(1)
+    rows = load_master()
+    beats = []
+    for i, r in enumerate(rows, 1):
+        check_tokens(r["phenomenon"], f"grid beat {i} (b{r['block_id']}/{r['clip_index']})")
+        beats.append({
+            "narration": r["narration"],
+            "image_prompt": r["phenomenon"],
+            "variants": int(r["variants"]),
+        })
+    out = HERE.parent / "moon-grid-finish"
+    out.mkdir(exist_ok=True)
+    (out / "beats.json").write_text(
+        json.dumps({"canon": CANON, "beats": beats}, indent=2, ensure_ascii=False))
+    real = sum(int(r["variants"]) for r in rows)
+    total = len(rows) * 4
+    idx = HERE / "GRID-INDEX.csv"
+    with idx.open("w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["beat", "block", "clip", "weight", "variants", "narration"])
+        for i, r in enumerate(rows, 1):
+            w.writerow([f"{i:03d}", r["block_id"], r["clip_index"],
+                        r["weight"], r["variants"], r["narration"]])
+    print(f"  grid: {len(beats)} beats -> {out}/beats.json")
+    print(f"  {real} real stills + {total - real} skip tiles = {total} files | ${real * 0.08:.2f}")
+    print(f"  review index -> {idx}")
+
+
 def cmd_probe(slots=PROBE, out_name="moon-probe-finish", card_name="PROBE-CARD.md"):
     picked, card = [], []
     for i, (block, clip, rule, question) in enumerate(slots):
@@ -792,6 +827,7 @@ def cmd_film(argv):
 if __name__ == "__main__":
     cmd, rest = (sys.argv[1] if len(sys.argv) > 1 else ""), sys.argv[2:]
     if cmd == "blocks": cmd_blocks(rest)
+    elif cmd == "grid": cmd_grid(rest)
     elif cmd == "sweep": cmd_sweep(rest)
     elif cmd == "audio": cmd_audio(rest)
     elif cmd == "normalise": cmd_normalise(rest)
