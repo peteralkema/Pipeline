@@ -755,58 +755,55 @@ def _still_to_held_clip(still_path: Path, out_path: Path, duration: float = None
     return out_path
 
 
-def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) -> Path:
+def ken_burns_still(still_path: Path, out_path: Path, duration: float = None, move: str = None) -> Path:
     """
-    TIERED RENDER — the free clip floor. Turn a still into a slow zoom-in clip via
-    ffmpeg zoompan, rendered to the beat's EXACT duration (no Kling, no stretch, no
-    cost). Writes the SAME artifact Kling writes (clips/shot_NNN.mp4, channel aspect),
-    so assembly can't tell them apart and needs zero changes.
-
-    Craft (banked): zooming the source directly judders — upscale the still first,
-    then zoom, for smoothness. Slow zoom-IN always (one default, zero per-beat
-    decisions). Cap the zoom so long beats do not creep too far in.
+    TIERED RENDER -- the free clip floor, DOCTRINE-VARIED.
+    `move` drives a slow ffmpeg zoompan on the still so the floor rotates motion
+    across a film like the motion doctrine itself:
+        push   = slow zoom IN         (one overwhelming subject; the default)
+        pull   = slow zoom OUT        (scale / number / how-far)
+        crane  = slow rise            (vertical phenomena)
+        settle = slow drift DOWN      (reflection / aftermath / grief)
+        static = held frame, no move  (eerie stillness / near-locked)
+    Writes clips/shot_NNN.mp4 at channel aspect -- the SAME artifact Kling writes, so
+    assembly cannot tell them apart. move=None keeps the legacy true-static floor
+    byte-for-byte (backward compatible). Every move is SLOW: a weighted 40kg camera.
+    Craft (banked): upscale 4x before zoompan or the zoom judders.
     """
     import subprocess
     dur = float(duration or SHOT_DURATION)
     fps = 24
     total_frames = max(1, int(round(dur * fps)))
     W, H = ASPECT["width"], ASPECT["height"]
-    # Per-channel ken_burns flag (FIXED 04 Jul): resolved from the STILL's own
-    # path. The 01 Jul hardcode existed because the CWD-walk-up + cached config
-    # read did not take at render time; walking the artifact's parents to the
-    # first channel.json is deterministic regardless of CWD, per-call, uncached
-    # (one tiny JSON read per clip — negligible next to the encode).
-    # "ken_burns": false -> true-static held frame (QQrew keeps its floor);
-    # absent/true -> cinematic slow zoom-in, capped (banked craft).
-    _kb_zoom = True
-    try:
-        import json as _json
-        for _p in Path(still_path).resolve().parents:
-            _cj = _p / "channel.json"
-            if _cj.is_file():
-                _kb_zoom = bool(_json.loads(_cj.read_text()).get("ken_burns", True))
-                break
-    except Exception:
-        _kb_zoom = True
-    _z = "min(zoom+0.0008,1.10)"  # slow zoom-in, capped — same craft as the assembler's kb-tail
-    if not _kb_zoom:
-        # TRUE STATIC (01 Jul): zoompan micro-pans even at z=1 (the x/y viewport
-        # math drifts per-frame on the 4x-upscaled input). Bypass zoompan
-        # entirely -- scale-to-fit + pad to the frame, a single held image, ZERO
-        # motion. Proven via frame-diff (frame0 == frame100).
+    d = total_frames
+    m = (move or "").strip().lower()
+
+    if m in ("", "static"):
+        # TRUE STATIC: bypass zoompan (it micro-drifts even at z=1). scale-to-fit +
+        # pad = a single held frame, ZERO motion. move=None keeps the legacy floor.
         vf = (
             f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
             f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2,"
             f"setsar=1,fps={fps}"
         )
     else:
-        # Cinematic slow zoom-in (unchanged): upscale 4x for smoothness, then zoompan.
+        # MOVING: upscale 4x for smoothness, then a slow move-specific zoompan.
         up_w, up_h = W * 4, H * 4
+        cx = "iw/2-(iw/zoom/2)"
+        cy = "ih/2-(ih/zoom/2)"
+        if m == "pull":
+            z, x, y = "if(eq(on,0),1.16,max(zoom-0.0012,1.0))", cx, cy
+        elif m == "crane":
+            z, x, y = "1.12", cx, "(ih-ih/zoom)*(1-on/%d)" % d
+        elif m == "settle":
+            z, x, y = "1.12", cx, "(ih-ih/zoom)*(on/%d)" % d
+        else:  # push and any unknown move -> safe slow zoom-in
+            z, x, y = "min(zoom+0.0012,1.16)", cx, cy
         vf = (
             f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
             f"crop={up_w}:{up_h},"
-            f"zoompan=z='{_z}':d={total_frames}:"
-            f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
+            f"zoompan=z='{z}':d={total_frames}:"
+            f"x='{x}':y='{y}':"
             f"s={W}x{H}:fps={fps},setsar=1"
         )
     cmd = [
@@ -822,37 +819,6 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None) ->
         tail = " | ".join(res.stderr.strip().splitlines()[-6:])
         raise RuntimeError(f"ken_burns ffmpeg failed: {tail}")
     return out_path
-
-
-def inherit_prev_clip(src_clip: Path, out_path: Path, offset: float) -> Path:
-    """CLIP-MERGE derivation — write out_path as src_clip seeked from `offset`
-    onward (the unused tail of an already-paid atom). The assembler then treats
-    it as an ordinary clip: trims to the beat's frozen duration, or fills if the
-    tail runs short. Raises when the source is missing or (checked via ffprobe)
-    the offset leaves under 0.3s, so the caller can fall back to the free
-    Ken-Burns floor instead of shipping a near-empty clip."""
-    import subprocess
-    src_clip = Path(src_clip)
-    if not src_clip.exists():
-        raise RuntimeError(f"source clip missing: {src_clip.name}")
-    pr = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
-                         "-of", "default=noprint_wrappers=1:nokey=1", str(src_clip)],
-                        capture_output=True, text=True)
-    try:
-        native = float(pr.stdout.strip())
-    except ValueError:
-        native = 0.0
-    if native - offset < 0.30:
-        raise RuntimeError(f"nothing left in the atom (native {native:.2f}s, offset {offset:.2f}s)")
-    cmd = ["ffmpeg", "-y", "-ss", f"{offset:.3f}", "-i", str(src_clip),
-           "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-           "-pix_fmt", "yuv420p", "-an", str(out_path)]
-    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    if res.returncode != 0:
-        tail = " | ".join(res.stderr.strip().splitlines()[-4:])
-        raise RuntimeError(f"inherit ffmpeg failed: {tail}")
-    return out_path
-
 
 def _is_content_policy_error(exc) -> bool:
     """Detect Kling's content-policy refusal across the ways it can surface."""

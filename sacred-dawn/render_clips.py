@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
 """
-render_clips.py -- turn placed stills into clips, floor-first and air-gated.
+render_clips.py -- turn placed stills into clips, doctrine-varied and floor-first.
 
-Reuses the shared engine's animate_still (Kling) and ken_burns_still (free zoompan)
-WITHOUT modifying it. Every beat defaults to the Ken Burns FLOOR ($0); a beat is
-upgraded to Kling only when its `air` column marks visible suspended matter
-(dust/smoke/mist/embers/water/cloth). Kling beats MUST carry a `motion` prompt --
-the render aborts before any spend if one is missing (gate before spend).
+Every beat rides the Ken Burns floor with its own doctrine MOVE (push/pull/crane/
+settle/static) read from the `move` column -- so the floor rotates motion across the
+film at $0, never a uniform slideshow. A beat is upgraded to Kling only when its `air`
+column marks visible suspended matter AND it carries a `motion` prompt (gate before
+spend). `--floor-only` forces every beat to Ken Burns regardless of `air` (the
+all-floor cut); drop it later and mark specific air beats to add Kling additively.
 
-Reads the master CSV in beat order (row N == beat N == shot_{N:03d}). Writes
-clips/shot_NNN.mp4 next to the stills. Resume-safe. Channel-agnostic: the engine
-funcs resolve the channel from the paths.
+Reuses the shared engine's ken_burns_still(move=...) and animate_still WITHOUT
+modifying them. Reads the master CSV in beat order (row N == shot_{N:03d}).
+Resume-safe. Channel-agnostic. Place in the CHANNEL dir; run from there.
 
-Place in the CHANNEL dir; run from there:
-    python render_clips.py --csv projects/<video>/beats/master.csv \\
-                           --stills projects/<video>/stills \\
-                           --out projects/<video>/clips
+    python render_clips.py --csv projects/<v>/beats/master.csv \
+        --stills projects/<v>/stills --out projects/<v>/clips --floor-only
 
-`air`  truthy values: kling, air, visible, yes, y, 1, true
-`motion` free text (the doctrine move, e.g. "slow push-in, subject locked").
+`move`  push|pull|crane|settle|static   (blank -> push)
+`air`   kling|air|visible|yes|y|1|true  -> Kling (needs `motion`); else Ken Burns
 """
 import argparse, csv, sys
 from pathlib import Path
@@ -30,6 +29,7 @@ if str(SHARED) not in sys.path:
 import recreation_pipeline as rp  # noqa: E402
 
 AIR_TRUE = {"kling", "air", "visible", "yes", "y", "1", "true"}
+MOVES = {"push", "pull", "crane", "settle", "static"}
 DURATION = getattr(rp, "SHOT_DURATION", 5.0)
 KLING_COST = 0.42
 
@@ -40,12 +40,13 @@ def die(msg):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Render clips: Ken Burns floor + air-gated Kling.")
-    ap.add_argument("--csv", required=True, help="master CSV (row order == beat order)")
-    ap.add_argument("--stills", required=True, help="placed stills dir (shot_NNN.png)")
-    ap.add_argument("--out", required=True, help="clips output dir")
+    ap = argparse.ArgumentParser(description="Render clips: doctrine Ken Burns floor + optional Kling.")
+    ap.add_argument("--csv", required=True)
+    ap.add_argument("--stills", required=True)
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--floor-only", action="store_true", help="force all Ken Burns (ignore air/Kling)")
     ap.add_argument("--force", action="store_true", help="re-render clips already on disk")
-    ap.add_argument("--dry-run", action="store_true", help="report the Kling/KenBurns split + cost, render nothing")
+    ap.add_argument("--dry-run", action="store_true", help="report the split + cost, render nothing")
     args = ap.parse_args()
 
     csv_path = Path(args.csv).expanduser()
@@ -55,54 +56,58 @@ def main():
         die(f"CSV not found: {csv_path}")
     if not stills.is_dir():
         die(f"stills dir not found: {stills}")
-
     rows = list(csv.DictReader(csv_path.open()))
     if not rows:
         die("CSV has no rows.")
 
-    # classify every beat + validate BEFORE any spend
-    plan = []            # (beat, still, out, is_kling, motion)
-    missing_still = []
-    kling_no_motion = []
+    plan = []
+    missing_still, kling_no_motion, bad_move = [], [], []
+    move_hist = {}
     for i, r in enumerate(rows, 1):
         still = stills / f"shot_{i:03d}.png"
         if not still.is_file():
-            missing_still.append(i)
-            continue
+            missing_still.append(i); continue
         air = (r.get("air") or "").strip().lower()
-        is_kling = air in AIR_TRUE
-        motion = (r.get("motion") or "").strip()
-        if is_kling and not motion:
-            kling_no_motion.append(i)
-        plan.append((i, still, out / f"shot_{i:03d}.mp4", is_kling, motion))
+        move = (r.get("move") or "push").strip().lower()
+        if move not in MOVES:
+            bad_move.append((i, move)); move = "push"
+        if not args.floor_only and air in AIR_TRUE:
+            motion = (r.get("motion") or "").strip()
+            if not motion:
+                kling_no_motion.append(i)
+            plan.append((i, still, out / f"shot_{i:03d}.mp4", "kling", motion))
+        else:
+            move_hist[move] = move_hist.get(move, 0) + 1
+            plan.append((i, still, out / f"shot_{i:03d}.mp4", "kb", move))
 
     if missing_still:
         die(f"{len(missing_still)} placed still(s) missing (run place.py first): {missing_still[:20]}")
+    if bad_move:
+        die(f"unknown move value(s): {bad_move[:10]} -- use push|pull|crane|settle|static.")
     if kling_no_motion:
-        die(f"{len(kling_no_motion)} beat(s) marked air/Kling with NO motion prompt: "
-            f"{kling_no_motion[:20]} -- fill `motion` or clear `air`.")
+        die(f"{len(kling_no_motion)} air/Kling beat(s) with NO motion: {kling_no_motion[:20]} "
+            f"-- fill `motion`, clear `air`, or use --floor-only.")
 
-    kling = [p for p in plan if p[3]]
-    burns = [p for p in plan if not p[3]]
+    kling = [p for p in plan if p[3] == "kling"]
     print(f"{len(plan)} beats | Kling {len(kling)} (${len(kling)*KLING_COST:.2f}) | "
-          f"Ken Burns {len(burns)} ($0)")
+          f"Ken Burns {len(plan)-len(kling)} ($0)")
+    print("  moves: " + ", ".join(f"{m}:{move_hist.get(m,0)}" for m in
+                                   ("push", "pull", "crane", "settle", "static")))
     if args.dry_run:
-        print("dry-run: nothing rendered. Kling beats:",
-              ", ".join(str(p[0]) for p in kling) or "(none)")
+        print("dry-run: nothing rendered.")
         return
 
     out.mkdir(parents=True, exist_ok=True)
     made = skipped = 0
-    for beat, still, dst, is_kling, motion in plan:
+    for beat, still, dst, kind, arg in plan:
         if dst.exists() and not args.force:
-            skipped += 1
-            continue
-        if is_kling:
-            print(f"  [{beat:03d}] KLING  {motion[:56]}")
-            rp.animate_still(still, motion, dst)
+            skipped += 1; continue
+        if kind == "kling":
+            print(f"  [{beat:03d}] KLING  {arg[:52]}")
+            rp.animate_still(still, arg, dst)
         else:
-            print(f"  [{beat:03d}] ken burns")
-            rp.ken_burns_still(still, dst, DURATION)
+            print(f"  [{beat:03d}] ken burns / {arg}")
+            rp.ken_burns_still(still, dst, DURATION, move=arg)
         made += 1
 
     print(f"\nOK clips -> {out}")
