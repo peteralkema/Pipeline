@@ -807,7 +807,7 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None, mo
             f"s={W}x{H}:fps={fps},setsar=1"
         )
     cmd = [
-        "ffmpeg", "-y", "-i", str(still_path),
+        "ffmpeg", "-y", "-loop", "1", "-i", str(still_path),
         "-vf", vf,
         "-t", f"{dur:.3f}",
         "-c:v", "libx264", "-preset", "medium", "-crf", "18",
