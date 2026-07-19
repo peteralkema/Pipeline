@@ -45,6 +45,8 @@ def main():
     ap.add_argument("--stills", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--floor-only", action="store_true", help="force all Ken Burns (ignore air/Kling)")
+    ap.add_argument("--duration", type=float, default=None,
+                    help="seconds per clip (Ken Burns only); default SHOT_DURATION")
     ap.add_argument("--force", action="store_true", help="re-render clips already on disk")
     ap.add_argument("--dry-run", action="store_true", help="report the split + cost, render nothing")
     args = ap.parse_args()
@@ -56,6 +58,7 @@ def main():
         die(f"CSV not found: {csv_path}")
     if not stills.is_dir():
         die(f"stills dir not found: {stills}")
+    dur = args.duration if args.duration else DURATION
     rows = list(csv.DictReader(csv_path.open()))
     if not rows:
         die("CSV has no rows.")
@@ -107,7 +110,7 @@ def main():
             rp.animate_still(still, arg, dst)
         else:
             print(f"  [{beat:03d}] ken burns / {arg}")
-            rp.ken_burns_still(still, dst, DURATION, move=arg)
+            rp.ken_burns_still(still, dst, dur, move=arg)
         made += 1
 
     print(f"\nOK clips -> {out}")
