@@ -341,9 +341,89 @@ def cmd_calibrate(cfg, argv):
                   f"(should land on {(i+1)*5.0:.0f}.0s) -----")
             cum = 0.0
 
+# ------------------------------------------------------------------ stills (ref-aware 4x grid)
+def cmd_stills(cfg, argv):
+    """Render the variant grid for one or more blocks, WITH reference attachment.
+
+    Per beat: 4 real re-rolls if hero, 2 real + 2 _skip.png if connective.
+    Names {beat:03d}-{variant:02d}.png into ONE grid folder + GRID-INDEX.csv.
+    Reuses recreation_pipeline's proven /edit reference path (same as cmd_stills),
+    looped -- the piece the doc specifies but no single code path implemented for
+    reference mode. Resume-safe: existing files skipped.
+
+      build_lego.py stills --project P [N ...]
+    """
+    import re as _re
+    rows = load_master(cfg)
+    if not has_col(rows, "phenomenon"):
+        raise SystemExit("stills needs a 'phenomenon' column -- author first.")
+    wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})
+    canon = canon_of(cfg)
+    proj = Path(cfg["_project_dir"])
+
+    shared = Path(cfg["_channel_dir"]).parent / "shared"
+    sys.path.insert(0, str(shared))
+    try:
+        import recreation_pipeline as rp
+    except Exception as e:
+        raise SystemExit(f"cannot import recreation_pipeline from {shared}: {e}")
+
+    ref_mode = cfg.get("render_mode") == "reference"
+    ref_map = cfg.get("reference_map", {}) if ref_mode else {}
+    ref_chdir = Path(cfg["_channel_dir"])
+    # skip-tile is channel-AGNOSTIC: shared/_skip.png for all channels;
+    # a channel may override with characters/_skip.png. Resolve shared first.
+    _shared_skip = Path(cfg["_channel_dir"]).parent / "shared" / "_skip.png"
+    _chan_skip = ref_chdir / "characters" / "_skip.png"
+    skip_tile = _chan_skip if _chan_skip.exists() else _shared_skip
+
+    for block in wanted:
+        brows = [r for r in rows if int(r["block_id"]) == block]
+        gerrs = gate_block(brows, cfg, load_banned(cfg))
+        if gerrs:
+            print("\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
+        grid = proj / f"grid-b{block:02d}"
+        grid.mkdir(parents=True, exist_ok=True)
+        index = []
+        real = 0
+        for r in brows:
+            ci = int(r["clip_index"])
+            raw = r["phenomenon"].strip()
+            prompt = rp._expand_canon(raw, canon)
+            refs = []
+            if ref_mode:
+                seen = set()
+                for t in _re.findall(r"\{([a-zA-Z_][a-zA-Z0-9_]*)\}", raw):
+                    if t in ref_map and t not in seen:
+                        seen.add(t)
+                        entry = ref_map[t]
+                        for f in (entry if isinstance(entry, list) else [entry]):
+                            refs.append(str(ref_chdir / f))
+            n_real = 4 if r["weight"] == "hero" else 2
+            for v in range(1, 5):
+                out = grid / f"{ci:03d}-{v:02d}.png"
+                index.append((ci, v, "real" if v <= n_real else "skip", out.name))
+                if out.exists():
+                    continue
+                if v <= n_real:
+                    print(f"  [{block}/{ci} v{v}] {'[ref:%d] ' % len(refs) if refs else ''}{prompt[:50]}...")
+                    rp.generate_still(prompt, out, reference_images=(refs or None))
+                    real += 1
+                else:
+                    # connective skip-tile
+                    if skip_tile.exists():
+                        import shutil as _sh; _sh.copy(skip_tile, out)
+                    else:
+                        out.write_bytes(b"")  # empty placeholder; place.py hard-fails on a pick here
+        with open(grid / "GRID-INDEX.csv", "w", newline="") as f:
+            w = csv.writer(f); w.writerow(["clip_index", "variant", "kind", "file"]); w.writerows(index)
+        print(f"  block {block}: grid -> {grid} | {real} real stills (${real*0.08:.2f}) | GRID-INDEX.csv")
+    print("\nNEXT: review each grid folder, promote ONE winner per beat to shot_NNN.png (the pick).")
+
+
 # ------------------------------------------------------------------ dispatch
 CMDS = {"normalise": cmd_normalise, "sweep": cmd_sweep, "film": cmd_film,
-        "blocks": cmd_blocks, "audio": cmd_audio, "calibrate": cmd_calibrate}
+        "blocks": cmd_blocks, "stills": cmd_stills, "audio": cmd_audio, "calibrate": cmd_calibrate}
 
 def main():
     ap = argparse.ArgumentParser(add_help=False)
