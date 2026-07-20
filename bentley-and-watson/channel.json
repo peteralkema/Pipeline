@@ -37,7 +37,9 @@
   "reference_map": {
     "bentley": "characters/bentley_ref_clean.png",
     "watson": "characters/watson_ref.png",
-    "both_dogs": "characters/pair_body.png"
+    "both_dogs": "characters/pair_body.png",
+    "car": "characters/roadster_ref.png",
+    "boot": "characters/roadster_boot.png"
   },
   "canon": {
     "bentley": "a chocolate-and-tan long-haired dachshund with a liver-brown nose, warm amber eyes, tan eyebrow pips and tan muzzle, silky feathered chocolate ears and plumed tail",
@@ -47,13 +49,15 @@
     "team": "a mixed team of dachshunds of every colour and coat in matching football shirts, smooth and long-haired, red, cream, chocolate, dapple and black-and-tan",
     "ext": "a cherry-red open-top electric roadster drifting in space on a bare silver mounting adapter, no badges, no logos, no brand text, sleek recognisable two-seat sports-car silhouette",
     "int": "the red cabin of the roadster: matte black dashboard, one dark blank rectangular screen, round steering wheel, two low bucket seats",
-    "starman": "an anonymous figure in a clean white spacesuit and mirror-black visor, gloved hands resting at ten and two on the wheel, helmet facing forward, utterly still and unreadable, never a recognisable person",
+    "starman": "an anonymous figure in a clean white spacesuit with a fully OPAQUE mirror-black reflective visor showing NO face and nothing inside, gloved hands resting at ten and two on the wheel, helmet facing forward, utterly still and unreadable, never a recognisable person",
     "void": "pure black deep space, hard bright pinpoint stars, deep cinematic clarity, no earth, no planet, no galaxy band, no nebula",
     "spectacle": "a vast luminous field of stars and distant coloured cosmic light stretching far below and beyond, immense overwhelming scale",
     "mirror": "the small side wing-mirror of the car holding a single framed rectangle of view showing planet Earth, blue and luminous, small and receding, deep black all around it",
     "home": "a warm sunlit domestic scene in the Netherlands, a cosy canal-side garden in soft golden afternoon light, safe and ordinary, gentle memory-like soft focus",
     "wish": "a dreamlike warm golden alien meadow under oversaturated storybook light, soft glow, an imagined paradise",
-    "overhead": "a top-down overhead view looking straight down from directly above the roadster"
+    "overhead": "a top-down overhead view looking straight down from directly above the roadster",
+    "car": "a cherry-red open-top two-seat electric roadster, sleek low sports-car silhouette, black five-spoke wheels, carbon accents, no badges, no logos, no brand text, no lettering anywhere",
+    "boot": "the open front boot compartment of the roadster, a shallow carpeted cavity with the lid raised, clean and empty, no badges, no logos, no brand text"
   },
   "default_motion": "Gentle natural movement. Soft warm light. No camera shake, no fast motion.",
   "_notes": {
