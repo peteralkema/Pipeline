@@ -817,3 +817,123 @@ From the best clip of each block. No new renders.
 
 1. **The pick.** 800 stills per film, never automated, and the real ceiling on how many shots you take.
 2. **Packaging.** Fixed in one evening for the price of one sentence and one image: **1.4% → 6.3% CTR.** No pipeline work will ever beat that ratio. *Every problem solved here was arithmetic pretending to be craft. The pick and the packaging are the parts that are actually craft.*
+
+
+---
+
+## 14. REFERENCE MODE — the `/edit` path (character & object plates)
+
+**Mode selector:** `channel.json` sets `"render_mode": "reference"` and a
+`reference_map` of `{token} -> plate.png`. On these channels a beat whose
+`phenomenon` contains a mapped token renders via the fal `/edit` endpoint
+(`nano-banana-2/edit`) conditioned on that plate. Token-free beats fall through
+to text-to-image. Proven on Bentley & Watson, 20 Jul 2026 (two probes).
+
+**Reference is NOT a 3-D model. Ref = identity; text = angle.** The model does
+not rotate a solid object; per render it generates a fresh image conditioned on
+one plate. It extrapolates *unseen viewpoints from one plate within a render*
+(a clean overhead came from a side-profile car plate; a face-ref gave crawl,
+howl, sleep, cabin). So **you do not need an angle-specific plate per shot** —
+the angle lives in the `phenomenon` text, the plate locks identity.
+
+**One ref per render, from a labelled library; the human selects per beat.**
+There is NO auto-orchestration — the beat names the ref it wants and gets exactly
+that; the model never reaches for a better plate. Add a NEW token only for a
+*surface the ref cannot show* (the car's open boot cavity vs its exterior),
+never for an angle. A `{token:label}` per-beat selector (pick a library member)
+is the documented next-build in `build_lego`.
+
+**Multi-ref fragility — QUANTIFIED (20 Jul):**
+- **1 ref** (character OR object alone): reliable, photoreal.
+- **2 refs** (object + character stacked): works, but higher refusal rate and
+  occasional identity softening.
+- **3 refs**: refuses outright.
+- **Authoring rule:** interior / character-subject -> character ref only, set &
+  object as *TEXT* ("the red cabin, black dash"). Exterior / object-subject ->
+  object ref alone. Two-ref only where object AND character must both lock
+  (a character climbing on the object); expect re-rolls. NEVER stack three.
+
+**Refusals are per-CALL, not per-BEAT.** A hero beat re-rolls 4 real calls; at a
+~25% refusal rate, all four refusing is ~0.4% — every beat keeps >=1 clean
+pick. A refused slot silently **falls back to flux**, which ignores BOTH the ref
+and the unbranded canon: flux-fallback frames can render off-model faces AND
+reintroduce logos. **Every flux-fallback frame gets a logo/identity QA pass; do
+not pick it if a clean `/edit` variant exists.** (Resume-safe render: re-run to
+refill refused slots.)
+
+**Opaque where a face must not appear.** A see-through visor let a character ref
+bleed a dog face into the helmet; specify "opaque, fully reflective, no face
+visible" (also the rights-safe default for an anonymous figure).
+
+**The growing-library moat.** Promote your own best outputs into new reference
+plates — identity tightens across a film, and you accumulate the exact
+angles/expressions/wardrobe the film needs. Same compounding-asset logic as the
+CSV database. A weak composite pair-plate (`pair_body.png`) is fixed by promoting
+a clean rendered two-shot, not by prompt-wrestling.
+
+---
+
+## 15. MODE OVERRIDES — festival vs distribution
+
+The craft law has two audiences. Name the mode; do not silently reinterpret.
+
+| rule | DISTRIBUTION (browse/feed) | FESTIVAL (jury, watched end-to-end) |
+|---|---|---|
+| Ken Burns on flat beats | craft (invisible, free) | **OFF** — a pan on a still reads as "couldn't animate"; Kling on everything |
+| retention cold-open / trailer front-load | required (the click decides) | **OFF** — spends best shots up front; jury watches in order |
+| `frozen_peak_action` (still over Kling for comedy) | a distribution-game rule | **OFF** — festival judges the animation being alive |
+| advertiser hedge / subscribe beat | present | **OFF** |
+
+Festival cut and channel-launch cut of the SAME film may be different edits: the
+feed wants a hook in 4 seconds, the jury wants the slow open. Decide up front
+whether they are one file or a re-edit.
+
+---
+
+## 16. WHAT LEGO IS NOT FOR (the boundary)
+
+LEGO is the pathway for **single-narrator, generated-visual,
+retention-through-variety narrative films** (Sacred Dawn, Scripture, Synthetic,
+Final Hours, YHTBT, Bentley). It is NOT the right tool for:
+
+- **Anti-variety / audio-first channels (Sacred Soak).** The `film` audit flags a
+  register flatline and settle-lock as failure; a sleep/meditation read *wants*
+  the flatline. Forcing it through LEGO makes it worse. Audio-first is a
+  different product (visuals-as-wallpaper), not a LEGO film.
+- **Stock-footage channels (Success Coach).** LEGO's spine is
+  `phenomenon -> still -> clip` — it assumes you *author* the image. Success Coach
+  *selects* licensed clips; there is no `{token}` canon, no render, nothing for
+  the visual half to generate. The NARRATION half (wall-to-wall VO + calibrate)
+  transfers; the visual half is a different pipeline (search-and-place).
+- **True multi-character dialogue.** The VO model is ONE continuous narrator. Two
+  characters *in dialogue* (not narrator + silent foil) breaks the single-call
+  model -> back to per-utterance render + placement. Bentley dodges this (Watson
+  silent); Synthetic Press's dual-mode drama will hit it. Unsolved.
+
+Browse/evergreen channels (Woodworking) use LEGO's *machinery* (CSV, calibrate,
+variety, data surface) but NOT its narrative craft (spine, escalation) — a
+tool-explainer is not a feature film. The pipeline and the storytelling doctrine
+are separable; apply only what fits.
+
+---
+
+## LEDGER ADDITIONS (20 Jul 2026)
+
+- **`build_lego.py` SUPERSEDES `build_moon.py`.** One channel-agnostic tool, five
+  verbs: `sweep` / `film` / `blocks` / `stills` / `audio` + `calibrate`. Config-
+  driven: canon from `channel.json`, banned words from the channel `rulebook.json`,
+  TTS provider from `tts_provider`. Master CSV at `projects/<name>/master.csv`.
+  One continuous VO + `calibrate` (no per-beat MP3s). `build_moon` was the
+  enoch-only proof; retire it once a second channel runs on `build_lego`.
+- **`render_grid.py` does NOT attach references.** It calls `generate_still` with
+  no `reference_images`, so on a reference channel it renders generic subjects.
+  Reference-mode channels render the variant grid via `build_lego stills` (which
+  replicates `cmd_stills`' `reference_map` resolution and loops per beat), NOT via
+  `render_grid`.
+- **The skip-tile is channel-agnostic:** `shared/_skip.png` for all channels;
+  a channel may override with `characters/_skip.png`.
+- **The pick is a filename, never a column.** All variants share one `phenomenon`,
+  so nothing distinguishes the winner at the data level. `place` promotes the
+  chosen `{beat}-{variant}.png` to `shot_NNN.png`; that file's existence IS the
+  pick. CSV = instructions (phenomenon, air/move/motion); stills folder = chosen
+  pixels; joined only by beat index.
