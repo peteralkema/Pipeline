@@ -421,9 +421,63 @@ def cmd_stills(cfg, argv):
     print("\nNEXT: review each grid folder, promote ONE winner per beat to shot_NNN.png (the pick).")
 
 
+# ------------------------------------------------------------------ clips (picked stills -> animated clips)
+def cmd_clips(cfg, argv):
+    """Animate the PICKED stills into clips. Reads shot_NNN.png (the promoted
+    winners) + the CSV's air/move/motion; routes each beat:
+        air=kling -> animate_still(motion)   (Kling image->video)
+        else      -> ken_burns_still(move)   (the free ffmpeg floor)
+    Writes clips/shot_NNN.mp4. Resume-safe. A picked-still-missing beat aborts.
+
+      build_lego.py clips --project P [N ...]
+    """
+    rows = load_master(cfg)
+    wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})
+    proj = Path(cfg["_project_dir"])
+    stills = proj / "stills"
+    clips = proj / "clips"; clips.mkdir(parents=True, exist_ok=True)
+
+    shared = Path(cfg["_channel_dir"]).parent / "shared"
+    sys.path.insert(0, str(shared))
+    try:
+        import recreation_pipeline as rp
+    except Exception as e:
+        raise SystemExit(f"cannot import recreation_pipeline from {shared}: {e}")
+
+    todo = [r for r in rows if int(r["block_id"]) in wanted]
+    # verify every beat has a picked still before spending on any
+    missing = [r["clip_index"] for r in todo
+               if not (stills / f"shot_{int(r['clip_index']):03d}.png").exists()]
+    if missing:
+        raise SystemExit(f"no picked still for beats {missing} -- promote a grid winner "
+                         f"to stills/shot_NNN.png (the pick) before clips.")
+
+    kling = sum(1 for r in todo if r.get("air", "").lower() == "kling")
+    print(f"  {len(todo)} beats | {kling} kling / {len(todo)-kling} floor "
+          f"| ~${kling*0.42:.2f} kling")
+    for r in todo:
+        ci = int(r["clip_index"])
+        still = stills / f"shot_{ci:03d}.png"
+        out = clips / f"shot_{ci:03d}.mp4"
+        if out.exists():
+            print(f"  [{ci}] already done"); continue
+        air = r.get("air", "").lower()
+        if air == "kling":
+            motion = (r.get("motion") or "").strip()
+            if not motion:
+                raise SystemExit(f"beat {ci}: air=kling but no motion prompt -- aborting before spend")
+            print(f"  [{ci}] kling: {motion[:48]}...")
+            rp.animate_still(still, motion, out)
+        else:
+            print(f"  [{ci}] floor (ken burns)")
+            rp.ken_burns_still(still, out)
+    print(f"\nOK clips -> {clips}  (output #1; VO is output #2, from `audio`)")
+
+
 # ------------------------------------------------------------------ dispatch
 CMDS = {"normalise": cmd_normalise, "sweep": cmd_sweep, "film": cmd_film,
-        "blocks": cmd_blocks, "stills": cmd_stills, "audio": cmd_audio, "calibrate": cmd_calibrate}
+        "blocks": cmd_blocks, "stills": cmd_stills, "clips": cmd_clips,
+        "audio": cmd_audio, "calibrate": cmd_calibrate}
 
 def main():
     ap = argparse.ArgumentParser(add_help=False)
