@@ -1,0 +1,121 @@
+clip_index,block_id,weight,variants,setting_token,angle,motion,rr,register,vo_words,narration,phenomenon,ref_tag
+1,1,H,4,ext,XWIDE,PULL,0,hook,17,"You might recognise this one. Famous little red car, drifting out past everything, going absolutely nowhere fast.","{car} drifting in deep black space, extreme-wide front three-quarter, raw hard sunlight on one flank, pure black star-field behind, the recognisable cherry-red roadster, cinematic bright",EXT
+2,1,C,2,ext,MED,SETTLE,0,reflection,14,"Famous drive. Famous everything. And nobody, you will notice, is actually steering the thing.","{car} in space, medium front view, {starman}, empty driver seat with no hands truly steering, hard side light, black star-field",EXT
+3,1,C,2,ext,WIDE,PUSH,0,tension,14,"But stick around a moment, because the good bit is very easy to miss.","{car} in space, wide rear three-quarter drifting away, camera pushing toward the closed rear boot compartment, faint thump implied, hard stars",EXT
+4,1,H,4,boot,LOW,CRANE,1,mystery,14,"See, the best part of this whole story was tucked away in the boot.","inside a dark closed boot compartment, low angle, two long-haired dachshunds {both_dogs} curled asleep, a thin crack of light across their faces, wearing clear spherical glass space helmets, full faces visible through the glass, intimate warm rim light",INT
+5,1,C,2,boot,XCU,PUSH,1,tender,5,"Watson. Watson, wake up, mate.","extreme close on {bentley} asleep in the dark boot, one amber eye just opening, stars reflected faintly, wearing a clear spherical glass space helmet, full face visible through the glass",INT
+6,1,C,2,int,CU,PUSH,0,tension,15,"Come on, up you get. Big morning. Possibly the biggest one we have ever had.","{bentley} in the dark boot close-up, ears lifting, alert and urgent, waking {watson} beside him, wearing a clear spherical glass space helmet, full face visible through the glass, thin seam light",INT
+7,1,C,2,int,MED,SETTLE,0,joy,15,And there he is. Never once met a morning that dog did not absolutely love.,"{both_dogs} waking together in the dark boot, over-the-shoulder, the cream dog blissful and delighted to be alive, wearing clear spherical glass space helmets, full faces visible through the glass, warm seam light",INT
+8,1,H,4,int,OTS,PULL,1,reflection,15,"Me, though? Me, I like to know exactly where we are before I get excited.","{both_dogs} in the red cabin interior, matte black dashboard, round wheel, over-the-shoulder two-shot looking out through the windshield at black space, {starman} at the wheel, opaque mirror-black visor showing no face, wearing clear spherical glass space helmets, full faces visible through the glass, bright",INT
+9,1,C,2,int,POV,SETTLE,0,dread,1,...Ah.,"point-of-view through the windshield of {void}, the vast black void and hard bright stars beyond the glass, enormous and empty, cold clarity",INT
+10,1,H,4,void,XWIDE,PULL,1,awe,11,"Right. So. Bit further from home than we usually manage, this.","{car} tiny in an extreme-wide black void of hard stars, two small helmeted dachshund silhouettes visible inside, the car dwarfed, no earth no planet, bright stars",EXT2
+11,1,C,2,int,CU,PUSH,0,joy,13,"Watson, of course, has already made his mind up. Full adventure. No notes.","{watson} close-up in the red cabin interior, matte black dashboard, round wheel, bouncing with delight ready for adventure, wearing a clear spherical glass space helmet, full face visible through the glass, warm dash glow",INT
+12,1,C,2,int,MED,SETTLE,0,tender,14,"And I have never, not once in my life, said no to that face.","{bentley} medium in the red cabin interior, matte black dashboard, round wheel looking fondly at Watson off-frame, tender, wearing a clear spherical glass space helmet, full face visible through the glass, soft light",INT
+13,1,C,2,int,OTS,PUSH,0,reflection,15,You are probably wondering how two dogs from the Hague end up out here. Well.,"{bentley} over-the-shoulder in the red cabin, matte black dashboard, turning toward camera as a warm dissolve begins, raconteur, wearing a clear spherical glass space helmet, full face visible, warm dash glow",INT
+14,1,H,4,home,WIDE,SETTLE,1,nostalgia,14,"The Hague. Two dachshunds, four very short legs, and dreams the size of houses.","two bare-fur long-haired dachshunds {both_dogs} in {home}, wide, no helmets, warm golden Dutch afternoon light, cosy canal-side garden, soft memory focus",HOME
+15,1,C,2,home,MED,PUSH,0,joy,14,"Watson found the car first. Sitting there in the sun, boot wide open, waiting.","bare-fur {watson} in {home} medium, ears up, spotting something off-frame, no helmet, warm daylight",HOME
+16,1,C,2,home,CU,PUSH,0,mischief,15,"I found the open boot. And I had, if I say so myself, an idea.","bare-fur {bentley} in {home} close-up at an open car boot with a scheming grin, no helmet, golden light",HOME
+17,1,H,4,home,LOW,CRANE,1,joy,15,"So in we went. No ticket, no plan, no earthly clue. Best kind of trip.","two bare-fur dachshunds {both_dogs} leaping into an open car boot in {home}, low angle, no helmets, warm daylight, playful",HOME
+18,1,C,2,home,HIGH,SETTLE,0,tension,13,"In hindsight, I possibly should have mentioned the plan to Watson. Ah well.","high angle looking down as a boot lid swings shut over two bare-fur dogs in {home}, the daylight narrowing to a sliver, no helmets",HOME
+19,1,H,4,launch,XCU,PUSH,1,fear,14,"Then the ground said goodbye, and everything shook like the end of the world—","extreme close inside the dark boot, {both_dogs} pressed together by violent force, rattling, wide-eyed, wearing clear spherical glass space helmets, full faces visible, near-black with a single hard rim of light, chaotic motion, no rocket visible",INT
+20,1,C,2,void,WIDE,SETTLE,0,awe,10,"—and then, all at once, everything went very, very quiet.","{car} drifting free and silent in a wide black void, the boot lid ajar, everything suddenly still, hard stars, cold clarity",EXT
+21,1,C,2,ext,MED,CRANE,0,tension,15,"Now. Only one way to the good seats, and it was straight out the boot.","{car} exterior in space, medium, one helmeted dachshund head {bentley} emerging from the open rear boot into the void, camera craning, wearing a clear spherical glass space helmet, full face visible, hard star light",EXT2
+22,1,H,4,ext,OTS,PUSH,1,tension,17,"Paws where you can, grip like you mean it, and whatever you do, do not look down.","{bentley} gripping the smooth hull of {car} with front paws, over-the-shoulder, body trailing weightless, deep star-field behind, wearing a clear spherical glass space helmet, full face visible through the glass, hard key light",EXT2
+23,1,C,2,ext,LOW,PUSH,1,comedy,9,"Watson, naturally, looked straight down. Watson always looks down.","{watson} on the hull of {car}, low angle, scrabbling and looking down in comic alarm, wearing a clear spherical glass space helmet, full face visible through the glass, stars behind",EXT2
+24,1,H,4,ext,CU,PUSH,1,love,14,"Gotcha. I have got you. I have always got you, you daft, wonderful animal.","close on the hull of {car}, {both_dogs}, the cream dog slipping and the chocolate dog clamping a paw onto it, both hanging on, wearing clear spherical glass space helmets, full faces visible through the glass, dramatic light, no melt",EXT2
+25,1,H,4,ext,XWIDE,PULL,1,joy,10,Two sausage dogs. One spaceship. Zero regrets. Well. Nearly zero.,"extreme-wide, {both_dogs} spread on the hull of {car} against an enormous black star-field, tiny and glorious, wearing clear spherical glass space helmets, full faces visible through the glass",EXT2
+26,1,H,4,overhead,OVER,PULL,1,awe,12,...Okay. Maybe the one regret. That is a very long way down.,"{car} seen from directly overhead looking straight down, tiny against an immense luminous carpet of stars far below, extreme dwarfing scale, holy-cow spectacle",EXT
+27,1,C,2,ext,CU,PUSH,0,tension,17,"Nearly there now. It is always the last bit that is the hard part, is it not.","close on a paw reaching the cabin door seam of {car}, hauling, wearing a clear spherical glass space helmet, full face visible through the glass, stars behind",EXT2
+28,1,C,2,int,OTS,CRANE,0,tension,2,And then—,"{both_dogs} tumbling over the sill into the red cabin, matte black dashboard, over-the-shoulder, motion, wearing clear spherical glass space helmets, full faces visible, warm dash glow",INT
+29,1,H,4,int,MED,SETTLE,1,relief,15,"—the good seats. Paws on the dash, warm and safe. Told you, did I not.","{both_dogs} flopped into the passenger seat of the red cabin interior, matte black dashboard, round wheel paws up on the dash panting and safe, {starman} at the wheel, opaque mirror-black visor showing no face, wearing clear spherical glass space helmets, full faces visible through the glass, relief, bright",INT
+30,1,C,2,int,CU,PUSH,0,relief,12,"We made it, Watson. We always make it. Every single time, somehow.","{both_dogs} close-up catching their breath in the red cabin, a warm look between them, wearing clear spherical glass space helmets, full faces visible, soft warm light",INT
+31,1,C,2,int,OTS,PUSH,0,surprise,9,"...Oh. Hello. Did not see you sitting there, mate.","{bentley} over-the-shoulder in the red cabin interior, matte black dashboard, round wheel noticing {starman} at the wheel, opaque mirror-black visor showing no face for the first time, surprise, wearing a clear spherical glass space helmet, full face visible through the glass",INT
+32,1,C,2,starman,MED,SETTLE,0,humour,12,Quiet type. Hands at ten and two. Does not say much. Respect.,"{starman} at the wheel, opaque mirror-black visor showing no face, medium, gloved hands at ten and two, blank opaque visor reflecting stars, utterly still and anonymous, the red cabin interior, matte black dashboard, round wheel",INT
+33,1,C,2,int,CU,PUSH,0,tension,13,"Watson, though. Watson had gone very still, staring at something in the mirror.","{watson} close-up in the red cabin, matte black dashboard, settling happy then going still, caught by something in a mirror, wearing a clear spherical glass space helmet, full face visible, soft dash glow",INT
+34,1,H,4,mirror,XCU,PULL,0,dread,13,"And there it was. Home. Little blue thing in the glass, getting smaller.","extreme close on the small side wing-mirror of the car {mirror} holding a small receding blue Earth, the rest of the cabin dark, low light",INT
+35,1,C,2,int,MED,PUSH,0,deflect,9,"Nothing to worry about, though! Nothing at all! Here—look—radio!","{bentley} medium in the red cabin interior, matte black dashboard, round wheel pawing brightly at the dashboard radio to distract, wearing a clear spherical glass space helmet, full face visible through the glass, warm dash glow",INT
+36,1,C,2,int,CU,PUSH,0,hope,15,"Every good road trip needs a tune, that is just the rules, everyone knows that.","{bentley} close-up in the red cabin interior, matte black dashboard, round wheel fiddling the radio dial with comic hope, wearing a clear spherical glass space helmet, full face visible through the glass, amber glow",INT
+37,1,C,2,int,XCU,SETTLE,0,dread,13,...Just static. That is all it is. Just a little bit of static.,"extreme close on the dark radio dial in the red cabin dashboard {int} interior, cold dead static, no signal, dim with a faint amber pilot light",INT
+38,1,H,4,spectacle,XWIDE,PULL,0,awe,14,It is big out here. Bigger than I—bigger than I thought it would be.,"{car} small within an extreme-wide luminous star-field {spectacle}, cold and beautiful, the car a bright speck",EXT
+39,1,C,2,int,CU,SETTLE,0,worry,15,"...Watson? Hey. We are together, are we not. That is the trick. The whole trick.","{watson} close-up in the red cabin interior, matte black dashboard, round wheel not looking at Bentley, worry settling, wearing a clear spherical glass space helmet, full face visible through the glass, soft light",INT
+40,1,H,4,ext,XWIDE,PULL,1,dread,17,So whatever it was that got us all the way up here—we are in it together now.,"{car} drifting forward and shrinking into an extreme-wide black void {spectacle}, seen from behind, one small helmeted dachshund face turned back toward camera, worried, hard stars",EXT
+41,2,H,4,spectacle,XWIDE,PULL,0,reflection,8,So. Day two of the best trip ever.,,
+42,2,C,2,int,MED,PUSH,0,joy,5,Breakfast is starlight. Unlimited refills.,,
+43,2,C,2,int,CU,PUSH,0,joy,10,Watson's not worried about a thing. Keep it that way.,,
+44,2,C,2,int,OTS,PUSH,0,relief,2,See? Company.,,
+45,2,H,4,int,WIDE,SETTLE,1,warmth,11,For a minute it's a road trip. Just a long one.,,
+46,2,C,2,int,XCU,PUSH,0,nostalgia,6,That tune. He knows that tune.,,
+47,2,H,4,home,WIDE,SETTLE,1,nostalgia,9,"A kitchen. A warm floor. That song, every morning.",,
+48,2,C,2,home,XCU,SETTLE,1,grief,7,"Home had a shape. Small, and ours.",,
+49,2,C,2,int,CU,PUSH,0,tension,5,...then the song went strange.,,
+50,2,C,2,int,MED,PUSH,0,tension,6,No no no - come back-,,
+51,2,C,2,int,OTS,SETTLE,0,denial,10,Just a tunnel. We always come out the other side.,,
+52,2,H,4,mirror,XCU,PULL,0,dread,5,Smaller than yesterday. I checked.,,
+53,2,C,2,int,CU,SETTLE,0,dread,1,Huh.,,
+54,2,C,2,int,MED,PUSH,0,deflect,4,-right! Enough moping. Adventure!,,
+55,2,H,4,spectacle,XWIDE,PULL,1,awe,7,Look at THAT. Nobody's ever seen that.,,
+56,2,C,2,int,CU,PUSH,0,tender,7,He's happy. That's the whole job now.,,
+57,2,C,2,starman,OTS,SETTLE,0,reflection,10,"You knew, didn't you. You've been out here a while.",,
+58,2,C,2,starman,XCU,SETTLE,0,grief,3,...yeah. Thought so.,,
+59,2,H,4,int,WIDE,PULL,1,dread,8,"Three of us. One car. Going... where, exactly.",,
+60,2,C,2,int,MED,SETTLE,0,loneliness,8,Third time round. It's the only song left.,,
+61,2,C,2,int,CU,PUSH,0,tender,9,He thinks it's on repeat because I like it.,,
+62,2,C,2,int,OTS,SETTLE,0,grief,7,I stopped looking forward. Started looking back.,,
+63,2,H,4,mirror,XCU,PULL,0,grief,8,You can watch a whole world get small.,,
+64,2,C,2,int,CU,PUSH,1,denial,7,Great view! Best view! Everything's - great.,,
+65,2,C,2,int,MED,SETTLE,0,grief,6,...and then the song ran out.,,
+66,2,H,4,int,WIDE,SETTLE,1,grief,10,No music. No station. Just the quiet he'd always had.,,
+67,2,C,2,starman,CU,SETTLE,0,reflection,7,Didn't even flinch. Eight years of this.,,
+68,2,C,2,int,OTS,PUSH,0,unease,9,"Watson noticed. He notices me first, the world second.",,
+69,2,C,2,int,MED,PUSH,0,deflect,11,Hey - who needs a radio! We'll make our own fun!,,
+70,2,H,4,spectacle,XWIDE,PULL,1,dread,13,"Out here, fun is a small word. The dark is a big one.",,
+71,2,C,2,int,CU,SETTLE,0,grief,9,Here's the thing I hadn't said. Not to him.,,
+72,2,H,4,mirror,XCU,PULL,1,grief,7,We aren't going home. There's just... on.,,
+73,2,C,2,int,OTS,PUSH,0,tender,12,And he's looking at me like he can hear me think it.,,
+74,2,C,2,int,CU,SETTLE,0,resolve,11,So I did the only thing a good dog can do.,,
+75,2,C,2,int,MED,PUSH,0,resolve,8,I decided we were going somewhere. Somewhere good.,,
+76,2,C,2,int,CU,PUSH,0,hope,6,If I believed it hard enough-,,
+77,2,C,2,int,OTS,PUSH,0,hope,4,-he'd believe it too.,,
+78,2,H,4,spectacle,WIDE,CRANE,1,hope,8,See that? Out there? That's where we're headed.,,
+79,2,C,2,int,CU,PUSH,0,hope,6,A whole planet. Just for us.,,
+80,2,H,4,int,WIDE,PULL,1,resolve,8,And so could he. That was the plan.,,
+81,3,H,4,spectacle,XWIDE,CRANE,0,hope,6,A good captain sells the destination.,,
+82,3,C,2,int,MED,PUSH,0,joy,8,"Let me tell you about the planet, Watson.",,
+83,3,H,4,wish,WIDE,PULL,1,wonder,10,Whippets. A whole world of them. They'll think we're exotic.,,
+84,3,C,2,wish,MED,PUSH,1,comedy,8,"They've got a king. Obviously. Honoured guests, us.",,
+85,3,H,4,wish,CU,PUSH,1,warmth,6,"And sausages, Watson. Every single morning.",,
+86,3,C,2,int,CU,PUSH,0,tender,5,I'd have promised him anything.,,
+87,3,C,2,int,OTS,SETTLE,0,reflection,8,...I could see it myself. That's the thing.,,
+88,3,H,4,spectacle,XWIDE,PULL,1,dread,12,"Out the window, still just dark. We weren't looking out the window.",,
+89,3,C,2,starman,CU,SETTLE,1,humour,10,Even the quiet one tapped along. Everybody aboard the story.,,
+90,3,H,4,int,WIDE,SETTLE,1,warmth,8,"For a while, it worked. It really worked.",,
+91,3,C,2,int,MED,SETTLE,0,tender,9,He ran in his sleep. I watched him run.,,
+92,3,C,2,int,XCU,SETTLE,0,grief,5,I couldn't sleep at all.,,
+93,3,C,2,mirror,XCU,PULL,1,grief,7,Nothing left in the mirror to check.,,
+94,3,C,2,int,OTS,SETTLE,0,grief,9,You can't get lost in a place you built.,,
+95,3,H,4,spectacle,XWIDE,PULL,1,grief,4,We weren't getting closer.,,
+96,3,C,2,int,OTS,SETTLE,1,grief,5,I looked anyway. Every morning.,,
+97,3,C,2,int,CU,SETTLE,0,crack,9,...one morning I ran out of things to say.,,
+98,3,C,2,int,OTS,PUSH,0,unease,6,Watson noticed. Of course he did.,,
+99,3,C,2,int,CU,SETTLE,1,grief,9,He looked at me. And I had no joke.,,
+100,3,H,4,int,MED,CRANE,1,crack,9,Ten minutes of brave. That was all I had.,,
+101,3,C,2,int,LOW,CRANE,1,grief,5,Nobody was holding me up.,,
+102,3,C,2,starman,MED,PUSH,1,turn,0,,,
+103,3,C,2,int,CU,SETTLE,0,grief,0,,,
+104,3,H,4,starman,XCU,CRANE,1,peak,0,,,
+105,3,C,2,int,XCU,PUSH,1,undone,1,...oh.,,
+106,3,C,2,starman,MED,SETTLE,1,reflection,8,He wasn't driving anymore. Maybe he never was.,,
+107,3,C,2,int,OTS,SETTLE,0,tender,11,The quiet one had been waiting to do that. Eight years.,,
+108,3,H,4,int,WIDE,PULL,1,love,6,The trip was never about arriving.,,
+109,3,C,2,int,CU,SETTLE,0,confession,8,"There's no planet, Watson. I made it up.",,
+110,3,C,2,int,OTS,PUSH,0,tender,6,And he just... leaned on me.,,
+111,3,C,2,int,CU,SETTLE,0,realisation,12,He never wanted a planet. He wanted the seat next to mine.,,
+112,3,H,4,spectacle,WIDE,CRANE,1,wonder,9,And then - maybe because we stopped needing it-,,
+113,3,C,2,int,CU,PUSH,1,wonder,4,-Watson saw it first.,,
+114,3,H,4,int,LOW,PUSH,1,joy,0,"[WATSON'S SOUND - joyful howl, head thrown back]",,
+115,3,H,4,wish,XWIDE,PULL,1,warmth,8,Whippets. A king. Breakfast. Exactly like I promised.,,
+116,3,C,2,int,OTS,SETTLE,0,reflection,6,Real or not. I've stopped asking.,,
+117,3,C,2,int,MED,PUSH,0,resolution,11,The future worth having wasnt out there. It was in here.,,
+118,3,H,4,spectacle,WIDE,PULL,1,resolution,10,Whatever brought us together - we were in it together.,,
+119,3,H,4,ext,XWIDE,PULL,1,reflection,12,"Two dachshunds, a quiet man, and a red car never coming back.",,
+120,3,H,4,spectacle,XWIDE,PULL,1,warmth,5,...best trip we ever took.,,
