@@ -1,115 +1,63 @@
-# Render artifacts — generated outputs, regenerable, live on the box. Never tracked.
-**/projects/**/stills/
-**/projects/**/clips/
-**/projects/**/*.mp4
-**/projects/**/voiceover.*
-**/projects/**/*.srt
-**/projects/**/storyboard*.json
-**/projects/**/audio_credits.txt
-**/projects/**/metadata.json
-**/projects/**/thumbnail.*
-**/projects/**/review.html
-**/projects/**/*.json.backup
-**/stills/_backup/
+# ── Pipeline .gitignore ──────────────────────────────────────────────
+# Rule: ignore RENDER OUTPUT and box dumps. Keep SOURCE-OF-TRUTH
+# (master.csv, code, docs, canon/channel.json, reference plates, _skip.png).
+# Never `git add -A`; add named paths.
 
-# Temp/scratch, logs, in-place backups — never commit
-*TEMP*
-*.log
-*.py.pre_*
-*.py.backup
-*.py.bak*
-**/projects/**/*.mp3
+# ---- render output (regenerable, large) ----
+**/clips/
+**/stills/
+**/grid-b*/
+**/thumb_candidates/
+**/modea/
+**/_shipped/
+**/*.mp4
+**/*.mov
+**/voiceover.mp3
+**/_voice_part_*.mp3
+**/vo_clips/
+**/vo_map.json
+**/voiceover.json
+**/whisper*.json
+**/narration.txt
+**/beats.json
+**/beats_full.json
+**/engine_beats.json
+**/storyboard.json
+**/durations.json
+**/_index.json
 
-# Derived pipeline artifacts — regenerable from script.md + beat scripts
-**/projects/**/beats.json
-**/projects/**/beats_full.json
-**/projects/**/durations.json
-**/projects/**/ep_audio.*
-**/projects/**/modeb_review.html
-**/projects/**/script.txt
-synthetic/ep1_beats_*.json
-synthetic/ep1_narration.txt
-synthetic/synthetic_modeA_beats_index.json
+# ---- per-beat still candidates (grid) anywhere ----
+**/[0-9][0-9][0-9]-[0-9][0-9].png
 
-# Python
+# ---- box dumps / scratch (from the 20 Jul status) ----
+*_from_box.json
+*_from_box.md
+/pipeline/
+_hold_*/
+
+# ---- python / env ----
 __pycache__/
 *.pyc
-.venv/
-venv/
-
-# Env / secrets — never commit
 .env
-*token.json
-client_secret.json
-
-# OS noise
-.DS_Store
-.obsidian/
-clips/
-*.docx
-~$*
-voiceover.mp3
-voiceover.json
-
-remotion/node_modules/
-remotion/out/
-remotion/.remotion/
-
-# Pipeline-generated artifacts (regenerated every run — never track)
-.review_current
-.mc_jobs/
-**/_index.json
-**/engine_beats.json
-**/modea_engine_beats.json
-**/modea_index.json
-**/*_audio.txt
-**/*_audio.manifest.json
-
-# Local backups from idempotent patches
+venv/
 *.pre_*
-*.bak*
 
-# Filmora / office clutter
-*.wfp
-*.pptx
+# ── EXPLICIT KEEPS (belt-and-braces; these are NOT ignored) ──
+# master.csv is the film-as-data — always tracked
+!**/master.csv
+# reference plates + skip tile are small, durable assets
+!**/characters/*.png
+!shared/_skip.png
+# canon / config
+!**/channel.json
+!**/canon.json
+!**/rulebook.json
 
-# Loose media anywhere (renders, music, thumbnails, stray stills) — never track
-*.mp4
-*.mp3
-*.jpeg
-*.jpg
-*.png
-*.wav
-*.mov
-
-# Per-run pipeline artifacts (newer filenames — regenerated every render)
-**/projects/**/render_policy.json
-**/projects/**/thumbnail_selection.json
-**/projects/**/publish.json
-
-# Stray local test scaffolding — never track
-inbox-test/
-**/projects/pipetest*/
-
-# Inbox queues — transient staging the runner consumes; authored .md lives elsewhere
-**/batch_inbox/
-**/inbox/
-
-# committed metadata mirrors - force them in even if *.json is ignored elsewhere
-!*/channel_dump.json
-success-coach/channel_dump.json
-*token*.json
-dumps/
-
-# runtime artifacts — regenerable, should never have been tracked-noise
-shared/all_batches_manifest_*.json
+**/client_secret.json
+**/token.json
 **/channel_dump.json
-shared/batch_plan.json
-plan_*.json
-shared/plan_*.json
-secrets/
-*/projects/*/clips/
-*/projects/*/stills/
-*/projects/*/modea/
-*/projects/*/thumb_candidates/
-sacred-dawn/projects/enoch-moon/narration.txt
+**/*.credentials.json
+.DS_Store
+**/.DS_Store
+.obsidian/
+*.docx
