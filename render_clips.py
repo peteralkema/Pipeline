@@ -1,29 +1,31 @@
 #!/usr/bin/env python3
 """
 render_clips.py -- turn placed stills into clips, doctrine-varied and floor-first.
+ONE copy at repo root serves every channel: resolves shared/ by walking up for .git,
+resolves each channel grade/suffix off the OUTPUT PATH (--out) via the engine.
 
-Every beat rides the Ken Burns floor with its own doctrine MOVE (push/pull/crane/
-settle/static) read from the `move` column -- so the floor rotates motion across the
-film at $0, never a uniform slideshow. A beat is upgraded to Kling only when its `air`
-column marks visible suspended matter AND it carries a `motion` prompt (gate before
-spend). `--floor-only` forces every beat to Ken Burns regardless of `air` (the
-all-floor cut); drop it later and mark specific air beats to add Kling additively.
+    python render_clips.py \
+        --csv sacred-dawn/projects/<slug>/master.csv \
+        --stills sacred-dawn/projects/<slug>/stills \
+        --out sacred-dawn/projects/<slug>/clips --floor-only
 
-Reuses the shared engine's ken_burns_still(move=...) and animate_still WITHOUT
-modifying them. Reads the master CSV in beat order (row N == shot_{N:03d}).
-Resume-safe. Channel-agnostic. Place in the CHANNEL dir; run from there.
-
-    python render_clips.py --csv projects/<v>/beats/master.csv \
-        --stills projects/<v>/stills --out projects/<v>/clips --floor-only
-
-`move`  push|pull|crane|settle|static   (blank -> push)
-`air`   kling|air|visible|yes|y|1|true  -> Kling (needs `motion`); else Ken Burns
+move  push|pull|crane|settle|static   (blank -> push)
+air   kling|air|visible|yes|y|1|true  -> Kling (needs motion); else Ken Burns
 """
 import argparse, csv, sys
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-SHARED = HERE.parent / "shared"
+
+def _repo_root():
+    p = Path(__file__).resolve()
+    for cand in [p.parent, *p.parents]:
+        if (cand / ".git").exists():
+            return cand
+    return p.parent
+
+
+REPO = _repo_root()
+SHARED = REPO / "shared"
 if str(SHARED) not in sys.path:
     sys.path.insert(0, str(SHARED))
 import recreation_pipeline as rp  # noqa: E402
@@ -45,8 +47,6 @@ def main():
     ap.add_argument("--stills", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--floor-only", action="store_true", help="force all Ken Burns (ignore air/Kling)")
-    ap.add_argument("--duration", type=float, default=None,
-                    help="seconds per clip (Ken Burns only); default SHOT_DURATION")
     ap.add_argument("--force", action="store_true", help="re-render clips already on disk")
     ap.add_argument("--dry-run", action="store_true", help="report the split + cost, render nothing")
     args = ap.parse_args()
@@ -58,7 +58,6 @@ def main():
         die(f"CSV not found: {csv_path}")
     if not stills.is_dir():
         die(f"stills dir not found: {stills}")
-    dur = args.duration if args.duration else DURATION
     rows = list(csv.DictReader(csv_path.open()))
     if not rows:
         die("CSV has no rows.")
@@ -89,7 +88,7 @@ def main():
         die(f"unknown move value(s): {bad_move[:10]} -- use push|pull|crane|settle|static.")
     if kling_no_motion:
         die(f"{len(kling_no_motion)} air/Kling beat(s) with NO motion: {kling_no_motion[:20]} "
-            f"-- fill `motion`, clear `air`, or use --floor-only.")
+            f"-- fill motion, clear air, or use --floor-only.")
 
     kling = [p for p in plan if p[3] == "kling"]
     print(f"{len(plan)} beats | Kling {len(kling)} (${len(kling)*KLING_COST:.2f}) | "
@@ -110,7 +109,7 @@ def main():
             rp.animate_still(still, arg, dst)
         else:
             print(f"  [{beat:03d}] ken burns / {arg}")
-            rp.ken_burns_still(still, dst, dur, move=arg)
+            rp.ken_burns_still(still, dst, DURATION, move=arg)
         made += 1
 
     print(f"\nOK clips -> {out}")
