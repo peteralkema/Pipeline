@@ -16,7 +16,21 @@
     "visible machinery",
     "spiral galaxy",
     "galaxy",
-    "nebula"
+    "nebula",
+    "unfurled scroll",
+    "rolled parchment scroll",
+    "open scroll laid on a table",
+    "book resting on a lectern",
+    "open book on a reading stand",
+    "book propped on a carved wooden stand",
+    "lectern",
+    "reading stand",
+    "scholar's study interior",
+    "library interior with rows of bookshelves",
+    "writing desk beneath a tall window",
+    "window directly behind a writing desk",
+    "quill pen and inkwell on a desk",
+    "scattered loose manuscript pages strewn across a surface"
   ],
   "motion_rules": [],
   "people_directive": ""
