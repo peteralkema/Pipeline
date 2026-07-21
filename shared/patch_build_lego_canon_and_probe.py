@@ -63,7 +63,37 @@ ANCHOR_2 = '''    rows = load_master(cfg)
 REPLACE_2 = '''    rows = load_master(cfg)
     if not has_col(rows, "phenomenon"):
         raise SystemExit("stills needs a 'phenomenon' column -- author first.")
-    # --beats a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
+    # beats=a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
+    # (1..N over the whole master, master order) into one grid-probe folder. A
+    # DASHLESS positional token (a --flag is eaten by the top-level parser before
+    # this command sees it). 1-based, matches calibrate.
+    _probe_beats = None
+    _bspec = None
+    for _a in list(argv):
+        if _a.startswith("beats="):
+            _bspec = _a.split("=", 1)[1]
+            argv = [x for x in argv if x != _a]
+            break
+    if _bspec is not None:
+        _probe_beats = set()
+        for _tok in _bspec.split(","):
+            _tok = _tok.strip()
+            if _tok:
+                _probe_beats.add(int(_tok))
+        if not _probe_beats:
+            raise SystemExit("beats= needs film indices 1..N, e.g. beats=1,58,231")
+        _nrows = len(rows)
+        _oob = sorted(n for n in _probe_beats if n < 1 or n > _nrows)
+        if _oob:
+            raise SystemExit(f"beats= out of range 1..{_nrows}: {_oob}")
+    wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})'''
+
+MARKER_2 = 'if _a.startswith("beats=")'
+
+# If the earlier (flat-index) --beats version already landed on the box, edit 2's
+# pristine ANCHOR_2 is gone. Accept that block as an alternate anchor -> same
+# REPLACE_2, so a re-patch heals a half-applied box instead of aborting.
+ALT_ANCHOR_2 = '''    # --beats a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
     # (1..N over the whole master, master order) into one grid-probe folder -- a
     # register/token spread, instead of whole blocks. 1-based, matches calibrate.
     _probe_beats = None
@@ -83,8 +113,6 @@ REPLACE_2 = '''    rows = load_master(cfg)
         if _oob:
             raise SystemExit(f"--beats out of range 1..{_nrows}: {_oob}")
     wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})'''
-
-MARKER_2 = "_probe_beats = None"
 
 # ---- edit 3: honour _probe_beats in the block loop -------------------------
 ANCHOR_3 = '''    for block in wanted:
@@ -136,24 +164,26 @@ def main():
     src = open(target, "r", encoding="utf-8").read()
 
     edits = [
-        ("canon load in load_config", ANCHOR_1, REPLACE_1, MARKER_1),
-        ("--beats parse in cmd_stills", ANCHOR_2, REPLACE_2, MARKER_2),
-        ("probe row-select in loop", ANCHOR_3, REPLACE_3, MARKER_3),
+        ("canon load in load_config", ANCHOR_1, REPLACE_1, MARKER_1, None),
+        ("--beats parse in cmd_stills", ANCHOR_2, REPLACE_2, MARKER_2, ALT_ANCHOR_2),
+        ("probe row-select in loop", ANCHOR_3, REPLACE_3, MARKER_3, None),
     ]
 
-    for name, anchor, replace, marker in edits:
+    for name, anchor, replace, marker, alt in edits:
         if marker in src:
             print("skip (already applied): %s" % name)
             continue
-        if anchor not in src:
+        use = anchor if anchor in src else (alt if (alt and alt in src) else None)
+        if use is None:
             sys.stderr.write("ERROR: anchor not found for %r -- ABORT (no write).\n"
-                             "The source differs from expected; do not force.\n" % name)
+                             "The source differs from expected; do not force. "
+                             "Paste `grep -nE 'beats=|--beats|_merged_canon|film ordinal' build_lego.py`.\n" % name)
             sys.exit(1)
-        if src.count(anchor) != 1:
+        if src.count(use) != 1:
             sys.stderr.write("ERROR: anchor for %r matches %d times (need 1) -- ABORT.\n"
-                             % (name, src.count(anchor)))
+                             % (name, src.count(use)))
             sys.exit(1)
-        src = src.replace(anchor, replace)
+        src = src.replace(use, replace)
         print("applied: %s" % name)
 
     if any(ord(c) > 127 for c in "".join([REPLACE_1, REPLACE_2, REPLACE_3])):

@@ -368,25 +368,32 @@ def cmd_stills(cfg, argv):
     rows = load_master(cfg)
     if not has_col(rows, "phenomenon"):
         raise SystemExit("stills needs a 'phenomenon' column -- author first.")
-    # --beats a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
-    # (1..N over the whole master, master order) into one grid-probe folder -- a
-    # register/token spread, instead of whole blocks. 1-based, matches calibrate.
+    rows = load_master(cfg)
+    if not has_col(rows, "phenomenon"):
+        raise SystemExit("stills needs a 'phenomenon' column -- author first.")
+    # beats=a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
+    # (1..N over the whole master, master order) into one grid-probe folder. A
+    # DASHLESS positional token (a --flag is eaten by the top-level parser before
+    # this command sees it). 1-based, matches calibrate.
     _probe_beats = None
-    if "--beats" in argv:
-        _i = argv.index("--beats")
-        _spec = argv[_i + 1] if _i + 1 < len(argv) else ""
-        argv = argv[:_i] + argv[_i + 2:]
+    _bspec = None
+    for _a in list(argv):
+        if _a.startswith("beats="):
+            _bspec = _a.split("=", 1)[1]
+            argv = [x for x in argv if x != _a]
+            break
+    if _bspec is not None:
         _probe_beats = set()
-        for _tok in _spec.split(","):
+        for _tok in _bspec.split(","):
             _tok = _tok.strip()
             if _tok:
                 _probe_beats.add(int(_tok))
         if not _probe_beats:
-            raise SystemExit("--beats needs film indices 1..N, e.g. --beats 1,58,231")
+            raise SystemExit("beats= needs film indices 1..N, e.g. beats=1,58,231")
         _nrows = len(rows)
         _oob = sorted(n for n in _probe_beats if n < 1 or n > _nrows)
         if _oob:
-            raise SystemExit(f"--beats out of range 1..{_nrows}: {_oob}")
+            raise SystemExit(f"beats= out of range 1..{_nrows}: {_oob}")
     wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})
     canon = canon_of(cfg)
     proj = Path(cfg["_project_dir"])
