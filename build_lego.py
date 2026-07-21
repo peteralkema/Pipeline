@@ -353,119 +353,203 @@ def cmd_calibrate(cfg, argv):
             cum = 0.0
 
 # ------------------------------------------------------------------ stills (ref-aware 4x grid)
-def cmd_stills(cfg, argv):
-    """Render the variant grid for one or more blocks, WITH reference attachment.
+def _stills_render(cfg, brows, out_dir, prefix_block, label):
+    """Render the 4-variant pick-set for a list of rows into out_dir.
 
-    Per beat: 4 real re-rolls if hero, 2 real + 2 _skip.png if connective.
-    Names {beat:03d}-{variant:02d}.png into ONE grid folder + GRID-INDEX.csv.
-    Reuses recreation_pipeline's proven /edit reference path (same as cmd_stills),
-    looped -- the piece the doc specifies but no single code path implemented for
-    reference mode. Resume-safe: existing files skipped.
-
-      build_lego.py stills --project P [N ...]
+    Per beat: 4 real re-rolls if hero, else 2 real + 2 skip-tiles. Filenames are
+    {clip:03d}-{v:02d}.png normally, or {block:02d}-{clip:03d}-{v:02d}.png when
+    prefix_block is True (cross-film probe -- clip_index repeats across blocks and
+    would collide). Resume-safe. Returns (real_count, index_rows).
     """
-    import re as _re
-    rows = load_master(cfg)
-    if not has_col(rows, "phenomenon"):
-        raise SystemExit("stills needs a 'phenomenon' column -- author first.")
-    rows = load_master(cfg)
-    if not has_col(rows, "phenomenon"):
-        raise SystemExit("stills needs a 'phenomenon' column -- author first.")
-    # beats=a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
-    # (1..N over the whole master, master order) into one grid-probe folder. A
-    # DASHLESS positional token (a --flag is eaten by the top-level parser before
-    # this command sees it). 1-based, matches calibrate.
-    _probe_beats = None
-    _bspec = None
-    for _a in list(argv):
-        if _a.startswith("beats="):
-            _bspec = _a.split("=", 1)[1]
-            argv = [x for x in argv if x != _a]
-            break
-    if _bspec is not None:
-        _probe_beats = set()
-        for _tok in _bspec.split(","):
-            _tok = _tok.strip()
-            if not _tok:
-                continue
-            if "/" not in _tok:
-                raise SystemExit("beats= needs block/clip pairs, e.g. beats=1/1,2/3,6/20")
-            _b, _c = _tok.split("/", 1)
-            _probe_beats.add((int(_b), int(_c)))
-        if not _probe_beats:
-            raise SystemExit("beats= needs block/clip pairs, e.g. beats=1/1,2/3,6/20")
-        _have = {(int(r["block_id"]), int(r["clip_index"])) for r in rows}
-        _oob = sorted(p for p in _probe_beats if p not in _have)
-        if _oob:
-            raise SystemExit("beats= not in master: %s" % ", ".join("%d/%d" % x for x in _oob))
-    wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})
+    import re as _re, shutil as _sh
     canon = canon_of(cfg)
-    proj = Path(cfg["_project_dir"])
-
     shared = Path(cfg["_channel_dir"]).parent / "shared"
     sys.path.insert(0, str(shared))
     try:
         import recreation_pipeline as rp
     except Exception as e:
-        raise SystemExit(f"cannot import recreation_pipeline from {shared}: {e}")
-
+        raise SystemExit("cannot import recreation_pipeline from %s: %s" % (shared, e))
     ref_mode = cfg.get("render_mode") == "reference"
     ref_map = cfg.get("reference_map", {}) if ref_mode else {}
     ref_chdir = Path(cfg["_channel_dir"])
-    # skip-tile is channel-AGNOSTIC: shared/_skip.png for all channels;
-    # a channel may override with characters/_skip.png. Resolve shared first.
-    _shared_skip = Path(cfg["_channel_dir"]).parent / "shared" / "_skip.png"
+    _shared_skip = shared / "_skip.png"
     _chan_skip = ref_chdir / "characters" / "_skip.png"
     skip_tile = _chan_skip if _chan_skip.exists() else _shared_skip
-
-    if _probe_beats is not None:
-        wanted = [0]  # single synthetic pass; the probe selects rows by (block, clip)
-    for block in wanted:
-        if _probe_beats is not None:
-            brows = [r for r in rows if (int(r["block_id"]), int(r["clip_index"])) in _probe_beats]
-        else:
-            brows = [r for r in rows if int(r["block_id"]) == block]
-        if _probe_beats is None:
-            gerrs = gate_block(brows, cfg, load_banned(cfg))
-            if gerrs:
-                print("\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
-        grid = (proj / "grid-probe") if _probe_beats is not None else (proj / f"grid-b{block:02d}")
-        grid.mkdir(parents=True, exist_ok=True)
-        index = []
-        real = 0
-        for r in brows:
-            ci = int(r["clip_index"])
-            raw = r["phenomenon"].strip()
-            prompt = rp._expand_canon(raw, canon)
-            refs = []
-            if ref_mode:
-                seen = set()
-                for t in _re.findall(r"\{([a-zA-Z_][a-zA-Z0-9_]*)\}", raw):
-                    if t in ref_map and t not in seen:
-                        seen.add(t)
-                        entry = ref_map[t]
-                        for f in (entry if isinstance(entry, list) else [entry]):
-                            refs.append(str(ref_chdir / f))
-            n_real = 4 if r["weight"] == "hero" else 2
-            for v in range(1, 5):
-                out = grid / f"{ci:03d}-{v:02d}.png"
-                index.append((ci, v, "real" if v <= n_real else "skip", out.name))
-                if out.exists():
-                    continue
-                if v <= n_real:
-                    print(f"  [{block}/{ci} v{v}] {'[ref:%d] ' % len(refs) if refs else ''}{prompt[:50]}...")
-                    rp.generate_still(prompt, out, reference_images=(refs or None))
-                    real += 1
+    out_dir.mkdir(parents=True, exist_ok=True)
+    index = []
+    real = 0
+    for r in brows:
+        b = int(r["block_id"]); ci = int(r["clip_index"])
+        raw = r["phenomenon"].strip()
+        prompt = rp._expand_canon(raw, canon)
+        refs = []
+        if ref_mode:
+            seen = set()
+            for t in _re.findall(r"\{([a-zA-Z_][a-zA-Z0-9_]*)\}", raw):
+                if t in ref_map and t not in seen:
+                    seen.add(t)
+                    entry = ref_map[t]
+                    for f in (entry if isinstance(entry, list) else [entry]):
+                        refs.append(str(ref_chdir / f))
+        n_real = 4 if r["weight"] == "hero" else 2
+        for v in range(1, 5):
+            name = ("%02d-%03d-%02d.png" % (b, ci, v)) if prefix_block else ("%03d-%02d.png" % (ci, v))
+            out = out_dir / name
+            index.append((b, ci, v, "real" if v <= n_real else "skip", name))
+            if out.exists():
+                continue
+            if v <= n_real:
+                tag = ("[ref:%d] " % len(refs)) if refs else ""
+                print("  [%d/%d v%d] %s%s..." % (b, ci, v, tag, prompt[:50]))
+                rp.generate_still(prompt, out, reference_images=(refs or None))
+                real += 1
+            else:
+                if skip_tile.exists():
+                    _sh.copy(skip_tile, out)
                 else:
-                    # connective skip-tile
-                    if skip_tile.exists():
-                        import shutil as _sh; _sh.copy(skip_tile, out)
-                    else:
-                        out.write_bytes(b"")  # empty placeholder; place.py hard-fails on a pick here
-        with open(grid / "GRID-INDEX.csv", "w", newline="") as f:
-            w = csv.writer(f); w.writerow(["clip_index", "variant", "kind", "file"]); w.writerows(index)
-        print(f"  block {block}: grid -> {grid} | {real} real stills (${real*0.08:.2f}) | GRID-INDEX.csv")
+                    out.write_bytes(b"")
+    return real, index
+
+
+def _write_grid_index(grid, index):
+    with open(grid / "GRID-INDEX.csv", "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["block_id", "clip_index", "variant", "kind", "file"])
+        w.writerows(index)
+
+
+def cmd_stills(cfg, argv):
+    """Render the variant grid.
+
+      build_lego.py stills --project P [BLOCK ...]     # whole block(s) -> grid-bNN
+      build_lego.py stills beats=1/1,2/3 --project P   # cross-film sample -> grid-probe
+    """
+    rows = load_master(cfg)
+    if not has_col(rows, "phenomenon"):
+        raise SystemExit("stills needs a 'phenomenon' column -- author first.")
+    proj = Path(cfg["_project_dir"])
+    beats = None
+    for a in list(argv):
+        if a.startswith("beats="):
+            beats = set()
+            for tok in a.split("=", 1)[1].split(","):
+                tok = tok.strip()
+                if not tok:
+                    continue
+                if "/" not in tok:
+                    raise SystemExit("beats= needs block/clip pairs, e.g. beats=1/1,2/3")
+                bb, cc = tok.split("/", 1)
+                beats.add((int(bb), int(cc)))
+            argv = [x for x in argv if x != a]
+            break
+    if beats is not None:
+        have = {(int(r["block_id"]), int(r["clip_index"])) for r in rows}
+        oob = sorted(p for p in beats if p not in have)
+        if oob:
+            raise SystemExit("beats= not in master: " + ", ".join("%d/%d" % p for p in oob))
+        brows = [r for r in rows if (int(r["block_id"]), int(r["clip_index"])) in beats]
+        real, index = _stills_render(cfg, brows, proj / "grid-probe", True, "probe")
+        _write_grid_index(proj / "grid-probe", index)
+        print("  probe: %d beats -> %s | %d real stills ($%.2f)" % (len(brows), proj / "grid-probe", real, real * 0.08))
+        return
+    wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})
+    for block in wanted:
+        brows = [r for r in rows if int(r["block_id"]) == block]
+        gerrs = gate_block(brows, cfg, load_banned(cfg))
+        if gerrs:
+            print("\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
+        grid = proj / ("grid-b%02d" % block)
+        real, index = _stills_render(cfg, brows, grid, False, "block %d" % block)
+        _write_grid_index(grid, index)
+        print("  block %d: grid -> %s | %d real stills ($%.2f) | GRID-INDEX.csv" % (block, grid, real, real * 0.08))
     print("\nNEXT: review each grid folder, promote ONE winner per beat to shot_NNN.png (the pick).")
+
+
+PROBE_PRIORITY = ("witness", "descent", "leviathan", "remnant", "deep", "codex")
+
+def _primary_token(phenomenon):
+    m = re.match(r"\s*\{([a-zA-Z_][a-zA-Z0-9_]*)\}", phenomenon or "")
+    return m.group(1) if m else None
+
+def cmd_probe(cfg, argv):
+    """Self-selecting visual probe -- NO numbering decisions.
+
+      build_lego.py probe --project P        # 20-beat register spread
+      build_lego.py probe 30 --project P     # N-beat spread
+
+    Picks one beat per canon token present (doubling the fail-hardest tokens),
+    spread across blocks, renders the 4-variant grid into grid-probe, prints the
+    verdict card. Block-prefixed filenames -- never collides.
+    """
+    n = 20
+    for a in argv:
+        if a.isdigit():
+            n = int(a); break
+    rows = load_master(cfg)
+    if not has_col(rows, "phenomenon"):
+        raise SystemExit("probe needs a 'phenomenon' column -- author first.")
+    by_tok = {}
+    for r in rows:
+        t = _primary_token(r["phenomenon"])
+        if t:
+            by_tok.setdefault(t, []).append(r)
+    for t in by_tok:
+        by_tok[t].sort(key=lambda r: (int(r["block_id"]), int(r["clip_index"])))
+    tokens = sorted(by_tok)
+    if not tokens:
+        raise SystemExit("probe: no canon tokens found in phenomena.")
+
+    def _spread(lst, k):
+        k = min(k, len(lst))
+        if k <= 0:
+            return []
+        if k == 1:
+            return [lst[len(lst) // 2]]
+        step = (len(lst) - 1) / (k - 1)
+        return [lst[round(i * step)] for i in range(k)]
+
+    picks = []
+    seen = set()
+    for t in tokens:
+        want = 2 if t in PROBE_PRIORITY else 1
+        for r in _spread(by_tok[t], want):
+            key = (int(r["block_id"]), int(r["clip_index"]))
+            if key not in seen:
+                seen.add(key); picks.append(r)
+    order = [t for t in PROBE_PRIORITY if t in by_tok] + [t for t in tokens if t not in PROBE_PRIORITY]
+    i = 2
+    while len(picks) < n:
+        added = False
+        for t in order:
+            if len(picks) >= n:
+                break
+            for r in _spread(by_tok[t], i):
+                key = (int(r["block_id"]), int(r["clip_index"]))
+                if key not in seen:
+                    seen.add(key); picks.append(r); added = True; break
+        i += 1
+        if not added:
+            break
+    picks.sort(key=lambda r: (int(r["block_id"]), int(r["clip_index"])))
+    picks = picks[:n]
+
+    proj = Path(cfg["_project_dir"])
+    real, index = _stills_render(cfg, picks, proj / "grid-probe", True, "probe")
+    _write_grid_index(proj / "grid-probe", index)
+    sel = ", ".join("%d/%d" % (int(r["block_id"]), int(r["clip_index"])) for r in picks)
+    nblocks = len({int(r["block_id"]) for r in picks})
+    print("\n  probe: %d beats across %d blocks -> %s" % (len(picks), nblocks, proj / "grid-probe"))
+    print("  beats: %s" % sel)
+    print("  %d real stills ($%.2f)" % (real, real * 0.08))
+    print("\n  VERDICT CARD -- eyeball before the $71 grid:")
+    print("    witness   : draped, austere, statuesque -- NOT sexualised")
+    print("    descent   : solid, opaque, hard shadow -- NOT glowing/translucent")
+    print("    leviathan : massive, bright-lit deep -- NOT murk")
+    print("    remnant   : giant vs tiny human -- scale reads")
+    print("    deep      : foreground anchor reads against the depth")
+    print("    codex     : monumental book -- NO scroll, NO lectern")
+    print("    relief    : sharp carved stone, bright -- NO murk")
+    print("  spell-breakers: text, watermarks, extra limbs, modern objects.")
 
 
 # ------------------------------------------------------------------ clips (picked stills -> animated clips)
@@ -523,7 +607,7 @@ def cmd_clips(cfg, argv):
 
 # ------------------------------------------------------------------ dispatch
 CMDS = {"normalise": cmd_normalise, "sweep": cmd_sweep, "film": cmd_film,
-        "blocks": cmd_blocks, "stills": cmd_stills, "clips": cmd_clips,
+        "blocks": cmd_blocks, "stills": cmd_stills, "probe": cmd_probe, "clips": cmd_clips,
         "audio": cmd_audio, "calibrate": cmd_calibrate}
 
 def main():
@@ -531,9 +615,10 @@ def main():
     ap.add_argument("command", choices=list(CMDS))
     ap.add_argument("--project", required=True)
     ap.add_argument("rest", nargs="*")
-    args = ap.parse_args()
+    args, _extra = ap.parse_known_args()
+    rest = list(args.rest) + list(_extra)
     cfg = load_config(args.project)
-    CMDS[args.command](cfg, args.rest)
+    CMDS[args.command](cfg, rest)
 
 if __name__ == "__main__":
     main()
