@@ -386,14 +386,18 @@ def cmd_stills(cfg, argv):
         _probe_beats = set()
         for _tok in _bspec.split(","):
             _tok = _tok.strip()
-            if _tok:
-                _probe_beats.add(int(_tok))
+            if not _tok:
+                continue
+            if "/" not in _tok:
+                raise SystemExit("beats= needs block/clip pairs, e.g. beats=1/1,2/3,6/20")
+            _b, _c = _tok.split("/", 1)
+            _probe_beats.add((int(_b), int(_c)))
         if not _probe_beats:
-            raise SystemExit("beats= needs film indices 1..N, e.g. beats=1,58,231")
-        _nrows = len(rows)
-        _oob = sorted(n for n in _probe_beats if n < 1 or n > _nrows)
+            raise SystemExit("beats= needs block/clip pairs, e.g. beats=1/1,2/3,6/20")
+        _have = {(int(r["block_id"]), int(r["clip_index"])) for r in rows}
+        _oob = sorted(p for p in _probe_beats if p not in _have)
         if _oob:
-            raise SystemExit(f"beats= out of range 1..{_nrows}: {_oob}")
+            raise SystemExit("beats= not in master: %s" % ", ".join("%d/%d" % x for x in _oob))
     wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})
     canon = canon_of(cfg)
     proj = Path(cfg["_project_dir"])
@@ -415,15 +419,16 @@ def cmd_stills(cfg, argv):
     skip_tile = _chan_skip if _chan_skip.exists() else _shared_skip
 
     if _probe_beats is not None:
-        wanted = [0]  # single synthetic pass; the probe selects rows by film ordinal
+        wanted = [0]  # single synthetic pass; the probe selects rows by (block, clip)
     for block in wanted:
         if _probe_beats is not None:
-            brows = [r for i, r in enumerate(rows, 1) if i in _probe_beats]
+            brows = [r for r in rows if (int(r["block_id"]), int(r["clip_index"])) in _probe_beats]
         else:
             brows = [r for r in rows if int(r["block_id"]) == block]
-        gerrs = gate_block(brows, cfg, load_banned(cfg))
-        if gerrs:
-            print("\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
+        if _probe_beats is None:
+            gerrs = gate_block(brows, cfg, load_banned(cfg))
+            if gerrs:
+                print("\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
         grid = (proj / "grid-probe") if _probe_beats is not None else (proj / f"grid-b{block:02d}")
         grid.mkdir(parents=True, exist_ok=True)
         index = []
