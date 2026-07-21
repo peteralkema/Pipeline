@@ -82,7 +82,7 @@ Sacred Dawn keeps the **curiosity** and drops the **fabrication** — and this i
 
 - **The block:** ~3 minutes = 40 final beats → **160 candidate stills (4 variants each) → the human picks 40 → 40 Kling image-to-video clips.** One music track per block. The **160→40 pick is gospel and will never be automated — it is the creative act.** Everything else is plumbing.
 - **The feature:** N blocks laid along a **narrative spine** (not N montages in a pile). A 30-min film = 10 blocks + a trailer cold-open (cut LAST from the best shot of each block, planting the film's biggest open loop) + a closing beat that pays off the promise and seeds the sequel.
-- **VO rides ABOVE the visuals** — carries story and curiosity, never captions the screen ("here is X, here is Y" causes drift). Loose thematic coupling means it can't drift out of sync because it was never locked to it. Voice: Inworld **Elliot** at speed 1.0 = **143 WPM** (measured). Container = 40 clips × 5s = 3:20; script each block to **~430 words** (~3:00 of speech, ~15s breathing room). Word count is the lever, never the speed dial.
+- **VO rides ABOVE the visuals** — carries story and curiosity, never captions the screen ("here is X, here is Y" causes drift). Loose thematic coupling means it can't drift out of sync because it was never locked to it. Voice: Inworld **Elliot** at speed 1.0 = **159 WPM** (measured). Container = 40 clips × 5s = 3:20; script each block to **~430 words** (~3:00 of speech, ~15s breathing room). [TIMING SUPERSEDED by _LEGO.md section 0.0: the shipping model is ONE continuous whole-film narration.txt and a ~6-13 word/beat band calibrated to the 200s seams, not a per-block ~430-word target.] Word count is the lever, never the speed dial.
 - **Retention (banked v1, still true):** past the open, retention is decided by whether it's an *escalating STORY, not a concept-explainer.* Promise early, deliver late; one recurring escalating spine; engineer against the early 2–3% cliff (context-dump open) and the mid-video ~50–60% cliff (human thread abandoned for explanation). The channel's BEST holder is its LONGEST video (*The Watchers' Daughters*, 33 min) — **length is survivable; an unplateaued curve is fatal.** A plateau is built by open loops and act-break re-hooks.
 - **The flagship law (banked v1):** the channel's *worst-retaining but well-clicked* video = proven demand + broken execution = the highest-leverage flagship candidate. Mine the demand you've already paid to discover, don't chase a new topic.
 
@@ -119,7 +119,7 @@ Sacred Dawn keeps the **curiosity** and drops the **fabrication** — and this i
 ## 10. CHANNEL CONFIG & FACTS
 - **Handle:** `@sacredawn` · **Display name:** Sacred Dawn · **Channel ID:** `UCs-VNV8IY6eiklcKprDWqIA` (connected to NexLev).
 - **`channel:` header:** `sacred_dawn` → resolves to `sacred-dawn/`.
-- **Voice:** `voice_id: "Elliot"`, model `inworld-tts-1.5-max`, measured **143 WPM** at speed 1.0.
+- **Voice:** `voice_id: "Elliot"`, model `inworld-tts-1.5-max`, measured **159 WPM** at speed 1.0 (supersedes the earlier 143; re-measured -- see _LEGO.md section 0.0).
 - **`image_model`:** MUST be `nano_banana_2` (set this session; was unset/flux — the murk fork).
 - **Music:** `{dir: "music", tracks: 3, crossfade_seconds: 2, level: 0.07}`; per-block unique track for a feature (music escalates across the film).
 - **Category:** Entertainment (`24`). **Paths:** films `sacred-dawn/projects/<slug>/`; batch inbox `sacred-dawn/batch_inbox/`.
