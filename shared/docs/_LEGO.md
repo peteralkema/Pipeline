@@ -9,6 +9,33 @@
 
 # _LEGO.md -- the channel-agnostic pathway for cinematic feature videos
 
+## 0.0 QUICK START -- ZERO-QUESTION START (read this first; it overrides any stale number below)
+
+Six things a fresh reader must NOT have to ask. If the body contradicts this block, THIS block wins.
+
+1. **AUTHORING WORD TARGET.** Author each 5.000s beat to a BAND of **~6-13 words** -- a hero beat breathes at 6, a dense sequence carries 13. This band IS the pace instrument (S3A, S12); a flat count on every beat is a S0 blanket. **~380 words/block is the block AVERAGE, not a per-beat rule.** The "10-word ceiling" / "<=10 words/beat" phrasings elsewhere mean the band's centre, not a hard cap. The code gate in build_lego fires at **55 words -- a RUNAWAY BACKSTOP** (it catches a paragraph pasted into one cell), never the target. Do not author to 55; do not flatten to 10.
+
+2. **CANONICAL TOOLSET** (one name per leg; aliases retired).
+   - Author / normalise / sweep / audit / VO / calibrate -> `build_lego.py` (verbs: normalise, sweep, film, blocks, stills, audio, calibrate). `build_moon.py` is RETIRED (the enoch-only proof).
+   - Stills grid -> `build_lego stills` (attaches references) OR `render_grid.py` (text-to-image only; does NOT attach refs). See #3.
+   - The pick -> `place.py` (promotes grid winners to `stills/shot_NNN.png`).
+   - Clips -> `render_clips.py` (reads air/move/motion; `--floor-only`, `--dry-run`). Do NOT use any `clips` verb inside build_lego -- that path renders a MOVELESS STATIC floor (it passes no `move`) and is a trap. `render_clips.py` is the ONLY clips leg.
+
+3. **MODE -> RENDER PATH** (which stills tool a channel uses).
+
+   | channel `render_mode` | stills grid tool | why |
+   |---|---|---|
+   | **reference** (character/object plates: Bentley) | `build_lego stills` | only it attaches the `reference_map` plates via /edit |
+   | **text-to-image** (Sacred Dawn, Scripture, Synthetic, Final Hours, YHTBT) | `build_lego stills` OR `render_grid.py` | no refs to attach; either works |
+
+4. **FILLING THE `move` COLUMN.** `move` (push/pull/crane/settle/static) is DERIVED off the picked frame's `phenomenon` + `register` via the S7 ladder, then eye-corrected -- never hand-invented per beat. Tool: `draft_moves.py`. `static` is hand-placed (not derivable). Validate the drafter against a shipped film (`draft_moves.py --validate` on enoch-moon). Full rule: **S7.1**.
+
+5. **TIMING MODEL.** Shipping model is **159 WPM (Elliot), ONE continuous whole-film `narration.txt`** (not per-block), whisper + `calibrate` measuring each seam against the 5.000s grid; the tail is a pad, never a trim; Inworld's 20-break-per-request cap is a hard limit. S4's interior 143-WPM / per-block-break arithmetic is the OLD illustrative derivation -- the METHOD (calibrate the seams) is current; the 143 / 380-as-hard specifics are retired.
+
+6. **CONFIG LIVES IN JSON, NEVER CODE.** `channel.json` (grade/style_suffix, voice_id, image_model, ken_burns flag, render_mode, reference_map), project `canon.json` ({token} definitions), `rulebook.json` (negatives; two-layer, CWD-scoped). A per-beat fact is a CSV column; a per-channel fact is JSON. Tempted to special-case in code -> add a column instead.
+
+---
+
 **Two outputs, and only two:** `clips/shot_NNN.mp4` (one clip per beat) **+** `voiceover.mp3`
 (one continuous narration track). Everything in this document exists to produce those two
 artifacts; **Filmora assembles them by hand** (music, seams, title, export). There is no third
@@ -104,7 +131,7 @@ negatives on `out_path`). A new video = new paths; a new channel = new JSON. No 
 
 | program | reads | writes | notes |
 |---|---|---|---|
-| **`build_beats`** *(today `build_moon.py`; lift to `shared/` at video two)* | master CSV, `canon.json` | -- / beats.json / narration.txt | subcommands: `normalise` (fill derived), `sweep` (audit), `audio` (emit narration.txt), `calibrate` (whisper vs 200s seams), `probe20` (auto-select 20 canaries), `grid` (whole-film beats.json + GRID-INDEX.csv), `blocks` (per-block) |
+| **`build_beats`** *(`build_lego.py` -- channel-agnostic; `build_moon.py` RETIRED)* | master CSV, `canon.json` | -- / beats.json / narration.txt | subcommands: `normalise` (fill derived), `sweep` (audit), `audio` (emit narration.txt), `calibrate` (whisper vs 200s seams), `probe20` (auto-select 20 canaries), `grid` (whole-film beats.json + GRID-INDEX.csv), `blocks` (per-block) |
 | **`render_grid.py`** | grid beats.json, `canon.json`, `_skip.png` | `stills/{beat}-{variant}.png` | renders `variants` real re-rolls per beat + `cp _skip.png` to 4. Reuses `generate_still`. Resume-safe. |
 | **`place.py`** | winners (folder or filename list), grid stills, `_skip.png` | `stills/shot_NNN.png` | pure stdlib; hard-fails on skip-tile pick, gap, or dupe. Sources bytes from the grid stills by filename. |
 | **`render_clips.py`** | master CSV (`air`/`move`/`motion`), placed stills | `clips/shot_NNN.mp4` | per beat: Kling(`motion`) if `air`, else `ken_burns_still(move)`. `--floor-only`, `--dry-run`. Reuses engine funcs. |
@@ -267,7 +294,7 @@ THE SCRIPT IS A COLUMN    The most governed column. Budgeted first, rendered las
 | **clips** | 40, trimmed to exactly 5.000s / 120 frames | §4 |
 | **stills** | **~100** (variable, §5) | not 160 — variable allocation |
 | **VO** | **~380 words** | 143 WPM (Elliot) → ~159s speech, ~41s air |
-| **word ceiling** | **10 words per beat** | hard gate |
+| **word band** | **~6-13 words/beat** | the pace instrument (S3A/S12), NOT a flat cap; ~380/block is the block AVERAGE. The code gate at 55 words is a runaway backstop, never the authoring target. |
 | **breaks** | **≤20 per request** | Inworld hard limit, §4 |
 | **block cost** | **~$25** | ~$8 stills + ~$17 Kling |
 
@@ -422,6 +449,8 @@ Rhythm and contrast: large → small intimate → reflection → escalation → 
 ---
 
 ## 4. TIMING — THE SOLVED PROBLEM
+
+> **TIMING MODEL -- CURRENT (159), read before the arithmetic below.** The shipping model is **159 WPM (Elliot), ONE continuous whole-film `narration.txt`** (not per-block MP3s), rendered then measured by whisper + `calibrate` against the 5.000s grid. The derivation in this section is the older **143-WPM / per-block-break** illustration -- the METHOD it teaches (measure the rendered audio, adjust the seam, the tail is a pad never a trim) is current and correct; treat the specific 143 / 380-as-hard-ceiling numbers as illustrative, and author to the ~6-13 word BAND (S0.0 #1), never a flat count.
 
 This was the recursive problem for months. It is arithmetic, not iteration.
 
@@ -635,6 +664,27 @@ The same beat picked as an `a` wide is a scale-reveal (PULL-BACK); picked as a `
 **Read the veto table.** Fix misclassifications by **correcting the register and re-deriving** — never by hand-picking a move.
 
 ---
+
+## 7.1 FILLING THE `move` COLUMN -- the allocation rule (draft, then correct)
+
+`move` (push | pull | crane | settle | static) is the trigger `ken_burns_still(move=...)` reads. It is **derived off the PICKED frame's `phenomenon` + `register` via the S7 ladder**, drafted by tool and corrected by eye -- never hand-invented per beat, never a flat value.
+
+**The ladder (first match wins) -- the S7 precedence made mechanical:**
+1. quiet register (reflection / grief / sorrow) OR quiet phenomenon words (aftermath, ash, empty, still, dark) -> **settle** (never push)
+2. vertical force (rising, column, tower, shaft, pillar, ascends) -> **crane**
+3. scale / wide (ranked, vast, receding, whole curve, to the horizon, thousands) -> **pull**
+4. everything else -> **push** (one overwhelming subject; the default)
+
+**`static` is NOT auto-derivable.** Hand-place it sparingly on eerie-stillness / near-locked beats (~1 in 6 on enoch). The drafter never assigns it; you promote specific held beats by eye.
+
+**Register alone does NOT determine the move** -- on enoch, `awe` maps to pull, push AND static across the film. The **phenomenon drives it**; register is the tiebreak. That is why the ladder reads the image, not just the mood.
+
+**TOOL: `draft_moves.py`.**
+- `--csv master.csv` fills blank `move` cells off phenomenon+register (idempotent; preserves edits; `.pre_` backup).
+- `--dry-run` prints the push/pull/crane/settle spread before a frame renders. A flatline (all push) is the S0 blanket signal -- widen the cues.
+- `--validate` measures the drafter against an ALREADY-SHIPPED film's `move` column. Run it on enoch-moon: the match rate tells you the ladder is the rule, and every disagreement is either a hand-placed `static` or a phenomenon cue to widen. This is how you trust the drafter before spending it on a new film.
+
+`enoch-moon/beats/moon_master.csv` is the ground-truth exemplar of this rule; a new channel's floor is drafted the same way, then eye-corrected.
 
 ## 8. THE FILM SPINE
 
