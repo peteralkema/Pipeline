@@ -47,6 +47,17 @@ def load_config(project: str):
     cfg["_channel_dir"] = str(cj.parent)
     cfg["_project_dir"] = str(proj)
     cfg.setdefault("beats_per_block", 40)
+    # canon: project <project>/canon.json layered OVER channel base_canon
+    # (project wins on key collision -- same rule as recreation_pipeline). This
+    # is what canon_of(cfg) returns; without it token expansion is a silent no-op.
+    _merged_canon = dict(cfg.get("base_canon", {}) or {})
+    _cj = proj / "canon.json"
+    if _cj.is_file():
+        try:
+            _merged_canon.update(json.loads(_cj.read_text()))
+        except Exception as _e:
+            raise SystemExit(f"canon.json parse error ({_cj}): {_e}")
+    cfg["canon"] = _merged_canon
     return cfg
 
 def load_banned(cfg) -> list:
@@ -357,6 +368,25 @@ def cmd_stills(cfg, argv):
     rows = load_master(cfg)
     if not has_col(rows, "phenomenon"):
         raise SystemExit("stills needs a 'phenomenon' column -- author first.")
+    # --beats a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
+    # (1..N over the whole master, master order) into one grid-probe folder -- a
+    # register/token spread, instead of whole blocks. 1-based, matches calibrate.
+    _probe_beats = None
+    if "--beats" in argv:
+        _i = argv.index("--beats")
+        _spec = argv[_i + 1] if _i + 1 < len(argv) else ""
+        argv = argv[:_i] + argv[_i + 2:]
+        _probe_beats = set()
+        for _tok in _spec.split(","):
+            _tok = _tok.strip()
+            if _tok:
+                _probe_beats.add(int(_tok))
+        if not _probe_beats:
+            raise SystemExit("--beats needs film indices 1..N, e.g. --beats 1,58,231")
+        _nrows = len(rows)
+        _oob = sorted(n for n in _probe_beats if n < 1 or n > _nrows)
+        if _oob:
+            raise SystemExit(f"--beats out of range 1..{_nrows}: {_oob}")
     wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})
     canon = canon_of(cfg)
     proj = Path(cfg["_project_dir"])
@@ -377,12 +407,17 @@ def cmd_stills(cfg, argv):
     _chan_skip = ref_chdir / "characters" / "_skip.png"
     skip_tile = _chan_skip if _chan_skip.exists() else _shared_skip
 
+    if _probe_beats is not None:
+        wanted = [0]  # single synthetic pass; the probe selects rows by film ordinal
     for block in wanted:
-        brows = [r for r in rows if int(r["block_id"]) == block]
+        if _probe_beats is not None:
+            brows = [r for i, r in enumerate(rows, 1) if i in _probe_beats]
+        else:
+            brows = [r for r in rows if int(r["block_id"]) == block]
         gerrs = gate_block(brows, cfg, load_banned(cfg))
         if gerrs:
             print("\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
-        grid = proj / f"grid-b{block:02d}"
+        grid = (proj / "grid-probe") if _probe_beats is not None else (proj / f"grid-b{block:02d}")
         grid.mkdir(parents=True, exist_ok=True)
         index = []
         real = 0
