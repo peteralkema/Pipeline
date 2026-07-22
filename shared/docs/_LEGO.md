@@ -89,7 +89,7 @@ observe → bank → feed the next film.*
 | **0** | **PACKAGE FIRST** — topic for the CLICK; winnability gate (demand exists AND a small channel broke this lane); commit title + **render the thumbnail FILE, not a concept**; squint-test it at 120px beside the lane leader's tile. Title must obey the channel's attribution rule (an *asserting* title breaks the moat). Flag topic-level render-safety (family-safe/YPP). Un-packageable → **kill here, $0.** | human + NexLev + image gen | **`package.md` EXISTS on disk** — title, thumbnail findings, both winnability verdicts *with their evidence*, render-safety table, truth ledger, metadata | **`<project>/package.md` + `thumbnail.png`** |
 | **1** | **ARCHITECT** — runtime → N×200s blocks (200s = the seam unit); per block define its curiosity-gap + HANDOFF to the next; map the spine (cold open → escalation → turn → payoff); **name the SPINE OBJECT and the ANTAGONIST**; **name the canon tokens**; carry a **dated chronology column** if the film has one. ~3,000–3,600 words ≈ 8 blocks. | human | **`architecture.md` EXISTS on disk**; every block has role + gap + handoff + tokens + date; the spine object escalates; the antagonist is named and placed | **`<project>/architecture.md`** |
 | **2** | **AUTHOR BLOCK BY BLOCK** — per beat write `phenomenon` + `narration` under the craft law; canon `{token}` on every beat; weight hero/connective; build variety across every axis. Each 40-beat block is a mini-spine (open its question, build, turn, close on the handoff). **Blocks are drafted in CHAT; there are NO per-block CSV files and no `blocks/` folder** — append straight into `master.csv`. | human authoring | **GATE each block**: VISUAL present, ≤55 words (runaway backstop), tokens resolve, no banned words, register/setting sweep. The block gate is a *drafting* check, never the film's gate | rows appended to `master.csv` |
-| **3** | **INTERROGATE THE MASTER** — `normalise` fills derived columns; read the film AS DATA (setting mix, register spread, hero/connective balance, word histogram, token×block heatmap, framing-repeat scan on any token >~20% of beats). Adjust. **The project folder was born at Step 0.** | `build_lego normalise`, `sweep` | **RE-GATE THE WHOLE FILM, not N blocks again** — row count, `clip_index` 1..40 per block, hero count per block, no negation in any `phenomenon`, no token in any `narration`, every token defined in `canon.json`. *Per-block passes miss what only the film sees* | gated master CSV + variety audit |
+| **3** | **INTERROGATE THE MASTER** — `normalise` fills derived columns; read the film AS DATA (setting mix, register spread, hero/connective balance, word histogram, token×block heatmap, framing-repeat scan on any token >~20% of beats) **and run the VARIETY AUDIT below**. Adjust. **The project folder was born at Step 0.** | `build_lego normalise`, `sweep` | **RE-GATE THE WHOLE FILM, not N blocks again** — row count, `clip_index` 1..40 per block, hero count per block, no negation in any `phenomenon`, no token in any `narration`, every token defined in `canon.json`. *Per-block passes miss what only the film sees* | gated master CSV + variety audit |
 | **4** | **VO CONVERGENCE** — emit ONE whole-film `narration.txt`; render VO (Inworld); whisper; `calibrate` → per-block cumulative drift vs the 200s grid; enrich the CSV to fill toward the grid (see TIMING). | `build_lego audio`, `calibrate` + Inworld + Whisper | — | `voiceover.mp3` rendered, seams measured |
 | **5** | **REPEAT 4** until every block lands **~0 cumulative drift** (minor ±overs/unders fine). **VO LOCKED** (output #2). | as Step 4 | every seam near its 200s mark | **VO locked** |
 | **6** | **PROBE, THEN THE GRID** — `probe [N]` (self-selecting register sample); read vs the verdict card → name the FAILURE CLASS; **sweep the master film-wide, setting-aware** (two homes: rulebook negatives + `phenomenon`/token geometry); re-probe until clean; THEN `stills` (all blocks) → the variant grid. | `build_lego probe`, `stills`; rulebook / canon / `phenomenon` edits | probe reads clean; first grid frames >7KB (not black rejects) | grid stills |
@@ -185,6 +185,19 @@ written by the human; **derived** columns are computed by `normalise` from the a
 > attribution, a named one is free and defensible. The competitor's film has no antagonist and
 > sags for twelve unbroken minutes; that is not a coincidence, it is the same finding from the
 > other side.
+
+> **★ SOME CONCEPTS HAVE NO PHOTOREAL REFERENT — AND NO WORDING WILL SAVE THEM.** A localised
+> texture change on a human face is the worked example: skin turning to stone across one temple.
+> Three rewrites and four probes produced a lesion, a burn, a prosthetic and a smear of makeup, in
+> that order, because those are the only real-world things it resembles. **The model was obeying
+> every time.** The concept works in the THUMBNAIL because a poster licenses stylisation, heavy
+> retouch and a single dramatic key; a naturalistic film still licenses none of that.
+> **The test: can you point at a photograph of this?** If the honest answer is *only an illustration
+> of it*, the idea belongs in the packaging layer and not in the film. Cut it and let the plain
+> version carry the beat — dropping the stone entirely gave us an ancient, weathered, credible
+> patriarch on the first re-roll.
+> **Symptom to watch for: rewriting the same token more than twice.** That is the signal that the
+> concept is wrong, not the wording. Stop rewriting and change the idea.
 
 **THE CURIOSITY ENGINE.** Never answer a question without opening a larger one; curiosity
 never reaches zero. Keep an open-loop stack (several unanswered questions live at once).
@@ -317,6 +330,59 @@ drift). On **reference** channels the token is a character/object plate via `ref
   retag — the canon-contradiction rule applies to TIME as well as content. On any film spanning
   decades or centuries this is the normal case, not the exception, and the pair is also where the
   spine object's escalation becomes visible.
+> **★ IDENTITY TOKENS — a film about a PERSON needs more than place-locks.** Everything else in
+> this section locks WHERE. A character-led film also has to lock WHO, and nothing in the variant
+> grammar does it — *"anonymous, never faceless; never lock one face"* is correct for the chorus
+> and exactly wrong for the title character. The rules:
+> - **A protagonist appearing in more than ~10% of beats needs an identity token.** Without one
+>   the renderer has no way to know that "an ancient man" in block 8 and "an ancient man" in
+>   block 12 are the same person. They will be different men, every time, silently.
+> - **One token per LIFE STAGE, re-minted like a place that changes over time.** A boy and a
+>   nine-hundred-year-old cannot share a lock. Age is precisely *a surface the ref cannot show*.
+> - **Text tokens alone already help.** A fixed identity phrase tightens text-to-image
+>   consistency at zero cost and with no change to the render path — map only the stage that
+>   matters most to a reference plate.
+> - **★ SET `reference_prompt_lock` AND `reference_prompt_tail` OR YOU INHERIT ANOTHER CHANNEL'S
+>   REGISTER.** The reference `/edit` path **bypasses `style_suffix` entirely** — its only style
+>   instruction is the lock and tail in `recreation_pipeline.py`, which fall back to a hardcoded
+>   module constant when the channel does not set them. That constant is currently Q-Qrew's
+>   *"semi-realistic modern animated-feature"*, so Sacred Dawn's first reference renders came back
+>   as flat cel cartoons while every text beat in the same run was photoreal. The override is
+>   per-channel and has existed for a while; it just appears in no doc, which makes it functionally
+>   invisible. **Build the lock FROM the channel's own `style_suffix` so the two can never drift:**
+>   ```
+>   python -c "
+>   import json; p='channel.json'; d=json.load(open(p))
+>   sfx=d['style_suffix'].strip().rstrip('.')
+>   d['reference_prompt_lock']=('Use the reference image(s) as the exact visual template for the '
+>     'CHARACTER: keep that EXACT person -- same face, same hair, same wardrobe; do not change '
+>     'their identity. '+sfx+'. Render this new scene: ')
+>   d['reference_prompt_tail']=' '+sfx+'. 16:9 wide composition, no on-image text.'
+>   json.dump(d,open(p,'w'),ensure_ascii=False,indent=2)"
+>   ```
+>   *This is BUILD-ORDER BIAS in its second recorded form: Final Hours' painterly craft contaminated
+>   every channel once, and Q-Qrew's animated lock has now done the same in the other direction. The
+>   mechanism was built correctly and generally — the failure was that the keys lived in a channel
+>   doc instead of this one. **Anything describing how the SHARED pipeline behaves belongs here;
+>   channel docs get only what is true of that channel alone.***
+> - **Keep it to ONE ref per beat.** Lead with the place token (text) and carry the identity
+>   token inline (plate), so `reference_map` never resolves two plates on one call — the two-ref
+>   zone is where refusals start, and refusals fall back to flux SILENTLY.
+> - **TRY TEXT FIRST. A plate is the fallback, not the default.** *(Corrected 22 Jul after two
+>   plates and four probes on Methuselah.)* A well-written identity phrase held the same man across
+>   close, wide and medium two-shot with no reference at all. Reference mode is a second render
+>   path with its own failure modes — reach for it only when text has demonstrably failed, and
+>   measure that rather than assuming it.
+> - **★ IF YOU DO USE A PLATE, IT MUST BE A FILM STILL — NEVER A POSTER.** A thumbnail is an
+>   extreme close on a single key light against a void with heavy retouch. Condition a scene render
+>   on that and the most graphically distinctive thing in it transfers — which is the *treatment*,
+>   not the person. Methuselah's poster crop produced a stranger's face with the poster's gimmick
+>   stuck on it, and on one beat the /edit path fought the composition into a bobblehead. A plain
+>   photoreal portrait, neutral light, plain ground, no graphic device, worked immediately.
+> - **The plate carries identity; the TOKEN carries anything the plate cannot show.** If the lock
+>   says *same skin* and the plate has no scar, no stone, no marking, that clause will actively
+>   suppress whatever the token is asking for. Strip identity clauses that contradict the token.
+
 - **A high-frequency spine token (>~20% of beats)** gets a framing-repeat scan: vary the
   SUBJECT within the locked place (a prow, a hand, wreckage, a shoal), never the place — the
   variation is motivated by what the beat reveals, not a new location.
@@ -391,6 +457,70 @@ ignored. Count break tags and hard-fail above 20 before render.
 frames non-deterministically; the trim normalises it. **Trim never pad** (dropping a frame is
 invisible; a freeze-frame isn't). Derive 120 from `r_frame_rate × 5` (a 30fps model would make
 120 frames = 4.0s). Ken Burns clips are exactly 5.000s by construction.
+
+---
+
+### The variety audit (Step 3) — what the data audit cannot see
+
+> **★ TOKEN MIX IS NOT VARIETY.** A film can pass every existing check — sixteen tokens, healthy
+> register spread, clean word histogram, 11% consecutive-framing repeats — and still be four
+> images over and over. Those measures read how the frame is ARRANGED. None of them reads what is
+> IN it. **You can shoot "a man standing" from twelve angles and it is still twelve shots of a man
+> standing.**
+
+Four measures, all pure stdlib, all run on the master before any spend:
+
+| measure | what it catches | rough tolerance |
+|---|---|---|
+| **verb histogram** | posed subjects. Count the top-3 verbs as a share of all verbs | top-3 **under ~30%**; *standing* under ~10% of beats |
+| **noun-palette coverage** | a starved world. Probe for animals, weather, plants/food, textiles, children, work-in-progress, domestic objects | each category present, none at ~1–2% |
+| **longest human-absent run** | the mid-film cliff the HUMAN LENS law predicts | **no run over ~5 beats** |
+| **near-duplicate shot scan** | the disease the other three are symptoms of | see below |
+
+**The duplicate scan is the sharpest instrument in this doc.** Strip the leading `{token}`, take
+the set of content words per `phenomenon`, and flag every pair with Jaccard ≥ ~0.42. Expect real
+hits at distance — the same composition recurring blocks apart is invisible to a human reading
+sequentially and glaring in a finished film.
+
+> **Judge each hit, never mass-fix.** A recurring composition is the film's MEMORY when it is
+> deliberate (a light column returning three blocks later; the spine object at its first and last
+> appearance) and is sloppiness when it is not. Driving the count to zero deletes the callbacks.
+> **The hit that matters most is two DIFFERENT characters shot identically** — on Methuselah,
+> Enoch preaching from a market stone and Lamech boasting from a step were the same frame, which
+> silently deleted the mirror the whole film was built on. Opposite men need opposite
+> compositions.
+
+**Trade-off to expect.** Fixing posture by swapping posed people for objects, animals and detail
+will push human presence DOWN. Watch the absent-run measure while you do it, and keep a person in
+frame every few beats even in pure sweep.
+
+---
+
+### Reading a probe — the discipline that keeps it cheap
+
+**Probe cost is trivial and probe DISCIPLINE is not.** Methuselah's grid was $96; the six probe
+rounds that cleared it were about $20 total and caught eight systematic failures. That trade is
+always worth taking. What wastes the money is reading a probe badly.
+
+- **Change ONE variable per round.** Two config edits at once and a failure tells you nothing.
+- **Variants are the instrument, not the cost.** Four variants distinguish *systematic* failure
+  from a bad roll: four sunny meadows means the token is broken, one means it was a re-roll. At
+  n=1 you cannot tell, which is the probe's whole job. Take the economy only on routine drift
+  checks of a proven config.
+- **Judge the TOKEN, never the beat.** A wrong render is almost always the token's phrasing
+  leaking into every beat that uses it. Fix upstream and the whole film moves.
+- **Your own token text is the first suspect, and it will read as innocent.** Every geographic
+  failure on Methuselah traced to a literal description someone had written down and stopped
+  seeing: *braided rivers over pale sandbars, colossal ancient trees* is Olympic National Park;
+  *bare rock summit, exposed slabs, sheer drops* is Utah. **Read every place token as though a
+  location scout wrote it, and ask which real place on earth it describes.** If you can name one,
+  that is what will render.
+- **Watch for the wrong civilisation.** `{city}` rendered Norse, then medieval, before the word
+  *Mesopotamian* and a line about the people's dress and colouring pinned it. Period tokens need
+  the culture named, not implied.
+- **Watch for the wrong story.** A luminous newborn held by a woman rendered as a Nativity —
+  correct instruction, catastrophic association. Name the room, the cloth and the setting
+  explicitly when the beat sits near an image the model knows far better than yours.
 
 ---
 
@@ -717,6 +847,43 @@ locks identity. Add a NEW token only for a *surface the ref cannot show*, never 
 Verbs: `normalise` · `sweep` · `film` · `blocks` · `stills` · `probe` · `clips` · `audio` ·
 `calibrate`. Master CSV at `projects/<slug>/master.csv`.
 
+> **★ WHERE THE FILES ARE, AND WHERE YOU STAND WHEN YOU RUN THEM.**
+> ```
+> build_lego.py        ~/Pipeline/build_lego.py          <- REPO ROOT, not shared/   [VERIFIED]
+> the dumb readers     ~/Pipeline/shared/*.py            <- place, draft_moves, draft_air,
+>                                                            render_clips, verify_clips [VERIFIED]
+> ```
+> There is **no console entry point** — `which build_lego` resolves to nothing. Every invocation
+> is `python <abs-path> <verb> ...`.
+>
+> **CWD is the `projects/` directory — the PARENT of the project folder, not the project folder
+> itself.** `build_lego` builds its paths as `<slug>/master.csv` relative to the working dir, so
+> standing inside `methuselah/` makes it look for `methuselah/methuselah/master.csv` and it dies
+> with `missing <slug>/master.csv`. From `projects/`, `load_config` still walks UP correctly and
+> finds `<channel>/channel.json`. **That error string is the tell: if you see
+> `missing <slug>/master.csv`, you are one directory too deep.**
+> ```
+> cd ~/Pipeline/<channel>/projects
+> python ~/Pipeline/build_lego.py <verb> <rest...> --project <slug>
+> ```
+> Worked example, the 20-beat manual probe:
+> ```
+> cd ~/Pipeline/sacred-dawn/projects
+> python ~/Pipeline/build_lego.py stills beats=1/13,2/9,4/8,8/24,10/4 --project methuselah
+> ```
+> **UNVERIFIED — nail this down next session and delete this warning:** the five readers in
+> `shared/` take an explicit `--csv`, so their CWD convention has NOT been confirmed. Assume
+> nothing; run one from `projects/` with `--dry-run` and record the answer here.
+>
+> Where this doc writes `build_lego probe 20 --project P` it means the expanded form above; the
+> short form is shorthand for reading, never something you can paste.
+
+> **⚠ MARK UNVERIFIED INSTRUCTIONS AS UNVERIFIED.** This block was first written saying "always
+> launched from the PROJECT directory" — stated flatly, and wrong. A confidently wrong line in
+> this doc is worse than a missing one: a gap prompts a question, a wrong rule gets pasted and
+> fails, and the failure looks like the pipeline's fault rather than the doc's. **Anything not
+> read out of the actual code or run successfully gets the word UNVERIFIED next to it.**
+
 **Invocation form:** `build_lego.py <verb> <rest...> --project <slug>`. Argument order no longer
 matters — the top-level parser uses `parse_known_args` and folds extras into `rest`, so
 `probe 20 --project P` and `probe --project P 20` both work. (Historically the parser was
@@ -762,7 +929,9 @@ order-sensitive and rejected trailing positionals; that is fixed. Per-verb optio
 - **Render funcs anchor config on the OUTPUT PATH, not CWD** — write into the channel's project
   tree and grade + `style_suffix` + negatives attach automatically. This is what lets the
   standalone renderers work with zero engine changes.
-- **`load_config` resolves the channel by walking UP from the project dir** — `--project` is a
+- **`load_config` resolves the channel by walking UP from the working dir**, and the working dir
+  is `<channel>/projects/` (see COMMAND CONTRACT — standing inside the project folder itself
+  fails with `missing <slug>/master.csv`). `--project` is a
   bare slug only when you run from the channel dir (`~/Pipeline/<channel>`, which has `projects/`).
 - **`safety_tolerance:"5"` is required on fal Flux** — the default silently returns ~7KB black
   PNG placeholders on rejection. Gate the first grid frames >7KB.
@@ -770,6 +939,24 @@ order-sensitive and rejected trailing positionals; that is fixed. Per-verb optio
   `flux` (the murk styliser).
 - **The rulebook is two-layer, CWD-scoped** — channel dir → `<channel>/rulebook.json`; repo
   root → universal `shared/rulebook.json`. Edit channel negatives from the channel dir.
+- **★ A SILENT `scp` IS INDISTINGUISHABLE FROM A WORKING ONE.** Media travels by scp, not git, and
+  a wildcard that matched nothing, a `~` that did not expand, or a wrong remote filename all exit
+  quietly. Methuselah burned two probes rendering against a plate that had never reached the box.
+  **After ANY asset change, assert it before you spend** — mtime and dimensions, not just
+  existence:
+  ```
+  python -c "
+  from PIL import Image; import os,time
+  f='characters/<name>.png'; im=Image.open(f)
+  print(f, im.size, round(im.size[0]/im.size[1],2), time.ctime(os.path.getmtime(f)))"
+  ```
+  A stale timestamp is the tell. The same applies to music, look plates and any `reference_map`
+  target.
+- **★ `stills` SKIPS FILES THAT ALREADY EXIST**, exactly like `render_clips`. So a re-probe after a
+  config or canon fix returns `0 real stills ($0.00)` — **which reads as "the fix changed
+  nothing"** when it actually means nothing re-rendered. Delete the tiles first:
+  `rm grid-probe/<flat>-*.png`, then re-run. Read the cost line on every probe: a zero is a
+  no-op, never a result.
 - **`gate_canon` greps token TEXT for banned words and can't read a negation** — never put a
   banned word (even "no galaxy") inside a canon token; ban it in the rulebook.
 - **A banned REGISTER word may also be an ordinary NOUN, and the gate cannot tell.** Sacred Dawn
@@ -950,8 +1137,41 @@ retention — that is exactly what the instrument is for.
 
 ## CHANGELOG — what this rewrite superseded (history preserved)
 
-*22 Jul 2026 — flag register 01–18 merged from the Methuselah build (Sacred Dawn, 12 blocks /
+*22 Jul 2026 — flag register 01–21 merged from the Methuselah build (Sacred Dawn, 12 blocks /
 480 beats, authored end to end against this doc). `_LEGO-FLAGS.md` is retired; delete it.*
+
+- **COMMAND CONTRACT now says where the files ARE.** Every invocation in this doc was written in
+  shorthand — `build_lego probe 20 --project P` — with no path, no `python` prefix and no note
+  that there is no console entry point. `build_lego.py` sits at the **repo root**, the readers in
+  `shared/`, and the working dir is `<channel>/projects/` — the PARENT of the project folder.
+  Cost was a failed command and a round trip on every single session, then a second failure when
+  the first fix was written down confidently and wrongly. *The friction WAS the signal that a rule
+  lived only in conversation* — and the wrong fix is why unverified lines now get marked.
+- **VARIETY AUDIT at Step 3.** The existing audit reads token mix, register spread, word histogram
+  and hero balance — every one of which came back healthy on a film whose imagery had collapsed
+  into four things. Those measure how the frame is ARRANGED and never what is IN it. Four new
+  measures, all pure stdlib: verb histogram, noun-palette coverage, longest human-absent run, and
+  a **near-duplicate shot scan** (Jaccard over content words). The duplicate scan is the sharpest
+  of the four — it found Enoch preaching and Lamech boasting shot as the *same composition*, which
+  silently deleted the film's central mirror.
+- **THE REFERENCE PATH BYPASSES `style_suffix`.** `reference_prompt_lock` / `reference_prompt_tail`
+  now documented, with the recipe for building them from the channel's own suffix. The default is
+  one specific channel's animated register — build-order bias, second recorded instance, and it
+  cost a probe round before the cause was found.
+- **PLATE DOCTRINE CORRECTED.** Try text first; a plate is the fallback. And a plate must be a film
+  still, never a poster — poster treatment is what transfers, not the person.
+- **SOME CONCEPTS HAVE NO PHOTOREAL REFERENT.** Rewriting a token more than twice is the signal that
+  the idea is wrong rather than the wording.
+- **PROBE-READING DISCIPLINE** as its own section, including the rule that your own place tokens are
+  the first suspect — every geographic failure on Methuselah was a literal description of a real
+  national park that nobody had reread.
+- **A silent `scp` is indistinguishable from a working one**, and **`stills` skips existing files**
+  so a re-probe after a fix can return $0.00 and read as "nothing changed." Both in GOTCHAS.
+- **IDENTITY TOKENS for character-based films.** The canon section was entirely place-locks. A
+  protagonist appearing in >~10% of beats needs an identity token; if he changes materially across
+  the runtime he needs one per life stage, re-minted exactly like a place that changes over time.
+  Methuselah had 152 beats with a lone unnamed figure and **zero** identity locks — a guaranteed
+  different man in every shot, of the face the thumbnail had sold.
 
 - **THE PROCESS is now 0 to 10.** The cold open was one clause inside the old Step 9 and is now its
   own step with its own section, because two Sacred Dawn retention curves put the channel's whole
