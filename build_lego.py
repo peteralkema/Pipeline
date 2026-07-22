@@ -453,15 +453,53 @@ def cmd_stills(cfg, argv):
         print("  probe: %d beats -> %s | %d real stills ($%.2f)" % (len(brows), proj / "grid-probe", real, real * 0.08))
         return
     wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})
+    # PRE-GATE THE WHOLE FILM BEFORE ANY SPEND. Gating just-in-time inside the render
+    # loop means a bad beat in block 6 only surfaces after blocks 1-5 have spent -- so
+    # the run cannot be left unattended. Every input needed to validate all N blocks
+    # exists before the first fal call: validate them all, report every failure at once,
+    # spend nothing. An unattended run now either refuses at second zero or completes.
+    banned = load_banned(cfg)
+    pregate = []
     for block in wanted:
         brows = [r for r in rows if int(r["block_id"]) == block]
-        gerrs = gate_block(brows, cfg, load_banned(cfg))
-        if gerrs:
-            print("\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
+        for e in gate_block(brows, cfg, banned):
+            pregate.append("block %d: %s" % (block, e))
+    if pregate:
+        print("GATE FAIL -- %d issue(s) across %d block(s). NOTHING RENDERED, $0 spent:"
+              % (len(pregate), len(wanted)))
+        print("\n".join("  " + e for e in pregate))
+        raise SystemExit(1)
+    print("pre-gate OK: %d block(s) clean -- rendering." % len(wanted))
+
+    total_real = 0
+    checked = []
+    for block in wanted:
+        brows = [r for r in rows if int(r["block_id"]) == block]
         grid = proj / ("grid-b%02d" % block)
         real, index = _stills_render(cfg, brows, grid, False, "block %d" % block)
         _write_grid_index(grid, index)
+        total_real += real
+        for row in index:
+            if row[3] == "real":
+                checked.append(grid / row[4])
         print("  block %d: grid -> %s | %d real stills ($%.2f) | GRID-INDEX.csv" % (block, grid, real, real * 0.08))
+
+    # fal safety rejects land as ~7KB black placeholders and do NOT raise -- surface them
+    rejects = []
+    for f in checked:
+        try:
+            if f.exists() and f.stat().st_size < 8192:
+                rejects.append(f)
+        except OSError:
+            pass
+    print("\nDONE: %d block(s) | %d real stills ($%.2f)" % (len(wanted), total_real, total_real * 0.08))
+    if rejects:
+        print("WARNING: %d frame(s) under 8KB -- likely fal safety rejects (black placeholders):" % len(rejects))
+        for f in rejects[:20]:
+            print("  %s" % f)
+        if len(rejects) > 20:
+            print("  ... and %d more" % (len(rejects) - 20))
+        print("  check safety_tolerance, DELETE the listed files, then re-run (resume-safe refill).")
     print("\nNEXT: review each grid folder, promote ONE winner per beat to shot_NNN.png (the pick).")
 
 

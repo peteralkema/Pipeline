@@ -228,6 +228,13 @@ or metaphor-prop. No literal-metaphor beats (keys, globes, hearts, scales) — m
 metaphors as corny anachronisms. Write phenomena with real verbs (descends, towers, spreads,
 waits); a verbless beat derives no motion.
 
+> **★ NEVER WRITE "no X" IN A `phenomenon`.** The banned-word gate greps the RAW cell text,
+> so a beat authored "…monumental, no lectern" trips the very ban it was trying to honour — and
+> the image model ignores negatives anyway, often rendering the negated noun. **State the
+> positive that fills the space:** "resting on bare dark stone", "held in two hands", "alone in
+> a hard shaft". Same law as the canon tokens above, applied to the beat cell. *(Cost the WITW
+> grid two mid-render aborts, 21 Jul — the exclusions were authored, then banned.)*
+
 **IF THE OBJECT IS A DOCUMENT, do NOT render the document when the narration names it** (that
 is captioning), and do NOT let the model default to scroll/lectern/window furniture. Show what
 the book is ABOUT; reserve 1–2 MONUMENTAL hero shots of the object itself (a bound book in a
@@ -287,7 +294,8 @@ fine (an over trims trivially; an under is silence you place on purpose).
 ~161 dense, measured across the 21 Jul WITW passes). Never author to a WPM constant — render,
 run `calibrate`, read the drift. At ~160 WPM a full 200s block is **~530 words** (~13.3
 words/beat to fill a 5s slot). Beats may still vary for craft (a hero beat sparse, a dense
-neighbour fuller) so long as the BLOCK totals ~530.
+neighbour fuller) so long as the BLOCK totals ~530. *(WITW shipped at 13.5 words/beat
+measured — see FILM RECORD.)*
 
 **Blocks read at different speeds.** Same word count, different duration: proper nouns,
 em-dashes and short clauses slow the TTS (measured 151–171 WPM across WITW blocks). So compute
@@ -486,7 +494,10 @@ order-sensitive and rejected trailing positionals; that is fixed. Per-verb optio
 - **`stills [BLOCK...]`** — whole block(s) → `grid-b<NN>/` (unprefixed filenames; pick/place
   reads these). **`stills beats=b/c,…`** — a manual cross-film sample → `grid-probe/`
   (block-prefixed filenames). The per-block structural gate runs on block mode and is skipped
-  in probe mode (cross-film clip_index repeats would false-trip it).
+  in probe mode (cross-film clip_index repeats would false-trip it). **`stills` PRE-GATES every
+  wanted block before rendering any of them** — a gate failure prints the complete list across
+  the whole film and exits with nothing spent, so a full-grid run is safe to leave unattended.
+  The run ends with a completion summary and flags any sub-8KB frame (a fal safety reject).
 - **`audio`** — emit whole-film `narration.txt`, render Inworld VO (chunked), whisper →
   `voiceover.json`.
 - **`calibrate <voiceover.json>`** — per-block cumulative drift vs the 200s grid.
@@ -582,11 +593,72 @@ doctrine are separable; apply only what fits.
 
 ---
 
+## STORY ARC — THE UNSOLVED MEASURE (build the instrument, then the rubric)
+
+**The gap, stated plainly.** The CSV measures *structure* — register distribution, word
+density, hero/connective balance, token mix, escalation-countable-every-4-8-rows. A film is
+judged on something else: the **arc it produces in the viewer** — does tension rise, does a
+question stay open, does the viewer lean forward at minute fourteen. Nothing in this pipeline
+currently measures or designs for that. Structural counts are proxies, and the audit that reads
+them **flattens the time axis** (see GOVERNING LAW) — a perfect distribution can still be a
+flat film.
+
+This section is a **named open problem**, not a solved spec. It is written down so the next
+films test it rather than re-discover it.
+
+### It must eventually be BOTH
+
+| mode | what it is | when |
+|---|---|---|
+| **post-hoc instrument** | score a finished `master.csv`, join the shipped retention curve onto the beat rows, learn which measures predict where viewers actually left | **build first** — you cannot validate a rubric you have never correlated against real retention |
+| **authoring rubric** | score the arc at Step 2–3 and gate on it, the way the variety law is gated today | **graduates from the instrument** — a measure is promoted to a gate only once it has predicted a real drop |
+
+### The ground truth is exact, and that is the unlock
+
+Because the container is arithmetic (40 beats × 5.000s = 200.000s, block N starts at
+(N−1)×200), **a retention timestamp maps onto a beat row with no estimation**: beat *i* of the
+film spans `(i−1)×5.000` to `i×5.000` seconds. YouTube's retention curve can be joined directly
+onto the CSV. **The row where viewers leave becomes the next film's training signal.** No other
+part of this pipeline gets ground truth that clean — use it.
+
+### Candidate measures (sequence-aware, not distributional)
+
+All of these are computable from the existing master CSV. None is yet proven to predict
+retention — that is exactly what the instrument is for.
+
+- **Escalation delta, block over block.** Does at least one of scale / danger / mystery /
+  consequence / emotion / urgency / human-cost increase from block N to N+1? A film that
+  plateaus in the middle should show it here. *(The craft law already demands this; nothing
+  measures it.)*
+- **Open-loop count at each beat.** How many questions are live and unanswered. The curiosity
+  engine says the stack never empties — this counts it. Would need an authored column
+  (`opens` / `closes`); **unbuilt, and the only candidate that costs new authoring**.
+- **Longest human-absent run.** Consecutive beats with no person in `phenomenon`. The known
+  mid-video cliff on argument blocks is a human-absence failure — this is its early warning.
+- **Longest single-token run.** Consecutive beats sharing one `setting` token — same-place
+  monotony that a per-beat variety gate misses entirely.
+- **Register trajectory, not register mix.** The *sequence* of registers, read as a curve;
+  a flatline over several blocks is viewer fatigue even when the distribution looks healthy.
+- **Hero-beat spacing.** Gap between hero beats vs. the 20–30s doctrine — measured in rows.
+
+### The protocol
+
+1. Score every shipped film's `master.csv` on the candidates above (cheap, pure-stdlib, no spend).
+2. When day-14/21 retention lands, join the curve onto the beat rows and record it in FILM RECORD.
+3. Correlate: at the beats where viewers actually left, which measures were already flashing red?
+4. **Promote what predicts; drop what does not.** A measure that survives two or three films
+   graduates from instrument to authoring rubric and gets a gate at Step 3.
+
+> **Do not gate on any of these yet.** Gating on an unvalidated proxy is exactly the blanket
+> the GOVERNING LAW warns about — it would enforce a shape no evidence supports.
+
+---
+
 ## FUTURE
 
-- **Time-axis read for Step 3** — a per-block escalation delta, and a retention-data-playback
-  that joins YouTube's actual retention curve back onto the beat rows (the row where viewers
-  leave becomes the next film's training signal).
+- **The story-arc instrument, then the rubric** — see STORY ARC above. Nearest build: score a
+  shipped `master.csv` on the sequence-aware candidates and join the retention curve onto the
+  beat rows.
 - **`{token:label}` per-beat reference selector** — pick a specific library member per beat
   (documented next-build in `build_lego`).
 - **`make_shorts.py`** — cuts from `final_video.mp4`, square-centre-blur vertical.
@@ -626,3 +698,40 @@ end-to-end as the live test of this doc.*
 *Prior milestones: proven end-to-end on Sacred Dawn / Book of Enoch (30 min, 15 Jul 2026);
 timing model rebuilt and measured 17 Jul; authoring contract absorbed from `_SCRIPT-CONTRACT.md`
 17 Jul (genre overlays scrubbed — they carried the pre-pivot Final Hours register).*
+
+---
+
+## FILM RECORD — shipped films, facts and figures
+
+One block per completed film. Authoring/production figures are filled at ship; the distribution
+figures are filled when the data lands (48h, then day 14/21). The point is **comparison across
+films** — the questions no single film can answer (does higher word density help or hurt
+retention? does a heavier Kling count pay? does a tighter arc score predict a flatter curve?).
+Add STORY ARC scores here as the instrument comes online.
+
+### 1 — *The Daughters of the Watchers — the Mystery Every Ocean Kept*
+**Sacred Dawn · shipped: (pending) · project `women-in-the-water`**
+
+| | |
+|---|---|
+| structure | 8 blocks · 320 beats · ~26.7 min |
+| narration | **4,318 words · 13.5 words/beat** |
+| voice | Elliot (Inworld) · **161 WPM measured** |
+| VO passes | 3 — 2,734 w (156 WPM) → 3,464 w (158) → 4,318 w (161) |
+| drift at lock | b1 +5.3 · b2 −2.4 · b3 +5.7 · b4 −12.3 · b5 +0.3 · b6 +5.5 · b7 −15.1 · b8 +19.4 (seconds, per block) |
+| canon | 12 tokens (project `canon.json`) |
+| probe | 20 beats / 62 real stills / ~$5 |
+| grid | ~800 real stills / ~$71 |
+| clips | (pending — floor + additive Kling) |
+| **CTR @48h** | *(pending)* |
+| **AVD @48h** | *(pending)* |
+| **AVD day-14 / day-21** | *(pending)* |
+| traffic mix @day-14 | *(pending)* |
+| arc scores | *(pending — see STORY ARC)* |
+
+**Notes.** First film authored under **container-fill** (blocks filled to ~0 drift rather than
+carrying ~20% air) — 13.5 w/beat against the ~13.3 predicted by 161 WPM on a 5.000s slot, so
+the model held. Six of eight blocks landed within ±6s; b7 (−15s) and b8 (+19s) were accepted
+rather than chasing a fourth pass. First film to use the self-selecting `probe` verb and the
+project-`canon.json` load. `{newearth}` initially rendered as bright desert and was fixed at
+the **token** (glory-as-substance + positive fullness), not by re-authoring phenomena.
