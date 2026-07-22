@@ -878,6 +878,42 @@ Verbs: `normalise` · `sweep` · `film` · `blocks` · `stills` · `probe` · `c
 > Where this doc writes `build_lego probe 20 --project P` it means the expanded form above; the
 > short form is shorthand for reading, never something you can paste.
 
+> **★ THERE IS NO `--help`.** `main()` builds its parser with `add_help=False`, and `load_config`
+> runs BEFORE argparse — so `--help` dies on "no channel.json found walking up from ..." and prints
+> nothing. **Do not go looking for it.** The parser is three lines: a positional `command`, a
+> required `--project`, and `rest` as a free-form list that each verb parses itself. That is why
+> per-verb options are dashless (`beats=`, bare integers) — they are not argparse flags at all.
+
+### THE NINE VERBS — read from source 22 Jul, complete
+
+`normalise · sweep · film · blocks · stills · probe · clips · audio · calibrate`
+
+| verb | `rest` takes | what it does | writes |
+|---|---|---|---|
+| **normalise** | — | sorts rows by (block_id, clip_index), fills every derived column, rewrites the master **in place** | `master.csv` |
+| **sweep** | — | per-block audit: token mix, banned-word hits, tokenless beats, **unlit beats**. Needs `phenomenon` | stdout |
+| **film** | — | whole-film audit: beats, blocks, runtime, hero/conn split vs target, motion mix | stdout |
+| **blocks** | `[BLOCK ...]` (default: all) | **runs `gate_block` and EXITS 1 on any failure.** This is the gate. Needs `phenomenon` | stdout |
+| **stills** | `[BLOCK ...]` **or** `beats=b/c,b/c` | renders the variant grid. Validates every `beats=` pair exists and lists any out of range | grid folder |
+| **probe** | `[N]` (default **20**) | **self-selecting** visual probe — one beat per canon token, doubling the fail-hardest, spread across blocks, 4-variant grid, prints a verdict card | `grid-probe/` |
+| **clips** | `[BLOCK ...]` (default: all) | animates the PICKED `shot_NNN.png` using the CSV's air/move/motion. `air=kling` → `animate_still(motion)`, else → `ken_burns_still(move)`. **Resume-safe; aborts if a picked still is missing** | `clips/shot_NNN.mp4` |
+| **audio** | — | joins all narration → `narration.txt`, prints beats/words/chars, renders VO through `recreation_pipeline` (provider routed by `channel.json`) | `narration.txt` + `voiceover.mp3` |
+| **calibrate** | `<whisper.json>` **REQUIRED** | measures spoken duration per beat against the container. Whisper must be run with `--word_timestamps True` or it exits | stdout |
+
+> **★ `place` IS NOT A VERB.** It is not in `CMDS` — the pick-promotion step is a standalone script
+> in `shared/`, run separately between `stills` and `clips`. Every other stage is `build_lego`; this
+> one is not, which is exactly the kind of thing that costs a round trip when it isn't written down.
+
+> **★ USE `probe`, NOT `stills beats=`, FOR A FIRST LOOK.** `probe` is self-selecting by design —
+> it picks one beat per canon token, doubles the ones most likely to fail, spreads across blocks and
+> prints a verdict card. Hand-listing twenty `beats=` pairs is doing by hand what the tool does
+> better, and it is how you end up probing four beats of the same token. `stills beats=` is for
+> **re-testing specific known-bad beats after a fix**, which is its own good use.
+
+> **UNVERIFIED — confirm and delete this note:** `stills` docstring says whole-block runs land in
+> `grid-bNN` while `beats=` lands in `grid-probe`, but a `grid/` folder also exists in shipped
+> projects. Check where a bare `stills --project P` actually writes before assuming.
+
 > **⚠ MARK UNVERIFIED INSTRUCTIONS AS UNVERIFIED.** This block was first written saying "always
 > launched from the PROJECT directory" — stated flatly, and wrong. A confidently wrong line in
 > this doc is worse than a missing one: a gap prompts a question, a wrong rule gets pasted and
@@ -1140,6 +1176,11 @@ retention — that is exactly what the instrument is for.
 *22 Jul 2026 — flag register 01–21 merged from the Methuselah build (Sacred Dawn, 12 blocks /
 480 beats, authored end to end against this doc). `_LEGO-FLAGS.md` is retired; delete it.*
 
+- **ALL NINE VERBS DOCUMENTED FROM SOURCE**, with what each takes in `rest`, what it does and what
+  it writes — plus the two facts that were costing a round trip every session: **there is no
+  `--help`** (the parser is `add_help=False` and `load_config` fails first), and **`place` is not a
+  verb** but a standalone script in `shared/`. Also recorded: `probe` is self-selecting and is the
+  right first look, `calibrate` requires a whisper json argument, `blocks` is the gate and exits 1.
 - **COMMAND CONTRACT now says where the files ARE.** Every invocation in this doc was written in
   shorthand — `build_lego probe 20 --project P` — with no path, no `python` prefix and no note
   that there is no console entry point. `build_lego.py` sits at the **repo root**, the readers in
