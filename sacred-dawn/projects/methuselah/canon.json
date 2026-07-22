@@ -1,37 +1,23 @@
 {
   "youngearth": "the world before the flood, wide green valleys and immense braided rivers running over pale sandbars, forests of colossal ancient trees, a low bright cloud ceiling, unbroken wilderness reaching to a clear horizon, clean bright daylight, terrain entirely of rock and earth and water and timber",
-
   "village": "a small settlement of the line of Seth, low mud-brick and rough timber houses with flat roofs, open dirt yards, cooking fires, clay vessels, goat pens, hand tools of wood and bone and stone, modest and plain, built low into a green valley floor",
-
   "highstone": "a bare rock summit high above the valley, exposed grey stone slabs swept clean by wind, one broad flat ledge at the top, a small ring of dark fire stones, sheer drops to a wide bright landscape on every side, open sky overhead",
-
   "hut": "the interior of a single-room Sethite dwelling, packed earth floor, mud-brick walls, low timber roof beams, one open doorway, woven mats and rough wool cloth, a single oil lamp, clay jars set against the wall",
-
   "firsthome": "the dwelling of the oldest man on earth, a single low house of large fitted grey stones under a heavy timber lintel, standing alone on open ground, one broad flat sitting-stone worn hollow beside the doorway, dry grass and scattered rock around it, an empty bright landscape reaching away on every side",
-
   "firstman": "an immensely old man, upright and clear-eyed, skin ridged and split like the bark of an ancient tree, a full white beard, pale steady eyes, heavy undyed wool robes, calm and unhurried, dignified and physically strong",
-
   "eden": "a warm green garden world of enormous fruiting trees and soft deep grass, every leaf and stem and surface glowing as if lit from within with white-and-gold light, rich saturated colour everywhere, an even unbroken radiance filling the air itself, abundant and full and whole",
-
   "city": "the first city on earth, immense walls and towers of cut grey stone rising straight out of a flat plain, tight stone-walled streets packed with people, flat roofs, heavy timber gates, scaffolds and new construction spreading at the edges, black smoke standing in columns above the rooftops, dense and crowded and permanent",
-
   "forge": "a long open-sided metalworking shed of heavy timber posts and a soot-black roof, three brick furnaces roaring white-orange, stone anvils, wall racks of finished bronze, sand casting beds on the earth floor, ore baskets and charcoal heaps, the whole space lit by furnace glare",
-
   "hermon": "a colossal isolated mountain in the far north, a broad snow-covered summit above a hard tree line, bare grey rock faces and deep clean snowfields, brilliant thin high-altitude daylight, an immense sunlit world of plain and river visible far below on every side",
-
   "watchers": "enormous physical beings far larger than men, solid and opaque and heavy, dense mass with hard shadow beneath them and real weight pressing into whatever they stand on, austere still faces, plain heavy draped cloth covering them fully, upright and unhurried and monumental",
-
   "nephilim": "enormous physical giants far taller than any man, solid opaque bodies with real mass and hard shadow beneath them, heavy limbs and broad flat faces, rough hide and plain coarse cloth, upright and unhurried, pressing deep into whatever ground they stand on, monumental and incurious",
-
   "cave": "a low rock chamber cut back into a bare hillside, one narrow entrance admitting hard daylight, dry stone walls and a flat sand floor, rock ledges stacked with stretched marked hides bound in cord, a single clay oil lamp burning bright at the centre, deep shadow in the corners",
-
   "lightcolumn": "a colossal vertical shaft of brilliant white-and-gold light standing on the ground and rising unbroken into the sky, solid and defined with hard clean edges like a physical pillar, the rock at its base blazing lit, immense and still and weighted, a real structure of light rather than a haze or a beam",
-
   "stonefield": "the same bare rock summit later in its life, now covered in hundreds of flat pale stones laid in long ordered rows across the whole ledge, the oldest stones weathered grey and pitted and the newest still clean, the rows curving to the rock edge and doubling back, a small fire ring at the centre, open sky and a wide bright landscape falling away on every side",
-
   "luminouschild": "a healthy newborn infant whose skin gives off a soft clean white radiance from within, the complexion bright and warm with a rose flush, fine white hair, clear calm open eyes, wrapped in plain dark wool, the light coming off him steady and warm and gentle enough to fill a room, beautiful and peaceful and entirely human in form",
-
   "ark": "an enormous vessel of pale cut timber standing on open cleared ground far from any water, three decks high and immensely long, heavy pegged beams and thick planking sealed with black pitch, one large door in the side and one window band near the roof line, scaffolds and timber stacks and pitch pots around its base, an ordinary bright landscape of fields and hills all around it",
-
-  "flood": "an immense rising body of bright grey-white water covering an entire landscape, colossal moving walls and sheets of water catching hard daylight, brilliant white foam along every crest, hills and rooftops and fields disappearing beneath it, a heavy dark sky above with strong light breaking through onto the surface, vast and open and empty of people"
+  "flood": "an immense rising body of bright grey-white water covering an entire landscape, colossal moving walls and sheets of water catching hard daylight, brilliant white foam along every crest, hills and rooftops and fields disappearing beneath it, a heavy dark sky above with strong light breaking through onto the surface, vast and open and empty of people",
+  "elder": "Methuselah in extreme old age, an immensely old man upright and unbroken, a full white beard and long white hair, pale grey-blue mineral strata and cracked slate spread across his brow and temple and upper cheekbone where the skin has become ancient stone, deep dry fissures between the plates, the rest of his skin deeply weathered and lined like old timber, clear steady pale eyes, heavy dark undyed wool robes, monumental and dignified and physically strong",
+  "methuman": "Methuselah in his prime, a strongly built man with a full dark beard and long dark hair, weathered sun-darkened skin, plain undyed wool robes and a worn leather cord at the throat, upright and unhurried, calm and watchful",
+  "methuboy": "Methuselah as a child, a lean dark-haired boy with sun-darkened skin and dark deep-set eyes, plain rough wool tunic, barefoot, alert and serious"
 }
