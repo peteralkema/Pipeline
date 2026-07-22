@@ -41,7 +41,10 @@ fresh operator with no memory):
 docs:          shared/docs/_LEGO.md , shared/docs/_<Channel>.md
 channel config: <channel>/channel.json , <channel>/rulebook.json
 shared rulebook: shared/rulebook.json
-project:       <channel>/projects/<slug>/{master.csv, canon.json, narration.txt, voiceover.mp3, voiceover.json}
+project:       <channel>/projects/<slug>/{package.md, architecture.md, master.csv, canon.json,
+                                            narration.txt, voiceover.mp3, voiceover.json,
+                                            coldopen.txt, coldopen.mp3, thumbnail.png, observations.md}
+               (there is NO blocks/ folder — see Step 2)
 grid stills:   <channel>/projects/<slug>/grid/{flat:03d}-{variant:02d}.png   <- ALL beats, ONE folder
 probe stills:  <channel>/projects/<slug>/grid-probe/{flat:03d}-{variant:02d}.png
 winners:       <channel>/projects/<slug>/winners/{flat:03d}-{variant:02d}.png (the picks, names unchanged)
@@ -73,7 +76,7 @@ fires on every beat, that's the bug.
 
 ---
 
-## THE PROCESS — 0 to 9 (this leads; everything hangs off it)
+## THE PROCESS — 0 to 10 (this leads; everything hangs off it)
 
 Run in order. Three orderings are load-bearing and cost money if broken: **package first**
 (the click decides whether the film is watched), **VO before stills** (measure the cheap
@@ -83,20 +86,24 @@ observe → bank → feed the next film.*
 
 | # | STEP | program(s) | gate | output |
 |---|---|---|---|---|
-| **0** | **PACKAGE FIRST** — topic for the CLICK; winnability gate (demand exists AND a small channel broke this lane); commit title + thumbnail CONCEPT (curiosity gap). Title must obey the channel's attribution rule (an *asserting* title breaks the moat). Flag topic-level render-safety (family-safe/YPP) before generating. Un-packageable → **kill here, $0.** | human + NexLev | title + thumbnail concept + winnability verdict | a decision to build |
-| **1** | **ARCHITECT** — runtime → N×200s blocks (200s = the seam unit); per block define its curiosity-gap + HANDOFF to the next; map the spine (cold open → escalation → turn → payoff); **name the canon tokens** the film needs. ~3,000–3,600 words ≈ 8 blocks. | human | block plan exists | N blocks, each with role + gap + handoff + token set |
-| **2** | **AUTHOR BLOCK BY BLOCK** — per beat write `phenomenon` + `narration` under the craft law; canon `{token}` on every beat; weight hero/connective; build variety across every axis. Each 40-beat block is a mini-spine (open its question, build, turn, close on the handoff). **Per-block CSVs live in CHAT, not on disk.** | human authoring | **GATE each block**: VISUAL present, ≤55 words (runaway backstop), tokens resolve, no banned words, register/setting sweep | one gated block CSV (in chat) |
-| **3** | **MERGE + INTERROGATE THE MASTER** — merge block CSVs → ONE master; `normalise` fills derived columns; read the film AS DATA (setting mix, register spread, hero/connective balance, word histogram, token×block heatmap, framing-repeat scan on any token >~20% of beats). Adjust. **The project folder is born here (or at the Step-0 thumbnail).** | `build_lego normalise`, `sweep` | RE-GATE the master | gated master CSV + variety audit |
+| **0** | **PACKAGE FIRST** — topic for the CLICK; winnability gate (demand exists AND a small channel broke this lane); commit title + **render the thumbnail FILE, not a concept**; squint-test it at 120px beside the lane leader's tile. Title must obey the channel's attribution rule (an *asserting* title breaks the moat). Flag topic-level render-safety (family-safe/YPP). Un-packageable → **kill here, $0.** | human + NexLev + image gen | **`package.md` EXISTS on disk** — title, thumbnail findings, both winnability verdicts *with their evidence*, render-safety table, truth ledger, metadata | **`<project>/package.md` + `thumbnail.png`** |
+| **1** | **ARCHITECT** — runtime → N×200s blocks (200s = the seam unit); per block define its curiosity-gap + HANDOFF to the next; map the spine (cold open → escalation → turn → payoff); **name the SPINE OBJECT and the ANTAGONIST**; **name the canon tokens**; carry a **dated chronology column** if the film has one. ~3,000–3,600 words ≈ 8 blocks. | human | **`architecture.md` EXISTS on disk**; every block has role + gap + handoff + tokens + date; the spine object escalates; the antagonist is named and placed | **`<project>/architecture.md`** |
+| **2** | **AUTHOR BLOCK BY BLOCK** — per beat write `phenomenon` + `narration` under the craft law; canon `{token}` on every beat; weight hero/connective; build variety across every axis. Each 40-beat block is a mini-spine (open its question, build, turn, close on the handoff). **Blocks are drafted in CHAT; there are NO per-block CSV files and no `blocks/` folder** — append straight into `master.csv`. | human authoring | **GATE each block**: VISUAL present, ≤55 words (runaway backstop), tokens resolve, no banned words, register/setting sweep. The block gate is a *drafting* check, never the film's gate | rows appended to `master.csv` |
+| **3** | **INTERROGATE THE MASTER** — `normalise` fills derived columns; read the film AS DATA (setting mix, register spread, hero/connective balance, word histogram, token×block heatmap, framing-repeat scan on any token >~20% of beats). Adjust. **The project folder was born at Step 0.** | `build_lego normalise`, `sweep` | **RE-GATE THE WHOLE FILM, not N blocks again** — row count, `clip_index` 1..40 per block, hero count per block, no negation in any `phenomenon`, no token in any `narration`, every token defined in `canon.json`. *Per-block passes miss what only the film sees* | gated master CSV + variety audit |
 | **4** | **VO CONVERGENCE** — emit ONE whole-film `narration.txt`; render VO (Inworld); whisper; `calibrate` → per-block cumulative drift vs the 200s grid; enrich the CSV to fill toward the grid (see TIMING). | `build_lego audio`, `calibrate` + Inworld + Whisper | — | `voiceover.mp3` rendered, seams measured |
 | **5** | **REPEAT 4** until every block lands **~0 cumulative drift** (minor ±overs/unders fine). **VO LOCKED** (output #2). | as Step 4 | every seam near its 200s mark | **VO locked** |
 | **6** | **PROBE, THEN THE GRID** — `probe [N]` (self-selecting register sample); read vs the verdict card → name the FAILURE CLASS; **sweep the master film-wide, setting-aware** (two homes: rulebook negatives + `phenomenon`/token geometry); re-probe until clean; THEN `stills` (all blocks) → the variant grid. | `build_lego probe`, `stills`; rulebook / canon / `phenomenon` edits | probe reads clean; first grid frames >7KB (not black rejects) | grid stills |
 | **7** | **PICK + AIR + MOVE + MOTION** — hand-pick ONE variant per beat into `winners/`; `place` them into `shot_NNN.png`; `draft_moves` fills `move`; `draft_air` fills `air`+`motion` (sliding quota × motion-want rank × score floor); eye-correct both against the picked frames. | `place.py`; `draft_moves.py`; `draft_air.py` | place = N files, no gaps/dupes/skip-tiles; BOTH drafters `--dry-run` first (a move flatline or a wrong Kling split is free to fix, expensive to render); a Kling beat with no `motion` aborts | placed stills + routing plan |
 | **8** | **RENDER CLIPS + GATE THEM** — per beat: `air`=Kling → `animate_still(motion)`, else → `ken_burns_still(move)` (the doctrine-varied free floor). Then ffprobe EVERY output. | `render_clips.py` (`--floor-only`, `--dry-run`); `verify_clips.py` | `--dry-run` shows split + cost before spend; then **`verify_clips.py --expect N --normalise` must PASS — every clip exactly 5.000s** | **`clips/shot_NNN.mp4`** (output #1) |
-| **9** | **ASSEMBLE + SHIP + OBSERVE** — clips + locked VO in Filmora (music, seam swells, title); cold-open cut LAST from the best clip of each block; export; upload. Read CTR+AVD @48h, day-14/21 traffic; **bank every failure as portable law**; feed it back to Step 0 of the next film. | Filmora (human) | — | shipped video → observations → next film |
+| **9** | **CUT THE COLD OPEN** — 45–55s in front of block 1. Its own `coldopen.txt`, its own Inworld render at the identical voice and speed, its own clips pulled from ONE already-picked moment. **Not a trailer** (see COLD OPEN below). | human + `build_lego audio` | the seam check: read the last cold-open line and block 1 beat 1 aloud back to back — if you hear a full stop between them, it is not finished | `coldopen.mp3` + its clip list |
+| **10** | **ASSEMBLE + SHIP + OBSERVE** — clips + locked VO + cold open in Filmora (music, seam swells, title); export; upload. Read CTR+AVD @48h and the day-14/21 retention curve; **join the curve onto the beat rows** and write it up; **bank every failure as portable law**; feed it back to Step 0 of the next film. | Filmora (human); the retention-join script | **`observations.md` EXISTS on disk** and the FILM RECORD row is filled — a film with no written observation taught the next one nothing | shipped video → observations → next film |
 
 > **The output boundary.** The pipeline ends at Step 8: clips + VO. Everything after is
 > Filmora and packaging. The pipeline's whole job is to hand Filmora N×40 clips in beat order
-> and one narration track, gated and correct.
+> and one narration track, gated and correct. **The cold open (Step 9) is the one exception** —
+> it is a separately authored, separately rendered artifact that never enters `master.csv`, which
+> is also why it is the only place breath may be hand-placed without contaminating the repeatable
+> path.
 
 ---
 
@@ -155,6 +162,29 @@ written by the human; **derived** columns are computed by `normalise` from the a
 > (45–90s, cut LAST from the best shot of every block, planting the film's biggest loop).
 > Block 1 then opens on *the object*; the payload lands ~block 3. The cold open buys the right
 > to be patient — without it, an object-open is the mid-video cliff.
+
+> **★ THE SPINE OBJECT — one physical thing carries the film.** Not a theme, not an idea: a
+> THING that can be photographed, tended, threatened and finally lost. It appears in the first
+> block, recurs in most of them, and its destruction or completion IS the climax. This is what
+> converts an abstraction ("God's patience", "the cost of exile") into something the camera can
+> hold. *Selection rule: prefer an object that ESCALATES VISUALLY.* A fire looks identical at year
+> one hundred and year nine hundred; a field of one stone per year does not — and becomes the
+> film's escalation meter, readable by the audience without narration. **The competitor film that
+> beat us in this lane is one prop from end to end** (a watch-fire, put out by a single raindrop);
+> so is Methuselah (nine hundred and sixty-nine laid stones, drowned).
+
+> **★ THE REFRAIN.** One line, repeated three or four times across the film, meaning something
+> different each time because the circumstances moved underneath it. Costs nothing, and it is what
+> makes a long film feel composed rather than accumulated. Works on a NUMBER as readily as a line
+> (*two hundred*, *nine hundred and sixty-nine*). Place them deliberately at Step 1, not by
+> accident at Step 2.
+
+> **★ NAME THE ANTAGONIST — "the world" is not one.** A diffuse villain produces a diffuse middle,
+> and the middle is where films die. Step 1 must answer: *who opposes this by name, and in which
+> blocks does he appear?* Prefer someone the source already names — an invented antagonist costs
+> attribution, a named one is free and defensible. The competitor's film has no antagonist and
+> sags for twelve unbroken minutes; that is not a coincidence, it is the same finding from the
+> other side.
 
 **THE CURIOSITY ENGINE.** Never answer a question without opening a larger one; curiosity
 never reaches zero. Keep an open-loop stack (several unanswered questions live at once).
@@ -276,6 +306,17 @@ drift). On **reference** channels the token is a character/object plate via `ref
   never "no sea" — the model renders the negated noun. *(newearth, 21 Jul: the desert→glory
   flip came entirely from the token, no phenomenon re-authoring — because the token leads every
   beat that uses it.)*
+- **A NON-LEADING token is an identity lock.** `setting` derives from the LEADING `{token}`, so a
+  token placed mid-cell rides along without corrupting the derivation. Lead with the place, put the
+  character inline: `{firsthome} wide, {firstman} sitting motionless on a broad flat stone…`. This
+  is the cheap alternative to reference mode for a character confined to one block — a plate is
+  overkill for nine beats, and the phrase locks identity the same way.
+- **RE-MINT A TOKEN WHEN THE SAME PLACE CHANGES OVER TIME.** A bare summit in block 1 and the same
+  summit covered in hundreds of laid stones in block 8 are materially different locations, and one
+  token cannot hold both without going to mush. Mint a second (`{highstone}` → `{stonefield}`) and
+  retag — the canon-contradiction rule applies to TIME as well as content. On any film spanning
+  decades or centuries this is the normal case, not the exception, and the pair is also where the
+  spine object's escalation becomes visible.
 - **A high-frequency spine token (>~20% of beats)** gets a framing-repeat scan: vary the
   SUBJECT within the locked place (a prow, a hand, wreckage, a shoal), never the place — the
   variation is motivated by what the beat reveals, not a new location.
@@ -319,6 +360,29 @@ moves: (1) enrich thin fragments to full lines, (2) enrich to grid-fill words, (
 fill each block to ~0 drift using per-block WPS. Exit when the writing is as good as it gets
 AND every block lands on the grid — **not** when a formula says "two passes."
 
+> **WPM IS NOT A RETENTION LEVER — settled 22 Jul, do not re-litigate.** A competitor film that
+> did 698K views in eleven days runs 102 WPM against Elliot's measured ~160, which looks like an
+> argument for slowing down. It is not. Sacred Dawn's own curves show dense narration costs nothing
+> after the open: *Forbidden Books* holds 35%→13% across ninety percent of its runtime at 161 WPM,
+> with relative retention 0.70–0.75 mid-film. Inferring a pacing rule from a competitor's
+> PRODUCTION figure with no retention curve attached fails the two-signals rule. **Author at
+> measured WPM under container-fill.** Breath belongs in the cold open, which is hand-assembled
+> anyway. Revisit only if a curve shows mid-film decay correlating with word density.
+
+> **BANKED, NOT BUILT — silence is assembled, never spoken.** No TTS gives a reliable pause
+> instruction, so stop asking for one. Make `sentence_id` the TTS RENDER UNIT — one call per group,
+> N files back — then concatenate with ffmpeg-generated silence at exact durations. Because the
+> container is arithmetic the gap is *subtracted, not estimated*: a group spanning beats 12–14 owns
+> 15.000s; render it at 12.4s and the gap is 2.6s. **Cumulative drift would be zero on the first
+> pass, always**, which collapses Steps 4–5 entirely and turns `calibrate` into a verifier that
+> should print zeros. Two columns: `pause_after` (authored override) and `pause_mode`
+> (`grid` | `tight`). Free consequences: hash-cache each group so an enrichment pass re-renders
+> thirty utterances rather than the film; and emit `timing.json` (utterance boundaries, gap
+> positions, block seams in absolute seconds) as a music cue sheet and a direct feed to the
+> retention join. Two hazards: separate calls break prosodic continuity, so group 2–4 sentences
+> where the voice must run on; and uniform auto-fill is the §0 blanket, so expect roughly half of
+> groups to run `tight`. **Build it when a measurement demands it, never for taste.**
+
 **Inworld hard limit: ≤20 break tags per request** — after the first 20 the rest are SILENTLY
 ignored. Count break tags and hard-fail above 20 before render.
 
@@ -327,6 +391,70 @@ ignored. Count break tags and hard-fail above 20 before render.
 frames non-deterministically; the trim normalises it. **Trim never pad** (dropping a frame is
 invisible; a freeze-frame isn't). Derive 120 from `r_frame_rate × 5` (a 30fps model would make
 120 frames = 4.0s). Ken Burns clips are exactly 5.000s by construction.
+
+---
+
+## THE COLD OPEN — the highest-leverage sixty seconds in the film
+
+> **★ IT IS NOT A TRAILER, AND THE TRAILER VERSION IS MEASURABLY COSTING RETENTION.**
+> A trailer is a compression of the whole film. It has its own arc — it builds, peaks, and ENDS.
+> When it ends the viewer has completed something, and the film then has to start over. **That
+> restart is the seam, and the seam is where the audience leaves.**
+
+**The evidence, two Sacred Dawn films, both curves:**
+
+| film | open | collapse |
+|---|---|---|
+| *Forbidden Books* (76:10) | 93.5% at 46s | **60.7% at 91s** |
+| *200 Taught Us* (37:30) | 97.8% at 22s | **54.8% at 45s → 35.9% at 67s** |
+
+YouTube's own `relativeRetentionPerformance` in that window is **0.22–0.36 — bottom decile** —
+against **0.58–0.75 mid-film** on the same videos. The middle of those films is above median. The
+first minute is not. **The collapse lands where the cold open ENDS**, which means it is not failing
+to hook; it is failing to *transfer*.
+
+A trailer also breaks the curiosity engine at the root: it INFORMS. A viewer who has been shown a
+survey of all eight blocks has been told what the film is — the one thing that should stay
+unresolved for the whole runtime.
+
+**The spec — 45–55s, ~10 clips, ~145 words at measured WPM.** Not 90; ninety seconds of anything in
+front of a film is a trailer by duration alone.
+
+| window | move |
+|---|---|
+| **0:00–0:08** | **THE DROP.** Open inside the film's most extreme moment, already in progress. No establishing shot, no "long ago". Hard cut in on the loudest frame you own. |
+| **0:08–0:20** | **THE NAME.** One sentence of coordinates. Deliver the title's noun here so the viewer knows within twenty seconds they are in the right video. Attribution lands here. |
+| **0:20–0:40** | **THE QUESTION.** Widen. Ask the one question the film exists to answer — larger than the moment just shown, and it must stay open for the whole runtime. |
+| **0:40–0:55** | **THE HANDOFF.** No summary, no "in this film". One sentence that grammatically REQUIRES block 1 beat 1. Cut mid-momentum. |
+
+**Sourcing.** Pull from ONE moment — six to eight already-picked clips that belong to a single
+event, plus two or three elsewhere for the widen. **Never a survey of the best shot of every block**
+(that is the trailer error restated as a sourcing rule), and never the film's final payoff shot.
+Choose the moment by whether a stranger seeing one frame would ask a question — and it must be the
+thing the THUMBNAIL promised. If the thumbnail sells an image the first twenty seconds do not
+deliver, the promise breaks on arrival and no craft downstream recovers it.
+
+> **★ THE SEAM IS THE REPAIR, NOT THE HOOK.** A broken seam has three things terminating at the
+> same instant: the narration sentence lands, the music phrase resolves, the visual register
+> changes. Three simultaneous endings mean one film ended and a different one began. Break the
+> simultaneity:
+> - **No silence at the cut.** Cold-open VO ends 1.5–2s BEFORE the visual cut; block 1's first
+>   line starts on the cut or under the last cold-open frame. Silence at a seam is an exit ramp.
+> - **Carry the music across.** One continuous bed from 0:00 through at least 2:00, unresolved
+>   under the handoff. No crossfade, no new track at the cut. Cheapest item on this list and
+>   probably the highest-yield.
+> - **Never fade to black at that cut.**
+> - **Match on movement.** Last cold-open clip and first block-1 clip share a motion direction, so
+>   the cut reads as one continuous camera.
+
+**Voice.** Pin the identical `voiceId`, `modelId` and speed as the body — a timbre shift at the
+seam tells the viewer a different film just started. Render, whisper it, confirm 53–57s before
+committing. Prosody law applies harder here than anywhere: a terminal pitch fall on the last
+cold-open sentence is the exact acoustic signal for *this has ended*.
+
+**The gate — three free checks.** Could a stranger summarise the film from it? Then it is a trailer;
+cut it back. Does it ANSWER anything? Remove the answer. Read the last cold-open line and block 1
+beat 1 aloud, back to back — if you hear a full stop between them, the seam is still there.
 
 ---
 
@@ -471,6 +599,26 @@ front-loads; a hero motion beat can never be dropped for being late.
 > middle breaks the whole stretch. So when budget is left over, find the longest `air=kb` runs
 > and buy the highest-scoring beat INSIDE each. (This is the same blindness STORY ARC names:
 > distributional measures cannot see monotony-in-sequence. Run length is sequential.)
+
+> **★ THE SCORE READS YOUR PROSE, SO THE KLING BILL IS SET AT STEP 2.** `draft_air.py` decides
+> nothing on its own — it ranks the words you wrote. *"Hard sunlight across the stone"* is dry and
+> rides the free floor; *"shafts of light through dust"* is the same light, but the dust scores +2
+> and commits the beat. **The tell is almost always the light clause**: name the SURFACE the light
+> lands on and the beat is free; name the MEDIUM it travels through and you have bought a clip.
+> This is not a reason to write drier — an air-starved film is a slideshow — but it does mean the
+> spend curve is an authoring decision that nobody was previously told they were making. Declare
+> the intent at Step 1 alongside the block roles, write to it, and let `draft_air` confirm rather
+> than surprise you. *(Corollary of the AIR VOCABULARY law above: check the score table against
+> the film you are actually making BEFORE you author, not after you render.)*
+
+> **⚠ AIR IS A CLIP DIAL, NOT A STILL DIAL.** Every beat needs a picked still whether it animates
+> or not — Ken Burns operates ON a still. Still spend is fixed by `weight` alone (hero 4 /
+> connective 2) and `air` cannot move it. Cutting `air` saves Kling money and nothing else.
+
+> **CHECK THE QUOTA AGAINST YOUR BLOCK COUNT.** The 0.80→0.20 default was tuned on an 8-block
+> film. On a 12-block film the same curve yields ~244 of 480 beats (51%) — more than double what a
+> hand-planned budget would allocate. Run `--dry-run` and read the split before accepting it;
+> `--start`/`--end` exist precisely so the curve scales with runtime.
 
 **Get `air` right BEFORE rendering.** `render_clips.py` skips clips already on disk, so a beat
 upgraded after a full render needs `--force` or a manual delete. Dry-run, tune, then render once.
@@ -624,6 +772,11 @@ order-sensitive and rejected trailing positionals; that is fixed. Per-verb optio
   root → universal `shared/rulebook.json`. Edit channel negatives from the channel dir.
 - **`gate_canon` greps token TEXT for banned words and can't read a negation** — never put a
   banned word (even "no galaxy") inside a canon token; ban it in the rulebook.
+- **A banned REGISTER word may also be an ordinary NOUN, and the gate cannot tell.** Sacred Dawn
+  bans `grave` as a register adjective; it is also the plain English word for a burial place, so
+  every burial beat aborts. The gate greps raw text and has no part of speech. Either scope the ban
+  or write around it (*a mound of turned earth*) — but know that any film with a death in it will
+  meet this, and audit the channel's banned list against the film's SUBJECT before authoring.
 - **The engine won't import on the laptop** (no dotenv/venv) — anything importing
   `recreation_pipeline` runs on the box; laptop-side edits to engine-owned data are pure-stdlib
   patches. `build_lego` is box-only for the same reason.
@@ -697,6 +850,12 @@ front whether they are one file or a re-edit.
 - **True multi-character dialogue.** The VO model is ONE continuous narrator. Two characters in
   dialogue break the single-call model. Bentley dodges it (Watson silent); Synthetic Press's
   dual-mode drama will hit it. Unsolved.
+  **This is now a MEASURED competitive cost, not a footnote.** The film that beat us in the Sacred
+  Dawn lane (698K in eleven days) runs two-hander dialogue heavily throughout — its most effective
+  retention beats are two people talking. Until the single-call model is solved, compensate in the
+  narration: reported speech carried in the witness voice (*"What is this, his son asked him. And
+  his father did not look up."*) keeps the exchange and the tension inside one continuous read. It
+  is not as good as the real thing; write it knowing what it is standing in for.
 
 Browse/evergreen channels (Woodworking) use LEGO's *machinery* (CSV, calibrate, variety, data
 surface) but NOT its narrative craft (spine, escalation) — the pipeline and the storytelling
@@ -763,6 +922,18 @@ retention — that is exactly what the instrument is for.
 > **Do not gate on any of these yet.** Gating on an unvalidated proxy is exactly the blanket
 > the GOVERNING LAW warns about — it would enforce a shape no evidence supports.
 
+> **★ BUILD THE JOIN — it is the only unbuilt thing in this doc that makes every future film
+> cheaper.** Step 10's observation is currently "read CTR+AVD, bank the failure", which produces no
+> file and no format, which is why the FILM RECORD rows sit empty. Two artifacts fix it:
+> **(a)** `observations.md` per project — CTR and AVD at 48h, the traffic mix at day 14 and 21, the
+> two or three timestamps where the curve actually broke, and the portable law banked from each;
+> **(b)** a pure-stdlib join script that takes the exported retention curve and the master, and
+> writes the watch-ratio onto every beat row. The arithmetic is already exact — beat *i* of block
+> *N* spans `((N−1)×200)+((i−1)×5)` to `+5` seconds, plus the cold-open offset. No other part of
+> this pipeline gets ground truth this clean. **The row where viewers left becomes the next film's
+> training signal**, and the candidate measures above stop being speculation the moment there are
+> two joined films to correlate against.
+
 ---
 
 ## FUTURE
@@ -778,6 +949,42 @@ retention — that is exactly what the instrument is for.
 ---
 
 ## CHANGELOG — what this rewrite superseded (history preserved)
+
+*22 Jul 2026 — flag register 01–18 merged from the Methuselah build (Sacred Dawn, 12 blocks /
+480 beats, authored end to end against this doc). `_LEGO-FLAGS.md` is retired; delete it.*
+
+- **THE PROCESS is now 0 to 10.** The cold open was one clause inside the old Step 9 and is now its
+  own step with its own section, because two Sacred Dawn retention curves put the channel's whole
+  bleed in that seam (bottom-decile first minute against above-median middles). The old instruction
+  — *cut it from the best clip of every block* — was the trailer error stated as a sourcing rule.
+- **Steps 0, 1 and 10 now produce FILES.** `package.md`, `architecture.md`, `observations.md`. The
+  old gates were "a decision to build", "block plan exists" and a prose instruction — all of which
+  lived in chat and were gone by the next session. The doc diagnosed this failure in WORKFLOW and
+  then committed it in its own first two steps.
+- **Step 0 renders the thumbnail file**, not a concept. On a channel whose declared moat is
+  packaging, thumbnail production was absent from the pipeline entirely.
+- **Per-block CSVs are gone.** No `blocks/` folder, no `bNN.csv` — blocks are drafted in chat and
+  appended straight to `master.csv`. And the block gate is demoted to a drafting check: on
+  Methuselah the FILM-level gate caught three wrong hero counts, a negation, and per-block word
+  totals that had been reported without being measured. Twelve per-block passes are not a film pass.
+- **Step 1 carries the chronology, the spine object and the antagonist.** A block plan that assumes
+  a time-shape the source contradicts is invisible until you are authoring beat one — it cost three
+  separate catches on one film.
+- **Craft law gains the spine object, the refrain and the named antagonist** — all three read off
+  the competitor teardown, and the antagonist finding is the mid-film sag diagnosed from both sides.
+- **WPM is settled and recorded as settled** so it is not re-litigated: a competitor's 102 WPM is a
+  production figure with no curve attached, and Sacred Dawn's own curves show density costs nothing
+  after the open.
+- **Silence-as-assembly is banked with its full spec** (`sentence_id` as TTS render unit + ffmpeg
+  gap concat), deliberately unbuilt.
+- **`air` gains its authoring-side half.** `draft_air.py` ranks the words you wrote, so the Kling
+  bill is set at Step 2 whether or not anyone knew it; and the 0.80→0.20 quota was tuned on eight
+  blocks and yields ~51% on twelve.
+- **Canon technique:** the non-leading identity token, and re-minting a token when the same place
+  changes across time.
+- **Also banked:** a banned register word that is also an ordinary noun (`grave`) aborts every
+  burial beat and the gate cannot tell them apart; and the single-narrator limit is now a measured
+  competitive cost with a stated compensation.
 
 *21 Jul 2026 — full consolidation after running WITW (Sacred Dawn, 8 blocks / 320 beats)
 end-to-end as the live test of this doc.*
@@ -833,6 +1040,29 @@ figures are filled when the data lands (48h, then day 14/21). The point is **com
 films** — the questions no single film can answer (does higher word density help or hurt
 retention? does a heavier Kling count pay? does a tighter arc score predict a flatter curve?).
 Add STORY ARC scores here as the instrument comes online.
+
+### 2 — *Methuselah — The Movie · 969 Years, and He Died the Year the Water Came*
+**Sacred Dawn · shipped: (pending) · project `methuselah`**
+
+| | |
+|---|---|
+| structure | 12 blocks · 480 beats · 40:00 + 55s cold open |
+| narration | **6,859 words · 14.29 words/beat** |
+| voice | Elliot (Inworld) |
+| canon | 18 tokens (16 place-locks + 2 identity locks) |
+| spine object | the marked stones — one per year, 969 at the end, drowned |
+| antagonist | Lamech of Cain's line (Gen 4:23–24); the two-Lamechs mirror caps at b8 |
+| grid | 1,200 real stills · **$96.00** |
+| clips | (pending — `draft_air` split not yet run; hand-planned intent was ~22%) |
+| **CTR / AVD @48h** | *(pending)* |
+| **AVD day-14 / day-21** | *(pending)* |
+| arc scores | *(pending)* |
+
+**Notes.** First film authored under the 0–10 process with `package.md` and `architecture.md` as
+real artifacts. First to use a spine object and a named antagonist by design rather than by
+accident. Authored ~6% above WITW's 13.5 w/beat, so expect `calibrate` to want a trim pass weighted
+into blocks 8–12. Three chronology catches during authoring (see flag 16 in the changelog) — all
+from Genesis 5 arithmetic, all invisible until beat one.
 
 ### 1 — *The Daughters of the Watchers — the Mystery Every Ocean Kept*
 **Sacred Dawn · shipped: (pending) · project `women-in-the-water`**
