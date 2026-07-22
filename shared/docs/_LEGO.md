@@ -90,8 +90,8 @@ observe → bank → feed the next film.*
 | **4** | **VO CONVERGENCE** — emit ONE whole-film `narration.txt`; render VO (Inworld); whisper; `calibrate` → per-block cumulative drift vs the 200s grid; enrich the CSV to fill toward the grid (see TIMING). | `build_lego audio`, `calibrate` + Inworld + Whisper | — | `voiceover.mp3` rendered, seams measured |
 | **5** | **REPEAT 4** until every block lands **~0 cumulative drift** (minor ±overs/unders fine). **VO LOCKED** (output #2). | as Step 4 | every seam near its 200s mark | **VO locked** |
 | **6** | **PROBE, THEN THE GRID** — `probe [N]` (self-selecting register sample); read vs the verdict card → name the FAILURE CLASS; **sweep the master film-wide, setting-aware** (two homes: rulebook negatives + `phenomenon`/token geometry); re-probe until clean; THEN `stills` (all blocks) → the variant grid. | `build_lego probe`, `stills`; rulebook / canon / `phenomenon` edits | probe reads clean; first grid frames >7KB (not black rejects) | grid stills |
-| **7** | **PICK + AIR + MOVE + MOTION** — hand-pick ONE variant per beat; `place` the winners into `shot_NNN.png`; assign `air` (Kling vs Ken Burns) and the doctrine `move` off the PICKED frame; write `motion` only on Kling beats. | `place.py`; `draft_moves.py` | place = N files, no gaps/dupes/skip-tiles; a Kling beat with no `motion` aborts | placed stills + routing plan |
-| **8** | **RENDER CLIPS** — per beat: `air`=Kling → `animate_still(motion)`, else → `ken_burns_still(move)` (the doctrine-varied free floor). | `render_clips.py` (`--floor-only`, `--dry-run`) | `--dry-run` shows split + cost before spend | **`clips/shot_NNN.mp4`** (output #1) |
+| **7** | **PICK + AIR + MOVE + MOTION** — hand-pick ONE variant per beat into `winners/`; `place` them into `shot_NNN.png`; `draft_moves` fills `move`; `draft_air` fills `air`+`motion` (sliding quota × motion-want rank × score floor); eye-correct both against the picked frames. | `place.py`; `draft_moves.py`; `draft_air.py` | place = N files, no gaps/dupes/skip-tiles; BOTH drafters `--dry-run` first (a move flatline or a wrong Kling split is free to fix, expensive to render); a Kling beat with no `motion` aborts | placed stills + routing plan |
+| **8** | **RENDER CLIPS + GATE THEM** — per beat: `air`=Kling → `animate_still(motion)`, else → `ken_burns_still(move)` (the doctrine-varied free floor). Then ffprobe EVERY output. | `render_clips.py` (`--floor-only`, `--dry-run`); `verify_clips.py` | `--dry-run` shows split + cost before spend; then **`verify_clips.py --expect N --normalise` must PASS — every clip exactly 5.000s** | **`clips/shot_NNN.mp4`** (output #1) |
 | **9** | **ASSEMBLE + SHIP + OBSERVE** — clips + locked VO in Filmora (music, seam swells, title); cold-open cut LAST from the best clip of each block; export; upload. Read CTR+AVD @48h, day-14/21 traffic; **bank every failure as portable law**; feed it back to Step 0 of the next film. | Filmora (human) | — | shipped video → observations → next film |
 
 > **The output boundary.** The pipeline ends at Step 8: clips + VO. Everything after is
@@ -419,13 +419,61 @@ replaces `a,b,c,d`. Allocation off `weight`: hero → 4, connective → 2 (~10 h
 connective = ~100 stills/block). **Anonymous, never faceless** (never lock one face; a
 different anonymous face each time reads as *humanity reacting*).
 
-### Air (Step 7) — read off the picked still, not chosen
+### Air + Kling (Step 7) — the spend dial
 
-**Air means literal, visible, suspended matter** — dust, smoke, mist, embers, water, drifting
-cloth. Not pace, not narration pauses. `visible` → **KLING** (a frozen dust shaft reads as
-wrong before you can say why). `flat` → **KEN BURNS** (a page of Ge'ez, an inscription in
-close-up — a slow push is documentary language and correct). The line: *any beat with visible
-air is dead as a still.*
+**Air means literal, visible, suspended matter** — dust, smoke, mist, embers, **water**,
+drifting cloth. Not pace, not narration pauses. The line: *any beat with visible air is dead as
+a still* — a frozen dust shaft or a motionless sea reads as wrong before you can say why. A
+genuinely flat beat (a page of Ge'ez, an inscription in close-up) is CORRECT on the free floor;
+a slow push is documentary language.
+
+> **★ THE AIR VOCABULARY MUST MATCH THE FILM'S MEDIUM.** An earlier drafter's air nouns were
+> dust / smoke / cloud / ash with **no water at all** — so a deep-sea film scored ZERO from
+> block 4 on, while a distant "bright parting cloud" in an extreme wide scored high. Water, sea,
+> deep, surf, current, bubbles are first-class air. Read the vocabulary against the film you are
+> actually making before trusting any draft.
+
+`draft_air.py` fills `air` + `motion`, keeping two decisions deliberately separate:
+
+**HOW MANY — the sliding quota.** A linear front-loaded curve: `--start` (default 0.80) of
+block 1 animates, falling to `--end` (0.20) by the last block. Blunt, but definitive and cheap
+to reason about — and it spends where distribution is decided, since a viewer who bails at
+ninety seconds never reaches block 8. On an 8×40 film: 32/29/25/22/18/15/11/8 ≈ 160 beats.
+
+**WHICH ones — motion-want ranking, within each block.** Every beat is scored on how much the
+picked frame wants to move; the top N take the block's quota:
+
+| cue in `phenomenon` | score |
+|---|---|
+| water / sea / deep / surf / current / bubbles / kelp | **+3** |
+| suspended matter (dust, smoke, mist, ash, spray, embers) | +2 |
+| cloth, robes, hair, banners, sails in wind | +2 |
+| fire, flame, sparks | +2 |
+| motion verbs (rising, pouring, striding, churning, collapsing, drifting) | +2 |
+| living subjects (figures, crowd, birds, creature, sailors) | +1 |
+| **carved stone, relief, inscription, page, text, ink, manuscript** | **−3** |
+| **held / motionless / perfectly still / calm / unbroken** | **−2** |
+
+So the Leviathan in its light shaft animates and the wall relief rides the free floor —
+automatically, off the film's own `phenomenon` text, with no per-film configuration. That is
+the dividend of keeping every per-beat decision in a column: the same tool splits a desert film
+and a deep-sea film differently because the films describe themselves differently.
+
+**THE FLEX — `--score-floor` (default 4).** A quota alone starves the back half of a film whose
+most motion-hungry images are late. Any beat scoring at or above the floor animates in ANY
+block, on top of its quota. On *Women in the Water* this rescued 15 beats — ten of them in
+block 8, whose quota was only 8 — so the finale does not end on a slideshow. The curve still
+front-loads; a hero motion beat can never be dropped for being late.
+
+> **★ THE MARGINAL KLING DOLLAR BUYS RUN-BREAKING, NOT THE NEXT-HIGHEST SCORE.** The score ranks
+> frames in ISOLATION; the viewer experiences SEQUENCE. A run of six consecutive floor beats
+> reads as a slideshow however well each frame was chosen, and ONE Kling beat dropped into the
+> middle breaks the whole stretch. So when budget is left over, find the longest `air=kb` runs
+> and buy the highest-scoring beat INSIDE each. (This is the same blindness STORY ARC names:
+> distributional measures cannot see monotony-in-sequence. Run length is sequential.)
+
+**Get `air` right BEFORE rendering.** `render_clips.py` skips clips already on disk, so a beat
+upgraded after a full render needs `--force` or a manual delete. Dry-run, tune, then render once.
 
 ### Motion (Step 7) — a function of the shot, not a choice
 
@@ -440,8 +488,9 @@ action (no running, no choreography; that is where AI drift lives).
 | **settle** | reflection, aftermath, grief (an exhale; closes a section) |
 | **static** | eerie stillness (hand-placed, sparingly) |
 
-**Derivation ladder (first match wins), read off `phenomenon` + `register` of the PICKED
-frame** — drafted by `draft_moves.py`, eye-corrected, never hand-invented per beat:
+**Derivation ladder (first match wins), read off the beat's `phenomenon` + `register`** —
+drafted by `draft_moves.py`, then eye-corrected against the picked frame. Be honest about the
+order: **the tools derive from TEXT, you correct from the IMAGE.** Never hand-invent per beat:
 ```
 1. quiet register/words (grief, aftermath, ash, empty, still) → settle   (never push)
 2. vertical force (rising, column, tower, shaft, ascends)      → crane
@@ -451,8 +500,9 @@ frame** — drafted by `draft_moves.py`, eye-corrected, never hand-invented per 
 `static` is NOT auto-derivable — promote specific held beats by eye. **The phenomenon drives
 it; register is the tiebreak.** A flatline (all push) is the §0 blanket signal. Validate the
 drafter against an already-shipped film's `move` column before trusting it on a new one.
-**Front-load Kling** — the `kling_count` is a contiguous front-N block until per-beat MOTION
-control; a viewer who bails at 90s never reaches later beats, so animate the gate.
+**Front-loading is now a sliding QUOTA, not a contiguous block.** Per-beat control lives in the
+`air` column, so the old contiguous front-N `kling_count` is retired — see Air + Kling above for
+the quota, the ranking and the score floor.
 
 ### The Ken Burns floor (Step 8)
 
@@ -462,6 +512,12 @@ are small (push ~1.16×, pans ~11%) so continuous-across-5s reads as *alive*, no
 Because the floor is **$0**, iteration is free — render all, eyeball a sample, a bad feel is a
 one-number tune + a free re-render. Kling stays available additively: mark a beat `air=kling` +
 a `motion` and it upgrades, one beat at a time, only where the retention curve says.
+
+> **⚠ NEVER LEAVE `move` BLANK.** `ken_burns_still` treats blank and `static` as the SAME
+> true-static branch, which bypasses zoompan entirely and depends on `-loop 1` being on the
+> ffmpeg input. Without that flag a single PNG yields a **one-frame ~0.04s clip** — and ffmpeg
+> exits 0, so it looks like a successful render. Write `static` explicitly when you mean it, and
+> gate every output (Step 8). `draft_moves.py` fills every row, which is the practical defence.
 
 ### Reference mode — the `/edit` path (character & object plates)
 
@@ -535,9 +591,21 @@ order-sensitive and rejected trailing positionals; that is fixed. Per-verb optio
 - **Avoid the `clips` verb inside build_lego for real clips** unless verified — the documented
   clips leg is `render_clips.py` (reads `air`/`move`/`motion`; `--floor-only`, `--dry-run`).
 
-**The other readers:** `place.py` (winners folder/list → `shot_NNN.png`; hard-fails on
-skip-tile/gap/dupe) · `render_clips.py` (Kling(`motion`) if `air`, else `ken_burns_still(move)`)
-· `draft_moves.py` (`--csv`, `--dry-run`, `--validate` against a shipped film).
+**The other readers** — all pure-stdlib except the render legs, all `--dry-run` before spend:
+
+- **`place.py`** — winners → `shot_NNN.png`; hard-fails (placing NOTHING) on a skip-tile pick,
+  a doubled beat or any gap in 1..N. `--winners` takes a FOLDER of picks **or a `.txt` list of
+  filenames** plus `--grid` to source the bytes from the grid already on the box — so only the
+  filenames travel, not 1.3GB. `--skip-tile` is required (it byte-compares to reject placeholders).
+- **`draft_moves.py`** — fills `move` (`--csv`, `--dry-run`, `--redraft`, `--validate` against a
+  shipped film). Blanks-only by default, so eye-corrections survive a re-run.
+- **`draft_air.py`** — fills `air` + `motion` (`--csv`, `--start`, `--end`, `--score-floor`,
+  `--dry-run`, `--redraft`). The spend dial; see Air + Kling.
+- **`render_clips.py`** — Kling(`motion`) if `air`, else `ken_burns_still(move)`; `--floor-only`,
+  `--dry-run`, `--force`. Skips clips already on disk (resume-safe).
+- **`verify_clips.py`** — the Step-8 gate: ffprobe every clip, `--expect N`, `--normalise` to
+  trim over-long clips losslessly.
+- **`consolidate_grid.py`** — migrates an older per-block grid into the flat folder.
 
 ---
 
@@ -561,6 +629,14 @@ skip-tile/gap/dupe) · `render_clips.py` (Kling(`motion`) if `air`, else `ken_bu
   patches. `build_lego` is box-only for the same reason.
 - **The skip-tile is channel-agnostic** — `shared/_skip.png` for all channels; a channel may
   override with `characters/_skip.png` (resolve shared first).
+- **A blank `move` hits `ken_burns_still`'s true-static branch** (blank and `static` share it).
+  It bypasses zoompan and relies on `-loop 1`; without that flag a single PNG produces a
+  ONE-FRAME ~0.04s clip that still exits 0. Write `static` explicitly; gate every output.
+- **`render_clips.py` does NOT trim Kling output.** Ken Burns is exact by construction
+  (`-t 5.000` + `-r 24` → 120 frames); Kling returns a non-deterministic frame count (121 is
+  common). `verify_clips.py` is what actually makes all N clips exactly 5.000s.
+- **Derive the trim frame count PER CLIP as `round(fps × 5.0)` — never hardcode 120.** A 30fps
+  clip trimmed to 120 frames is 4.0 seconds.
 - **Machine work batches; human work chunks.** The block boundary buys nothing at render time —
   it exists to protect your eye at the pick.
 
@@ -572,6 +648,12 @@ skip-tile/gap/dupe) · `render_clips.py` (Kling(`motion`) if `air`, else `ken_bu
 LAPTOP → commit → `git pull --no-edit` on box → verify. Assets (media) move by rsync/scp and are
 gitignored; code is GitHub-only. Stage explicit named paths — never `git add -A` (it can sweep
 large media). BOX uses `python` in the venv; LAPTOP uses `python3`.
+
+**Verify a tool is actually IN the repo before you depend on it.** Two working tools were found
+misplaced or untracked mid-film — one sat at the repo root while the doc implied a channel
+folder; another existed only as a loose file in `~/Downloads` and had never been committed at
+all. "Code is GitHub-only" is a rule nothing enforces: `git ls-files --error-unmatch <tool>`
+costs a second and catches it.
 
 **Patches are idempotent `patch_*.py`:** verify the anchor before writing, `.pre_*` backup once,
 `py_compile` the patched source before touching the target, ASCII-only, print applied/skip per
@@ -727,6 +809,14 @@ end-to-end as the live test of this doc.*
   film index (CSV row order) is unique by construction, `place.py`-compatible, and the same
   number `render_clips.py` uses — one naming law for probe, grid, winners and clips.
   `consolidate_grid.py` migrates older films.
+- **The air/Kling SPEND DIAL** (22 Jul, WITW clips). `draft_air.py` retires both the contiguous
+  front-N `kling_count` and the earlier air drafter: sliding quota (80%→20%) × motion-want
+  ranking × score floor. **Water added to the air vocabulary** — its absence had scored a
+  deep-sea film at zero from block 4 on. Marginal budget goes to RUN-BREAKING, not the next
+  highest score.
+- **Step 8 finally has its gate.** `verify_clips.py` implements the "ffprobe every output,
+  hard-fail anything not 5.000s" rule the doc has always asserted and nothing implemented —
+  plus the Kling trim `render_clips.py` never did, with the frame count derived per clip.
 - **Note:** `shared/docs/_Sacred-Dawn.md` may still carry a stale 143-WPM / god-ray-in-suffix
   line — fix at that file, out of scope here.
 
