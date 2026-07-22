@@ -63,7 +63,42 @@ ANCHOR_2 = '''    rows = load_master(cfg)
 REPLACE_2 = '''    rows = load_master(cfg)
     if not has_col(rows, "phenomenon"):
         raise SystemExit("stills needs a 'phenomenon' column -- author first.")
-    # beats=a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
+    # beats=b/c,b/c  -> cross-film PROBE: render exactly these (block/clip) beats
+    # into one grid-probe folder (register/token spread). A DASHLESS positional
+    # token (a --flag is eaten by the top-level parser). Matches how calibrate
+    # prints beats: block/clip.
+    _probe_beats = None
+    _bspec = None
+    for _a in list(argv):
+        if _a.startswith("beats="):
+            _bspec = _a.split("=", 1)[1]
+            argv = [x for x in argv if x != _a]
+            break
+    if _bspec is not None:
+        _probe_beats = set()
+        for _tok in _bspec.split(","):
+            _tok = _tok.strip()
+            if not _tok:
+                continue
+            if "/" not in _tok:
+                raise SystemExit("beats= needs block/clip pairs, e.g. beats=1/1,2/3,6/20")
+            _b, _c = _tok.split("/", 1)
+            _probe_beats.add((int(_b), int(_c)))
+        if not _probe_beats:
+            raise SystemExit("beats= needs block/clip pairs, e.g. beats=1/1,2/3,6/20")
+        _have = {(int(r["block_id"]), int(r["clip_index"])) for r in rows}
+        _oob = sorted(p for p in _probe_beats if p not in _have)
+        if _oob:
+            raise SystemExit("beats= not in master: %s"
+                             % ", ".join("%d/%d" % p for p in _oob))
+    wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})'''
+
+MARKER_2 = 'beats= needs block/clip pairs'
+
+# The box currently has the earlier FLAT-INDEX beats= version. Accept that block
+# as an alternate anchor -> same REPLACE_2 (now block/clip), so a re-patch heals
+# the box instead of aborting.
+ALT_ANCHOR_2 = '''    # beats=a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
     # (1..N over the whole master, master order) into one grid-probe folder. A
     # DASHLESS positional token (a --flag is eaten by the top-level parser before
     # this command sees it). 1-based, matches calibrate.
@@ -88,32 +123,6 @@ REPLACE_2 = '''    rows = load_master(cfg)
             raise SystemExit(f"beats= out of range 1..{_nrows}: {_oob}")
     wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})'''
 
-MARKER_2 = 'if _a.startswith("beats=")'
-
-# If the earlier (flat-index) --beats version already landed on the box, edit 2's
-# pristine ANCHOR_2 is gone. Accept that block as an alternate anchor -> same
-# REPLACE_2, so a re-patch heals a half-applied box instead of aborting.
-ALT_ANCHOR_2 = '''    # --beats a,b,c  -> cross-film PROBE: render exactly these FLAT FILM INDICES
-    # (1..N over the whole master, master order) into one grid-probe folder -- a
-    # register/token spread, instead of whole blocks. 1-based, matches calibrate.
-    _probe_beats = None
-    if "--beats" in argv:
-        _i = argv.index("--beats")
-        _spec = argv[_i + 1] if _i + 1 < len(argv) else ""
-        argv = argv[:_i] + argv[_i + 2:]
-        _probe_beats = set()
-        for _tok in _spec.split(","):
-            _tok = _tok.strip()
-            if _tok:
-                _probe_beats.add(int(_tok))
-        if not _probe_beats:
-            raise SystemExit("--beats needs film indices 1..N, e.g. --beats 1,58,231")
-        _nrows = len(rows)
-        _oob = sorted(n for n in _probe_beats if n < 1 or n > _nrows)
-        if _oob:
-            raise SystemExit(f"--beats out of range 1..{_nrows}: {_oob}")
-    wanted = [int(a) for a in argv] or sorted({int(r["block_id"]) for r in rows})'''
-
 # ---- edit 3: honour _probe_beats in the block loop -------------------------
 ANCHOR_3 = '''    for block in wanted:
         brows = [r for r in rows if int(r["block_id"]) == block]
@@ -126,15 +135,34 @@ REPLACE_3 = '''    if _probe_beats is not None:
         wanted = [0]  # single synthetic pass; the probe selects rows by film ordinal
     for block in wanted:
         if _probe_beats is not None:
+            brows = [r for r in rows if (int(r["block_id"]), int(r["clip_index"])) in _probe_beats]
+        else:
+            brows = [r for r in rows if int(r["block_id"]) == block]
+        # probe = a cross-film SAMPLE of already-gated beats (repeating clip_index
+        # across blocks would false-trip the per-block structural gate). Skip the
+        # structural gate here; token expansion + the >7KB black-frame eyeball are
+        # the real spend guards for a probe.
+        if _probe_beats is None:
+            gerrs = gate_block(brows, cfg, load_banned(cfg))
+            if gerrs:
+                print("\\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
+        grid = (proj / "grid-probe") if _probe_beats is not None else (proj / f"grid-b{block:02d}")'''
+
+MARKER_3 = 'int(r["clip_index"])) in _probe_beats]'
+
+# box currently has the flat-ordinal enumerate version of the row-select; accept
+# it as an alternate anchor -> same REPLACE_3 (block/clip pair match).
+ALT_ANCHOR_3 = '''    if _probe_beats is not None:
+        wanted = [0]  # single synthetic pass; the probe selects rows by film ordinal
+    for block in wanted:
+        if _probe_beats is not None:
             brows = [r for i, r in enumerate(rows, 1) if i in _probe_beats]
         else:
             brows = [r for r in rows if int(r["block_id"]) == block]
         gerrs = gate_block(brows, cfg, load_banned(cfg))
         if gerrs:
             print("\\n".join("  GATE FAIL: " + e for e in gerrs)); raise SystemExit(1)
-        grid = (proj / "grid-probe") if _probe_beats is not None else (proj / f"grid-b{block:02d}")'''
-
-MARKER_3 = 'grid = (proj / "grid-probe")'
+        grid = proj / f"grid-b{block:02d}"'''
 
 
 def main():
@@ -166,7 +194,7 @@ def main():
     edits = [
         ("canon load in load_config", ANCHOR_1, REPLACE_1, MARKER_1, None),
         ("--beats parse in cmd_stills", ANCHOR_2, REPLACE_2, MARKER_2, ALT_ANCHOR_2),
-        ("probe row-select in loop", ANCHOR_3, REPLACE_3, MARKER_3, None),
+        ("probe row-select in loop", ANCHOR_3, REPLACE_3, MARKER_3, ALT_ANCHOR_3),
     ]
 
     for name, anchor, replace, marker, alt in edits:
