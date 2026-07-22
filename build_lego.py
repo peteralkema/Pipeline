@@ -79,8 +79,14 @@ def master_path(cfg) -> Path:
     return Path(cfg["_project_dir"]) / "master.csv"
 
 def wc(s: str) -> int:
-    """Standalone punctuation is not a word (em-dashes are prosody, not tokens)."""
-    return len([t for t in (s or "").split() if re.search(r"[A-Za-z0-9]", t)])
+    """Standalone punctuation is not a word (em-dashes are prosody, not tokens).
+    TTS markup is an instruction, never narration: anything between < and > is
+    stripped before splitting. Whisper emits no words for a break tag, so
+    counting one would advance calibrate's stream pointer and desync every
+    downstream beat. Stripping (not token-filtering) is required because the
+    spaced form <break time="1.5s" /> leaves an attribute carrying no bracket."""
+    s = re.sub(r"<[^>]*>", " ", s or "")
+    return len([t for t in s.split() if re.search(r"[A-Za-z0-9]", t)])
 
 def load_master(cfg):
     mp = master_path(cfg)
