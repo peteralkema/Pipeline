@@ -42,8 +42,9 @@ docs:          shared/docs/_LEGO.md , shared/docs/_<Channel>.md
 channel config: <channel>/channel.json , <channel>/rulebook.json
 shared rulebook: shared/rulebook.json
 project:       <channel>/projects/<slug>/{master.csv, canon.json, narration.txt, voiceover.mp3, voiceover.json}
-grid stills:   <channel>/projects/<slug>/grid-b<NN>/{clip:03d}-{variant:02d}.png
-probe stills:  <channel>/projects/<slug>/grid-probe/{block:02d}-{clip:03d}-{variant:02d}.png
+grid stills:   <channel>/projects/<slug>/grid/{flat:03d}-{variant:02d}.png   <- ALL beats, ONE folder
+probe stills:  <channel>/projects/<slug>/grid-probe/{flat:03d}-{variant:02d}.png
+winners:       <channel>/projects/<slug>/winners/{flat:03d}-{variant:02d}.png (the picks, names unchanged)
 placed stills: <channel>/projects/<slug>/stills/shot_NNN.png
 clips:         <channel>/projects/<slug>/clips/shot_NNN.mp4
 ```
@@ -130,6 +131,11 @@ written by the human; **derived** columns are computed by `normalise` from the a
   `phenomenon`, so nothing distinguishes the winner at the data level. `place` promotes the
   chosen file to `shot_NNN.png`; that file's existence IS the pick. There is no
   `picked_variant` column to keep in sync.
+- **One number runs the whole visual chain: the FLAT FILM INDEX (CSV row order, 1..N).** Grid
+  and probe stills are named `{flat}-{variant}.png`, `place.py` parses that flat beat out of the
+  filename, and `render_clips.py` enumerates the same rows for `shot_{i:03d}`. Never name a
+  still by `clip_index` (it repeats in every block) and never block-prefix it (`place.py`'s
+  regex rejects a second dash).
 - Every beat resolves to `variants` real files + `_skip.png` fill to 4; a **skip-tile pick
   is a hard fail** (`place` catches it). Never write blank placeholder stills — a blank
   collapses "never requested" and "generation failed" into one artifact.
@@ -370,18 +376,41 @@ pairs, dashless token (see COMMAND CONTRACT). Also renders into `grid-probe/`.
 The 4 variants are **4 re-rolls of one prompt**, not four framings — same `phenomenon`, four
 fal calls, non-determinism gives four frames of the one composition; pick the cleanest.
 Hero = 4 real; connective = 2 real + 2 `_skip.png`. Cost = REAL stills only
-(`sum(variants) × $0.08`), visible before you spend. Per-block grid folders are `grid-b<NN>/`,
-filenames `{clip:03d}-{variant:02d}.png` (clip-only — unique within a block). Probe folders are
-`grid-probe/`, filenames block-PREFIXED `{block:02d}-{clip:03d}-{variant:02d}.png` (clip_index
-repeats across blocks and would otherwise collide).
+(`sum(variants) × $0.08`), visible before you spend.
+
+> **★ ONE GRID FOLDER, FLAT-INDEX FILENAMES.** Every still of the film lands in a single
+> `grid/` folder named `{flat:03d}-{variant:02d}.png`, where **flat is the FILM INDEX 1..N**.
+> The folder therefore sorts in exact beat order — you scroll the film start to finish. The
+> probe folder uses the same names. Three reasons this is the ONE naming law:
+> - **Unique by construction.** `{clip}-{variant}` repeats in every block, so the winners
+>   collide the moment they share a folder — a silent overwrite that loses most of the picks.
+> - **`place.py`-compatible.** It parses `^(\d{1,4})-(\d+)\.png$` and reads group 1 as the flat
+>   beat; a block-prefixed name (`06-019-03.png`) fails that regex outright.
+> - **Agrees with `render_clips.py`**, which enumerates CSV rows for `shot_{i:03d}`.
+>
+> **FLAT IS CSV ROW ORDER, never `(block−1)×40+clip`.** The formula agrees only while every
+> block holds exactly 40 rows; one short block would silently misalign every beat after it —
+> which you would meet as narration over the wrong image at assembly. `_flat_map()` reads the
+> master and enumerates. `consolidate_grid.py` migrates an older per-block layout (`grid-bNN/`)
+> into the flat folder — a rename, no re-render, dry-run by default.
 
 ### The pick (Step 7)
 
-100 stills/block → 40 winners. **The pick will never be automated — it is the creative act,
-and the real ceiling on how many shots you take.** `place.py` promotes the chosen file to
-`shot_NNN.png`; hard-fails on a skip-tile pick, gap, or dupe. **Block-at-a-time is a PICK rule
-(visual fatigue over ~800 stills), not a text rule** — enrichment is whole-film in one pass;
-the pick is one block per sitting.
+~4 stills per beat → ONE winner each (≈1,280 → 320 on an 8-block film). **The pick will never be
+automated — it is the creative act, and the real ceiling on how many shots you take.**
+
+Review the whole `grid/` folder sorted by name: flat-index names put it in exact beat order, so
+you scroll the film in sequence and stop wherever. Copy ONE winner per beat into `winners/`
+(filenames unchanged — they are already unique), then place them:
+
+    python3 place.py --winners <project>/winners --out <project>/stills \
+                     --skip-tile shared/_skip.png
+
+`place.py` parses the flat beat from each filename and writes `shot_{beat:03d}.png`. It
+hard-fails — placing NOTHING — on a skip-tile pick, a doubled beat, or any gap in 1..N, so it
+names exactly what to re-pick rather than half-placing. **Pace the pick across sittings (visual
+fatigue over ~1,000 stills is real), but that is a PACING rule, not a folder rule** —
+enrichment is whole-film in one pass, and so is the grid.
 
 **Variant grammar** (proven on Enoch, 400 beats — wildcard 36% the clear winner, mid 20% the
 loser): `a` WIDE (phenomenon dominant, human tiny) · `c` TIGHT (reaction, register-matched
@@ -491,9 +520,9 @@ order-sensitive and rejected trailing positionals; that is fixed. Per-verb optio
 `key=value` positionals, e.g. `beats=1/1,2/3` — a `--flag` gets eaten by the top-level parser.)
 
 - **`probe [N]`** — self-selecting register sample → `grid-probe/` + verdict card (above).
-- **`stills [BLOCK...]`** — whole block(s) → `grid-b<NN>/` (unprefixed filenames; pick/place
-  reads these). **`stills beats=b/c,…`** — a manual cross-film sample → `grid-probe/`
-  (block-prefixed filenames). The per-block structural gate runs on block mode and is skipped
+- **`stills [BLOCK...]`** — whole block(s) → the single `grid/` folder, flat-index filenames.
+  **`stills beats=b/c,…`** — a manual cross-film sample → `grid-probe/` (same flat names).
+  The per-block structural gate runs on block mode and is skipped
   in probe mode (cross-film clip_index repeats would false-trip it). **`stills` PRE-GATES every
   wanted block before rendering any of them** — a gate failure prints the complete list across
   the whole film and exits with nothing spent, so a full-grid run is safe to leave unattended.
@@ -692,6 +721,12 @@ end-to-end as the live test of this doc.*
   PHASE 0–12 pathway, and the legacy `finish`/`storyboard.json`/`mission-control` pipeline
   mapping (that is the older recreation-pipeline path, not the current `build_lego` path).
 - **The pick is a filename, never a `picked_variant` column** (settled the duplicate beat-table).
+- **One grid folder, flat-index filenames** (21 Jul, after the WITW grid). Per-block folders and
+  `{clip}-{variant}` names are retired: clip index repeats in every block, so flattening the
+  winners collided, and the block-prefix fix used on the probe fails `place.py`'s regex. Flat
+  film index (CSV row order) is unique by construction, `place.py`-compatible, and the same
+  number `render_clips.py` uses — one naming law for probe, grid, winners and clips.
+  `consolidate_grid.py` migrates older films.
 - **Note:** `shared/docs/_Sacred-Dawn.md` may still carry a stale 143-WPM / god-ray-in-suffix
   line — fix at that file, out of scope here.
 
