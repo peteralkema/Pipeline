@@ -353,7 +353,18 @@ def cmd_calibrate(cfg, argv):
             cum = 0.0
 
 # ------------------------------------------------------------------ stills (ref-aware 4x grid)
-def _stills_render(cfg, brows, out_dir, prefix_block, label):
+def _flat_map(rows):
+    """(block, clip) -> FLAT FILM INDEX (CSV row order, 1-based).
+
+    Flat index is row ORDER, never (block-1)*40+clip: the formula only agrees when
+    every block holds exactly 40 rows, and a short block would silently misalign every
+    beat after it. This is the number place.py parses out of {flat}-{variant}.png and
+    the number render_clips.py uses for shot_{i:03d}.
+    """
+    return {(int(r["block_id"]), int(r["clip_index"])): i for i, r in enumerate(rows, 1)}
+
+
+def _stills_render(cfg, brows, out_dir, flat_map, label):
     """Render the 4-variant pick-set for a list of rows into out_dir.
 
     Per beat: 4 real re-rolls if hero, else 2 real + 2 skip-tiles. Filenames are
@@ -393,7 +404,7 @@ def _stills_render(cfg, brows, out_dir, prefix_block, label):
                         refs.append(str(ref_chdir / f))
         n_real = 4 if r["weight"] == "hero" else 2
         for v in range(1, 5):
-            name = ("%02d-%03d-%02d.png" % (b, ci, v)) if prefix_block else ("%03d-%02d.png" % (ci, v))
+            name = "%03d-%02d.png" % (flat_map[(b, ci)], v)
             out = out_dir / name
             index.append((b, ci, v, "real" if v <= n_real else "skip", name))
             if out.exists():
@@ -428,6 +439,7 @@ def cmd_stills(cfg, argv):
     if not has_col(rows, "phenomenon"):
         raise SystemExit("stills needs a 'phenomenon' column -- author first.")
     proj = Path(cfg["_project_dir"])
+    flat_map = _flat_map(rows)
     beats = None
     for a in list(argv):
         if a.startswith("beats="):
@@ -448,7 +460,7 @@ def cmd_stills(cfg, argv):
         if oob:
             raise SystemExit("beats= not in master: " + ", ".join("%d/%d" % p for p in oob))
         brows = [r for r in rows if (int(r["block_id"]), int(r["clip_index"])) in beats]
-        real, index = _stills_render(cfg, brows, proj / "grid-probe", True, "probe")
+        real, index = _stills_render(cfg, brows, proj / "grid-probe", flat_map, "probe")
         _write_grid_index(proj / "grid-probe", index)
         print("  probe: %d beats -> %s | %d real stills ($%.2f)" % (len(brows), proj / "grid-probe", real, real * 0.08))
         return
@@ -475,8 +487,8 @@ def cmd_stills(cfg, argv):
     checked = []
     for block in wanted:
         brows = [r for r in rows if int(r["block_id"]) == block]
-        grid = proj / ("grid-b%02d" % block)
-        real, index = _stills_render(cfg, brows, grid, False, "block %d" % block)
+        grid = proj / "grid"
+        real, index = _stills_render(cfg, brows, grid, flat_map, "block %d" % block)
         _write_grid_index(grid, index)
         total_real += real
         for row in index:
@@ -572,7 +584,7 @@ def cmd_probe(cfg, argv):
     picks = picks[:n]
 
     proj = Path(cfg["_project_dir"])
-    real, index = _stills_render(cfg, picks, proj / "grid-probe", True, "probe")
+    real, index = _stills_render(cfg, picks, proj / "grid-probe", _flat_map(rows), "probe")
     _write_grid_index(proj / "grid-probe", index)
     sel = ", ".join("%d/%d" % (int(r["block_id"]), int(r["clip_index"])) for r in picks)
     nblocks = len({int(r["block_id"]) for r in picks})
