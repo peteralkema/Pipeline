@@ -61,3 +61,16 @@ venv/
 **/.DS_Store
 .obsidian/
 *.docx
+
+# ---- added 23 Jul 2026: secrets, media, editor projects, backups ----
+secrets/
+*.wfp
+*.pptx
+*.jpeg
+*.mp3
+*/music/
+*/batch_inbox/
+*.bak_*
+*.bak-*
+success-coach/new_thumbs/
+crew-wip/
