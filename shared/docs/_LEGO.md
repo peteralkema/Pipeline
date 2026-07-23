@@ -147,6 +147,10 @@ written by the human; **derived** columns are computed by `normalise` from the a
   is a hard fail** (`place` catches it). Never write blank placeholder stills — a blank
   collapses "never requested" and "generation failed" into one artifact.
 - `move` ∈ {push,pull,crane,settle,static}; a Kling `air` beat has non-empty `motion`.
+- **`air` ∈ {`kling`,`kb`} and is filled on EVERY row — it is not blank-for-floor.** `motion` is
+  filled ONLY on `kling` rows. So demoting a beat to the free floor means setting `air='kb'` AND
+  blanking `motion`; blanking `air` itself leaves a row no leg will claim. Kling costs **$0.42
+  per clip** — `air` is the only column that spends money.
 - Derived columns are NEVER hand-edited.
 
 ---
@@ -185,6 +189,26 @@ written by the human; **derived** columns are computed by `normalise` from the a
 > attribution, a named one is free and defensible. The competitor's film has no antagonist and
 > sags for twelve unbroken minutes; that is not a coincidence, it is the same finding from the
 > other side.
+
+> **★ THE CALIBRATION NOISE FLOOR IS BIGGER THAN THE DRIFT YOU ARE CORRECTING.** Two independent
+> sources of variance make per-block precision unreachable, and both were measured on Methuselah:
+> - **TTS is not deterministic.** The identical script rendered at 163 WPM, then 160, then 158 —
+>   a 1.3% swing worth **±31s across a 40-minute film**. Blocks whose text did not change between
+>   runs moved by **12 and 18 seconds**.
+> - **Whisper drops words** (63, then 91, of ~6,550). Every drop advances `calibrate`'s pointer
+>   past its beat, so **per-beat durations downstream of a drop are fiction** — 28 beats came back
+>   implying 260–456 WPM, which is physically impossible. Block *totals* survive (they are sums);
+>   per-beat attribution does not.
+>
+> **The practical rule: correct a block that misses by more than ~10s, and stop.** One targeted
+> pass works — a +15-word restore moved its block +6.18s against +5.7s predicted, so the method is
+> sound. A second pass chasing ±5s is arithmetic on numbers that will not reproduce.
+> **Sanity-check before authoring against any per-beat figure: implied WPM = words × 60 ÷ seconds.
+> Outside ~90–260, the measurement is an artifact — do not trim or pad against it.**
+> Ground truth for film length is `ffprobe` on the mp3, never the calibrate table.
+>
+> **Ignore every `cut Nw` on a beat carrying a `<break/>`** — `calibrate` counts the deliberate
+> silence as part of the beat and reports a 9–11s overrun that is not real.
 
 > **★ SOME CONCEPTS HAVE NO PHOTOREAL REFERENT — AND NO WORDING WILL SAVE THEM.** A localised
 > texture change on a human face is the worked example: skin turning to stone across one temple.
@@ -460,7 +484,40 @@ invisible; a freeze-frame isn't). Derive 120 from `r_frame_rate × 5` (a 30fps m
 
 ---
 
+### The visual budget (Step 1) — the audit that has to happen BEFORE authoring
+
+> **★ THE TOKEN DISTRIBUTION *IS* THE FILM'S LOOK, AND IT IS LOCKED AT STEP 1.** Not at authoring,
+> not at the Step-3 audit. By the time you are writing beats the look is already decided, because
+> every beat opens with a `{token}` and the token list is the entire vocabulary of things the film
+> can show. **Count it at Step 1 and read it as a budget.**
+>
+> Methuselah, measured after the fact: 17 tokens, of which **10 were terrestrial** — rock, mud,
+> market, forge, hut. Result: **88% of the film ordinary, 12% spectacle.** The three acts that
+> existed to be spectacle were not: the Watchers 16/40, the giants 7/40, and *the man who did not
+> die* — a bodily ascent into heaven — **2 out of 40**. Reviewing the finished grid, the operator
+> named 17 recurring subjects unprompted. They were the 17 tokens.
+>
+> Two Step-1 decisions caused it and both looked like craft at the time:
+> - **A BIOGRAPHICAL FRAME PRODUCES A DOCUMENTARY.** "The life of X" over 969 years is mostly
+>   ordinary life, and it relegates every supernatural event to a cameo the protagonist hears about.
+>   A blockbuster register wants an **event frame** — the film is about the things that happen and
+>   the protagonist is the thread through them.
+> - **A SPINE OBJECT CAN BECOME A VISUAL SINK.** One marked stone per year is excellent story and
+>   **26% of the film** was then two rock tokens. *Test at Step 1: can you name TEN visually
+>   distinct frames of this object?* The stones give about three.
+>
+> **The gate, run at Step 1 on the token list, before a single beat is authored:**
+> - What percentage of planned beats is spectacle? On a blockbuster-register channel, **under ~30%
+>   means the architecture is wrong** and no amount of beat-level craft will rescue it.
+> - Does any single token exceed ~15% of the film?
+> - Does every act named for a spectacle actually own the tokens to deliver it?
+
 ### The variety audit (Step 3) — what the data audit cannot see
+
+> **⚠ THIS AUDIT MEASURES WITHIN-TOKEN VARIETY AND CANNOT SEE BETWEEN-TOKEN MONOTONY.** It passed
+> Methuselah — verb histogram healthy, noun palette improved, near-duplicates 65 → 47 — while the
+> film had seventeen subjects in it. Fixing the grammar of the sentences does not help a book with
+> seventeen nouns. **The subject range is a Step-1 problem; this audit is downstream of it.**
 
 > **★ TOKEN MIX IS NOT VARIETY.** A film can pass every existing check — sixteen tokens, healthy
 > register spread, clean word histogram, 11% consecutive-framing repeats — and still be four
@@ -661,6 +718,46 @@ Review the whole `grid/` folder sorted by name: flat-index names put it in exact
 you scroll the film in sequence and stop wherever. Copy ONE winner per beat into `winners/`
 (filenames unchanged — they are already unique), then place them:
 
+> **★ THE REVIEW SET IS 4×N BY CONSTRUCTION — NEVER "THE REAL STILLS".** Every beat must occupy
+> **exactly four slots** in whatever you review from, hero and connective alike. Connective beats
+> render 2 real + 2 `_skip.png`; **the skip tiles are part of the review set and must travel with
+> it.**
+>
+> The reason is the reviewer, which pages in fixed groups of four and takes `1`–`4` to promote.
+> That only works while group boundaries fall on beat boundaries. Drop the two placeholders from
+> one connective beat and **every beat after it shifts by two** — screen 2 shows variants 3 and 4
+> of one beat next to variants 1 and 2 of the next, and you are choosing between stills from
+> different prompts without noticing. The tiles look redundant on disk and are load-bearing on
+> screen.
+>
+> **Build the review set from the MASTER, not from what is on disk.** Enumerate 1..N × 1..4 and
+> fill every gap. Deriving it from `grid/` reproduces whatever is missing there — including a real
+> still that failed to render, which you want to SEE as a blank rather than silently skip.
+> ```
+> SRC=$(find grid -name "*.png" -size -20k | head -1)          # any skip tile
+> ffmpeg -loglevel error -y -i "$SRC" -vf scale=480:-1 /tmp/skip480.png
+> python - <<'EOF'
+> import csv, os, shutil
+> rows = list(csv.DictReader(open('master.csv')))
+> for i, _ in enumerate(rows, 1):
+>     for v in range(1, 5):
+>         f = "review/%03d-%02d.png" % (i, v)
+>         if not os.path.exists(f):
+>             shutil.copy('/tmp/skip480.png', f)
+> print(len(rows) * 4, "expected")
+> EOF
+> ls review/*.png | wc -l        # MUST equal 4 x N. 480 beats -> 1920.
+> ```
+> **Gate it: `ls review/*.png | wc -l` must equal `4 × N` exactly before you start picking.** Any
+> other number means the groups are misaligned somewhere and the pick is being made against the
+> wrong stills.
+>
+> *Banked 23 Jul, Methuselah: the review folder was built with `find -size +20k`, which is a
+> perfectly sensible way to exclude placeholders and exactly wrong here. It was caught on visual
+> inspection — screen 1 showed four tiles, screen 2 showed two of one beat and two of the next.
+> A size filter is a plausible-looking optimisation that silently breaks the only step in the
+> process that cannot be automated.*
+
     python3 place.py --winners <project>/winners --out <project>/stills \
                      --skip-tile shared/_skip.png
 
@@ -848,11 +945,18 @@ Verbs: `normalise` · `sweep` · `film` · `blocks` · `stills` · `probe` · `c
 `calibrate`. Master CSV at `projects/<slug>/master.csv`.
 
 > **★ WHERE THE FILES ARE, AND WHERE YOU STAND WHEN YOU RUN THEM.**
+> **The tools live in THREE different places. There is no single rule — check this table.**
 > ```
-> build_lego.py        ~/Pipeline/build_lego.py          <- REPO ROOT, not shared/   [VERIFIED]
-> the dumb readers     ~/Pipeline/shared/*.py            <- place, draft_moves, draft_air,
->                                                            render_clips, verify_clips [VERIFIED]
+> build_lego.py      ~/Pipeline/build_lego.py            <- REPO ROOT        [VERIFIED 23 Jul]
+> render_clips.py    ~/Pipeline/render_clips.py          <- REPO ROOT        [VERIFIED 23 Jul]
+> verify_clips.py    ~/Pipeline/verify_clips.py          <- REPO ROOT        [VERIFIED 23 Jul]
+> draft_moves.py     ~/Pipeline/shared/draft_moves.py    <- shared/          [VERIFIED 23 Jul]
+> draft_air.py       ~/Pipeline/shared/draft_air.py      <- shared/          [VERIFIED 23 Jul]
+> place.py           ~/Pipeline/<channel>/place.py       <- CHANNEL FOLDER   [VERIFIED 23 Jul]
 > ```
+> *`place.py` sitting inside one channel's folder is a real defect, not a quirk — it is
+> channel-agnostic and every other channel will hit this at the same step. Move it to `shared/`
+> when convenient and correct this table.*
 > There is **no console entry point** — `which build_lego` resolves to nothing. Every invocation
 > is `python <abs-path> <verb> ...`.
 >
@@ -910,9 +1014,13 @@ Verbs: `normalise` · `sweep` · `film` · `blocks` · `stills` · `probe` · `c
 > better, and it is how you end up probing four beats of the same token. `stills beats=` is for
 > **re-testing specific known-bad beats after a fix**, which is its own good use.
 
-> **UNVERIFIED — confirm and delete this note:** `stills` docstring says whole-block runs land in
-> `grid-bNN` while `beats=` lands in `grid-probe`, but a `grid/` folder also exists in shipped
-> projects. Check where a bare `stills --project P` actually writes before assuming.
+> **RESOLVED 23 Jul:** a bare `stills --project P` writes the flat `grid/` folder (the docstring's
+> `grid-bNN` is stale). `beats=` writes `grid-probe/`. Both use `{flat:03d}-{variant:02d}.png`.
+>
+> **`GRID-INDEX.csv` IS OVERWRITTEN PER BLOCK, NOT APPENDED** — after a full-film run it holds only
+> the LAST block (161 lines, not 1,921). Nothing depends on it (`place.py` parses the flat index
+> out of the filename, `_flat_map()` reads the master), so it is cosmetic — but do not use it as
+> the tile→beat map.
 
 > **⚠ MARK UNVERIFIED INSTRUCTIONS AS UNVERIFIED.** This block was first written saying "always
 > launched from the PROJECT directory" — stated flatly, and wrong. A confidently wrong line in
@@ -943,6 +1051,24 @@ order-sensitive and rejected trailing positionals; that is fixed. Per-verb optio
   clips leg is `render_clips.py` (reads `air`/`move`/`motion`; `--floor-only`, `--dry-run`).
 
 **The other readers** — all pure-stdlib except the render legs, all `--dry-run` before spend:
+
+> **★ STEP 7-8 INVOCATIONS, VERBATIM.** None of these take defaults; all paths are explicit. Run
+> from the PROJECT dir (not `projects/` — that rule is `build_lego`'s, not theirs).
+> ```
+> cd ~/Pipeline/<channel>/projects/<slug>
+>
+> python ~/Pipeline/<channel>/place.py --winners winners.txt --grid grid \
+>        --out stills --skip-tile ~/Pipeline/shared/_skip.png
+>
+> python ~/Pipeline/shared/draft_moves.py --csv master.csv [--dry-run]
+> python ~/Pipeline/shared/draft_air.py   --csv master.csv --start 0.5 --end 0.2 [--dry-run]
+>
+> python ~/Pipeline/render_clips.py --csv master.csv --stills stills --out clips --dry-run
+> python ~/Pipeline/verify_clips.py --clips clips --expect <N> --normalise
+> ```
+> **`draft_air --start/--end` take FRACTIONS, not percentages.** `--start 80` is read as 8000%,
+> clamps to 100%, and drafts EVERY beat as Kling — 480 clips, **$201**, silently. The default
+> slide is `0.8 → 0.2`; `--start 0.8 --end 0.2` reproduces it exactly.
 
 - **`place.py`** — winners → `shot_NNN.png`; hard-fails (placing NOTHING) on a skip-tile pick,
   a doubled beat or any gap in 1..N. `--winners` takes a FOLDER of picks **or a `.txt` list of
@@ -1176,6 +1302,18 @@ retention — that is exactly what the instrument is for.
 *22 Jul 2026 — flag register 01–21 merged from the Methuselah build (Sacred Dawn, 12 blocks /
 480 beats, authored end to end against this doc). `_LEGO-FLAGS.md` is retired; delete it.*
 
+- **THE VISUAL BUDGET IS SET AT STEP 1** — token distribution is the film's look, and the Step-3
+  variety audit cannot see it. New Step-1 gate: spectacle share, single-token cap, and whether each
+  act owns the tokens it needs. Biographical frames produce documentaries; spine objects need ten
+  distinct frames or they become sinks.
+- **THE CALIBRATION NOISE FLOOR** — TTS varies ±1.3% run to run and whisper drops words, so per-beat
+  figures downstream of a drop are fiction (sanity-check implied WPM). Correct a >10s miss, then
+  stop. `ffprobe` is ground truth, not the calibrate table.
+- **TOOL PATHS CORRECTED** — the tools live in three places, not one; `place.py` is at CHANNEL level.
+  Step 7-8 invocations written verbatim. **`draft_air --start/--end` take FRACTIONS** — passing `80`
+  drafts the whole film as Kling for $201.
+- **`air` ∈ {kling,kb}, filled on every row**; `motion` only on kling rows; Kling is $0.42/clip.
+- **The review set is 4×N** (see the pick) — placeholders are load-bearing, not redundant.
 - **ALL NINE VERBS DOCUMENTED FROM SOURCE**, with what each takes in `rest`, what it does and what
   it writes — plus the two facts that were costing a round trip every session: **there is no
   `--help`** (the parser is `add_help=False` and `load_config` fails first), and **`place` is not a

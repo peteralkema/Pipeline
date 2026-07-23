@@ -1,5 +1,6 @@
 # Sacred Dawn — Channel Doctrine (v2, the director's pivot)
-**Rewritten 13 Jul 2026.** Complete pivot from the v1 "Flux-sublime" thesis to a director-led, bright-crisp-real visual doctrine — built on the same nano-banana-2 grade upgrade proven on Scripture On Screen and Synthetic Press this session. Strategy, competitive read, moat, and packaging carried forward from v1; the *visual heart* is new.
+**Rewritten 13 Jul 2026 · revised 23 Jul 2026** (post-Methuselah: real traffic data added as §7b, the trailer cold-open banned, stills economics corrected 160→100, the Step-1 visual budget gate added to §1, reference-lock keys added to §2, attribution demoted from opening act to per-claim tag).
+**Original note:** Complete pivot from the v1 "Flux-sublime" thesis to a director-led, bright-crisp-real visual doctrine — built on the same nano-banana-2 grade upgrade proven on Scripture On Screen and Synthetic Press this session. Strategy, competitive read, moat, and packaging carried forward from v1; the *visual heart* is new.
 
 ---
 
@@ -28,12 +29,25 @@ Scott's weighted shafted light + Jackson's dwarfing epic scale + Spielberg's for
 
 - **COLOUR & LIGHT.** This diverges deliberately from the other two channels. Scripture = desert-gold-and-lapis (warm, biblical). Synthetic = teal-orange (cold, catastrophic). **Sacred Dawn = ancient gold and deep shadow, cut with an unearthly light** — burnished bronze, aged stone, deep indigo skies, and one impossible source of pale-white or cold-blue light breaking through. The signature is *contrast*: a dark, ancient, weighted world, torn open by a light that doesn't belong to it. That single unearthly light source is the "sacred/forbidden" signal — the Ark's glow, the fire of the Watchers, the light of the opened heaven. **Bright and crisp per the murk-not-saturation law; the *palette* is older and darker than Scripture — bronze and shadow, not gold and blue sky — but never muddy, never soft, never painterly.**
 - **COMPOSITION.** Jackson's dwarfing wides as the default — ancient mountains, vast skies, colossal impossible things, the tiny human witness at the bottom of the frame. Scott's low angles for power (look *up* at the Watchers, the giants, the throne). Spielberg's reaction shots — one awed face lit by the forbidden light — as the intimate counterpoint to the epic wides.
-- **ATMOSPHERE.** Always heavy air: dust in the light shafts (Scott), mist on the mountains (Jackson), smoke and embers around the sacred (Spielberg). Air is never empty. This is also drift-safe and it's what makes AI renders read as *film*, not *render*.
+- **ATMOSPHERE.** Heavy air **where it earns the clip**: dust in the light shafts (Scott), mist on the mountains (Jackson), smoke and embers around the sacred (Spielberg). *(Updated 23 Jul: "air is never empty" predates `draft_air.py`. `air` is now a METERED SPEND DIAL — `kling` or `kb` per beat, $0.42 a Kling clip, drafted on a sliding quota × motion-want rank. Writing every beat wet maxes the bill. The atmosphere still belongs in the `phenomenon`; what is metered is whether the beat gets ANIMATED. See `_LEGO.md` → Air + Kling.)* This is also drift-safe and it's what makes AI renders read as *film*, not *render*.
 - **THE SUPERNATURAL RULE (the most important one).** Render the impossible as *physically real and massive*, never as glowing cartoon fantasy. The Watchers descending are enormous *physical* figures breaking cloud, not translucent angels. The Nephilim are *real giants* with weight and shadow. The heavens are *architecture* — gates, storehouses, chambers — not abstract light. **Jackson's Balrog principle: give the mythic mass and consequence, and it takes your breath away; make it glow and float, and it's slop.** This single rule separates Sacred Dawn from every AI-slop apocryphal channel — they render vapor; we render *weight*.
 - **MOTION** (per `_MOTION-DOCTRINE.md`, tuned for the mythic): majestic and sweeping. Slow push-ins on the sacred/forbidden as the wonder builds; slow cranes *up* the colossal figures as *hero reveals* that make an audience gasp; near-locked holds on the ancient-stillness beats. The camera is a witness in a holy, spectacular place — it moves with awe, never with frantic action-energy, and never shrinks.
 
 ### THE ONE-LINE CASTING
 *Sacred Dawn is Raiders of the Lost Ark shot by Ridley Scott in Peter Jackson's world — ancient, vast, and thrilling, torn open by a forbidden light, where the impossible is rendered real and massive enough to take your breath away.*
+
+### ⚠ THE VISUAL BUDGET IS SET AT STEP 1, NOT BY THIS DOCTRINE
+*Banked 23 Jul from the Methuselah build, and it matters MORE on this channel than any other, because "blockbuster" is the whole promise.*
+
+Everything above describes how a beat should LOOK. None of it decides what the film SHOWS — that is fixed by the canon token list at Step 1, before a beat is authored. **Count the tokens and read them as a budget.**
+
+Methuselah, measured after the fact: 17 tokens, 10 of them terrestrial (rock, mud, market, forge, hut) → **88% of the film ordinary, 12% spectacle.** The three acts that existed to be spectacle were not: the Watchers 16/40, the giants 7/40, and *the man who did not die* — a bodily ascent into heaven — **2 out of 40**. The channel had already shipped the throne of fire, the storehouses of stars, the seven mountains; almost none of it appeared.
+
+**Two Step-1 decisions caused it, and both looked like craft:**
+- **A biographical frame produces a documentary.** "The life of X" over 969 years is mostly ordinary life; the spectacle is what he WITNESSES, and a life-frame demotes it to cameo. A blockbuster register wants an **event frame** — the film is about the things that happen, the protagonist is the thread.
+- **A spine object can become a visual sink.** One stone per year is excellent story and made two rock tokens **26% of the film**. *Test at Step 1: can you name TEN visually distinct frames of this object?*
+
+**THE GATE, run on the token list before authoring:** what percentage of planned beats is spectacle — **under ~30% means the architecture is wrong on this channel**; does any single token exceed ~15%; does every act named for a spectacle own the tokens to deliver it?
 
 ### BANNED WORDS (the Final Hours pull — excise on sight)
 **dread · reverent · solemn · grave · mournful · murk · painterly · golden-hour-wash.** These are the gravitational pull back toward the Final Hours look and register. They are wrong for Sacred Dawn. The vocabulary is **awe · wonder · spectacle · scale · thrill · adventure · the epic · discovery.**
@@ -44,6 +58,7 @@ Scott's weighted shafted light + Jackson's dwarfing epic scale + Spielberg's for
 - **`image_model`: `nano_banana_2`** (NOT flux — flux is the murk/painterly fork proven-bad this session; a channel with `image_model` unset defaults to flux and MUST be set).
 - **`style_suffix`:** `cinematic biblical epic film still, photorealistic and grounded, epic mythic scale, ancient burnished bronze and aged stone against deep indigo shadow, one unearthly light source breaking through -- pale white or cold blue -- shafts of god-ray light through dust and smoke, bright vivid exposure, high contrast, high dynamic range with crisp detail held in the shadows, the impossible rendered physically real and massive with weight and shadow, sharp crisp focus, weathered antiquity, heavy atmospheric air, expressive faces, high production value, period-accurate ancient world, no modern architecture, no soft painterly haze, no murk, no muddy shadows, no washed-out wash, no glowing cartoon fantasy, no text, no modern elements, 16:9`
 - *(v1 note: the pre-pivot config had `image_model` UNSET — silently defaulting to flux, the murk styliser. That, not the suffix, was the source of the "painterly" look the v1 doctrine mistook for a deliberate aesthetic. The v1 suffix was already bright-chromatic-photoreal; the fix was flipping the model to nano_banana_2 and a targeted lift of the suffix into the bronze/shadow/unearthly-light director palette.)*
+- **`reference_prompt_lock` / `reference_prompt_tail`** (set 23 Jul, currently dormant). **The reference `/edit` path BYPASSES `style_suffix` entirely** — its only style instruction is these two keys, and if a channel does not set them it falls back to a module constant in `recreation_pipeline.py` that is currently **Q-Qrew's animated-feature register**. Sacred Dawn's first reference renders came back as flat cel cartoons while every text beat in the same run was photoreal. Both keys are now built FROM this channel's own `style_suffix` so they cannot drift. **Do not turn `render_mode: reference` on without checking them.**
 - Same two-key fix as Scripture and Synthetic: set the model, lift the grade to bright-crisp-real in this palette, explicit anti-murk negatives.
 
 ---
@@ -80,9 +95,10 @@ Sacred Dawn keeps the **curiosity** and drops the **fabrication** — and this i
 ## 6. THE CONTENT MODEL — the Lego-block feature
 *Proven this session on Revelation and Catastrophes; Sacred Dawn features are built the same way.*
 
-- **The block:** ~3 minutes = 40 final beats → **160 candidate stills (4 variants each) → the human picks 40 → 40 Kling image-to-video clips.** One music track per block. The **160→40 pick is gospel and will never be automated — it is the creative act.** Everything else is plumbing.
-- **The feature:** N blocks laid along a **narrative spine** (not N montages in a pile). A 30-min film = 10 blocks + a trailer cold-open (cut LAST from the best shot of each block, planting the film's biggest open loop) + a closing beat that pays off the promise and seeds the sequel.
-- **VO rides ABOVE the visuals** — carries story and curiosity, never captions the screen ("here is X, here is Y" causes drift). Loose thematic coupling means it can't drift out of sync because it was never locked to it. Voice: Inworld **Elliot** at speed 1.0 = **159 WPM** (measured). Container = 40 clips × 5s = 3:20; script each block to **~430 words** (~3:00 of speech, ~15s breathing room). [TIMING SUPERSEDED by _LEGO.md section 0.0: the shipping model is ONE continuous whole-film narration.txt and a ~6-13 word/beat band calibrated to the 200s seams, not a per-block ~430-word target.] Word count is the lever, never the speed dial.
+- **The block:** ~3⅓ minutes = 40 final beats → **100 candidate stills → the human picks 40 → clips.** *(Corrected 23 Jul: variants are derived from `weight` — hero 4, connective 2 — so a block is 100 real stills at **$8.00**, not 160. A 12-block film is 1,200 stills, ~$96.)* Kling is **no longer 1:1 with beats**: every beat gets a free Ken Burns floor, and Kling is added per beat on a sliding quota. One music track per block. The **100→40 pick is gospel and will never be automated — it is the creative act.** Everything else is plumbing.
+- **The feature:** N blocks laid along a **narrative spine** (not N montages in a pile). A 30-min film = 10 blocks + a **cold open** + a closing beat that pays off the promise and seeds the sequel.
+- **⚠ THE TRAILER COLD-OPEN IS BANNED.** *(23 Jul — this doc previously mandated "cut LAST from the best shot of each block".)* A best-of montage summarises the film and closes the loop it should open; measured retention on the two films built that way sits at **0.22–0.36 relative in the first minute against 0.70–0.75 mid-film** — bottom-decile openings on above-median middles. Build it per `_LEGO.md` → THE COLD OPEN: **one moment**, six to eight clips from a single event plus two or three for the widen, sourced from the LATE MIDDLE and never the payoff, ending on a line that grammatically requires block 1 beat 1.
+- **VO rides ABOVE the visuals** — carries story and curiosity, never captions the screen ("here is X, here is Y" causes drift). Loose thematic coupling means it can't drift out of sync because it was never locked to it. Voice: Inworld **Elliot** at speed 1.0 ≈ **160 WPM** — but measured at **163, 160 and 158 across three renders of the SAME script** (23 Jul), a ±1.3% swing worth ±31s on a 40-minute film. **Treat WPM as a planning estimate, never a precision instrument** (see `_LEGO.md` → the calibration noise floor). Container = 40 clips × 5s = 3:20; script each block to **~430 words** (~3:00 of speech, ~15s breathing room). [TIMING SUPERSEDED by _LEGO.md section 0.0: the shipping model is ONE continuous whole-film narration.txt and a ~6-13 word/beat band calibrated to the 200s seams, not a per-block ~430-word target.] Word count is the lever, never the speed dial.
 - **Retention (banked v1, still true):** past the open, retention is decided by whether it's an *escalating STORY, not a concept-explainer.* Promise early, deliver late; one recurring escalating spine; engineer against the early 2–3% cliff (context-dump open) and the mid-video ~50–60% cliff (human thread abandoned for explanation). The channel's BEST holder is its LONGEST video (*The Watchers' Daughters*, 33 min) — **length is survivable; an unplateaued curve is fatal.** A plateau is built by open loops and act-break re-hooks.
 - **The flagship law (banked v1):** the channel's *worst-retaining but well-clicked* video = proven demand + broken execution = the highest-leverage flagship candidate. Mine the demand you've already paid to discover, don't chase a new topic.
 
@@ -95,7 +111,27 @@ Sacred Dawn keeps the **curiosity** and drops the **fabrication** — and this i
 
 **The hot vein RIGHT NOW (July, small-channel breakouts):** the **Book of Enoch "reveals [hidden thing]"** cluster — "What's inside the Moon" (242K), "Noah Was Not Human" (194K on 22K), "Maps All 7 Heavens" (188K on 9.2K), "Creatures Outside Eden" (140K on 5.3K), "Where Souls Go / Sheol" (678K on 22.9K). Tiny channels hitting 140–680K in weeks. This is Sacred Dawn's opening slate — the apocryphal-cosmic-mystery vein, out-crafted.
 
+**Direct-comparison data (23 Jul, the sharpest two points the channel has):**
+- **Unraveling the Scriptures — "Methuselah": 698K in ELEVEN DAYS.** Same topic, same lane, and — inspected — **the same register of visuals as ours**. Whatever separates 698K from 345 views, *it is not the imagery*.
+- **Scripture Origins — "Female Nephilim": 805K**, on a topic this channel has already shipped for **345 views**. The demand was proven and the packaging did not collect it.
+
 **Rejected lanes (on record):** military (archival-dependent, most AI-hostile audience); speculative-future timelapse (wrong engine); ancient-mystery/archaeology (packaging game, held as runner-up).
+
+---
+
+## 7b. WHERE THE CHANNEL ACTUALLY STANDS (the numbers that should drive every decision)
+*YouTube export, channel lifetime to 19 Jul 2026. **Pull traffic sources from the YouTube export, never from the NexLev taxonomy** — "subscriber" there is an audience type, not a traffic source, and its lack of a browse row was once misread as 0% browse.*
+
+- **5,210 views · 554 watch-hours · AVD 6:22 · 108,514 impressions · CTR 3.66%.** ~177 views/day over the last fortnight.
+- **Traffic: 61.4% suggested · 26.4% browse · 5.5% direct · 2.1% search.**
+- **BROWSE CTR (4.32%) BEATS SUGGESTED (3.43%).** The home feed converts better than the rail — 26,522 browse impressions on a tiny channel means YouTube is actively testing it. **The lane is open and under-converting, not closed.**
+- **AVD by source:** suggested 6:58, browse 5:38, search 3:49. Suggested viewers arrive already interested and watch ~80s longer — package for the suggested rail specifically, because it is both the volume AND the quality traffic.
+- **Playlists: 15:25 AVD** (n=32, 2.5× channel average). Tiny sample, free watch-time if it holds — the obvious series groupings are unbuilt.
+- **Audience: 82% over 45, 56% US, RPM $7.73–9.00.** This is *why* long-form and "Full Movie" framing work here, and it is the reason a 40-minute film is an asset rather than a risk.
+
+**THE STRATEGIC READ: Sacred Dawn is CTR-STARVED, not distribution-starved.** 2,580 impressions a day is YouTube showing the channel to people; 3.66% is how many click. At that rate, 700 views/day needs ~19,000 impressions daily — a 7.4× increase that does not happen incrementally. **One properly packaged breakout clears the impression threshold; accumulating better videos does not.** Long-form and quality *convert* a breakout into money; they do not *cause* one.
+
+**Retention, measured:** the first minute runs **0.22–0.36 relative** against **0.70–0.75 mid-film**. The opening is the channel's only measured weakness, it costs nothing to fix, and it is worth more than any render decision.
 
 ---
 
@@ -103,7 +139,9 @@ Sacred Dawn keeps the **curiosity** and drops the **fabrication** — and this i
 - **Complement, never echo.** Image carries the *what*; title carries the *why-click*. Different nouns.
 - **Titles as juxtaposition-frames** (the hot vein): "What Enoch Says Is Inside the Moon," "The Book They Buried for 1,000 Years." Provocative frame, relentlessly attributed, defensible line by line.
 - **The two-beat video title:** recognition anchor + em-dash curiosity clause. *"The Watchers: The Night 200 Angels Broke Heaven's Law — and What They Taught Us."*
-- **Thumbnail = one dominating phenomenon + tiny human for scale + title lockup in reserved negative space** (the scale-vs-humanity signature, proven on Revelation/Catastrophes). Bright-crisp Sacred Dawn grade — NOT sepia, NOT painterly wash. Match the lockup type across videos for series branding. Judge at grid size (squint test).
+- **Thumbnail = one dominating phenomenon + tiny human for scale + title lockup in reserved negative space** (the scale-vs-humanity signature, proven on Revelation/Catastrophes).
+- **⚠ EXCEPTION — WHEN THE HUMAN *IS* THE PHENOMENON.** A face may fill the frame with no scale element at all. The locked Methuselah tile is head-and-shoulders on black: cracked grey-blue stone across brow and temple, white beard, clear eyes, gaze up-left, three-line lockup METHUSELAH / **969** / YEARS. It beats the formula because the subject itself is the impossible thing.
+- **CONTRAST, NOT BRIGHTNESS.** At 120px a bright subject on BLACK reads; bright-on-bright does not, however well exposed. Three findings from the render runs: **palette is a re-roll lottery, not a dial** (ask for warm, get cool, roll again); **listing forbidden injuries trips the safety classifier at the prompt door** — state positively what the surface IS; and **"cracked plates" pulls toward reptilian scales** — say strata, slabs, fissures. Bright-crisp Sacred Dawn grade — NOT sepia, NOT painterly wash. Match the lockup type across videos for series branding. Judge at grid size (squint test).
 - **Anchor doctrine (banked v1):** top-left default; drop to bottom-left when the image's subject is high and the headline would collide — flagship authority placement, image-triggered not channel-set. Render both variants, vision-choose, **fail to top-left** (never ship thumbnail-less).
 - **Text is a layer, not rendered by the model** (models garble type) — though the ChatGPT-UI route rendered clean titles this session; still keep the layer discipline for the automated path.
 
@@ -112,6 +150,7 @@ Sacred Dawn keeps the **curiosity** and drops the **fabrication** — and this i
 ## 9. DESCRIPTION & CHAPTERS (banked v1, kept)
 - **Chapters auto-hyperlink** if first is `0:00`, ≥3 exist, each ≥10s apart. **Compute timestamps from `durations.json` (`audio_start`), never estimate** — estimating lands them 20–40s off. On a fixed-clip montage, chapters map to the block boundaries. Give chapter titles drama, never production labels.
 - **Description template:** hook paragraph (poses the open question) → source-credibility line ("Drawn from the Book of Enoch and the older traditions, with canon and apocrypha named plainly") → chapter block → comment-bait question (writes the pinned comment) → sequel tease → standing disclaimer ("All imagery is artistic interpretation; supernatural events are presented as the ancient texts describe them, canon and tradition distinguished throughout"). The disclaimer is the public face of the §5 moat and protects YPP.
+- **⚠ ATTRIBUTION IS A PER-CLAIM TAG, NEVER AN OPENING ACT.** The source-credibility line belongs in the DESCRIPTION (above) and, in narration, as a four-or-five-word tag inside a scene — *"the old accounts say"*, *"Genesis gives him four verses"*. **It must not open the film.** Opening on "a book kept out of the Bible, preserved only in the Ethiopian church" spends the first thirty seconds on credentials the viewer never asked for, delays the image the thumbnail promised, and — with 25% of views coming from subscribers — plays the identical move to the same people on every upload. *(Banked 23 Jul from watching the films back-to-back: they had begun to feel repetitive, and this was why.)*
 - **Pinned comment:** one specific, low-effort, reflexive-opinion question. Reply to the first 10–20. Never stack asks.
 
 ---
@@ -119,7 +158,7 @@ Sacred Dawn keeps the **curiosity** and drops the **fabrication** — and this i
 ## 10. CHANNEL CONFIG & FACTS
 - **Handle:** `@sacredawn` · **Display name:** Sacred Dawn · **Channel ID:** `UCs-VNV8IY6eiklcKprDWqIA` (connected to NexLev).
 - **`channel:` header:** `sacred_dawn` → resolves to `sacred-dawn/`.
-- **Voice:** `voice_id: "Elliot"`, model `inworld-tts-1.5-max`, measured **159 WPM** at speed 1.0 (supersedes the earlier 143; re-measured -- see _LEGO.md section 0.0).
+- **Voice:** `voice_id: "Elliot"`, model `inworld-tts-1.5-max`, **~160 WPM** at speed 1.0 — measured 163 / 160 / 158 across three renders of one script, so plan at 160 and never treat it as exact.
 - **`image_model`:** MUST be `nano_banana_2` (set this session; was unset/flux — the murk fork).
 - **Music:** `{dir: "music", tracks: 3, crossfade_seconds: 2, level: 0.07}`; per-block unique track for a feature (music escalates across the film).
 - **Category:** Entertainment (`24`). **Paths:** films `sacred-dawn/projects/<slug>/`; batch inbox `sacred-dawn/batch_inbox/`.
@@ -130,4 +169,4 @@ Sacred Dawn keeps the **curiosity** and drops the **fabrication** — and this i
 **"The Book of Enoch" — 30-min film, 10 blocks + trailer cold-open.** Attributed, juxtaposition-framed, wonder-not-dread. The arc (escalating curiosity climb, thumbnail material in blocks 2–4, retention holds in 8–10):
 1. The Book They Buried for 1,000 Years · 2. What Enoch Says Happened on Mount Hermon (the Watchers) · 3. The Forbidden Knowledge the Watchers Gave Humanity · 4. What the Book of Enoch Describes Walking the Earth (the Nephilim) · 5. The Warning Enoch Says the Earth Itself Cried Out · 6. Why Enoch Says the Flood Was Not an Accident · 7. Where Enoch Says He Was Taken — Alive · 8. What Enoch Describes Inside the Moon (the storehouses, the gates, the four names — real text) · 9. What the Book of Enoch Says Waits for the Dead · 10. The End Enoch Says He Was Shown.
 
-*Cold open cut last from the best shot of each block, planting the world's-end loop (paid off in block 10). Closing beat: "and this was only the first of the books they buried" → sequel hook.*
+*Cold open per `_LEGO.md` (**not** a best-of montage — see §6): ONE moment, from the late middle, planting the world's-end loop paid off in block 10. Closing beat: "and this was only the first of the books they buried" → sequel hook.*
