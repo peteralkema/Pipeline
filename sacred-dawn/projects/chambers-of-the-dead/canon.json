@@ -19,7 +19,7 @@
   "tablet": "a flat rectangular writing tablet of pale stone about the size of two hands, the surface smooth and bare with only a few short incised lines at one edge, the edges worn round and catching the light",
   "enochman": "a lean upright man of middle years in a heavy undyed woollen robe, dark beard cut short, weathered sunlit face, bare forearms, moving with purpose",
   "guideone": "an enormous solid figure in pale undyed grey, standing twice a man's height, broad and physically heavy with full mass and a hard cast shadow, face calm and human and fully visible",
-  "guidetwo": "an enormous solid figure in deep bronze-red, standing twice a man's height, massive and materially real with full weight and hard shadow, face calm and human, hands empty and carrying no light",
+  "guidetwo": "an enormous solid figure in deep bronze-red, standing twice a man's height, massive and materially real with full weight and hard shadow, face calm and human, both hands open and empty at rest",
   "tabletfull": "a flat rectangular writing tablet of pale stone about the size of two hands, its whole face cut edge to edge with dense straight lines of small incised script, the grooves holding shadow, the edges worn round",
   "upland": "a dry bare upland of pale packed earth and low scattered scrub running to open horizons, shallow dry watercourses cutting through low hills, the ground hard-swept and stony, wide clear sky above",
   "fireplain": "a vast dark plain of bare fractured rock under a low unlit sky, running flat to distant black mountains, the ground dry and swept and littered with loose stone",
@@ -27,5 +27,6 @@
   "steamshore": "a dark rock coastline meeting a flat cold sea under a low sky, black wet stones along the waterline, an enormous white wall of steam standing off the water and glowing orange from below",
   "windstores": "an enormous row of open doorways of cut pale stone set into a cliff at the edge of the world, each one giving onto a vast vaulted chamber, bright cold light standing inside every opening, bare swept ground before them",
   "wasteplace": "a boundless open dark beyond the last edge of solid rock, the rim of pale stone ending in one clean cut line, deep clear darkness falling away below it and standing open above it, hard cold light reaching only the final ground",
-  "angelprison": "a colossal cleft torn down through dark rock running beyond the reach of sight, its walls sheer and vertical, enormous straight-sided columns of fire descending steadily into it, the rock lit hard orange along their whole path"
+  "angelprison": "a colossal cleft torn down through dark rock running beyond the reach of sight, its walls sheer and vertical, enormous straight-sided columns of fire descending steadily into it, the rock lit hard orange along their whole path",
+  "archface": "an enormous plane of grey-black rock rising sheer from bare ground, the whole side of a mountain taken down flat with fine parallel working marks across it, four colossal arched openings cut in a row into its base, cold hard light raking the surface"
 }
