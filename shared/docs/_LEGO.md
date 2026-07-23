@@ -87,9 +87,9 @@ observe → bank → feed the next film.*
 | # | STEP | program(s) | gate | output |
 |---|---|---|---|---|
 | **0** | **PACKAGE FIRST** — topic for the CLICK; winnability gate (demand exists AND a small channel broke this lane); commit title + **render the thumbnail FILE, not a concept**; squint-test it at 120px beside the lane leader's tile. Title must obey the channel's attribution rule (an *asserting* title breaks the moat). Flag topic-level render-safety (family-safe/YPP). Un-packageable → **kill here, $0.** | human + NexLev + image gen | **`package.md` EXISTS on disk** — title, thumbnail findings, both winnability verdicts *with their evidence*, render-safety table, truth ledger, metadata | **`<project>/package.md` + `thumbnail.png`** |
-| **1** | **ARCHITECT** — runtime → N×200s blocks (200s = the seam unit); per block define its curiosity-gap + HANDOFF to the next; map the spine (cold open → escalation → turn → payoff); **name the SPINE OBJECT and the ANTAGONIST**; **name the canon tokens**; carry a **dated chronology column** if the film has one. ~3,000–3,600 words ≈ 8 blocks. | human | **`architecture.md` EXISTS on disk**; every block has role + gap + handoff + tokens + date; the spine object escalates; the antagonist is named and placed | **`<project>/architecture.md`** |
+| **1** | **ARCHITECT** — runtime → N×200s blocks (200s = the seam unit); per block define its curiosity-gap + HANDOFF to the next; map the spine (cold open → escalation → turn → payoff); **name the SPINE OBJECT and the ANTAGONIST**; **name the canon tokens** and read them as a VISUAL BUDGET; **write the SUBJECT LEDGER and the SCALE BUDGET** (see below — this is now the highest-leverage artifact at Step 1); carry a **dated chronology column** if the film has one. ~3,000–3,600 words ≈ 8 blocks. | human | **`architecture.md` EXISTS on disk**; every block has role + gap + handoff + tokens + date; the spine object escalates; the antagonist is named and placed | **`<project>/architecture.md`** |
 | **2** | **AUTHOR BLOCK BY BLOCK** — per beat write `phenomenon` + `narration` under the craft law; canon `{token}` on every beat; weight hero/connective; build variety across every axis. Each 40-beat block is a mini-spine (open its question, build, turn, close on the handoff). **Blocks are drafted in CHAT; there are NO per-block CSV files and no `blocks/` folder** — append straight into `master.csv`. | human authoring | **GATE each block**: VISUAL present, ≤55 words (runaway backstop), tokens resolve, no banned words, register/setting sweep. The block gate is a *drafting* check, never the film's gate | rows appended to `master.csv` |
-| **3** | **INTERROGATE THE MASTER** — `normalise` fills derived columns; read the film AS DATA (setting mix, register spread, hero/connective balance, word histogram, token×block heatmap, framing-repeat scan on any token >~20% of beats) **and run the VARIETY AUDIT below**. Adjust. **The project folder was born at Step 0.** | `build_lego normalise`, `sweep` | **RE-GATE THE WHOLE FILM, not N blocks again** — row count, `clip_index` 1..40 per block, hero count per block, no negation in any `phenomenon`, no token in any `narration`, every token defined in `canon.json`. *Per-block passes miss what only the film sees* | gated master CSV + variety audit |
+| **3** | **INTERROGATE THE MASTER** — `normalise` fills derived columns; read the film AS DATA (setting mix, register spread, hero/connective balance, word histogram, token×block heatmap, framing-repeat scan on any token >~20% of beats) **run the THREE DIALS and the VARIETY AUDIT below**. Adjust. **The project folder was born at Step 0.** | `build_lego normalise`, `sweep` | **RE-GATE THE WHOLE FILM, not N blocks again** — row count, `clip_index` 1..40 per block, hero count per block, no negation in any `phenomenon`, no token in any `narration`, every token defined in `canon.json`. *Per-block passes miss what only the film sees* | gated master CSV + variety audit |
 | **4** | **VO CONVERGENCE** — emit ONE whole-film `narration.txt`; render VO (Inworld); whisper; `calibrate` → per-block cumulative drift vs the 200s grid; enrich the CSV to fill toward the grid (see TIMING). | `build_lego audio`, `calibrate` + Inworld + Whisper | — | `voiceover.mp3` rendered, seams measured |
 | **5** | **REPEAT 4** until every block lands **~0 cumulative drift** (minor ±overs/unders fine). **VO LOCKED** (output #2). | as Step 4 | every seam near its 200s mark | **VO locked** |
 | **6** | **PROBE, THEN THE GRID** — `probe [N]` (self-selecting register sample); read vs the verdict card → name the FAILURE CLASS; **sweep the master film-wide, setting-aware** (two homes: rulebook negatives + `phenomenon`/token geometry); re-probe until clean; THEN `stills` (all blocks) → the variant grid. | `build_lego probe`, `stills`; rulebook / canon / `phenomenon` edits | probe reads clean; first grid frames >7KB (not black rejects) | grid stills |
@@ -122,6 +122,8 @@ written by the human; **derived** columns are computed by `normalise` from the a
 | `register` | authored | Step 2 | move drafter; authoring | emotional register (awe/dread/grief/wonder) → drives `move` + tone |
 | `narration` | authored | Step 2, enriched 4–5 | `audio` → `narration.txt` | the spoken line. **HALF the final output.** Pure text, NO tokens, NO markup |
 | `phenomenon` | authored | Step 2, swept Step 6 | `stills` → `generate_still` | the image prompt → still → clip. Carries the canon `{token}` inline. Names its own scene light |
+| `subject` | **authored** | Step 2, allocated Step 1 | the three dials (Step 3) | **2–4 words naming what HAPPENS in this frame, never where it happens.** The single most important column for whether the film feels alive. See THE SUBJECT LEDGER |
+| `scale` | **authored** | Step 2, budgeted Step 1 | the escalation dial (Step 3) | **1–5**: 1 intimate (hands, a face, one object) · 2 personal (a room, two people, a doorway) · 3 local (a village, a crowd, a hillside) · 4 vast (a city, a valley, a host) · 5 world/cosmic (the whole earth, the flood, the heavens). **RATIONED — see the scale budget** |
 | `setting` | **derived** (leading `{token}` of `phenomenon`) | `normalise` | `gate_canon`, `_expand_canon` | which canon place-lock the beat uses; the sweep is setting-aware off this |
 | `words` | **derived** (from `narration`) | `normalise` | audit / `calibrate` | word count — a *measurement*, not a gate |
 | `variants` | **derived** (from `weight`) | `normalise` | `stills` | real re-rolls to fal (hero 4 / connective 2); the rest fill with `_skip.png` |
@@ -308,7 +310,9 @@ waits); a verbless beat derives no motion.
 > a hard shaft". Same law as the canon tokens above, applied to the beat cell. *(Cost the WITW
 > grid two mid-render aborts, 21 Jul — the exclusions were authored, then banned.)*
 
-**IF THE OBJECT IS A DOCUMENT, do NOT render the document when the narration names it** (that
+**IF THE OBJECT IS A DOCUMENT, do NOT render the document when the narration names it** — *this is
+the narrow case of SHOOT THE CONTENTS, NOT THE CONTAINER (see the subject ledger); a book is a
+container for what it says, exactly as a village is a container for a life* — (that
 is captioning), and do NOT let the model default to scroll/lectern/window furniture. Show what
 the book is ABOUT; reserve 1–2 MONUMENTAL hero shots of the object itself (a bound book in a
 hard shaft, no stand). Ban the STAGING in `rulebook.json` (no scroll on a table, no lectern,
@@ -512,9 +516,144 @@ invisible; a freeze-frame isn't). Derive 120 from `r_frame_rate × 5` (a 30fps m
 > - Does any single token exceed ~15% of the film?
 > - Does every act named for a spectacle actually own the tokens to deliver it?
 
+### The subject ledger + the scale budget (Step 1) — the forcing function
+
+> **★ WHY A FILM GOES MONOTONOUS, MECHANICALLY.** Not model weakness. Three causes, all in the
+> AUTHORING, and the third is the one that actually does it:
+> - **The canon `{token}` is a monotony engine by design.** It exists so the city looks identical
+>   every time — that is its job, it is the anti-drift device. Reaching for it is reaching for a
+>   pre-made image. Every token defined makes reuse cheaper than invention.
+> - **Authoring runs block by block, with no cross-film instrument.** At beat 301 you hold block 8,
+>   not the 300 phenomena behind you. Variety inside a block is easy; variety across twelve is
+>   invisible without a measure.
+> - **EVERY REPEAT IS LOCALLY CORRECT.** When the narration says *the smiths worked*, a forge shot
+>   is not wrong — it is right. A NOVEL correct image costs an act of invention; the established one
+>   costs nothing. **Over 480 beats, cheap-and-correct beats expensive-and-correct every single time
+>   unless something makes reuse ILLEGAL.** That is what this section is.
+
+> **★ SHOOT THE CONTENTS, NOT THE CONTAINER.** *(The general law under the older document rule:
+> "if the object is a document, show what the book is ABOUT."  That rule was right and far too
+> narrow — it catches lantern-lit scrolls and lets sixty-five men-looking-at-fires walk past.)*
+>
+> A **container** is a place where something happens: a village, a market, a forge, a city wide, a
+> book, a fire. **A container is never WRONG, which is exactly what makes it the cheap path** — it
+> fits any beat, so it can be used a hundred times without a single one being a mistake.
+> **Contents** are the specific thing that happens: *a woman bars a door from the inside*, *molten
+> metal poured into sand*, *a man lies full length inside a footprint*. Specific things can only be
+> shot once. **Containers smear; contents cannot.**
+>
+> Symptom to recognise: block 6 of Methuselah is *the man who did not die* — a bodily ascent into
+> heaven — rendered as twelve beats of city, twelve of rock and eight of a cave. **Three containers
+> standing in for the most spectacular event in the film.**
+
+**THE SUBJECT LEDGER.** At Step 1, before a beat is authored, allocate **~3–4 subjects per block**
+to blocks, by name, in `architecture.md`. Each subject belongs to exactly ONE block. When you author
+block 8 the ledger tells you which subjects are yours and which are **SPENT and forbidden**.
+
+This inverts the economics. Reuse stops being cheap and starts being illegal, so invention becomes
+the only legal move — and the source material is never the constraint. On Methuselah the throne of
+fire, the storehouses of the stars, the seven mountains and the chambers of the dead sat unused
+while the sixty-fifth fire was written.
+
+*The ledger also delivers CLUSTERING for free: the allocation IS the clustering.*
+
+**Writing a `subject` well.** Two to four words. **Name the event, not the location.**
+
+| ✗ container | ✓ contents |
+|---|---|
+| `mud-hut village` | `woman bars her door` |
+| `forge` | `molten metal poured into sand` |
+| `city wide` | `gate shut against a crowd` |
+| `man at a fire` | `he burns the hides he wrote on` |
+
+*Smell test: a container is a bare noun; an event usually carries a verb. Not a hard rule — `the
+last stone` is a legitimate subject — but if a `subject` has no verb and no article, suspect it.*
+
+**THE SCALE BUDGET — and the counterintuitive part.** The fix for a flat film is **not more
+spectacle. It is spectacle WITHHELD.** Ration the `scale` ladder by act at Step 1:
+
+| act | max `scale` allowed | why |
+|---|---|---|
+| first third | **3** (one 4 permitted for the cold-open source) | keep the ladder unspent |
+| middle third | **4** | the world opens |
+| final third | **5** | the only place 5s live |
+
+Saturate the ladder in act one and the finale has nowhere to go. Methuselah peaked at 5 in block 1
+and every block after it, so *the drowning of the world* was shot at the same magnitude as *a birth
+in a hut* — mean scale 2.42 vs 3.05 across forty minutes.
+
+---
+
+### The three dials (Step 3) — measured on Methuselah, all three failed
+
+Pure stdlib, run on the master before any spend. **These are the instruments that would have caught
+what a human only saw after reviewing 1,200 stills.**
+
+| dial | measure | tolerance | Methuselah |
+|---|---|---|---|
+| **NOVELTY** | subjects appearing for the FIRST time in each block | **≥2 per block** | **blocks 5–12 scored ZERO** — 12 of 12 subjects arrived in blocks 1–4 |
+| **SPAN** | per subject, (last block − first block + 1) ÷ N blocks | **≤0.35**, one declared spine exception | **10 of 12 scored 0.83–1.00** — smeared across the whole film |
+| **ESCALATION** | mean `scale` per act, and where the 5s sit | **rises act over act**; no 5 before the final third | **flat: 2.42 → 3.05**, peak saturated at 5 from block 1 |
+
+```python
+# the three dials -- run at Step 3, costs nothing
+import csv, collections
+rows = list(csv.DictReader(open('master.csv')))
+B    = sorted({int(r['block_id']) for r in rows})
+sub  = collections.defaultdict(list)
+for r in rows:
+    sub[r['subject'].strip().lower()].append(int(r['block_id']))
+
+first = collections.Counter(min(v) for v in sub.values())          # NOVELTY
+for b in B:
+    print(f"b{b:02d} new subjects: {first.get(b,0)}", "  <-- FAIL" if first.get(b,0) < 2 else "")
+
+for name, bl in sorted(sub.items(), key=lambda x: -len(x[1])):     # SPAN + CAP
+    span = (max(bl) - min(bl) + 1) / len(B)
+    flag = "SMEARED" if span > 0.35 else ("CAP" if len(bl) > 8 else "ok")
+    print(f"  {name:<34} {len(bl):>3} beats  b{min(bl):02d}-b{max(bl):02d}  span {span:.2f}  {flag}")
+
+for a, blocks in enumerate(( B[:len(B)//3], B[len(B)//3:2*len(B)//3], B[2*len(B)//3:] ), 1):
+    v = [int(r['scale']) for r in rows if int(r['block_id']) in blocks]
+    print(f"act {a}: mean {sum(v)/len(v):.2f}  peak {max(v)}")     # ESCALATION
+```
+
+> **★ THE SCRIPT CAN ESCALATE WHILE THE VISUAL LAYER STAYS FLAT — and they fail separately.**
+> Methuselah's story is a countdown (369 + 600 = 969, a name that means *when he is gone it will be
+> sent*), and mid-film retention held at **0.70–0.75 relative**, so the narrative information rate
+> was working. **What was flat was what the viewer LOOKED AT.** Diagnose them apart: retention says
+> whether the story moves; these three dials say whether the pictures do.
+
+---
+
+### Dials named but NOT built — the growth room
+
+*Banked deliberately. Each is real and measurable; none is worth building until the three above are
+routine. **The trap in every film-analysis framework is the sixteen-dimension matrix nobody
+maintains past the first film** — 480 beats × 16 scores is 7,680 hand-authored numbers, most of
+which neither a human nor a model can assign reliably.*
+
+- **INFORMATION RATE** — new named entities (people, places, numbers, texts) per block. Methuselah's
+  is healthy; this is the dial that tells you the STORY has stalled while the dials above tell you
+  the PICTURES have.
+- **SETUP / PAYOFF LEDGER** — loops opened and closed per block; never zero open, everything opened
+  is closed. Pairs with the per-block curiosity gap already in `architecture.md`.
+- **CONTRAST** — the swing in `scale` / `register` / light between adjacent beats. Flat adjacency
+  reads as monotony even when the film-wide spread looks healthy.
+- **SHOT-TYPE VARIETY** — already partly covered by the framing-repeat scan; a full ladder (POV,
+  over-shoulder, reflection, silhouette, tracking) is a richer authoring vocabulary than the six
+  camera positions in use.
+
+**Explicitly NOT to be built: an emotional-intensity score.** It cannot be assigned consistently by
+a human or a model, so a curve drawn from it measures nothing. `register` is the honest proxy and it
+is already there.
+
+---
+
 ### The variety audit (Step 3) — what the data audit cannot see
 
-> **⚠ THIS AUDIT MEASURES WITHIN-TOKEN VARIETY AND CANNOT SEE BETWEEN-TOKEN MONOTONY.** It passed
+> **⚠ THIS AUDIT MEASURES WITHIN-TOKEN VARIETY AND CANNOT SEE BETWEEN-TOKEN MONOTONY, NOR SUBJECT
+> REPETITION ACROSS BLOCKS — run THE THREE DIALS above for both.** It passed
 > Methuselah — verb histogram healthy, noun palette improved, near-duplicates 65 → 47 — while the
 > film had seventeen subjects in it. Fixing the grammar of the sentences does not help a book with
 > seventeen nouns. **The subject range is a Step-1 problem; this audit is downstream of it.**
@@ -1302,6 +1441,13 @@ retention — that is exactly what the instrument is for.
 *22 Jul 2026 — flag register 01–21 merged from the Methuselah build (Sacred Dawn, 12 blocks /
 480 beats, authored end to end against this doc). `_LEGO-FLAGS.md` is retired; delete it.*
 
+- **THE SUBJECT LEDGER, THE SCALE BUDGET AND THE THREE DIALS** — two new authored columns
+  (`subject`, `scale`) and the forcing function that makes reuse ILLEGAL rather than merely
+  discouraged. Measured on Methuselah: blocks 5–12 introduced **zero** new subjects, 10 of 12
+  subjects smeared across the whole film, and visual scale was **flat** (2.42 → 3.05) while the
+  script escalated. Also: **shoot the contents, not the container** — the general law under the
+  older document-specific rule — and **spectacle withheld**, since saturating the scale ladder in
+  act one leaves the finale nowhere to go. Growth dials named but deliberately not built.
 - **THE VISUAL BUDGET IS SET AT STEP 1** — token distribution is the film's look, and the Step-3
   variety audit cannot see it. New Step-1 gate: spectacle share, single-token cap, and whether each
   act owns the tokens it needs. Biographical frames produce documentaries; spine objects need ten
