@@ -74,3 +74,5 @@ secrets/
 *.bak-*
 success-coach/new_thumbs/
 crew-wip/
+packaging/reverts/
+packaging/thumb_map.csv
