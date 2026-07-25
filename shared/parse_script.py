@@ -41,6 +41,7 @@ KV_COLON_RE  = re.compile(r"^\s+([a-zA-Z_]\w*):\s*(.+?)\s*$")      # highlight: 
 KV_EQ_RE     = re.compile(r"([a-zA-Z_]\w*)=(\"[^\"]*\"|'[^']*'|\S+)")
 VISUAL_RE    = re.compile(r"\*?\s*VISUAL:\s*(.*?)\*?\s*$", re.IGNORECASE)
 MOTION_RE    = re.compile(r"\*?\s*MOTION:\s*(.*?)\*?\s*$", re.IGNORECASE)
+MOVE_RE      = re.compile(r"\*?\s*MOVE:\s*(.*?)\*?\s*$", re.IGNORECASE)
 
 
 @dataclass
@@ -53,6 +54,7 @@ class Beat:
     found_line: str = ""                        # the real quoted line, if any (QuoteCards)
     visual: str = ""                            # A only: the VISUAL: direction
     motion: str = ""                            # A only: the MOTION: direction (per-beat override; blank => channel default_motion)
+    move: str = ""                              # A only: the MOVE: direction (Ken Burns floor: push/pull/crane/settle/static; blank => legacy static)
     face_hold: bool = False                     # A only: rationed face-hold
     silence_after: bool = False
     warnings: list = field(default_factory=list)
@@ -279,16 +281,20 @@ def parse_script(path: str):
             for seg in block:
                 vm = VISUAL_RE.search(seg)
                 mm = MOTION_RE.search(seg)
+                mvm = MOVE_RE.search(seg)
                 if vm and not beat.visual:
                     beat.visual = _strip_md(vm.group(1))
                     if "\u2b50" in seg:
                         beat.face_hold = True
                 elif mm and not beat.motion:
                     beat.motion = _strip_md(mm.group(1))
+                elif mvm and not beat.move:
+                    beat.move = _strip_md(mvm.group(1)).lower()
                 else:
                     clean = _strip_md(seg)
                     if clean and not clean.upper().startswith("VISUAL:") \
-                            and not clean.upper().startswith("MOTION:"):
+                            and not clean.upper().startswith("MOTION:") \
+                            and not clean.upper().startswith("MOVE:"):
                         beat.narration = (beat.narration + " " + clean).strip()
 
         beats.append(beat)

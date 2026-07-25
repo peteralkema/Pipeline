@@ -1511,6 +1511,7 @@ def cmd_stills(args):
                 "narration": b.get("narration", "").strip(),
                 "image_prompt": image_prompt,
                 "motion_prompt": motion_prompt,
+                "move": b.get("move", ""),
                 "_reference_images": _refs,
             })
         # Save the concatenated narration as the script (used later for metadata).
@@ -1764,7 +1765,7 @@ def cmd_finish(args):
         else:
             dur = _tiered_duration(bi, project_root) or float(SHOT_DURATION)
             print(f"  [{s['index']}/{len(shots)}] Ken Burns ({dur:.2f}s, free)...")
-            ken_burns_still(still, clip, dur)
+            ken_burns_still(still, clip, dur, move=s.get("move"))
             _kbmark.write_text("kbfloor")  # mark as a free, regenerable floor clip
         clip_paths.append(clip)
 
@@ -1790,7 +1791,7 @@ def cmd_finish(args):
                 j -= 1
             if j < 0:
                 print(f"  [inherit] beat {bi}: no predecessor — Ken Burns fallback (free)")
-                ken_burns_still(still, clip, dur_b)
+                ken_burns_still(still, clip, dur_b, move=s.get("move"))
                 continue
             offset += _tiered_duration(j, project_root) or float(SHOT_DURATION)
             src = p["clips"] / f"shot_{_b2s.get(j, j + 1):03d}.mp4"
@@ -1799,7 +1800,7 @@ def cmd_finish(args):
                 print(f"  [inherit] shot {s['index']:03d} <- beat {j}'s atom @ {offset:.2f}s (free)")
             except Exception as e:
                 print(f"  [inherit] beat {bi}: {e} — Ken Burns fallback (free)")
-                ken_burns_still(still, clip, dur_b)
+                ken_burns_still(still, clip, dur_b, move=s.get("move"))
 
     if getattr(args, "animate_only", False):
         print(f"\nAnimate-only: {len(clip_paths)} clips in {p['clips']}, "

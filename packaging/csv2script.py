@@ -76,11 +76,13 @@ def expand(text, canon, where):
     return out
 
 
-def emit_beat(narration, visual, motion):
+def emit_beat(narration, visual, motion, move=""):
     """GOLDEN-PAIR beat shape: narration rides ON the tag line."""
     lines = ["[A] " + narration, "VISUAL: " + visual]
     if motion:
         lines.append("MOTION: " + motion)
+    if move:
+        lines.append("MOVE: " + move)
     return "\n".join(lines)
 
 
@@ -184,6 +186,7 @@ def main():
         phen = expand(phen, canon, "row %d phenomenon" % i)
 
         motion = normalise((r.get("motion") or "").strip())
+        move = (r.get("move") or "").strip().lower()
         if motion:
             motion = expand(motion, canon, "row %d motion" % i)
         if i in kling_idx and not motion:
@@ -216,7 +219,7 @@ def main():
                                      % (ROMAN[act_counter - 1],
                                         (block or ("PART %d" % act_counter)).upper())
                                      + "\n")
-        out_parts.append(emit_beat(narr, phen, motion) + "\n")
+        out_parts.append(emit_beat(narr, phen, motion, move) + "\n")
 
     body = "\n".join(out_parts)
 
