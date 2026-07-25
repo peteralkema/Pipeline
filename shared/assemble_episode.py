@@ -58,7 +58,7 @@ A_COLOR = "0x222222"   # grey placeholder for recreated (Mode A) beats
 B_COLOR = "0x0a1628"   # Synthetic navy placeholder for graphic (Mode B) beats
 COLDOPEN_COLOR = "0x000000"
 VOICE_LEVEL = 1.15   # VO full (calibrated)
-MUSIC_LEVEL = 0.040  # patched 2026-06-20: -28dB, ~17 LU under voice (was 0.07/-23dB/~14 LU)   # music bed sits low under narration (Jamendo-calibrated)
+MUSIC_LEVEL = 0.11  # patched: sidechain-ducked baseline. Music now auto-ducks under the voice (sidechaincompress), so it can sit RICHER in the gaps without fighting narration. Was 0.040 static.
 KB_TAIL = False  # --kb-tail: NEVER-STRETCH — Mode A short clips play native + Ken-Burns tail
 
 
@@ -389,8 +389,10 @@ def main():
                 music_src = looped
             run(["ffmpeg", "-y", "-i", str(silent_v), "-i", str(voiceover), "-i", str(music_src),
                  "-filter_complex",
-                 f"[1:a]volume={VOICE_LEVEL}[v];[2:a]volume={MUSIC_LEVEL}[m];"
-                 f"[v][m]amix=inputs=2:normalize=0:duration=first:dropout_transition=0[a]",
+                 f"[1:a]volume={VOICE_LEVEL},asplit=2[vmix][vkey];"
+                 f"[2:a]volume={MUSIC_LEVEL}[m];"
+                 f"[m][vkey]sidechaincompress=threshold=0.03:ratio=8:attack=15:release=350:makeup=1[mduck];"
+                 f"[vmix][mduck]amix=inputs=2:normalize=0:duration=first:dropout_transition=0[a]",
                  "-map", "0:v:0", "-map", "[a]",
                  "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
                  "-t", f"{voice_dur:.3f}", str(out)],
