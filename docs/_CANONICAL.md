@@ -235,3 +235,56 @@ artifacts (batch manifests) are not docs and get gitignored, not archived.
    prose, no comments inside blocks. One step at a time on multi-step work.
 5. Every session that changes doctrine ends with: worklog entry + which doc absorbed
    the lesson. A lesson not written into a doc did not happen.
+
+---
+
+## APPENDIX A — THE PROCESS, AS CLOCKED BY HAND (25 Jul, the whiteboard walk)
+
+Five stations, one loop. Money moves in exactly one box; human judgment in exactly three
+moments per film. The hand-drawn version lives beside the desk; photo in `docs/sessions/`.
+
+| station | inputs | what happens | outputs |
+|---|---|---|---|
+| **DESIGN** | slate line · universal test · winnability | the click is designed before the content exists (title, thumbnail lockup, promise) — then the film is designed AS A TABLE (container, subject ledger, scale budget, spine, dials run ON THE LEDGER) | `package.md` ("the click") + `architecture.md ≥70` ("the table") — both in `<slug>-src/`, both at $0. A film failing here dies free |
+| **AUTHOR** | package + architecture | beats written into `master.csv` block-by-block against the ledger (subjects spent once, forbidden after). Columns: narration ≤55w · phenomenon (tokens) · subject (dials) · scale (budgeted) · air/motion (front-40) · topic_class | `master.csv` in `-src/` |
+| **GATE** | master.csv | `audit_script` (dials, dupes, words, safety, topic mix, BILL) → `csv2script` (tokens expanded, golden-pair emit) → `parse_script` (GATE OF RECORD: beats==rows, zero warnings) → probe (~20 risk beats, ~$1.60, through the REAL engine, delete after) | a blessed pair + a verdict — total gate cost ~$1.60 |
+| **RENDER $** | the pair → `batch_inbox/` | one command (`run_batch --kling-count 40`): voice · whisper · stills · Kling on authored motions · KB floor · music · assemble · private upload. Untouched, unattended. **The only box where money moves** | `final_video.mp4` (~$43 at 27 min / ~$32-48 at 60 min golden-pair density) |
+| **OBSERVE** | the private video | hand thumbnail (always) · watch · schedule into the 1/day drip · **one ledger row** (topic_class, line, length, title shape) · weekly 10-min Studio CTR read · fortnightly cohort read · N≥40 campaign verdict | the loop arrow: observations feed the NEXT film's DESIGN. Without the arrow it's a production line; with it, the flywheel |
+
+**Grain:** DESIGN/AUTHOR/GATE per video · **probe per WAVE** (a batch sharing proven
+canon/register/suffix probes once — the probe tests the system, not the script) ·
+RENDER per batch (N=1 is a batch) · OBSERVE per video for ACTIONS, per cadence for READS.
+The split protects against the cardinal sin: reading any single video as a verdict.
+
+**The three human touchpoints per film:** the architecture · the audit report + probe
+stills · the cold open. Everything else is the handle turning.
+
+---
+
+## APPENDIX B — START OF A FRESH CLAUDE SESSION (the exact ritual)
+
+**Upload/load, always:** `docs/_CANONICAL.md` (this file) + `docs/__MASTER-WORKLOG.md`.
+**Plus exactly ONE task doc:**
+
+| session is about | third doc |
+|---|---|
+| authoring / compiling / shipping Line B | `docs/_BRIDGE.md` |
+| strategy, priorities, where hours go | `docs/_STRATEGY.md` |
+| the fortnightly cohort read | `docs/_PACKAGING-AUDIT.md` |
+| a LEGO feature | `docs/_LEGO.md` + that film's `-src/` docs |
+| channel doctrine | `docs/channels/_Sacred-Dawn.md` (or relevant) |
+| picking slate titles | `docs/slates/sacred-dawn-lineb-slate-01.md` |
+
+**The ritual, in order:**
+1. State the goal in ONE sentence and the rung it serves.
+2. Paste real terminal output and real file heads — never describe from memory.
+3. Claude reads actual code/data before proposing; never guesses CLI flags, signatures,
+   or formats (the golden pair exists because guessing failed).
+4. Full paste-block files, never snippets. Command blocks labeled LAPTOP or BOX in
+   prose, no comments inside blocks. Multi-step work one step at a time.
+5. The session ends with: a worklog entry + naming which doc absorbed each lesson.
+   **A lesson not written into a doc did not happen.**
+
+**The standing next-session briefcase (as of 25 Jul):** canonical · worklog · `_BRIDGE.md`
+· the slate → chambers final video (hand thumbnail → schedule → ledger row), then pick
+the first eight slate titles and build eight ledgers. Cadence never breaks while you work.
