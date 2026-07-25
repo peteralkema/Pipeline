@@ -1849,7 +1849,7 @@ def cmd_kenburns(args):
         raise SystemExit(f"still not found: {still}")
     out.parent.mkdir(parents=True, exist_ok=True)
     print(f"Ken Burns: {still.name} -> {out.name} @ {args.duration:.2f}s ...")
-    ken_burns_still(still, out, args.duration)
+    ken_burns_still(still, out, args.duration, move=getattr(args, 'move', None))
     r = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries", "format=duration",
          "-of", "default=noprint_wrappers=1:nokey=1", str(out)],
@@ -1913,6 +1913,7 @@ def main():
     e.add_argument("--still", required=True, help="path to the still PNG")
     e.add_argument("--out", required=True, help="output mp4 path")
     e.add_argument("--duration", type=float, default=9.0, help="target clip duration in seconds")
+    e.add_argument("--move", default=None, help="Ken Burns move: push|pull|crane|settle|static (blank=legacy static)")
     e.set_defaults(func=cmd_kenburns)
 
     # Rulebook management — no project needed
