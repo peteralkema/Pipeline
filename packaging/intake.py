@@ -104,6 +104,55 @@ def run_audit(d, audit):
     return passed, r.stdout + r.stderr
 
 
+def visual_monotony(d):
+    """The 'no 16 wheat fields' gate. Returns (hard_fails, warns).
+    HARD: a bare token (token is the entire visual, no framing after it) repeated,
+          or a run of >=4 beats with identical token-stripped visual text.
+    WARN: a single bare token even once (author should add framing)."""
+    rows = list(csv.reader(open(Path(d) / "master.csv")))
+    hdr, data = rows[0], rows[1:]
+    ix = {c: i for i, c in enumerate(hdr)}
+    pcol = ix.get("phenomenon")
+    if pcol is None:
+        return [], []
+    hard, warn = [], []
+    tok_re = re.compile(r"\{(\w+)\}")
+    # bare token = phenomenon is ONLY a token (optionally whitespace)
+    bare = []
+    for i, r in enumerate(data):
+        p = r[pcol].strip()
+        stripped = tok_re.sub("", p).strip()
+        if tok_re.search(p) and not stripped:
+            bare.append(i)
+    if bare:
+        # consecutive bare-token runs are the hard fail
+        runs = []
+        s = bare[0]; prev = bare[0]
+        for b in bare[1:]:
+            if b == prev + 1:
+                prev = b
+            else:
+                runs.append((s, prev)); s = b; prev = b
+        runs.append((s, prev))
+        for a, b in runs:
+            n = b - a + 1
+            if n >= 2:
+                hard.append("BARE-TOKEN RUN beats %d-%d (%d beats, no per-beat framing) -- the 16-wheat-fields failure" % (a, b, n))
+            else:
+                warn.append("bare token at beat %d (add framing after the token)" % a)
+    # identical token-stripped visual runs
+    sigs = [tok_re.sub("", r[pcol]).strip().lower()[:60] for r in data]
+    i = 0
+    while i < len(sigs):
+        j = i
+        while j + 1 < len(sigs) and sigs[j + 1] == sigs[i] and sigs[i]:
+            j += 1
+        if j - i + 1 >= 4:
+            hard.append("IDENTICAL-VISUAL RUN beats %d-%d (%d beats same frame) -- vary framing per beat" % (i, j, j - i + 1))
+        i = j + 1
+    return hard, warn
+
+
 def ledger_flags(d, ledger_path):
     """Warn (never fail) if this title's key nouns collide with a shipped-ledger pool."""
     if not ledger_path or not Path(ledger_path).exists():
@@ -178,6 +227,16 @@ def main():
         print("  audit_script: %s" % ("ALL HARD GATES PASS" if ok else "FAIL"))
         if not ok:
             hard_fail.append("audit_script.py hard-gate failure (run it directly to see which)")
+
+    if "master.csv" in have:
+        mono_hard, mono_warn = visual_monotony(d)
+        if mono_hard:
+            for m in mono_hard:
+                hard_fail.append(m)
+        else:
+            print("  visual-monotony: clean (no bare-token or identical-visual runs)")
+        for w in mono_warn:
+            print("  WARN  " + w)
 
     if args.admit:
         print("  -- ADMIT judgment flags (human call, not auto-fail) --")
