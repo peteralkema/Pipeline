@@ -23,6 +23,7 @@ A fresh session MUST list the briefcase for `.py` files before writing any code.
 | `recreation_pipeline` legs | re-render EXISTING projects (`stills`, `finish`) | box only; `run_batch` is for NEW projects only (exists-guard refuses existing) |
 | `draft_moves.py` | fills the `move` column by the motion doctrine (§6) | box; CSV-side |
 | `kenburns --move` | permanent per-move geometry test rig | box |
+| `intake.py` | **the authoring gate** — runs IN the authoring session (pure text; no box). Completeness + tokens + audit_script + strips strays; `--admit` adds ledger/judgment flags | `python3 intake.py <dir-or-zip> --channel <underscore_form> [--admit --ledger <doctrine.md>]` |
 
 `orchestrate.py` is engine-side; sessions never touch it. **Settled 26 Jul:** `run_batch` writes `render_policy.json` with `kling_count` = **contiguous front-N, which is the mechanism that decides animation**. Scattered per-beat `MOTION:` lines outside the front-N are inert (harmless, wasted authoring). Do not relitigate Law 8.
 
@@ -76,6 +77,8 @@ out/<slug>.md + out/<slug>.thumb.json   # produced ONLY by the real csv2script.p
 
 The write → machine-check → fix → present loop per authored chunk is the proven working pattern; run it every chunk. Craft laws that the checks serve: contents-not-containers; positive-statement-only visuals (no "no X" phenomenon language); one subject per beat; canon `{token}` place-locks against drift; the spine object with the ten-frames test; cold open is the highest-leverage sixty seconds.
 
+**PAUSE DOCTRINE (breath — required authoring judgment, per video).** Elliot's pace is right, but the narration must be given space to breathe or it runs airless. Sprinkle Inworld SSML break tags throughout the script — `<break time="700ms" />` inside the narration column, at the natural resting points. This is a per-video judgment call on *placement*, but it is NOT optional to do: every script gets deliberate pausing. Range and placement heuristics (observed working, 26 Jul — ~60 breaks across ~158 beats is a healthy density): a beat of ~0.9–1.5s (900–1500ms) AFTER the title question or a hero line lands, to let it register; ~0.6–0.7s (600–700ms) at the turn between thoughts or before a reveal; ~0.4–0.5s (450–500ms) on quick connective beats. Longer holds pair naturally with `settle`/`static` moves and hush/awe registers; short breaths with `push`/`pull` momentum beats. Do not front-load all pauses into the cold open — distribute across the whole runtime so the teaching body breathes too. Breaks live in the narration text and are stripped before the word-count, so they cost nothing against the word band.
+
 ---
 
 ## 4. THE LINE B RUN OF SHOW (Bridge steps, with owners)
@@ -117,9 +120,10 @@ Hard rules: one primary motion per beat; slow is fast; lock the subject, move th
 1. Load: `_CANONICAL.md` (this) + the ONE channel doctrine for the session's channel (slate + observe loop live inside it). Worklog on demand for state questions.
 2. List the briefcase for code files FIRST; `--help` before use; never reconstruct.
 3. Confirm with Peter: channel, slate number(s), skip-probe yes/no, publish schedule. Then execute §3/§4 with the chunk-check loop. One step at a time; full paste-blocks; terse.
-4. End of session: session notes in the defect-report format (what shipped, chronology warts included, fixes caught, briefcase defects found, open items).
-5. Target state: **multiple CSVs per session** — one Claude per channel, several slate titles per sitting, each delivered as a complete `-src/` set in outputs.
-6. Next horizon (not yet built): a "batch operator" Claude whose whole job is §4 steps 7–9 — take finished pairs, seat inboxes, drive `run_batch` through to Studio.
+4. **BEFORE HANDOVER — run the gate until GREEN.** `python3 intake.py <your -src dir> --channel <underscore_form>` in this session's own container. Fix every listed defect and re-run until it prints GREEN. The §3 prohibitions (complete set, resolving tokens, no stray sidecars, move column, front-N kling, BOM ceiling) are enforced by this gate, not by memory — a fresh session skimming prose on a phone will miss them, so the gate is the enforcement. GREEN is sufficient quality control; the handover zip does NOT get re-gated at the batch boundary. Only then produce the handover zip (the -src set + the compiled pair).
+5. End of session: session notes in the defect-report format (what shipped, chronology warts included, fixes caught, briefcase defects found, open items).
+6. Target state: **multiple CSVs per session** — one Claude per channel, several slate titles per sitting, each delivered as a complete `-src/` set in outputs.
+7. Next horizon (not yet built): a "batch operator" Claude whose whole job is §4 steps 7–9 — take finished pairs, seat inboxes, drive `run_batch` through to Studio.
 
 ## 9. CHANGE BUDGET
 Max three engine changes per campaign, ranked, spent only on what strengthens the production system + packaging layer. Everything else is authoring-side (free) or rejected. Current queue: fx uniform grain (inert default, channel-config strength, no mapping), channel-agnostic upload step with batch exit-gate, make_shorts.py.
