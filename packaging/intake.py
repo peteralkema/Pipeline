@@ -150,6 +150,35 @@ def visual_monotony(d):
         if j - i + 1 >= 4:
             hard.append("IDENTICAL-VISUAL RUN beats %d-%d (%d beats same frame) -- vary framing per beat" % (i, j, j - i + 1))
         i = j + 1
+    # TABLEAU BUDGET (the Job ash-heap gate, 27 Jul): a tableau = the beat's first token.
+    # Varied framing text does NOT rescue a dominant tableau: AI re-rolls the actor per
+    # still, so long dwells render as a carousel of strangers, not coverage.
+    firsts = []
+    for r in data:
+        m = tok_re.findall(r[pcol])
+        firsts.append(m[0] if m else None)
+    n = len(data)
+    counts = {}
+    for t in firsts:
+        if t:
+            counts[t] = counts.get(t, 0) + 1
+    for t, cnt in sorted(counts.items(), key=lambda kv: -kv[1]):
+        share = cnt / float(n)
+        if share > 0.15:
+            hard.append("TABLEAU SHARE: {%s} on %d/%d beats (%.0f%%) -- max 15%%. Redistribute; mine the source catalogue for cutaways" % (t, cnt, n, 100 * share))
+        elif share > 0.10:
+            warn.append("tableau {%s} at %.0f%% of beats (soft ceiling 10%%) -- confirm intended" % (t, 100 * share))
+    i = 0
+    while i < len(firsts):
+        j = i
+        while j + 1 < len(firsts) and firsts[j + 1] == firsts[i] and firsts[i]:
+            j += 1
+        rl = j - i + 1
+        if firsts[i] and rl > 6:
+            hard.append("TABLEAU RUN: {%s} beats %d-%d (%d consecutive) -- max 6; dwell 4-6 then cut away" % (firsts[i], i, j, rl))
+        elif firsts[i] and rl > 4:
+            warn.append("tableau {%s} run of %d (beats %d-%d) -- soft ceiling 4" % (firsts[i], rl, i, j))
+        i = j + 1
     return hard, warn
 
 
