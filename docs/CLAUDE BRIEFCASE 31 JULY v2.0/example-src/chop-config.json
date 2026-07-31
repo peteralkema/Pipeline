@@ -1,0 +1,301 @@
+{
+ "register": {
+  "target_words": 46,
+  "hardcap_words": 55,
+  "merge_floor": 32,
+  "aggressive_floor": 15,
+  "aggressive_hardcap": 58
+ },
+ "kling_count": 2,
+ "kling_motion": [
+  "the spade drives down and stops dead on buried clay, dust jumping from the impact, the digger freezing",
+  "the jar's sealed mouth cracks open and the first leather books slide out into the low gold light"
+ ],
+ "blocks": {
+  "0": {
+   "scale": 4,
+   "routes": [
+    [
+     "In the last light of an Egyptian December",
+     "desert_dig",
+     "desert_dig"
+    ],
+    [
+     "It rings\\. Clay\\.",
+     "sealed_jar",
+     "sealed_jar"
+    ],
+    [
+     "He breaks it anyway",
+     "leather_books",
+     "leather_books"
+    ],
+    [
+     "Inside one of those books",
+     "sayings_page",
+     "sayings_page"
+    ]
+   ]
+  },
+  "1": {
+   "scale": 3,
+   "routes": [
+    [
+     "Hold that claim up to the light",
+     "key_door",
+     "key_door"
+    ],
+    [
+     "The book gives its own name",
+     "lamp_reader",
+     "lamp_reader"
+    ],
+    [
+     "This series has opened five graves",
+     "kingdom_spread",
+     "kingdom_spread"
+    ],
+    [
+     "Sit with what that sentence does",
+     "council_shadow",
+     "council_shadow"
+    ],
+    [
+     "The people who buried the jar knew",
+     "monk_burial",
+     "monk_burial"
+    ],
+    [
+     "Sixteen hundred years of silence",
+     "desert_dig",
+     "desert_dig"
+    ],
+    [
+     "What came out of that jar in 1945",
+     "open_library",
+     "open_library"
+    ],
+    [
+     "And the argument they reopen",
+     "lamp_reader",
+     "lamp_reader"
+    ],
+    [
+     "That is the next grave",
+     "sealed_jar",
+     "sealed_jar"
+    ],
+    [
+     "The Secret Sayings\\. The full film",
+     "lamp_reader",
+     "lamp_reader"
+    ]
+   ]
+  }
+ },
+ "force_reassign": [],
+ "canon": {
+  "desert_dig": "an Egyptian farmer's spade striking a buried jar at the foot of pale cliffs in low December light, bright blockbuster photoreal",
+  "sealed_jar": "a tall sealed storage jar, bitumen-sealed mouth, shoulder-deep in dry ground, patient and old, bright blockbuster photoreal",
+  "leather_books": "thirteen ancient leather-bound codices spilling into fading light, tooled covers, papyrus pages, bright blockbuster photoreal, object-first",
+  "sayings_page": "an open papyrus page of Coptic script, short sayings stacked line on line, lamplit, bright blockbuster photoreal, object-first",
+  "lamp_reader": "a single reader with an oil lamp and an open book in deep night, the circle of light small and defiant, bright blockbuster photoreal",
+  "kingdom_spread": "the ordinary world suddenly luminous, fields and villages under a sky where the light itself carries meaning, bright blockbuster photoreal",
+  "monk_burial": "a monk by night packing books into a jar and burying them beneath desert cliffs, torch-lit secrecy, bright blockbuster photoreal",
+  "council_shadow": "the age of creeds: stern assemblies, an edict read aloud, scrolls consigned to a brazier's fire, bright blockbuster photoreal, restrained",
+  "open_library": "the jar's whole library revealed: codices fanned open on cloth, many unfamiliar titles, a lost reading list in the light, bright blockbuster photoreal",
+  "key_door": "an ancient key cut for a different door: bronze key, unfamiliar lock, a door standing a hand's width open onto light, bright blockbuster photoreal, object-first"
+ },
+ "variants": {
+  "desert_dig": [
+   [
+    "wide",
+    "pale desert cliffs the color of old bread in low winter light, a lone figure digging",
+    true
+   ],
+   [
+    "close",
+    "a spade blade meeting a clay curve in dry ground, dust rising",
+    true
+   ],
+   [
+    "medium",
+    "a man kneeling at a hole, hands brushing soil from a jar's sealed shoulder",
+    true
+   ]
+  ],
+  "sealed_jar": [
+   [
+    "medium",
+    "a tall clay jar standing shoulder-deep in a dug pit, mouth sealed black",
+    false
+   ],
+   [
+    "close",
+    "the bitumen seal on a jar mouth, cracked lines of great age",
+    false
+   ],
+   [
+    "wide",
+    "the opened pit at dusk, the jar tilted, long shadows down the valley",
+    false
+   ]
+  ],
+  "leather_books": [
+   [
+    "medium",
+    "thirteen leather-bound books tumbled together in fading gold light",
+    false
+   ],
+   [
+    "close",
+    "a tooled leather cover with its wrap-strap, older than kingdoms",
+    false
+   ],
+   [
+    "close",
+    "weathered hands lifting one codex free of the others",
+    true
+   ]
+  ],
+  "sayings_page": [
+   [
+    "close",
+    "dense Coptic script on papyrus, short sayings stacked like blades",
+    false
+   ],
+   [
+    "close",
+    "a fingertip resting beneath one line of ancient script in lamplight",
+    true
+   ],
+   [
+    "medium",
+    "an open codex on a table beside a small oil lamp, night around it",
+    false
+   ]
+  ],
+  "lamp_reader": [
+   [
+    "medium",
+    "a lone figure bent over an open book inside a small circle of lamplight",
+    true
+   ],
+   [
+    "close",
+    "an oil lamp's flame steady in still air, darkness pressing the edge",
+    false
+   ],
+   [
+    "wide",
+    "one lit window of lamplight in a dark valley of sleeping houses",
+    false
+   ]
+  ],
+  "kingdom_spread": [
+   [
+    "wide",
+    "ordinary fields and villages under a sky of extraordinary spreading light",
+    false
+   ],
+   [
+    "medium",
+    "a dusty road at golden hour, every stone and leaf lit like an announcement",
+    false
+   ],
+   [
+    "close",
+    "wheat heads in low sun, glowing as if lit from inside",
+    false
+   ]
+  ],
+  "monk_burial": [
+   [
+    "medium",
+    "a hooded figure lowering books into a jar by torchlight",
+    true
+   ],
+   [
+    "close",
+    "hands pressing a bitumen seal onto a jar mouth in firelight",
+    true
+   ],
+   [
+    "wide",
+    "a small torch moving beneath vast dark cliffs, a burial left unmarked",
+    true
+   ]
+  ],
+  "council_shadow": [
+   [
+    "medium",
+    "an edict unrolled before a stern assembly, seals heavy at its foot",
+    true
+   ],
+   [
+    "close",
+    "a scroll's edge catching flame at a brazier's lip",
+    false
+   ],
+   [
+    "wide",
+    "a columned hall of gathered authorities, shadows long between the pillars",
+    true
+   ]
+  ],
+  "open_library": [
+   [
+    "wide",
+    "a dozen ancient codices fanned open on dark cloth, a library resurfacing",
+    false
+   ],
+   [
+    "close",
+    "two open pages of unfamiliar script side by side, strangers to every shelf",
+    false
+   ],
+   [
+    "medium",
+    "careful hands spreading the recovered books apart in raking light",
+    true
+   ]
+  ],
+  "key_door": [
+   [
+    "medium",
+    "an old bronze key on dark cloth, teeth cut to a pattern that fits nothing familiar",
+    false
+   ],
+   [
+    "close",
+    "the key entering an unfamiliar lock, tumblers older than the wall",
+    false
+   ],
+   [
+    "medium",
+    "a heavy door standing a hand's width open, thin light along its edge",
+    false
+   ]
+  ]
+ },
+ "lore_tokens": [],
+ "scale5_rules": [
+  {
+   "subject": "lamp_reader",
+   "position": "last"
+  }
+ ],
+ "token_archetypes": {
+  "desert_dig": "discovery",
+  "sealed_jar": "discovery",
+  "leather_books": "written_word",
+  "sayings_page": "written_word",
+  "lamp_reader": "reader_lamp",
+  "kingdom_spread": "revelation",
+  "monk_burial": "hidden_library",
+  "council_shadow": "institution",
+  "open_library": "discovery",
+  "key_door": "revelation"
+ },
+ "archetype_share_cap": 0.4
+}

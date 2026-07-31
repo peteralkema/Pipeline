@@ -124,7 +124,12 @@ def run(con, project_dir: Path, privacy: str = "private",
         title = title[:TITLE_MAX]
     description = str(proj["description"] or "").strip()[:DESC_MAX]
     tags = parse_tags(proj["tags"])
-    category_id = category or DEFAULT_CATEGORY
+    proj_cat = None
+    try:
+        proj_cat = proj["category_id"]
+    except (KeyError, IndexError):
+        pass
+    category_id = category or proj_cat or DEFAULT_CATEGORY
 
     if publish_at:
         privacy = "private"

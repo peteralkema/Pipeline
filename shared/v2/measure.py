@@ -34,8 +34,10 @@ def _ensure_whisper_json(project_dir: Path, voiceover_path: Path) -> Path:
     wj = project_dir / "voiceover.json"
     if wj.exists():
         return wj
-    if not voiceover_path or not Path(voiceover_path).exists():
-        raise SystemExit("stage 'measure': no voiceover.mp3 -- run stage 'audio' first")
+    if not str(voiceover_path) or not Path(voiceover_path).is_file():
+        raise SystemExit("stage 'measure': no voiceover.mp3 file -- run stage "
+                         "'audio' first (guard: is_file, teaser receipt -- "
+                         "Path('') resolves to '.' and whisper eats a directory)")
     cmd = ["whisper", str(voiceover_path), "--model", WHISPER_MODEL,
            "--output_format", "json", "--output_dir", str(project_dir),
            "--word_timestamps", "True"]

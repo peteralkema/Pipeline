@@ -10,8 +10,22 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 _HERE = Path(__file__).resolve().parent
+
+
+def _apply_migrations(con: sqlite3.Connection, from_ver: int) -> None:
+    """Apply numbered migrations from_ver+1 .. SCHEMA_VERSION, in order.
+    Migration files: migrations/NNNN_*.sql. The lasts-for-years mechanism."""
+    mdir = _HERE / "migrations"
+    for v in range(from_ver + 1, SCHEMA_VERSION + 1):
+        matches = sorted(mdir.glob(f"{v:04d}_*.sql"))
+        if not matches:
+            raise SystemExit(f"missing migration {v:04d}_*.sql in {mdir}")
+        con.executescript(matches[0].read_text(encoding="utf-8"))
+        set_meta(con, "schema_version", str(v))
+        con.commit()
+        print(f"   migrated schema -> v{v} ({matches[0].name})")
 
 
 def _now() -> str:
@@ -30,10 +44,12 @@ def connect(db_path: Path) -> sqlite3.Connection:
     ver = get_meta(con, "schema_version")
     if ver is None:
         raise SystemExit(f"{db_path} has no schema_version -- not a v2 project DB")
-    if int(ver) != SCHEMA_VERSION:
+    if int(ver) > SCHEMA_VERSION:
         raise SystemExit(
             f"{db_path} is schema v{ver}; this code speaks v{SCHEMA_VERSION}. "
-            f"Run migrations before using it.")
+            f"Update the code before touching this DB.")
+    if int(ver) < SCHEMA_VERSION:
+        _apply_migrations(con, int(ver))
     return con
 
 
@@ -49,6 +65,8 @@ def create(db_path: Path, engine_commit: str = "dev") -> sqlite3.Connection:
     con.row_factory = sqlite3.Row
     sql = (_HERE / "migrations" / "0001_init.sql").read_text(encoding="utf-8")
     con.executescript(sql)
+    set_meta(con, "schema_version", "1")
+    _apply_migrations(con, 1)
     set_meta(con, "schema_version", str(SCHEMA_VERSION))
     set_meta(con, "created_at", _now())
     set_meta(con, "engine_commit", engine_commit)

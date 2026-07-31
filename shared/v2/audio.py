@@ -78,6 +78,10 @@ def run(con, project_dir: Path, speaking_rate: float = 1.0) -> Path:
         "SELECT narration FROM beats ORDER BY id").fetchall()
     script = "\n\n".join(b["narration"] for b in beats)
     voice_id = proj["voice"] or "Victor"
+    try:
+        speaking_rate = float(proj["speaking_rate"] or 1.0)
+    except (KeyError, IndexError, TypeError):
+        speaking_rate = 1.0
 
     chunks = _chunk_text(script)
     print(f"   voice: {voice_id} | {len(script)} chars -> {len(chunks)} chunk(s)")
