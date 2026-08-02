@@ -326,3 +326,13 @@ efficient against documentary's 20:1–100:1).
 - v1 imports inside shared/v2/. Mode flags selecting v1-vs-v2 inside a file.
 - Hand-editing a .db (the door is the only entrance).
 - Secrets in the database (tokens stay on disk).
+
+
+## kb-tail v2 -- the continuation grammar (2 Aug fix-commit)
+The kling tail's three defects (quarter-second rewind via -sseof -0.25; hardcoded slow push regardless of the beat's move; fixed 0.0008/frame rate freezing at the 1.10 cap on long tails) are dead. `_kb_filter(move, d, W, H, tail=)` is now the ONE motion law with two grammars: OPENING (floor stills, the original doctrine map) and CONTINUATION (tails): every tail variant starts at IDENTITY (zoom 1.0, zero offset) so the seam with the native clip is invisible (measured: PSNR 35+ across all four moves), then moves in the beat's authored direction across exactly the tail's frames. Frame grab tightened to -sseof -0.05. `_fit_to_duration` gained a `move` parameter, threaded from the beat.
+
+## fx: floating speckles (2 Aug, Filmora verdict productionized)
+Uniform table-free fx per the standing ruling: `channel.json` -> {"fx": {"speckles": 0.35}}. Inert at 0/absent. One hash-seeded speck field is generated per render (`_ensure_speckles`, oversized W+240 x H+240), then every floor beat's `_kb_still` drifts a crop of it over the frame (overlay pan, screen blend at the channel strength). Kling clips are untouched (real motion needs no dressing). Cost: one tiny geq frame per render + a cheap blend per floor beat.
+
+## the six-move doctrine (2 Aug, the LTX observation)
+The move vocabulary is complete across all three camera axes: push/pull (zoom), crane/settle (vertical -- settle IS crane-down), jibl/jibr (horizontal, NEW). Both grammars carry all six (opening at 1.12-1.16 doctrine strength; tail-continuation at identity-start 1.06). chop assigns from the full six-palette, max_run 3. The horizontal axis finally serves the register's wides: corridors, roads, battle-lines, processions.

@@ -120,32 +120,105 @@ def _gen_still(prompt: str, out_path: Path, proj, negative: str = "") -> Path | 
     return _download(images[0]["url"], out_path)
 
 
-def _kb_still(still_path: Path, out_path: Path, duration: float,
-              move: str, W: int, H: int) -> Path:
-    """ken_burns_still, verbatim: doctrine-varied zoompan or true static."""
-    dur = float(duration)
-    total_frames = max(1, int(round(dur * FPS)))
-    d = total_frames
+def _channel_fx_speckles(project_dir: Path) -> float:
+    """Uniform fx doctrine: one strength per channel, inert default, no
+    mapping. channel.json: {"fx": {"speckles": 0.35}}."""
+    for cand in (project_dir.parent.parent, project_dir.parent):
+        cj = cand / "channel.json"
+        if cj.is_file():
+            try:
+                fx = (json.loads(cj.read_text(encoding="utf-8"))
+                      .get("fx") or {})
+                return float(fx.get("speckles", 0.0) or 0.0)
+            except Exception:
+                return 0.0
+    return 0.0
+
+
+def _kb_filter(move: str, d: int, W: int, H: int, tail: bool = False) -> str:
+    """The motion law, two grammars. OPENING grammar (floor stills): the
+    original doctrine map. CONTINUATION grammar (tail=True, kling tails, 2 Aug
+    fix-commit): every variant starts at IDENTITY (zoom 1.0, zero offset) so
+    the seam with the native clip is invisible, then moves outward across
+    exactly d frames -- no fixed rates, no cap-freeze, no rewind."""
     m = (move or "").strip().lower()
     if m in ("", "static"):
-        vf = (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
-              f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps={FPS}")
-    else:
-        up_w, up_h = W * 4, H * 4
-        cx = "iw/2-(iw/zoom/2)"
-        cy = "ih/2-(ih/zoom/2)"
-        if m == "pull":
-            z, x, y = "if(eq(on,0),1.16,max(1.16-0.16*on/%d,1.0))" % d, cx, cy
-        elif m == "crane":
-            z, x, y = "1.12", cx, "(ih-ih/zoom)*(1-on/%d)" % d
+        return (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+                f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps={FPS}")
+    up_w, up_h = W * 4, H * 4
+    cx = "iw/2-(iw/zoom/2)"
+    cy = "ih/2-(ih/zoom/2)"
+    if tail:
+        if m == "crane":
+            z = "min(1.0+0.06*on/%d,1.06)" % d
+            x, y = cx, "(ih-ih/zoom)*(1-on/%d)" % d
         elif m == "settle":
-            z, x, y = "1.12", cx, "(ih-ih/zoom)*(on/%d)" % d
+            z = "min(1.0+0.06*on/%d,1.06)" % d
+            x, y = cx, "(ih-ih/zoom)*(on/%d)" % d
+        elif m == "jibl":
+            z = "min(1.0+0.06*on/%d,1.06)" % d
+            x, y = "(iw-iw/zoom)*(1-on/%d)" % d, cy
+        elif m == "jibr":
+            z = "min(1.0+0.06*on/%d,1.06)" % d
+            x, y = "(iw-iw/zoom)*(on/%d)" % d, cy
         else:
-            z, x, y = "min(1.0+0.16*on/%d,1.16)" % d, cx, cy
-        vf = (f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
-              f"crop={up_w}:{up_h},"
-              f"zoompan=z='{z}':d={total_frames}:x='{x}':y='{y}':"
-              f"s={W}x{H}:fps={FPS},setsar=1")
+            z, x, y = "min(1.0+0.10*on/%d,1.10)" % d, cx, cy
+    elif m == "pull":
+        z, x, y = "if(eq(on,0),1.16,max(1.16-0.16*on/%d,1.0))" % d, cx, cy
+    elif m == "crane":
+        z, x, y = "1.12", cx, "(ih-ih/zoom)*(1-on/%d)" % d
+    elif m == "settle":
+        z, x, y = "1.12", cx, "(ih-ih/zoom)*(on/%d)" % d
+    elif m == "jibl":
+        z, x, y = "1.12", "(iw-iw/zoom)*(1-on/%d)" % d, cy
+    elif m == "jibr":
+        z, x, y = "1.12", "(iw-iw/zoom)*(on/%d)" % d, cy
+    else:
+        z, x, y = "min(1.0+0.16*on/%d,1.16)" % d, cx, cy
+    return (f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
+            f"crop={up_w}:{up_h},"
+            f"zoompan=z='{z}':d={d}:x='{x}':y='{y}':"
+            f"s={W}x{H}:fps={FPS},setsar=1")
+
+
+def _ensure_speckles(work: Path, W: int, H: int) -> Path:
+    """One hash-seeded speck field per render (fx=speckles, the uniform
+    table-free doctrine). Oversized so the per-beat overlay can drift it."""
+    p = work / "speckles_field.png"
+    if p.exists():
+        return p
+    fw, fh = W + 240, H + 240
+    expr = ("st(0,sin(X*12.9898+Y*78.233)*43758.5453);"
+            "st(1,ld(0)-floor(ld(0)));"
+            "if(lt(ld(1),0.00045),200+55*ld(1)/0.00045,0)")
+    _run(["ffmpeg", "-y", "-f", "lavfi",
+          "-i", f"nullsrc=s={fw}x{fh}:d=0.04",
+          "-vf", f"format=gray,geq=lum='{expr}',boxblur=1:1",
+          "-frames:v", "1", "-update", "1", str(p)], "speckle field")
+    return p
+
+
+def _kb_still(still_path: Path, out_path: Path, duration: float,
+              move: str, W: int, H: int,
+              speckles: Path = None, spk_strength: float = 0.0) -> Path:
+    """ken_burns_still: doctrine motion via _kb_filter, plus the optional
+    uniform floating-speckles pass (channel fx, inert by default)."""
+    dur = float(duration)
+    total_frames = max(1, int(round(dur * FPS)))
+    vf = _kb_filter(move, total_frames, W, H)
+    if speckles is not None and spk_strength > 0:
+        op = max(0.0, min(1.0, float(spk_strength)))
+        fc = (f"[0:v]{vf}[base];"
+              f"[1:v]crop={W}:{H}:x='mod(t*11,240)':y='mod(t*7,240)',"
+              f"format=rgb24[spk];"
+              f"[base][spk]blend=all_mode=screen:all_opacity={op:.3f}")
+        _run(["ffmpeg", "-y", "-loop", "1", "-i", str(still_path),
+              "-loop", "1", "-i", str(speckles),
+              "-filter_complex", fc,
+              "-t", f"{dur:.3f}", "-c:v", "libx264", "-preset", "medium",
+              "-crf", "18", "-pix_fmt", "yuv420p", "-r", str(FPS),
+              str(out_path)], "ken_burns+speckles ffmpeg")
+        return out_path
     _run(["ffmpeg", "-y", "-loop", "1", "-i", str(still_path), "-vf", vf,
           "-t", f"{dur:.3f}", "-c:v", "libx264", "-preset", "medium",
           "-crf", "18", "-pix_fmt", "yuv420p", "-r", str(FPS), str(out_path)],
@@ -184,7 +257,8 @@ def _animate(still_path: Path, motion_prompt: str, out_path: Path, proj):
 
 
 def _fit_to_duration(clip: Path, dur: float, out_path: Path,
-                     W: int, H: int, work: Path, tag: str) -> str:
+                     W: int, H: int, work: Path, tag: str,
+                     move: str = "") -> str:
     """make_video_segment's law-compliant branches, verbatim. Returns label.
     trim | exact | kb-tail | clone-pad. The slow-fill branch is DELETED."""
     native = _probe(clip)
@@ -210,14 +284,12 @@ def _fit_to_duration(clip: Path, dur: float, out_path: Path,
               "-c:v", "libx264", "-preset", "medium", "-crf", "18",
               "-pix_fmt", "yuv420p", "-an", str(part1)], f"kb-tail native {tag}")
         frame = work / f"{tag}_last.png"
-        _run(["ffmpeg", "-y", "-sseof", "-0.25", "-i", str(part1),
+        _run(["ffmpeg", "-y", "-sseof", "-0.05", "-i", str(part1),
               "-frames:v", "1", "-update", "1", str(frame)],
              f"kb-tail frame {tag}")
         tail_frames = max(1, int(round(remainder * FPS)))
         part2 = work / f"{tag}_tail.mp4"
-        zp = (f"scale={W*2}:{H*2},"
-              f"zoompan=z='min(zoom+0.0008,1.10)':d={tail_frames}:"
-              f"s={W}x{H}:fps={FPS}")
+        zp = _kb_filter(move, tail_frames, W, H, tail=True)
         _run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame), "-vf", zp,
               "-t", f"{remainder:.3f}", "-c:v", "libx264", "-preset", "medium",
               "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(part2)],
@@ -282,6 +354,10 @@ def run(con, project_dir: Path) -> None:
 
     todo = v2db.pending(con, "clip_path", "still_path IS NOT NULL")
     print(f"   pass B clips: {len(todo)} to build")
+    spk_strength = _channel_fx_speckles(project_dir)
+    spk = _ensure_speckles(work, W, H) if spk_strength > 0 else None
+    if spk_strength > 0:
+        print(f"   fx: floating speckles at {spk_strength:.2f} (channel.json)")
     for b in todo:
         dur = float(b["audio_duration"])
         out = clips_dir / f"shot_{b['id']:03d}.mp4"
@@ -294,11 +370,13 @@ def run(con, project_dir: Path) -> None:
                 v2db.log_generation(con, stage="clips", model="kling",
                                     prompt=b["motion_prompt"], beat_id=b["id"],
                                     cost=0.0, status="refused", kept=0)
-                _kb_still(Path(b["still_path"]), out, dur, b["move"], W, H)
+                _kb_still(Path(b["still_path"]), out, dur, b["move"], W, H,
+                          speckles=spk, spk_strength=spk_strength)
                 label = "kb(refusal-fallback)"
                 cost, model = 0.0, "ffmpeg-kb"
             else:
-                label = _fit_to_duration(raw, dur, out, W, H, work, tag)
+                label = _fit_to_duration(raw, dur, out, W, H, work, tag,
+                                         move=b["move"] or "")
                 cost = KLING_COST
                 model = proj["video_model"] or DEFAULT_VIDEO_ENDPOINT
             v2db.log_generation(con, stage="clips", model=model,
@@ -307,7 +385,8 @@ def run(con, project_dir: Path) -> None:
                                 params_json=json.dumps({"fit": label,
                                                         "dur": dur}))
         else:
-            _kb_still(Path(b["still_path"]), out, dur, b["move"], W, H)
+            _kb_still(Path(b["still_path"]), out, dur, b["move"], W, H,
+                      speckles=spk, spk_strength=spk_strength)
             label = f"kb({b['move'] or 'push'})"
             v2db.log_generation(con, stage="clips", model="ffmpeg-kb",
                                 beat_id=b["id"], cost=0.0,

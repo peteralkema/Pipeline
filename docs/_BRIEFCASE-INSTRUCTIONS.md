@@ -37,7 +37,8 @@ token; names `[a-z_]+` only, Law 20), the three dials (novelty ≥2/block — cu
 under-hit, address deliberately; span ≤0.35; escalation rising — currently
 unenforced, design it in), kling plan (front-N Law 8, OR — once the authored `kling` column lands — placement-by-value per Law 28e: first-10-min saturation, act-opener pairs, hero miracles, probe reserve), **the REGISTER MAP (Law 28d: which sequences carry dream/vision transformation license; everything else is witness grammar)**, scale plan (cold open =
 its own zone, Law 17), thumbnail-payoff plan (Law 18: beat 1 IS the thumbnail
-image). If creative license wanted: invoke the DREAM LICENSE (Law 24) explicitly.
+image), **mute-still test on every cold-open and hero token's variant bank (Law
+29: spectacular as a silent frozen frame, or rewrite the substrate)**. If creative license wanted: invoke the DREAM LICENSE (Law 24) explicitly.
 
 **STEP 2 — RIVER (Pass 1).** Pure continuous prose, no CSV thinking, permission-
 slip length. Act headers as `## `-headings (mandatory — chop derives blocks from

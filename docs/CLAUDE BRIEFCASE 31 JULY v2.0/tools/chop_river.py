@@ -207,7 +207,7 @@ def route(block_id, text, routes):
     return None, None
 
 
-def assign_moves_fuzzy(n, palette=("push", "pull", "crane", "settle"), max_run=3, seed=42):
+def assign_moves_fuzzy(n, palette=("push", "pull", "crane", "settle", "jibl", "jibr"), max_run=3, seed=42):
     """Pure distributional move assignment -- no content read, no semantics.
     Roughly equal share of each move type across n beats, no run longer than
     max_run identical values in a row. Deterministic (seeded) so the same
@@ -267,14 +267,25 @@ def main():
 
     chopped = {}
     for b, paras in raw_blocks.items():
+        # Law 33 (1 Aug): per-block register override -- blocks may carry their
+        # own "register" dict (any subset of the global keys). Block 0 chops
+        # short (opening ramp); the feature register is earned, not default.
+        breg = (cfg["blocks"].get(str(b), {}) or {}).get("register", {})
+        b_target = breg.get("target_words", target)
+        b_hardcap = breg.get("hardcap_words", hardcap)
+        b_mfloor = breg.get("merge_floor", merge_floor)
+        b_afloor = breg.get("aggressive_floor", agg_floor)
+        b_ahard = breg.get("aggressive_hardcap", agg_hardcap if not breg else b_hardcap)
         beats = []
         for p in paras:
-            beats.extend(chunk_paragraph(p, target, hardcap))
-        beats = merge_pass(beats, hardcap, merge_floor)
-        beats = aggressive_merge(beats, agg_hardcap, agg_floor)
+            beats.extend(chunk_paragraph(p, b_target, b_hardcap))
+        beats = merge_pass(beats, b_hardcap, b_mfloor)
+        beats = aggressive_merge(beats, b_ahard, b_afloor)
         chopped[str(b)] = beats
 
-    over = [(b, wc(x)) for b, beats in chopped.items() for x in beats if wc(x) > hardcap]
+    def _hc(b):
+        return (cfg["blocks"].get(str(b), {}) or {}).get("register", {}).get("hardcap_words", hardcap)
+    over = [(b, wc(x)) for b, beats in chopped.items() for x in beats if wc(x) > _hc(b)]
     if over:
         print(f"WARNING: {len(over)} beat(s) over the {hardcap}-word hard cap after merge -- "
               f"these need a manual one-line trim before AUDIT: {over}", file=sys.stderr)

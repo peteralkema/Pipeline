@@ -115,6 +115,92 @@ def csv_stats(d):
         except Exception:
             pass
     out["contact_motion"] = hits
+
+    # Law 32 (1 Aug, the five-burning-pages receipt): monotony is mechanical.
+    scol, pcol = idx.get("subject"), idx.get("phenomenon")
+    runs_over, run_tok, run_len, run_start = [], None, 0, 0
+    if scol is not None:
+        for i, r in enumerate(data):
+            tok = r[scol].strip()
+            if tok == run_tok:
+                run_len += 1
+            else:
+                if run_len > 3:
+                    runs_over.append(f"{run_tok}@{run_start}x{run_len}")
+                run_tok, run_len, run_start = tok, 1, i
+        if run_len > 3:
+            runs_over.append(f"{run_tok}@{run_start}x{run_len}")
+    out["token_runs_over3"] = runs_over
+    import difflib
+    dups = []
+    if pcol is not None:
+        for i in range(1, len(data)):
+            a, b = data[i-1][pcol].strip(), data[i][pcol].strip()
+            if a and b and (a == b or difflib.SequenceMatcher(None, a, b).ratio() > 0.85):
+                dups.append(i)
+    out["adjacent_dup_phenomena"] = dups
+    bcol = idx.get("block_id")
+    # Law 34 (1 Aug, the telephone-pole receipt): positive period lock.
+    out["period_missing"], out["highprior_unqualified"] = [], []
+    cfg_p2 = Path(d) / "chop-config.json"
+    canon_p = Path(d) / "canon.json"
+    if cfg_p2.exists():
+        try:
+            c2 = json.load(open(cfg_p2))
+            anchor = c2.get("period_anchor")
+            if anchor:
+                exempt = set(c2.get("period_exempt_archetypes", []))
+                arch = c2.get("token_archetypes", {})
+                canon = json.load(open(canon_p)) if canon_p.exists() else {}
+                variants = c2.get("variants", {})
+                for tok, desc in canon.items():
+                    if arch.get(tok) in exempt:
+                        continue
+                    texts = [desc] + [v[1] for v in variants.get(tok, [])]
+                    if any(anchor not in t for t in texts):
+                        out["period_missing"].append(tok)
+            HIGH = re.compile(r"(?i)\b(road|roads|street|streets|highway|town|city|cities|lights)\b")
+            MAT = re.compile(r"(?i)\b(dirt|packed|earth|earthen|stone|mud-brick|dust|unpaved|track|"
+                             r"oil-lamp|oil lamp|torch\w*|fire\w*|lamplit|lamp-lit|candle)\b")
+            variants2 = c2.get("variants", {})
+            canon2 = json.load(open(canon_p)) if canon_p.exists() else {}
+            for tok in set(list(canon2.keys()) + list(variants2.keys())):
+                texts = [canon2.get(tok, "")] + [v[1] for v in variants2.get(tok, [])]
+                for t in texts:
+                    if t and HIGH.search(t) and not MAT.search(t):
+                        out["highprior_unqualified"].append(tok)
+                        break
+        except Exception:
+            pass
+    # Law 35 (2 Aug, the missing-chariots receipt): cast + props per block.
+    out["abstract_blocks"], out["castlight_blocks"] = [], []
+    if cfg_p2.exists():
+        try:
+            c3 = json.load(open(cfg_p2))
+            chr_cls = set(c3.get("character_archetypes", []))
+            obj_cls = set(c3.get("object_archetypes", []))
+            arch3 = c3.get("token_archetypes", {})
+        except Exception:
+            c3, chr_cls, obj_cls, arch3 = {}, set(), set(), {}
+        try:
+            bcolx = idx.get("block_id")
+            if (chr_cls or obj_cls) and scol is not None and bcolx is not None:
+                blocks = {}
+                for r in data:
+                    blocks.setdefault(r[bcolx].strip(), set()).add(r[scol].strip())
+                for b, toks in sorted(blocks.items(), key=lambda x: int(x[0]) if x[0].isdigit() else 999):
+                    has_c = any(arch3.get(t) in chr_cls for t in toks)
+                    has_o = any(arch3.get(t) in obj_cls for t in toks)
+                    if not has_c and not has_o:
+                        out["abstract_blocks"].append(b)
+                    elif not (has_c and has_o):
+                        out["castlight_blocks"].append(b)
+        except Exception:
+            pass
+    out["block0_overlong"] = [i for i, r in enumerate(data)
+                              if bcol is not None and ncol is not None
+                              and r[bcol].strip() == "0"
+                              and len(r[ncol].split()) > 26]
     toks = set()
     if pcol is not None:
         for r in data:
@@ -296,6 +382,44 @@ def main():
             hard_fail.append("TAG-WORD (move:/visual:/motion:) inside narration "
                              "at rows %s (Law 25 -- parser eats the beat)"
                              % s["tagword_narr"][:8])
+        ab = s.get("abstract_blocks") or []
+        if ab:
+            hard_fail.append("FULLY ABSTRACT BLOCKS %s -- zero character-class "
+                             "AND zero object-class tokens (Law 35: every act "
+                             "carries cast and props; face-safe staging exists "
+                             "for exactly this)" % ab[:8])
+        aw = s.get("castlight_blocks") or []
+        if aw:
+            warn.append("blocks %s carry only one of character/object classes "
+                        "(Law 35 soft: prefer both)" % aw[:8])
+        pa = s.get("period_missing") or []
+        if pa:
+            hard_fail.append("PERIOD ANCHOR MISSING from canon/variants of tokens "
+                             "%s (Law 34 -- the period is enforced positively; "
+                             "every non-exempt token's texts carry the config's "
+                             "period_anchor verbatim)" % pa[:6])
+        hp = s.get("highprior_unqualified") or []
+        if hp:
+            hard_fail.append("HIGH-PRIOR NOUN UNQUALIFIED in %s (Law 34 -- "
+                             "road/street/town/city/lights never appear without "
+                             "their material or light source named: dirt, packed "
+                             "earth, stone, mud-brick, oil-lamp, torch)" % hp[:6])
+        b0 = s.get("block0_overlong") or []
+        if b0:
+            hard_fail.append("BLOCK-0 BEATS OVER 26 WORDS at rows %s (Law 33 -- "
+                             "the opening ramp: cold-open beats chop at their own "
+                             "register, target ~20w, hard 26; add a block-0 "
+                             "register override to the chop config)" % b0[:8])
+        runs = s.get("token_runs_over3") or []
+        if runs:
+            hard_fail.append("SAME-TOKEN RUN >3 consecutive beats at %s (Law 32 "
+                             "-- a dwell is coverage, not repetition: interleave "
+                             "tokens or cut the scene)" % runs[:6])
+        dups = s.get("adjacent_dup_phenomena") or []
+        if dups:
+            hard_fail.append("ADJACENT NEAR-IDENTICAL PHENOMENA at rows %s (Law "
+                             "32 -- no two successive beats may read as the same "
+                             "frame; vary the variant or the token)" % dups[:8])
         if s.get("contact_motion"):
             hard_fail.append("CONTACT-PHYSICS verbs in motion prompts at %s "
                              "(Law 28 -- i2v morphs, never simulates contact; "
