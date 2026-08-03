@@ -120,6 +120,67 @@ def _gen_still(prompt: str, out_path: Path, proj, negative: str = "") -> Path | 
     return _download(images[0]["url"], out_path)
 
 
+def _load_assets(project_dir: Path) -> dict:
+    """Per-channel <channel>/assets.json: the frozen fal snapshot (S3 lock).
+    Absent for films with no cast -- returns empty, the @-branch never fires."""
+    p = project_dir.parent.parent / "assets.json"
+    if not p.exists():
+        return {}
+    return json.loads(p.read_text())
+
+
+def _detect_ats(phenomenon: str) -> list:
+    """All @identifiers in the authored phenomenon (Law-20 grammar, no digits)."""
+    return re.findall(r"@([a-z][a-z_]*)", phenomenon or "")
+
+
+def _resolve_refs(phenomenon: str, ats: list, assets: dict, beat_id: int):
+    """@ids -> (image_urls from the frozen snapshot, prompt with @id -> name).
+    Unknown or url-less @ is a HARD stop -- an unbound face never renders."""
+    urls, disp = [], phenomenon
+    for a in ats:
+        rec = assets.get("@" + a) or assets.get(a)
+        if not rec:
+            raise SystemExit(
+                "beat %d: unknown @%s -- not in <channel>/assets.json. "
+                "Lock it (S3) or fix the mention." % (beat_id, a))
+        rurls = rec.get("reference_urls") or []
+        if not rurls:
+            raise SystemExit(
+                "beat %d: @%s has no reference_urls in assets.json -- "
+                "run the registry --refresh to freeze the fal snapshot." % (beat_id, a))
+        for u in rurls:
+            if u not in urls:
+                urls.append(u)
+        disp = re.sub(r"@" + re.escape(a) + r"\b", rec.get("name", a), disp)
+    return urls, disp
+
+
+def _gen_still_edit(prompt: str, image_urls: list, out_path: Path) -> Path | None:
+    """P3 shape, verbatim: seedream v5 pro edit, explicit refs, FAL_KEY, sync."""
+    import os
+    key = os.environ.get("FAL_KEY")
+    if not key:
+        raise SystemExit("resolver: FAL_KEY not in environment")
+    body = {"prompt": prompt, "image_urls": image_urls,
+            "image_size": "landscape_16_9"}
+    try:
+        r = requests.post("https://fal.run/bytedance/seedream/v5/pro/edit",
+                          headers={"Authorization": "Key " + key,
+                                   "Content-Type": "application/json"},
+                          json=body, timeout=300)
+        r.raise_for_status()
+        data = r.json()
+    except Exception as e:
+        print("      SKIP (edit refused): %s -- %s." % (out_path.name, type(e).__name__))
+        return None
+    imgs = data.get("images") or []
+    if not imgs or "url" not in imgs[0]:
+        print("      SKIP (edit no media): %s -- keys=%s" % (out_path.name, list(data)))
+        return None
+    return _download(imgs[0]["url"], out_path)
+
+
 def _channel_fx_speckles(project_dir: Path) -> float:
     """Uniform fx doctrine: one strength per channel, inert default, no
     mapping. channel.json: {"fx": {"speckles": 0.35}}."""
@@ -347,6 +408,7 @@ def run(con, project_dir: Path) -> None:
                         "WHERE reference_paths IS NOT NULL "
                         "AND reference_paths NOT IN ('', '[]')")}
     style = proj["style_contract"] or ""
+    assets = _load_assets(project_dir)
     W, H = proj["width"], proj["height"]
     stills_dir = project_dir / "stills"
     clips_dir = project_dir / "clips"
@@ -357,6 +419,22 @@ def run(con, project_dir: Path) -> None:
     todo = v2db.pending(con, "still_path")
     print(f"   pass A stills: {len(todo)} to generate")
     for b in todo:
+        _ats = _detect_ats(b["phenomenon"])
+        if _ats:
+            urls, disp = _resolve_refs(b["phenomenon"], _ats, assets, b["id"])
+            eprompt = "%s. %s" % (style.strip(), disp) if style else disp
+            out = stills_dir / ("shot_%03d.png" % b["id"])
+            got = _gen_still_edit(eprompt, urls, out)
+            v2db.log_generation(con, stage="stills", model="seedream_edit",
+                                prompt=eprompt, beat_id=b["id"],
+                                cost=STILL_COST if got else 0.0,
+                                result_path=str(out) if got else None,
+                                status="done" if got else "refused",
+                                kept=1 if got else 0)
+            if got:
+                v2db.mark(con, b["id"], still_path=str(out))
+            con.commit()
+            continue
         m = re.match(r"^\{([a-z0-9_]+)\}", b["phenomenon"].strip())
         if m and m.group(1) in refs:
             raise SystemExit(
