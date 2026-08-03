@@ -184,9 +184,11 @@ def _kb_filter(move: str, d: int, W: int, H: int, tail: bool = False) -> str:
 def _ensure_speckles(work: Path, W: int, H: int) -> Path:
     """One hash-seeded speck field per render (fx=speckles, the uniform
     table-free doctrine). Oversized so the per-beat overlay can drift it."""
-    p = work / "speckles_field.png"
+    p = work / "speckles_field_v3.png"
     if p.exists():
         return p
+    for stale in work.glob("speckles_field*.png"):
+        stale.unlink(missing_ok=True)
     fw, fh = W + 240, H + 240
     # 3 Aug fix: ~4x density + peak restore after blur (the rig proved the
     # first field imperceptible: too sparse, blur-dimmed, screen-lost on
