@@ -1,0 +1,39 @@
+{
+  "@michael": {
+    "fal_id": "d9ob6fsregj40uhl9s6g",
+    "name": "Michael",
+    "class": "character",
+    "reference_urls": [
+      "https://v3b.fal.media/files/b/0aa4dd95/Aa8SdrSKwon0VQ8DGsfAc_19a7260739074045aeccf7252339f846.jpg",
+      "https://v3b.fal.media/files/b/0aa4ddd0/Ss__DI7DSdZ2CO-8LzF-__64161f4f35344a58b776fcbd9b85caec.jpg",
+      "https://v3b.fal.media/files/b/0aa4ddcd/fHxp3kZuBZnUD39V744pX_5684efcb81bc4995b7f4f6fd55d6d35e.jpg",
+      "https://v3b.fal.media/files/b/0aa4de64/b3oUmSUUK0djfpEgfdmn3_KwX1Loqn.png"
+    ],
+    "staging": ["face-on permitted", "wardrobe stabilizer: in his reference armor", "weapon asymmetry: the spear of white light"],
+    "density_exempt": true
+  },
+  "@mosaic": {
+    "fal_id": "d9obq8cregj5kdhlghig",
+    "name": "the mosaic",
+    "class": "object",
+    "reference_urls": [
+      "https://v3b.fal.media/files/b/0aa4df8b/OkWu7mspf-3wzBTO7Jw_-_640af01f20124231ae38244dcdef9f88.jpg",
+      "https://v3b.fal.media/files/b/0aa4dfa3/btRLcv8ZMkx340A00wY9T_5c952d655e544f338269f170aa629fcc.jpg",
+      "https://v3b.fal.media/files/b/0aa4dfa5/JDKJEgicnMLpSgAA2pPS6_4f8fd0649e0d46fc959389321d000936.jpg"
+    ],
+    "staging": ["face-only device", "identity concealed -- never name whose face"],
+    "density_exempt": false
+  },
+  "@throneroom": {
+    "fal_id": "d9oc5jcregj68f9lkf10",
+    "name": "the fire-stone throne room",
+    "class": "place",
+    "reference_urls": [
+      "https://v3b.fal.media/files/b/0aa4dfff/dhLtHUETwZZwxjN3b3hCV_098877e82f2949b6a5dd9c1fc812d265.jpg",
+      "https://v3b.fal.media/files/b/0aa4e033/iKaYCrG3PboKM3uuIvvtP_2ecdc360acd349cca7aea0969c1cac7c.jpg",
+      "https://v3b.fal.media/files/b/0aa4e032/tZv-Xu5b-2dF1FcAucEX6_1e0d0ebb348842de81f98e8eb399c372.jpg"
+    ],
+    "staging": ["angle variety text-side", "fire-stone walls, sapphire pavement, aurora columns"],
+    "density_exempt": false
+  }
+}
