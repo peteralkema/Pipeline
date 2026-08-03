@@ -265,7 +265,8 @@ def _animate(still_path: Path, motion_prompt: str, out_path: Path, proj):
 
 def _fit_to_duration(clip: Path, dur: float, out_path: Path,
                      W: int, H: int, work: Path, tag: str,
-                     move: str = "") -> str:
+                     move: str = "",
+                     speckles: Path = None, spk_strength: float = 0.0) -> str:
     """make_video_segment's law-compliant branches, verbatim. Returns label.
     trim | exact | kb-tail | clone-pad. The slow-fill branch is DELETED."""
     native = _probe(clip)
@@ -299,10 +300,25 @@ def _fit_to_duration(clip: Path, dur: float, out_path: Path,
         tail_frames = max(1, int(round(remainder * FPS)))
         part2 = work / f"{tag}_tail.mp4"
         zp = _kb_filter(move, tail_frames, W, H, tail=True)
-        _run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame), "-vf", zp,
-              "-t", f"{remainder:.3f}", "-c:v", "libx264", "-preset", "medium",
-              "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(part2)],
-             f"kb-tail zoom {tag}")
+        # 3 Aug: tails carry the channel speckle atmosphere (floor parity);
+        # raw kling stays clean by design -- the model makes its own air.
+        if speckles is not None and spk_strength > 0:
+            op = max(0.0, min(1.0, float(spk_strength)))
+            fc = (f"[0:v]{zp}[base];"
+                  f"[1:v]crop={W}:{H}:x='mod(t*11,240)':y='mod(t*7,240)',"
+                  f"format=rgb24,fade=t=in:st=0:d=0.8[spk];"
+                  f"[base][spk]blend=all_mode=screen:all_opacity={op:.3f}")
+            _run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame),
+                  "-loop", "1", "-i", str(speckles),
+                  "-filter_complex", fc,
+                  "-t", f"{remainder:.3f}", "-c:v", "libx264",
+                  "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+                  "-an", str(part2)], f"kb-tail zoom+speckles {tag}")
+        else:
+            _run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame), "-vf", zp,
+                  "-t", f"{remainder:.3f}", "-c:v", "libx264", "-preset", "medium",
+                  "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(part2)],
+                 f"kb-tail zoom {tag}")
         lf = work / f"{tag}_list.txt"
         lf.write_text(f"file '{part1.resolve()}'\nfile '{part2.resolve()}'\n")
         _run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(lf),
@@ -385,7 +401,8 @@ def run(con, project_dir: Path) -> None:
                 cost, model = 0.0, "ffmpeg-kb"
             else:
                 label = _fit_to_duration(raw, dur, out, W, H, work, tag,
-                                         move=b["move"] or "")
+                                         move=b["move"] or "",
+                                         speckles=spk, spk_strength=spk_strength)
                 cost = KLING_COST
                 model = proj["video_model"] or DEFAULT_VIDEO_ENDPOINT
             v2db.log_generation(con, stage="clips", model=model,

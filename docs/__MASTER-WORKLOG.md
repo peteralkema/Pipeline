@@ -483,3 +483,4 @@ _Older sessions (pre-3 June) live in the canonical reference and ante-machinam w
 
 - 2 Aug: fix-commit -- kb-tail continuation grammar (seam PSNR 9.6 -> 35+, direction-aware, no cap-freeze) + fx speckles (channel-config, uniform, inert default; Filmora verdict productionized). visuals.py only.
 - 3 Aug: fix-3aug -- universal cover-crop (letterbox dead), speckle field v3 (visible), rates re-based ($0.04 still / $0.35 kling-5s). Rig verdicts: all six tail seams clean in production; tail gentleness ruled by-design.
+- 3 Aug (late): tail-speckle parity patched + faded; atmosphere doctrine final (floor+tails specked, raw kling clean, one dial).
