@@ -482,3 +482,4 @@ Shipped FH#7. Banked: Flux silent safety-reject (`safety_tolerance:"5"`); Overri
 _Older sessions (pre-3 June) live in the canonical reference and ante-machinam where they were absorbed._
 
 - 2 Aug: fix-commit -- kb-tail continuation grammar (seam PSNR 9.6 -> 35+, direction-aware, no cap-freeze) + fx speckles (channel-config, uniform, inert default; Filmora verdict productionized). visuals.py only.
+- 3 Aug: fix-3aug -- universal cover-crop (letterbox dead), speckle field v3 (visible), rates re-based ($0.04 still / $0.35 kling-5s). Rig verdicts: all six tail seams clean in production; tail gentleness ruled by-design.

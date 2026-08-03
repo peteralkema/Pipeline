@@ -143,8 +143,8 @@ def _kb_filter(move: str, d: int, W: int, H: int, tail: bool = False) -> str:
     exactly d frames -- no fixed rates, no cap-freeze, no rewind."""
     m = (move or "").strip().lower()
     if m in ("", "static"):
-        return (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
-                f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps={FPS}")
+        return (f"scale={W}:{H}:force_original_aspect_ratio=increase,"
+                f"crop={W}:{H},setsar=1,fps={FPS}")
     up_w, up_h = W * 4, H * 4
     cx = "iw/2-(iw/zoom/2)"
     cy = "ih/2-(ih/zoom/2)"
@@ -188,12 +188,17 @@ def _ensure_speckles(work: Path, W: int, H: int) -> Path:
     if p.exists():
         return p
     fw, fh = W + 240, H + 240
+    # 3 Aug fix: ~4x density + peak restore after blur (the rig proved the
+    # first field imperceptible: too sparse, blur-dimmed, screen-lost on
+    # bright frames; visible speckles live on mids and darks by physics).
+    hw, hh = fw // 2, fh // 2
     expr = ("st(0,sin(X*12.9898+Y*78.233)*43758.5453);"
             "st(1,ld(0)-floor(ld(0)));"
-            "if(lt(ld(1),0.00045),200+55*ld(1)/0.00045,0)")
+            "if(lt(ld(1),0.0036),255,0)")
     _run(["ffmpeg", "-y", "-f", "lavfi",
-          "-i", f"nullsrc=s={fw}x{fh}:d=0.04",
-          "-vf", f"format=gray,geq=lum='{expr}',boxblur=1:1",
+          "-i", f"nullsrc=s={hw}x{hh}:d=0.04",
+          "-vf", f"format=gray,geq=lum='{expr}',"
+                 f"scale={fw}:{fh}:flags=neighbor,gblur=sigma=0.7",
           "-frames:v", "1", "-update", "1", str(p)], "speckle field")
     return p
 
@@ -262,8 +267,10 @@ def _fit_to_duration(clip: Path, dur: float, out_path: Path,
     """make_video_segment's law-compliant branches, verbatim. Returns label.
     trim | exact | kb-tail | clone-pad. The slow-fill branch is DELETED."""
     native = _probe(clip)
-    scale_pad = (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
-                 f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps={FPS}")
+    # 3 Aug fix: cover-crop, never letterbox -- non-16:9 sources fill the
+    # frame by center-crop (the old Mission Control "fix" made automatic).
+    scale_pad = (f"scale={W}:{H}:force_original_aspect_ratio=increase,"
+                 f"crop={W}:{H},setsar=1,fps={FPS}")
     if native >= dur:
         _run(["ffmpeg", "-y", "-i", str(clip), "-t", f"{dur:.3f}",
               "-vf", scale_pad, "-c:v", "libx264", "-preset", "medium",
