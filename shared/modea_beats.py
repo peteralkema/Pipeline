@@ -71,6 +71,14 @@ def translate(beats):
             shot["motion_prompt"] = authored_motion
         elif b.get("face_hold"):
             shot["motion_prompt"] = FACEHOLD_MOTION
+        # Directed Ken-Burns floor (29 Jul): carry the `move` column through
+        # untouched when present (push|pull|crane|settle|static). Beats with
+        # no `move` key -- every Synthetic-Press-schema beat, this
+        # translator's original input -- are unaffected: b.get returns None,
+        # guarded to "", falsy, skipped. Purely additive.
+        _move = (b.get("move") or "").strip()
+        if _move:
+            shot["move"] = _move
         shot_beats.append(shot)
         index_map[engine_idx] = b["index"]
     return {"beats": shot_beats}, index_map

@@ -270,7 +270,7 @@ def _build_music_bed(music_dir, voice_dur, work, n_tracks, crossfade_s, run_fn, 
     mlist.write_text("".join(f"file '{Path(seq).resolve()}'\n" for _ in range(reps)))
     looped = work / "music_bed.m4a"
     run_fn(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(mlist),
-            "-c", "copy", str(looped)], "loop music bed")
+            "-c:a", "aac", "-b:a", "192k", str(looped)], "loop music bed")
     return looped
 
 

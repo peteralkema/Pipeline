@@ -792,13 +792,18 @@ def ken_burns_still(still_path: Path, out_path: Path, duration: float = None, mo
         cx = "iw/2-(iw/zoom/2)"
         cy = "ih/2-(ih/zoom/2)"
         if m == "pull":
-            z, x, y = "if(eq(on,0),1.16,max(zoom-0.0012,1.0))", cx, cy
+            # duration-scaled push/pull (29 Jul): was a fixed 0.0012/frame
+            # rate that completed the full zoom range in 5.56s then froze
+            # for the rest of any longer beat. Now scaled by on/d, matching
+            # crane/settle's existing pattern -- spans the whole beat.
+            z, x, y = "if(eq(on,0),1.16,max(1.16-0.16*on/%d,1.0))" % d, cx, cy
         elif m == "crane":
             z, x, y = "1.12", cx, "(ih-ih/zoom)*(1-on/%d)" % d
         elif m == "settle":
             z, x, y = "1.12", cx, "(ih-ih/zoom)*(on/%d)" % d
         else:  # push and any unknown move -> safe slow zoom-in
-            z, x, y = "min(zoom+0.0012,1.16)", cx, cy
+            # duration-scaled push/pull (29 Jul): see pull branch above.
+            z, x, y = "min(1.0+0.16*on/%d,1.16)" % d, cx, cy
         vf = (
             f"scale={up_w}:{up_h}:force_original_aspect_ratio=increase,"
             f"crop={up_w}:{up_h},"
