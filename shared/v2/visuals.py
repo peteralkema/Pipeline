@@ -283,7 +283,7 @@ def _kb_still(still_path: Path, out_path: Path, duration: float,
     vf = _kb_filter(move, total_frames, W, H)
     if speckles is not None and spk_strength > 0:
         op = max(0.0, min(1.0, float(spk_strength)))
-        fc = (f"[0:v]{vf}[base];"
+        fc = (f"[0:v]{vf},format=rgb24[base];"
               f"[1:v]crop={W}:{H}:x='mod(t*11,240)':y='mod(t*7,240)',"
               f"format=rgb24[spk];"
               f"[base][spk]blend=all_mode=screen:all_opacity={op:.3f},"
@@ -381,7 +381,7 @@ def _fit_to_duration(clip: Path, dur: float, out_path: Path,
         # raw kling stays clean by design -- the model makes its own air.
         if speckles is not None and spk_strength > 0:
             op = max(0.0, min(1.0, float(spk_strength)))
-            fc = (f"[0:v]{zp}[base];"
+            fc = (f"[0:v]{zp},format=rgb24[base];"
                   f"[1:v]crop={W}:{H}:x='mod(t*11,240)':y='mod(t*7,240)',"
                   f"format=rgb24,fade=t=in:st=0:d=0.8[spk];"
                   f"[base][spk]blend=all_mode=screen:all_opacity={op:.3f},"
