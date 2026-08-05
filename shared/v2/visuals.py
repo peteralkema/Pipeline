@@ -181,6 +181,13 @@ def _gen_still_edit(prompt: str, image_urls: list, out_path: Path) -> Path | Non
     return _download(imgs[0]["url"], out_path)
 
 
+BT709_FLAGS = ["-colorspace", "bt709", "-color_primaries", "bt709",
+               "-color_trc", "bt709", "-color_range", "tv"]
+RGB_TO_709 = "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p"
+YUV_PASS_709 = (":in_range=tv:in_color_matrix=bt709"
+                ":out_range=tv:out_color_matrix=bt709")
+
+
 def _channel_fx_speckles(project_dir: Path) -> float:
     """Uniform fx doctrine: one strength per channel, inert default, no
     mapping. channel.json: {"fx": {"speckles": 0.35}}."""
@@ -279,17 +286,21 @@ def _kb_still(still_path: Path, out_path: Path, duration: float,
         fc = (f"[0:v]{vf}[base];"
               f"[1:v]crop={W}:{H}:x='mod(t*11,240)':y='mod(t*7,240)',"
               f"format=rgb24[spk];"
-              f"[base][spk]blend=all_mode=screen:all_opacity={op:.3f}")
+              f"[base][spk]blend=all_mode=screen:all_opacity={op:.3f},"
+              f"{RGB_TO_709}")
         _run(["ffmpeg", "-y", "-loop", "1", "-i", str(still_path),
               "-loop", "1", "-i", str(speckles),
               "-filter_complex", fc,
               "-t", f"{dur:.3f}", "-c:v", "libx264", "-preset", "medium",
               "-crf", "18", "-pix_fmt", "yuv420p", "-r", str(FPS),
+              *BT709_FLAGS,
               str(out_path)], "ken_burns+speckles ffmpeg")
         return out_path
-    _run(["ffmpeg", "-y", "-loop", "1", "-i", str(still_path), "-vf", vf,
+    _run(["ffmpeg", "-y", "-loop", "1", "-i", str(still_path),
+          "-vf", vf + "," + RGB_TO_709,
           "-t", f"{dur:.3f}", "-c:v", "libx264", "-preset", "medium",
-          "-crf", "18", "-pix_fmt", "yuv420p", "-r", str(FPS), str(out_path)],
+          "-crf", "18", "-pix_fmt", "yuv420p", "-r", str(FPS),
+          *BT709_FLAGS, str(out_path)],
          "ken_burns ffmpeg")
     return out_path
 
@@ -333,12 +344,14 @@ def _fit_to_duration(clip: Path, dur: float, out_path: Path,
     native = _probe(clip)
     # 3 Aug fix: cover-crop, never letterbox -- non-16:9 sources fill the
     # frame by center-crop (the old Mission Control "fix" made automatic).
-    scale_pad = (f"scale={W}:{H}:force_original_aspect_ratio=increase,"
+    scale_pad = (f"scale={W}:{H}:force_original_aspect_ratio=increase"
+                 f"{YUV_PASS_709},"
                  f"crop={W}:{H},setsar=1,fps={FPS}")
     if native >= dur:
         _run(["ffmpeg", "-y", "-i", str(clip), "-t", f"{dur:.3f}",
               "-vf", scale_pad, "-c:v", "libx264", "-preset", "medium",
-              "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(out_path)],
+              "-crf", "18", "-pix_fmt", "yuv420p", *BT709_FLAGS,
+              "-an", str(out_path)],
              f"trim {tag}")
         return "trim"
     remainder = dur - native
@@ -346,16 +359,19 @@ def _fit_to_duration(clip: Path, dur: float, out_path: Path,
         _run(["ffmpeg", "-y", "-i", str(clip),
               "-vf", f"{scale_pad},tpad=stop_mode=clone:stop_duration={dur:.3f}",
               "-t", f"{dur:.3f}", "-c:v", "libx264", "-preset", "medium",
-              "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(out_path)],
+              "-crf", "18", "-pix_fmt", "yuv420p", *BT709_FLAGS,
+              "-an", str(out_path)],
              f"hold {tag}")
         return "hold(probe-fail)"
     if remainder >= 0.5:
         part1 = work / f"{tag}_native.mp4"
         _run(["ffmpeg", "-y", "-i", str(clip), "-vf", scale_pad,
               "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-              "-pix_fmt", "yuv420p", "-an", str(part1)], f"kb-tail native {tag}")
+              "-pix_fmt", "yuv420p", *BT709_FLAGS,
+              "-an", str(part1)], f"kb-tail native {tag}")
         frame = work / f"{tag}_last.png"
         _run(["ffmpeg", "-y", "-sseof", "-0.05", "-i", str(part1),
+              "-vf", "scale=in_range=tv:in_color_matrix=bt709",
               "-frames:v", "1", "-update", "1", str(frame)],
              f"kb-tail frame {tag}")
         tail_frames = max(1, int(round(remainder * FPS)))
@@ -368,23 +384,28 @@ def _fit_to_duration(clip: Path, dur: float, out_path: Path,
             fc = (f"[0:v]{zp}[base];"
                   f"[1:v]crop={W}:{H}:x='mod(t*11,240)':y='mod(t*7,240)',"
                   f"format=rgb24,fade=t=in:st=0:d=0.8[spk];"
-                  f"[base][spk]blend=all_mode=screen:all_opacity={op:.3f}")
+                  f"[base][spk]blend=all_mode=screen:all_opacity={op:.3f},"
+                  f"{RGB_TO_709}")
             _run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame),
                   "-loop", "1", "-i", str(speckles),
                   "-filter_complex", fc,
                   "-t", f"{remainder:.3f}", "-c:v", "libx264",
                   "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+                  *BT709_FLAGS,
                   "-an", str(part2)], f"kb-tail zoom+speckles {tag}")
         else:
-            _run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame), "-vf", zp,
+            _run(["ffmpeg", "-y", "-loop", "1", "-i", str(frame),
+                  "-vf", zp + "," + RGB_TO_709,
                   "-t", f"{remainder:.3f}", "-c:v", "libx264", "-preset", "medium",
-                  "-crf", "18", "-pix_fmt", "yuv420p", "-an", str(part2)],
+                  "-crf", "18", "-pix_fmt", "yuv420p", *BT709_FLAGS,
+                  "-an", str(part2)],
                  f"kb-tail zoom {tag}")
         lf = work / f"{tag}_list.txt"
         lf.write_text(f"file '{part1.resolve()}'\nfile '{part2.resolve()}'\n")
         _run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(lf),
               "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
-              "-crf", "18", "-pix_fmt", "yuv420p", str(out_path)],
+              "-crf", "18", "-pix_fmt", "yuv420p", *BT709_FLAGS,
+              str(out_path)],
              f"kb-tail concat {tag}")
         return f"kb-tail({native:.1f}+{remainder:.1f}s)"
     _run(["ffmpeg", "-y", "-i", str(clip),
@@ -467,8 +488,13 @@ def run(con, project_dir: Path) -> None:
         tag = f"b{b['id']:03d}"
         if b["method"] == "kling":
             raw = work / f"{tag}_kling.mp4"
-            got, refused = _animate(Path(b["still_path"]),
-                                    b["motion_prompt"] or "", raw, proj)
+            cached = raw.exists() and raw.stat().st_size > 100000
+            if cached:
+                print(f"   {tag}: kling raw cached -- fit only, $0")
+                got, refused = raw, False
+            else:
+                got, refused = _animate(Path(b["still_path"]),
+                                        b["motion_prompt"] or "", raw, proj)
             if refused:
                 v2db.log_generation(con, stage="clips", model="kling",
                                     prompt=b["motion_prompt"], beat_id=b["id"],
@@ -481,7 +507,7 @@ def run(con, project_dir: Path) -> None:
                 label = _fit_to_duration(raw, dur, out, W, H, work, tag,
                                          move=b["move"] or "",
                                          speckles=spk, spk_strength=spk_strength)
-                cost = KLING_COST
+                cost = 0.0 if cached else KLING_COST
                 model = proj["video_model"] or DEFAULT_VIDEO_ENDPOINT
             v2db.log_generation(con, stage="clips", model=model,
                                 prompt=b["motion_prompt"], beat_id=b["id"],

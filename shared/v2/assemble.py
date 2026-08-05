@@ -53,12 +53,17 @@ def _probe(path) -> float:
         return 0.0
 
 
+BT709_FLAGS = ["-colorspace", "bt709", "-color_primaries", "bt709",
+               "-color_trc", "bt709", "-color_range", "tv"]
+
+
 def _concat_video(segments, out: Path, work: Path) -> Path:
     listfile = work / "concat_v.txt"
     listfile.write_text("".join(f"file '{Path(s).resolve()}'\n" for s in segments))
     _run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(listfile),
           "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-          "-pix_fmt", "yuv420p", "-r", str(FPS), str(out)], "concat video")
+          "-pix_fmt", "yuv420p", "-r", str(FPS), *BT709_FLAGS,
+          str(out)], "concat video")
     return out
 
 
