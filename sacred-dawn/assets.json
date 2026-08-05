@@ -96,5 +96,20 @@
    "one ref by design; single strong frame anchors the count"
   ],
   "density_exempt": true
+ },
+ "@azazel": {
+  "fal_id": "d9phr0cregjcv28i8gag",
+  "name": "Azazel (watcher prime)",
+  "class": "character",
+  "reference_urls": [
+   "https://v3b.fal.media/files/b/0aa51c92/O3VhjdunYad0Rojt8RjVf_c779e75d9c404908a8b7c939a95f0f1c.jpg"
+  ],
+  "staging": [
+   "watcher_prime = Azazel; face-on permitted, his humanity is the horror",
+   "eye ruling (Peter, 5 Aug): glowing supernatural eyes, overrides canon's too-steady line -- rhymes with the fallen's ember eyes",
+   "HARD LAW: teaching renders as RESULTS -- blades in hands, painted faces, first ornaments -- never forge, anvil, or workshop",
+   "scale: reads larger than the men around him -- something in a man's shape"
+  ],
+  "density_exempt": true
  }
 }
