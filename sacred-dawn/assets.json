@@ -81,5 +81,20 @@
    "wardrobe stabilizer: in his cracked breastplate of darkened stones"
   ],
   "density_exempt": true
+ },
+ "@dragon": {
+  "fal_id": "d9phk3sregjdf2ohbj5g",
+  "name": "The Morning Star (the dragon)",
+  "class": "character",
+  "reference_urls": [
+   "https://v3b.fal.media/files/b/0aa51beb/INWVFj3nIsTKBMcu2M4x-_25Lp7KHy.png"
+  ],
+  "staging": [
+   "form (c) THE DRAGON -- Rev 12 seven-headed, E2 ruled c1 (Peter, 5 Aug): narration names seven, image must show seven",
+   "hero beat; sky-break top-left ties to the channel's Lucifer opening",
+   "author WIDE/MID where all seven crowned heads read -- close-ups risk model reinventing head count",
+   "one ref by design; single strong frame anchors the count"
+  ],
+  "density_exempt": true
  }
 }
