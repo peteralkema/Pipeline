@@ -208,6 +208,15 @@ def csv_stats(d):
     canon = json.load(open(Path(d) / "canon.json")) if (Path(d) / "canon.json").exists() else {}
     out["tokens"] = len(toks)
     out["missing_canon"] = sorted(toks - set(canon))
+    # CAST GATE collection (registry law): @identifiers in phenomenon, the
+    # resolver's exact grammar (shared/v2/visuals.py _detect_ats). Ruled: @
+    # creates NO canon rows -- canon.json stays environmental-only, so @ids
+    # are deliberately NOT in the missing_canon universe above.
+    ats = set()
+    if pcol is not None:
+        for r in data:
+            ats |= set(re.findall(r"@([a-z][a-z_]*)", r[pcol]))
+    out["at_tokens"] = sorted(ats)
     out["bom"] = round(len(data) * 0.08 + len(kl) * 0.42 + 1, 2)
     return out
 
@@ -331,6 +340,8 @@ def main():
     ap.add_argument("--channel", required=True, help="underscore form, e.g. scripture_on_screen")
     ap.add_argument("--admit", action="store_true", help="boundary mode: add ledger + judgment flags")
     ap.add_argument("--ledger", help="path to channel doctrine .md (for --admit pool check)")
+    ap.add_argument("--assets", help="channel assets.json (cast registry); "
+                    "auto-discovered at <src>/../../assets.json when omitted")
     ap.add_argument("--bom-ceiling", type=float, default=25.0,
                     help="max acceptable BOM in $. Default 25 (Line B). For long-form runs "
                          "(70min+ runtime floor, banked 29 Jul evening third session), pass the "
@@ -427,6 +438,49 @@ def main():
                              % s["contact_motion"][:8])
         if s["missing_canon"]:
             hard_fail.append("UNRESOLVED tokens (no canon entry): %s" % ", ".join(s["missing_canon"]))
+        # CAST GATE judgment (registry law, HARD): every @id must be a locked
+        # citizen with frozen reference_urls. Disk read only -- NEVER network.
+        if s.get("at_tokens"):
+            apath = Path(args.assets) if args.assets else None
+            if apath is None:
+                cand = Path(args.src).resolve().parent.parent / "assets.json"
+                apath = cand if cand.exists() else None
+            if apath is None or not apath.exists():
+                hard_fail.append("CAST TOKENS %s but NO assets.json found "
+                                 "(pass --assets or place the src at "
+                                 "<channel>/projects/<slug>-src) -- an @-film "
+                                 "cannot be gated without the registry"
+                                 % ["@" + a for a in s["at_tokens"]])
+            else:
+                try:
+                    reg = json.load(open(apath))
+                except Exception as e:
+                    reg = None
+                    hard_fail.append("assets.json UNREADABLE at %s (%s)"
+                                     % (apath, type(e).__name__))
+                if reg is not None:
+                    bad_unknown, bad_nourls, cast = [], [], []
+                    for a in s["at_tokens"]:
+                        rec = reg.get("@" + a) or reg.get(a)
+                        if not rec:
+                            bad_unknown.append("@" + a)
+                        elif not rec.get("reference_urls"):
+                            bad_nourls.append("@" + a)
+                        else:
+                            cast.append("@%s(%d refs%s)"
+                                        % (a, len(rec["reference_urls"]),
+                                           ", density_exempt"
+                                           if rec.get("density_exempt") else ""))
+                    if bad_unknown:
+                        hard_fail.append("UNKNOWN CAST %s -- not in %s. Lock "
+                                         "them (S3) or fix the mention."
+                                         % (bad_unknown, apath))
+                    if bad_nourls:
+                        hard_fail.append("CAST WITHOUT FROZEN REFS %s -- run "
+                                         "the registry --refresh to freeze "
+                                         "the fal snapshot." % bad_nourls)
+                    if cast:
+                        print("  cast: %s [%s]" % (", ".join(cast), apath))
         if s["bom"] > args.bom_ceiling:
             hard_fail.append("BOM $%.2f exceeds $%.2f ceiling" % (s["bom"], args.bom_ceiling))
         if s["over_band"]:
