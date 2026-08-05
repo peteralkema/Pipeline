@@ -36,13 +36,13 @@
   "name": "the fire-stone throne room",
   "class": "place",
   "reference_urls": [
-   "https://v3b.fal.media/files/b/0aa4dfff/dhLtHUETwZZwxjN3b3hCV_098877e82f2949b6a5dd9c1fc812d265.jpg",
-   "https://v3b.fal.media/files/b/0aa4e033/iKaYCrG3PboKM3uuIvvtP_2ecdc360acd349cca7aea0969c1cac7c.jpg",
-   "https://v3b.fal.media/files/b/0aa4e032/tZv-Xu5b-2dF1FcAucEX6_1e0d0ebb348842de81f98e8eb399c372.jpg"
+   "https://v3b.fal.media/files/b/0aa51b38/ohWAtDFhYoTW6QkZFcuOI_xkw0JVg6.png",
+   "https://v3b.fal.media/files/b/0aa51b46/k4tFZoR4HxiH9GhfZ5eTb_8pf2IsTW.png"
   ],
   "staging": [
    "angle variety text-side",
-   "fire-stone walls, sapphire pavement, aurora columns"
+   "fire-stone walls, sapphire pavement, aurora columns",
+   "refs rebuilt 5 Aug: empty-hall pair derived from rig beat 5 (frontal / beside-throne), fire-in-stone + sapphire stairs canon"
   ],
   "density_exempt": false
  },
@@ -62,6 +62,23 @@
    "wardrobe stabilizer: in his reference breastplate of nine stones",
    "wing states: refs carry both woven-light and golden-feather -- author per beat",
    "face ruling: slightly older (Peter, 5 Aug)"
+  ],
+  "density_exempt": true
+ },
+ "@morningstar_fallen": {
+  "fal_id": "d9ph724regjblegfibk0",
+  "name": "The Morning Star (fallen)",
+  "class": "character",
+  "reference_urls": [
+   "https://v3b.fal.media/files/b/0aa51b22/fDbSLL7t7nZsb9Ylp_W7J_7ccd285c74b64743b99ec45b49b4087a.jpg",
+   "https://v3b.fal.media/files/b/0aa51b69/Ryo2sS7sy7mNOj8wj5pU5_07cb8ae683754f109c6da904962e61d7.jpg",
+   "https://v3b.fal.media/files/b/0aa51b7d/cGtgjMdM2kcVohj8iZTpF_Screenshot%202026-08-05%20at%2012.38.45.png"
+  ],
+  "staging": [
+   "form (b) THE FALLEN -- derived from (a)'s hero: same silhouette, same-pose cut to form (a) available",
+   "eye ruling (Peter, 5 Aug): burning ember eyes, overrides canon's remember-the-morning line",
+   "the Temptation (X) adversary form; the other figure stays UNCAST, face-safe menu only",
+   "wardrobe stabilizer: in his cracked breastplate of darkened stones"
   ],
   "density_exempt": true
  }
