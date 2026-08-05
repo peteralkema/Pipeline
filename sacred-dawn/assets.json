@@ -111,5 +111,31 @@
    "scale: reads larger than the men around him -- something in a man's shape"
   ],
   "density_exempt": true
+ },
+ "@theabyss": {
+  "fal_id": "d9pi0nsregjednoj2uq0",
+  "name": "the abyss",
+  "class": "place",
+  "reference_urls": [
+   "https://v3b.fal.media/files/b/0aa51c92/MyLrgujvLTr9I-qnHI6Uo_mJGGkuqI.png"
+  ],
+  "staging": [
+   "place: loose refs, angles come text-side at authoring",
+   "reads as a bottomless shaft, not a cave -- the descent is the point"
+  ],
+  "density_exempt": false
+ },
+ "@eden_gate": {
+  "fal_id": "d9pi0pcregjednoj2v60",
+  "name": "the eastern gate of Eden",
+  "class": "place",
+  "reference_urls": [
+   "https://v3b.fal.media/files/b/0aa51c96/IHvo9wB_e5V9K75s-cUW1_75c156e5e5924c2c995a20930cb82512.jpg"
+  ],
+  "staging": [
+   "place scoped to the Gen 3:24 closing frame; the flaming sword is the subject at authoring distance",
+   "canon note (Peter, 5 Aug): cherubim rendered as classical serene angels, NOT the many-faced watching-face brief -- kept; terror version is a later re-roll if wanted"
+  ],
+  "density_exempt": false
  }
 }
