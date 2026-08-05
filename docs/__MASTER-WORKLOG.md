@@ -494,3 +494,34 @@ _Older sessions (pre-3 June) live in the canonical reference and ante-machinam w
 - MICHAEL RIG (10 beats, ~$1.22 actual): the casting doctrine proven in production plumbing. seedream_edit 9/9 including the SEVEN-REF MULTI-@ BEAT (@michael inside @throneroom) -- multi-citizen beats are LEGAL at the endpoint, ruled proven. Legacy {token} coexists (flux 1/1). Kling face-hold through i2v confirmed by eye. Face-hold across seven framings: PASS. S2 casting session licensed.
 - RATE NOTE: box logs stills at $0.08 and kling v2.5-turbo at $0.42 vs the boot doc's $0.04/$0.35 -- truth-check the rate constants next config pass.
 - OPEN: E1 (mosaic finished picture) + sign-off on four redrafted canon texts gate the S2 sitting; gospel public-swap is Peter's product call; SESSION-SHEET-morning-star-S2.md is the sitting's one document.
+## 5 AUG (session 2) -- THE MORNING STAR CAST LOCKED (S2 session + S3 lock)
+
+REGISTRY COMPLETE: ten citizens locked on fal Assets + sacred-dawn/assets.json, gated at intake and resolved at render.
+@michael, @mosaic, @throneroom (rebuilt), @morningstar (a), @morningstar_fallen (b), @dragon (c),
+@azazel, @theabyss, @eden_gate, @thechain. @seraphim RULED text-authored, not a citizen.
+
+FORMS OF THE MORNING STAR -- all three estates cast:
+- (a) lightbearer: 4 refs, nine-stone Ezekiel breastplate protected, face slightly-older (ruling), wings carry both woven-light and golden-feather.
+- (b) fallen: DERIVED from (a)'s hero via edit-path -- same silhouette, ember-eyes ruling. Same-pose (a)->(b) cut is the arc's hinge.
+- (c) dragon: E2 ruled c1 seven-headed -- narration names seven, image must show seven. Author wide/mid; one hero ref; sky-break ties to the channel's Lucifer opening.
+
+RULINGS RECORDED (the cast is the canon -- ref beats drafted text where they diverge):
+- E1 = (iii) THE UNFALLEN FACE. The completed @mosaic reassembles into the lightbearer's face, in tesserae -- the film's XII reveal, withholding his beauty until the last shot. XII can author.
+- E2 = c1 seven-headed dragon.
+- Ember eyes (fallen), glowing eyes (Azazel) -- a fallen-ones eye signature.
+- Eden cherubim kept serene (not the many-faced brief) to protect the reverent register.
+- @throneroom rebuilt from rig beat 5: fal-generated hall beat the earlier fal-cast version (aquarium problem); empty-hall pair by edit-path so no figure ghosts in.
+- Mosaic tesserae-face: the unlock was 'photograph of a real handmade mosaic' + 'tile-work close, portrait far' -- forces the face to EMERGE from the tile grid instead of a smooth portrait pasted on.
+
+PROOFS BANKED:
+- MULTI-@ co-framing LEGAL: 8 refs / 2 citizens / 1 edit call resolved clean, identities intact, finishes reconciled. Duels unblocked. (artifacts: sacred-dawn/projects/duel-probe/)
+- REGISTER-BY-REALM confirmed: mixed citizen finishes coexist when the realm anchor unifies the frame.
+- REF FINISH DOMINATES, text style-pressure weak (22-roll photoreal-append test: no change) -- register set at ref time, not prompt time.
+
+ENGINE (carried from session 1, all shipped): color law (12 encode sites convert+tag bt709/tv) + speckle blend pin ([base] rgb24 before blend, was channel-scrambling Flux PNGs to magenta) + kling raw cache guard ($0 re-renders). gospel-of-thomas healed, eye-confirmed. Intake cast gate live in 3 layers (repo lineage / operator kit v2.2.0 / render resolver). Michael rig proved face-hold + legacy-coexistence + kling-face-survival. speckles dialed 0.35 -> 0.2 (Peter's eye).
+
+PACKAGING: split-face LUCIFER thumbnail proven (midline registered) -- the thesis in one frame.
+
+REGISTRATION MECHANIC (for next session): fal platform API, POST /v1/assets/characters, reference_images accepts request IDs (materialized) or fal URLs; @ mentions resolve registered citizens natively in the playground. Places/props updated via delete-then-recreate (no PATCH). FAL_ADMIN_KEY for platform calls, FAL_KEY for renders.
+
+OPEN / NEXT: S4 authoring -- the river written AROUND a cast that cannot fail to render. @tokens inline in phenomenon like prose; same @ in adjacent beats must differ in framing (the adjacent-near-dup gate). Uncast material (skies, seas, fire, crowds, @seraphim) on the classic text-token system under all standing laws. NOTHING PARKED -- the registry is closed.
