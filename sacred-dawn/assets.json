@@ -137,5 +137,19 @@
    "canon note (Peter, 5 Aug): cherubim rendered as classical serene angels, NOT the many-faced watching-face brief -- kept; terror version is a later re-roll if wanted"
   ],
   "density_exempt": false
+ },
+ "@thechain": {
+  "fal_id": "d9pi3o4regjedo0jg2eg",
+  "name": "the great chain",
+  "class": "prop",
+  "reference_urls": [
+   "https://v3b.fal.media/files/b/0aa51cdc/N861wWLxhpFu_zmVY7qjM_TRnxPq0b.png"
+  ],
+  "staging": [
+   "the mosaic's dark twin -- hero beat at XII: as the last tessera sets, the chain closes",
+   "octagonal links, glowing white script, millstone scale; one end taut toward the unseen height",
+   "prop: loose refs, framing text-side at authoring"
+  ],
+  "density_exempt": false
  }
 }
