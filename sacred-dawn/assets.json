@@ -17,17 +17,16 @@
   "density_exempt": true
  },
  "@mosaic": {
-  "fal_id": "d9obq8cregj5kdhlghig",
+  "fal_id": "d9pidlcregjf98gksd2g",
   "name": "the mosaic",
   "class": "object",
   "reference_urls": [
-   "https://v3b.fal.media/files/b/0aa4df8b/OkWu7mspf-3wzBTO7Jw_-_640af01f20124231ae38244dcdef9f88.jpg",
-   "https://v3b.fal.media/files/b/0aa4dfa3/btRLcv8ZMkx340A00wY9T_5c952d655e544f338269f170aa629fcc.jpg",
-   "https://v3b.fal.media/files/b/0aa4dfa5/JDKJEgicnMLpSgAA2pPS6_4f8fd0649e0d46fc959389321d000936.jpg"
+   "https://v3b.fal.media/files/b/0aa51d6e/X5miYGZjYsScksMM3xFqp_ChatGPT%20Image%20Aug%205%2C%202026%2C%2002_02_01%20PM.png"
   ],
   "staging": [
    "face-only device",
-   "identity concealed -- never name whose face"
+   "identity concealed -- never name whose face",
+   "face corrected 5 Aug to the morningstar lightbearer, rendered in tesserae (tile-work close, portrait far); E1 ruled (iii) THE UNFALLEN FACE -- this is the XII reveal"
   ],
   "density_exempt": false
  },
