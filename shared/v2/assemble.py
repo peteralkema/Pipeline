@@ -142,7 +142,19 @@ def run(con, project_dir: Path) -> None:
         print(f"   video {vid_dur:.1f}s | voice {voice_dur:.1f}s | "
               f"diff {abs(vid_dur - voice_dur):.2f}s")
 
-        music_src = _build_music_bed(project_dir / "music", voice_dur, work)
+        # MUSIC FALLBACK (v2 patch): project folder is an OVERRIDE; the
+        # channel pool is the default. project_dir = <channel>/projects/<slug>
+        _mdir = Path(project_dir) / "music"
+        _has = _mdir.is_dir() and any(
+            _mdir.glob("*.mp3")) or _mdir.is_dir() and any(
+            list(_mdir.glob("*.m4a")) + list(_mdir.glob("*.wav")))
+        if not _has:
+            _chan = Path(project_dir).parent.parent / "music"
+            if _chan.is_dir():
+                print("   music: project folder empty -- falling back to "
+                      "channel pool %s" % _chan)
+                _mdir = _chan
+        music_src = _build_music_bed(_mdir, voice_dur, work)
 
         if music_src:
             md = _probe(music_src)
